@@ -1,0 +1,33 @@
+# ============================================================
+# MASTER CONFIG — change pipeline behavior here, not in code
+# ============================================================
+
+project:
+  name: predictioneering
+  domain: conflict_onset  # current active domain
+
+# Active DAG
+dag:
+  file: dag/conflict_onset_dag.json
+
+# Estimation settings
+estimator:
+  method: weighted_minimum_distance  # options: wmd, equal_weight
+  n_simulations: 500                 # sims per forward map evaluation
+  random_seed: 42
+
+# Forecasting
+forecast:
+  output_file: predictions/log.csv
+  markets:                           # platforms to post to
+    - metaculus
+    - polymarket
+
+# Data
+data:
+  raw_dir: data/raw
+  processed_dir: data/processed
+
+# Logging
+logging:
+  level: INFO  # DEBUG, INFO, WARNING

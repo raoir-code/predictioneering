@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Data — don't commit raw data to repo
+data/raw/
+data/processed/
+
+# Secrets
+*.key
+secrets.yaml
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Keep predictions log in repo (it's the track record)
+!predictions/log.csv
