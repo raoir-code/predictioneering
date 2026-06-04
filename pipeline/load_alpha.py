@@ -22,13 +22,35 @@ ALPHA_FILE = "alpha/conflict_onset.json"
 # These are manual overrides with documented provenance.
 # Format: { node_name: { "beta": float, "se": float, "source": str } }
 EXPERT_PRIORS = {
-    "AudienceCosts": {
-        "beta": 0.35,
-        "se": 0.50,   # wide SE = high uncertainty
-        "source": "Expert elicitation — [name/affiliation of your friend here]",
-        "note": "No published study found for AudienceCosts as of v3. "
-                "Re-examine when Weeks 2020 or similar is ingested."
-    }
+    # AudienceCosts (v2 legacy) — deactivated in v3.
+    # Mechanism now covered by DemocraticPeace node, estimated from studies.
+    # Keeping for provenance. Re-activate if DAG splits alpha_A/alpha_B.
+    # "AudienceCosts": {
+    #     "beta": 0.35,
+    #     "se": 0.50,
+    #     "source": "Expert elicitation — [name/affiliation of your friend here]",
+    #     "note": "No published study found for AudienceCosts as of v2."
+    # },
+
+    # Credibility / settlement implementation (pi_A, pi_B)
+    # No published study cleanly identifies this channel.
+    # Prior: low credibility raises effective outside option -> more conflict.
+    # Wide SE reflects genuine uncertainty.
+    "Credibility_A": {
+        "beta": -0.30,
+        "se":    0.30,
+        "source": "expert_prior_v3",
+        "note": "pi_A: challenger credibility / settlement implementation. "
+                "Derived from bargaining model comparative statics. "
+                "No clean empirical proxy in hazard library v4."
+    },
+    "Credibility_B": {
+        "beta": -0.30,
+        "se":    0.30,
+        "source": "expert_prior_v3",
+        "note": "pi_B: target credibility / settlement implementation. "
+                "Symmetric to Credibility_A pending asymmetric study identification."
+    },
 }
 
 
