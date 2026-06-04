@@ -18,6 +18,19 @@ import os
 
 ALPHA_FILE = "alpha/conflict_onset.json"
 
+# Legacy name map — translates old node names to v3 theory-grounded names.
+# Allows backtest_venezuela.ipynb to keep old names while alpha/ uses new ones.
+# Remove once backtest is updated to v3 names.
+LEGACY_NAME_MAP = {
+    "Capabilities":        "WinProbability",
+    "Trade":               "WarCosts",
+    "TerritorialDispute":  "HardlineClaims",
+    "PreferenceSimilarity":"PreferenceAlignment",
+    "LeaderHorizon":       "Patience",
+    "Democracy":           "DemocraticPeace",
+    "AudienceCosts":       "DemocraticPeace",
+}
+
 # Expert-elicited priors — nodes with no published study in the library.
 # These are manual overrides with documented provenance.
 # Format: { node_name: { "beta": float, "se": float, "source": str } }
@@ -89,6 +102,11 @@ def load_alpha(alpha_file: str = ALPHA_FILE,
             alpha[node] = val["beta"]
         else:
             alpha[node] = float(val)
+
+    # Add legacy aliases so old-name references still resolve
+    for old_name, new_name in LEGACY_NAME_MAP.items():
+        if new_name in alpha and old_name not in alpha:
+            alpha[old_name] = alpha[new_name]
 
     return alpha
 
