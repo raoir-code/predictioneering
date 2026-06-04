@@ -1,0 +1,73 @@
+{
+  "version": "3.0",
+  "outcome": "conflict_onset",
+  "conventions": {
+    "dyad_direction": "A=challenger/initiator, B=target/defender",
+    "symmetry_rule": "Studies not specifying side tag as symmetric — constrain average of A and B parameters",
+    "non_linearity": "w_A/pi_A preserved as ratio, not linearized",
+    "calculated_vs_estimated": "estimated nodes have GMM-recovered edge weights; calculated nodes are deterministic functions of estimated nodes"
+  },
+  "nodes": {
+    "estimated": {
+      "dyad_level": ["S", "p", "q"],
+      "challenger_A": ["C_A", "pi_A", "delta_A", "alpha_A", "xbar_A"],
+      "target_B": ["C_B", "pi_B", "delta_B", "alpha_B", "xbar_B"]
+    },
+    "calculated": {
+      "w_A": "p * V_A - C_A",
+      "w_B": "(1 - p) * V_B - C_B",
+      "BR": "S - w_A/pi_A - w_B/pi_B - f(alpha_A, alpha_B, delta_A, delta_B, q, xbar_A, xbar_B)"
+    },
+    "outcome": {
+      "Y": "1 if BR < 0 else 0"
+    }
+  },
+  "edges": [
+    {"from": "capability_ratio",      "to": "p",        "side": "dyad"},
+    {"from": "alliance_activated",    "to": "p",        "side": "dyad"},
+    {"from": "alliance_latent",       "to": "p",        "side": "dyad"},
+    {"from": "major_power_status",    "to": "p",        "side": "dyad"},
+    {"from": "power_shift_risk",      "to": "q",        "side": "dyad"},
+    {"from": "preference_distance",   "to": "S",        "side": "dyad"},
+    {"from": "issue_overlap",         "to": "S",        "side": "dyad"},
+    {"from": "flow_war_costs",        "to": "C_A",      "side": "A"},
+    {"from": "flow_war_costs",        "to": "C_B",      "side": "B"},
+    {"from": "stock_war_costs",       "to": "C_A",      "side": "A"},
+    {"from": "stock_war_costs",       "to": "C_B",      "side": "B"},
+    {"from": "war_absorption_gdp",    "to": "C_A",      "side": "A"},
+    {"from": "war_absorption_gdp",    "to": "C_B",      "side": "B"},
+    {"from": "contract_fragility",    "to": "pi_A",     "side": "A"},
+    {"from": "contract_fragility",    "to": "pi_B",     "side": "B"},
+    {"from": "veto_players",          "to": "pi_A",     "side": "A"},
+    {"from": "veto_players",          "to": "pi_B",     "side": "B"},
+    {"from": "leader_survival",       "to": "pi_A",     "side": "A"},
+    {"from": "leader_survival",       "to": "pi_B",     "side": "B"},
+    {"from": "leader_horizon",        "to": "delta_A",  "side": "A"},
+    {"from": "leader_horizon",        "to": "delta_B",  "side": "B"},
+    {"from": "state_patience",        "to": "delta_A",  "side": "A"},
+    {"from": "state_patience",        "to": "delta_B",  "side": "B"},
+    {"from": "economic_growth",       "to": "delta_A",  "side": "A"},
+    {"from": "economic_growth",       "to": "delta_B",  "side": "B"},
+    {"from": "regime_type",           "to": "alpha_A",  "side": "A"},
+    {"from": "regime_type",           "to": "alpha_B",  "side": "B"},
+    {"from": "audience_mobilization", "to": "alpha_A",  "side": "A"},
+    {"from": "audience_mobilization", "to": "alpha_B",  "side": "B"},
+    {"from": "issue_indivisibility",  "to": "xbar_A",   "side": "A"},
+    {"from": "issue_indivisibility",  "to": "xbar_B",   "side": "B"},
+    {"from": "ethnic_kin_toxicity",   "to": "xbar_A",   "side": "A"},
+    {"from": "ethnic_kin_toxicity",   "to": "xbar_B",   "side": "B"},
+    {"from": "w_A",                   "to": "BR",       "side": "calculated"},
+    {"from": "w_B",                   "to": "BR",       "side": "calculated"},
+    {"from": "pi_A",                  "to": "BR",       "side": "calculated"},
+    {"from": "pi_B",                  "to": "BR",       "side": "calculated"},
+    {"from": "S",                     "to": "BR",       "side": "calculated"},
+    {"from": "alpha_A",               "to": "BR",       "side": "calculated"},
+    {"from": "alpha_B",               "to": "BR",       "side": "calculated"},
+    {"from": "delta_A",               "to": "BR",       "side": "calculated"},
+    {"from": "delta_B",               "to": "BR",       "side": "calculated"},
+    {"from": "q",                     "to": "BR",       "side": "calculated"},
+    {"from": "xbar_A",                "to": "BR",       "side": "calculated"},
+    {"from": "xbar_B",                "to": "BR",       "side": "calculated"},
+    {"from": "BR",                    "to": "Y",        "side": "outcome"}
+  ]
+}
