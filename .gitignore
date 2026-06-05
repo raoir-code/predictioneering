@@ -24,3 +24,5 @@ Thumbs.db
 
 # Keep predictions log in repo (it's the track record)
 !predictions/log.csv
+library/
+engine/gods_dag_v2.py
