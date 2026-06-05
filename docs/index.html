@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PREDICTIONEERING — Geopolitical Forecasting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0a0c0f;
+    --bg2:      #0f1318;
+    --bg3:      #141920;
+    --border:   #1e2730;
+    --border2:  #253040;
+    --green:    #00e676;
+    --green-dim:#004d26;
+    --amber:    #ffb300;
+    --amber-dim:#3d2c00;
+    --red:      #ff5252;
+    --red-dim:  #3d0f0f;
+    --blue:     #40c4ff;
+    --blue-dim: #003d57;
+    --text:     #c8d8e8;
+    --text-dim: #4a6070;
+    --text-mid: #7a9ab0;
+    --mono:     'IBM Plex Mono', monospace;
+    --sans:     'IBM Plex Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Scanline overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  /* ── Header ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 28px 40px 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .logo-block {}
+
+  .logo {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  h1 {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    line-height: 1;
+  }
+
+  h1 span {
+    color: var(--green);
+  }
+
+  .header-meta {
+    text-align: right;
+    color: var(--text-dim);
+    font-size: 11px;
+    line-height: 1.8;
+  }
+
+  .header-meta strong {
+    color: var(--text-mid);
+    font-weight: 400;
+  }
+
+  /* ── Stats bar ── */
+  .stats-bar {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+  }
+
+  .stat {
+    flex: 1;
+    padding: 16px 24px;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+  }
+
+  .stat-value {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .stat-value.green { color: var(--green); }
+  .stat-value.amber { color: var(--amber); }
+  .stat-value.blue  { color: var(--blue); }
+
+  /* ── Filter bar ── */
+  .filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 40px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .filter-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-right: 8px;
+  }
+
+  .filter-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 5px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.05em;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--border2);
+    color: var(--text);
+  }
+
+  .filter-btn.active-all   { border-color: var(--blue);  color: var(--blue);  background: var(--blue-dim); }
+  .filter-btn.active-core  { border-color: var(--green); color: var(--green); background: var(--green-dim); }
+  .filter-btn.active-adj   { border-color: var(--amber); color: var(--amber); background: var(--amber-dim); }
+
+  .filter-spacer { flex: 1; }
+
+  .last-updated {
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+
+  /* ── Main table area ── */
+  main {
+    padding: 0 40px 60px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+  }
+
+  thead tr {
+    border-bottom: 1px solid var(--border2);
+  }
+
+  th {
+    padding: 14px 12px 10px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+
+  th:first-child { padding-left: 0; }
+  th.right { text-align: right; }
+  th.center { text-align: center; }
+
+  /* Table rows */
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+    animation: rowIn 0.3s ease both;
+  }
+
+  tbody tr:hover {
+    background: var(--bg2);
+  }
+
+  @keyframes rowIn {
+    from { opacity: 0; transform: translateX(-6px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  td {
+    padding: 13px 12px;
+    vertical-align: middle;
+    font-size: 12px;
+  }
+
+  td:first-child { padding-left: 0; }
+
+  /* ── Bucket badge ── */
+  .badge {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    padding: 3px 8px;
+    font-weight: 500;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .badge-core {
+    color: var(--green);
+    border: 1px solid var(--green-dim);
+    background: var(--green-dim);
+  }
+
+  .badge-adjacent {
+    color: var(--amber);
+    border: 1px solid var(--amber-dim);
+    background: var(--amber-dim);
+  }
+
+  /* ── Question cell ── */
+  .question-cell {
+    max-width: 400px;
+  }
+
+  .question-text {
+    color: var(--text);
+    line-height: 1.45;
+    margin-bottom: 3px;
+  }
+
+  .question-meta {
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+
+  .dyad-tag {
+    display: inline-block;
+    font-size: 9px;
+    color: var(--blue);
+    border: 1px solid var(--blue-dim);
+    background: var(--blue-dim);
+    padding: 1px 6px;
+    margin-right: 6px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── Price cells ── */
+  .price-cell {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .market-price {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .our-prediction {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--green);
+  }
+
+  .our-prediction.pending {
+    color: var(--text-dim);
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* Edge indicator — how far we are from market */
+  .edge-cell {
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .edge-positive { color: var(--green); }
+  .edge-negative { color: var(--red); }
+  .edge-none     { color: var(--text-dim); font-style: italic; font-size: 11px; }
+
+  /* ── End date ── */
+  .end-date {
+    color: var(--text-mid);
+    white-space: nowrap;
+    font-size: 11px;
+  }
+
+  .end-date.soon {
+    color: var(--amber);
+  }
+
+  /* ── Timestamp ── */
+  .timestamp-cell {
+    color: var(--text-dim);
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  /* ── Resolution badge ── */
+  .resolved-yes { color: var(--green); font-weight: 500; }
+  .resolved-no  { color: var(--red);   font-weight: 500; }
+  .resolved-open{ color: var(--text-dim); font-style: italic; }
+
+  /* ── Empty state ── */
+  .empty-state {
+    padding: 80px 0;
+    text-align: center;
+    color: var(--text-dim);
+  }
+
+  .empty-state .big {
+    font-size: 36px;
+    opacity: 0.2;
+    margin-bottom: 16px;
+  }
+
+  /* ── Section divider ── */
+  .section-head {
+    padding: 20px 0 8px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+
+  /* ── Blinking cursor ── */
+  .cursor::after {
+    content: '▋';
+    animation: blink 1s step-end infinite;
+    color: var(--green);
+    margin-left: 2px;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  /* ── Footnote ── */
+  footer {
+    padding: 24px 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-dim);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  footer a { color: var(--text-dim); text-decoration: none; }
+  footer a:hover { color: var(--text-mid); }
+
+  /* ── Loading state ── */
+  #loading {
+    padding: 60px 40px;
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-block">
+    <div class="logo">Structural IR Forecasting</div>
+    <h1>PREDICTION<span>EERING</span></h1>
+  </div>
+  <div class="header-meta">
+    <div><strong>Method:</strong> God's DAG — Min-Distance Structural Estimator</div>
+    <div><strong>Studies:</strong> 10 IR studies · 7 identified nodes · Jacobian rank = 7</div>
+    <div><strong>Benchmark:</strong> Polymarket prediction markets</div>
+  </div>
+</header>
+
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-label">Live Predictions</div>
+    <div class="stat-value blue" id="stat-live">—</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Resolved</div>
+    <div class="stat-value" id="stat-resolved">—</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Brier Score</div>
+    <div class="stat-value green" id="stat-brier">—</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Market Baseline</div>
+    <div class="stat-value" id="stat-baseline">—</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Tracking</div>
+    <div class="stat-value amber" id="stat-tracking">—</div>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <span class="filter-label">Show:</span>
+  <button class="filter-btn active-all" onclick="setFilter('all')">All</button>
+  <button class="filter-btn" onclick="setFilter('core')">✅ Core</button>
+  <button class="filter-btn" onclick="setFilter('adjacent')">🟡 Adjacent</button>
+  <div class="filter-spacer"></div>
+  <span class="last-updated" id="last-updated">Loading...</span>
+</div>
+
+<main>
+  <div id="loading">
+    <span class="cursor">Loading market feed</span>
+  </div>
+  <div id="table-container" style="display:none">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:36px"></th>
+          <th>Question</th>
+          <th class="right">Market</th>
+          <th class="right">Our Prediction</th>
+          <th class="center">Edge</th>
+          <th>Ends</th>
+          <th>Prediction Timestamp</th>
+          <th>Resolution</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer>
+  <div>PREDICTIONEERING · God's DAG v2 · <a href="https://github.com/raoir-code/predictioneering" target="_blank">github.com/raoir-code/predictioneering</a></div>
+  <div>Predictions logged before resolution. No retroactive entries.</div>
+</footer>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────
+let allMarkets = [];
+let currentFilter = 'all';
+
+// ── Load data ──────────────────────────────────────────────────────────────
+async function loadFeed() {
+  try {
+    // Try classified_feed.json first (has bucket info), fall back to live_feed.json
+    let data;
+    try {
+      const r = await fetch('classified_feed.json');
+      if (!r.ok) throw new Error('no classified feed');
+      data = await r.json();
+    } catch {
+      const r = await fetch('live_feed.json');
+      data = await r.json();
+    }
+
+    allMarkets = data;
+    renderTable(currentFilter);
+    updateStats();
+
+    // Show last updated time
+    const times = data.map(m => m.scraped_at).filter(Boolean);
+    if (times.length) {
+      const latest = new Date(times[0]);
+      document.getElementById('last-updated').textContent =
+        'Feed scraped: ' + latest.toUTCString().replace(' GMT', 'Z');
+    }
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('table-container').style.display = 'block';
+
+  } catch(e) {
+    document.getElementById('loading').innerHTML =
+      '<span style="color:var(--red)">⚠ Could not load feed. Run scrape_live.py first.</span>';
+    console.error(e);
+  }
+}
+
+// ── Render ─────────────────────────────────────────────────────────────────
+function setFilter(f) {
+  currentFilter = f;
+
+  // Update button states
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.className = 'filter-btn';
+  });
+  const btns = document.querySelectorAll('.filter-btn');
+  if (f === 'all')      btns[0].className = 'filter-btn active-all';
+  if (f === 'core')     btns[1].className = 'filter-btn active-core';
+  if (f === 'adjacent') btns[2].className = 'filter-btn active-adj';
+
+  renderTable(f);
+}
+
+function renderTable(filter) {
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = '';
+
+  let markets = allMarkets.filter(m => {
+    const b = (m.bucket || '').toUpperCase();
+    if (filter === 'core')     return b === 'CORE';
+    if (filter === 'adjacent') return b === 'ADJACENT';
+    // 'all' shows CORE and ADJACENT only — NOISE is never shown
+    return b === 'CORE' || b === 'ADJACENT';
+  });
+
+  if (markets.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="8">
+      <div class="empty-state">
+        <div class="big">◈</div>
+        <div>No markets to display.</div>
+        <div style="margin-top:8px;font-size:11px">Run pipeline/scrape_live.py → pipeline/disciplinarian.py</div>
+      </div>
+    </td></tr>`;
+    return;
+  }
+
+  // Sort: CORE first, then by volume
+  markets.sort((a, b) => {
+    const bucketOrder = { CORE: 0, ADJACENT: 1 };
+    const ba = bucketOrder[a.bucket] ?? 2;
+    const bb = bucketOrder[b.bucket] ?? 2;
+    if (ba !== bb) return ba - bb;
+    return (b.volume || 0) - (a.volume || 0);
+  });
+
+  let delay = 0;
+  for (const m of markets) {
+    const tr = document.createElement('tr');
+    tr.style.animationDelay = `${delay}ms`;
+    delay += 20;
+
+    const isCore     = (m.bucket || '').toUpperCase() === 'CORE';
+    const marketPct  = m.market_price != null ? (m.market_price * 100).toFixed(1) + '%' : '—';
+    const ourPct     = m.our_prediction != null ? (m.our_prediction * 100).toFixed(1) + '%' : null;
+
+    // Edge calculation
+    let edgeHtml = '<span class="edge-none">—</span>';
+    if (m.our_prediction != null && m.market_price != null) {
+      const edge = ((m.our_prediction - m.market_price) * 100).toFixed(1);
+      const cls  = parseFloat(edge) > 0 ? 'edge-positive' : parseFloat(edge) < 0 ? 'edge-negative' : 'edge-none';
+      edgeHtml   = `<span class="${cls}">${parseFloat(edge) > 0 ? '+' : ''}${edge}pp</span>`;
+    }
+
+    // End date — flag if within 30 days
+    let endHtml = '—';
+    if (m.end_date) {
+      const daysLeft = Math.ceil((new Date(m.end_date) - Date.now()) / 86400000);
+      const cls = daysLeft < 30 ? 'end-date soon' : 'end-date';
+      endHtml = `<span class="${cls}">${m.end_date}${daysLeft < 30 ? ' ⚡' : ''}</span>`;
+    }
+
+    // Timestamp
+    const tsHtml = m.prediction_at
+      ? `<span class="timestamp-cell">${new Date(m.prediction_at).toISOString().replace('T', ' ').slice(0, 16)}Z</span>`
+      : '<span class="timestamp-cell" style="opacity:0.3">not yet posted</span>';
+
+    // Resolution
+    let resHtml = '<span class="resolved-open">open</span>';
+    if (m.resolution === 1)   resHtml = '<span class="resolved-yes">YES ✓</span>';
+    if (m.resolution === 0)   resHtml = '<span class="resolved-no">NO ✗</span>';
+
+    // Dyad tag
+    const dyadHtml = m.dyad ? `<span class="dyad-tag">${m.dyad}</span>` : '';
+
+    // Relevant nodes
+    const nodesHtml = (m.relevant_nodes || []).length
+      ? (m.relevant_nodes || []).slice(0, 3).join(' · ')
+      : '';
+
+    tr.innerHTML = `
+      <td>
+        ${isCore
+          ? '<span class="badge badge-core">core</span>'
+          : '<span class="badge badge-adjacent">adj</span>'
+        }
+      </td>
+      <td class="question-cell">
+        <div class="question-text">${escHtml(m.question || m.event_title || '')}</div>
+        <div class="question-meta">
+          ${dyadHtml}
+          <span style="opacity:0.5">${escHtml(nodesHtml)}</span>
+        </div>
+      </td>
+      <td class="price-cell">
+        <span class="market-price">${marketPct}</span>
+      </td>
+      <td class="price-cell">
+        ${ourPct
+          ? `<span class="our-prediction">${ourPct}</span>`
+          : `<span class="our-prediction pending">pending</span>`
+        }
+      </td>
+      <td class="edge-cell">${edgeHtml}</td>
+      <td>${endHtml}</td>
+      <td>${tsHtml}</td>
+      <td>${resHtml}</td>
+    `;
+
+    tbody.appendChild(tr);
+  }
+}
+
+// ── Stats ──────────────────────────────────────────────────────────────────
+function updateStats() {
+  const withPred   = allMarkets.filter(m => m.our_prediction != null);
+  const resolved   = allMarkets.filter(m => m.resolution != null);
+  const tracking   = allMarkets.filter(m =>
+    (m.bucket || '').toUpperCase() === 'ADJACENT'
+  );
+
+  document.getElementById('stat-live').textContent     = withPred.length || '0';
+  document.getElementById('stat-resolved').textContent = resolved.length || '0';
+  document.getElementById('stat-tracking').textContent = tracking.length || '0';
+
+  // Brier score — only compute if we have resolved predictions
+  const resolvedWithPred = resolved.filter(m => m.our_prediction != null);
+  if (resolvedWithPred.length > 0) {
+    const ourBrier = resolvedWithPred.reduce((sum, m) =>
+      sum + Math.pow(m.our_prediction - m.resolution, 2), 0
+    ) / resolvedWithPred.length;
+    const mktBrier = resolvedWithPred.reduce((sum, m) =>
+      sum + Math.pow((m.market_price_at_prediction ?? m.market_price) - m.resolution, 2), 0
+    ) / resolvedWithPred.length;
+    document.getElementById('stat-brier').textContent    = ourBrier.toFixed(4);
+    document.getElementById('stat-baseline').textContent = mktBrier.toFixed(4);
+  } else {
+    document.getElementById('stat-brier').textContent    = 'N/A';
+    document.getElementById('stat-baseline').textContent = 'N/A';
+  }
+}
+
+// ── Helpers ────────────────────────────────────────────────────────────────
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// ── Boot ───────────────────────────────────────────────────────────────────
+loadFeed();
+</script>
+</body>
+</html>
