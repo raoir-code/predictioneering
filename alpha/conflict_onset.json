@@ -1,0 +1,62 @@
+{
+  "derby": "conflict_onset",
+  "alpha": {
+    "WinProbability": 0.0,
+    "WarCosts": -0.22326555238216308,
+    "HardlineClaims": 1.5330767167013923,
+    "CommitmentProblem": 0.2722864242765534,
+    "PreferenceAlignment": -1.0689420144218997,
+    "Patience": -0.18391762272896395,
+    "DemocraticPeace": -0.03497462779018943
+  },
+  "ci": {
+    "WinProbability": {
+      "ci_lo": 0.0,
+      "ci_hi": 0.0,
+      "boot_se": 0.0
+    },
+    "WarCosts": {
+      "ci_lo": -0.3396508869075472,
+      "ci_hi": 0.0,
+      "boot_se": 0.08256830787241806
+    },
+    "HardlineClaims": {
+      "ci_lo": 0.0,
+      "ci_hi": 1.7098405756157038,
+      "boot_se": 0.4554470304950161
+    },
+    "CommitmentProblem": {
+      "ci_lo": 0.0,
+      "ci_hi": 0.47607166443744797,
+      "boot_se": 0.31946524421095207
+    },
+    "PreferenceAlignment": {
+      "ci_lo": -1.8769425686447048,
+      "ci_hi": 0.0,
+      "boot_se": 0.45820567703364085
+    },
+    "Patience": {
+      "ci_lo": -0.18632953933229018,
+      "ci_hi": 0.0,
+      "boot_se": 0.09086316639466867
+    },
+    "DemocraticPeace": {
+      "ci_lo": -0.3775093224284811,
+      "ci_hi": 0.0,
+      "boot_se": 0.15500730643588548
+    }
+  },
+  "diagnostics": {
+    "n_moments": 19,
+    "jacobian_rank": 7,
+    "condition_number": 2.0000000001665335,
+    "is_identified": true
+  },
+  "counts": {
+    "raw_moments": 19,
+    "kosher_moments": 19,
+    "dropped_moments": 0,
+    "study_clusters": 10,
+    "drop_reasons": {}
+  }
+}
