@@ -51,7 +51,7 @@ The model is designed to forecast INTERSTATE CONFLICT ONSET between two named st
 
 For each Polymarket question, classify it as exactly one of:
 - CORE: The question is directly about whether interstate conflict will occur or escalate between a specific dyad. The model's DAG nodes are directly relevant.
-- ADJACENT: The question is geopolitics-related and involves state actors but the model has only partial traction. Examples: ceasefire timing, peace deal questions, sanctions, specific military incidents that aren't full conflict onset.
+- ADJACENT: The question is geopolitics-related and involves state actors but the model has only partial traction. Examples: ceasefire timing, peace deal questions, sanctions, specific military incidents that aren't full conflict onset, territorial advance or battlefield progress questions (will X capture city Y, will X control territory Z by date, will X reach location Y).
 - NOISE: Not about interstate conflict between state actors. Skip.
 
 Respond ONLY with valid JSON in this exact format:
