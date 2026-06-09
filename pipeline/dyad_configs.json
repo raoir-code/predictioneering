@@ -1,0 +1,436 @@
+{
+  "China-Taiwan": {
+    "label": "China and Taiwan",
+    "baseline": {
+      "WinProbability": 0.5,
+      "WarCosts": -1.0,
+      "HardlineClaims": 2.0,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.0
+    },
+    "query": "\"China\" AND (\"Taiwan\" OR \"PLA\" OR \"strait\" OR \"invasion\" OR \"blockade\")",
+    "baseline_source": "verified"
+  },
+  "Russia-Ukraine": {
+    "label": "Russia and Ukraine",
+    "baseline": {
+      "WinProbability": 0.0,
+      "WarCosts": -0.5,
+      "HardlineClaims": 2.0,
+      "CommitmentProblem": 1.5,
+      "PreferenceAlignment": -2.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.0
+    },
+    "query": "\"Russia\" AND (\"Ukraine\" OR \"Zelensky\" OR \"Putin\" OR \"Kyiv\" OR \"ceasefire\")",
+    "baseline_source": "verified"
+  },
+  "US-Iran": {
+    "label": "United States and Iran",
+    "baseline": {
+      "WinProbability": -1.0,
+      "WarCosts": 1.0,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.5
+    },
+    "query": "\"Iran\" AND (\"United States\" OR US OR \"American\" OR Tehran OR \"nuclear\") NOT Venezuela",
+    "baseline_source": "verified"
+  },
+  "Israel-Iran": {
+    "label": "Israel and Iran",
+    "baseline": {
+      "WinProbability": 0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -2.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.0
+    },
+    "query": "\"Iran\" AND (\"Israel\" OR \"IDF\" OR \"nuclear\" OR \"strike\" OR \"airstrike\")",
+    "baseline_source": "verified"
+  },
+  "North Korea-US": {
+    "label": "North Korea and the United States",
+    "baseline": {
+      "WinProbability": -2.0,
+      "WarCosts": 0.5,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -2.0,
+      "Patience": -1.0,
+      "DemocraticPeace": 2.0
+    },
+    "query": "\"North Korea\" AND (\"United States\" OR \"Kim\" OR \"missile\" OR \"nuclear\" OR \"ICBM\")",
+    "baseline_source": "verified"
+  },
+  "India-Pakistan": {
+    "label": "India and Pakistan",
+    "baseline": {
+      "WinProbability": 0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.5
+    },
+    "query": "\"India\" AND (\"Pakistan\" OR \"Kashmir\" OR \"LOC\" OR \"strike\" OR \"airstrike\")",
+    "baseline_source": "verified"
+  },
+  "NATO-Russia": {
+    "label": "NATO and Russia",
+    "baseline": {
+      "WinProbability": 0.5,
+      "WarCosts": -1.0,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 1.5,
+      "PreferenceAlignment": -2.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.0
+    },
+    "query": "\"NATO\" AND (\"Russia\" OR \"Putin\" OR \"Article 5\" OR \"escalation\" OR \"alliance\")",
+    "baseline_source": "verified"
+  },
+  "US-Venezuela": {
+    "label": "United States and Venezuela",
+    "baseline": {
+      "WinProbability": -1.5,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5
+    },
+    "query": "\"Venezuela\" AND (\"United States\" OR \"Maduro\" OR \"sanctions\" OR \"military\" OR \"Guyana\")",
+    "baseline_source": "verified"
+  },
+  "US-Cuba": {
+    "label": "United States and Cuba",
+    "baseline": {
+      "WinProbability": -2.0,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.0,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5
+    },
+    "query": "\"Cuba\" AND (\"United States\" OR \"Havana\" OR \"sanctions\" OR \"embargo\" OR \"military\")",
+    "baseline_source": "verified"
+  },
+  "US-Mexico": {
+    "label": "United States and Mexico",
+    "baseline": {
+      "WinProbability": -2.0,
+      "WarCosts": 1.0,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.5
+    },
+    "query": "\"Mexico\" AND (\"United States\" OR \"cartel\" OR \"military\" OR \"border\" OR \"tariff\") NOT \"New Mexico\"",
+    "baseline_source": "verified"
+  },
+  "US-Russia": {
+    "label": "United States and Russia",
+    "baseline": {
+      "WinProbability": 0.0,
+      "WarCosts": -0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -2.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.5
+    },
+    "query": "\"Russia\" AND (\"United States\" OR \"Washington\" OR \"Pentagon\" OR \"State Department\") NOT Ukraine NOT NATO",
+    "baseline_source": "verified"
+  },
+  "US-China": {
+    "label": "United States and China",
+    "baseline": {
+      "WinProbability": 0.5,
+      "WarCosts": -1.0,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.5
+    },
+    "query": "\"China\" AND (\"United States\" OR \"Pentagon\" OR \"trade war\" OR \"South China Sea\") NOT Taiwan",
+    "baseline_source": "verified"
+  },
+  "Greece-Turkey": {
+    "label": "Greece and Turkey",
+    "baseline": {
+      "WinProbability": 0.0,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.0
+    },
+    "query": "\"Greece\" AND (\"Turkey\" OR \"Aegean\" OR \"Cyprus\" OR \"airspace\" OR \"Erdogan\")",
+    "baseline_source": "verified"
+  },
+  "China-Japan": {
+    "label": "China and Japan",
+    "baseline": {
+      "WinProbability": 0.5,
+      "WarCosts": -1.0,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.0
+    },
+    "query": "\"China\" AND (\"Japan\" OR \"Senkaku\" OR \"Diaoyu\" OR \"JMSDF\" OR \"East China Sea\")",
+    "baseline_source": "verified"
+  },
+  "China-Philippines": {
+    "label": "China and the Philippines",
+    "baseline": {
+      "WinProbability": 0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.5,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.0
+    },
+    "query": "\"China\" AND (\"Philippines\" OR \"South China Sea\" OR \"Scarborough\" OR \"BRP\" OR \"Manila\")",
+    "baseline_source": "verified"
+  },
+  "NorthKorea-SouthKorea": {
+    "label": "North Korea and South Korea",
+    "baseline": {
+      "WinProbability": -0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.5,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -2.0,
+      "Patience": -1.0,
+      "DemocraticPeace": 2.0
+    },
+    "query": "\"North Korea\" AND (\"South Korea\" OR \"Seoul\" OR \"DMZ\" OR \"provocation\" OR \"missile\")",
+    "baseline_source": "verified"
+  },
+  "Israel-Yemen": {
+    "label": "Israel and Yemen (Houthis)",
+    "baseline": {
+      "WinProbability": 0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -2.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5
+    },
+    "query": "\"Israel\" AND (\"Yemen\" OR \"Houthi\" OR \"Red Sea\" OR \"missile\" OR \"drone\")",
+    "baseline_source": "verified"
+  },
+  "Israel-Turkey": {
+    "label": "Israel and Turkey",
+    "baseline": {
+      "WinProbability": 0.0,
+      "WarCosts": -0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.5
+    },
+    "query": "\"Israel\" AND (\"Turkey\" OR \"Erdogan\" OR \"Ankara\" OR \"flotilla\" OR \"Gaza\")",
+    "baseline_source": "verified"
+  },
+  "Israel-Syria": {
+    "label": "Israel and Syria",
+    "baseline": {
+      "WinProbability": 1.0,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -2.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5
+    },
+    "query": "\"Israel\" AND (\"Syria\" OR \"Damascus\" OR \"airstrike\" OR \"IDF\" OR \"Golan\")",
+    "baseline_source": "verified"
+  },
+  "US-Denmark": {
+    "label": "United States and Denmark (Greenland)",
+    "baseline": {
+      "WinProbability": -2.0,
+      "WarCosts": 1.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -0.5,
+      "Patience": 0.0,
+      "DemocraticPeace": -1.0
+    },
+    "query": "\"Greenland\" AND (\"United States\" OR \"Denmark\" OR \"Trump\" OR \"annexation\" OR \"sovereignty\")",
+    "baseline_source": "verified"
+  },
+  "US-Colombia": {
+    "label": "United States and Colombia",
+    "baseline": {
+      "WinProbability": -2.0,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.0,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -1.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.5
+    },
+    "query": "\"Colombia\" AND (\"United States\" OR \"tariff\" OR \"military\" OR \"deportation\" OR \"Petro\")",
+    "baseline_source": "verified"
+  },
+  "China-India": {
+    "label": "China and India",
+    "baseline": {
+      "WinProbability": 0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.0
+    },
+    "query": "\"China\" AND (\"India\" OR \"LAC\" OR \"Ladakh\" OR \"Galwan\" OR \"Arunachal\")",
+    "baseline_source": "verified"
+  },
+  "Russia-Poland": {
+    "label": "Russia and Poland",
+    "baseline": {
+      "WinProbability": -0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -2.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.5
+    },
+    "query": "\"Russia\" AND (\"Poland\" OR \"Warsaw\" OR \"NATO\" OR \"border\" OR \"Suwalki\")",
+    "baseline_source": "verified"
+  },
+  "Thailand-Cambodia": {
+    "label": "Thailand and Cambodia",
+    "baseline": {
+      "WinProbability": 0.0,
+      "WarCosts": -0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -0.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.5
+    },
+    "query": "\"Thailand\" AND (\"Cambodia\" OR \"border\" OR \"temple\" OR \"Preah Vihear\" OR \"military\")",
+    "baseline_source": "verified"
+  },
+  "US-Panama": {
+    "label": "United States and Panama",
+    "baseline": {
+      "WinProbability": -2.0,
+      "WarCosts": 1.0,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -0.5,
+      "Patience": 0.0,
+      "DemocraticPeace": -0.5
+    },
+    "query": "\"Panama\" AND (\"United States\" OR \"canal\" OR \"Trump\" OR \"military\" OR \"sovereignty\")",
+    "baseline_source": "verified"
+  },
+  "Europe(France/UK/Germany)-Iran": {
+    "label": "Europe and Iran",
+    "baseline": {
+      "WinProbability": -1.0,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.5
+    },
+    "query": "\"Iran\" AND (\"France\" OR \"UK\" OR \"Germany\" OR \"Europe\" OR \"nuclear deal\" OR \"JCPOA\")",
+    "baseline_source": "verified"
+  },
+  "USA-Iran": {
+    "label": "United States and Iran",
+    "baseline": {
+      "WinProbability": -1.0,
+      "WarCosts": 1.0,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.5
+    },
+    "query": "\"Iran\" AND (\"United States\" OR US OR \"American\" OR Tehran OR \"nuclear\") NOT Venezuela",
+    "baseline_source": "verified"
+  },
+  "USA-Venezuela": {
+    "label": "United States and Venezuela",
+    "baseline": {
+      "WinProbability": -1.5,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5
+    },
+    "query": "\"Venezuela\" AND (\"United States\" OR \"Maduro\" OR \"sanctions\" OR \"military\" OR \"Guyana\")",
+    "baseline_source": "verified"
+  },
+  "USA-Denmark": {
+    "label": "United States and Denmark (Greenland)",
+    "baseline": {
+      "WinProbability": -2.0,
+      "WarCosts": 1.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -0.5,
+      "Patience": 0.0,
+      "DemocraticPeace": -1.0
+    },
+    "query": "\"Greenland\" AND (\"United States\" OR \"Denmark\" OR \"Trump\" OR \"annexation\" OR \"sovereignty\")",
+    "baseline_source": "verified"
+  },
+  "USA-Colombia": {
+    "label": "United States and Colombia",
+    "baseline": {
+      "WinProbability": -2.0,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.0,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -1.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.5
+    },
+    "query": "\"Colombia\" AND (\"United States\" OR \"tariff\" OR \"military\" OR \"deportation\" OR \"Petro\")",
+    "baseline_source": "verified"
+  },
+  "Russia-NATO": {
+    "label": "NATO and Russia",
+    "baseline": {
+      "WinProbability": 0.5,
+      "WarCosts": -1.0,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 1.5,
+      "PreferenceAlignment": -2.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.0
+    },
+    "query": "\"NATO\" AND (\"Russia\" OR \"Putin\" OR \"Article 5\" OR \"escalation\" OR \"alliance\")",
+    "baseline_source": "verified"
+  }
+}

@@ -65,88 +65,9 @@ TOGGLE_RANGES = {
 MAX_WEEKLY_DELTA = {n: 0.5 for n in NODES}
 
 # ============================================================
-# DYAD CONFIGS
+# DYAD CONFIGS — loaded from pipeline/dyad_configs.json
 # ============================================================
-DYAD_CONFIGS = {
-    "China-Taiwan": {
-        "label": "China and Taiwan",
-        "baseline": {
-            "WinProbability":      0.5,
-            "WarCosts":           -1.0,
-            "HardlineClaims":      2.0,
-            "CommitmentProblem":   0.5,
-            "PreferenceAlignment": -1.5,
-            "Patience":           -0.5,
-            "DemocraticPeace":     1.0,
-        },
-        "query": '"China" AND ("Taiwan" OR "PLA" OR "strait" OR "invasion" OR "blockade")',
-    },
-    "Russia-Ukraine": {
-        "label": "Russia and Ukraine",
-        "baseline": {
-            "WinProbability":      0.0,
-            "WarCosts":           -0.5,
-            "HardlineClaims":      2.0,
-            "CommitmentProblem":   1.5,
-            "PreferenceAlignment": -2.0,
-            "Patience":            0.0,
-            "DemocraticPeace":     1.0,
-        },
-        "query": '"Russia" AND ("Ukraine" OR "Zelensky" OR "Putin" OR "Kyiv" OR "ceasefire")',
-    },
-    "US-Iran": {
-        "label": "United States and Iran",
-        "baseline": {
-            "WinProbability":     -1.0,
-            "WarCosts":            1.0,
-            "HardlineClaims":      0.5,
-            "CommitmentProblem":   1.0,
-            "PreferenceAlignment": -1.5,
-            "Patience":            0.0,
-            "DemocraticPeace":     1.5,
-        },
-        "query": '"Iran" AND ("United States" OR US OR "American" OR Tehran OR "nuclear") NOT Venezuela',
-    },
-    "Israel-Iran": {
-        "label": "Israel and Iran",
-        "baseline": {
-            "WinProbability":      0.5,
-            "WarCosts":           -0.5,
-            "HardlineClaims":      1.0,
-            "CommitmentProblem":   1.0,
-            "PreferenceAlignment": -2.0,
-            "Patience":           -0.5,
-            "DemocraticPeace":     1.0,
-        },
-        "query": '"Iran" AND ("Israel" OR "IDF" OR "nuclear" OR "strike" OR "airstrike")',
-    },
-    "North Korea-US": {
-        "label": "North Korea and the United States",
-        "baseline": {
-            "WinProbability":     -2.0,
-            "WarCosts":            0.5,
-            "HardlineClaims":      1.0,
-            "CommitmentProblem":   0.5,
-            "PreferenceAlignment": -2.0,
-            "Patience":           -1.0,
-            "DemocraticPeace":     2.0,
-        },
-        "query": '"North Korea" AND ("United States" OR "Kim" OR "missile" OR "nuclear" OR "ICBM")',
-    },
-    "India-Pakistan": {
-        "label": "India and Pakistan",
-        "baseline": {
-            "WinProbability":      0.5,
-            "WarCosts":           -0.5,
-            "HardlineClaims":      1.5,
-            "CommitmentProblem":   0.5,
-            "PreferenceAlignment": -1.5,
-            "Patience":           -0.5,
-            "DemocraticPeace":     0.5,
-        },
-        "query": '"India" AND ("Pakistan" OR "Kashmir" OR "LOC" OR "strike" OR "airstrike")',
-    },
-}
+DYAD_CONFIGS_PATH = os.path.join(os.path.dirname(__file__), "dyad_configs.json")
 
 FALLBACK_BASELINE = {
     "WinProbability":      0.0,
@@ -157,6 +78,13 @@ FALLBACK_BASELINE = {
     "Patience":            0.0,
     "DemocraticPeace":     0.5,
 }
+
+
+def load_dyad_configs():
+    if os.path.exists(DYAD_CONFIGS_PATH):
+        with open(DYAD_CONFIGS_PATH) as f:
+            return json.load(f)
+    return {}
 
 # ============================================================
 # NODE SYSTEM PROMPT + RUBRICS
@@ -444,13 +372,10 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         print(f"DYAD: {dyad} ({len(dyad_markets)} markets)")
         print(f"{'='*60}")
 
-        config = DYAD_CONFIGS.get(dyad)
+        dyad_configs = load_dyad_configs()
+        config = dyad_configs.get(dyad)
         if config is None:
-            for key in DYAD_CONFIGS:
-                if any(part.lower() in dyad.lower() for part in key.split("-")):
-                    config = DYAD_CONFIGS[key]
-                    print(f"  [warn] No exact config for '{dyad}', using '{key}'")
-                    break
+            print(f"  [warn] No config for '{dyad}' in dyad_configs.json — using fallback baseline.")
 
         if config is None:
             print(f"  [warn] No config for '{dyad}', using fallback baseline.")
