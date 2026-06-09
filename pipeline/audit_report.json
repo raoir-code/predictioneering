@@ -1,0 +1,285 @@
+{
+  "generated_at": "2026-06-09T15:33:46.243646+00:00",
+  "dyads": {
+    "US-Iran": {
+      "gaps": [
+        {
+          "mechanism": "Third-party coalition warfare / multilateral conflict structure",
+          "description": "The conflict involves Israel as a co-belligerent alongside the US against Iran, fundamentally altering the strategic calculus beyond what a purely bilateral US-Iran model can capture.",
+          "evidence": "\"Iran's participation in the FIFA World Cup 2026 has been complicated by the ongoing war with Israel and the United States\"; \"Will high gas prices change the auto industry again? \u2014 the U.S.-Israeli war with Iran\"; \"Iran fired seven ballistic missiles toward Kuwait and Bahrain\"",
+          "frequency": "5/10",
+          "candidate_node": "CoalitionDynamics",
+          "theoretical_grounding": "Alliance theory (Walt's balance of threat, Weitsman's coalition dynamics in war) \u2014 the presence of a co-belligerent ally changes bargaining leverage, war aims, and termination conditions in ways a bilateral model cannot represent."
+        },
+        {
+          "mechanism": "Domestic economic war-burden transmission (energy/commodity price channel)",
+          "description": "The war is transmitting economic costs to the US public through energy prices, affecting consumer behavior and economic sentiment in ways that create domestic political pressure distinct from bilateral trade costs.",
+          "evidence": "\"Gas prices have remained high due to the U.S.-Israeli war with Iran\"; \"Fuel prices are shaping summer plans\"; \"labor market continued to show resilience in the face of rising costs from the Iran war\"; \"economic frustration persists\"",
+          "frequency": "4/10",
+          "candidate_node": "DomesticWarBurden",
+          "theoretical_grounding": "Audience costs and war support literature (Mueller's war-weariness thesis, Gartner & Segura on casualty/cost sensitivity) \u2014 indirect economic pain shapes public tolerance for continued conflict and leader decision-making beyond what WarCosts (bilateral trade interdependence) captures."
+        },
+        {
+          "mechanism": "Diplomatic signaling through non-security issue linkage (sports/visa diplomacy)",
+          "description": "Visa restrictions on Iranian World Cup officials serve as a coercive diplomatic signal and micro-escalation mechanism outside traditional military or economic channels.",
+          "evidence": "\"Iran soccer officials denied USA visas for 2026 World Cup\"; \"Iran's Soccer Team Leaves for World Cup as Some Officials Still Await US Visas\" (appearing in 5+ headlines)",
+          "frequency": "5/10",
+          "candidate_node": "NonMilitaryCoercion",
+          "theoretical_grounding": "Issue-linkage theory (Keohane & Nye) and signaling theory \u2014 states use non-security domains (cultural exchange, sports participation) to signal hostility or openness, affecting the broader bargaining environment in ways none of the 7 nodes address."
+        },
+        {
+          "mechanism": "Active interstate war dynamics (escalation management during ongoing hostilities)",
+          "description": "The model is designed around a pre-war bargaining framework, but the headlines describe an ongoing shooting war with active missile exchanges, meaning the relevant mechanisms are now war termination and escalation management rather than dispute onset.",
+          "evidence": "\"US shoots down missiles and drones\"; \"Iran fired seven ballistic missiles toward Kuwait and Bahrain\"; \"the ongoing war with Israel and the United States\"; \"rising costs from the Iran war\"",
+          "frequency": "5/10",
+          "candidate_node": "ActiveWarEscalation",
+          "theoretical_grounding": "War termination theory (Pillar, Reiter) and escalation dynamics (Kahn's escalation ladder, Schelling's bargaining in conflict) \u2014 once war is underway, the relevant mechanisms shift from onset probability to information updating, battlefield momentum, and escalation/de-escalation thresholds."
+        }
+      ],
+      "summary": "The model's most critical blind spot is that a US-Iran shooting war is already underway involving Israel as a co-belligerent, meaning the Fearon pre-war bargaining framework is misspecified for the current phase. Additionally, the model cannot capture domestic economic war-burden transmission through energy prices or diplomatic signaling via non-security channels like visa/sports diplomacy, both of which dominate the current headline environment."
+    },
+    "China-Taiwan": {
+      "gaps": [
+        {
+          "mechanism": "Third-party alliance signaling and reactive escalation",
+          "description": "China escalates military posture not in response to Taiwan's actions but in reaction to third-party alliance deepening (Japan-Philippines defense cooperation), creating a triangulated escalation pathway the bilateral model cannot capture.",
+          "evidence": "\"China Escalates Patrols Near Taiwan Over Japan-Philippines Talks\" -- China launched a special maritime operation east of Taiwan in response to Japan-Philippines maritime border and defense cooperation agreement.",
+          "frequency": "1/10",
+          "candidate_node": "ThirdPartyAllianceTrigger",
+          "theoretical_grounding": "Alliance security dilemma theory (Snyder 1997); chain-ganging and entrapment dynamics in extended deterrence literature."
+        },
+        {
+          "mechanism": "Patron signaling and extended deterrence credibility",
+          "description": "The US as security patron signals commitment and provides defense guidance to Taiwan, affecting both deterrence credibility and Chinese threat perception in ways that a purely bilateral model misses.",
+          "evidence": "\"Taiwan needs to 'spend smarter' on its defence, senior US diplomat says\"; \"Trump Keeps the Door Open to a Call with Taiwan's President Even Though China Has Warned against it\"",
+          "frequency": "4/10",
+          "candidate_node": "PatronCommitmentSignal",
+          "theoretical_grounding": "Extended deterrence theory (Huth 1988); credibility of security guarantees literature; Fearon's audience cost model applied to patron states."
+        },
+        {
+          "mechanism": "Symbolic diplomacy and confidence-building measures",
+          "description": "Non-security cooperative exchanges (panda diplomacy) serve as deliberate signaling of willingness to manage tensions, operating as a de-escalation mechanism distinct from formal preference alignment or cost calculations.",
+          "evidence": "\"Taipei Zoo welcomes a pair of red pandas from China, first in over a decade\" (repeated across 4 headlines); described as occurring \"as tensions between the two sides run high.\"",
+          "frequency": "4/10",
+          "candidate_node": "SymbolicCBM",
+          "theoretical_grounding": "Constructivist signaling theory; confidence-building measures (CBM) literature; costly signaling of benign intent (Kydd 2005)."
+        },
+        {
+          "mechanism": "Multi-theater coercion and geographic linkage",
+          "description": "China simultaneously pressures Taiwan in the South China Sea (near Taiping/Itu Aba) and east of Taiwan, using geographically dispersed operations to stretch Taiwan's defense posture across multiple domains the model's single bilateral tension variable cannot differentiate.",
+          "evidence": "\"Taiwan says Chinese coast guard, research ships near key S. China Sea islands\" (coordinated coast guard + research ship operation described as first of its kind); combined with patrols east of Taiwan in the Bloomberg headline.",
+          "frequency": "3/10",
+          "candidate_node": "MultiTheaterCoercion",
+          "theoretical_grounding": "Coercive diplomacy theory (George & Simons 1994); gray-zone operations literature; horizontal escalation and multi-domain coercion frameworks."
+        }
+      ],
+      "summary": "The model's most critical blind spot for the China-Taiwan dyad is the absence of third-party actors\u2014particularly the US as security patron and Japan-Philippines alliance dynamics\u2014which directly drive both escalation and deterrence in nearly half the headlines. A secondary but theoretically important gap is the model's inability to capture symbolic confidence-building measures (panda diplomacy) that signal cooperative intent alongside simultaneous coercive operations, a mixed-signal dynamic central to cross-strait relations."
+    },
+    "NATO-Russia": {
+      "gaps": [
+        {
+          "mechanism": "Nuclear deterrence and escalation dynamics",
+          "description": "The deployment or forward-positioning of nuclear weapons creates strategic stability/instability effects (deterrence, first-strike fears, escalation spirals) that operate independently of conventional military balance.",
+          "evidence": "'Highly Confidential' nuclear spread: US considers planting more warheads in NATO countries, as Moscow vows 'closer scrutiny'",
+          "frequency": "1/10",
+          "candidate_node": "NuclearEscalation",
+          "theoretical_grounding": "Nuclear deterrence theory (Schelling, Waltz); stability-instability paradox; nuclear posture literature"
+        },
+        {
+          "mechanism": "Intra-alliance cohesion and burden-sharing dynamics",
+          "description": "The internal solidarity and commitment reliability of a multilateral alliance affects the credibility of collective defense, where US retrenchment or ambiguous commitment weakens NATO's bargaining position vis-\u00e0-vis Russia.",
+          "evidence": "\"Pentagon likely to cancel missile deal with Germany over fears of Russia\" (described as 'broader American retrenchment from NATO'); 'Trump will attend the NATO summit in Turkey' (attendance framed as relieving allied anxiety); 'US tells Europe, Canada to boost NATO air and naval forces'",
+          "frequency": "5/10",
+          "candidate_node": "AllianceCohesion",
+          "theoretical_grounding": "Alliance politics theory (Snyder's alliance security dilemma); burden-sharing literature (Olson & Zeckhauser); credible commitment within alliances"
+        },
+        {
+          "mechanism": "Third-party contested spaces and proxy competition",
+          "description": "Competition over the alignment of non-member or neutral states (e.g., Serbia) serves as a barometer and driver of rivalry intensity, as each side seeks to expand or deny spheres of influence.",
+          "evidence": "\"Russia says Serbia drills show NATO trying to squeeze Belgrade 'like boa constrictor'\" (x2, Reuters and U.S. News)",
+          "frequency": "2/10",
+          "candidate_node": "SphereOfInfluenceContest",
+          "theoretical_grounding": "Buffer state theory; spheres of influence (Mearsheimer's offensive realism); geopolitical competition over alignment of third parties"
+        },
+        {
+          "mechanism": "Information warfare and strategic blame attribution",
+          "description": "Actors weaponize ambiguous incidents (e.g., stray drones) through competing narratives to undermine adversary legitimacy or destabilize adversary-aligned governments, a mechanism distinct from material capabilities or bargaining positions.",
+          "evidence": "\"Ukraine's stray drones topple Latvian government as EU blames Russia instead\" \u2014 competing narratives about drone redirection, with Russia blamed despite expert skepticism; NATO official warning young Russians 'high chance you'll die'",
+          "frequency": "2/10",
+          "candidate_node": "StrategicNarrativeWarfare",
+          "theoretical_grounding": "Constructivist securitization theory (Buzan, W\u00e6ver); information warfare and hybrid conflict literature; strategic communication studies"
+        }
+      ],
+      "summary": "The model's most critical blind spot for the NATO-Russia dyad is intra-alliance cohesion dynamics, which appear in half the headlines and fundamentally shape NATO's bargaining credibility but have no node representation. Additionally, nuclear deterrence dynamics, competition over third-party state alignment, and strategic narrative/information warfare all feature prominently and are entirely unmodeled."
+    },
+    "India-Pakistan": {
+      "gaps": [
+        {
+          "mechanism": "Sports diplomacy and cultural signaling",
+          "description": "Bilateral sporting engagement (or disengagement) serves as a barometer and instrument of political relations, where decisions about participation, venue selection, and boycotts signal the state of diplomatic ties and can escalate or de-escalate tensions.",
+          "evidence": "\"Why India picked a full-strength squad for Asian Games? Pakistan connection comes to light\"; \"Lalit Modi breaks silence on India-Pakistan cricket tensions; defends BCCI's position\"; \"ICC confirms Pakistan as 2028 Women's T20 World Cup host; India's matches shifted to neutral venue\"",
+          "frequency": "3/7",
+          "candidate_node": "CulturalDiplomacySignals",
+          "theoretical_grounding": "Constructivist IR theory on cultural diplomacy and identity signaling; literature on 'cricket diplomacy' in South Asia (e.g., Cricketing Ties and Interstate Relations, \u00d6zerdem & Lee 2007); soft power frameworks (Nye)"
+        },
+        {
+          "mechanism": "Third-party institutional mediation of bilateral interaction",
+          "description": "International organizations like the ICC structure the terms under which adversarial states interact (e.g., mandating neutral venues), effectively mediating bilateral tensions through institutional rules rather than direct negotiation.",
+          "evidence": "\"ICC confirms Pakistan as 2028 Women's T20 World Cup host; India's matches shifted to neutral venue\"",
+          "frequency": "1/7",
+          "candidate_node": "InstitutionalMediation",
+          "theoretical_grounding": "Liberal institutionalism (Keohane); regime theory on how international organizations constrain and channel state behavior in adversarial dyads"
+        },
+        {
+          "mechanism": "Third-party alignment shifting bilateral power dynamics",
+          "description": "A major energy/strategic deal between one dyad member and an external great power (US-India) can alter the bilateral balance by boosting one side's economic resilience and strategic partnerships, indirectly affecting the adversarial dyad.",
+          "evidence": "\"Can US and India Forge a 'Big, Beautiful' Energy Deal?\"",
+          "frequency": "1/7",
+          "candidate_node": "ExternalPatronAlignment",
+          "theoretical_grounding": "Balance of power theory; patron-client alliance literature (Walt 1987); external alignment effects on bilateral bargaining (Leeds 2003)"
+        }
+      ],
+      "summary": "The most prominent blind spot for this dyad in the current headline set is the role of sports/cricket diplomacy as a signaling mechanism for bilateral relations, which appears in nearly half the headlines and is entirely uncaptured by the Fearon-based nodes. Secondary gaps involve third-party institutional mediation (ICC) and external great-power alignment (US-India energy deal), both of which the model's purely bilateral structure cannot represent."
+    },
+    "US-Venezuela": {
+      "gaps": [
+        {
+          "mechanism": "Post-intervention state-building and patron-client reconfiguration",
+          "description": "Following a U.S. military operation to remove a foreign leader, the bilateral relationship transforms from adversarial deterrence into an asymmetric patron-client occupation/reconstruction dynamic, which fundamentally changes what 'conflict' means between the two states.",
+          "evidence": "\"Joint Chiefs head makes first official visit to post-Maduro Venezuela\" (five months after 'high-risk U.S. military operation to remove Venezuelan President'); \"Venezuela Opposition Leader Machado: 'Aligned' With US Goals\"",
+          "frequency": "5/8",
+          "candidate_node": "PostInterventionDynamics",
+          "theoretical_grounding": "Post-conflict reconstruction literature (Dobbins et al., RAND studies on nation-building); principal-agent models of occupation and state-building; Edelstein's occupational bargaining theory"
+        },
+        {
+          "mechanism": "Successor regime legitimacy and alignment with intervener",
+          "description": "The degree to which a post-intervention successor regime aligns with and legitimizes the intervening power's goals shapes whether bilateral conflict re-emerges or consolidates into cooperative dependency.",
+          "evidence": "\"Venezuela Opposition Leader Machado: 'Aligned' With US Goals\"; \"U.S. Chairman of the Joint Chiefs of Staff Visits Venezuela\" (visiting post-regime-change Caracas)",
+          "frequency": "3/8",
+          "candidate_node": "SuccessorRegimeLegitimacy",
+          "theoretical_grounding": "Regime change and regime promotion literature (Downes 2011, 'Catastrophic Success'); Bueno de Mesquita's selectorate theory on imposed leader alignment"
+        },
+        {
+          "mechanism": "Ruling party fragmentation as post-intervention instability driver",
+          "description": "The internal fracturing of the deposed regime's political party creates spoiler risks and insurgent potential that could reignite bilateral military tensions even after the initial intervention succeeded.",
+          "evidence": "\"Venezuela's ruling party fractures after Maduro capture\" \u2014 'facing internal divisions after 27 years of unity'",
+          "frequency": "1/8",
+          "candidate_node": "SpoilerFragmentation",
+          "theoretical_grounding": "Stedman's spoiler theory in peace processes; Walter (2002) on civil war recurrence and commitment problems in post-conflict settings"
+        },
+        {
+          "mechanism": "Third-party diplomatic re-engagement signaling consolidation",
+          "description": "Third-party states reopening diplomatic ties with the post-intervention government signals international consolidation of the new order, reducing the probability of renewed bilateral conflict.",
+          "evidence": "\"Canada Envoys Visit Venezuela as Carney Weighs Reopening Embassy\" \u2014 diplomats traveled as government 'mulls restoring formal ties after the US operation'",
+          "frequency": "1/8",
+          "candidate_node": "ThirdPartyLegitimation",
+          "theoretical_grounding": "International recognition and sovereignty literature; Fazal (2007) on state death and international legitimation; constructivist theories of collective recognition"
+        }
+      ],
+      "summary": "The model's bargaining framework assumes an ongoing pre-conflict or crisis dyad, but the headlines reveal a post-intervention reality where the U.S. has already forcibly removed Venezuela's leader and is now engaged in state-building and patron-client consolidation \u2014 a phase the 7-node model has no mechanism to represent. The most critical blind spot is the absence of any node capturing post-intervention dynamics, successor regime alignment, and spoiler fragmentation risks, which collectively determine whether the dyad stabilizes or cycles back into conflict."
+    },
+    "NorthKorea-SouthKorea": {
+      "gaps": [
+        {
+          "mechanism": "Nuclear deterrence and escalation dominance",
+          "description": "The acquisition and expansion of nuclear weapons capabilities creates a deterrence dynamic that fundamentally alters the bilateral strategic calculus beyond conventional military balance, enabling coercive bargaining under a nuclear umbrella.",
+          "evidence": "\"N. Korea unveils new fuel facility for nuclear bombs\"; \"Kim Jong Un announcing plans to bolster the country's nuclear forces 'at an exponential rate'\"",
+          "frequency": "2/2",
+          "candidate_node": "NuclearDeterrence",
+          "theoretical_grounding": "Nuclear deterrence theory (Schelling, Waltz), stability-instability paradox, and the nuclear coercion literature which argues that nuclear capabilities create qualitatively distinct strategic dynamics not reducible to conventional capability ratios."
+        },
+        {
+          "mechanism": "Deliberate revelation of strategic capability (signaling via transparency)",
+          "description": "The public unveiling of a previously covert facility is a calculated signaling act designed to shift adversary beliefs about resolve and capability, operating as a costly signal distinct from both conventional deployments and hardline territorial claims.",
+          "evidence": "\"North Korea unveils a new plant to produce fuel for nuclear weapons\" \u2014 the act of 'unveiling' is itself the strategic signal",
+          "frequency": "2/2",
+          "candidate_node": "StrategicSignaling",
+          "theoretical_grounding": "Costly signaling theory (Fearon 1997, Kydd 2005); information revelation models in crisis bargaining where states selectively disclose capabilities to update adversary beliefs and shift the perceived bargaining range."
+        },
+        {
+          "mechanism": "Rapid arms buildup as commitment problem accelerant",
+          "description": "Kim's declared intent to expand nuclear forces 'at an exponential rate' signals a trajectory of rapid power shifts that exacerbates commitment problems beyond what static force deployments capture \u2014 it is the announced rate of change, not the current posture, that matters.",
+          "evidence": "\"Kim Jong Un announcing plans to bolster the country's nuclear forces 'at an exponential rate'\"",
+          "frequency": "2/2",
+          "candidate_node": "ArmsBuildupTrajectory",
+          "theoretical_grounding": "Preventive war logic (Copeland 2000, Powell 2006); the commitment problem intensifies not from current capability but from the anticipated rate of future power shifts, which existing CommitmentProblem node may not capture when framed as declared future intent rather than present deployments."
+        }
+      ],
+      "summary": "The model's most critical blind spot for this dyad is the complete absence of a nuclear deterrence mechanism, which is the defining feature of the DPRK-ROK strategic relationship and is front-and-center in both headlines. Additionally, the model lacks the capacity to distinguish strategic signaling through deliberate capability revelation from routine military posturing, and cannot capture how announced trajectories of exponential nuclear growth create forward-looking commitment problems distinct from current force deployments."
+    },
+    "China-Philippines": {
+      "gaps": [
+        {
+          "mechanism": "Third-party alliance signaling and security networking",
+          "description": "Security cooperation agreements between the Philippines and third parties (Japan) trigger escalatory responses from China, meaning the bilateral dyad's conflict dynamics are driven by external alliance formation the model cannot represent.",
+          "evidence": "\"China Escalates Patrols Near Taiwan Over Japan-Philippines Talks\" \u2014 China's escalation is explicitly a response to Japan-Philippines defense cooperation and maritime border negotiations.",
+          "frequency": "1/10",
+          "candidate_node": "AllianceNetwork",
+          "theoretical_grounding": "Alliance theory (Snyder's alliance security dilemma); Walt's balance of threat theory \u2014 third-party security partnerships alter adversary threat perceptions and provoke counter-escalation."
+        },
+        {
+          "mechanism": "Gray zone fait accompli through physical infrastructure emplacement",
+          "description": "Construction of structures at disputed features represents a salami-slicing strategy to incrementally shift the territorial status quo without kinetic confrontation, a mechanism distinct from both military capability shifts and hardline claims.",
+          "evidence": "\"Satellite images show suspected structure at disputed South China Sea atoll, but later gone\"; \"Philippines probes possible new structure at disputed Scarborough Shoal\"",
+          "frequency": "2/10",
+          "candidate_node": "FaitAccompliInfrastructure",
+          "theoretical_grounding": "Gray zone coercion literature (Mazarr 2015; Morris et al. 2019); incremental revisionism theory \u2014 physical infrastructure changes the reversion point in bargaining without crossing kinetic thresholds."
+        },
+        {
+          "mechanism": "Cross-dyad horizontal escalation spillover",
+          "description": "China's actions against Taiwan in the South China Sea (Pratas, coast guard standoffs) create a multi-theater escalation environment that directly affects the China-Philippines dyad's risk calculus, but the model has no mechanism for conflict linkage across dyads.",
+          "evidence": "\"Taiwan, China coast guards in renewed standoff at top of South China Sea\"; \"China and Taiwan Ships Face Off in South China Sea\"; \"China Escalates Patrols Near Taiwan Over Japan-Philippines Talks\" \u2014 China's Taiwan-directed operations occur in the same contested maritime space.",
+          "frequency": "5/10",
+          "candidate_node": "CrossDyadSpillover",
+          "theoretical_grounding": "Horizontal escalation theory (Morgan 1977); multi-theater deterrence literature; linked conflicts framework \u2014 actions in one dyad shift threat perceptions and operational conditions in adjacent dyads sharing the same geographic space."
+        },
+        {
+          "mechanism": "Multilateral institutional status competition",
+          "description": "The Philippines' loss of a UN Security Council seat to Kyrgyzstan affects its institutional standing and capacity to mobilize multilateral pressure, altering its non-military leverage options against China.",
+          "evidence": "\"Portugal and Austria defeat Germany for seats on the UN Security Council\" \u2014 \"In the other contested race... Kyrgyzstan defeated the Philippines.\"",
+          "frequency": "1/10",
+          "candidate_node": "InstitutionalLeverage",
+          "theoretical_grounding": "Liberal institutionalism (Keohane 1984); forum-shopping and institutional bargaining power \u2014 a state's position in international organizations affects its ability to mobilize collective responses and shapes its outside options in bilateral disputes."
+        }
+      ],
+      "summary": "The model's most critical blind spot for this dyad is cross-dyad spillover: half the headlines concern China-Taiwan confrontations in the same South China Sea theater, creating escalation dynamics that directly shape China-Philippines risk but are invisible to a purely bilateral framework. The second major gap is the role of third-party alliance networks (Japan-Philippines defense cooperation) and gray zone infrastructure tactics at disputed features, both of which drive the conflict cycle through mechanisms the current seven nodes cannot represent."
+    },
+    "Israel-Iran": {
+      "gaps": [
+        {
+          "mechanism": "Third-party patron involvement and US co-belligerency",
+          "description": "The United States is actively engaged as a co-belligerent and diplomatic principal in the Israel-Iran conflict, shaping war aims, negotiation terms, and military operations in ways that cannot be reduced to bilateral dynamics.",
+          "evidence": "\"Do we still have Israel's back?\" (Trump strategy for winning war in Iran); \"Iran Demands Billions in Deal Talks - U.S. Intercepts Missiles\"; \"Witkoff, Kushner meet nuclear experts at Oak Ridge\"; \"Iran's war with Israel and the United States\" (multiple headlines)",
+          "frequency": "8/10",
+          "candidate_node": "PatronInfluence",
+          "theoretical_grounding": "Alliance entrapment/abandonment theory (Snyder 1997); patron-client state dynamics in extended deterrence literature; the US role transforms the bilateral bargaining space fundamentally."
+        },
+        {
+          "mechanism": "Nuclear weapons as a deal-breaker and escalation constraint",
+          "description": "Iran's nuclear program is a central variable in conflict termination negotiations, functioning both as a commitment problem amplifier and an independent constraint on acceptable bargaining outcomes.",
+          "evidence": "\"Inside the Obama-era Iran nuclear deal that Trump withdrew from\"; \"Trump is adamant that any deal...include a provision that Tehran will not develop a nuclear weapon\"; \"Witkoff, Kushner meet nuclear experts at Oak Ridge National Lab\"; \"U.S...quietly convened nuclear experts to prepare for...implementation of a deal\"",
+          "frequency": "4/10",
+          "candidate_node": "NuclearEscalationConstraint",
+          "theoretical_grounding": "Nuclear deterrence theory (Waltz, Sagan); proliferation bargaining models (Narang 2017); nuclear latency as a bargaining chip in crisis negotiation literature."
+        },
+        {
+          "mechanism": "Third-state territorial access for military operations",
+          "description": "Neighboring states granting or denying territorial access for strikes fundamentally alters military feasibility and escalation pathways beyond bilateral capability ratios.",
+          "evidence": "\"Azerbaijan denies report Israel attacked Iran from its territory\"",
+          "frequency": "1/10",
+          "candidate_node": "GeographicAccess",
+          "theoretical_grounding": "Power projection and basing access literature (Caverley 2014); geographic constraints on force employment (Mearsheimer 2001); third-party complicity in interstate conflict."
+        },
+        {
+          "mechanism": "Frozen assets and financial leverage as negotiation currency",
+          "description": "Iran's demand for release of $24 billion in frozen assets represents a distinct mechanism where third-party-held financial resources become central bargaining chips in conflict termination, distinct from bilateral trade costs.",
+          "evidence": "\"Iran is demanding the release of $24 billion in frozen assets as a condition for advancing a potential agreement with Washington\"",
+          "frequency": "1/10",
+          "candidate_node": "ExternalFinancialLeverage",
+          "theoretical_grounding": "Sanctions bargaining theory (Drezner 1999); issue linkage in coercive diplomacy; economic statecraft as a tool of conflict management distinct from bilateral trade interdependence."
+        }
+      ],
+      "summary": "The model's most critical blind spot is the overwhelming role of the United States as a co-belligerent, patron, and negotiation principal\u2014appearing in 8 of 10 headlines\u2014which transforms this from a bilateral to a trilateral conflict dynamic. The secondary gap is the nuclear dimension, which functions as both an independent escalation constraint and the central issue in deal-making, and cannot be adequately captured by existing commitment problem or capability nodes alone."
+    }
+  }
+}
