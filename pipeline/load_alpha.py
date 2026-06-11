@@ -49,6 +49,38 @@ EXPERT_PRIORS = {
     # No published study cleanly identifies this channel.
     # Prior: low credibility raises effective outside option -> more conflict.
     # Wide SE reflects genuine uncertainty.
+    # PatronDeterrence deterrence channel (PatronDeterrence -> w, sign=-1)
+    # The alliance/patron literature (Benson 2011, Shea 2014, Horowitz 2017)
+    # measures the moral hazard channel only (positive betas — patrons embolden clients).
+    # The deterrence channel — patrons raise costs for the challenger — is identified
+    # by the extended deterrence literature (Huth 1988) but not in hazard_library_v4.
+    # Prior: strong negative effect on war payoff. Huth 1988 finds extended deterrence
+    # succeeds ~75% of the time; that implies a large structural deterrent effect.
+    # This prior applies to the PatronDeterrence -> w edge only.
+    # The moral hazard channel (PatronDeterrence -> HardlineClaims) is estimated from literature.
+    "PatronDeterrence_deterrence": {
+        "beta": -0.80,
+        "se":    0.40,
+        "source": "expert_prior_mach2",
+        "note": "Extended deterrence channel. Huth 1988 + comparative statics. "
+                "No clean Cox hazard estimate in library v4. "
+                "Applied to PatronDeterrence -> w path in predict.py."
+    },
+
+    # WinProbability structural effect
+    # Capabilities literature shows sign cancellation across studies —
+    # some find stronger states initiate more, others less.
+    # Net structural effect on war payoff is indistinguishable from zero in GMM.
+    # Prior: small positive effect consistent with bargaining model (p must matter).
+    "WinProbability_prior": {
+        "beta": 0.25,
+        "se":   0.50,
+        "source": "expert_prior_mach2",
+        "note": "Sign cancellation in capabilities literature. "
+                "Positive prior from bargaining model comparative statics. "
+                "Wide SE reflects genuine uncertainty."
+    },
+
     "Credibility_A": {
         "beta": -0.30,
         "se":    0.30,

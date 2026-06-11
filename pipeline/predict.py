@@ -35,7 +35,7 @@ ALPHA_FILE      = "alpha/conflict_onset.json"
 # ============================================================
 # ENGINE CONFIG
 # ============================================================
-BASE_RATE_ANNUAL = 0.10
+BASE_RATE_ANNUAL = 0.03
 ANTHROPIC_URL    = "https://api.anthropic.com/v1/messages"
 GNEWS_URL        = "https://gnews.io/api/v4/search"
 
@@ -159,11 +159,15 @@ def load_alpha() -> Dict[str, float]:
         data = json.load(f)
     # alpha/conflict_onset.json is nested: data["alpha"] contains node -> float
     alpha = {k: float(v) for k, v in data["alpha"].items()}
-    # WinProbability = 0 from literature (sign cancellation) — set expert prior
+    # WinProbability = 0 from literature (sign cancellation) — expert prior
     alpha["WinProbability"] = 0.25
     # NuclearDeterrence expert prior (sparse literature)
     if not alpha.get("NuclearDeterrence"):
         alpha["NuclearDeterrence"] = -0.35
+    # PatronDeterrence deterrence channel expert prior (Huth 1988)
+    # The optimizer estimated near-zero because studies measure moral hazard not deterrence.
+    # Override with theoretically grounded prior for the w-channel only.
+    alpha["PatronDeterrence_w"] = -0.80
     return alpha
 
 
@@ -172,7 +176,7 @@ def predict_probability(toggles: Dict[str, float], days_remaining: int, alpha: D
     # Tier 2: war payoff and effective weight
     w     = (alpha.get("WinProbability", 0.0) * toggles.get("WinProbability", 0.0)
            + alpha.get("WarCosts", 0.0)       * toggles.get("WarCosts", 0.0)
-           + alpha.get("PatronDeterrence", 0.0) * toggles.get("PatronDeterrence", 0.0)
+           + alpha.get("PatronDeterrence_w", alpha.get("PatronDeterrence", 0.0)) * toggles.get("PatronDeterrence", 0.0)
            + alpha.get("NuclearDeterrence", 0.0) * toggles.get("NuclearDeterrence", 0.0))
     Omega = (alpha.get("CommitmentProblem", 0.0) * toggles.get("CommitmentProblem", 0.0)
            + alpha.get("Patience", 0.0)          * toggles.get("Patience", 0.0))
