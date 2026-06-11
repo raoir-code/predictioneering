@@ -40,12 +40,36 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.3637,
+    "prediction_at": "2026-06-11T17:08:57.129483+00:00",
+    "_toggles": {
+      "WinProbability": -1.0,
+      "WarCosts": 1.0,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 1.5,
+      "PreferenceAlignment": -1.5,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {
+      "CommitmentProblem": 0.5
+    },
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "White House threatened military force and economic sanctions against Oman if it does not sever diplomatic relations with Iran over Strait of Hormuz tolls.",
+      "Patience": "none",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 2.424
   },
   {
     "event_title": "Will China invade Taiwan by end of 2026?",
@@ -70,12 +94,37 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.8053,
+    "prediction_at": "2026-06-11T17:11:19.723253+00:00",
+    "_toggles": {
+      "WinProbability": 1.0,
+      "WarCosts": -1.0,
+      "HardlineClaims": 2.0,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 2.0,
+      "NuclearDeterrence": 0.5,
+      "AudienceCosts": 1.0
+    },
+    "_deltas": {
+      "WinProbability": 0.5,
+      "CommitmentProblem": 0.5
+    },
+    "_evidence": {
+      "WinProbability": "China deployed new HQ-16F air defense missiles with frontline forces facing Taiwan.",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "China deployed new HQ-16F air defense missiles near Taiwan, enhancing military threat credibility.",
+      "Patience": "none",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "none",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 5.0848
   },
   {
     "event_title": "Venezuela leader end of 2026?",
@@ -243,12 +292,37 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.142,
+    "prediction_at": "2026-06-11T17:11:19.723253+00:00",
+    "_toggles": {
+      "WinProbability": 1.0,
+      "WarCosts": -1.0,
+      "HardlineClaims": 2.0,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 2.0,
+      "NuclearDeterrence": 0.5,
+      "AudienceCosts": 1.0
+    },
+    "_deltas": {
+      "WinProbability": 0.5,
+      "CommitmentProblem": 0.5
+    },
+    "_evidence": {
+      "WinProbability": "China deployed new HQ-16F air defense missiles with frontline forces facing Taiwan.",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "China deployed new HQ-16F air defense missiles near Taiwan, enhancing military threat credibility.",
+      "Patience": "none",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "none",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 5.0848
   },
   {
     "event_title": "Will the US acquire part of Greenland in 2026?",
@@ -621,12 +695,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.1979,
+    "prediction_at": "2026-06-11T17:12:37.865984+00:00",
+    "_toggles": {
+      "WinProbability": -2.0,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.0,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "none",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "none",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 1.4766
   },
   {
     "event_title": "Iran agrees to surrender enriched uranium stockpile by...?",
@@ -734,12 +830,37 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.0078,
+    "prediction_at": "2026-06-11T17:13:41.247110+00:00",
+    "_toggles": {
+      "WinProbability": 0.5,
+      "WarCosts": -1.0,
+      "HardlineClaims": 1.5,
+      "CommitmentProblem": 1.5,
+      "PreferenceAlignment": -2.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 1.0
+    },
+    "_deltas": {
+      "HardlineClaims": 0.5,
+      "AudienceCosts": 0.5
+    },
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "none",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "parse_error",
+      "CommitmentProblem": "parse_error",
+      "Patience": "none",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "French jet on NATO mission shoots down drone in Latvian airspace on June 8th.",
+      "AudienceCosts": "Latvian government collapsed with prime minister and defense minister resigning due to Ukrainian drone incursions, creating domestic political crisis over NATO security failures."
+    },
+    "_log_odds_shift": 5.0074
   },
   {
     "event_title": "Putin out as President of Russia by June 30?",
@@ -782,12 +903,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.002,
+    "prediction_at": "2026-06-11T17:14:49.878133+00:00",
+    "_toggles": {
+      "WinProbability": -1.5,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "none",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 2.2378
   },
   {
     "event_title": "Which party will gain most seats in Russian Parliamentary Election?",
@@ -950,12 +1093,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.1979,
+    "prediction_at": "2026-06-11T17:12:37.865984+00:00",
+    "_toggles": {
+      "WinProbability": -2.0,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.0,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "none",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "none",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 1.4766
   },
   {
     "event_title": "Iran leader end of 2026?",
@@ -998,12 +1163,36 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.0287,
+    "prediction_at": "2026-06-11T17:15:58.697812+00:00",
+    "_toggles": {
+      "WinProbability": -1.0,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.0,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {
+      "HardlineClaims": -0.5
+    },
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "none",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "none",
+      "Patience": "parse_error",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "none",
+      "HardlineClaims": "Iran and Israel agreed to halt strikes on each other following U.S. appeal.",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 1.907
   },
   {
     "event_title": "Israel x Iran permanent peace deal by...?",
@@ -1296,12 +1485,37 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.8053,
+    "prediction_at": "2026-06-11T17:11:19.723253+00:00",
+    "_toggles": {
+      "WinProbability": 1.0,
+      "WarCosts": -1.0,
+      "HardlineClaims": 2.0,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 2.0,
+      "NuclearDeterrence": 0.5,
+      "AudienceCosts": 1.0
+    },
+    "_deltas": {
+      "WinProbability": 0.5,
+      "CommitmentProblem": 0.5
+    },
+    "_evidence": {
+      "WinProbability": "China deployed new HQ-16F air defense missiles with frontline forces facing Taiwan.",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "China deployed new HQ-16F air defense missiles near Taiwan, enhancing military threat credibility.",
+      "Patience": "none",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "none",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 5.0848
   },
   {
     "event_title": "Venezuela leader end of 2026?",
@@ -1438,12 +1652,37 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.142,
+    "prediction_at": "2026-06-11T17:11:19.723253+00:00",
+    "_toggles": {
+      "WinProbability": 1.0,
+      "WarCosts": -1.0,
+      "HardlineClaims": 2.0,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 2.0,
+      "NuclearDeterrence": 0.5,
+      "AudienceCosts": 1.0
+    },
+    "_deltas": {
+      "WinProbability": 0.5,
+      "CommitmentProblem": 0.5
+    },
+    "_evidence": {
+      "WinProbability": "China deployed new HQ-16F air defense missiles with frontline forces facing Taiwan.",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "China deployed new HQ-16F air defense missiles near Taiwan, enhancing military threat credibility.",
+      "Patience": "none",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "none",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 5.0848
   },
   {
     "event_title": "Russia x Ukraine ceasefire agreement by...?",
@@ -1655,12 +1894,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.0907,
+    "prediction_at": "2026-06-11T17:17:18.547701+00:00",
+    "_toggles": {
+      "WinProbability": -2.0,
+      "WarCosts": 1.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -0.5,
+      "Patience": 0.0,
+      "DemocraticPeace": -1.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "none",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 0.5175
   },
   {
     "event_title": "Lai Ching-te impeached by June 30?",
@@ -1775,12 +2036,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.0528,
+    "prediction_at": "2026-06-11T17:18:31.765858+00:00",
+    "_toggles": {
+      "WinProbability": 0.0,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "none",
+      "WarCosts": "none",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "none",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "none",
+      "HardlineClaims": "none",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 2.804
   },
   {
     "event_title": "Which party will gain most seats in Russian Parliamentary Election?",
@@ -2094,12 +2377,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.0007,
+    "prediction_at": "2026-06-11T17:19:42.872252+00:00",
+    "_toggles": {
+      "WinProbability": -2.0,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.0,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -1.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 0.8947
   },
   {
     "event_title": "NATO x Russia military clash by...?",
@@ -2124,12 +2429,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.1074,
+    "prediction_at": "2026-06-11T17:20:56.966360+00:00",
+    "_toggles": {
+      "WinProbability": 0.5,
+      "WarCosts": -1.0,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 1.5,
+      "PreferenceAlignment": -2.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 2.0,
+      "NuclearDeterrence": 1.5,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "none",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 4.2598
   },
   {
     "event_title": "Will the Iranian regime survive U.S. military strikes?",
@@ -2503,12 +2830,37 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.5912,
+    "prediction_at": "2026-06-11T17:11:19.723253+00:00",
+    "_toggles": {
+      "WinProbability": 1.0,
+      "WarCosts": -1.0,
+      "HardlineClaims": 2.0,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 2.0,
+      "NuclearDeterrence": 0.5,
+      "AudienceCosts": 1.0
+    },
+    "_deltas": {
+      "WinProbability": 0.5,
+      "CommitmentProblem": 0.5
+    },
+    "_evidence": {
+      "WinProbability": "China deployed new HQ-16F air defense missiles with frontline forces facing Taiwan.",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "China deployed new HQ-16F air defense missiles near Taiwan, enhancing military threat credibility.",
+      "Patience": "none",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "none",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 5.0848
   },
   {
     "event_title": "Nobel Peace Prize Winner 2026",
@@ -2796,12 +3148,36 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.5548,
+    "prediction_at": "2026-06-11T17:22:11.720108+00:00",
+    "_toggles": {
+      "WinProbability": 0.5,
+      "WarCosts": -1.0,
+      "HardlineClaims": 1.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {
+      "HardlineClaims": 0.5
+    },
+    "_evidence": {
+      "WinProbability": "China launched special maritime operation east of Taiwan in response to Japan-Philippines defense cooperation.",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "parse_error",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "China launched a special maritime operation east of Taiwan in response to Japan-Philippines defense cooperation agreement.",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 3.3863
   },
   {
     "event_title": "Strait of Hormuz traffic returns to normal by December 31?",
@@ -2945,12 +3321,37 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.9897,
+    "prediction_at": "2026-06-11T17:11:19.723253+00:00",
+    "_toggles": {
+      "WinProbability": 1.0,
+      "WarCosts": -1.0,
+      "HardlineClaims": 2.0,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 2.0,
+      "NuclearDeterrence": 0.5,
+      "AudienceCosts": 1.0
+    },
+    "_deltas": {
+      "WinProbability": 0.5,
+      "CommitmentProblem": 0.5
+    },
+    "_evidence": {
+      "WinProbability": "China deployed new HQ-16F air defense missiles with frontline forces facing Taiwan.",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "China deployed new HQ-16F air defense missiles near Taiwan, enhancing military threat credibility.",
+      "Patience": "none",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "none",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 5.0848
   },
   {
     "event_title": "Who will attend the next US x Iran diplomatic meeting?",
@@ -3013,12 +3414,38 @@
       "CommitmentProblem",
       "Patience"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.1234,
+    "prediction_at": "2026-06-11T17:23:27.282688+00:00",
+    "_toggles": {
+      "WinProbability": 0.5,
+      "WarCosts": 0.0,
+      "HardlineClaims": 1.5,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -2.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {
+      "WarCosts": 0.5,
+      "CommitmentProblem": 0.5,
+      "HardlineClaims": 0.5
+    },
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "Houthis declared a complete ban on Israeli maritime navigation through the Red Sea.",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "Houthis declared a complete and total ban on Israeli maritime navigation through the Red Sea on June 8th.",
+      "Patience": "none",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "Houthis declared complete ban on Israeli maritime navigation through Red Sea on June 8.",
+      "AudienceCosts": "Iran-backed Houthis declared a complete and total ban on Israeli maritime navigation through the Red Sea on June 8th."
+    },
+    "_log_odds_shift": 4.6449
   },
   {
     "event_title": "Bill Clinton divorce by June 30?",
@@ -3158,12 +3585,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.1885,
+    "prediction_at": "2026-06-11T17:24:40.101542+00:00",
+    "_toggles": {
+      "WinProbability": -2.0,
+      "WarCosts": 1.0,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 1.4117
   },
   {
     "event_title": "Which party will gain most seats in Russian Parliamentary Election?",
@@ -3428,12 +3877,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.304,
+    "prediction_at": "2026-06-11T17:25:52.191771+00:00",
+    "_toggles": {
+      "WinProbability": -1.0,
+      "WarCosts": 1.0,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.5,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "parse_error",
+      "CommitmentProblem": "parse_error",
+      "Patience": "none",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 2.1124
   },
   {
     "event_title": "Nothing Ever Happens: 2026",
@@ -3861,12 +4332,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.002,
+    "prediction_at": "2026-06-11T17:14:49.878133+00:00",
+    "_toggles": {
+      "WinProbability": -1.5,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "none",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 2.2378
   },
   {
     "event_title": "Where will Trump and Putin meet next?",
@@ -3927,12 +4420,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.691,
+    "prediction_at": "2026-06-11T17:27:01.315995+00:00",
+    "_toggles": {
+      "WinProbability": 0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.5,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 1.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 1.0
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "none",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 4.1801
   },
   {
     "event_title": " Iran agrees to end enrichment of uranium by December 31?",
@@ -4810,12 +5325,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.7029,
+    "prediction_at": "2026-06-11T17:20:56.966360+00:00",
+    "_toggles": {
+      "WinProbability": 0.5,
+      "WarCosts": -1.0,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 1.5,
+      "PreferenceAlignment": -2.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 2.0,
+      "NuclearDeterrence": 1.5,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "none",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 4.2598
   },
   {
     "event_title": "UAE x Qatar sever diplomatic relations in 2026?",
@@ -4963,12 +5500,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.588,
+    "prediction_at": "2026-06-11T17:27:59.787496+00:00",
+    "_toggles": {
+      "WinProbability": 0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 1.5,
+      "AudienceCosts": 1.0
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "none",
+      "WarCosts": "none",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "none",
+      "Patience": "none",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "none",
+      "HardlineClaims": "none",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 3.5645
   },
   {
     "event_title": "Will a Chinese AI model become #1 by June 30? ",
@@ -5368,12 +5927,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.294,
+    "prediction_at": "2026-06-11T17:28:25.592668+00:00",
+    "_toggles": {
+      "WinProbability": 0.0,
+      "WarCosts": 0.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "CommitmentProblem": 0.5,
+      "Patience": 0.0,
+      "DemocraticPeace": 0.5,
+      "PreferenceAlignment": -1.0,
+      "HardlineClaims": 0.5,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "none",
+      "WarCosts": "none",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "none",
+      "Patience": "none",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "none",
+      "HardlineClaims": "none",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 2.058
   },
   {
     "event_title": "Gustavo Petro out as leader of Colombia by...?",
@@ -5457,12 +6038,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.6764,
+    "prediction_at": "2026-06-11T17:29:32.153705+00:00",
+    "_toggles": {
+      "WinProbability": -0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.5,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -2.0,
+      "Patience": -1.0,
+      "DemocraticPeace": 2.0,
+      "PatronDeterrence": 1.5,
+      "NuclearDeterrence": 2.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "parse_error",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 4.085
   },
   {
     "event_title": "Will Russia capture Lyman by...?",
@@ -5726,12 +6329,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.002,
+    "prediction_at": "2026-06-11T17:14:49.878133+00:00",
+    "_toggles": {
+      "WinProbability": -1.5,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "none",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 2.2378
   },
   {
     "event_title": "Pete Hegseth out as Secretary of Defense by December 31?",
@@ -5774,12 +6399,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.294,
+    "prediction_at": "2026-06-11T17:29:53.656011+00:00",
+    "_toggles": {
+      "WinProbability": 0.0,
+      "WarCosts": 0.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "CommitmentProblem": 0.5,
+      "Patience": 0.0,
+      "DemocraticPeace": 0.5,
+      "PreferenceAlignment": -1.0,
+      "HardlineClaims": 0.5,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "none",
+      "WarCosts": "none",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "none",
+      "Patience": "none",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "none",
+      "HardlineClaims": "none",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 2.058
   },
   {
     "event_title": "Will China invade Taiwan by June 30, 2027?",
@@ -5804,12 +6451,37 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.9547,
+    "prediction_at": "2026-06-11T17:11:19.723253+00:00",
+    "_toggles": {
+      "WinProbability": 1.0,
+      "WarCosts": -1.0,
+      "HardlineClaims": 2.0,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 2.0,
+      "NuclearDeterrence": 0.5,
+      "AudienceCosts": 1.0
+    },
+    "_deltas": {
+      "WinProbability": 0.5,
+      "CommitmentProblem": 0.5
+    },
+    "_evidence": {
+      "WinProbability": "China deployed new HQ-16F air defense missiles with frontline forces facing Taiwan.",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "China deployed new HQ-16F air defense missiles near Taiwan, enhancing military threat credibility.",
+      "Patience": "none",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "none",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 5.0848
   },
   {
     "event_title": "Will the U.S. invade Venezuela by...?",
@@ -5834,12 +6506,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.002,
+    "prediction_at": "2026-06-11T17:31:27.766659+00:00",
+    "_toggles": {
+      "WinProbability": -1.5,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 2.2378
   },
   {
     "event_title": "Israel x Turkey military clash before 2027?",
@@ -5864,12 +6558,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.4634,
+    "prediction_at": "2026-06-11T17:32:56.239316+00:00",
+    "_toggles": {
+      "WinProbability": 0.0,
+      "WarCosts": -0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "none",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "none",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "none",
+      "HardlineClaims": "none",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 2.921
   },
   {
     "event_title": "Ukraine election held by...?",
@@ -6151,12 +6867,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.4324,
+    "prediction_at": "2026-06-11T17:34:08.126702+00:00",
+    "_toggles": {
+      "WinProbability": 0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "parse_error",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 2.7671
   },
   {
     "event_title": "Nobel Peace Prize Winner 2026",
@@ -6528,12 +7266,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.1885,
+    "prediction_at": "2026-06-11T17:24:40.101542+00:00",
+    "_toggles": {
+      "WinProbability": -2.0,
+      "WarCosts": 1.0,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -1.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 1.4117
   },
   {
     "event_title": "Will Trump restart Project Freedom by...?",
@@ -6880,12 +7640,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.079,
+    "prediction_at": "2026-06-11T17:35:22.364235+00:00",
+    "_toggles": {
+      "WinProbability": 0.0,
+      "WarCosts": -0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -2.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "none",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "parse_error",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "none",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 3.5471
   },
   {
     "event_title": "Where will Zelenskyy and Putin meet next before 2027?",
@@ -7104,12 +7886,34 @@
       "DemocraticPeace",
       "Patience"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.006,
+    "prediction_at": "2026-06-11T17:20:56.966360+00:00",
+    "_toggles": {
+      "WinProbability": 0.5,
+      "WarCosts": -1.0,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 1.5,
+      "PreferenceAlignment": -2.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 2.0,
+      "NuclearDeterrence": 1.5,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "none",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 4.2598
   },
   {
     "event_title": "Iran leader end of 2026?",
@@ -7188,12 +7992,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.1979,
+    "prediction_at": "2026-06-11T17:12:37.865984+00:00",
+    "_toggles": {
+      "WinProbability": -2.0,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.0,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "none",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "none",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 1.4766
   },
   {
     "event_title": "2k+ container ship transits of Suez Canal in H1 2026?",
@@ -7556,12 +8382,36 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.5798,
+    "prediction_at": "2026-06-11T17:36:31.031399+00:00",
+    "_toggles": {
+      "WinProbability": 0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {
+      "WarCosts": 0.5
+    },
+    "_evidence": {
+      "WinProbability": "none",
+      "WarCosts": "US imposed new Iran-related sanctions on June 5th targeting one Chinese entity among others.",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "none",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 3.5202
   },
   {
     "event_title": "How many different countries will the US conduct military action against in 2026?",
@@ -7720,12 +8570,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.0743,
+    "prediction_at": "2026-06-11T17:37:42.553727+00:00",
+    "_toggles": {
+      "WinProbability": -0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -2.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "none",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "none",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 3.4221
   },
   {
     "event_title": "Iran leader end of 2026?",
@@ -7768,12 +8640,37 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.0134,
+    "prediction_at": "2026-06-11T17:38:46.234824+00:00",
+    "_toggles": {
+      "WinProbability": 0.0,
+      "WarCosts": -0.5,
+      "HardlineClaims": 0.0,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -0.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {
+      "CommitmentProblem": -0.5,
+      "HardlineClaims": -0.5
+    },
+    "_evidence": {
+      "WinProbability": "none",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "Thailand agreed to join UN-backed mediation process with Cambodia, creating formal commitment mechanism.",
+      "Patience": "none",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "Thailand formally agreed to appoint conciliators and join UN-backed mediation process with Cambodia on June 5th.",
+      "HardlineClaims": "Thailand agreed to join UN-backed mediation process for maritime dispute resolution with Cambodia.",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 0.981
   },
   {
     "event_title": "Crude Oil all time high by...?",
@@ -8535,12 +9432,34 @@
       "HardlineClaims",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.294,
+    "prediction_at": "2026-06-11T17:39:56.398825+00:00",
+    "_toggles": {
+      "WinProbability": 0.0,
+      "WarCosts": 0.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "CommitmentProblem": 0.5,
+      "Patience": 0.0,
+      "DemocraticPeace": 0.5,
+      "PreferenceAlignment": -1.0,
+      "HardlineClaims": 0.5,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 2.058
   },
   {
     "event_title": "Who will acquire TikTok?",
@@ -8761,12 +9680,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.0976,
+    "prediction_at": "2026-06-11T17:40:51.583640+00:00",
+    "_toggles": {
+      "WinProbability": -2.0,
+      "WarCosts": 1.0,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -0.5,
+      "Patience": 0.0,
+      "DemocraticPeace": -0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "none",
+      "WarCosts": "none",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "none",
+      "Patience": "none",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "none",
+      "HardlineClaims": "none",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 0.6017
   },
   {
     "event_title": "Which countries will Donald Trump visit in 2026?",
@@ -8944,12 +9885,36 @@
       "PreferenceAlignment",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.0983,
+    "prediction_at": "2026-06-11T17:41:57.233256+00:00",
+    "_toggles": {
+      "WinProbability": -2.0,
+      "WarCosts": 1.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -0.5,
+      "Patience": -0.5,
+      "DemocraticPeace": -1.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {
+      "Patience": -0.5
+    },
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "none",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "Mette Frederiksen consolidated leadership beginning third term as Danish Prime Minister.",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 0.6095
   },
   {
     "event_title": "Trump x Greenland deal signed by December 31?",
@@ -10335,12 +11300,36 @@
       "PreferenceAlignment",
       "Patience"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.1034,
+    "prediction_at": "2026-06-11T17:43:07.165254+00:00",
+    "_toggles": {
+      "WinProbability": 0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -2.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 1.5,
+      "NuclearDeterrence": 1.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {
+      "AudienceCosts": -0.5
+    },
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "none",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "none",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "none",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "Netanyahu publicly announced Israel has halted attacks against Iran 'for now', reducing domestic pressure to act."
+    },
+    "_log_odds_shift": 4.164
   },
   {
     "event_title": "Will Russia rejoin the G7 before 2027?",
@@ -11108,12 +12097,34 @@
       "DemocraticPeace",
       "CommitmentProblem"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.294,
+    "prediction_at": "2026-06-11T17:43:30.515634+00:00",
+    "_toggles": {
+      "WinProbability": 0.0,
+      "WarCosts": 0.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "CommitmentProblem": 0.5,
+      "Patience": 0.0,
+      "DemocraticPeace": 0.5,
+      "PreferenceAlignment": -1.0,
+      "HardlineClaims": 0.5,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "none",
+      "WarCosts": "none",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "none",
+      "Patience": "none",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "none",
+      "HardlineClaims": "none",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 2.058
   },
   {
     "event_title": "Will BRICS add a new member in 2026?",
@@ -11722,12 +12733,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.1252,
+    "prediction_at": "2026-06-11T17:44:37.794805+00:00",
+    "_toggles": {
+      "WinProbability": -2.0,
+      "WarCosts": 0.5,
+      "HardlineClaims": 0.0,
+      "CommitmentProblem": 0.0,
+      "PreferenceAlignment": -1.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "none",
+      "Patience": "parse_error",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "parse_error",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 0.8947
   },
   {
     "event_title": "EU/NATO country announces peacekeeping force in Ukraine by...?",
@@ -12721,12 +13754,34 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.5848,
+    "prediction_at": "2026-06-11T17:35:22.364235+00:00",
+    "_toggles": {
+      "WinProbability": 0.0,
+      "WarCosts": -0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -2.0,
+      "Patience": 0.0,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "parse_error",
+      "WarCosts": "none",
+      "PatronDeterrence": "parse_error",
+      "NuclearDeterrence": "parse_error",
+      "CommitmentProblem": "parse_error",
+      "Patience": "parse_error",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "none",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 3.5471
   },
   {
     "event_title": "Will Russia capture all of Huliaipole by...?",
@@ -14483,12 +15538,37 @@
       "Patience",
       "DemocraticPeace"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.8053,
+    "prediction_at": "2026-06-11T17:11:19.723253+00:00",
+    "_toggles": {
+      "WinProbability": 1.0,
+      "WarCosts": -1.0,
+      "HardlineClaims": 2.0,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -1.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 2.0,
+      "NuclearDeterrence": 0.5,
+      "AudienceCosts": 1.0
+    },
+    "_deltas": {
+      "WinProbability": 0.5,
+      "CommitmentProblem": 0.5
+    },
+    "_evidence": {
+      "WinProbability": "China deployed new HQ-16F air defense missiles with frontline forces facing Taiwan.",
+      "WarCosts": "parse_error",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "China deployed new HQ-16F air defense missiles near Taiwan, enhancing military threat credibility.",
+      "Patience": "none",
+      "DemocraticPeace": "parse_error",
+      "PreferenceAlignment": "parse_error",
+      "HardlineClaims": "none",
+      "AudienceCosts": "none"
+    },
+    "_log_odds_shift": 5.0848
   },
   {
     "event_title": "Will Russia capture Prymorske by...?",
@@ -16236,12 +17316,34 @@
       "CommitmentProblem",
       "Patience"
     ],
-    "our_prediction": null,
-    "prediction_at": null,
-    "_toggles": null,
-    "_deltas": null,
-    "_evidence": null,
-    "_log_odds_shift": null
+    "our_prediction": 0.1071,
+    "prediction_at": "2026-06-11T17:45:52.858321+00:00",
+    "_toggles": {
+      "WinProbability": 1.0,
+      "WarCosts": -0.5,
+      "HardlineClaims": 1.0,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -2.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "_deltas": {},
+    "_evidence": {
+      "WinProbability": "none",
+      "WarCosts": "none",
+      "PatronDeterrence": "none",
+      "NuclearDeterrence": "none",
+      "CommitmentProblem": "parse_error",
+      "Patience": "none",
+      "DemocraticPeace": "none",
+      "PreferenceAlignment": "none",
+      "HardlineClaims": "none",
+      "AudienceCosts": "parse_error"
+    },
+    "_log_odds_shift": 4.2529
   },
   {
     "event_title": "Who will meet with Iran by June 30?",
