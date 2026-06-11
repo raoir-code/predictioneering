@@ -45,21 +45,27 @@ GNEWS_URL        = "https://gnews.io/api/v4/search"
 NODES = [
     "WinProbability",
     "WarCosts",
-    "HardlineClaims",
+    "PatronDeterrence",
+    "NuclearDeterrence",
     "CommitmentProblem",
-    "PreferenceAlignment",
     "Patience",
     "DemocraticPeace",
+    "PreferenceAlignment",
+    "HardlineClaims",
+    "AudienceCosts",
 ]
 
 TOGGLE_RANGES = {
     "WinProbability":      (-2.0, 2.0),
     "WarCosts":            (-2.0, 2.0),
-    "HardlineClaims":      (0.0,  3.0),
+    "PatronDeterrence":    (0.0,  3.0),
+    "NuclearDeterrence":   (0.0,  3.0),
     "CommitmentProblem":   (0.0,  2.0),
-    "PreferenceAlignment": (-2.0, 2.0),
     "Patience":            (-2.0, 2.0),
     "DemocraticPeace":     (-2.0, 2.0),
+    "PreferenceAlignment": (-2.0, 2.0),
+    "HardlineClaims":      (0.0,  3.0),
+    "AudienceCosts":       (0.0,  3.0),
 }
 
 MAX_WEEKLY_DELTA = {n: 0.5 for n in NODES}
@@ -72,11 +78,14 @@ DYAD_CONFIGS_PATH = os.path.join(os.path.dirname(__file__), "dyad_configs.json")
 FALLBACK_BASELINE = {
     "WinProbability":      0.0,
     "WarCosts":            0.0,
-    "HardlineClaims":      0.5,
+    "PatronDeterrence":    0.5,
+    "NuclearDeterrence":   0.0,
     "CommitmentProblem":   0.5,
-    "PreferenceAlignment": -1.0,
     "Patience":            0.0,
     "DemocraticPeace":     0.5,
+    "PreferenceAlignment": -1.0,
+    "HardlineClaims":      0.5,
+    "AudienceCosts":       0.5,
 }
 
 
@@ -116,19 +125,25 @@ Return valid JSON only:
 """
 
 NODE_RUBRICS = {
-    "WinProbability":      "Did a NEW concrete operational balance shift occur: deployment of forces, mobilization, withdrawal, major arms delivery, or readiness change? Rhetoric does NOT count.",
-    "WarCosts":            "Did a NEW concrete economic policy or enforcement action occur: sanctions imposed, embargo, blockade, seizure, tariff action, or restoration of trade ties?",
-    "HardlineClaims":      "Did a NEW operational flashpoint occur: strike, seizure, border clash, naval confrontation, airspace incident, or direct sovereignty challenge?",
-    "CommitmentProblem":   "Did a NEW event change the credibility or urgency of threats: public ultimatums, force deployments near the adversary, events that make today's deal harder to sustain tomorrow?",
-    "PreferenceAlignment": "Did a NEW formal diplomatic alignment shift occur: signed agreement, formal rupture, diplomatic recognition, coalition change, or explicit policy reversal?",
-    "Patience":            "Did a NEW domestic political instability event occur affecting leadership survival or time horizon: protests, coup signals, election shocks, elite rupture, or resignation risk?",
-    "DemocraticPeace":     "Did a NEW major institutional rupture occur: coup, emergency rule, election cancellation, or constitutional suspension? This should almost ALWAYS be 0.",
+    "WinProbability":      "Did a NEW concrete operational balance shift occur: deployment of forces, mobilization, withdrawal, major arms delivery, or readiness change? +0.5 = initiator gains military advantage (carrier group deployed, force buildup). -0.5 = defender gains advantage (defensive fortifications, third-party military support to defender). Rhetoric does NOT count.",
+    "WarCosts":            "Did a NEW concrete economic policy or enforcement action occur: sanctions imposed, embargo, blockade, seizure, tariff action, or restoration of trade ties? +0.5 = economic ties severed (raises war costs for initiator). -0.5 = new economic interdependence created.",
+    "PatronDeterrence":    "Did a NEW patron commitment signal occur: explicit security guarantee reaffirmed, patron military assets moved to theater, patron issued credible deterrence statement, or patron withdrew support? +0.5 = patron visibly committed to defender (deters initiator). -0.5 = patron signal weakened or withdrawn.",
+    "NuclearDeterrence":   "Did a NEW nuclear signal occur: nuclear test, new delivery system deployment, nuclear alert status change, or explicit nuclear threat? +0.5 = nuclear threat escalated. -0.5 = nuclear de-escalation. This should almost ALWAYS be 0.",
+    "CommitmentProblem":   "Did a NEW event change the credibility or urgency of threats: public ultimatums, force deployments near the adversary, events that make today's deal harder to sustain tomorrow? +0.5 = commitment problem worsened. -0.5 = credible commitment mechanism created.",
+    "Patience":            "Did a NEW domestic political instability event occur affecting leadership survival or time horizon: protests, coup signals, election shocks, elite rupture, or resignation risk? +0.5 = leadership under pressure, shorter time horizon. -0.5 = leadership consolidated, longer horizon.",
+    "DemocraticPeace":     "Did a NEW major institutional rupture occur: coup, emergency rule, election cancellation, or constitutional suspension? This should almost ALWAYS be 0. +0.5 = democratic institutions weakened. -0.5 = democratic consolidation.",
+    "PreferenceAlignment": "Did a NEW formal diplomatic alignment shift occur: signed agreement, formal rupture, diplomatic recognition, coalition change, or explicit policy reversal? +0.5 = preferences diverged. -0.5 = preferences converged.",
+    "HardlineClaims":      "Did a NEW operational flashpoint occur: strike, seizure, border clash, naval confrontation, airspace incident, or direct sovereignty challenge? +0.5 = new territorial/issue escalation. -0.5 = territorial/issue resolution or de-escalation.",
+    "AudienceCosts":       "Did a NEW domestic political event raise the cost of backing down: nationalist mobilization, public commitment by leader, domestic pressure to act, or major protest demanding action? +0.5 = audience costs raised (harder to back down). -0.5 = domestic pressure reduced.",
 }
 
 NODE_GATES = {
-    "WinProbability":      ["deploy", "carrier", "troops", "base", "mobiliz", "arms", "weapon"],
-    "PreferenceAlignment": ["agreement", "rupture", "recognition", "accord", "reversal", "withdraw"],
+    "WinProbability":      ["deploy", "carrier", "troops", "base", "mobiliz", "arms", "weapon", "forces", "readiness"],
+    "PatronDeterrence":    ["guarantee", "commitment", "alliance", "patron", "support", "deterr", "deploy", "carrier"],
+    "NuclearDeterrence":   ["nuclear", "missile", "warhead", "deterr", "test", "launch"],
+    "PreferenceAlignment": ["agreement", "rupture", "recognition", "accord", "reversal", "withdraw", "signed"],
     "DemocraticPeace":     ["coup", "emergency", "cancel", "suspend", "constitutional"],
+    "AudienceCosts":       ["protest", "nationalist", "rally", "domestic", "pressure", "demand", "mobiliz"],
 }
 
 # ============================================================
@@ -142,14 +157,34 @@ def clamp(name: str, value: float) -> float:
 def load_alpha() -> Dict[str, float]:
     with open(ALPHA_FILE) as f:
         data = json.load(f)
-    alpha = dict(data["alpha"])
-    alpha["Credibility_A"] = -0.30
-    alpha["Credibility_B"] = -0.30
+    # alpha/conflict_onset.json is nested: data["alpha"] contains node -> float
+    alpha = {k: float(v) for k, v in data["alpha"].items()}
+    # WinProbability = 0 from literature (sign cancellation) — set expert prior
+    alpha["WinProbability"] = 0.25
+    # NuclearDeterrence expert prior (sparse literature)
+    if not alpha.get("NuclearDeterrence"):
+        alpha["NuclearDeterrence"] = -0.35
     return alpha
 
 
 def predict_probability(toggles: Dict[str, float], days_remaining: int, alpha: Dict[str, float]) -> Dict[str, float]:
-    log_odds_shift = sum(alpha.get(k, 0.0) * v for k, v in toggles.items())
+    # Mach 2 four-tier structured DAG formula
+    # Tier 2: war payoff and effective weight
+    w     = (alpha.get("WinProbability", 0.0) * toggles.get("WinProbability", 0.0)
+           + alpha.get("WarCosts", 0.0)       * toggles.get("WarCosts", 0.0)
+           + alpha.get("PatronDeterrence", 0.0) * toggles.get("PatronDeterrence", 0.0)
+           + alpha.get("NuclearDeterrence", 0.0) * toggles.get("NuclearDeterrence", 0.0))
+    Omega = (alpha.get("CommitmentProblem", 0.0) * toggles.get("CommitmentProblem", 0.0)
+           + alpha.get("Patience", 0.0)          * toggles.get("Patience", 0.0))
+    # Tier 3: credibility-adjusted war value
+    w_over_pi = w + alpha.get("DemocraticPeace", 0.0) * toggles.get("DemocraticPeace", 0.0)
+    # Tier 4: WarPayoff and WarPolitics
+    WarPayoff   = Omega + w_over_pi
+    WarPolitics = (alpha.get("PreferenceAlignment", 0.0) * toggles.get("PreferenceAlignment", 0.0)
+                 + alpha.get("HardlineClaims", 0.0)      * toggles.get("HardlineClaims", 0.0)
+                 + alpha.get("AudienceCosts", 0.0)        * toggles.get("AudienceCosts", 0.0))
+    # Total log-odds shift
+    log_odds_shift = WarPayoff + WarPolitics
     base_log_odds  = math.log(BASE_RATE_ANNUAL / (1 - BASE_RATE_ANNUAL))
     p_annual       = 1 / (1 + math.exp(-(base_log_odds + log_odds_shift)))
     lam            = -math.log(max(1e-12, 1 - p_annual))

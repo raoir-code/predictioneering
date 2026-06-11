@@ -8,7 +8,10 @@
       "CommitmentProblem": 0.5,
       "PreferenceAlignment": -1.5,
       "Patience": -0.5,
-      "DemocraticPeace": 1.0
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 2.0,
+      "NuclearDeterrence": 0.5,
+      "AudienceCosts": 1.0
     },
     "query": "\"China\" AND (\"Taiwan\" OR \"PLA\" OR \"strait\" OR \"invasion\" OR \"blockade\")",
     "baseline_source": "verified"
@@ -22,7 +25,10 @@
       "CommitmentProblem": 1.5,
       "PreferenceAlignment": -2.0,
       "Patience": 0.0,
-      "DemocraticPeace": 1.0
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 1.5,
+      "NuclearDeterrence": 1.0,
+      "AudienceCosts": 1.0
     },
     "query": "\"Russia\" AND (\"Ukraine\" OR \"Zelensky\" OR \"Putin\" OR \"Kyiv\" OR \"ceasefire\")",
     "baseline_source": "verified"
@@ -36,7 +42,10 @@
       "CommitmentProblem": 1.0,
       "PreferenceAlignment": -1.5,
       "Patience": 0.0,
-      "DemocraticPeace": 1.5
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.5,
+      "AudienceCosts": 0.5
     },
     "query": "\"Iran\" AND (\"United States\" OR US OR \"American\" OR Tehran OR \"nuclear\") NOT Venezuela",
     "baseline_source": "verified"
@@ -50,7 +59,10 @@
       "CommitmentProblem": 1.0,
       "PreferenceAlignment": -2.0,
       "Patience": -0.5,
-      "DemocraticPeace": 1.0
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 1.5,
+      "NuclearDeterrence": 1.0,
+      "AudienceCosts": 1.0
     },
     "query": "\"Iran\" AND (\"Israel\" OR \"IDF\" OR \"nuclear\" OR \"strike\" OR \"airstrike\")",
     "baseline_source": "verified"
@@ -64,7 +76,10 @@
       "CommitmentProblem": 0.5,
       "PreferenceAlignment": -2.0,
       "Patience": -1.0,
-      "DemocraticPeace": 2.0
+      "DemocraticPeace": 2.0,
+      "PatronDeterrence": 1.0,
+      "NuclearDeterrence": 2.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"North Korea\" AND (\"United States\" OR \"Kim\" OR \"missile\" OR \"nuclear\" OR \"ICBM\")",
     "baseline_source": "verified"
@@ -78,7 +93,10 @@
       "CommitmentProblem": 0.5,
       "PreferenceAlignment": -1.5,
       "Patience": -0.5,
-      "DemocraticPeace": 0.5
+      "DemocraticPeace": 0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 1.5,
+      "AudienceCosts": 1.0
     },
     "query": "\"India\" AND (\"Pakistan\" OR \"Kashmir\" OR \"LOC\" OR \"strike\" OR \"airstrike\")",
     "baseline_source": "verified"
@@ -92,7 +110,10 @@
       "CommitmentProblem": 1.5,
       "PreferenceAlignment": -2.0,
       "Patience": 0.0,
-      "DemocraticPeace": 1.0
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 2.0,
+      "NuclearDeterrence": 1.5,
+      "AudienceCosts": 0.5
     },
     "query": "\"NATO\" AND (\"Russia\" OR \"Putin\" OR \"Article 5\" OR \"escalation\" OR \"alliance\")",
     "baseline_source": "verified"
@@ -106,7 +127,10 @@
       "CommitmentProblem": 0.5,
       "PreferenceAlignment": -1.5,
       "Patience": -0.5,
-      "DemocraticPeace": 1.5
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Venezuela\" AND (\"United States\" OR \"Maduro\" OR \"sanctions\" OR \"military\" OR \"Guyana\")",
     "baseline_source": "verified"
@@ -120,7 +144,10 @@
       "CommitmentProblem": 0.0,
       "PreferenceAlignment": -1.5,
       "Patience": -0.5,
-      "DemocraticPeace": 1.5
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Cuba\" AND (\"United States\" OR \"Havana\" OR \"sanctions\" OR \"embargo\" OR \"military\")",
     "baseline_source": "verified"
@@ -134,7 +161,10 @@
       "CommitmentProblem": 0.5,
       "PreferenceAlignment": -1.0,
       "Patience": -0.5,
-      "DemocraticPeace": 0.5
+      "DemocraticPeace": 0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Mexico\" AND (\"United States\" OR \"cartel\" OR \"military\" OR \"border\" OR \"tariff\") NOT \"New Mexico\"",
     "baseline_source": "verified"
@@ -148,7 +178,10 @@
       "CommitmentProblem": 1.0,
       "PreferenceAlignment": -2.0,
       "Patience": 0.0,
-      "DemocraticPeace": 1.5
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Russia\" AND (\"United States\" OR \"Washington\" OR \"Pentagon\" OR \"State Department\") NOT Ukraine NOT NATO",
     "baseline_source": "verified"
@@ -162,7 +195,10 @@
       "CommitmentProblem": 1.0,
       "PreferenceAlignment": -1.5,
       "Patience": 0.0,
-      "DemocraticPeace": 1.5
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"China\" AND (\"United States\" OR \"Pentagon\" OR \"trade war\" OR \"South China Sea\") NOT Taiwan",
     "baseline_source": "verified"
@@ -176,7 +212,10 @@
       "CommitmentProblem": 0.5,
       "PreferenceAlignment": -1.0,
       "Patience": -0.5,
-      "DemocraticPeace": 0.0
+      "DemocraticPeace": 0.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Greece\" AND (\"Turkey\" OR \"Aegean\" OR \"Cyprus\" OR \"airspace\" OR \"Erdogan\")",
     "baseline_source": "verified"
@@ -190,7 +229,10 @@
       "CommitmentProblem": 0.5,
       "PreferenceAlignment": -1.0,
       "Patience": 0.0,
-      "DemocraticPeace": 1.0
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"China\" AND (\"Japan\" OR \"Senkaku\" OR \"Diaoyu\" OR \"JMSDF\" OR \"East China Sea\")",
     "baseline_source": "verified"
@@ -204,7 +246,10 @@
       "CommitmentProblem": 0.5,
       "PreferenceAlignment": -1.5,
       "Patience": 0.0,
-      "DemocraticPeace": 1.0
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 1.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 1.0
     },
     "query": "\"China\" AND (\"Philippines\" OR \"South China Sea\" OR \"Scarborough\" OR \"BRP\" OR \"Manila\")",
     "baseline_source": "verified"
@@ -218,7 +263,10 @@
       "CommitmentProblem": 1.0,
       "PreferenceAlignment": -2.0,
       "Patience": -1.0,
-      "DemocraticPeace": 2.0
+      "DemocraticPeace": 2.0,
+      "PatronDeterrence": 1.5,
+      "NuclearDeterrence": 2.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"North Korea\" AND (\"South Korea\" OR \"Seoul\" OR \"DMZ\" OR \"provocation\" OR \"missile\")",
     "baseline_source": "verified"
@@ -232,7 +280,10 @@
       "CommitmentProblem": 0.5,
       "PreferenceAlignment": -2.0,
       "Patience": -0.5,
-      "DemocraticPeace": 1.5
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Israel\" AND (\"Yemen\" OR \"Houthi\" OR \"Red Sea\" OR \"missile\" OR \"drone\")",
     "baseline_source": "verified"
@@ -246,7 +297,10 @@
       "CommitmentProblem": 0.5,
       "PreferenceAlignment": -1.5,
       "Patience": -0.5,
-      "DemocraticPeace": 0.5
+      "DemocraticPeace": 0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Israel\" AND (\"Turkey\" OR \"Erdogan\" OR \"Ankara\" OR \"flotilla\" OR \"Gaza\")",
     "baseline_source": "verified"
@@ -260,7 +314,10 @@
       "CommitmentProblem": 0.5,
       "PreferenceAlignment": -2.0,
       "Patience": -0.5,
-      "DemocraticPeace": 1.5
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Israel\" AND (\"Syria\" OR \"Damascus\" OR \"airstrike\" OR \"IDF\" OR \"Golan\")",
     "baseline_source": "verified"
@@ -274,7 +331,10 @@
       "CommitmentProblem": 0.0,
       "PreferenceAlignment": -0.5,
       "Patience": 0.0,
-      "DemocraticPeace": -1.0
+      "DemocraticPeace": -1.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Greenland\" AND (\"United States\" OR \"Denmark\" OR \"Trump\" OR \"annexation\" OR \"sovereignty\")",
     "baseline_source": "verified"
@@ -288,7 +348,10 @@
       "CommitmentProblem": 0.0,
       "PreferenceAlignment": -1.0,
       "Patience": -0.5,
-      "DemocraticPeace": 0.5
+      "DemocraticPeace": 0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Colombia\" AND (\"United States\" OR \"tariff\" OR \"military\" OR \"deportation\" OR \"Petro\")",
     "baseline_source": "verified"
@@ -302,7 +365,10 @@
       "CommitmentProblem": 0.5,
       "PreferenceAlignment": -1.0,
       "Patience": 0.0,
-      "DemocraticPeace": 1.0
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"China\" AND (\"India\" OR \"LAC\" OR \"Ladakh\" OR \"Galwan\" OR \"Arunachal\")",
     "baseline_source": "verified"
@@ -316,7 +382,10 @@
       "CommitmentProblem": 1.0,
       "PreferenceAlignment": -2.0,
       "Patience": 0.0,
-      "DemocraticPeace": 1.5
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Russia\" AND (\"Poland\" OR \"Warsaw\" OR \"NATO\" OR \"border\" OR \"Suwalki\")",
     "baseline_source": "verified"
@@ -330,7 +399,10 @@
       "CommitmentProblem": 0.0,
       "PreferenceAlignment": -0.5,
       "Patience": -0.5,
-      "DemocraticPeace": 0.5
+      "DemocraticPeace": 0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Thailand\" AND (\"Cambodia\" OR \"border\" OR \"temple\" OR \"Preah Vihear\" OR \"military\")",
     "baseline_source": "verified"
@@ -344,7 +416,10 @@
       "CommitmentProblem": 0.0,
       "PreferenceAlignment": -0.5,
       "Patience": 0.0,
-      "DemocraticPeace": -0.5
+      "DemocraticPeace": -0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Panama\" AND (\"United States\" OR \"canal\" OR \"Trump\" OR \"military\" OR \"sovereignty\")",
     "baseline_source": "verified"
@@ -358,7 +433,10 @@
       "CommitmentProblem": 1.0,
       "PreferenceAlignment": -1.5,
       "Patience": 0.0,
-      "DemocraticPeace": 1.5
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Iran\" AND (\"France\" OR \"UK\" OR \"Germany\" OR \"Europe\" OR \"nuclear deal\" OR \"JCPOA\")",
     "baseline_source": "verified"
@@ -372,7 +450,10 @@
       "CommitmentProblem": 1.0,
       "PreferenceAlignment": -1.5,
       "Patience": 0.0,
-      "DemocraticPeace": 1.5
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Iran\" AND (\"United States\" OR US OR \"American\" OR Tehran OR \"nuclear\") NOT Venezuela",
     "baseline_source": "verified"
@@ -386,7 +467,10 @@
       "CommitmentProblem": 0.5,
       "PreferenceAlignment": -1.5,
       "Patience": -0.5,
-      "DemocraticPeace": 1.5
+      "DemocraticPeace": 1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Venezuela\" AND (\"United States\" OR \"Maduro\" OR \"sanctions\" OR \"military\" OR \"Guyana\")",
     "baseline_source": "verified"
@@ -400,7 +484,10 @@
       "CommitmentProblem": 0.0,
       "PreferenceAlignment": -0.5,
       "Patience": 0.0,
-      "DemocraticPeace": -1.0
+      "DemocraticPeace": -1.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Greenland\" AND (\"United States\" OR \"Denmark\" OR \"Trump\" OR \"annexation\" OR \"sovereignty\")",
     "baseline_source": "verified"
@@ -414,7 +501,10 @@
       "CommitmentProblem": 0.0,
       "PreferenceAlignment": -1.0,
       "Patience": -0.5,
-      "DemocraticPeace": 0.5
+      "DemocraticPeace": 0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"Colombia\" AND (\"United States\" OR \"tariff\" OR \"military\" OR \"deportation\" OR \"Petro\")",
     "baseline_source": "verified"
@@ -428,7 +518,10 @@
       "CommitmentProblem": 1.5,
       "PreferenceAlignment": -2.0,
       "Patience": 0.0,
-      "DemocraticPeace": 1.0
+      "DemocraticPeace": 1.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
     },
     "query": "\"NATO\" AND (\"Russia\" OR \"Putin\" OR \"Article 5\" OR \"escalation\" OR \"alliance\")",
     "baseline_source": "verified"

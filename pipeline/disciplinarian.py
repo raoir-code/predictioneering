@@ -81,20 +81,25 @@ Dyad naming rules: Always use the shortest standard English name. Use "US" not "
 
 BASELINE_SYSTEM_PROMPT = """You are an expert in international relations and the Fearon bargaining model of conflict.
 
-Given a dyad (pair of states), set theoretically defensible baseline toggle values for the following 7 nodes. These represent STRUCTURAL CONDITIONS for this dyad -- slow-moving features that do not change week to week.
+Given a dyad (pair of states), set theoretically defensible baseline toggle values for the following 10 nodes. These represent STRUCTURAL CONDITIONS for this dyad -- slow-moving features that do not change week to week.
 
 Nodes and their meaning:
 - WinProbability: military capability balance. Positive = challenger has advantage. Range: -2.0 to 2.0.
-- WarCosts: economic interdependence / trade costs of conflict. Positive = high costs (peace-inducing). Range: -2.0 to 2.0.
-- HardlineClaims: active territorial disputes / hardline bargaining positions. Higher = more contested. Range: 0.0 to 3.0.
+- WarCosts: economic interdependence / trade costs of conflict. Negative = high costs (peace-inducing). Range: -2.0 to 2.0.
+- PatronDeterrence: strength of external patron commitment to the defender. Higher = stronger patron guarantee (e.g. US commitment to Taiwan). Range: 0.0 to 3.0.
+- NuclearDeterrence: nuclear weapons presence creating mutual destruction constraint. Higher = stronger nuclear deterrence. Range: 0.0 to 3.0.
 - CommitmentProblem: power shift risk making deals hard to sustain. Higher = more commitment problems. Range: 0.0 to 2.0.
-- PreferenceAlignment: alignment of interests. Negative = opposed interests (conflict-inducing). Range: -2.0 to 2.0.
 - Patience: leader time horizon / domestic stability. Negative = impatient/unstable leaders. Range: -2.0 to 2.0.
-- DemocraticPeace: regime type effect. Positive = one or both autocratic (conflict-inducing). Range: -2.0 to 2.0.
+- DemocraticPeace: regime type / credibility effect. Positive = one or both autocratic. Range: -2.0 to 2.0.
+- PreferenceAlignment: alignment of interests. Negative = opposed interests (conflict-inducing). Range: -2.0 to 2.0.
+- HardlineClaims: active territorial disputes / hardline bargaining positions. Higher = more contested. Range: 0.0 to 3.0.
+- AudienceCosts: domestic political pressure making backing down costly. Higher = more locked in. Range: 0.0 to 3.0.
 
 Rules:
 - Use your knowledge of IR history, territorial disputes, regime types, and military balance.
-- Be theoretically conservative -- only set extreme values (2.0) for genuinely extreme cases.
+- Be theoretically conservative -- only set extreme values (2.0+) for genuinely extreme cases.
+- PatronDeterrence should be high (2.0+) only where a major power has an explicit defense commitment (e.g. US-Taiwan, US-South Korea).
+- NuclearDeterrence should be high only where both sides have nuclear weapons or one side has them and they are relevant to the dyad.
 - Also generate a GNews search query (boolean, English) that would pull relevant headlines for this dyad.
 
 Respond ONLY with valid JSON in this exact format:
@@ -103,11 +108,14 @@ Respond ONLY with valid JSON in this exact format:
   "baseline": {
     "WinProbability": 0.0,
     "WarCosts": 0.0,
-    "HardlineClaims": 0.0,
+    "PatronDeterrence": 0.0,
+    "NuclearDeterrence": 0.0,
     "CommitmentProblem": 0.0,
-    "PreferenceAlignment": 0.0,
     "Patience": 0.0,
-    "DemocraticPeace": 0.0
+    "DemocraticPeace": 0.0,
+    "PreferenceAlignment": 0.0,
+    "HardlineClaims": 0.0,
+    "AudienceCosts": 0.0
   },
   "query": "boolean GNews search query string",
   "reasoning": "two sentences explaining the key baseline choices"
