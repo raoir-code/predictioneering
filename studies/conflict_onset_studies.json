@@ -1,137 +1,628 @@
 {
-  "dag_version": "3.0",
-  "note": "Flat-approximation implementation. A/B asymmetry and pi non-linearity deferred to v4.",
-  "dag_nodes": ["WinProbability", "WarCosts", "HardlineClaims", "CommitmentProblem", "PreferenceAlignment", "Patience", "DemocraticPeace", "Conflict"],
-  "dag_edges": [
-    {"from": "WinProbability",     "to": "Conflict", "sign":  1, "initial_value":  0.4},
-    {"from": "WarCosts",           "to": "Conflict", "sign": -1, "initial_value": -0.4},
-    {"from": "HardlineClaims",     "to": "Conflict", "sign":  1, "initial_value":  0.8},
-    {"from": "CommitmentProblem",  "to": "Conflict", "sign":  1, "initial_value":  0.6},
-    {"from": "PreferenceAlignment","to": "Conflict", "sign": -1, "initial_value": -0.3},
-    {"from": "Patience",           "to": "Conflict", "sign": -1, "initial_value": -0.3},
-    {"from": "DemocraticPeace",    "to": "Conflict", "sign": -1, "initial_value": -0.2}
+  "dag_version": "mach2_hardline_direct",
+  "note": "HardlineClaims wired directly to Conflict (issue indivisibility as distinct mechanism per Fearon 1995). PatronDeterrence dual-channel retained. PreferenceAlignment and AudienceCosts through WarPolitics. 16 edges, 10 primitives.",
+  "dag_nodes": [
+    "WinProbability",
+    "WarCosts",
+    "PatronDeterrence",
+    "NuclearDeterrence",
+    "CommitmentProblem",
+    "Patience",
+    "DemocraticPeace",
+    "PreferenceAlignment",
+    "HardlineClaims",
+    "AudienceCosts",
+    "w",
+    "Omega",
+    "w_over_pi",
+    "WarPayoff",
+    "WarPolitics",
+    "Conflict"
   ],
-  "primitives": ["WinProbability", "WarCosts", "HardlineClaims", "CommitmentProblem", "PreferenceAlignment", "Patience"],
-  "confounders": ["DemocraticPeace"],
+  "dag_edges": [
+    {
+      "from": "WinProbability",
+      "to": "w",
+      "sign": 1,
+      "initial_value": 0.4,
+      "fixed": false
+    },
+    {
+      "from": "WarCosts",
+      "to": "w",
+      "sign": -1,
+      "initial_value": -0.4,
+      "fixed": false
+    },
+    {
+      "from": "PatronDeterrence",
+      "to": "w",
+      "sign": -1,
+      "initial_value": -0.3,
+      "fixed": false
+    },
+    {
+      "from": "NuclearDeterrence",
+      "to": "w",
+      "sign": -1,
+      "initial_value": -0.3,
+      "fixed": false
+    },
+    {
+      "from": "PatronDeterrence",
+      "to": "HardlineClaims",
+      "sign": 1,
+      "initial_value": 0.3,
+      "fixed": false
+    },
+    {
+      "from": "CommitmentProblem",
+      "to": "Omega",
+      "sign": 1,
+      "initial_value": 0.6,
+      "fixed": false
+    },
+    {
+      "from": "Patience",
+      "to": "Omega",
+      "sign": -1,
+      "initial_value": -0.3,
+      "fixed": false
+    },
+    {
+      "from": "w",
+      "to": "w_over_pi",
+      "sign": 1,
+      "initial_value": 1.0,
+      "fixed": true
+    },
+    {
+      "from": "DemocraticPeace",
+      "to": "w_over_pi",
+      "sign": -1,
+      "initial_value": -0.2,
+      "fixed": false
+    },
+    {
+      "from": "Omega",
+      "to": "WarPayoff",
+      "sign": 1,
+      "initial_value": 1.0,
+      "fixed": true
+    },
+    {
+      "from": "w_over_pi",
+      "to": "WarPayoff",
+      "sign": 1,
+      "initial_value": 1.0,
+      "fixed": true
+    },
+    {
+      "from": "PreferenceAlignment",
+      "to": "WarPolitics",
+      "sign": -1,
+      "initial_value": -0.3,
+      "fixed": false
+    },
+    {
+      "from": "AudienceCosts",
+      "to": "WarPolitics",
+      "sign": 1,
+      "initial_value": 0.2,
+      "fixed": false
+    },
+    {
+      "from": "HardlineClaims",
+      "to": "Conflict",
+      "sign": 1,
+      "initial_value": 1.0,
+      "fixed": true
+    },
+    {
+      "from": "WarPayoff",
+      "to": "Conflict",
+      "sign": 1,
+      "initial_value": 1.0,
+      "fixed": true
+    },
+    {
+      "from": "WarPolitics",
+      "to": "Conflict",
+      "sign": 1,
+      "initial_value": 1.0,
+      "fixed": true
+    }
+  ],
+  "primitives": [
+    "WinProbability",
+    "WarCosts",
+    "PatronDeterrence",
+    "NuclearDeterrence",
+    "CommitmentProblem",
+    "Patience",
+    "DemocraticPeace",
+    "PreferenceAlignment",
+    "HardlineClaims",
+    "AudienceCosts"
+  ],
+  "confounders": [],
   "outcome_node": "Conflict",
   "studies": [
     {
       "study_name": "Gartzke Weisiger 2013",
-      "hero_vars": ["capability ratio"],
-      "node_map": {
-        "capability ratio":  "WinProbability",
-        "democracy (low)":   "DemocraticPeace",
-        "dyadic difference": "CommitmentProblem",
-        "systemic diff.":    "CommitmentProblem"
-      },
-      "extra_moments": [
-        {"var": "dyadic difference", "role": "control", "note": "same-study anchor"},
-        {"var": "systemic diff.",    "role": "control", "note": "same-study anchor"}
+      "hero_vars": [
+        "capability ratio"
       ],
-      "estimator": "cox"
+      "node_map": {
+        "capability ratio": "WinProbability",
+        "democracy (low)": "DemocraticPeace",
+        "dyadic difference": "CommitmentProblem",
+        "systemic diff.": "CommitmentProblem",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": [
+        {
+          "var": "dyadic difference",
+          "role": "control",
+          "note": "same-study anchor for CommitmentProblem"
+        },
+        {
+          "var": "systemic diff.",
+          "role": "control",
+          "note": "same-study anchor for CommitmentProblem"
+        }
+      ]
     },
     {
       "study_name": "Maoz et al. 2018",
-      "hero_vars": ["log trade"],
+      "hero_vars": [
+        "log trade"
+      ],
       "node_map": {
-        "log trade":             "WarCosts",
+        "log trade": "WarCosts",
         "relative capabilities": "WinProbability",
-        "joint democracy":       "DemocraticPeace"
+        "joint democracy": "DemocraticPeace",
+        "Conflict": "Conflict"
       },
-      "estimator": "cox"
+      "estimator": "cox",
+      "extra_moments": []
     },
     {
       "study_name": "Miller & Gibler 2011",
-      "hero_vars": ["territorial dispute"],
+      "hero_vars": [
+        "territorial dispute"
+      ],
       "node_map": {
         "territorial dispute": "HardlineClaims",
-        "capability ratio":    "WinProbability",
-        "joint democracy":     "DemocraticPeace"
+        "capability ratio": "WinProbability",
+        "joint democracy": "DemocraticPeace",
+        "state a democracy": "DemocraticPeace",
+        "state b democracy": "DemocraticPeace",
+        "Conflict": "Conflict"
       },
-      "estimator": "cox"
+      "estimator": "cox",
+      "extra_moments": []
     },
     {
       "study_name": "Bell and Johnson 2015",
-      "hero_vars": ["peace years"],
-      "node_map": {
-        "peace years":               "Patience",
-        "joint democracy":           "DemocraticPeace",
-        "expected power shift":      "CommitmentProblem",
-        "foreign policy similarity": "PreferenceAlignment"
-      },
-      "extra_moments": [
-        {"var": "expected shift in the distribution of power", "role": "control", "note": "same-study anchor"},
-        {"var": "similarity in foreign policy interests",      "role": "control", "note": "same-study anchor"}
+      "hero_vars": [
+        "peace years"
       ],
-      "estimator": "cox"
+      "node_map": {
+        "peace years": "Patience",
+        "joint democracy": "DemocraticPeace",
+        "expected power shift": "CommitmentProblem",
+        "foreign policy similarity": "PreferenceAlignment",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": [
+        {
+          "var": "expected shift in the distribution of power",
+          "role": "control",
+          "note": "same-study anchor for CommitmentProblem"
+        },
+        {
+          "var": "similarity in foreign policy interests",
+          "role": "control",
+          "note": "same-study anchor for PreferenceAlignment"
+        }
+      ]
     },
     {
       "study_name": "Bas and Schub 2016",
-      "hero_vars": ["joint democracy"],
-      "node_map": {
-        "joint democracy":   "DemocraticPeace",
-        "dyadic uncertainty": "CommitmentProblem",
-        "system uncertainty": "CommitmentProblem"
-      },
-      "extra_moments": [
-        {"var": "dyadic uncertainty", "role": "control", "note": "same-study anchor"},
-        {"var": "system uncertainty", "role": "control", "note": "same-study anchor"}
+      "hero_vars": [
+        "joint democracy"
       ],
-      "estimator": "cox"
+      "node_map": {
+        "joint democracy": "DemocraticPeace",
+        "dyadic uncertainty": "CommitmentProblem",
+        "system uncertainty": "CommitmentProblem",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": [
+        {
+          "var": "dyadic uncertainty",
+          "role": "control",
+          "note": "same-study anchor for CommitmentProblem"
+        },
+        {
+          "var": "system uncertainty",
+          "role": "control",
+          "note": "same-study anchor for CommitmentProblem"
+        }
+      ]
     },
     {
       "study_name": "Mousseau, Hegre, and Oneal 2003",
-      "hero_vars": ["dependencyl"],
-      "node_map": {
-        "dependencyl":                         "WarCosts",
-        "ln(capability ratio)":                "WinProbability",
-        "democracyl":                          "DemocraticPeace",
-        "brevity of peace (5-year half-life)": "Patience"
-      },
-      "extra_moments": [
-        {"var": "ln(capability ratio)",                "role": "control", "note": "same-study anchor"},
-        {"var": "democracyl",                          "role": "control", "note": "same-study anchor"},
-        {"var": "brevity of peace (5-year half-life)", "role": "control", "note": "same-study anchor"}
+      "hero_vars": [
+        "dependencyl"
       ],
-      "estimator": "cox"
+      "node_map": {
+        "dependencyl": "WarCosts",
+        "ln(capability ratio)": "WinProbability",
+        "democracyl": "DemocraticPeace",
+        "brevity of peace (5-year half-life)": "Patience",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": [
+        {
+          "var": "ln(capability ratio)",
+          "role": "control",
+          "note": "same-study anchor for WinProbability"
+        },
+        {
+          "var": "democracyl",
+          "role": "control",
+          "note": "same-study anchor for DemocraticPeace"
+        },
+        {
+          "var": "brevity of peace (5-year half-life)",
+          "role": "control",
+          "note": "same-study anchor for Patience"
+        }
+      ]
     },
     {
       "study_name": "Kim 2018",
-      "hero_vars": ["territorial rivalry (strategic)"],
+      "hero_vars": [
+        "territorial rivalry (strategic)"
+      ],
       "node_map": {
-        "territorial rivalry (strategic)": "HardlineClaims"
+        "territorial rivalry (strategic)": "HardlineClaims",
+        "Conflict": "Conflict"
       },
-      "estimator": "cox"
+      "estimator": "cox",
+      "extra_moments": []
     },
     {
       "study_name": "Owsiak and Rider 2013",
-      "hero_vars": ["power parity"],
+      "hero_vars": [
+        "power parity"
+      ],
       "node_map": {
-        "power parity":    "CommitmentProblem",
-        "joint democracy": "DemocraticPeace"
+        "power parity": "CommitmentProblem",
+        "joint democracy": "DemocraticPeace",
+        "Conflict": "Conflict"
       },
-      "estimator": "cox"
+      "estimator": "cox",
+      "extra_moments": []
     },
     {
       "study_name": "Haynes 2017",
-      "hero_vars": ["s score"],
+      "hero_vars": [
+        "s score"
+      ],
       "node_map": {
-        "s score":          "PreferenceAlignment",
+        "s score": "PreferenceAlignment",
         "sender democracy": "DemocraticPeace",
         "target democracy": "DemocraticPeace",
-        "trade":            "WarCosts"
+        "trade": "WarCosts",
+        "Conflict": "Conflict"
       },
-      "estimator": "cox"
+      "estimator": "cox",
+      "extra_moments": []
     },
     {
       "study_name": "Fuhrmann and Kreps 2010",
-      "hero_vars": ["foreign policy similarity"],
+      "hero_vars": [
+        "foreign policy similarity"
+      ],
       "node_map": {
         "foreign policy similarity": "PreferenceAlignment",
-        "power ratio":               "WinProbability",
-        "target's polity":           "DemocraticPeace"
+        "power ratio": "WinProbability",
+        "target's polity": "DemocraticPeace",
+        "Conflict": "Conflict"
       },
-      "estimator": "cox"
+      "estimator": "cox",
+      "extra_moments": []
+    },
+    {
+      "study_name": "Gowa 2011",
+      "hero_vars": [
+        "ratio"
+      ],
+      "node_map": {
+        "ratio": "WinProbability",
+        "democratic dyad": "DemocraticPeace",
+        "alliance": "PatronDeterrence",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": []
+    },
+    {
+      "study_name": "Chatagnier and Kavakl\u0131 2017",
+      "hero_vars": [
+        "un vote similarity"
+      ],
+      "node_map": {
+        "un vote similarity": "PreferenceAlignment",
+        "capabilities ratio": "WinProbability",
+        "both democracies": "DemocraticPeace",
+        "trade dependence": "WarCosts",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": []
+    },
+    {
+      "study_name": "Oneal and Tir 2006",
+      "hero_vars": [
+        "ln(capability ratio)"
+      ],
+      "node_map": {
+        "ln(capability ratio)": "WinProbability",
+        "initiator democracy score": "DemocraticPeace",
+        "initiator's economic growth rate": "Patience",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": []
+    },
+    {
+      "study_name": "Bak et al. 2016",
+      "hero_vars": [
+        "target relative capabilities"
+      ],
+      "node_map": {
+        "target relative capabilities": "WinProbability",
+        "trade dependency": "WarCosts",
+        "democracy": "DemocraticPeace",
+        "alliance similarity": "PatronDeterrence",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": []
+    },
+    {
+      "study_name": "McDonald 2004",
+      "hero_vars": [
+        "interests"
+      ],
+      "node_map": {
+        "interests": "WarCosts",
+        "capratio": "WinProbability",
+        "democracyl": "DemocraticPeace",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": []
+    },
+    {
+      "study_name": "Kleinberg et al. 2012",
+      "hero_vars": [
+        "extradyadic trade concentration low"
+      ],
+      "node_map": {
+        "extradyadic trade concentration low": "WarCosts",
+        "capability ratio (log)": "WinProbability",
+        "democracy low": "DemocraticPeace",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": []
+    },
+    {
+      "study_name": "Lupu and Traag 2012",
+      "hero_vars": [
+        "same trading community"
+      ],
+      "node_map": {
+        "same trading community": "WarCosts",
+        "democracy low": "DemocraticPeace",
+        "alliance": "PatronDeterrence",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": []
+    },
+    {
+      "study_name": "Maoz 2009",
+      "hero_vars": [
+        "economic interdependence"
+      ],
+      "node_map": {
+        "economic interdependence": "WarCosts",
+        "strategic interdependence": "PreferenceAlignment",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": []
+    },
+    {
+      "study_name": "Schultz 2014",
+      "hero_vars": [
+        "age at first mid"
+      ],
+      "node_map": {
+        "age at first mid": "HardlineClaims",
+        "capability ratio": "WinProbability",
+        "democratic dyad": "DemocraticPeace",
+        "alliance portfolio similarity": "PreferenceAlignment",
+        "border treaty since last mid": "HardlineClaims",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": [
+        {
+          "var": "border treaty since last mid",
+          "role": "control",
+          "note": "same-study anchor for HardlineClaims"
+        }
+      ]
+    },
+    {
+      "study_name": "Benson 2011",
+      "hero_vars": [
+        "unconditional deterrent"
+      ],
+      "node_map": {
+        "unconditional deterrent": "PatronDeterrence",
+        "conditional deterrent": "PatronDeterrence",
+        "capabilities ratio": "WinProbability",
+        "joint democracy": "DemocraticPeace",
+        "s-score": "PreferenceAlignment",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": [
+        {
+          "var": "conditional deterrent",
+          "role": "control",
+          "note": "same-study anchor for PatronDeterrence"
+        }
+      ]
+    },
+    {
+      "study_name": "Shea 2014",
+      "hero_vars": [
+        "ally support"
+      ],
+      "node_map": {
+        "ally support": "PatronDeterrence",
+        "capabilities": "WinProbability",
+        "polity": "DemocraticPeace",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": []
+    },
+    {
+      "study_name": "Horowitz et al. 2017",
+      "hero_vars": [
+        "defensive alliance t-1"
+      ],
+      "node_map": {
+        "defensive alliance t-1": "PatronDeterrence",
+        "involved in interstate rivalry": "HardlineClaims",
+        "democracy": "DemocraticPeace",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": []
+    },
+    {
+      "study_name": "Gibler and Owsiak 2018",
+      "hero_vars": [
+        "settled border"
+      ],
+      "node_map": {
+        "settled border": "HardlineClaims",
+        "previously settled border": "HardlineClaims",
+        "joint democracy": "DemocraticPeace",
+        "defense pact": "PatronDeterrence",
+        "stronger state's capability": "WinProbability",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": [
+        {
+          "var": "previously settled border",
+          "role": "control",
+          "note": "same-study anchor for HardlineClaims"
+        }
+      ]
+    },
+    {
+      "study_name": "Gibler 2014",
+      "hero_vars": [
+        "lowest democracy score in dyad"
+      ],
+      "node_map": {
+        "lowest democracy score in dyad": "HardlineClaims",
+        "capability ratio within dyad (weaker over stronger)": "WinProbability",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": []
+    },
+    {
+      "study_name": "Jung 2014",
+      "hero_vars": [
+        "pi's unrest"
+      ],
+      "node_map": {
+        "pi's unrest": "AudienceCosts",
+        "pt's unrest": "AudienceCosts",
+        "relpow": "WinProbability",
+        "jointdemo": "DemocraticPeace",
+        "alliance": "PatronDeterrence",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": [
+        {
+          "var": "pt's unrest",
+          "role": "control",
+          "note": "same-study anchor for AudienceCosts"
+        }
+      ]
+    },
+    {
+      "study_name": "Haynes 2016",
+      "hero_vars": [
+        "dyadic s-score"
+      ],
+      "node_map": {
+        "dyadic s-score": "PreferenceAlignment",
+        "sender democracy": "DemocraticPeace",
+        "target democracy": "DemocraticPeace",
+        "power share": "WinProbability",
+        "mass unrest": "AudienceCosts",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": []
+    },
+    {
+      "study_name": "Tir Jasinski 2008",
+      "hero_vars": [
+        "index of government unpopularity"
+      ],
+      "node_map": {
+        "index of government unpopularity": "AudienceCosts",
+        "approaching elections": "Patience",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": []
+    },
+    {
+      "study_name": "Petersen et al. 2004",
+      "hero_vars": [
+        "territory"
+      ],
+      "node_map": {
+        "territory": "AudienceCosts",
+        "multiparty": "DemocraticPeace",
+        "Conflict": "Conflict"
+      },
+      "estimator": "cox",
+      "extra_moments": []
     }
   ]
 }

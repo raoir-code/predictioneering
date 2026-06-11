@@ -58,7 +58,7 @@ def canon(x):
 # ── Build DAGSpec ─────────────────────────────────────────────────────────────
 dag = DAGSpec(
     nodes=ROSTER['dag_nodes'],
-    edges=[Edge(e['from'], e['to'], sign=e['sign'], initial_value=e['initial_value'])
+    edges=[Edge(e['from'], e['to'], sign=e['sign'], initial_value=e['initial_value'], fixed=e.get('fixed', False))
            for e in ROSTER['dag_edges']],
     primitives=ROSTER['primitives'],
     confounders=ROSTER['confounders'],
@@ -97,5 +97,5 @@ for s in ROSTER['studies']:
         node_map=node_map, moments=moments))
 
 # ── Run engine — results exposed at module level for run_derby.py ─────────────
-engine = GodsDagEngine(dag=dag, studies=study_models, lambda_ridge=0.001, n_bootstrap=100)
+engine = GodsDagEngine(dag=dag, studies=study_models, lambda_ridge=0.001, n_bootstrap=0)
 results = engine.run()
