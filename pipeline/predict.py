@@ -348,6 +348,7 @@ Return:
     payload = {
         "model":    "claude-sonnet-4-20250514",
         "max_tokens": 220,
+        "temperature": 0,
         "system":   STRICT_NODE_SYSTEM,
         "messages": [{"role": "user", "content": user_prompt}],
     }
