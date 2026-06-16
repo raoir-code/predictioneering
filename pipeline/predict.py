@@ -53,6 +53,7 @@ NODES = [
     "PreferenceAlignment",
     "HardlineClaims",
     "AudienceCosts",
+    "MobilizationSignal",
 ]
 
 TOGGLE_RANGES = {
@@ -66,6 +67,7 @@ TOGGLE_RANGES = {
     "PreferenceAlignment": (-2.0, 2.0),
     "HardlineClaims":      (0.0,  3.0),
     "AudienceCosts":       (0.0,  3.0),
+    "MobilizationSignal":  (0.0,  2.0),
 }
 
 MAX_WEEKLY_DELTA = {n: 0.5 for n in NODES}
@@ -86,6 +88,7 @@ FALLBACK_BASELINE = {
     "PreferenceAlignment": -1.0,
     "HardlineClaims":      0.5,
     "AudienceCosts":       0.5,
+    "MobilizationSignal":  0.0,
 }
 
 
@@ -125,11 +128,12 @@ Return valid JSON only:
 """
 
 NODE_RUBRICS = {
-    "WinProbability":      "Did a NEW concrete operational balance shift occur: deployment of forces, mobilization, withdrawal, major arms delivery, or readiness change? +0.5 = initiator gains military advantage (carrier group deployed, force buildup). -0.5 = defender gains advantage (defensive fortifications, third-party military support to defender). Rhetoric does NOT count.",
+    "WinProbability":      "Did a NEW concrete operational balance shift occur: deployment of forces, withdrawal, major arms delivery, or readiness change? +0.5 = initiator gains military advantage (carrier group deployed, force buildup). -0.5 = defender gains advantage (defensive fortifications, third-party military support to defender). Rhetoric does NOT count. NOTE: mobilization/call-up/conscription orders belong to MobilizationSignal, not here -- score generic troop deployment/presence here, score the act of activating reserves or issuing call-up orders under MobilizationSignal.",
     "WarCosts":            "Did a NEW concrete economic policy or enforcement action occur: sanctions imposed, embargo, blockade, seizure, tariff action, or restoration of trade ties? +0.5 = economic ties severed (raises war costs for initiator). -0.5 = new economic interdependence created.",
     "PatronDeterrence":    "Did a NEW patron commitment signal occur: explicit security guarantee reaffirmed, patron military assets moved to theater, patron issued credible deterrence statement, or patron withdrew support? +0.5 = patron visibly committed to defender (deters initiator). -0.5 = patron signal weakened or withdrawn.",
     "NuclearDeterrence":   "Did a NEW nuclear signal occur: nuclear test, new delivery system deployment, nuclear alert status change, or explicit nuclear threat? +0.5 = nuclear threat escalated. -0.5 = nuclear de-escalation. This should almost ALWAYS be 0.",
     "CommitmentProblem":   "Did a NEW event change the credibility or urgency of threats: public ultimatums, force deployments near the adversary, events that make today's deal harder to sustain tomorrow? +0.5 = commitment problem worsened. -0.5 = credible commitment mechanism created.",
+    "MobilizationSignal":  "Did a NEW costly military mobilization signal occur, specifically: reserve call-up, conscription order, formal mobilization decree, military alert status escalation, or troop activation orders? This is DISTINCT from WinProbability (capability balance) and PatronDeterrence (alliance signaling) -- score this node ONLY for the act of mobilizing/activating forces, not for generic troop presence, deployment location, or base posture (those belong to WinProbability). +0.5 to +1.0 = clear mobilization order issued (the literature shows this predicts escalation risk, Levin-Banchik 2021). 0 = generic troop movement, exercises, or presence without a mobilization/call-up order -- the literature (Fuhrmann & Sechser 2014) finds this channel statistically null, do NOT score it as mobilization. Almost always 0 unless an explicit call-up/activation order is reported."
     "Patience":            "Did a NEW domestic political instability event occur affecting leadership survival or time horizon: protests, coup signals, election shocks, elite rupture, or resignation risk? +0.5 = leadership under pressure, shorter time horizon. -0.5 = leadership consolidated, longer horizon.",
     "DemocraticPeace":     "Did a NEW major institutional rupture occur: coup, emergency rule, election cancellation, or constitutional suspension? This should almost ALWAYS be 0. +0.5 = democratic institutions weakened. -0.5 = democratic consolidation.",
     "PreferenceAlignment": "Did a NEW formal diplomatic alignment shift occur: signed agreement, formal rupture, diplomatic recognition, coalition change, or explicit policy reversal? +0.5 = preferences diverged. -0.5 = preferences converged.",
@@ -138,12 +142,13 @@ NODE_RUBRICS = {
 }
 
 NODE_GATES = {
-    "WinProbability":      ["deploy", "carrier", "troops", "base", "mobiliz", "arms", "weapon", "forces", "readiness"],
+    "WinProbability":      ["deploy", "carrier", "troops", "base", "arms", "weapon", "forces", "readiness"],
     "PatronDeterrence":    ["guarantee", "commitment", "alliance", "patron", "support", "deterr", "deploy", "carrier"],
     "NuclearDeterrence":   ["nuclear", "missile", "warhead", "deterr", "test", "launch"],
     "PreferenceAlignment": ["agreement", "rupture", "recognition", "accord", "reversal", "withdraw", "signed"],
     "DemocraticPeace":     ["coup", "emergency", "cancel", "suspend", "constitutional"],
-    "AudienceCosts":       ["protest", "nationalist", "rally", "domestic", "pressure", "demand", "mobiliz"],
+    "AudienceCosts":       ["protest", "nationalist", "rally", "domestic", "pressure", "demand"],
+    "MobilizationSignal":  ["mobiliz", "call-up", "callup", "conscript", "reserve activ", "activate reserv", "alert status", "general mobilization"],
 }
 
 # ============================================================
@@ -179,7 +184,8 @@ def predict_probability(toggles: Dict[str, float], days_remaining: int, alpha: D
            + alpha.get("PatronDeterrence_w", alpha.get("PatronDeterrence", 0.0)) * toggles.get("PatronDeterrence", 0.0)
            + alpha.get("NuclearDeterrence", 0.0) * toggles.get("NuclearDeterrence", 0.0))
     Omega = (alpha.get("CommitmentProblem", 0.0) * toggles.get("CommitmentProblem", 0.0)
-           + alpha.get("Patience", 0.0)          * toggles.get("Patience", 0.0))
+           + alpha.get("Patience", 0.0)          * toggles.get("Patience", 0.0)
+           + alpha.get("MobilizationSignal", 0.0) * toggles.get("MobilizationSignal", 0.0))
     # Tier 3: credibility-adjusted war value
     w_over_pi = w + alpha.get("DemocraticPeace", 0.0) * toggles.get("DemocraticPeace", 0.0)
     # Tier 4: WarPayoff and WarPolitics
