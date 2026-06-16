@@ -73,7 +73,7 @@ EXPERT_PRIORS = {
     # Net structural effect on war payoff is indistinguishable from zero in GMM.
     # Prior: small positive effect consistent with bargaining model (p must matter).
     "WinProbability_prior": {
-        "beta": 0.25,
+        "beta": 0.10,
         "se":   0.50,
         "source": "expert_prior_mach2",
         "note": "Sign cancellation in capabilities literature. "
@@ -95,6 +95,47 @@ EXPERT_PRIORS = {
         "source": "expert_prior_v3",
         "note": "pi_B: target credibility / settlement implementation. "
                 "Symmetric to Credibility_A pending asymmetric study identification."
+    },
+
+    # MobilizationSignal -> CommitmentProblem (q channel), sign=+1
+    # Costly-signal escalation literature is real but design-heterogeneous:
+    # three source studies measure three different DVs and cannot be pooled
+    # into one forward map without risking the same sign-conflict failure
+    # mode already fixed once for PatronDeterrence (see June 11 work log).
+    # Expert-hardcoded with shrinkage, NOT derby-estimated. Zero studies
+    # mapped to this node in conflict_onset_studies.json by design.
+    #
+    # Sources considered:
+    # - Levin-Banchik 2021 (ICB nondirected crisis-dyads, 1918-2010): prior
+    #   military hostility -> escalation to serious clash/war, OR=1.621 with
+    #   controls (beta ~0.483). DV-MATCHED (escalation to war/serious clash).
+    #   This is the primary anchor for the magnitude below.
+    # - Lai 2004 (ICB crisis-level, Heckman-corrected): private mobilization
+    #   associated with war outcome. DV-matched, but qualitative/directional
+    #   only -- no usable coefficient. Used as corroboration, not magnitude.
+    # - Post & Sechser 2024 (compellent threats, n=210+): mobilization
+    #   coefficient 1.918-2.796. NOT used for magnitude -- DV is compellence
+    #   SUCCESS (target compliance), which is closer to the inverse of
+    #   war-on-rejection than to it. Directional corroboration only that
+    #   mobilization is a stronger signal than generic show-of-force/troop
+    #   presence (which Fuhrmann & Sechser 2014 found statistically
+    #   indistinguishable from zero, beta=-0.00109, n.s.).
+    #
+    # Shrunk to 0.50: at the DV-matched Levin-Banchik beta (0.483), rounded
+    # up slightly for Lai's directional reinforcement, deliberately NOT
+    # pulled toward Post & Sechser's larger but DV-mismatched coefficient.
+    "MobilizationSignal": {
+        "beta": 0.50,
+        "se":    0.40,
+        "source": "expert_prior_v1_mobilization",
+        "note": "q-channel costly-signal escalation prior. DV-matched anchor: "
+                "Levin-Banchik 2021 OR=1.621 (beta~0.483). Wide SE reflects "
+                "heterogeneous DVs across the three source studies and small-N "
+                "underlying samples. GNews scoring gate (predict.py/backtest.py) "
+                "must require mobilization-specific language (call-up orders, "
+                "reserve activation, force posture change) -- NOT generic "
+                "troop-presence/show-of-force language, which the literature "
+                "shows is empirically null."
     },
 }
 

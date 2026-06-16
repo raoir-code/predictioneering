@@ -17,7 +17,8 @@
     "w_over_pi",
     "WarPayoff",
     "WarPolitics",
-    "Conflict"
+    "Conflict",
+    "MobilizationSignal"
   ],
   "dag_edges": [
     {
@@ -131,6 +132,13 @@
       "sign": 1,
       "initial_value": 1.0,
       "fixed": true
+    },
+    {
+      "from": "MobilizationSignal",
+      "to": "CommitmentProblem",
+      "sign": 1,
+      "initial_value": 0.5,
+      "fixed": false
     }
   ],
   "primitives": [
