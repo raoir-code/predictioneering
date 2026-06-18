@@ -4,9 +4,9 @@
     "baseline": {
       "WinProbability": 0.5,
       "WarCosts": -1.0,
-      "HardlineClaims": 2.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -1.5,
+      "PreferenceAlignment": -0.5,
       "Patience": -0.5,
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 2.0,
@@ -14,16 +14,20 @@
       "AudienceCosts": 1.0
     },
     "query": "\"China\" AND (\"Taiwan\" OR \"PLA\" OR \"strait\" OR \"invasion\" OR \"blockade\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "q_static": {
+      "ProtractedConflict": 0.3,
+      "GeographicProximity": 0.35
+    }
   },
   "Russia-Ukraine": {
     "label": "Russia and Ukraine",
     "baseline": {
       "WinProbability": 0.0,
       "WarCosts": -0.5,
-      "HardlineClaims": 2.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 1.5,
-      "PreferenceAlignment": -2.0,
+      "PreferenceAlignment": -0.5,
       "Patience": 0.0,
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 1.5,
@@ -31,7 +35,11 @@
       "AudienceCosts": 1.0
     },
     "query": "\"Russia\" AND (\"Ukraine\" OR \"Zelensky\" OR \"Putin\" OR \"Kyiv\" OR \"ceasefire\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "q_static": {
+      "ProtractedConflict": 0.3,
+      "GeographicProximity": 0.35
+    }
   },
   "US-Iran": {
     "label": "United States and Iran",
@@ -40,7 +48,7 @@
       "WarCosts": 1.0,
       "HardlineClaims": 0.5,
       "CommitmentProblem": 1.0,
-      "PreferenceAlignment": -1.5,
+      "PreferenceAlignment": -0.5,
       "Patience": 0.0,
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
@@ -48,16 +56,20 @@
       "AudienceCosts": 0.5
     },
     "query": "\"Iran\" AND (\"United States\" OR US OR \"American\" OR Tehran OR \"nuclear\") NOT Venezuela",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "q_static": {
+      "ProtractedConflict": 0.3,
+      "GeographicProximity": 0.0
+    }
   },
   "Israel-Iran": {
     "label": "Israel and Iran",
     "baseline": {
       "WinProbability": 0.5,
       "WarCosts": -0.5,
-      "HardlineClaims": 1.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 1.0,
-      "PreferenceAlignment": -2.0,
+      "PreferenceAlignment": -0.5,
       "Patience": -0.5,
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 1.5,
@@ -72,9 +84,9 @@
     "baseline": {
       "WinProbability": -2.0,
       "WarCosts": 0.5,
-      "HardlineClaims": 1.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -2.0,
+      "PreferenceAlignment": -0.5,
       "Patience": -1.0,
       "DemocraticPeace": 2.0,
       "PatronDeterrence": 1.0,
@@ -89,9 +101,9 @@
     "baseline": {
       "WinProbability": 0.5,
       "WarCosts": -0.5,
-      "HardlineClaims": 1.5,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -1.5,
+      "PreferenceAlignment": -0.5,
       "Patience": -0.5,
       "DemocraticPeace": 0.5,
       "PatronDeterrence": 0.5,
@@ -99,16 +111,20 @@
       "AudienceCosts": 1.0
     },
     "query": "\"India\" AND (\"Pakistan\" OR \"Kashmir\" OR \"LOC\" OR \"strike\" OR \"airstrike\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "q_static": {
+      "ProtractedConflict": 0.3,
+      "GeographicProximity": 0.35
+    }
   },
   "NATO-Russia": {
     "label": "NATO and Russia",
     "baseline": {
       "WinProbability": 0.5,
       "WarCosts": -1.0,
-      "HardlineClaims": 1.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 1.5,
-      "PreferenceAlignment": -2.0,
+      "PreferenceAlignment": -0.5,
       "Patience": 0.0,
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 2.0,
@@ -125,7 +141,7 @@
       "WarCosts": 0.5,
       "HardlineClaims": 0.5,
       "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -1.5,
+      "PreferenceAlignment": -0.5,
       "Patience": -0.5,
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
@@ -133,16 +149,20 @@
       "AudienceCosts": 0.5
     },
     "query": "\"Venezuela\" AND (\"United States\" OR \"Maduro\" OR \"sanctions\" OR \"military\" OR \"Guyana\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "q_static": {
+      "ProtractedConflict": 0.0,
+      "GeographicProximity": 0.15
+    }
   },
   "US-Cuba": {
     "label": "United States and Cuba",
     "baseline": {
       "WinProbability": -2.0,
       "WarCosts": 0.5,
-      "HardlineClaims": 0.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 0.0,
-      "PreferenceAlignment": -1.5,
+      "PreferenceAlignment": -0.5,
       "Patience": -0.5,
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
@@ -159,7 +179,7 @@
       "WarCosts": 1.0,
       "HardlineClaims": 0.5,
       "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -1.0,
+      "PreferenceAlignment": -0.5,
       "Patience": -0.5,
       "DemocraticPeace": 0.5,
       "PatronDeterrence": 0.5,
@@ -176,7 +196,7 @@
       "WarCosts": -0.5,
       "HardlineClaims": 0.5,
       "CommitmentProblem": 1.0,
-      "PreferenceAlignment": -2.0,
+      "PreferenceAlignment": -0.5,
       "Patience": 0.0,
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
@@ -191,9 +211,9 @@
     "baseline": {
       "WinProbability": 0.5,
       "WarCosts": -1.0,
-      "HardlineClaims": 1.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 1.0,
-      "PreferenceAlignment": -1.5,
+      "PreferenceAlignment": -0.5,
       "Patience": 0.0,
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
@@ -208,9 +228,9 @@
     "baseline": {
       "WinProbability": 0.0,
       "WarCosts": -0.5,
-      "HardlineClaims": 1.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -1.0,
+      "PreferenceAlignment": -0.5,
       "Patience": -0.5,
       "DemocraticPeace": 0.0,
       "PatronDeterrence": 0.5,
@@ -225,9 +245,9 @@
     "baseline": {
       "WinProbability": 0.5,
       "WarCosts": -1.0,
-      "HardlineClaims": 1.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -1.0,
+      "PreferenceAlignment": -0.5,
       "Patience": 0.0,
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 0.5,
@@ -242,9 +262,9 @@
     "baseline": {
       "WinProbability": 0.5,
       "WarCosts": -0.5,
-      "HardlineClaims": 1.5,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -1.5,
+      "PreferenceAlignment": -0.5,
       "Patience": 0.0,
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 1.5,
@@ -259,9 +279,9 @@
     "baseline": {
       "WinProbability": -0.5,
       "WarCosts": -0.5,
-      "HardlineClaims": 1.5,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 1.0,
-      "PreferenceAlignment": -2.0,
+      "PreferenceAlignment": -0.5,
       "Patience": -1.0,
       "DemocraticPeace": 2.0,
       "PatronDeterrence": 1.5,
@@ -276,9 +296,9 @@
     "baseline": {
       "WinProbability": 0.5,
       "WarCosts": -0.5,
-      "HardlineClaims": 1.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -2.0,
+      "PreferenceAlignment": -0.5,
       "Patience": -0.5,
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
@@ -295,7 +315,7 @@
       "WarCosts": -0.5,
       "HardlineClaims": 0.5,
       "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -1.5,
+      "PreferenceAlignment": -0.5,
       "Patience": -0.5,
       "DemocraticPeace": 0.5,
       "PatronDeterrence": 0.5,
@@ -310,9 +330,9 @@
     "baseline": {
       "WinProbability": 1.0,
       "WarCosts": -0.5,
-      "HardlineClaims": 1.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -2.0,
+      "PreferenceAlignment": -0.5,
       "Patience": -0.5,
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
@@ -344,9 +364,9 @@
     "baseline": {
       "WinProbability": -2.0,
       "WarCosts": 0.5,
-      "HardlineClaims": 0.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 0.0,
-      "PreferenceAlignment": -1.0,
+      "PreferenceAlignment": -0.5,
       "Patience": -0.5,
       "DemocraticPeace": 0.5,
       "PatronDeterrence": 0.5,
@@ -361,9 +381,9 @@
     "baseline": {
       "WinProbability": 0.5,
       "WarCosts": -0.5,
-      "HardlineClaims": 1.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -1.0,
+      "PreferenceAlignment": -0.5,
       "Patience": 0.0,
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 0.5,
@@ -380,7 +400,7 @@
       "WarCosts": -0.5,
       "HardlineClaims": 0.5,
       "CommitmentProblem": 1.0,
-      "PreferenceAlignment": -2.0,
+      "PreferenceAlignment": -0.5,
       "Patience": 0.0,
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
@@ -431,7 +451,7 @@
       "WarCosts": 0.5,
       "HardlineClaims": 0.5,
       "CommitmentProblem": 1.0,
-      "PreferenceAlignment": -1.5,
+      "PreferenceAlignment": -0.5,
       "Patience": 0.0,
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
@@ -448,7 +468,7 @@
       "WarCosts": 1.0,
       "HardlineClaims": 0.5,
       "CommitmentProblem": 1.0,
-      "PreferenceAlignment": -1.5,
+      "PreferenceAlignment": -0.5,
       "Patience": 0.0,
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
@@ -465,7 +485,7 @@
       "WarCosts": 0.5,
       "HardlineClaims": 0.5,
       "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -1.5,
+      "PreferenceAlignment": -0.5,
       "Patience": -0.5,
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
@@ -497,9 +517,9 @@
     "baseline": {
       "WinProbability": -2.0,
       "WarCosts": 0.5,
-      "HardlineClaims": 0.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 0.0,
-      "PreferenceAlignment": -1.0,
+      "PreferenceAlignment": -0.5,
       "Patience": -0.5,
       "DemocraticPeace": 0.5,
       "PatronDeterrence": 0.5,
@@ -514,9 +534,9 @@
     "baseline": {
       "WinProbability": 0.5,
       "WarCosts": -1.0,
-      "HardlineClaims": 1.0,
+      "HardlineClaims": 0.5,
       "CommitmentProblem": 1.5,
-      "PreferenceAlignment": -2.0,
+      "PreferenceAlignment": -0.5,
       "Patience": 0.0,
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 0.5,
