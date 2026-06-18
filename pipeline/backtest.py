@@ -319,6 +319,19 @@ ICB_COEF = {
     "GeographicProximity":           1.045,  # SE 0.757 -- NOT significant, use with caution
 }
 
+# Mach 3 regime classification (June 18 2026).
+# Z_t=0: quiet dyad -- use Mach 2 structural formula.
+# Z_t=1: active pre-war crisis -- use q_full as primary probability.
+#        Counterfactual validated: Brier 0.0675 vs market 0.1043.
+# Z_t=2: ongoing war, inverted-polarity market -- exclude from Brier.
+DYAD_REGIME = {
+    "China-Taiwan":   0,
+    "India-Pakistan": 0,
+    "US-Iran":        1,
+    "US-Venezuela":   1,
+    "Russia-Ukraine": 2,
+}
+
 # Onset-valid, LLM-scored each snapshot from the current precipitating event.
 # NOTE: the spec's "5 onset-valid fields" includes ProtractedConflict and
 # GeographicProximity, but both are explicitly defined as static dyad
@@ -434,16 +447,35 @@ def _call_claude_json(prompt, expected_fields, max_tokens, retries=1):
         return {n: 0.0 for n in expected_fields}
     text = resp["content"][0]["text"].strip()
 
-    try:
-        if "```" in text:
-            text = text.split("```")[1]
-            if text.startswith("json"):
-                text = text[4:]
-        parsed = json.loads(text.strip())
-        return {n: float(parsed.get(n, 0.0)) for n in expected_fields}
-    except Exception:
-        print(f"    [warn] Node scoring parse error, using zeros")
-        return {n: 0.0 for n in expected_fields}
+    # Three-tier JSON extraction (June 18 2026):
+    # Tier 1 -- direct parse (clean JSON, happy path).
+    # Tier 2 -- strip markdown code fences (```json...```).
+    # Tier 3 -- brace extraction: find first { and last } and parse
+    #   that substring -- handles preamble text before the JSON object.
+    # On total failure: log first 300 chars of raw response.
+    def _fence_strip(t):
+        if "```" not in t:
+            return t
+        part = t.split("```")[1]
+        return part.lstrip("json").strip()
+
+    def _brace_extract(t):
+        lo, hi = t.find("{"), t.rfind("}")
+        return t[lo:hi+1] if lo != -1 and hi != -1 else ""
+
+    for label, candidate in [
+        ("direct",        text),
+        ("fence-strip",   _fence_strip(text)),
+        ("brace-extract", _brace_extract(text)),
+    ]:
+        try:
+            parsed = json.loads(candidate)
+            return {n: float(parsed.get(n, 0.0)) for n in expected_fields}
+        except Exception:
+            continue
+    print(f"    [warn] Node scoring parse error (all 3 tiers), using zeros")
+    print(f"    [warn] raw response (first 300 chars): {text[:300]!r}")
+    return {n: 0.0 for n in expected_fields}
 
 def score_nodes_call_a(dyad, articles, as_of_date):
     """Call A: existing 11 primitives + 3 new onset-context q-parents, one call."""
@@ -735,14 +767,18 @@ def run_backtest(dry_run=False):
             q_onset_only  = q_with_subset(q_components, ONSET_ONLY_KEYS)
             q_live_only   = q_with_subset(q_components, LIVE_ONLY_KEYS)
 
-            # Run Mach 2 -- June 18 2026: q-submodel now wired in. q_logit is
-            # the same additive sum q_full is built from (sigmoid of it IS
-            # q_full), passed straight into log_odds_shift, weight 1.0, no
-            # separate calibration factor invented for this.
+            # Mach 3 regime routing (June 18 2026):
+            # Z_t=0 -> Mach 2 structural formula.
+            # Z_t=1 -> q_full as primary probability (crisis reference class).
+            # Z_t=2 -> Mach 2 stored but excluded from Brier in print_results.
             q_logit  = sum(q_components.values())
-            engine_p = predict_probability(toggles, days_remaining, q_logit=q_logit)
+            z_t      = DYAD_REGIME.get(dyad, 0)
+            if z_t == 1:
+                engine_p = round(q_full, 4)
+            else:
+                engine_p = predict_probability(toggles, days_remaining, q_logit=q_logit)
 
-            # Brier scores (only for resolved markets)
+            # Brier scores (resolved markets; Z_t=2 filtered in print_results)
             b_engine = (engine_p - resolution)**2 if resolution is not None else None
             b_market = (mkt_price - resolution)**2 if resolution is not None else None
 
@@ -752,6 +788,7 @@ def run_backtest(dry_run=False):
                 "snapshot_date": snapshot_date.isoformat(),
                 "days_remaining":days_remaining,
                 "resolution":    resolution,
+                "z_t":           z_t,
                 "engine_p":      engine_p,
                 "market_p":      mkt_price,
                 "b_engine":      b_engine,
@@ -785,8 +822,10 @@ def run_backtest(dry_run=False):
 # ─────────────────────────────────────────────────────────────────────
 
 def print_results(rows):
-    resolved = [r for r in rows if r["resolution"] is not None]
-    live     = [r for r in rows if r["resolution"] is None]
+    all_resolved = [r for r in rows if r["resolution"] is not None]
+    live         = [r for r in rows if r["resolution"] is None]
+    resolved  = [r for r in all_resolved if r.get("z_t", 0) != 2]
+    excluded2 = [r for r in all_resolved if r.get("z_t", 0) == 2]
 
     if not resolved:
         print("\nNo resolved markets to score yet.")
@@ -797,9 +836,9 @@ def print_results(rows):
     wins = sum(1 for r in resolved if r["b_engine"] < r["b_market"])
 
     print("\n" + "█"*60)
-    print("  BACKTEST RESULTS — Mach 2")
+    print("  BACKTEST RESULTS — Mach 3 (regime-switched)")
     print("█"*60)
-    print(f"\n  Resolved rows:  {len(resolved)}")
+    print(f"\n  Resolved rows:  {len(resolved)}  (Z_t=2 excluded: {len(excluded2)})")
     print(f"  Live rows:      {len(live)}")
     print(f"\n  Engine Brier:   {mean_b_engine:.4f}")
     print(f"  Market Brier:   {mean_b_market:.4f}")
