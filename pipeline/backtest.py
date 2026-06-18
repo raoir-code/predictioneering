@@ -544,10 +544,16 @@ def q_with_subset(q_components, include_keys=None):
 # MACH 2 FORMULA
 # ─────────────────────────────────────────────────────────────────────
 
-def predict_probability(toggles, days_remaining):
+def predict_probability(toggles, days_remaining, q_logit=0.0):
     """
-    Four-tier Mach 2 formula from predict.py (June 11 session).
-    toggles: dict of node_name → score (baseline + delta)
+    Four-tier Mach 2 formula from predict.py (June 11 session), extended
+    June 18 2026 to fold in the q-submodel's logit contribution.
+
+    q_logit: sum of build_q_components(...).values() -- i.e. logit(q) itself,
+    since q_full is already constructed as sigmoid(that same sum). Added here
+    with weight 1.0, consistent with the logit-additivity discipline already
+    used inside the q-submodel -- no separate calibration weight invented.
+    Defaults to 0.0 so any other caller of this function is unaffected.
     """
     a = ALPHA
 
@@ -575,7 +581,7 @@ def predict_probability(toggles, days_remaining):
     # HardlineClaims goes direct to Conflict (fixed edge = 1.0)
     HardlineDirect = t.get("HardlineClaims", 0)
 
-    log_odds_shift = WarPayoff + WarPolitics + HardlineDirect
+    log_odds_shift = WarPayoff + WarPolitics + HardlineDirect + q_logit
 
     # Convert annual base rate to window probability, then to log-odds
     # Correct compounding: p_window = 1 - (1 - p_annual)^(days/365)
@@ -723,14 +729,18 @@ def run_backtest(dry_run=False):
 
             toggles  = apply_deltas(baseline, call_a)  # only NODES keys get applied; new fields ignored here
 
-            # Run Mach 2 (unchanged formula — q-submodel is diagnostic-only this run)
-            engine_p = predict_probability(toggles, days_remaining)
-
             # Q-submodel: compute logit(q) decomposition for this snapshot
             q_components = build_q_components(toggles, call_a, call_b, q_static)
             q_full        = q_with_subset(q_components)
             q_onset_only  = q_with_subset(q_components, ONSET_ONLY_KEYS)
             q_live_only   = q_with_subset(q_components, LIVE_ONLY_KEYS)
+
+            # Run Mach 2 -- June 18 2026: q-submodel now wired in. q_logit is
+            # the same additive sum q_full is built from (sigmoid of it IS
+            # q_full), passed straight into log_odds_shift, weight 1.0, no
+            # separate calibration factor invented for this.
+            q_logit  = sum(q_components.values())
+            engine_p = predict_probability(toggles, days_remaining, q_logit=q_logit)
 
             # Brier scores (only for resolved markets)
             b_engine = (engine_p - resolution)**2 if resolution is not None else None
