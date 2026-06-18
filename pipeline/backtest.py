@@ -731,6 +731,12 @@ def run_backtest(dry_run=False):
                   f"Engine: {engine_p:.1%} | Market: {mkt_price:.1%} | "
                   f"Res: {res_str} | Articles: {len(articles)}")
 
+        # Checkpoint: save progress after each market finishes, so a crash
+        # mid-run (e.g. a network timeout) doesn't lose everything back to
+        # the start -- only loses whatever wasn't checkpointed yet.
+        RESULTS_OUT.write_text(json.dumps(rows, indent=2))
+        print(f"  [checkpoint] {len(rows)} rows saved → {RESULTS_OUT}")
+
     return rows
 
 # ─────────────────────────────────────────────────────────────────────
