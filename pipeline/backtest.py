@@ -641,6 +641,7 @@ def run_backtest(dry_run=False):
         end_date = date.fromisoformat(mkt["end_date"])
         dyad     = mkt["dyad"]
         baseline = load_dyad_baseline(dyad)
+        q_static = load_dyad_q_static(dyad)
 
         print(f"  Sub-market: {sm['label']} | Resolution: {resolution} | "
               f"History: {len(sm['history'])} days")
@@ -660,13 +661,22 @@ def run_backtest(dry_run=False):
 
             days_remaining = (end_date - snapshot_date).days
 
-            # Fetch headlines + score nodes
+            # Fetch headlines + score nodes (two-call structure, June 17 spec)
             articles = fetch_gnews(dyad, snapshot_date)
-            deltas   = score_nodes(dyad, articles, snapshot_date)
-            toggles  = apply_deltas(baseline, deltas)
+            call_a   = score_nodes_call_a(dyad, articles, snapshot_date)
+            trigger_was_violent = call_a.get("TriggerType", 0.0) >= 0.60
+            call_b   = score_nodes_call_b(dyad, articles, snapshot_date, trigger_was_violent)
 
-            # Run Mach 2
+            toggles  = apply_deltas(baseline, call_a)  # only NODES keys get applied; new fields ignored here
+
+            # Run Mach 2 (unchanged formula — q-submodel is diagnostic-only this run)
             engine_p = predict_probability(toggles, days_remaining)
+
+            # Q-submodel: compute logit(q) decomposition for this snapshot
+            q_components = build_q_components(toggles, call_a, call_b, q_static)
+            q_full        = q_with_subset(q_components)
+            q_onset_only  = q_with_subset(q_components, ONSET_ONLY_KEYS)
+            q_live_only   = q_with_subset(q_components, LIVE_ONLY_KEYS)
 
             # Brier scores (only for resolved markets)
             b_engine = (engine_p - resolution)**2 if resolution is not None else None
@@ -683,6 +693,10 @@ def run_backtest(dry_run=False):
                 "b_engine":      b_engine,
                 "b_market":      b_market,
                 "n_articles":    len(articles),
+                "q_components":  q_components,
+                "q_full":        round(q_full, 4),
+                "q_onset_only":  round(q_onset_only, 4),
+                "q_live_only":   round(q_live_only, 4),
             }
             rows.append(row)
 
