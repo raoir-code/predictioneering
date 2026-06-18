@@ -282,11 +282,42 @@ NODES = [
 # logit(q_t) = q0 + xi*kappa_commit + Sum(onset-valid) + Sum(live dynamic)
 # Strictly additive in logit space, v1 — no interactions.
 #
-# Q0 is a placeholder. The spec did not carry forward an ICB-regression
-# intercept (only per-parent slopes). Treated as 0 until/unless a real
-# intercept exists -- this affects q's absolute level, not the relative
-# TP-vs-TN discrimination test this run is actually for.
-Q0 = 0.0
+# Q0 and ICB_COEF below come from a real logistic regression on ICB
+# System-Level data (June 18 2026, via ChatGPT, critiqued/verified by Claude),
+# NOT hand-set. DV = VIOL>=3 ("serious clashes or full-scale war"), N=509,
+# positives=227 (44.6%), McFadden pseudo-R^2=0.198. Independent variables
+# were recoded onto this pipeline's exact rubric scale (crosswalk documented
+# in the work log) BEFORE fitting, so these coefficients are correctly
+# composable with the raw rubric outputs in build_q_components() below --
+# a first-pass version of this regression used ICB's native categorical
+# codings instead and was not directly composable.
+#
+# IMPORTANT: this is a crisis-conditioned intercept, not a normal dyad-day
+# base rate. ICB's whole sample is already-recognized international crises
+# (threat to basic values + time pressure + heightened probability of
+# military hostilities), so it cannot speak to "ordinary, nothing-happening
+# day" calibration -- confirmed explicitly by the regression's own author
+# when asked. Expect this to still read somewhat too high on truly quiet
+# snapshots; that's a known, documented limitation, not a bug to chase now.
+#
+# Coefficient confidence varies. TriggerType, ValueThreatGravity, and
+# ThirdPartyMilitaryInvolvement are robustly significant (each >3x their own
+# SE). ProtractedConflict and GeographicProximity are NOT statistically
+# distinguishable from zero in this fit (coefficient smaller than or
+# comparable to its own SE) -- consistent with this pipeline's own June 18
+# backtest finding that those two terms were confounded/unreliable, since
+# only 2 of 5 dyads ever resolved Yes. Used here as the best available point
+# estimate rather than zeroed out, but flagged as the least trustworthy part
+# of this equation.
+Q0 = -3.407  # SE 0.398
+
+ICB_COEF = {
+    "TriggerType":                   3.680,  # SE 0.455, robustly significant
+    "ValueThreatGravity":            3.674,  # SE 0.620, robustly significant
+    "ThirdPartyMilitaryInvolvement": 2.474,  # SE 0.771, significant, medium-confidence mapping (GPINVTP/USINV/SUINV/CHINV aggregated)
+    "ProtractedConflict":            0.535,  # SE 0.715 -- NOT significant, use with caution
+    "GeographicProximity":           1.045,  # SE 0.757 -- NOT significant, use with caution
+}
 
 # Onset-valid, LLM-scored each snapshot from the current precipitating event.
 # NOTE: the spec's "5 onset-valid fields" includes ProtractedConflict and
@@ -492,11 +523,11 @@ def build_q_components(toggles, call_a, call_b, q_static):
     return {
         "base":                          Q0,
         "CommitmentProblem":             ALPHA["CommitmentProblem"] * toggles.get("CommitmentProblem", 0),
-        "TriggerType":                   call_a.get("TriggerType", 0.0),
-        "ValueThreatGravity":            call_a.get("ValueThreatGravity", 0.0),
-        "ThirdPartyMilitaryInvolvement": call_a.get("ThirdPartyMilitaryInvolvement", 0.0),
-        "ProtractedConflict":            q_static.get("ProtractedConflict", 0.0),
-        "GeographicProximity":           q_static.get("GeographicProximity", 0.0),
+        "TriggerType":                   ICB_COEF["TriggerType"] * call_a.get("TriggerType", 0.0),
+        "ValueThreatGravity":            ICB_COEF["ValueThreatGravity"] * call_a.get("ValueThreatGravity", 0.0),
+        "ThirdPartyMilitaryInvolvement": ICB_COEF["ThirdPartyMilitaryInvolvement"] * call_a.get("ThirdPartyMilitaryInvolvement", 0.0),
+        "ProtractedConflict":            ICB_COEF["ProtractedConflict"] * q_static.get("ProtractedConflict", 0.0),
+        "GeographicProximity":           ICB_COEF["GeographicProximity"] * q_static.get("GeographicProximity", 0.0),
         "LiveNonviolentMilitaryPressure":call_b.get("LiveNonviolentMilitaryPressure", 0.0),
         "LiveViolenceObserved":          call_b.get("LiveViolenceObserved", 0.0),
         "LiveUltimatumDeadline":         call_b.get("LiveUltimatumDeadline", 0.0),
