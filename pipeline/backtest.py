@@ -359,8 +359,16 @@ Score these 5 live-dynamic q-parents from the headlines below. Each has its own 
 Return ONLY valid JSON, no preamble: {{"LiveNonviolentMilitaryPressure": 0, "LiveViolenceObserved": 0, "LiveUltimatumDeadline": 0, "LiveMediationAccepted": 0, "LiveAbatementSignal": 0}}
 """
 
-def _call_claude_json(prompt, expected_fields, max_tokens):
-    """Shared Claude call + JSON parse, used by both Call A and Call B."""
+def _call_claude_json(prompt, expected_fields, max_tokens, retries=1):
+    """Shared Claude call + JSON parse, used by both Call A and Call B.
+
+    The network call is wrapped separately from the JSON-parsing step below --
+    a dropped connection or read timeout (e.g. from a laptop sleep/wake cycle)
+    is a different failure mode than the model returning malformed JSON, and
+    previously crashed the whole script since nothing caught it. Retries once
+    before falling back to zeros, since a fresh attempt right after a timeout
+    usually just works.
+    """
     headers = {
         "x-api-key": ANTHROPIC_KEY,
         "anthropic-version": "2023-06-01",
@@ -372,9 +380,24 @@ def _call_claude_json(prompt, expected_fields, max_tokens):
         "temperature": 0,
         "messages": [{"role": "user", "content": prompt}],
     }
-    r = requests.post("https://api.anthropic.com/v1/messages",
-                      headers=headers, json=body, timeout=60)
-    resp = r.json()
+
+    resp = None
+    for attempt in range(retries + 1):
+        try:
+            r = requests.post("https://api.anthropic.com/v1/messages",
+                              headers=headers, json=body, timeout=60)
+            resp = r.json()
+            break
+        except requests.exceptions.RequestException as e:
+            if attempt < retries:
+                print(f"    [warn] API request failed ({type(e).__name__}), retrying once...")
+                continue
+            print(f"    [warn] API request failed ({type(e).__name__}) after retry, using zeros")
+            return {n: 0.0 for n in expected_fields}
+        except ValueError:
+            print(f"    [warn] API returned non-JSON response, using zeros")
+            return {n: 0.0 for n in expected_fields}
+
     if "content" not in resp:
         print(f"    [warn] Claude API error: {resp.get('error', {}).get('message', 'unknown')}")
         return {n: 0.0 for n in expected_fields}
