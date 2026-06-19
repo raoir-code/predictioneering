@@ -711,18 +711,36 @@ def run_leakage_check():
 Q_SHRINKAGE = {
     'base':                           1.00,
     'LiveViolenceObserved':           0.90,
-    'LiveUltimatumDeadline':          0.80,
-    'LiveNonviolentMilitaryPressure': 0.70,
+    'LiveUltimatumDeadline':          0.90,
+    'LiveNonviolentMilitaryPressure': 0.80,
     'MobilizationSignal':             0.70,
-    'TriggerType':                    0.60,
-    'ThirdPartyMilitaryInvolvement':  0.40,
-    'CommitmentProblem':              0.30,
-    'ValueThreatGravity':             0.10,
-    'GeographicProximity':            0.05,
-    'ProtractedConflict':             0.05,
-    'LiveMediationAccepted':          1.00,
-    'LiveAbatementSignal':            1.00,
+    'ThirdPartyMilitaryInvolvement':  0.20,
+    'CommitmentProblem':              0.25,
+    'TriggerType':                    0.08,
+    'ValueThreatGravity':             0.06,
+    'GeographicProximity':            0.00,
+    'ProtractedConflict':             0.00,
+    'LiveMediationAccepted':          0.15,
+    'LiveAbatementSignal':            0.20,
 }
+
+HALF_LIFE_DAYS = {
+    'LiveUltimatumDeadline':          2,
+    'LiveMediationAccepted':          2,
+    'LiveAbatementSignal':            5,
+    'LiveNonviolentMilitaryPressure': 7,
+    'MobilizationSignal':             7,
+    'LiveViolenceObserved':           10,
+    'TriggerType':                    21,
+    'ThirdPartyMilitaryInvolvement':  30,
+    'ValueThreatGravity':             30,
+    'CommitmentProblem':              30,
+    'GeographicProximity':            None,
+    'ProtractedConflict':             None,
+    'base':                           None,
+}
+DECAY_FACTOR = {k: (0.5 ** (1.0/v) if v else 1.0)
+                for k, v in HALF_LIFE_DAYS.items()}
 
 def run_backtest(dry_run=False):
     slate = SLATE[:2] if dry_run else SLATE
@@ -755,6 +773,7 @@ def run_backtest(dry_run=False):
               f"History: {len(sm['history'])} days")
 
         # 2. Run snapshots
+        node_memory = {}  # decay memory — reset per dyad
         for offset in SNAPSHOT_OFFSETS:
             snapshot_date = end_date - timedelta(days=offset)
 
@@ -787,7 +806,14 @@ def run_backtest(dry_run=False):
             # Z_t=0 -> Mach 2 structural formula.
             # Z_t=1 -> q_full as primary probability (crisis reference class).
             # Z_t=2 -> Mach 2 stored but excluded from Brier in print_results.
-            q_logit  = sum(v * Q_SHRINKAGE.get(k, 0.50) for k, v in q_components.items())
+            for node, today_val in q_components.items():
+                hl = HALF_LIFE_DAYS.get(node)
+                if hl is None:
+                    node_memory[node] = today_val
+                else:
+                    decayed = node_memory.get(node, 0.0) * DECAY_FACTOR.get(node, 1.0)
+                    node_memory[node] = max(today_val, decayed)
+            q_logit  = sum(v * Q_SHRINKAGE.get(k, 0.50) for k, v in node_memory.items())
             z_t      = DYAD_REGIME.get(dyad, 0)
             # Mach 3.1: unified formula. Z_t only controls polarity flip.
             engine_p_raw = predict_probability(toggles, days_remaining, q_logit=q_logit)
@@ -839,7 +865,7 @@ def run_backtest(dry_run=False):
 def print_results(rows):
     all_resolved = [r for r in rows if r["resolution"] is not None]
     live         = [r for r in rows if r["resolution"] is None]
-    resolved  = all_resolved  # Patch 13: Z_t=2 scored with polarity flip, not excluded
+    resolved  = [r for r in all_resolved if r.get("z_t", 0) != 2]
     excluded2 = []  # nothing excluded
 
     if not resolved:
