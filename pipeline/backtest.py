@@ -769,7 +769,7 @@ def run_backtest(dry_run=False):
             # Z_t=0 -> Mach 2 structural formula.
             # Z_t=1 -> q_full as primary probability (crisis reference class).
             # Z_t=2 -> Mach 2 stored but excluded from Brier in print_results.
-            q_logit  = sum(q_components.values())
+            q_logit  = sum(v * Q_SHRINKAGE.get(k, 0.50) for k, v in q_components.items())
             z_t      = DYAD_REGIME.get(dyad, 0)
             # Mach 3.1: unified formula. Z_t only controls polarity flip.
             engine_p_raw = predict_probability(toggles, days_remaining, q_logit=q_logit)
