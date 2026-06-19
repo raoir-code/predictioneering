@@ -613,13 +613,11 @@ def predict_probability(toggles, days_remaining, q_logit=0.0):
     # HardlineClaims goes direct to Conflict (fixed edge = 1.0)
     HardlineDirect = t.get("HardlineClaims", 0)
 
-    log_odds_shift = WarPayoff + WarPolitics + HardlineDirect + q_logit
-
-    # Convert annual base rate to window probability, then to log-odds
-    # Correct compounding: p_window = 1 - (1 - p_annual)^(days/365)
-    p_window_base   = 1 - (1 - BASE_RATE_ANNUAL) ** (days_remaining / 365)
-    base_window_log_odds = math.log(p_window_base / (1 - p_window_base))
-    window_log_odds = base_window_log_odds + log_odds_shift
+    # Mach 3.1: Q0 (ICB crisis-conditioned) is sole anchor; peacetime intercept dropped.
+    # SSPE structural deviations at 0.25 shrinkage (signs transport, magnitudes dont).
+    SSPE_SHRINKAGE  = 0.25
+    sspe_deviations = WarPayoff + WarPolitics + HardlineDirect
+    window_log_odds = q_logit + SSPE_SHRINKAGE * sspe_deviations
 
     p = 1 / (1 + math.exp(-window_log_odds))
     return round(p, 4)
@@ -773,10 +771,9 @@ def run_backtest(dry_run=False):
             # Z_t=2 -> Mach 2 stored but excluded from Brier in print_results.
             q_logit  = sum(q_components.values())
             z_t      = DYAD_REGIME.get(dyad, 0)
-            if z_t == 1:
-                engine_p = round(q_full, 4)
-            else:
-                engine_p = predict_probability(toggles, days_remaining, q_logit=q_logit)
+            # Mach 3.1: unified formula. Z_t only controls polarity flip.
+            engine_p_raw = predict_probability(toggles, days_remaining, q_logit=q_logit)
+            engine_p = round(1 - engine_p_raw, 4) if z_t == 2 else round(engine_p_raw, 4)
 
             # Brier scores (resolved markets; Z_t=2 filtered in print_results)
             b_engine = (engine_p - resolution)**2 if resolution is not None else None
