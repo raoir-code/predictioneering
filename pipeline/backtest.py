@@ -824,8 +824,8 @@ def run_backtest(dry_run=False):
 def print_results(rows):
     all_resolved = [r for r in rows if r["resolution"] is not None]
     live         = [r for r in rows if r["resolution"] is None]
-    resolved  = [r for r in all_resolved if r.get("z_t", 0) != 2]
-    excluded2 = [r for r in all_resolved if r.get("z_t", 0) == 2]
+    resolved  = all_resolved  # Patch 13: Z_t=2 scored with polarity flip, not excluded
+    excluded2 = []  # nothing excluded
 
     if not resolved:
         print("\nNo resolved markets to score yet.")
@@ -836,7 +836,7 @@ def print_results(rows):
     wins = sum(1 for r in resolved if r["b_engine"] < r["b_market"])
 
     print("\n" + "█"*60)
-    print("  BACKTEST RESULTS — Mach 3 (regime-switched)")
+    print("  BACKTEST RESULTS — Mach 3.1 (unified formula, polarity flip)")
     print("█"*60)
     print(f"\n  Resolved rows:  {len(resolved)}  (Z_t=2 excluded: {len(excluded2)})")
     print(f"  Live rows:      {len(live)}")
