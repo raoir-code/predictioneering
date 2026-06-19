@@ -706,6 +706,24 @@ def run_leakage_check():
 # MAIN BACKTEST LOOP
 # ─────────────────────────────────────────────────────────────────────
 
+
+# Shrinkage vector: transports ICB crisis-conditioned q toward full dyad-year population
+Q_SHRINKAGE = {
+    'base':                           1.00,
+    'LiveViolenceObserved':           0.90,
+    'LiveUltimatumDeadline':          0.80,
+    'LiveNonviolentMilitaryPressure': 0.70,
+    'MobilizationSignal':             0.70,
+    'TriggerType':                    0.60,
+    'ThirdPartyMilitaryInvolvement':  0.40,
+    'CommitmentProblem':              0.30,
+    'ValueThreatGravity':             0.10,
+    'GeographicProximity':            0.05,
+    'ProtractedConflict':             0.05,
+    'LiveMediationAccepted':          1.00,
+    'LiveAbatementSignal':            1.00,
+}
+
 def run_backtest(dry_run=False):
     slate = SLATE[:2] if dry_run else SLATE
     rows  = []
