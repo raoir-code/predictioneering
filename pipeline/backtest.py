@@ -456,8 +456,8 @@ def _call_claude_json(prompt, expected_fields, max_tokens, retries=1):
     def _fence_strip(t):
         if "```" not in t:
             return t
-        part = t.split("```")[1]
-        return part.lstrip("json").strip()
+        part = t.split("```")[1].lstrip("json").strip()
+        return re.sub(r'": \+(\d)', r'": \1', part)
 
     def _brace_extract(t):
         lo, hi = t.find("{"), t.rfind("}")
