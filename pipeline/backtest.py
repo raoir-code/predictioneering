@@ -493,7 +493,9 @@ Headlines:
 {headlines}
 
 {NODE_RUBRICS}
-{RUBRIC_ONSET_ADDITION}"""
+{RUBRIC_ONSET_ADDITION}
+
+Return ONLY valid JSON with no preamble, explanation, or markdown. Example: {{"WinProbability": 0, "WarCosts": 0}}"""
 
     return _call_claude_json(prompt, expected, max_tokens=700)
 
@@ -527,7 +529,9 @@ Date: {as_of_date}
 Headlines:
 {headlines}
 
-{RUBRIC_LIVE_TEMPLATE.format(trigger_context=trigger_context)}"""
+{RUBRIC_LIVE_TEMPLATE.format(trigger_context=trigger_context)}
+
+Return ONLY valid JSON with no preamble, explanation, or markdown. Example: {{"LiveNonviolentMilitaryPressure": 0, "LiveViolenceObserved": 0, "LiveUltimatumDeadline": 0, "LiveMediationAccepted": 0, "LiveAbatementSignal": 0}}"""
 
     return _call_claude_json(prompt, expected, max_tokens=400)
 
@@ -817,7 +821,12 @@ def run_backtest(dry_run=False):
             z_t      = DYAD_REGIME.get(dyad, 0)
             # Mach 3.1: unified formula. Z_t only controls polarity flip.
             engine_p_raw = predict_probability(toggles, days_remaining, q_logit=q_logit)
-            engine_p = round(1 - engine_p_raw, 4) if z_t == 2 else round(engine_p_raw, 4)
+            # Horizon scaling: convert 90-day probability to days_remaining probability.
+            # p_contract = 1 - (1-p_90)^(days_remaining/90)
+            # Collapses near-zero events toward zero as deadline approaches.
+            horizon_scale = max(days_remaining, 1) / 90.0
+            engine_p_scaled = 1 - (1 - engine_p_raw) ** horizon_scale
+            engine_p = round(1 - engine_p_scaled, 4) if z_t == 2 else round(engine_p_scaled, 4)
 
             # Brier scores (resolved markets; Z_t=2 filtered in print_results)
             b_engine = (engine_p - resolution)**2 if resolution is not None else None
@@ -866,7 +875,7 @@ def print_results(rows):
     all_resolved = [r for r in rows if r["resolution"] is not None]
     live         = [r for r in rows if r["resolution"] is None]
     resolved  = [r for r in all_resolved if r.get("z_t", 0) != 2]
-    excluded2 = []  # nothing excluded
+    excluded2 = [r for r in all_resolved if r.get("z_t", 0) == 2]
 
     if not resolved:
         print("\nNo resolved markets to score yet.")
