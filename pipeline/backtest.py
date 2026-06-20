@@ -516,6 +516,7 @@ def score_nodes_call_b(dyad, articles, as_of_date, trigger_was_violent):
     whatever already set TriggerType, or the same triggering event gets
     double-counted for the rest of its 7-day rolling window.
     """
+    _crisis_ctx = ""  # default; overwritten below from dyad_configs if available
     expected = Q_PARENTS_LIVE
     if not articles:
         return {n: 0.0 for n in expected}
@@ -545,7 +546,7 @@ Date: {as_of_date}
 Headlines:
 {headlines}
 
-{RUBRIC_LIVE_TEMPLATE.format(trigger_context=trigger_context)}
+{RUBRIC_LIVE_TEMPLATE.format(trigger_context=trigger_context, crisis_context=_crisis_ctx)}
 
 Return ONLY valid JSON with no preamble, explanation, or markdown. Example: {{"LiveNonviolentMilitaryPressure": 0, "LiveViolenceObserved": 0, "LiveUltimatumDeadline": 0, "LiveMediationAccepted": 0, "LiveAbatementSignal": 0}}"""
 
