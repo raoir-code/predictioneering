@@ -340,7 +340,7 @@ DYAD_REGIME = {
 Q_PARENTS_ONSET_LLM = ["TriggerType", "ValueThreatGravity", "ThirdPartyMilitaryInvolvement"]
 
 # Live dynamic, LLM-scored each snapshot, own call to protect field quality.
-Q_PARENTS_LIVE = ["LiveNonviolentMilitaryPressure", "LiveViolenceObserved",
+Q_PARENTS_LIVE = ["RoutineMilitaryPressure", "OperationalPreparation", "LiveViolenceObserved",
                   "LiveUltimatumDeadline", "LiveMediationAccepted", "LiveAbatementSignal"]
 
 # Static dyad metadata, set once in dyad_configs.json under "q_static", never scored from news.
@@ -387,20 +387,28 @@ Return ONLY valid JSON containing ALL fields together (the nodes above AND these
 """
 
 RUBRIC_LIVE_TEMPLATE = """
-Score these 5 live-dynamic q-parents from the headlines below. Each has its own recency window -- only count evidence dated within that window before the snapshot date; ignore anything older.
+{crisis_context}
 
-- LiveNonviolentMilitaryPressure (7-day window): 0 = routine exercise. 0.25 = unusual movement / show of force. 0.60 = mobilization / alert / major deployment / offensive posture shift. 1.00 = offensive posture shift WITH a deadline or high-value threat present. Signal class: call-ups, reserve activation, conscription, alert status, fleets leaving port, bomber/tanker surges, missile dispersal, exclusion zones.
+Score these 6 live-dynamic q-parents from the headlines below. Each has its own recency window -- only count evidence dated within that window before the snapshot date; ignore anything older.
+
+CRITICAL DISTINCTION for military pressure nodes:
+- RoutineMilitaryPressure: exercises, patrols, standard ADIZ incursions, arms sale reactions, capability announcements, post-conflict rhetoric, speeches, warnings, NOTAMs for routine drills. These are CHRONIC features of rivalries and do NOT indicate imminent action.
+- OperationalPreparation: force packages moving into strike range, airspace/maritime closure, evacuation orders, confirmed logistics/munitions buildup, force protection upgrades, allied operational coordination, specific time-bounded ultimatums with visible military backing. These indicate a DECISION to use force may be imminent.
+
+- RoutineMilitaryPressure (7-day window): 0 = none or genuinely quiet. 0.25 = standard exercises / patrols / symbolic demonstrations / post-conflict rhetoric. 0.60 = elevated rhetoric with capability claims but no operational movement. Do NOT score operational preparation here.
+
+- OperationalPreparation (7-day window): 0 = no operational signals. 0.25 = unusual but ambiguous movement. 0.60 = confirmed strike-range deployment / force protection changes / airspace closure / logistics buildup. 1.00 = all of the above WITH a binding deadline present.
 
 - LiveViolenceObserved (7-day window): 0 = no violence this window. 0.50 = minor/isolated incident. 0.90 = serious clash / strike / raid / attack on military personnel / cross-border fire. A full-scale attack is excluded (it becomes the outcome, not a predictor).
     IMPORTANT: {trigger_context}
 
 - LiveUltimatumDeadline (14-day window): 0 = none. 0.20 = vague threat. 0.60 = explicit deadline / red line / exclusion zone / "withdraw by X" / "we will respond if".
 
-- LiveMediationAccepted (14-day window): report the MAGNITUDE only (0, 0.30, or 0.60) -- sign is applied downstream in code, do not output a negative number. 0 = none, or offered-not-accepted. 0.30 = accepted talks / third-party mediation. 0.60 = active serious mediation, both parties engaged. ("Calls for restraint" alone do not count.)
+- LiveMediationAccepted (14-day window): report the MAGNITUDE only (0, 0.30, or 0.60) -- sign is applied downstream in code, do not output a negative number. 0 = none, or offered-not-accepted. 0.30 = talks scheduled or ongoing (procedural diplomacy -- weak signal). 0.60 = concrete stand-down agreement, verified withdrawal, or ceasefire implementation in progress. NOTE: talks/negotiations continuing alongside military pressure are NOT strong de-escalation signals.
 
-- LiveAbatementSignal (21-day window): report the MAGNITUDE only (0 or 0.50) -- sign is applied downstream in code. 0.50 = withdrawal, stand-down, reopened borders/channels, ceasefire implementation, canceled exercises, de-alerting, prisoner exchange, accepted inspection, resumed talks, or explicit de-escalatory concession. 0 = none of the above.
+- LiveAbatementSignal (21-day window): report the MAGNITUDE only (0 or 0.50) -- sign is applied downstream in code. 0.50 = verified concrete stand-down: withdrawal orders executed, ceasefire confirmed, exclusion zones lifted, forces visibly stood down. 0 = none of the above. Talks alone do NOT qualify.
 
-Return ONLY valid JSON, no preamble: {{"LiveNonviolentMilitaryPressure": 0, "LiveViolenceObserved": 0, "LiveUltimatumDeadline": 0, "LiveMediationAccepted": 0, "LiveAbatementSignal": 0}}
+Return ONLY valid JSON, no preamble: {{"RoutineMilitaryPressure": 0, "OperationalPreparation": 0, "LiveViolenceObserved": 0, "LiveUltimatumDeadline": 0, "LiveMediationAccepted": 0, "LiveAbatementSignal": 0}}
 """
 
 def _call_claude_json(prompt, expected_fields, max_tokens, retries=1):
@@ -512,9 +520,17 @@ def score_nodes_call_b(dyad, articles, as_of_date, trigger_was_violent):
     if not articles:
         return {n: 0.0 for n in expected}
 
+    # Deduplicate near-identical headlines before scoring
+    seen_titles = set()
+    deduped = []
+    for a in articles:
+        title = a.get('title', '').strip().lower()[:80]
+        if title not in seen_titles:
+            seen_titles.add(title)
+            deduped.append(a)
     headlines = "\n".join(
         f"- {a['title']} ({a['publishedAt'][:10]})"
-        for a in articles
+        for a in deduped
     )
     trigger_context = (
         "The precipitating violent event for this crisis was already scored under "
@@ -564,7 +580,10 @@ def build_q_components(toggles, call_a, call_b, q_static):
         "ThirdPartyMilitaryInvolvement": ICB_COEF["ThirdPartyMilitaryInvolvement"] * call_a.get("ThirdPartyMilitaryInvolvement", 0.0),
         "ProtractedConflict":            ICB_COEF["ProtractedConflict"] * q_static.get("ProtractedConflict", 0.0),
         "GeographicProximity":           ICB_COEF["GeographicProximity"] * q_static.get("GeographicProximity", 0.0),
-        "LiveNonviolentMilitaryPressure":call_b.get("LiveNonviolentMilitaryPressure", 0.0),
+        "LiveNonviolentMilitaryPressure":(
+            call_b.get("OperationalPreparation", 0.0) * 1.0 +
+            call_b.get("RoutineMilitaryPressure", 0.0) * 0.20
+        ),
         "LiveViolenceObserved":          call_b.get("LiveViolenceObserved", 0.0),
         "LiveUltimatumDeadline":         call_b.get("LiveUltimatumDeadline", 0.0),
         "LiveMediationAccepted":         -call_b.get("LiveMediationAccepted", 0.0),
@@ -777,6 +796,7 @@ def run_backtest(dry_run=False):
               f"History: {len(sm['history'])} days")
 
         # 2. Run snapshots
+        market_window = min(max(SNAPSHOT_OFFSETS), len(sm['history']))  # actual days in this market
         node_memory = {}  # decay memory — reset per dyad
         for offset in SNAPSHOT_OFFSETS:
             snapshot_date = end_date - timedelta(days=offset)
@@ -824,7 +844,7 @@ def run_backtest(dry_run=False):
             # Horizon scaling: convert 90-day probability to days_remaining probability.
             # p_contract = 1 - (1-p_90)^(days_remaining/90)
             # Collapses near-zero events toward zero as deadline approaches.
-            horizon_scale = max(days_remaining, 1) / 90.0
+            horizon_scale = max(days_remaining, 1) / market_window
             engine_p_scaled = 1 - (1 - engine_p_raw) ** horizon_scale
             engine_p = round(1 - engine_p_scaled, 4) if z_t == 2 else round(engine_p_scaled, 4)
 

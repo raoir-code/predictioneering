@@ -18,7 +18,8 @@
     "q_static": {
       "ProtractedConflict": 0.3,
       "GeographicProximity": 0.35
-    }
+    },
+    "crisis_context": "CRISIS CONTEXT: China conducts recurring large-scale military exercises around Taiwan as part of the ongoing Fourth Taiwan Strait Crisis sequence (2022-present). Exercises, ADIZ incursions, patrol announcements, arms sale reactions, and blockade warnings are routine features of this rivalry \u2014 they occur continuously and do not indicate imminent invasion. When scoring headlines: distinguish routine coercive pressure (exercises, patrols, diplomatic protests) from genuine operational preparation (evacuation orders, airspace closure, confirmed amphibious staging). Score RoutineMilitaryPressure for standard exercises and rhetoric. Score OperationalPreparation only for concrete force positioning indicating imminent action."
   },
   "Russia-Ukraine": {
     "label": "Russia and Ukraine",
@@ -39,7 +40,8 @@
     "q_static": {
       "ProtractedConflict": 0.3,
       "GeographicProximity": 0.35
-    }
+    },
+    "crisis_context": "CRISIS CONTEXT: This is an ongoing war market asking about peace/ceasefire termination, NOT a conflict onset market. YES resolution means a peace deal was reached, not that violence occurred. The violence-onset scoring model does not apply. Score with polarity inverted: de-escalation signals are positive for YES resolution, escalation signals are negative."
   },
   "US-Iran": {
     "label": "United States and Iran",
@@ -60,7 +62,8 @@
     "q_static": {
       "ProtractedConflict": 0.3,
       "GeographicProximity": 0.0
-    }
+    },
+    "crisis_context": "CRISIS CONTEXT: The US and Israel struck Iranian nuclear sites in June 2025 (the Twelve-Day War). In early 2026, the Trump administration issued nuclear ultimatums with a February 28 deadline while indirect US-Iran talks occurred in Oman and Turkey. These talks were procedural \u2014 occurring alongside active military planning, not instead of it. The strike happened February 28, 2026. When scoring headlines: diplomatic talks during this period do NOT indicate de-escalation. Score OperationalPreparation high if carrier groups, airspace activity, or force positioning appear. Score ProceduralDiplomacy (weak negative) for talk scheduling. Score ConcreteStandDown only for verified force withdrawals or explicit stand-down orders."
   },
   "Israel-Iran": {
     "label": "Israel and Iran",
@@ -115,7 +118,8 @@
     "q_static": {
       "ProtractedConflict": 0.3,
       "GeographicProximity": 0.35
-    }
+    },
+    "crisis_context": "CRISIS CONTEXT: India and Pakistan fought Operation Sindoor May 7-10, 2025 \u2014 a brief armed conflict triggered by the Pahalgam terrorist attack. India conducted missile strikes on Pakistani territory. A US-mediated ceasefire ended the conflict May 10, 2025. The backtest scoring period (October-December 2025) is POST-CEASEFIRE. When scoring headlines: nuclear threats, BrahMos range claims, army chief warnings, and capability discussions are post-conflict rhetoric from the winning side, NOT indicators of imminent new conflict. Score RoutineMilitaryPressure for speeches and capability claims. Score OperationalPreparation ONLY for new verified troop movements or mobilization orders."
   },
   "NATO-Russia": {
     "label": "NATO and Russia",
@@ -153,7 +157,8 @@
     "q_static": {
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.15
-    }
+    },
+    "crisis_context": "CRISIS CONTEXT: By September 2025, the US launched Operation Southern Spear, an active military campaign in the Caribbean. By November 2025, 15,000 US troops and a carrier strike group (USS Gerald R. Ford) were deployed in the region. A US oil blockade of Venezuela began December 2025. On January 3, 2026, the US launched Operation Absolute Resolve, capturing Maduro. When scoring headlines in this period: the military operation was already active and escalating. Troop presence, naval assets, and blockade language indicate OperationalPreparation, not routine pressure."
   },
   "US-Cuba": {
     "label": "United States and Cuba",
