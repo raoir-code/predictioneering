@@ -958,9 +958,10 @@ def print_results(rows):
         print("\nNo resolved markets to score yet.")
         return
 
-    mean_b_engine = sum(r["b_engine"] for r in resolved) / len(resolved)
+    resolved_scored = [r for r in resolved if r["b_engine"] is not None]
+    mean_b_engine = sum(r["b_engine"] for r in resolved_scored) / len(resolved_scored) if resolved_scored else float("nan")
     mean_b_market = sum(r["b_market"] for r in resolved) / len(resolved)
-    wins = sum(1 for r in resolved if r["b_engine"] < r["b_market"])
+    wins = sum(1 for r in resolved_scored if r["b_engine"] < r["b_market"])
 
     print("\n" + "█"*60)
     print("  BACKTEST RESULTS — Mach 3.1 (unified formula, polarity flip)")
@@ -976,8 +977,8 @@ def print_results(rows):
     print(f"\n  Engine beats market: {wins}/{len(resolved)} snapshots")
 
     # By resolution
-    yes_rows = [r for r in resolved if r["resolution"] == 1]
-    no_rows  = [r for r in resolved if r["resolution"] == 0]
+    yes_rows = [r for r in resolved if r["resolution"] == 1 and r["b_engine"] is not None]
+    no_rows  = [r for r in resolved if r["resolution"] == 0 and r["b_engine"] is not None]
     print(f"\n  BY RESOLUTION:")
     if yes_rows:
         print(f"    Resolved Yes (n={len(yes_rows)}): "
@@ -993,7 +994,9 @@ def print_results(rows):
     for offset in SNAPSHOT_OFFSETS:
         offset_rows = [r for r in resolved if r["days_remaining"] == offset]
         if offset_rows:
-            print(f"    T-{offset:3d}: Engine {sum(r['b_engine'] for r in offset_rows)/len(offset_rows):.4f} | "
+            offset_rows_scored = [r for r in offset_rows if r['b_engine'] is not None]
+            if not offset_rows_scored: continue
+            print(f"    T-{offset:3d}: Engine {sum(r['b_engine'] for r in offset_rows_scored)/len(offset_rows_scored):.4f} | "
                   f"Market {sum(r['b_market'] for r in offset_rows)/len(offset_rows):.4f}")
 
     # Calibration table
