@@ -838,46 +838,16 @@ def run_backtest(dry_run=False):
                 else:
                     decayed = node_memory.get(node, 0.0) * DECAY_FACTOR.get(node, 1.0)
                     node_memory[node] = max(today_val, decayed)
-            # ── Run 18: SSPE-compatible semantic logit assembly ──────────────────
-            # ICB base intercept (-3.407) lives in node_memory['base'] — excluded below.
-            # Structural/chronic: horizon-scaled (calendar risk, already shrunk toward 0).
-            # Trigger/onset: moderate weight, no horizon crush.
-            # Live acute: full shrinkage weight, NO horizon crush (episode-clock evidence).
-            # Abatement: strong negative, no horizon crush.
-            _c = node_memory
-            _horizon = max(days_remaining, 1) / market_window
-
-            _q_structural = _horizon * (
-                Q_SHRINKAGE.get('GeographicProximity', 0.00)            * _c.get('GeographicProximity', 0.0)
-              + Q_SHRINKAGE.get('ProtractedConflict', 0.00)              * _c.get('ProtractedConflict', 0.0)
-              + Q_SHRINKAGE.get('ValueThreatGravity', 0.06)              * _c.get('ValueThreatGravity', 0.0)
-              + Q_SHRINKAGE.get('ThirdPartyMilitaryInvolvement', 0.20)   * _c.get('ThirdPartyMilitaryInvolvement', 0.0)
-            )
-
-            _q_trigger = (
-                Q_SHRINKAGE.get('TriggerType', 0.08)       * _c.get('TriggerType', 0.0)
-              + Q_SHRINKAGE.get('CommitmentProblem', 0.25) * _c.get('CommitmentProblem', 0.0)
-            )
-
-            _q_live = (
-                Q_SHRINKAGE.get('LiveNonviolentMilitaryPressure', 0.80) * _c.get('LiveNonviolentMilitaryPressure', 0.0)
-              + Q_SHRINKAGE.get('LiveViolenceObserved', 0.90)            * _c.get('LiveViolenceObserved', 0.0)
-              + Q_SHRINKAGE.get('LiveUltimatumDeadline', 0.90)           * _c.get('LiveUltimatumDeadline', 0.0)
-              + Q_SHRINKAGE.get('MobilizationSignal', 0.70)              * _c.get('MobilizationSignal', 0.0)
-            )
-
-            _q_abatement = (
-                Q_SHRINKAGE.get('LiveMediationAccepted', 0.15) * abs(_c.get('LiveMediationAccepted', 0.0))
-              + Q_SHRINKAGE.get('LiveAbatementSignal', 0.20)   * abs(_c.get('LiveAbatementSignal', 0.0))
-            )
-
-            q_logit = _q_structural + _q_trigger + _q_live - _q_abatement
+            q_logit  = sum(v * Q_SHRINKAGE.get(k, 0.50) for k, v in node_memory.items())
             z_t      = DYAD_REGIME.get(dyad, 0)
             # Mach 3.1: unified formula. Z_t only controls polarity flip.
             engine_p_raw = predict_probability(toggles, days_remaining, q_logit=q_logit)
-            # Run 18: horizon scaling now lives inside _q_structural only.
-            # Live acute q enters logit at full weight — no post-hoc crush.
-            engine_p = round(1 - engine_p_raw, 4) if z_t == 2 else round(engine_p_raw, 4)
+            # Horizon scaling: convert 90-day probability to days_remaining probability.
+            # p_contract = 1 - (1-p_90)^(days_remaining/90)
+            # Collapses near-zero events toward zero as deadline approaches.
+            horizon_scale = max(days_remaining, 1) / market_window
+            engine_p_scaled = 1 - (1 - engine_p_raw) ** horizon_scale
+            engine_p = round(1 - engine_p_scaled, 4) if z_t == 2 else round(engine_p_scaled, 4)
 
             # Brier scores (resolved markets; Z_t=2 filtered in print_results)
             b_engine = (engine_p - resolution)**2 if resolution is not None else None
