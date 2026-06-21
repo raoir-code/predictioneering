@@ -63,7 +63,10 @@
       "ProtractedConflict": 0.3,
       "GeographicProximity": 0.0
     },
-    "crisis_context": "CRISIS CONTEXT: The US and Israel struck Iranian nuclear sites in June 2025 (the Twelve-Day War). In early 2026, the Trump administration issued nuclear ultimatums with a February 28 deadline while indirect US-Iran talks occurred in Oman and Turkey. These talks were procedural \u2014 occurring alongside active military planning, not instead of it. The strike happened February 28, 2026. When scoring headlines: diplomatic talks during this period do NOT indicate de-escalation. Score OperationalPreparation high if carrier groups, airspace activity, or force positioning appear. Score ProceduralDiplomacy (weak negative) for talk scheduling. Score ConcreteStandDown only for verified force withdrawals or explicit stand-down orders."
+    "crisis_context": "CRISIS CONTEXT: The US and Israel struck Iranian nuclear sites in June 2025 (the Twelve-Day War). In early 2026, the Trump administration issued nuclear ultimatums with a February 28 deadline while indirect US-Iran talks occurred in Oman and Turkey. These talks were procedural \u2014 occurring alongside active military planning, not instead of it. The strike happened February 28, 2026. When scoring headlines: diplomatic talks during this period do NOT indicate de-escalation. Score OperationalPreparation high if carrier groups, airspace activity, or force positioning appear. Score ProceduralDiplomacy (weak negative) for talk scheduling. Score ConcreteStandDown only for verified force withdrawals or explicit stand-down orders.",
+    "crisis_onset_date": "2025-11-01",
+    "acute_phase_onset_date": "2026-01-20",
+    "event_date": null
   },
   "Israel-Iran": {
     "label": "Israel and Iran",
@@ -158,7 +161,10 @@
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.15
     },
-    "crisis_context": "CRISIS CONTEXT: By September 2025, the US launched Operation Southern Spear, an active military campaign in the Caribbean. By November 2025, 15,000 US troops and a carrier strike group (USS Gerald R. Ford) were deployed in the region. A US oil blockade of Venezuela began December 2025. On January 3, 2026, the US launched Operation Absolute Resolve, capturing Maduro. When scoring headlines in this period: the military operation was already active and escalating. Troop presence, naval assets, and blockade language indicate OperationalPreparation, not routine pressure."
+    "crisis_context": "CRISIS CONTEXT: By September 2025, the US launched Operation Southern Spear, an active military campaign in the Caribbean. By November 2025, 15,000 US troops and a carrier strike group (USS Gerald R. Ford) were deployed in the region. A US oil blockade of Venezuela began December 2025. On January 3, 2026, the US launched Operation Absolute Resolve, capturing Maduro. When scoring headlines in this period: the military operation was already active and escalating. Troop presence, naval assets, and blockade language indicate OperationalPreparation, not routine pressure.",
+    "crisis_onset_date": "2025-11-15",
+    "acute_phase_onset_date": "2025-12-13",
+    "event_date": "2026-01-03"
   },
   "US-Cuba": {
     "label": "United States and Cuba",

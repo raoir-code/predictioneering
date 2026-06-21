@@ -769,6 +769,26 @@ HALF_LIFE_DAYS = {
 DECAY_FACTOR = {k: (0.5 ** (1.0/v) if v else 1.0)
                 for k, v in HALF_LIFE_DAYS.items()}
 
+# ── ICB Weibull transport (Patch 19) ─────────────────────────────────────────
+ICB_TRANSPORT_RHO = 3.0
+
+def _weibull_residual(A, D, scale=14.2, shape=0.65):
+    import math
+    FA  = 1 - math.exp(-((max(A, 0) / scale) ** shape))
+    FAD = 1 - math.exp(-((max(A + D, 0) / scale) ** shape))
+    denom = 1 - FA
+    if denom < 1e-9:
+        return 1.0
+    return (FAD - FA) / denom
+
+def _parse_date_str(s):
+    if not s:
+        return None
+    from datetime import datetime as _dtt
+    return _dtt.strptime(s, "%Y-%m-%d").date()
+
+# ── end ICB transport helpers ─────────────────────────────────────────────────
+
 def run_backtest(dry_run=False):
     slate = SLATE[:2] if dry_run else SLATE
     rows  = []
@@ -794,7 +814,11 @@ def run_backtest(dry_run=False):
         end_date = date.fromisoformat(mkt["end_date"])
         dyad     = mkt["dyad"]
         baseline = load_dyad_baseline(dyad)
-        q_static = load_dyad_q_static(dyad)
+        q_static   = load_dyad_q_static(dyad)
+        # ICB transport: load full dyad config for onset/event dates
+        _dcfg_path = ROOT / 'pipeline' / 'dyad_configs.json'
+        _dcfg_all  = json.loads(_dcfg_path.read_text()) if _dcfg_path.exists() else {}
+        _dyad_meta = _dcfg_all.get(dyad)
 
         print(f"  Sub-market: {sm['label']} | Resolution: {resolution} | "
               f"History: {len(sm['history'])} days")
@@ -843,17 +867,44 @@ def run_backtest(dry_run=False):
                     node_memory[node] = max(today_val, decayed)
             q_logit  = sum(v * Q_SHRINKAGE.get(k, 0.50) for k, v in node_memory.items())
             z_t      = DYAD_REGIME.get(dyad, 0)
-            # Mach 3.1: unified formula. Z_t only controls polarity flip.
+            # Mach 3.1 + ICB transport (Patch 19).
             engine_p_raw = predict_probability(toggles, days_remaining, q_logit=q_logit)
-            # Horizon scaling: convert 90-day probability to days_remaining probability.
-            # p_contract = 1 - (1-p_90)^(days_remaining/90)
-            # Collapses near-zero events toward zero as deadline approaches.
+            # Horizon scaling on SSPE structural prior only.
             horizon_scale = max(days_remaining, 1) / market_window
             engine_p_scaled = 1 - (1 - engine_p_raw) ** horizon_scale
-            engine_p = round(1 - engine_p_scaled, 4) if z_t == 2 else round(engine_p_scaled, 4)
+            engine_p_base = round(1 - engine_p_scaled, 4) if z_t == 2 else round(engine_p_scaled, 4)
+
+            # ── ICB Weibull transport ──────────────────────────────────────
+            import math as _math
+            _crisis_onset = _parse_date_str(_dyad_meta.get('crisis_onset_date') if _dyad_meta else None)
+            _acute_onset  = _parse_date_str(_dyad_meta.get('acute_phase_onset_date') if _dyad_meta else None)
+            _event_date   = _parse_date_str(_dyad_meta.get('event_date') if _dyad_meta else None)
+            _icb_boost = 0.0
+            if _crisis_onset and snapshot_date >= _crisis_onset:
+                _clock = _acute_onset if (_acute_onset and snapshot_date >= _acute_onset) else _crisis_onset
+                _A = max((snapshot_date - _clock).days, 0)
+                _F = _weibull_residual(_A, max(days_remaining, 0))
+                _qc = q_components
+                _acute_core = (
+                    _qc.get('OperationalPreparation', 0)
+                  + _qc.get('LiveViolenceObserved',   0)
+                  + _qc.get('LiveUltimatumDeadline',  0)
+                  + _qc.get('MobilizationSignal',     0)
+                )
+                _abatement  = abs(_qc.get('LiveAbatementSignal', 0))
+                _live_boost = _F * max(0.0, _acute_core - _abatement)
+                _icb_boost  = ICB_TRANSPORT_RHO * _live_boost
+                _bl = _math.log(max(engine_p_base,1e-6)/max(1-engine_p_base,1e-6))
+                engine_p = round(1/(1+_math.exp(-(_bl+_icb_boost))),4)
+            else:
+                engine_p = engine_p_base
+            # ── end ICB transport ──────────────────────────────────────────
 
             # Brier scores (resolved markets; Z_t=2 filtered in print_results)
-            b_engine = (engine_p - resolution)**2 if resolution is not None else None
+            _post_res = bool(_event_date and snapshot_date >= _event_date)
+            b_engine = None if _post_res else (
+                (engine_p - resolution)**2 if resolution is not None else None
+            )
             b_market = (mkt_price - resolution)**2 if resolution is not None else None
 
             row = {
@@ -870,6 +921,8 @@ def run_backtest(dry_run=False):
                 "n_articles":    len(articles),
                 "q_components":  q_components,
                 "q_full":        round(q_full, 4),
+                "icb_boost":     round(_icb_boost, 4),
+                "post_res":      _post_res,
                 "q_onset_only":  round(q_onset_only, 4),
                 "q_live_only":   round(q_live_only, 4),
             }
