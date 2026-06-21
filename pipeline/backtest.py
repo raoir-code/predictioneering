@@ -558,7 +558,7 @@ Return ONLY valid JSON with no preamble, explanation, or markdown. Example: {{"L
 
 ONSET_ONLY_KEYS = ["base", "CommitmentProblem", "TriggerType", "ValueThreatGravity",
                    "ThirdPartyMilitaryInvolvement", "ProtractedConflict", "GeographicProximity"]
-LIVE_ONLY_KEYS  = ["base", "CommitmentProblem", "LiveNonviolentMilitaryPressure",
+LIVE_ONLY_KEYS  = ["base", "CommitmentProblem", "OperationalPreparation", "RoutineMilitaryPressure",
                    "LiveViolenceObserved", "LiveUltimatumDeadline",
                    "LiveMediationAccepted", "LiveAbatementSignal"]
 
@@ -581,9 +581,10 @@ def build_q_components(toggles, call_a, call_b, q_static):
         "ThirdPartyMilitaryInvolvement": ICB_COEF["ThirdPartyMilitaryInvolvement"] * call_a.get("ThirdPartyMilitaryInvolvement", 0.0),
         "ProtractedConflict":            ICB_COEF["ProtractedConflict"] * q_static.get("ProtractedConflict", 0.0),
         "GeographicProximity":           ICB_COEF["GeographicProximity"] * q_static.get("GeographicProximity", 0.0),
-        "LiveNonviolentMilitaryPressure":(
-            call_b.get("OperationalPreparation", 0.0) * 1.0 +
-            call_b.get("RoutineMilitaryPressure", 0.0) * 0.20
+        "OperationalPreparation":(
+            call_b.get("OperationalPreparation", 0.0) * 1.0),
+        "RoutineMilitaryPressure":(
+            call_b.get("RoutineMilitaryPressure", 0.0) * 1.0
         ),
         "LiveViolenceObserved":          call_b.get("LiveViolenceObserved", 0.0),
         "LiveUltimatumDeadline":         call_b.get("LiveUltimatumDeadline", 0.0),
@@ -736,7 +737,8 @@ Q_SHRINKAGE = {
     'base':                           1.00,
     'LiveViolenceObserved':           0.90,
     'LiveUltimatumDeadline':          0.90,
-    'LiveNonviolentMilitaryPressure': 0.80,
+    'OperationalPreparation':         0.80,
+    'RoutineMilitaryPressure':         0.20,
     'MobilizationSignal':             0.70,
     'ThirdPartyMilitaryInvolvement':  0.20,
     'CommitmentProblem':              0.25,
@@ -752,7 +754,8 @@ HALF_LIFE_DAYS = {
     'LiveUltimatumDeadline':          2,
     'LiveMediationAccepted':          2,
     'LiveAbatementSignal':            5,
-    'LiveNonviolentMilitaryPressure': 7,
+    'OperationalPreparation':         7,
+    'RoutineMilitaryPressure':         14,
     'MobilizationSignal':             7,
     'LiveViolenceObserved':           10,
     'TriggerType':                    21,
