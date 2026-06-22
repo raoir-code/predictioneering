@@ -5,3 +5,5 @@ pipeline/backtest_results.json
 __pycache__/
 *.pyc
 .DS_Store
+patch*.py
+retro_sim*.py
