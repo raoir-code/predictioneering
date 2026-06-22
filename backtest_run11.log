@@ -1,0 +1,375 @@
+
+============================================================
+  CONTAMINATION CHECK — US-Iran T-90
+============================================================
+
+  Snapshot date: 2025-11-30
+  Correct headlines (10): US-Iran Nov 2025
+  Wrong headlines   (10): China-Taiwan Jul 2024
+
+  Node                              Correct    Wrong    Delta
+  ----------------------------------------------------------
+  WinProbability                       0.00     0.00     0.00
+  WarCosts                             0.00     0.00     0.00
+  PatronDeterrence                     0.00     0.00     0.00
+  NuclearDeterrence                    0.00     0.00     0.00
+  CommitmentProblem                    0.00     0.00     0.00
+  Patience                             0.25     0.00     0.25 ← MOVES
+  DemocraticPeace                      0.00     0.00     0.00
+  PreferenceAlignment                  0.25     0.00     0.25 ← MOVES
+  HardlineClaims                       0.25     0.00     0.25 ← MOVES
+  AudienceCosts                        0.25     0.00     0.25 ← MOVES
+  MobilizationSignal                   0.00     0.00     0.00
+  TriggerType                          0.00     0.00     0.00
+  ValueThreatGravity                   0.25     0.00     0.25 ← MOVES
+  ThirdPartyMilitaryInvolvement        0.00     0.00     0.00
+  LiveNonviolentMilitaryPressure       0.00     0.00     0.00
+  LiveViolenceObserved                 0.00     0.00     0.00
+  LiveUltimatumDeadline                0.00     0.00     0.00
+  LiveMediationAccepted                0.00     0.00     0.00
+  LiveAbatementSignal                  0.00     0.00     0.00
+
+  Max delta across nodes: 0.25
+  ✗ FAIL — Scores barely move. Training data contamination likely.
+    Recommendation: restrict backtest to post-Aug 2025 markets only.
+
+  ⚠ Contamination check failed. Run with --leakage to review.
+  Continuing anyway — interpret results with caution.
+
+
+── China invades Taiwan 2024 ──
+  Sub-market: Will China invade Taiwan in 2024? | Resolution: 0 | History: 352 days
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -1.0,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +1.0,\n  "HardlineClaims": +1.5,\n  "AudienceCosts": +1.0,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T- 90 (2024-10-02) | Engine: 0.1% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 89 (2024-10-03) | Engine: 13.5% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 88 (2024-10-04) | Engine: 9.7% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 87 (2024-10-05) | Engine: 5.7% | Market: 4.2% | Res: 0 | Articles: 10
+  ✓ T- 86 (2024-10-06) | Engine: 0.5% | Market: 4.2% | Res: 0 | Articles: 10
+  ✓ T- 85 (2024-10-07) | Engine: 0.6% | Market: 4.2% | Res: 0 | Articles: 10
+  ✓ T- 84 (2024-10-08) | Engine: 1.1% | Market: 4.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": 0,\n  "WarCosts": 0,\n  "PatronDeterrence": 0,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": 0,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerType": 0,\n'
+  ✓ T- 83 (2024-10-09) | Engine: 0.1% | Market: 3.9% | Res: 0 | Articles: 10
+  ✗ T- 82 (2024-10-10) | Engine: 5.3% | Market: 3.8% | Res: 0 | Articles: 10
+  ✗ T- 81 (2024-10-11) | Engine: 4.5% | Market: 3.6% | Res: 0 | Articles: 10
+  ✓ T- 80 (2024-10-12) | Engine: 0.3% | Market: 3.7% | Res: 0 | Articles: 10
+  ✗ T- 79 (2024-10-13) | Engine: 7.2% | Market: 3.6% | Res: 0 | Articles: 10
+  ✗ T- 78 (2024-10-14) | Engine: 7.1% | Market: 3.8% | Res: 0 | Articles: 10
+  ✓ T- 77 (2024-10-15) | Engine: 1.0% | Market: 5.0% | Res: 0 | Articles: 10
+  ✗ T- 76 (2024-10-16) | Engine: 11.0% | Market: 6.1% | Res: 0 | Articles: 10
+  ✗ T- 75 (2024-10-17) | Engine: 10.8% | Market: 6.5% | Res: 0 | Articles: 10
+  ✓ T- 74 (2024-10-18) | Engine: 4.4% | Market: 4.8% | Res: 0 | Articles: 10
+  ✗ T- 73 (2024-10-19) | Engine: 9.2% | Market: 4.5% | Res: 0 | Articles: 10
+  ✓ T- 72 (2024-10-20) | Engine: 2.3% | Market: 5.1% | Res: 0 | Articles: 10
+  ✓ T- 71 (2024-10-21) | Engine: 2.5% | Market: 4.5% | Res: 0 | Articles: 10
+  ✓ T- 70 (2024-10-22) | Engine: 2.5% | Market: 5.8% | Res: 0 | Articles: 10
+  ✗ T- 69 (2024-10-23) | Engine: 23.5% | Market: 6.0% | Res: 0 | Articles: 10
+  ✗ T- 68 (2024-10-24) | Engine: 23.3% | Market: 5.9% | Res: 0 | Articles: 10
+  ✗ T- 67 (2024-10-25) | Engine: 21.3% | Market: 6.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +1.0,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +1.0,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T- 66 (2024-10-26) | Engine: 0.1% | Market: 6.0% | Res: 0 | Articles: 10
+  ✗ T- 65 (2024-10-27) | Engine: 8.6% | Market: 6.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -1.0,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +1.0,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T- 64 (2024-10-28) | Engine: 0.1% | Market: 4.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": 0.0,\n  "WarCosts": -0.5,\n  "PatronDeterrence": 0.0,\n  "NuclearDeterrence": 0.0,\n  "CommitmentProblem": +0.5,\n  "Patience": 0.0,\n  "DemocraticPeace": 0.0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0.0,\n  "Tr'
+  ✓ T- 63 (2024-10-29) | Engine: 0.1% | Market: 5.7% | Res: 0 | Articles: 10
+  ✓ T- 62 (2024-10-30) | Engine: 0.2% | Market: 5.3% | Res: 0 | Articles: 10
+  ✓ T- 61 (2024-10-31) | Engine: 0.2% | Market: 5.7% | Res: 0 | Articles: 10
+  ✓ T- 60 (2024-11-01) | Engine: 0.3% | Market: 5.1% | Res: 0 | Articles: 10
+  ✓ T- 59 (2024-11-02) | Engine: 0.3% | Market: 5.1% | Res: 0 | Articles: 10
+  ✓ T- 58 (2024-11-03) | Engine: 0.3% | Market: 4.8% | Res: 0 | Articles: 10
+  ✓ T- 57 (2024-11-04) | Engine: 0.4% | Market: 4.8% | Res: 0 | Articles: 10
+  ✓ T- 56 (2024-11-05) | Engine: 0.4% | Market: 4.7% | Res: 0 | Articles: 10
+  ✓ T- 55 (2024-11-06) | Engine: 0.5% | Market: 4.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": +0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T- 54 (2024-11-07) | Engine: 0.1% | Market: 4.1% | Res: 0 | Articles: 10
+  ✓ T- 53 (2024-11-08) | Engine: 0.2% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 52 (2024-11-09) | Engine: 0.2% | Market: 3.1% | Res: 0 | Articles: 10
+  ✓ T- 51 (2024-11-10) | Engine: 0.4% | Market: 3.0% | Res: 0 | Articles: 10
+  ✓ T- 50 (2024-11-11) | Engine: 0.4% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 49 (2024-11-12) | Engine: 0.4% | Market: 3.8% | Res: 0 | Articles: 10
+  ✓ T- 48 (2024-11-13) | Engine: 0.3% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 47 (2024-11-14) | Engine: 0.7% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 46 (2024-11-15) | Engine: 0.3% | Market: 3.0% | Res: 0 | Articles: 10
+  ✓ T- 45 (2024-11-16) | Engine: 0.1% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 44 (2024-11-17) | Engine: 1.4% | Market: 3.0% | Res: 0 | Articles: 10
+  ✓ T- 43 (2024-11-18) | Engine: 2.2% | Market: 2.8% | Res: 0 | Articles: 10
+  ✓ T- 42 (2024-11-19) | Engine: 0.1% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 41 (2024-11-20) | Engine: 0.1% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 40 (2024-11-21) | Engine: 0.1% | Market: 3.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": 0.0,\n  "WarCosts": 0.0,\n  "PatronDeterrence": +0.5,\n  "NuclearDeterrence": 0.0,\n  "CommitmentProblem": +0.5,\n  "Patience": 0.0,\n  "DemocraticPeace": 0.0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +1.0,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0.0,\n  "Tr'
+  ✓ T- 39 (2024-11-22) | Engine: 0.1% | Market: 3.3% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": 0.0,\n  "WarCosts": 0.0,\n  "PatronDeterrence": 0.0,\n  "NuclearDeterrence": 0.0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0.0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": 0.0,\n  "MobilizationSignal": 0.0,\n  "Tri'
+  ✓ T- 38 (2024-11-23) | Engine: 0.1% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 37 (2024-11-24) | Engine: 1.6% | Market: 3.1% | Res: 0 | Articles: 10
+  ✓ T- 36 (2024-11-25) | Engine: 1.2% | Market: 2.8% | Res: 0 | Articles: 10
+  ✓ T- 35 (2024-11-26) | Engine: 0.6% | Market: 2.6% | Res: 0 | Articles: 10
+  ✓ T- 34 (2024-11-27) | Engine: 0.4% | Market: 2.8% | Res: 0 | Articles: 10
+  ✓ T- 33 (2024-11-28) | Engine: 0.4% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 32 (2024-11-29) | Engine: 0.4% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 31 (2024-11-30) | Engine: 0.6% | Market: 2.8% | Res: 0 | Articles: 10
+  ✓ T- 30 (2024-12-01) | Engine: 0.6% | Market: 2.8% | Res: 0 | Articles: 10
+  ✓ T- 29 (2024-12-02) | Engine: 0.3% | Market: 2.8% | Res: 0 | Articles: 10
+  ✓ T- 28 (2024-12-03) | Engine: 0.6% | Market: 2.6% | Res: 0 | Articles: 10
+  ✗ T- 27 (2024-12-04) | Engine: 6.7% | Market: 2.5% | Res: 0 | Articles: 10
+  ✓ T- 26 (2024-12-05) | Engine: 0.3% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 25 (2024-12-06) | Engine: 2.9% | Market: 2.1% | Res: 0 | Articles: 10
+  ✓ T- 24 (2024-12-07) | Engine: 0.4% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 23 (2024-12-08) | Engine: 2.7% | Market: 2.1% | Res: 0 | Articles: 10
+  ✓ T- 22 (2024-12-09) | Engine: 0.5% | Market: 2.2% | Res: 0 | Articles: 10
+  ✓ T- 21 (2024-12-10) | Engine: 0.4% | Market: 3.4% | Res: 0 | Articles: 10
+  ✓ T- 20 (2024-12-11) | Engine: 0.2% | Market: 2.7% | Res: 0 | Articles: 10
+  ✓ T- 19 (2024-12-12) | Engine: 0.6% | Market: 2.1% | Res: 0 | Articles: 10
+  ✓ T- 18 (2024-12-13) | Engine: 1.0% | Market: 2.1% | Res: 0 | Articles: 10
+  ✓ T- 17 (2024-12-14) | Engine: 0.4% | Market: 2.7% | Res: 0 | Articles: 10
+  ✓ T- 16 (2024-12-15) | Engine: 0.4% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T- 15 (2024-12-16) | Engine: 0.3% | Market: 2.3% | Res: 0 | Articles: 10
+  ✓ T- 14 (2024-12-17) | Engine: 0.4% | Market: 2.1% | Res: 0 | Articles: 10
+  ✓ T- 13 (2024-12-18) | Engine: 0.1% | Market: 1.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": 0.0,\n  "WarCosts": 0.0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": +0.5,\n  "CommitmentProblem": +0.5,\n  "Patience": 0.0,\n  "DemocraticPeace": 0.0,\n  "PreferenceAlignment": 0.0,\n  "HardlineClaims": 0.0,\n  "AudienceCosts": 0.0,\n  "MobilizationSignal": 0.0,\n  "Trig'
+  ✓ T- 12 (2024-12-19) | Engine: 0.0% | Market: 1.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": +0.5,\n  "CommitmentProblem": +0.5,\n  "Patience": 0,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": 0,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": 0,\n  "MobilizationSignal": 0,\n  "TriggerType": '
+  ✓ T- 11 (2024-12-20) | Engine: 0.0% | Market: 1.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -1.0,\n  "NuclearDeterrence": +0.5,\n  "CommitmentProblem": +1.0,\n  "Patience": 0,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T- 10 (2024-12-21) | Engine: 0.0% | Market: 1.6% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -1.0,\n  "NuclearDeterrence": +0.5,\n  "CommitmentProblem": +0.5,\n  "Patience": 0,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T-  9 (2024-12-22) | Engine: 0.0% | Market: 1.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -1.0,\n  "NuclearDeterrence": +0.5,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T-  8 (2024-12-23) | Engine: 0.0% | Market: 1.6% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -1.0,\n  "NuclearDeterrence": +0.5,\n  "CommitmentProblem": +0.5,\n  "Patience": 0,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T-  7 (2024-12-24) | Engine: 0.0% | Market: 1.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -1.0,\n  "NuclearDeterrence": +0.5,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T-  6 (2024-12-25) | Engine: 0.0% | Market: 0.9% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": +0.5,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T-  5 (2024-12-26) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T-  4 (2024-12-27) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T-  3 (2024-12-28) | Engine: 0.0% | Market: 0.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T-  2 (2024-12-29) | Engine: 0.0% | Market: 0.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": +0.3,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.3,\n  "DemocraticPeace": -0.3,\n  "PreferenceAlignment": +0.3,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.3,\n  "MobilizationSignal": 0,\n  "Tr'
+  ✓ T-  1 (2024-12-30) | Engine: 0.0% | Market: 0.6% | Res: 0 | Articles: 10
+  [checkpoint] 90 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── China invades Taiwan 2025 ──
+  Sub-market: Will China invade Taiwan in 2025? | Resolution: 0 | History: 338 days
+  ✗ T- 90 (2025-10-02) | Engine: 4.8% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 89 (2025-10-03) | Engine: 14.7% | Market: 3.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": 0.0,\n  "WarCosts": 0.0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0.0,\n  "CommitmentProblem": 0.0,\n  "Patience": +0.5,\n  "DemocraticPeace": 0.0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0.0,\n  "Tr'
+  ✓ T- 88 (2025-10-04) | Engine: 0.1% | Market: 2.6% | Res: 0 | Articles: 10
+  ✓ T- 87 (2025-10-05) | Engine: 0.6% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 86 (2025-10-06) | Engine: 0.4% | Market: 2.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": 0.0,\n  "WarCosts": 0.0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0.0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0.0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0.0,\n  "T'
+  ✓ T- 85 (2025-10-07) | Engine: 0.1% | Market: 2.8% | Res: 0 | Articles: 10
+  ✓ T- 84 (2025-10-08) | Engine: 0.7% | Market: 2.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T- 83 (2025-10-09) | Engine: 0.3% | Market: 3.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": 0,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": -0.5,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +1.0,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T- 82 (2025-10-10) | Engine: 0.1% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 81 (2025-10-11) | Engine: 6.9% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 80 (2025-10-12) | Engine: 0.4% | Market: 3.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": +0.5,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Tr'
+  ✓ T- 79 (2025-10-13) | Engine: 0.1% | Market: 4.1% | Res: 0 | Articles: 10
+  ✓ T- 78 (2025-10-14) | Engine: 0.4% | Market: 3.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": 0.0,\n  "WarCosts": -0.3,\n  "PatronDeterrence": 0.0,\n  "NuclearDeterrence": +0.5,\n  "CommitmentProblem": +0.3,\n  "Patience": +0.3,\n  "DemocraticPeace": 0.0,\n  "PreferenceAlignment": +0.3,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.3,\n  "MobilizationSignal": 0.0,\n  "'
+  ✓ T- 77 (2025-10-15) | Engine: 0.1% | Market: 3.3% | Res: 0 | Articles: 10
+  ✓ T- 76 (2025-10-16) | Engine: 0.4% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 75 (2025-10-17) | Engine: 0.4% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 74 (2025-10-18) | Engine: 0.2% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 73 (2025-10-19) | Engine: 8.2% | Market: 3.4% | Res: 0 | Articles: 10
+  ✓ T- 72 (2025-10-20) | Engine: 0.1% | Market: 3.1% | Res: 0 | Articles: 10
+  ✓ T- 71 (2025-10-21) | Engine: 0.2% | Market: 3.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +1.0,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 70 (2025-10-22) | Engine: 0.1% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 69 (2025-10-23) | Engine: 0.2% | Market: 2.9% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": 0,\n  "WarCosts": 0,\n  "PatronDeterrence": 0,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": 0,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +1.0,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerType": 0.1'
+  ✓ T- 68 (2025-10-24) | Engine: 0.1% | Market: 3.0% | Res: 0 | Articles: 10
+  ✓ T- 67 (2025-10-25) | Engine: 0.2% | Market: 3.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.3,\n  "PatronDeterrence": -0.3,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.3,\n  "Patience": +0.3,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.3,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.3,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T- 66 (2025-10-26) | Engine: 0.1% | Market: 3.1% | Res: 0 | Articles: 10
+  ✓ T- 65 (2025-10-27) | Engine: 0.3% | Market: 3.4% | Res: 0 | Articles: 10
+  ✓ T- 64 (2025-10-28) | Engine: 0.4% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 63 (2025-10-29) | Engine: 4.2% | Market: 3.4% | Res: 0 | Articles: 10
+  ✓ T- 62 (2025-10-30) | Engine: 0.3% | Market: 3.0% | Res: 0 | Articles: 10
+  ✓ T- 61 (2025-10-31) | Engine: 1.4% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 60 (2025-11-01) | Engine: 0.6% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 59 (2025-11-02) | Engine: 0.2% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 58 (2025-11-03) | Engine: 0.2% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 57 (2025-11-04) | Engine: 0.4% | Market: 2.5% | Res: 0 | Articles: 10
+  ✓ T- 56 (2025-11-05) | Engine: 0.3% | Market: 2.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 55 (2025-11-06) | Engine: 0.1% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 54 (2025-11-07) | Engine: 0.4% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T- 53 (2025-11-08) | Engine: 0.2% | Market: 2.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": +0.5,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": -0.5,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Tr'
+  ✓ T- 52 (2025-11-09) | Engine: 0.1% | Market: 2.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 51 (2025-11-10) | Engine: 0.1% | Market: 2.2% | Res: 0 | Articles: 10
+  ✓ T- 50 (2025-11-11) | Engine: 0.1% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 49 (2025-11-12) | Engine: 0.1% | Market: 2.2% | Res: 0 | Articles: 10
+  ✓ T- 48 (2025-11-13) | Engine: 0.4% | Market: 2.5% | Res: 0 | Articles: 10
+  ✓ T- 47 (2025-11-14) | Engine: 0.9% | Market: 2.3% | Res: 0 | Articles: 10
+  ✓ T- 46 (2025-11-15) | Engine: 0.1% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 45 (2025-11-16) | Engine: 2.1% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 44 (2025-11-17) | Engine: 0.3% | Market: 2.2% | Res: 0 | Articles: 10
+  ✓ T- 43 (2025-11-18) | Engine: 0.7% | Market: 2.3% | Res: 0 | Articles: 10
+  ✓ T- 42 (2025-11-19) | Engine: 0.7% | Market: 2.2% | Res: 0 | Articles: 10
+  ✓ T- 41 (2025-11-20) | Engine: 0.1% | Market: 1.4% | Res: 0 | Articles: 10
+  ✓ T- 40 (2025-11-21) | Engine: 0.3% | Market: 1.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +1.0,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T- 39 (2025-11-22) | Engine: 0.1% | Market: 1.9% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +1.0,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 38 (2025-11-23) | Engine: 0.1% | Market: 1.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": +0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": 0,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": -0.5,\n  "HardlineClaims": +1.0,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 37 (2025-11-24) | Engine: 0.0% | Market: 1.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.3,\n  "WarCosts": 0,\n  "PatronDeterrence": -0.3,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.3,\n  "Patience": +0.3,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.8,\n  "AudienceCosts": +0.3,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 36 (2025-11-25) | Engine: 0.1% | Market: 1.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": 0.0,\n  "WarCosts": 0.0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0.0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0.0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0.0,\n  "T'
+  ✓ T- 35 (2025-11-26) | Engine: 0.1% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T- 34 (2025-11-27) | Engine: 0.3% | Market: 1.7% | Res: 0 | Articles: 10
+  ✓ T- 33 (2025-11-28) | Engine: 0.2% | Market: 1.7% | Res: 0 | Articles: 10
+  ✓ T- 32 (2025-11-29) | Engine: 0.2% | Market: 1.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.3,\n  "PatronDeterrence": +0.3,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": 0,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.3,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.3,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 31 (2025-11-30) | Engine: 0.0% | Market: 1.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": 0,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerType'
+  ✓ T- 30 (2025-12-01) | Engine: 0.0% | Market: 1.3% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 29 (2025-12-02) | Engine: 0.1% | Market: 1.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": 0,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": 0,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerType": '
+  ✓ T- 28 (2025-12-03) | Engine: 0.0% | Market: 1.1% | Res: 0 | Articles: 10
+  ✓ T- 27 (2025-12-04) | Engine: 0.5% | Market: 1.1% | Res: 0 | Articles: 10
+  ✓ T- 26 (2025-12-05) | Engine: 0.4% | Market: 1.2% | Res: 0 | Articles: 10
+  ✓ T- 25 (2025-12-06) | Engine: 0.6% | Market: 1.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": +0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 24 (2025-12-07) | Engine: 0.0% | Market: 0.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +1.0,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 23 (2025-12-08) | Engine: 0.0% | Market: 0.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": 0,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 22 (2025-12-09) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": 0,\n  "DemocraticPeace": +0.5,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 21 (2025-12-10) | Engine: 0.0% | Market: 1.1% | Res: 0 | Articles: 10
+  ✓ T- 20 (2025-12-11) | Engine: 0.4% | Market: 0.9% | Res: 0 | Articles: 10
+  ✓ T- 19 (2025-12-12) | Engine: 0.3% | Market: 0.7% | Res: 0 | Articles: 10
+  ✓ T- 18 (2025-12-13) | Engine: 0.2% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 17 (2025-12-14) | Engine: 2.9% | Market: 0.6% | Res: 0 | Articles: 10
+  ✓ T- 16 (2025-12-15) | Engine: 0.1% | Market: 0.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": 0.0,\n  "WarCosts": 0.0,\n  "PatronDeterrence": -1.0,\n  "NuclearDeterrence": 0.0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0.0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0.0,\n  "T'
+  ✓ T- 15 (2025-12-16) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+  ✓ T- 14 (2025-12-17) | Engine: 0.3% | Market: 0.4% | Res: 0 | Articles: 10
+  ✗ T- 13 (2025-12-18) | Engine: 2.7% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 12 (2025-12-19) | Engine: 7.8% | Market: 0.6% | Res: 0 | Articles: 10
+  ✗ T- 11 (2025-12-20) | Engine: 1.1% | Market: 0.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": 0.0,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -1.0,\n  "NuclearDeterrence": 0.0,\n  "CommitmentProblem": +0.5,\n  "Patience": 0.0,\n  "DemocraticPeace": 0.0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +1.0,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0.0,\n  "T'
+  ✓ T- 10 (2025-12-21) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -1.0,\n  "NuclearDeterrence": +0.5,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Tr'
+  ✓ T-  9 (2025-12-22) | Engine: 0.0% | Market: 0.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +1.0,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T-  8 (2025-12-23) | Engine: 0.0% | Market: 0.3% | Res: 0 | Articles: 10
+  ✗ T-  7 (2025-12-24) | Engine: 0.8% | Market: 0.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": 0,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +1.0,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerType'
+  ✓ T-  6 (2025-12-25) | Engine: 0.0% | Market: 0.2% | Res: 0 | Articles: 10
+  ✓ T-  5 (2025-12-26) | Engine: 0.1% | Market: 0.1% | Res: 0 | Articles: 10
+  ✓ T-  4 (2025-12-27) | Engine: 0.1% | Market: 0.1% | Res: 0 | Articles: 10
+  ✓ T-  3 (2025-12-28) | Engine: 0.0% | Market: 0.1% | Res: 0 | Articles: 10
+  ✗ T-  2 (2025-12-29) | Engine: 0.2% | Market: 0.1% | Res: 0 | Articles: 10
+  ✓ T-  1 (2025-12-30) | Engine: 0.1% | Market: 0.4% | Res: 0 | Articles: 10
+  [checkpoint] 180 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── Trump ends Ukraine war 90 days ──
+  Sub-market: Trump ends Ukraine war in first 90 days? | Resolution: 0 | History: 184 days
+  ✗ T- 90 (2025-01-19) | Engine: 75.6% | Market: 34.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": +0.5,\n  "NuclearDeterrence": +0.5,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": 0,\n  "HardlineClaims": 0,\n  "AudienceCosts": 0,\n  "MobilizationSignal": 0,\n  "TriggerType": '
+  ✓ T- 89 (2025-01-20) | Engine: 0.8% | Market: 34.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": 0.0,\n  "WarCosts": 0.0,\n  "PatronDeterrence": +0.5,\n  "NuclearDeterrence": 0.0,\n  "CommitmentProblem": 0.0,\n  "Patience": +0.5,\n  "DemocraticPeace": 0.0,\n  "PreferenceAlignment": -0.5,\n  "HardlineClaims": 0.0,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0.0,\n  "Tri'
+  ✓ T- 88 (2025-01-21) | Engine: 0.6% | Market: 34.5% | Res: 0 | Articles: 10
+  ✓ T- 87 (2025-01-22) | Engine: 2.4% | Market: 28.5% | Res: 0 | Articles: 10
+  ✗ T- 86 (2025-01-23) | Engine: 68.9% | Market: 28.5% | Res: 0 | Articles: 10
+  ✗ T- 85 (2025-01-24) | Engine: 86.4% | Market: 32.5% | Res: 0 | Articles: 10
+  ✗ T- 84 (2025-01-25) | Engine: 59.9% | Market: 30.5% | Res: 0 | Articles: 10
+  ✗ T- 83 (2025-01-26) | Engine: 67.1% | Market: 30.5% | Res: 0 | Articles: 10
+  ✗ T- 82 (2025-01-27) | Engine: 79.8% | Market: 28.5% | Res: 0 | Articles: 10
+  ✗ T- 81 (2025-01-28) | Engine: 74.4% | Market: 26.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": -0.5,\n  "NuclearDeterrence": +0.5,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T- 80 (2025-01-29) | Engine: 0.5% | Market: 21.5% | Res: 0 | Articles: 10
+  ✗ T- 79 (2025-01-30) | Engine: 84.1% | Market: 20.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": +0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": -0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 78 (2025-01-31) | Engine: 0.4% | Market: 20.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": 0.0,\n  "WarCosts": -0.5,\n  "PatronDeterrence": +0.5,\n  "NuclearDeterrence": 0.0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0.0,\n  "PreferenceAlignment": +0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0.0,\n  "'
+  ✓ T- 77 (2025-02-01) | Engine: 0.5% | Market: 22.5% | Res: 0 | Articles: 10
+  ✗ T- 76 (2025-02-02) | Engine: 49.2% | Market: 20.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": +0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": -0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T- 75 (2025-02-03) | Engine: 0.4% | Market: 17.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": -0.5,\n  "PatronDeterrence": +0.3,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": -0.3,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "Trigg'
+  ✓ T- 74 (2025-02-04) | Engine: 0.4% | Market: 18.0% | Res: 0 | Articles: 10
+  ✗ T- 73 (2025-02-05) | Engine: 53.2% | Market: 19.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +1.0,\n  "WarCosts": -0.5,\n  "PatronDeterrence": +0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": 0,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 72 (2025-02-06) | Engine: 0.5% | Market: 24.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": +0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": -0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 71 (2025-02-07) | Engine: 0.4% | Market: 25.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): '```json\n{\n  "WinProbability": +0.5,\n  "WarCosts": 0,\n  "PatronDeterrence": +0.5,\n  "NuclearDeterrence": 0,\n  "CommitmentProblem": +0.5,\n  "Patience": +0.5,\n  "DemocraticPeace": 0,\n  "PreferenceAlignment": -0.5,\n  "HardlineClaims": +0.5,\n  "AudienceCosts": +0.5,\n  "MobilizationSignal": 0,\n  "TriggerT'
+  ✓ T- 70 (2025-02-08) | Engine: 0.4% | Market: 25.0% | Res: 0 | Articles: 10
+  ✗ T- 69 (2025-02-09) | Engine: 61.0% | Market: 25.5% | Res: 0 | Articles: 10
+  ✗ T- 68 (2025-02-10) | Engine: 73.4% | Market: 25.5% | Res: 0 | Articles: 10
+  ✗ T- 67 (2025-02-11) | Engine: 39.7% | Market: 25.5% | Res: 0 | Articles: 10
+  ✓ T- 66 (2025-02-12) | Engine: 24.6% | Market: 27.5% | Res: 0 | Articles: 10
+  ✗ T- 65 (2025-02-13) | Engine: 65.6% | Market: 35.5% | Res: 0 | Articles: 10

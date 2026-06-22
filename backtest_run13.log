@@ -1,0 +1,77 @@
+
+============================================================
+  CONTAMINATION CHECK — US-Iran T-90
+============================================================
+
+  Snapshot date: 2025-11-30
+  Correct headlines (10): US-Iran Nov 2025
+  Wrong headlines   (10): China-Taiwan Jul 2024
+
+  Node                              Correct    Wrong    Delta
+  ----------------------------------------------------------
+  WinProbability                       0.00     0.00     0.00
+  WarCosts                             0.00     0.00     0.00
+  PatronDeterrence                     0.00     0.00     0.00
+  NuclearDeterrence                    0.00     0.00     0.00
+  CommitmentProblem                    0.00     0.00     0.00
+  Patience                             0.25     0.00     0.25 ← MOVES
+  DemocraticPeace                      0.00     0.00     0.00
+  PreferenceAlignment                  0.25     0.00     0.25 ← MOVES
+  HardlineClaims                       0.25     0.00     0.25 ← MOVES
+  AudienceCosts                        0.25     0.00     0.25 ← MOVES
+  MobilizationSignal                   0.00     0.00     0.00
+  TriggerType                          0.00     0.00     0.00
+  ValueThreatGravity                   0.25     0.00     0.25 ← MOVES
+  ThirdPartyMilitaryInvolvement        0.00     0.00     0.00
+  LiveNonviolentMilitaryPressure       0.00     0.00     0.00
+  LiveViolenceObserved                 0.00     0.00     0.00
+  LiveUltimatumDeadline                0.00     0.00     0.00
+  LiveMediationAccepted                0.00     0.00     0.00
+  LiveAbatementSignal                  0.00     0.00     0.00
+
+  Max delta across nodes: 0.25
+  ✗ FAIL — Scores barely move. Training data contamination likely.
+    Recommendation: restrict backtest to post-Aug 2025 markets only.
+
+  ⚠ Contamination check failed. Run with --leakage to review.
+  Continuing anyway — interpret results with caution.
+
+
+── China invades Taiwan 2024 ──
+  Sub-market: Will China invade Taiwan in 2024? | Resolution: 0 | History: 352 days
+  ✗ T- 90 (2024-10-02) | Engine: 87.5% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 89 (2024-10-03) | Engine: 85.4% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 88 (2024-10-04) | Engine: 81.0% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 87 (2024-10-05) | Engine: 67.9% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 86 (2024-10-06) | Engine: 19.7% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 85 (2024-10-07) | Engine: 24.2% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 84 (2024-10-08) | Engine: 35.7% | Market: 4.0% | Res: 0 | Articles: 10
+  ✗ T- 83 (2024-10-09) | Engine: 78.5% | Market: 3.9% | Res: 0 | Articles: 10
+  ✗ T- 82 (2024-10-10) | Engine: 80.7% | Market: 3.8% | Res: 0 | Articles: 10
+  ✗ T- 81 (2024-10-11) | Engine: 75.5% | Market: 3.6% | Res: 0 | Articles: 10
+  ✗ T- 80 (2024-10-12) | Engine: 19.7% | Market: 3.7% | Res: 0 | Articles: 10
+  ✗ T- 79 (2024-10-13) | Engine: 78.3% | Market: 3.6% | Res: 0 | Articles: 10
+  ✗ T- 78 (2024-10-14) | Engine: 78.3% | Market: 3.8% | Res: 0 | Articles: 10
+  ✗ T- 77 (2024-10-15) | Engine: 78.3% | Market: 5.0% | Res: 0 | Articles: 10
+  ✗ T- 76 (2024-10-16) | Engine: 80.4% | Market: 6.1% | Res: 0 | Articles: 10
+  ✗ T- 75 (2024-10-17) | Engine: 80.4% | Market: 6.5% | Res: 0 | Articles: 10
+  ✗ T- 74 (2024-10-18) | Engine: 78.5% | Market: 4.8% | Res: 0 | Articles: 10
+  ✗ T- 73 (2024-10-19) | Engine: 79.8% | Market: 4.5% | Res: 0 | Articles: 10
+  ✗ T- 72 (2024-10-20) | Engine: 58.1% | Market: 5.1% | Res: 0 | Articles: 10
+  ✗ T- 71 (2024-10-21) | Engine: 58.7% | Market: 4.5% | Res: 0 | Articles: 10
+  ✗ T- 70 (2024-10-22) | Engine: 58.7% | Market: 5.8% | Res: 0 | Articles: 10
+  ✗ T- 69 (2024-10-23) | Engine: 92.4% | Market: 6.0% | Res: 0 | Articles: 10
+  ✗ T- 68 (2024-10-24) | Engine: 92.4% | Market: 5.9% | Res: 0 | Articles: 10
+  ✗ T- 67 (2024-10-25) | Engine: 96.8% | Market: 6.0% | Res: 0 | Articles: 10
+  ✗ T- 66 (2024-10-26) | Engine: 92.3% | Market: 6.0% | Res: 0 | Articles: 10
+  ✗ T- 65 (2024-10-27) | Engine: 81.7% | Market: 6.0% | Res: 0 | Articles: 10
+  ✗ T- 64 (2024-10-28) | Engine: 92.6% | Market: 4.7% | Res: 0 | Articles: 10
+  ✗ T- 63 (2024-10-29) | Engine: 32.5% | Market: 5.7% | Res: 0 | Articles: 10
+  ✗ T- 62 (2024-10-30) | Engine: 16.5% | Market: 5.3% | Res: 0 | Articles: 10
+  ✗ T- 61 (2024-10-31) | Engine: 23.5% | Market: 5.7% | Res: 0 | Articles: 10
+  ✗ T- 60 (2024-11-01) | Engine: 20.8% | Market: 5.1% | Res: 0 | Articles: 10
+  ✗ T- 59 (2024-11-02) | Engine: 20.8% | Market: 5.1% | Res: 0 | Articles: 10
+  ✗ T- 58 (2024-11-03) | Engine: 20.8% | Market: 4.8% | Res: 0 | Articles: 10
+  ✗ T- 57 (2024-11-04) | Engine: 23.1% | Market: 4.8% | Res: 0 | Articles: 10
+  ✗ T- 56 (2024-11-05) | Engine: 15.4% | Market: 4.7% | Res: 0 | Articles: 10
+  ✗ T- 55 (2024-11-06) | Engine: 28.9% | Market: 4.5% | Res: 0 | Articles: 10

@@ -10,8 +10,9 @@
       "Patience": -0.5,
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 2.0,
-      "NuclearDeterrence": 0.5,
-      "AudienceCosts": 1.0
+      "NuclearDeterrence": 0.6,
+      "AudienceCosts": 1.0,
+      "PatronMoralHazard": 0.5
     },
     "query": "\"China\" AND (\"Taiwan\" OR \"PLA\" OR \"strait\" OR \"invasion\" OR \"blockade\")",
     "baseline_source": "verified",
@@ -19,7 +20,12 @@
       "ProtractedConflict": 0.3,
       "GeographicProximity": 0.35
     },
-    "crisis_context": "CRISIS CONTEXT: China conducts recurring large-scale military exercises around Taiwan as part of the ongoing Fourth Taiwan Strait Crisis sequence (2022-present). Exercises, ADIZ incursions, patrol announcements, arms sale reactions, and blockade warnings are routine features of this rivalry \u2014 they occur continuously and do not indicate imminent invasion. When scoring headlines: distinguish routine coercive pressure (exercises, patrols, diplomatic protests) from genuine operational preparation (evacuation orders, airspace closure, confirmed amphibious staging). Score RoutineMilitaryPressure for standard exercises and rhetoric. Score OperationalPreparation only for concrete force positioning indicating imminent action."
+    "crisis_context": "CRISIS CONTEXT: China conducts recurring large-scale military exercises around Taiwan as part of the ongoing Fourth Taiwan Strait Crisis sequence (2022-present). Exercises, ADIZ incursions, patrol announcements, arms sale reactions, and blockade warnings are routine features of this rivalry \u2014 they occur continuously and do not indicate imminent invasion. When scoring headlines: distinguish routine coercive pressure (exercises, patrols, diplomatic protests) from genuine operational preparation (evacuation orders, airspace closure, confirmed amphibious staging). Score RoutineMilitaryPressure for standard exercises and rhetoric. Score OperationalPreparation only for concrete force positioning indicating imminent action.",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.15,
+      "InitiatorSurvivalRisk": 0.85,
+      "SubstitutionPath": 0.7
+    }
   },
   "Russia-Ukraine": {
     "label": "Russia and Ukraine",
@@ -32,8 +38,9 @@
       "Patience": 0.0,
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 1.5,
-      "NuclearDeterrence": 1.0,
-      "AudienceCosts": 1.0
+      "NuclearDeterrence": 1.8,
+      "AudienceCosts": 1.0,
+      "PatronMoralHazard": 1.5
     },
     "query": "\"Russia\" AND (\"Ukraine\" OR \"Zelensky\" OR \"Putin\" OR \"Kyiv\" OR \"ceasefire\")",
     "baseline_source": "verified",
@@ -41,7 +48,12 @@
       "ProtractedConflict": 0.3,
       "GeographicProximity": 0.35
     },
-    "crisis_context": "CRISIS CONTEXT: This is an ongoing war market asking about peace/ceasefire termination, NOT a conflict onset market. YES resolution means a peace deal was reached, not that violence occurred. The violence-onset scoring model does not apply. Score with polarity inverted: de-escalation signals are positive for YES resolution, escalation signals are negative."
+    "crisis_context": "CRISIS CONTEXT: This is an ongoing war market asking about peace/ceasefire termination, NOT a conflict onset market. YES resolution means a peace deal was reached, not that violence occurred. The violence-onset scoring model does not apply. Score with polarity inverted: de-escalation signals are positive for YES resolution, escalation signals are negative.",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.5,
+      "InitiatorSurvivalRisk": 0.75,
+      "SubstitutionPath": 0.3
+    }
   },
   "US-Iran": {
     "label": "United States and Iran",
@@ -54,8 +66,9 @@
       "Patience": 0.0,
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
-      "NuclearDeterrence": 0.5,
-      "AudienceCosts": 0.5
+      "NuclearDeterrence": 0.2,
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Iran\" AND (\"United States\" OR US OR \"American\" OR Tehran OR \"nuclear\") NOT Venezuela",
     "baseline_source": "verified",
@@ -66,7 +79,12 @@
     "crisis_context": "CRISIS CONTEXT: The US and Israel struck Iranian nuclear sites in June 2025 (the Twelve-Day War). In early 2026, the Trump administration issued nuclear ultimatums with a February 28 deadline while indirect US-Iran talks occurred in Oman and Turkey. These talks were procedural \u2014 occurring alongside active military planning, not instead of it. The strike happened February 28, 2026. When scoring headlines: diplomatic talks during this period do NOT indicate de-escalation. Score OperationalPreparation high if carrier groups, airspace activity, or force positioning appear. Score ProceduralDiplomacy (weak negative) for talk scheduling. Score ConcreteStandDown only for verified force withdrawals or explicit stand-down orders.",
     "crisis_onset_date": "2025-11-01",
     "acute_phase_onset_date": "2026-01-20",
-    "event_date": null
+    "event_date": null,
+    "suppressor_static": {
+      "OperationalFeasibility": 0.6,
+      "InitiatorSurvivalRisk": 0.2,
+      "SubstitutionPath": 0.25
+    }
   },
   "Israel-Iran": {
     "label": "Israel and Iran",
@@ -79,11 +97,17 @@
       "Patience": -0.5,
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 1.5,
-      "NuclearDeterrence": 1.0,
-      "AudienceCosts": 1.0
+      "NuclearDeterrence": 0.8,
+      "AudienceCosts": 1.0,
+      "PatronMoralHazard": 0.5
     },
     "query": "\"Iran\" AND (\"Israel\" OR \"IDF\" OR \"nuclear\" OR \"strike\" OR \"airstrike\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.55,
+      "InitiatorSurvivalRisk": 0.3,
+      "SubstitutionPath": 0.35
+    }
   },
   "North Korea-US": {
     "label": "North Korea and the United States",
@@ -97,10 +121,16 @@
       "DemocraticPeace": 2.0,
       "PatronDeterrence": 1.0,
       "NuclearDeterrence": 2.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.0
     },
     "query": "\"North Korea\" AND (\"United States\" OR \"Kim\" OR \"missile\" OR \"nuclear\" OR \"ICBM\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.3,
+      "InitiatorSurvivalRisk": 0.95,
+      "SubstitutionPath": 0.5
+    }
   },
   "India-Pakistan": {
     "label": "India and Pakistan",
@@ -113,8 +143,9 @@
       "Patience": -0.5,
       "DemocraticPeace": 0.5,
       "PatronDeterrence": 0.5,
-      "NuclearDeterrence": 1.5,
-      "AudienceCosts": 1.0
+      "NuclearDeterrence": 1.8,
+      "AudienceCosts": 1.0,
+      "PatronMoralHazard": 0.5
     },
     "query": "\"India\" AND (\"Pakistan\" OR \"Kashmir\" OR \"LOC\" OR \"strike\" OR \"airstrike\")",
     "baseline_source": "verified",
@@ -122,7 +153,12 @@
       "ProtractedConflict": 0.3,
       "GeographicProximity": 0.35
     },
-    "crisis_context": "CRISIS CONTEXT: India and Pakistan fought Operation Sindoor May 7-10, 2025 \u2014 a brief armed conflict triggered by the Pahalgam terrorist attack. India conducted missile strikes on Pakistani territory. A US-mediated ceasefire ended the conflict May 10, 2025. The backtest scoring period (October-December 2025) is POST-CEASEFIRE. When scoring headlines: nuclear threats, BrahMos range claims, army chief warnings, and capability discussions are post-conflict rhetoric from the winning side, NOT indicators of imminent new conflict. Score RoutineMilitaryPressure for speeches and capability claims. Score OperationalPreparation ONLY for new verified troop movements or mobilization orders."
+    "crisis_context": "CRISIS CONTEXT: India and Pakistan fought Operation Sindoor May 7-10, 2025 \u2014 a brief armed conflict triggered by the Pahalgam terrorist attack. India conducted missile strikes on Pakistani territory. A US-mediated ceasefire ended the conflict May 10, 2025. The backtest scoring period (October-December 2025) is POST-CEASEFIRE. When scoring headlines: nuclear threats, BrahMos range claims, army chief warnings, and capability discussions are post-conflict rhetoric from the winning side, NOT indicators of imminent new conflict. Score RoutineMilitaryPressure for speeches and capability claims. Score OperationalPreparation ONLY for new verified troop movements or mobilization orders.",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.7,
+      "InitiatorSurvivalRisk": 0.15,
+      "SubstitutionPath": 0.4
+    }
   },
   "NATO-Russia": {
     "label": "NATO and Russia",
@@ -135,11 +171,17 @@
       "Patience": 0.0,
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 2.0,
-      "NuclearDeterrence": 1.5,
-      "AudienceCosts": 0.5
+      "NuclearDeterrence": 2.0,
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.5
     },
     "query": "\"NATO\" AND (\"Russia\" OR \"Putin\" OR \"Article 5\" OR \"escalation\" OR \"alliance\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.2,
+      "InitiatorSurvivalRisk": 0.8,
+      "SubstitutionPath": 0.6
+    }
   },
   "US-Venezuela": {
     "label": "United States and Venezuela",
@@ -153,7 +195,8 @@
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Venezuela\" AND (\"United States\" OR \"Maduro\" OR \"sanctions\" OR \"military\" OR \"Guyana\")",
     "baseline_source": "verified",
@@ -164,7 +207,12 @@
     "crisis_context": "CRISIS CONTEXT: By September 2025, the US launched Operation Southern Spear, an active military campaign in the Caribbean. By November 2025, 15,000 US troops and a carrier strike group (USS Gerald R. Ford) were deployed in the region. A US oil blockade of Venezuela began December 2025. On January 3, 2026, the US launched Operation Absolute Resolve, capturing Maduro. When scoring headlines in this period: the military operation was already active and escalating. Troop presence, naval assets, and blockade language indicate OperationalPreparation, not routine pressure.",
     "crisis_onset_date": "2025-11-15",
     "acute_phase_onset_date": "2025-12-13",
-    "event_date": "2026-01-03"
+    "event_date": "2026-01-03",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.9,
+      "InitiatorSurvivalRisk": 0.1,
+      "SubstitutionPath": 0.2
+    }
   },
   "US-Cuba": {
     "label": "United States and Cuba",
@@ -178,10 +226,16 @@
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Cuba\" AND (\"United States\" OR \"Havana\" OR \"sanctions\" OR \"embargo\" OR \"military\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.85,
+      "InitiatorSurvivalRisk": 0.1,
+      "SubstitutionPath": 0.5
+    }
   },
   "US-Mexico": {
     "label": "United States and Mexico",
@@ -195,10 +249,16 @@
       "DemocraticPeace": 0.5,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Mexico\" AND (\"United States\" OR \"cartel\" OR \"military\" OR \"border\" OR \"tariff\") NOT \"New Mexico\"",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.85,
+      "InitiatorSurvivalRisk": 0.05,
+      "SubstitutionPath": 0.65
+    }
   },
   "US-Russia": {
     "label": "United States and Russia",
@@ -211,11 +271,17 @@
       "Patience": 0.0,
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
-      "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "NuclearDeterrence": 1.8,
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.5
     },
     "query": "\"Russia\" AND (\"United States\" OR \"Washington\" OR \"Pentagon\" OR \"State Department\") NOT Ukraine NOT NATO",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.25,
+      "InitiatorSurvivalRisk": 0.7,
+      "SubstitutionPath": 0.45
+    }
   },
   "US-China": {
     "label": "United States and China",
@@ -348,10 +414,16 @@
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.25
     },
     "query": "\"Israel\" AND (\"Syria\" OR \"Damascus\" OR \"airstrike\" OR \"IDF\" OR \"Golan\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.7,
+      "InitiatorSurvivalRisk": 0.25,
+      "SubstitutionPath": 0.45
+    }
   },
   "US-Denmark": {
     "label": "United States and Denmark (Greenland)",
@@ -365,10 +437,16 @@
       "DemocraticPeace": -1.0,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Greenland\" AND (\"United States\" OR \"Denmark\" OR \"Trump\" OR \"annexation\" OR \"sovereignty\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.95,
+      "InitiatorSurvivalRisk": 0.05,
+      "SubstitutionPath": 0.75
+    }
   },
   "US-Colombia": {
     "label": "United States and Colombia",
@@ -382,10 +460,16 @@
       "DemocraticPeace": 0.5,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Colombia\" AND (\"United States\" OR \"tariff\" OR \"military\" OR \"deportation\" OR \"Petro\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.85,
+      "InitiatorSurvivalRisk": 0.05,
+      "SubstitutionPath": 0.6
+    }
   },
   "China-India": {
     "label": "China and India",
@@ -399,10 +483,16 @@
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.5
     },
     "query": "\"China\" AND (\"India\" OR \"LAC\" OR \"Ladakh\" OR \"Galwan\" OR \"Arunachal\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.45,
+      "InitiatorSurvivalRisk": 0.6,
+      "SubstitutionPath": 0.5
+    }
   },
   "Russia-Poland": {
     "label": "Russia and Poland",
@@ -415,11 +505,17 @@
       "Patience": 0.0,
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
-      "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "NuclearDeterrence": 1.5,
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.5
     },
     "query": "\"Russia\" AND (\"Poland\" OR \"Warsaw\" OR \"NATO\" OR \"border\" OR \"Suwalki\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.4,
+      "InitiatorSurvivalRisk": 0.7,
+      "SubstitutionPath": 0.55
+    }
   },
   "Thailand-Cambodia": {
     "label": "Thailand and Cambodia",
@@ -433,10 +529,16 @@
       "DemocraticPeace": 0.5,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.25
     },
     "query": "\"Thailand\" AND (\"Cambodia\" OR \"border\" OR \"temple\" OR \"Preah Vihear\" OR \"military\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.65,
+      "InitiatorSurvivalRisk": 0.5,
+      "SubstitutionPath": 0.55
+    }
   },
   "US-Panama": {
     "label": "United States and Panama",
@@ -450,10 +552,16 @@
       "DemocraticPeace": -0.5,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Panama\" AND (\"United States\" OR \"canal\" OR \"Trump\" OR \"military\" OR \"sovereignty\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.9,
+      "InitiatorSurvivalRisk": 0.05,
+      "SubstitutionPath": 0.65
+    }
   },
   "Europe(France/UK/Germany)-Iran": {
     "label": "Europe and Iran",
@@ -467,10 +575,16 @@
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Iran\" AND (\"France\" OR \"UK\" OR \"Germany\" OR \"Europe\" OR \"nuclear deal\" OR \"JCPOA\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.4,
+      "InitiatorSurvivalRisk": 0.4,
+      "SubstitutionPath": 0.5
+    }
   },
   "USA-Iran": {
     "label": "United States and Iran",
@@ -484,10 +598,16 @@
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Iran\" AND (\"United States\" OR US OR \"American\" OR Tehran OR \"nuclear\") NOT Venezuela",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.6,
+      "InitiatorSurvivalRisk": 0.2,
+      "SubstitutionPath": 0.25
+    }
   },
   "USA-Venezuela": {
     "label": "United States and Venezuela",
@@ -501,10 +621,16 @@
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Venezuela\" AND (\"United States\" OR \"Maduro\" OR \"sanctions\" OR \"military\" OR \"Guyana\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.9,
+      "InitiatorSurvivalRisk": 0.1,
+      "SubstitutionPath": 0.2
+    }
   },
   "USA-Denmark": {
     "label": "United States and Denmark (Greenland)",
@@ -518,10 +644,16 @@
       "DemocraticPeace": -1.0,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Greenland\" AND (\"United States\" OR \"Denmark\" OR \"Trump\" OR \"annexation\" OR \"sovereignty\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.95,
+      "InitiatorSurvivalRisk": 0.05,
+      "SubstitutionPath": 0.75
+    }
   },
   "USA-Colombia": {
     "label": "United States and Colombia",
@@ -535,10 +667,16 @@
       "DemocraticPeace": 0.5,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Colombia\" AND (\"United States\" OR \"tariff\" OR \"military\" OR \"deportation\" OR \"Petro\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.85,
+      "InitiatorSurvivalRisk": 0.05,
+      "SubstitutionPath": 0.6
+    }
   },
   "Russia-NATO": {
     "label": "NATO and Russia",
@@ -551,10 +689,16 @@
       "Patience": 0.0,
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 0.5,
-      "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
+      "NuclearDeterrence": 2.0,
+      "AudienceCosts": 0.5,
+      "PatronMoralHazard": 0.5
     },
     "query": "\"NATO\" AND (\"Russia\" OR \"Putin\" OR \"Article 5\" OR \"escalation\" OR \"alliance\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "suppressor_static": {
+      "OperationalFeasibility": 0.2,
+      "InitiatorSurvivalRisk": 0.8,
+      "SubstitutionPath": 0.6
+    }
   }
 }

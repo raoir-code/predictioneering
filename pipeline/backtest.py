@@ -39,6 +39,10 @@ ALPHA = _load_alpha()
 ALPHA["WinProbability"] = ALPHA.get("WinProbability_prior", 0.25)
 ALPHA["PatronDeterrence_w"] = ALPHA.get("PatronDeterrence_deterrence", -0.80)
 ALPHA["NuclearDeterrence_expert"] = ALPHA.get("NuclearDeterrence", -0.35)
+ALPHA["OperationalFeasibility_w"] = ALPHA.get("OperationalFeasibility", -1.50)
+ALPHA["InitiatorSurvivalRisk_w"]  = ALPHA.get("InitiatorSurvivalRisk",  -1.20)
+ALPHA["PatronMoralHazard_w"]      = ALPHA.get("PatronMoralHazard",       +0.60)
+ALPHA["SubstitutionPath_w"]       = ALPHA.get("SubstitutionPath",        -1.10)
 
 BASE_RATE_ANNUAL = 0.06  # Polymarket-conditional (June 11 evening fix)
 
@@ -621,7 +625,11 @@ def predict_probability(toggles, days_remaining, q_logit=0.0):
            + a["WarCosts"]              * t.get("WarCosts", 0)
            + a["PatronDeterrence_w"]    * t.get("PatronDeterrence", 0)
            + a.get("NuclearDeterrence_expert", a["NuclearDeterrence"])
-                                        * t.get("NuclearDeterrence", 0))
+                                        * t.get("NuclearDeterrence", 0)
+           + a.get("OperationalFeasibility_w", -1.50) * (1.0 - t.get("OperationalFeasibility", 0.5))
+           + a.get("InitiatorSurvivalRisk_w",  -1.20) * t.get("InitiatorSurvivalRisk", 0.5)
+           + a.get("PatronMoralHazard_w",       +0.60) * t.get("PatronMoralHazard", 0.0)
+           + a.get("SubstitutionPath_w",        -1.10) * t.get("SubstitutionPath", 0.5))
 
     Omega = (a["CommitmentProblem"]     * t.get("CommitmentProblem", 0)
            + a["Patience"]              * t.get("Patience", 0)
@@ -651,6 +659,14 @@ def predict_probability(toggles, days_remaining, q_logit=0.0):
 # BASELINE TOGGLES PER DYAD
 # (loads from dyad_configs.json — falls back to neutral if missing)
 # ─────────────────────────────────────────────────────────────────────
+
+def load_dyad_suppressor_static(dyad):
+    config_path = ROOT / "pipeline" / "dyad_configs.json"
+    if config_path.exists():
+        configs = json.loads(config_path.read_text())
+        if dyad in configs and "suppressor_static" in configs[dyad]:
+            return configs[dyad]["suppressor_static"]
+    return {"OperationalFeasibility": 0.5, "InitiatorSurvivalRisk": 0.5, "SubstitutionPath": 0.5}
 
 def load_dyad_baseline(dyad):
     config_path = ROOT / "pipeline" / "dyad_configs.json"
@@ -815,6 +831,8 @@ def run_backtest(dry_run=False):
         dyad     = mkt["dyad"]
         baseline = load_dyad_baseline(dyad)
         q_static   = load_dyad_q_static(dyad)
+        suppressor_static = load_dyad_suppressor_static(dyad)
+        baseline = {**baseline, **suppressor_static}
         # ICB transport: load full dyad config for onset/event dates
         _dcfg_path = ROOT / 'pipeline' / 'dyad_configs.json'
         _dcfg_all  = json.loads(_dcfg_path.read_text()) if _dcfg_path.exists() else {}

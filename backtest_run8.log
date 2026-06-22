@@ -1,0 +1,1025 @@
+
+============================================================
+  CONTAMINATION CHECK — US-Iran T-90
+============================================================
+
+  Snapshot date: 2025-11-30
+  Correct headlines (10): US-Iran Nov 2025
+  Wrong headlines   (10): China-Taiwan Jul 2024
+
+  Node                              Correct    Wrong    Delta
+  ----------------------------------------------------------
+  WinProbability                       0.00     0.00     0.00
+  WarCosts                             0.00     0.00     0.00
+  PatronDeterrence                     0.00     0.00     0.00
+  NuclearDeterrence                    0.00     0.00     0.00
+  CommitmentProblem                    0.00     0.00     0.00
+  Patience                             0.50     0.00     0.50 ← MOVES
+  DemocraticPeace                      0.00     0.00     0.00
+  PreferenceAlignment                  0.50     0.00     0.50 ← MOVES
+  HardlineClaims                       0.50     0.00     0.50 ← MOVES
+  AudienceCosts                        0.50     0.00     0.50 ← MOVES
+  MobilizationSignal                   0.00     0.00     0.00
+  TriggerType                          0.00     0.00     0.00
+  ValueThreatGravity                   0.25     0.00     0.25 ← MOVES
+  ThirdPartyMilitaryInvolvement        0.00     0.00     0.00
+  LiveNonviolentMilitaryPressure       0.00     0.00     0.00
+  LiveViolenceObserved                 0.00     0.00     0.00
+  LiveUltimatumDeadline                0.00     0.00     0.00
+  LiveMediationAccepted                0.00     0.00     0.00
+  LiveAbatementSignal                  0.00     0.00     0.00
+
+  Max delta across nodes: 0.50
+  ✓ PASS — GNews headlines are doing the work. Proceed with full backtest.
+
+── China invades Taiwan 2024 ──
+  Sub-market: Will China invade Taiwan in 2024? | Resolution: 0 | History: 352 days
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 90 (2024-10-02) | Engine: 0.1% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 89 (2024-10-03) | Engine: 13.5% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 88 (2024-10-04) | Engine: 9.7% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 87 (2024-10-05) | Engine: 5.7% | Market: 4.2% | Res: 0 | Articles: 10
+  ✓ T- 86 (2024-10-06) | Engine: 0.8% | Market: 4.2% | Res: 0 | Articles: 10
+  ✓ T- 85 (2024-10-07) | Engine: 1.1% | Market: 4.2% | Res: 0 | Articles: 10
+  ✓ T- 84 (2024-10-08) | Engine: 1.1% | Market: 4.0% | Res: 0 | Articles: 10
+  ✗ T- 83 (2024-10-09) | Engine: 7.1% | Market: 3.9% | Res: 0 | Articles: 10
+  ✗ T- 82 (2024-10-10) | Engine: 8.1% | Market: 3.8% | Res: 0 | Articles: 10
+  ✓ T- 81 (2024-10-11) | Engine: 2.6% | Market: 3.6% | Res: 0 | Articles: 10
+  ✓ T- 80 (2024-10-12) | Engine: 0.3% | Market: 3.7% | Res: 0 | Articles: 10
+  ✗ T- 79 (2024-10-13) | Engine: 7.2% | Market: 3.6% | Res: 0 | Articles: 10
+  ✗ T- 78 (2024-10-14) | Engine: 7.1% | Market: 3.8% | Res: 0 | Articles: 10
+  ✓ T- 77 (2024-10-15) | Engine: 1.0% | Market: 5.0% | Res: 0 | Articles: 10
+  ✗ T- 76 (2024-10-16) | Engine: 11.0% | Market: 6.1% | Res: 0 | Articles: 10
+  ✗ T- 75 (2024-10-17) | Engine: 10.8% | Market: 6.5% | Res: 0 | Articles: 10
+  ✗ T- 74 (2024-10-18) | Engine: 7.1% | Market: 4.8% | Res: 0 | Articles: 10
+  ✗ T- 73 (2024-10-19) | Engine: 9.2% | Market: 4.5% | Res: 0 | Articles: 10
+  ✓ T- 72 (2024-10-20) | Engine: 3.4% | Market: 5.1% | Res: 0 | Articles: 10
+  ✓ T- 71 (2024-10-21) | Engine: 2.5% | Market: 4.5% | Res: 0 | Articles: 10
+  ✓ T- 70 (2024-10-22) | Engine: 2.5% | Market: 5.8% | Res: 0 | Articles: 10
+  ✗ T- 69 (2024-10-23) | Engine: 23.5% | Market: 6.0% | Res: 0 | Articles: 10
+  ✗ T- 68 (2024-10-24) | Engine: 23.3% | Market: 5.9% | Res: 0 | Articles: 10
+  ✗ T- 67 (2024-10-25) | Engine: 21.3% | Market: 6.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 66 (2024-10-26) | Engine: 0.1% | Market: 6.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 65 (2024-10-27) | Engine: 0.1% | Market: 6.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 64 (2024-10-28) | Engine: 0.1% | Market: 4.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 63 (2024-10-29) | Engine: 0.1% | Market: 5.7% | Res: 0 | Articles: 10
+  ✓ T- 62 (2024-10-30) | Engine: 0.1% | Market: 5.3% | Res: 0 | Articles: 10
+  ✓ T- 61 (2024-10-31) | Engine: 0.2% | Market: 5.7% | Res: 0 | Articles: 10
+  ✓ T- 60 (2024-11-01) | Engine: 0.3% | Market: 5.1% | Res: 0 | Articles: 10
+  ✓ T- 59 (2024-11-02) | Engine: 0.3% | Market: 5.1% | Res: 0 | Articles: 10
+  ✓ T- 58 (2024-11-03) | Engine: 0.3% | Market: 4.8% | Res: 0 | Articles: 10
+  ✓ T- 57 (2024-11-04) | Engine: 0.4% | Market: 4.8% | Res: 0 | Articles: 10
+  ✓ T- 56 (2024-11-05) | Engine: 0.4% | Market: 4.7% | Res: 0 | Articles: 10
+  ✓ T- 55 (2024-11-06) | Engine: 0.5% | Market: 4.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 54 (2024-11-07) | Engine: 0.1% | Market: 4.1% | Res: 0 | Articles: 10
+  ✓ T- 53 (2024-11-08) | Engine: 0.2% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 52 (2024-11-09) | Engine: 0.2% | Market: 3.1% | Res: 0 | Articles: 10
+  ✓ T- 51 (2024-11-10) | Engine: 0.4% | Market: 3.0% | Res: 0 | Articles: 10
+  ✓ T- 50 (2024-11-11) | Engine: 0.4% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 49 (2024-11-12) | Engine: 0.4% | Market: 3.8% | Res: 0 | Articles: 10
+  ✓ T- 48 (2024-11-13) | Engine: 0.3% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 47 (2024-11-14) | Engine: 0.9% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 46 (2024-11-15) | Engine: 0.3% | Market: 3.0% | Res: 0 | Articles: 10
+  ✓ T- 45 (2024-11-16) | Engine: 0.1% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 44 (2024-11-17) | Engine: 1.4% | Market: 3.0% | Res: 0 | Articles: 10
+  ✓ T- 43 (2024-11-18) | Engine: 1.5% | Market: 2.8% | Res: 0 | Articles: 10
+  ✓ T- 42 (2024-11-19) | Engine: 0.1% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 41 (2024-11-20) | Engine: 0.2% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 40 (2024-11-21) | Engine: 0.1% | Market: 3.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 39 (2024-11-22) | Engine: 0.1% | Market: 3.3% | Res: 0 | Articles: 10
+  ✓ T- 38 (2024-11-23) | Engine: 1.7% | Market: 2.9% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 37 (2024-11-24) | Engine: 0.1% | Market: 3.1% | Res: 0 | Articles: 10
+  ✓ T- 36 (2024-11-25) | Engine: 0.2% | Market: 2.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 35 (2024-11-26) | Engine: 0.0% | Market: 2.6% | Res: 0 | Articles: 10
+  ✓ T- 34 (2024-11-27) | Engine: 0.4% | Market: 2.8% | Res: 0 | Articles: 10
+  ✓ T- 33 (2024-11-28) | Engine: 0.4% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 32 (2024-11-29) | Engine: 0.4% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 31 (2024-11-30) | Engine: 0.6% | Market: 2.8% | Res: 0 | Articles: 10
+  ✓ T- 30 (2024-12-01) | Engine: 0.6% | Market: 2.8% | Res: 0 | Articles: 10
+  ✓ T- 29 (2024-12-02) | Engine: 0.3% | Market: 2.8% | Res: 0 | Articles: 10
+  ✓ T- 28 (2024-12-03) | Engine: 0.6% | Market: 2.6% | Res: 0 | Articles: 10
+  ✗ T- 27 (2024-12-04) | Engine: 6.7% | Market: 2.5% | Res: 0 | Articles: 10
+  ✓ T- 26 (2024-12-05) | Engine: 0.4% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 25 (2024-12-06) | Engine: 2.9% | Market: 2.1% | Res: 0 | Articles: 10
+  ✗ T- 24 (2024-12-07) | Engine: 2.8% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 23 (2024-12-08) | Engine: 2.7% | Market: 2.1% | Res: 0 | Articles: 10
+  ✗ T- 22 (2024-12-09) | Engine: 3.5% | Market: 2.2% | Res: 0 | Articles: 10
+  ✓ T- 21 (2024-12-10) | Engine: 0.4% | Market: 3.4% | Res: 0 | Articles: 10
+  ✓ T- 20 (2024-12-11) | Engine: 0.2% | Market: 2.7% | Res: 0 | Articles: 10
+  ✓ T- 19 (2024-12-12) | Engine: 0.6% | Market: 2.1% | Res: 0 | Articles: 10
+  ✓ T- 18 (2024-12-13) | Engine: 1.0% | Market: 2.1% | Res: 0 | Articles: 10
+  ✗ T- 17 (2024-12-14) | Engine: 4.7% | Market: 2.7% | Res: 0 | Articles: 10
+  ✗ T- 16 (2024-12-15) | Engine: 4.5% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T- 15 (2024-12-16) | Engine: 0.3% | Market: 2.3% | Res: 0 | Articles: 10
+  ✓ T- 14 (2024-12-17) | Engine: 0.4% | Market: 2.1% | Res: 0 | Articles: 10
+  ✓ T- 13 (2024-12-18) | Engine: 0.1% | Market: 1.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 12 (2024-12-19) | Engine: 0.0% | Market: 1.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 11 (2024-12-20) | Engine: 0.0% | Market: 1.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 10 (2024-12-21) | Engine: 0.0% | Market: 1.6% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  9 (2024-12-22) | Engine: 0.0% | Market: 1.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  8 (2024-12-23) | Engine: 0.0% | Market: 1.6% | Res: 0 | Articles: 10
+  ✓ T-  7 (2024-12-24) | Engine: 1.2% | Market: 1.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  6 (2024-12-25) | Engine: 0.0% | Market: 0.9% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  5 (2024-12-26) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  4 (2024-12-27) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  3 (2024-12-28) | Engine: 0.0% | Market: 0.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  2 (2024-12-29) | Engine: 0.0% | Market: 0.2% | Res: 0 | Articles: 10
+  ✓ T-  1 (2024-12-30) | Engine: 0.0% | Market: 0.6% | Res: 0 | Articles: 10
+  [checkpoint] 90 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── China invades Taiwan 2025 ──
+  Sub-market: Will China invade Taiwan in 2025? | Resolution: 0 | History: 338 days
+  ✗ T- 90 (2025-10-02) | Engine: 4.8% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 89 (2025-10-03) | Engine: 15.9% | Market: 3.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 88 (2025-10-04) | Engine: 0.1% | Market: 2.6% | Res: 0 | Articles: 10
+  ✓ T- 87 (2025-10-05) | Engine: 0.6% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 86 (2025-10-06) | Engine: 0.3% | Market: 2.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 85 (2025-10-07) | Engine: 0.1% | Market: 2.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 84 (2025-10-08) | Engine: 0.1% | Market: 2.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 83 (2025-10-09) | Engine: 0.3% | Market: 3.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 82 (2025-10-10) | Engine: 0.1% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 81 (2025-10-11) | Engine: 6.9% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 80 (2025-10-12) | Engine: 0.4% | Market: 3.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 79 (2025-10-13) | Engine: 0.1% | Market: 4.1% | Res: 0 | Articles: 10
+  ✓ T- 78 (2025-10-14) | Engine: 0.4% | Market: 3.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 77 (2025-10-15) | Engine: 0.1% | Market: 3.3% | Res: 0 | Articles: 10
+  ✓ T- 76 (2025-10-16) | Engine: 0.4% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 75 (2025-10-17) | Engine: 0.4% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 74 (2025-10-18) | Engine: 0.4% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 73 (2025-10-19) | Engine: 8.2% | Market: 3.4% | Res: 0 | Articles: 10
+  ✓ T- 72 (2025-10-20) | Engine: 0.1% | Market: 3.1% | Res: 0 | Articles: 10
+  ✓ T- 71 (2025-10-21) | Engine: 0.3% | Market: 3.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 70 (2025-10-22) | Engine: 0.1% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 69 (2025-10-23) | Engine: 0.2% | Market: 2.9% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 68 (2025-10-24) | Engine: 0.1% | Market: 3.0% | Res: 0 | Articles: 10
+  ✓ T- 67 (2025-10-25) | Engine: 0.2% | Market: 3.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 66 (2025-10-26) | Engine: 0.1% | Market: 3.1% | Res: 0 | Articles: 10
+  ✓ T- 65 (2025-10-27) | Engine: 0.6% | Market: 3.4% | Res: 0 | Articles: 10
+  ✓ T- 64 (2025-10-28) | Engine: 0.4% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 63 (2025-10-29) | Engine: 4.2% | Market: 3.4% | Res: 0 | Articles: 10
+  ✓ T- 62 (2025-10-30) | Engine: 0.4% | Market: 3.0% | Res: 0 | Articles: 10
+  ✓ T- 61 (2025-10-31) | Engine: 1.4% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 60 (2025-11-01) | Engine: 0.6% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 59 (2025-11-02) | Engine: 0.2% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 58 (2025-11-03) | Engine: 0.2% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 57 (2025-11-04) | Engine: 0.4% | Market: 2.5% | Res: 0 | Articles: 10
+  ✓ T- 56 (2025-11-05) | Engine: 0.3% | Market: 2.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 55 (2025-11-06) | Engine: 0.1% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 54 (2025-11-07) | Engine: 0.4% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T- 53 (2025-11-08) | Engine: 0.2% | Market: 2.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 52 (2025-11-09) | Engine: 0.1% | Market: 2.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 51 (2025-11-10) | Engine: 0.1% | Market: 2.2% | Res: 0 | Articles: 10
+  ✓ T- 50 (2025-11-11) | Engine: 0.1% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 49 (2025-11-12) | Engine: 0.1% | Market: 2.2% | Res: 0 | Articles: 10
+  ✓ T- 48 (2025-11-13) | Engine: 0.4% | Market: 2.5% | Res: 0 | Articles: 10
+  ✓ T- 47 (2025-11-14) | Engine: 0.9% | Market: 2.3% | Res: 0 | Articles: 10
+  ✓ T- 46 (2025-11-15) | Engine: 0.2% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 45 (2025-11-16) | Engine: 2.3% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 44 (2025-11-17) | Engine: 0.3% | Market: 2.2% | Res: 0 | Articles: 10
+  ✓ T- 43 (2025-11-18) | Engine: 0.7% | Market: 2.3% | Res: 0 | Articles: 10
+  ✓ T- 42 (2025-11-19) | Engine: 0.7% | Market: 2.2% | Res: 0 | Articles: 10
+  ✓ T- 41 (2025-11-20) | Engine: 0.1% | Market: 1.4% | Res: 0 | Articles: 10
+  ✓ T- 40 (2025-11-21) | Engine: 0.5% | Market: 1.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 39 (2025-11-22) | Engine: 0.1% | Market: 1.9% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 38 (2025-11-23) | Engine: 0.1% | Market: 1.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 37 (2025-11-24) | Engine: 0.0% | Market: 1.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 36 (2025-11-25) | Engine: 0.1% | Market: 1.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 35 (2025-11-26) | Engine: 0.1% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T- 34 (2025-11-27) | Engine: 0.3% | Market: 1.7% | Res: 0 | Articles: 10
+  ✓ T- 33 (2025-11-28) | Engine: 0.3% | Market: 1.7% | Res: 0 | Articles: 10
+  ✓ T- 32 (2025-11-29) | Engine: 0.2% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T- 31 (2025-11-30) | Engine: 0.2% | Market: 1.5% | Res: 0 | Articles: 10
+  ✓ T- 30 (2025-12-01) | Engine: 0.3% | Market: 1.3% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 29 (2025-12-02) | Engine: 0.1% | Market: 1.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 28 (2025-12-03) | Engine: 0.0% | Market: 1.1% | Res: 0 | Articles: 10
+  ✓ T- 27 (2025-12-04) | Engine: 0.2% | Market: 1.1% | Res: 0 | Articles: 10
+  ✓ T- 26 (2025-12-05) | Engine: 0.4% | Market: 1.2% | Res: 0 | Articles: 10
+  ✓ T- 25 (2025-12-06) | Engine: 0.9% | Market: 1.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 24 (2025-12-07) | Engine: 0.0% | Market: 0.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 23 (2025-12-08) | Engine: 0.0% | Market: 0.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 22 (2025-12-09) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 21 (2025-12-10) | Engine: 0.0% | Market: 1.1% | Res: 0 | Articles: 10
+  ✓ T- 20 (2025-12-11) | Engine: 0.4% | Market: 0.9% | Res: 0 | Articles: 10
+  ✓ T- 19 (2025-12-12) | Engine: 0.3% | Market: 0.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 18 (2025-12-13) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 17 (2025-12-14) | Engine: 7.5% | Market: 0.6% | Res: 0 | Articles: 10
+  ✓ T- 16 (2025-12-15) | Engine: 0.1% | Market: 0.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 15 (2025-12-16) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+  ✓ T- 14 (2025-12-17) | Engine: 0.3% | Market: 0.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 13 (2025-12-18) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 12 (2025-12-19) | Engine: 7.5% | Market: 0.6% | Res: 0 | Articles: 10
+  ✗ T- 11 (2025-12-20) | Engine: 2.1% | Market: 0.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 10 (2025-12-21) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  9 (2025-12-22) | Engine: 0.0% | Market: 0.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  8 (2025-12-23) | Engine: 0.0% | Market: 0.3% | Res: 0 | Articles: 10
+  ✗ T-  7 (2025-12-24) | Engine: 0.8% | Market: 0.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  6 (2025-12-25) | Engine: 0.0% | Market: 0.2% | Res: 0 | Articles: 10
+  ✓ T-  5 (2025-12-26) | Engine: 0.1% | Market: 0.1% | Res: 0 | Articles: 10
+  ✓ T-  4 (2025-12-27) | Engine: 0.1% | Market: 0.1% | Res: 0 | Articles: 10
+  ✓ T-  3 (2025-12-28) | Engine: 0.0% | Market: 0.1% | Res: 0 | Articles: 10
+  ✓ T-  2 (2025-12-29) | Engine: 0.0% | Market: 0.1% | Res: 0 | Articles: 10
+  ✓ T-  1 (2025-12-30) | Engine: 0.1% | Market: 0.4% | Res: 0 | Articles: 10
+  [checkpoint] 180 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── Trump ends Ukraine war 90 days ──
+  Sub-market: Trump ends Ukraine war in first 90 days? | Resolution: 0 | History: 184 days
+  ✗ T- 90 (2025-01-19) | Engine: 73.9% | Market: 34.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 89 (2025-01-20) | Engine: 0.8% | Market: 34.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 88 (2025-01-21) | Engine: 0.6% | Market: 34.5% | Res: 0 | Articles: 10
+  ✓ T- 87 (2025-01-22) | Engine: 2.4% | Market: 28.5% | Res: 0 | Articles: 10
+  ✗ T- 86 (2025-01-23) | Engine: 71.9% | Market: 28.5% | Res: 0 | Articles: 10
+  ✗ T- 85 (2025-01-24) | Engine: 79.4% | Market: 32.5% | Res: 0 | Articles: 10
+  ✗ T- 84 (2025-01-25) | Engine: 59.9% | Market: 30.5% | Res: 0 | Articles: 10
+  ✗ T- 83 (2025-01-26) | Engine: 66.4% | Market: 30.5% | Res: 0 | Articles: 10
+  ✗ T- 82 (2025-01-27) | Engine: 79.0% | Market: 28.5% | Res: 0 | Articles: 10
+  ✗ T- 81 (2025-01-28) | Engine: 74.4% | Market: 26.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 80 (2025-01-29) | Engine: 0.5% | Market: 21.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 79 (2025-01-30) | Engine: 0.7% | Market: 20.5% | Res: 0 | Articles: 10
+  ✗ T- 78 (2025-01-31) | Engine: 85.5% | Market: 20.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 77 (2025-02-01) | Engine: 0.5% | Market: 22.5% | Res: 0 | Articles: 10
+  ✗ T- 76 (2025-02-02) | Engine: 54.2% | Market: 20.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 75 (2025-02-03) | Engine: 0.4% | Market: 17.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 74 (2025-02-04) | Engine: 0.4% | Market: 18.0% | Res: 0 | Articles: 10
+  ✗ T- 73 (2025-02-05) | Engine: 53.2% | Market: 19.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 72 (2025-02-06) | Engine: 0.5% | Market: 24.0% | Res: 0 | Articles: 10
+  ✗ T- 71 (2025-02-07) | Engine: 75.6% | Market: 25.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 70 (2025-02-08) | Engine: 0.4% | Market: 25.0% | Res: 0 | Articles: 10
+  ✗ T- 69 (2025-02-09) | Engine: 59.2% | Market: 25.5% | Res: 0 | Articles: 10
+  ✗ T- 68 (2025-02-10) | Engine: 73.4% | Market: 25.5% | Res: 0 | Articles: 10
+  ✗ T- 67 (2025-02-11) | Engine: 39.7% | Market: 25.5% | Res: 0 | Articles: 10
+  ✓ T- 66 (2025-02-12) | Engine: 24.6% | Market: 27.5% | Res: 0 | Articles: 10
+  ✗ T- 65 (2025-02-13) | Engine: 65.6% | Market: 35.5% | Res: 0 | Articles: 10
+  ✗ T- 64 (2025-02-14) | Engine: 84.9% | Market: 35.5% | Res: 0 | Articles: 10
+  ✗ T- 63 (2025-02-15) | Engine: 76.2% | Market: 31.5% | Res: 0 | Articles: 10
+  ✓ T- 62 (2025-02-16) | Engine: 24.2% | Market: 32.5% | Res: 0 | Articles: 10
+  ✗ T- 61 (2025-02-17) | Engine: 37.5% | Market: 37.5% | Res: 0 | Articles: 10
+  ✗ T- 60 (2025-02-18) | Engine: 39.7% | Market: 37.5% | Res: 0 | Articles: 10
+  ✓ T- 59 (2025-02-19) | Engine: 12.7% | Market: 31.5% | Res: 0 | Articles: 10
+  ✗ T- 58 (2025-02-20) | Engine: 48.9% | Market: 27.5% | Res: 0 | Articles: 10
+  ✓ T- 57 (2025-02-21) | Engine: 26.6% | Market: 28.5% | Res: 0 | Articles: 10
+  ✓ T- 56 (2025-02-22) | Engine: 23.2% | Market: 29.5% | Res: 0 | Articles: 10
+  ✗ T- 55 (2025-02-23) | Engine: 30.2% | Market: 29.5% | Res: 0 | Articles: 10
+  ✗ T- 54 (2025-02-24) | Engine: 53.0% | Market: 32.5% | Res: 0 | Articles: 10
+  ✗ T- 53 (2025-02-25) | Engine: 47.0% | Market: 30.5% | Res: 0 | Articles: 10
+  ✗ T- 52 (2025-02-26) | Engine: 55.5% | Market: 31.0% | Res: 0 | Articles: 10
+  ✗ T- 51 (2025-02-27) | Engine: 55.6% | Market: 28.5% | Res: 0 | Articles: 10
+  ✗ T- 50 (2025-02-28) | Engine: 34.4% | Market: 28.5% | Res: 0 | Articles: 10
+  ✓ T- 49 (2025-03-01) | Engine: 8.1% | Market: 22.5% | Res: 0 | Articles: 10
+  ✗ T- 48 (2025-03-02) | Engine: 71.4% | Market: 18.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 47 (2025-03-03) | Engine: 0.2% | Market: 21.5% | Res: 0 | Articles: 10
+  ✗ T- 46 (2025-03-04) | Engine: 21.5% | Market: 19.5% | Res: 0 | Articles: 10
+  ✗ T- 45 (2025-03-05) | Engine: 51.8% | Market: 26.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 44 (2025-03-06) | Engine: 0.3% | Market: 25.5% | Res: 0 | Articles: 10
+  ✗ T- 43 (2025-03-07) | Engine: 44.4% | Market: 22.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 42 (2025-03-08) | Engine: 0.3% | Market: 23.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 41 (2025-03-09) | Engine: 0.1% | Market: 22.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 40 (2025-03-10) | Engine: 0.1% | Market: 24.5% | Res: 0 | Articles: 10
+  ✗ T- 39 (2025-03-11) | Engine: 41.3% | Market: 26.5% | Res: 0 | Articles: 10
+  ✗ T- 38 (2025-03-12) | Engine: 60.4% | Market: 39.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 37 (2025-03-13) | Engine: 0.1% | Market: 37.5% | Res: 0 | Articles: 10
+  ✗ T- 36 (2025-03-14) | Engine: 54.1% | Market: 32.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 35 (2025-03-15) | Engine: 0.2% | Market: 33.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 34 (2025-03-16) | Engine: 0.3% | Market: 31.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 33 (2025-03-17) | Engine: 0.1% | Market: 35.5% | Res: 0 | Articles: 10
+  ✓ T- 32 (2025-03-18) | Engine: 11.5% | Market: 35.5% | Res: 0 | Articles: 10
+  ✓ T- 31 (2025-03-19) | Engine: 23.4% | Market: 24.5% | Res: 0 | Articles: 10
+  ✗ T- 30 (2025-03-20) | Engine: 43.1% | Market: 19.5% | Res: 0 | Articles: 10
+  ✗ T- 29 (2025-03-21) | Engine: 47.5% | Market: 14.0% | Res: 0 | Articles: 10
+  ✗ T- 28 (2025-03-22) | Engine: 56.6% | Market: 14.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 27 (2025-03-23) | Engine: 0.1% | Market: 15.5% | Res: 0 | Articles: 10
+  ✗ T- 26 (2025-03-24) | Engine: 28.1% | Market: 15.5% | Res: 0 | Articles: 10
+  ✗ T- 25 (2025-03-25) | Engine: 27.9% | Market: 13.5% | Res: 0 | Articles: 10
+  ✗ T- 24 (2025-03-26) | Engine: 67.1% | Market: 15.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 23 (2025-03-27) | Engine: 0.1% | Market: 13.5% | Res: 0 | Articles: 10
+  ✗ T- 22 (2025-03-28) | Engine: 29.8% | Market: 8.5% | Res: 0 | Articles: 10
+  ✗ T- 21 (2025-03-29) | Engine: 55.7% | Market: 7.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 20 (2025-03-30) | Engine: 0.1% | Market: 6.5% | Res: 0 | Articles: 10
+  ✗ T- 19 (2025-03-31) | Engine: 13.2% | Market: 6.5% | Res: 0 | Articles: 10
+  ✗ T- 18 (2025-04-01) | Engine: 24.6% | Market: 6.5% | Res: 0 | Articles: 10
+  ✗ T- 17 (2025-04-02) | Engine: 41.3% | Market: 6.5% | Res: 0 | Articles: 10
+  ✗ T- 16 (2025-04-03) | Engine: 25.4% | Market: 4.5% | Res: 0 | Articles: 10
+  ✗ T- 15 (2025-04-04) | Engine: 12.9% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 14 (2025-04-05) | Engine: 9.3% | Market: 3.8% | Res: 0 | Articles: 10
+  ✗ T- 13 (2025-04-06) | Engine: 13.3% | Market: 3.0% | Res: 0 | Articles: 10
+  ✗ T- 12 (2025-04-07) | Engine: 18.9% | Market: 3.5% | Res: 0 | Articles: 10
+  ✗ T- 11 (2025-04-08) | Engine: 14.5% | Market: 3.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 10 (2025-04-09) | Engine: 0.1% | Market: 2.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  9 (2025-04-10) | Engine: 0.1% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T-  8 (2025-04-11) | Engine: 5.7% | Market: 2.5% | Res: 0 | Articles: 10
+  ✗ T-  7 (2025-04-12) | Engine: 7.8% | Market: 2.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  6 (2025-04-13) | Engine: 0.0% | Market: 1.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  5 (2025-04-14) | Engine: 0.0% | Market: 0.9% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  4 (2025-04-15) | Engine: 0.0% | Market: 1.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  3 (2025-04-16) | Engine: 0.0% | Market: 1.1% | Res: 0 | Articles: 10
+  ✗ T-  2 (2025-04-17) | Engine: 2.7% | Market: 0.8% | Res: 0 | Articles: 10
+  ✓ T-  1 (2025-04-18) | Engine: 0.3% | Market: 1.1% | Res: 0 | Articles: 10
+  [checkpoint] 270 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── China invades Taiwan 2025 ──
+  Sub-market: Will China invade Taiwan in 2025? | Resolution: 0 | History: 338 days
+  ✗ T- 90 (2025-10-02) | Engine: 4.8% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 89 (2025-10-03) | Engine: 15.9% | Market: 3.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 88 (2025-10-04) | Engine: 0.1% | Market: 2.6% | Res: 0 | Articles: 10
+  ✓ T- 87 (2025-10-05) | Engine: 0.6% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 86 (2025-10-06) | Engine: 0.3% | Market: 2.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 85 (2025-10-07) | Engine: 0.1% | Market: 2.8% | Res: 0 | Articles: 10
+  ✓ T- 84 (2025-10-08) | Engine: 0.7% | Market: 2.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 83 (2025-10-09) | Engine: 0.3% | Market: 3.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 82 (2025-10-10) | Engine: 0.1% | Market: 3.1% | Res: 0 | Articles: 10
+  ✓ T- 81 (2025-10-11) | Engine: 0.5% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 80 (2025-10-12) | Engine: 0.4% | Market: 3.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 79 (2025-10-13) | Engine: 0.1% | Market: 4.1% | Res: 0 | Articles: 10
+  ✓ T- 78 (2025-10-14) | Engine: 0.4% | Market: 3.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 77 (2025-10-15) | Engine: 0.1% | Market: 3.3% | Res: 0 | Articles: 10
+  ✓ T- 76 (2025-10-16) | Engine: 0.4% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 75 (2025-10-17) | Engine: 0.4% | Market: 3.2% | Res: 0 | Articles: 10
+  ✓ T- 74 (2025-10-18) | Engine: 0.4% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 73 (2025-10-19) | Engine: 8.2% | Market: 3.4% | Res: 0 | Articles: 10
+  ✓ T- 72 (2025-10-20) | Engine: 0.1% | Market: 3.1% | Res: 0 | Articles: 10
+  ✓ T- 71 (2025-10-21) | Engine: 0.3% | Market: 3.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 70 (2025-10-22) | Engine: 0.1% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 69 (2025-10-23) | Engine: 0.2% | Market: 2.9% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 68 (2025-10-24) | Engine: 0.1% | Market: 3.0% | Res: 0 | Articles: 10
+  ✓ T- 67 (2025-10-25) | Engine: 0.2% | Market: 3.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 66 (2025-10-26) | Engine: 0.1% | Market: 3.1% | Res: 0 | Articles: 10
+  ✓ T- 65 (2025-10-27) | Engine: 0.6% | Market: 3.4% | Res: 0 | Articles: 10
+  ✓ T- 64 (2025-10-28) | Engine: 0.4% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 63 (2025-10-29) | Engine: 4.2% | Market: 3.4% | Res: 0 | Articles: 10
+  ✓ T- 62 (2025-10-30) | Engine: 0.5% | Market: 3.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 61 (2025-10-31) | Engine: 0.1% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 60 (2025-11-01) | Engine: 0.6% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 59 (2025-11-02) | Engine: 0.2% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 58 (2025-11-03) | Engine: 0.2% | Market: 2.9% | Res: 0 | Articles: 10
+  ✓ T- 57 (2025-11-04) | Engine: 0.4% | Market: 2.5% | Res: 0 | Articles: 10
+  ✓ T- 56 (2025-11-05) | Engine: 0.3% | Market: 2.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 55 (2025-11-06) | Engine: 0.1% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 54 (2025-11-07) | Engine: 0.4% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T- 53 (2025-11-08) | Engine: 0.2% | Market: 2.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 52 (2025-11-09) | Engine: 0.1% | Market: 2.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 51 (2025-11-10) | Engine: 0.1% | Market: 2.2% | Res: 0 | Articles: 10
+  ✓ T- 50 (2025-11-11) | Engine: 0.1% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 49 (2025-11-12) | Engine: 0.1% | Market: 2.2% | Res: 0 | Articles: 10
+  ✓ T- 48 (2025-11-13) | Engine: 0.4% | Market: 2.5% | Res: 0 | Articles: 10
+  ✓ T- 47 (2025-11-14) | Engine: 0.9% | Market: 2.3% | Res: 0 | Articles: 10
+  ✓ T- 46 (2025-11-15) | Engine: 0.1% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 45 (2025-11-16) | Engine: 2.3% | Market: 2.4% | Res: 0 | Articles: 10
+  ✓ T- 44 (2025-11-17) | Engine: 0.5% | Market: 2.2% | Res: 0 | Articles: 10
+  ✓ T- 43 (2025-11-18) | Engine: 0.7% | Market: 2.3% | Res: 0 | Articles: 10
+  ✓ T- 42 (2025-11-19) | Engine: 0.7% | Market: 2.2% | Res: 0 | Articles: 10
+  ✓ T- 41 (2025-11-20) | Engine: 0.1% | Market: 1.4% | Res: 0 | Articles: 10
+  ✓ T- 40 (2025-11-21) | Engine: 0.5% | Market: 1.5% | Res: 0 | Articles: 10
+  ✓ T- 39 (2025-11-22) | Engine: 0.6% | Market: 1.9% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 38 (2025-11-23) | Engine: 0.1% | Market: 1.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 37 (2025-11-24) | Engine: 0.0% | Market: 1.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 36 (2025-11-25) | Engine: 0.1% | Market: 1.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 35 (2025-11-26) | Engine: 0.1% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T- 34 (2025-11-27) | Engine: 0.3% | Market: 1.7% | Res: 0 | Articles: 10
+  ✓ T- 33 (2025-11-28) | Engine: 0.3% | Market: 1.7% | Res: 0 | Articles: 10
+  ✓ T- 32 (2025-11-29) | Engine: 0.2% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T- 31 (2025-11-30) | Engine: 0.2% | Market: 1.5% | Res: 0 | Articles: 10
+  ✓ T- 30 (2025-12-01) | Engine: 0.3% | Market: 1.3% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 29 (2025-12-02) | Engine: 0.1% | Market: 1.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 28 (2025-12-03) | Engine: 0.0% | Market: 1.1% | Res: 0 | Articles: 10
+  ✓ T- 27 (2025-12-04) | Engine: 0.5% | Market: 1.1% | Res: 0 | Articles: 10
+  ✓ T- 26 (2025-12-05) | Engine: 0.4% | Market: 1.2% | Res: 0 | Articles: 10
+  ✓ T- 25 (2025-12-06) | Engine: 0.9% | Market: 1.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 24 (2025-12-07) | Engine: 0.0% | Market: 0.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 23 (2025-12-08) | Engine: 0.0% | Market: 0.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 22 (2025-12-09) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 21 (2025-12-10) | Engine: 0.0% | Market: 1.1% | Res: 0 | Articles: 10
+  ✓ T- 20 (2025-12-11) | Engine: 0.4% | Market: 0.9% | Res: 0 | Articles: 10
+  ✓ T- 19 (2025-12-12) | Engine: 0.3% | Market: 0.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 18 (2025-12-13) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 17 (2025-12-14) | Engine: 2.9% | Market: 0.6% | Res: 0 | Articles: 10
+  ✓ T- 16 (2025-12-15) | Engine: 0.1% | Market: 0.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 15 (2025-12-16) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+  ✓ T- 14 (2025-12-17) | Engine: 0.3% | Market: 0.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 13 (2025-12-18) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 12 (2025-12-19) | Engine: 11.8% | Market: 0.6% | Res: 0 | Articles: 10
+  ✗ T- 11 (2025-12-20) | Engine: 1.9% | Market: 0.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 10 (2025-12-21) | Engine: 0.0% | Market: 0.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  9 (2025-12-22) | Engine: 0.0% | Market: 0.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  8 (2025-12-23) | Engine: 0.0% | Market: 0.3% | Res: 0 | Articles: 10
+  ✗ T-  7 (2025-12-24) | Engine: 0.8% | Market: 0.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  6 (2025-12-25) | Engine: 0.0% | Market: 0.2% | Res: 0 | Articles: 10
+  ✓ T-  5 (2025-12-26) | Engine: 0.1% | Market: 0.1% | Res: 0 | Articles: 10
+  ✓ T-  4 (2025-12-27) | Engine: 0.0% | Market: 0.1% | Res: 0 | Articles: 10
+  ✓ T-  3 (2025-12-28) | Engine: 0.0% | Market: 0.1% | Res: 0 | Articles: 10
+  ✗ T-  2 (2025-12-29) | Engine: 0.2% | Market: 0.1% | Res: 0 | Articles: 10
+  ✓ T-  1 (2025-12-30) | Engine: 0.1% | Market: 0.4% | Res: 0 | Articles: 10
+  [checkpoint] 360 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── US military action vs Venezuela (Jan 15) ──
+  Sub-market: January 15, 2026 | Resolution: 1 | History: 23 days
+  ✗ T- 33 (2025-12-13) | Engine: 2.5% | Market: 33.5% | Res: 1 | Articles: 10
+  ✗ T- 32 (2025-12-14) | Engine: 16.1% | Market: 33.5% | Res: 1 | Articles: 10
+  ✗ T- 31 (2025-12-15) | Engine: 0.9% | Market: 25.5% | Res: 1 | Articles: 10
+  ✗ T- 30 (2025-12-16) | Engine: 8.2% | Market: 26.0% | Res: 1 | Articles: 10
+  ✗ T- 29 (2025-12-17) | Engine: 0.3% | Market: 25.5% | Res: 1 | Articles: 10
+  ✗ T- 28 (2025-12-18) | Engine: 7.4% | Market: 31.5% | Res: 1 | Articles: 10
+  ✗ T- 27 (2025-12-19) | Engine: 0.2% | Market: 27.0% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✗ T- 26 (2025-12-20) | Engine: 0.1% | Market: 29.0% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✗ T- 25 (2025-12-21) | Engine: 0.1% | Market: 28.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✗ T- 24 (2025-12-22) | Engine: 0.1% | Market: 23.5% | Res: 1 | Articles: 10
+  ✗ T- 23 (2025-12-23) | Engine: 0.4% | Market: 20.5% | Res: 1 | Articles: 10
+  ✗ T- 22 (2025-12-24) | Engine: 0.9% | Market: 20.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✗ T- 21 (2025-12-25) | Engine: 0.1% | Market: 17.0% | Res: 1 | Articles: 10
+  ✗ T- 20 (2025-12-26) | Engine: 2.6% | Market: 15.5% | Res: 1 | Articles: 10
+  ✗ T- 19 (2025-12-27) | Engine: 2.7% | Market: 17.0% | Res: 1 | Articles: 10
+  ✗ T- 18 (2025-12-28) | Engine: 2.7% | Market: 15.5% | Res: 1 | Articles: 10
+  ✗ T- 17 (2025-12-29) | Engine: 3.9% | Market: 18.0% | Res: 1 | Articles: 10
+  ✗ T- 16 (2025-12-30) | Engine: 12.1% | Market: 23.5% | Res: 1 | Articles: 10
+  ✗ T- 15 (2025-12-31) | Engine: 4.1% | Market: 11.5% | Res: 1 | Articles: 10
+  ✗ T- 14 (2026-01-01) | Engine: 4.7% | Market: 14.0% | Res: 1 | Articles: 10
+  ✗ T- 13 (2026-01-02) | Engine: 0.9% | Market: 7.0% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✗ T- 12 (2026-01-03) | Engine: 3.2% | Market: 10.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+    [warn] Node scoring parse error, using zeros
+  ✗ T- 11 (2026-01-04) | Engine: 0.0% | Market: 10.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✗ T- 10 (2026-01-05) | Engine: 0.1% | Market: 10.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✗ T-  9 (2026-01-06) | Engine: 0.1% | Market: 10.5% | Res: 1 | Articles: 10
+  ✗ T-  8 (2026-01-07) | Engine: 0.0% | Market: 10.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+    [warn] Node scoring parse error, using zeros
+  ✗ T-  7 (2026-01-08) | Engine: 0.0% | Market: 10.5% | Res: 1 | Articles: 10
+  ✗ T-  6 (2026-01-09) | Engine: 0.0% | Market: 10.5% | Res: 1 | Articles: 10
+  ✗ T-  5 (2026-01-10) | Engine: 8.8% | Market: 10.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✗ T-  4 (2026-01-11) | Engine: 0.0% | Market: 10.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+    [warn] Node scoring parse error, using zeros
+  ✗ T-  3 (2026-01-12) | Engine: 0.0% | Market: 10.5% | Res: 1 | Articles: 10
+  ✗ T-  2 (2026-01-13) | Engine: 0.1% | Market: 10.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✗ T-  1 (2026-01-14) | Engine: 0.0% | Market: 10.5% | Res: 1 | Articles: 10
+  [checkpoint] 393 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── US strikes Iran by Feb 28 2026 ──
+  Sub-market: February 28 | Resolution: 1 | History: 40 days
+    [warn] Node scoring parse error, using zeros
+  ✗ T- 39 (2026-01-20) | Engine: 0.2% | Market: 43.0% | Res: 1 | Articles: 10
+  ✗ T- 38 (2026-01-21) | Engine: 1.4% | Market: 34.5% | Res: 1 | Articles: 10
+  ✗ T- 37 (2026-01-22) | Engine: 16.9% | Market: 39.0% | Res: 1 | Articles: 10
+  ✗ T- 36 (2026-01-23) | Engine: 1.6% | Market: 46.5% | Res: 1 | Articles: 10
+  ✗ T- 35 (2026-01-24) | Engine: 12.3% | Market: 53.0% | Res: 1 | Articles: 10
+  ✗ T- 34 (2026-01-25) | Engine: 0.9% | Market: 51.5% | Res: 1 | Articles: 10
+  ✗ T- 33 (2026-01-26) | Engine: 0.2% | Market: 52.0% | Res: 1 | Articles: 10
+  ✗ T- 32 (2026-01-27) | Engine: 31.4% | Market: 42.5% | Res: 1 | Articles: 10
+  ✗ T- 31 (2026-01-28) | Engine: 31.4% | Market: 44.0% | Res: 1 | Articles: 10
+  ✗ T- 30 (2026-01-29) | Engine: 2.5% | Market: 48.5% | Res: 1 | Articles: 10
+  ✗ T- 29 (2026-01-30) | Engine: 2.1% | Market: 59.0% | Res: 1 | Articles: 10
+  ✗ T- 28 (2026-01-31) | Engine: 20.8% | Market: 55.5% | Res: 1 | Articles: 10
+  ✗ T- 27 (2026-02-01) | Engine: 1.2% | Market: 49.5% | Res: 1 | Articles: 10
+  ✗ T- 26 (2026-02-02) | Engine: 0.1% | Market: 33.0% | Res: 1 | Articles: 10
+  ✗ T- 25 (2026-02-03) | Engine: 4.3% | Market: 23.5% | Res: 1 | Articles: 10
+  ✗ T- 24 (2026-02-04) | Engine: 0.7% | Market: 23.5% | Res: 1 | Articles: 10
+  ✗ T- 23 (2026-02-05) | Engine: 2.0% | Market: 25.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✗ T- 22 (2026-02-06) | Engine: 0.0% | Market: 25.5% | Res: 1 | Articles: 10
+  ✗ T- 21 (2026-02-07) | Engine: 3.1% | Market: 28.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✗ T- 20 (2026-02-08) | Engine: 0.1% | Market: 21.5% | Res: 1 | Articles: 10
+  ✗ T- 19 (2026-02-09) | Engine: 0.7% | Market: 22.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✗ T- 18 (2026-02-10) | Engine: 0.0% | Market: 25.5% | Res: 1 | Articles: 10
+  ✗ T- 17 (2026-02-11) | Engine: 4.6% | Market: 20.5% | Res: 1 | Articles: 10
+  ✗ T- 16 (2026-02-12) | Engine: 0.1% | Market: 17.5% | Res: 1 | Articles: 10
+  ✗ T- 15 (2026-02-13) | Engine: 1.5% | Market: 12.5% | Res: 1 | Articles: 10
+  ✗ T- 14 (2026-02-14) | Engine: 0.1% | Market: 12.5% | Res: 1 | Articles: 10
+  ✗ T- 13 (2026-02-15) | Engine: 0.1% | Market: 12.5% | Res: 1 | Articles: 10
+  ✗ T- 12 (2026-02-16) | Engine: 0.3% | Market: 13.5% | Res: 1 | Articles: 10
+  ✗ T- 11 (2026-02-17) | Engine: 0.6% | Market: 18.5% | Res: 1 | Articles: 10
+  ✗ T- 10 (2026-02-18) | Engine: 4.4% | Market: 18.5% | Res: 1 | Articles: 10
+  ✗ T-  9 (2026-02-19) | Engine: 1.3% | Market: 22.5% | Res: 1 | Articles: 10
+  ✗ T-  8 (2026-02-20) | Engine: 6.3% | Market: 25.5% | Res: 1 | Articles: 10
+  ✗ T-  7 (2026-02-21) | Engine: 1.1% | Market: 25.5% | Res: 1 | Articles: 10
+  ✗ T-  6 (2026-02-22) | Engine: 0.0% | Market: 17.5% | Res: 1 | Articles: 10
+  ✗ T-  5 (2026-02-23) | Engine: 0.4% | Market: 19.5% | Res: 1 | Articles: 10
+  ✗ T-  4 (2026-02-24) | Engine: 0.4% | Market: 20.5% | Res: 1 | Articles: 10
+  ✗ T-  3 (2026-02-25) | Engine: 1.2% | Market: 17.5% | Res: 1 | Articles: 10
+  ✗ T-  2 (2026-02-26) | Engine: 0.0% | Market: 9.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✗ T-  1 (2026-02-27) | Engine: 1.9% | Market: 8.5% | Res: 1 | Articles: 10
+  [checkpoint] 432 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── India strikes Pakistan by Dec 31 2025 (No) ──
+  Sub-market: December 31 | Resolution: 0 | History: 80 days
+  ✓ T- 77 (2025-10-15) | Engine: 0.3% | Market: 13.0% | Res: 0 | Articles: 10
+  ✓ T- 76 (2025-10-16) | Engine: 0.4% | Market: 11.5% | Res: 0 | Articles: 10
+  ✓ T- 75 (2025-10-17) | Engine: 0.4% | Market: 12.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 74 (2025-10-18) | Engine: 0.5% | Market: 12.5% | Res: 0 | Articles: 10
+  ✓ T- 73 (2025-10-19) | Engine: 2.6% | Market: 12.5% | Res: 0 | Articles: 10
+  ✓ T- 72 (2025-10-20) | Engine: 6.2% | Market: 12.5% | Res: 0 | Articles: 10
+  ✓ T- 71 (2025-10-21) | Engine: 1.5% | Market: 11.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 70 (2025-10-22) | Engine: 0.2% | Market: 11.0% | Res: 0 | Articles: 10
+  ✗ T- 69 (2025-10-23) | Engine: 26.9% | Market: 11.0% | Res: 0 | Articles: 10
+  ✓ T- 68 (2025-10-24) | Engine: 0.8% | Market: 11.0% | Res: 0 | Articles: 10
+  ✓ T- 67 (2025-10-25) | Engine: 0.7% | Market: 9.5% | Res: 0 | Articles: 10
+  ✓ T- 66 (2025-10-26) | Engine: 0.6% | Market: 11.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 65 (2025-10-27) | Engine: 0.2% | Market: 11.0% | Res: 0 | Articles: 10
+  ✓ T- 64 (2025-10-28) | Engine: 1.8% | Market: 11.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 63 (2025-10-29) | Engine: 1.7% | Market: 11.5% | Res: 0 | Articles: 10
+  ✓ T- 62 (2025-10-30) | Engine: 3.5% | Market: 12.0% | Res: 0 | Articles: 10
+  ✗ T- 61 (2025-10-31) | Engine: 11.7% | Market: 11.5% | Res: 0 | Articles: 10
+  ✓ T- 60 (2025-11-01) | Engine: 1.0% | Market: 10.5% | Res: 0 | Articles: 10
+  ✓ T- 59 (2025-11-02) | Engine: 0.7% | Market: 8.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 58 (2025-11-03) | Engine: 0.5% | Market: 8.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 57 (2025-11-04) | Engine: 0.1% | Market: 7.5% | Res: 0 | Articles: 10
+  ✓ T- 56 (2025-11-05) | Engine: 0.5% | Market: 7.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 55 (2025-11-06) | Engine: 0.1% | Market: 4.5% | Res: 0 | Articles: 10
+  ✓ T- 54 (2025-11-07) | Engine: 0.4% | Market: 4.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 53 (2025-11-08) | Engine: 0.1% | Market: 4.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 52 (2025-11-09) | Engine: 0.0% | Market: 4.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 51 (2025-11-10) | Engine: 0.4% | Market: 3.3% | Res: 0 | Articles: 10
+  ✗ T- 50 (2025-11-11) | Engine: 24.1% | Market: 13.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 49 (2025-11-12) | Engine: 8.0% | Market: 16.9% | Res: 0 | Articles: 10
+  ✓ T- 48 (2025-11-13) | Engine: 1.0% | Market: 21.6% | Res: 0 | Articles: 10
+  ✓ T- 47 (2025-11-14) | Engine: 0.2% | Market: 21.5% | Res: 0 | Articles: 10
+  ✗ T- 46 (2025-11-15) | Engine: 19.2% | Market: 17.8% | Res: 0 | Articles: 10
+  ✓ T- 45 (2025-11-16) | Engine: 0.1% | Market: 17.0% | Res: 0 | Articles: 10
+  ✗ T- 44 (2025-11-17) | Engine: 34.7% | Market: 14.7% | Res: 0 | Articles: 10
+  ✓ T- 43 (2025-11-18) | Engine: 0.2% | Market: 14.1% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 42 (2025-11-19) | Engine: 0.2% | Market: 13.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 41 (2025-11-20) | Engine: 0.1% | Market: 8.9% | Res: 0 | Articles: 10
+  ✓ T- 40 (2025-11-21) | Engine: 0.6% | Market: 10.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 39 (2025-11-22) | Engine: 0.2% | Market: 9.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 38 (2025-11-23) | Engine: 0.1% | Market: 10.2% | Res: 0 | Articles: 10
+  ✓ T- 37 (2025-11-24) | Engine: 0.4% | Market: 9.7% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 36 (2025-11-25) | Engine: 0.2% | Market: 10.1% | Res: 0 | Articles: 10
+  ✓ T- 35 (2025-11-26) | Engine: 2.4% | Market: 10.0% | Res: 0 | Articles: 10
+  ✓ T- 34 (2025-11-27) | Engine: 0.2% | Market: 10.1% | Res: 0 | Articles: 10
+  ✓ T- 33 (2025-11-28) | Engine: 0.2% | Market: 9.9% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 32 (2025-11-29) | Engine: 0.1% | Market: 9.2% | Res: 0 | Articles: 10
+  ✓ T- 31 (2025-11-30) | Engine: 0.8% | Market: 9.3% | Res: 0 | Articles: 10
+  ✓ T- 30 (2025-12-01) | Engine: 0.1% | Market: 10.8% | Res: 0 | Articles: 10
+  ✓ T- 29 (2025-12-02) | Engine: 0.2% | Market: 7.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 28 (2025-12-03) | Engine: 0.1% | Market: 6.9% | Res: 0 | Articles: 10
+  ✓ T- 27 (2025-12-04) | Engine: 0.3% | Market: 5.8% | Res: 0 | Articles: 10
+  ✓ T- 26 (2025-12-05) | Engine: 0.1% | Market: 5.9% | Res: 0 | Articles: 10
+  ✓ T- 25 (2025-12-06) | Engine: 0.6% | Market: 6.3% | Res: 0 | Articles: 10
+  ✓ T- 24 (2025-12-07) | Engine: 0.1% | Market: 5.5% | Res: 0 | Articles: 10
+  ✓ T- 23 (2025-12-08) | Engine: 4.3% | Market: 5.5% | Res: 0 | Articles: 10
+  ✓ T- 22 (2025-12-09) | Engine: 0.4% | Market: 3.4% | Res: 0 | Articles: 10
+  ✓ T- 21 (2025-12-10) | Engine: 0.6% | Market: 3.9% | Res: 0 | Articles: 10
+  ✓ T- 20 (2025-12-11) | Engine: 0.1% | Market: 3.8% | Res: 0 | Articles: 10
+  ✓ T- 19 (2025-12-12) | Engine: 0.3% | Market: 3.6% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 18 (2025-12-13) | Engine: 0.0% | Market: 4.6% | Res: 0 | Articles: 10
+  ✓ T- 17 (2025-12-14) | Engine: 0.0% | Market: 5.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 16 (2025-12-15) | Engine: 0.0% | Market: 0.9% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 15 (2025-12-16) | Engine: 0.1% | Market: 1.4% | Res: 0 | Articles: 10
+  ✓ T- 14 (2025-12-17) | Engine: 0.2% | Market: 1.5% | Res: 0 | Articles: 10
+  ✓ T- 13 (2025-12-18) | Engine: 0.1% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T- 12 (2025-12-19) | Engine: 0.2% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T- 11 (2025-12-20) | Engine: 0.0% | Market: 1.8% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T- 10 (2025-12-21) | Engine: 0.0% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T-  9 (2025-12-22) | Engine: 0.0% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T-  8 (2025-12-23) | Engine: 0.1% | Market: 1.8% | Res: 0 | Articles: 10
+  ✓ T-  7 (2025-12-24) | Engine: 0.2% | Market: 1.6% | Res: 0 | Articles: 10
+  ✓ T-  6 (2025-12-25) | Engine: 0.1% | Market: 1.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error, using zeros
+  ✓ T-  5 (2025-12-26) | Engine: 0.0% | Market: 1.4% | Res: 0 | Articles: 10
+  ✗ T-  4 (2025-12-27) | Engine: 3.1% | Market: 1.4% | Res: 0 | Articles: 10
+  ✓ T-  3 (2025-12-28) | Engine: 0.8% | Market: 1.1% | Res: 0 | Articles: 10
+  ✓ T-  2 (2025-12-29) | Engine: 0.1% | Market: 1.2% | Res: 0 | Articles: 10
+  ✓ T-  1 (2025-12-30) | Engine: 0.0% | Market: 0.3% | Res: 0 | Articles: 10
+  [checkpoint] 509 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── China invades Taiwan by Jun 30 2026 (live) ──
+  Sub-market: Will China invade Taiwan by June 30, 2026? | Resolution: None | History: 160 days
+   T- 90 (2026-04-01) | Engine: 0.2% | Market: 4.2% | Res: live | Articles: 10
+   T- 89 (2026-04-02) | Engine: 0.2% | Market: 3.4% | Res: live | Articles: 10
+   T- 88 (2026-04-03) | Engine: 0.4% | Market: 3.4% | Res: live | Articles: 10
+   T- 87 (2026-04-04) | Engine: 0.2% | Market: 3.4% | Res: live | Articles: 10
+   T- 86 (2026-04-05) | Engine: 0.2% | Market: 3.4% | Res: live | Articles: 10
+   T- 85 (2026-04-06) | Engine: 0.7% | Market: 3.4% | Res: live | Articles: 10
+   T- 84 (2026-04-07) | Engine: 0.6% | Market: 3.4% | Res: live | Articles: 10
+   T- 83 (2026-04-08) | Engine: 0.2% | Market: 3.4% | Res: live | Articles: 10
+    [warn] Node scoring parse error, using zeros
+   T- 82 (2026-04-09) | Engine: 0.1% | Market: 3.6% | Res: live | Articles: 10
+   T- 81 (2026-04-10) | Engine: 8.5% | Market: 3.6% | Res: live | Articles: 10
+    [warn] Node scoring parse error, using zeros
+   T- 80 (2026-04-11) | Engine: 0.1% | Market: 3.6% | Res: live | Articles: 10
+   T- 79 (2026-04-12) | Engine: 0.1% | Market: 3.6% | Res: live | Articles: 10
+   T- 78 (2026-04-13) | Engine: 0.2% | Market: 3.6% | Res: live | Articles: 10
+   T- 77 (2026-04-14) | Engine: 0.6% | Market: 3.6% | Res: live | Articles: 10
+    [warn] Node scoring parse error, using zeros
+   T- 76 (2026-04-15) | Engine: 0.7% | Market: 3.6% | Res: live | Articles: 10
+   T- 75 (2026-04-16) | Engine: 0.4% | Market: 3.6% | Res: live | Articles: 10
+    [warn] Node scoring parse error, using zeros
+   T- 74 (2026-04-17) | Engine: 0.1% | Market: 3.6% | Res: live | Articles: 10
+   T- 73 (2026-04-18) | Engine: 2.8% | Market: 3.6% | Res: live | Articles: 10
+   T- 72 (2026-04-19) | Engine: 21.7% | Market: 2.5% | Res: live | Articles: 10
+    [warn] Node scoring parse error, using zeros
+   T- 71 (2026-04-20) | Engine: 0.1% | Market: 2.5% | Res: live | Articles: 10
+   T- 70 (2026-04-21) | Engine: 1.2% | Market: 2.5% | Res: live | Articles: 10
+   T- 69 (2026-04-22) | Engine: 0.6% | Market: 2.1% | Res: live | Articles: 10
+   T- 68 (2026-04-23) | Engine: 0.9% | Market: 2.5% | Res: live | Articles: 10
+   T- 67 (2026-04-24) | Engine: 0.7% | Market: 2.4% | Res: live | Articles: 10
+    [warn] Node scoring parse error, using zeros
+   T- 66 (2026-04-25) | Engine: 0.1% | Market: 2.5% | Res: live | Articles: 10
+   T- 65 (2026-04-26) | Engine: 0.8% | Market: 2.5% | Res: live | Articles: 10
+   T- 64 (2026-04-27) | Engine: 0.8% | Market: 2.5% | Res: live | Articles: 10
+   T- 63 (2026-04-28) | Engine: 0.3% | Market: 2.2% | Res: live | Articles: 10
+   T- 62 (2026-04-29) | Engine: 0.3% | Market: 2.1% | Res: live | Articles: 10
+   T- 61 (2026-04-30) | Engine: 0.5% | Market: 1.8% | Res: live | Articles: 10
+   T- 60 (2026-05-01) | Engine: 0.2% | Market: 2.1% | Res: live | Articles: 10
+   T- 59 (2026-05-02) | Engine: 0.3% | Market: 1.9% | Res: live | Articles: 10
+   T- 58 (2026-05-03) | Engine: 0.3% | Market: 1.6% | Res: live | Articles: 10
+   T- 57 (2026-05-04) | Engine: 0.4% | Market: 1.5% | Res: live | Articles: 10
+   T- 56 (2026-05-05) | Engine: 0.1% | Market: 1.6% | Res: live | Articles: 10
+   T- 55 (2026-05-06) | Engine: 0.3% | Market: 1.5% | Res: live | Articles: 10
+   T- 54 (2026-05-07) | Engine: 3.5% | Market: 1.6% | Res: live | Articles: 10
+    [warn] Node scoring parse error, using zeros
+   T- 53 (2026-05-08) | Engine: 0.1% | Market: 1.7% | Res: live | Articles: 10
+   T- 52 (2026-05-09) | Engine: 0.2% | Market: 1.9% | Res: live | Articles: 10
+   T- 51 (2026-05-10) | Engine: 0.2% | Market: 1.6% | Res: live | Articles: 10
+   T- 50 (2026-05-11) | Engine: 0.5% | Market: 1.6% | Res: live | Articles: 10
+   T- 49 (2026-05-12) | Engine: 0.1% | Market: 1.9% | Res: live | Articles: 10
+   T- 48 (2026-05-13) | Engine: 0.2% | Market: 1.8% | Res: live | Articles: 10
+   T- 47 (2026-05-14) | Engine: 0.5% | Market: 1.8% | Res: live | Articles: 10
+   T- 46 (2026-05-15) | Engine: 0.0% | Market: 2.1% | Res: live | Articles: 10
+   T- 45 (2026-05-16) | Engine: 0.2% | Market: 1.1% | Res: live | Articles: 10
+   T- 44 (2026-05-17) | Engine: 0.3% | Market: 0.9% | Res: live | Articles: 10
+   T- 43 (2026-05-18) | Engine: 0.2% | Market: 1.7% | Res: live | Articles: 10
+    [warn] Node scoring parse error, using zeros
+   T- 42 (2026-05-19) | Engine: 0.1% | Market: 1.5% | Res: live | Articles: 10
+   T- 41 (2026-05-20) | Engine: 1.2% | Market: 1.2% | Res: live | Articles: 10
+   T- 40 (2026-05-21) | Engine: 1.1% | Market: 1.4% | Res: live | Articles: 10
+   T- 39 (2026-05-22) | Engine: 0.2% | Market: 1.8% | Res: live | Articles: 10
+   T- 38 (2026-05-23) | Engine: 0.3% | Market: 1.6% | Res: live | Articles: 10
+   T- 37 (2026-05-24) | Engine: 0.1% | Market: 1.6% | Res: live | Articles: 10
+   T- 36 (2026-05-25) | Engine: 0.2% | Market: 1.6% | Res: live | Articles: 10
+   T- 35 (2026-05-26) | Engine: 0.2% | Market: 1.5% | Res: live | Articles: 10
+   T- 34 (2026-05-27) | Engine: 0.1% | Market: 1.5% | Res: live | Articles: 10
+    [warn] Node scoring parse error, using zeros
+   T- 33 (2026-05-28) | Engine: 0.1% | Market: 1.3% | Res: live | Articles: 10
+   T- 32 (2026-05-29) | Engine: 0.3% | Market: 1.1% | Res: live | Articles: 10
+   T- 31 (2026-05-30) | Engine: 0.1% | Market: 0.9% | Res: live | Articles: 10
+   T- 30 (2026-05-31) | Engine: 0.2% | Market: 0.9% | Res: live | Articles: 10
+    [warn] Node scoring parse error, using zeros
+   T- 29 (2026-06-01) | Engine: 0.0% | Market: 0.9% | Res: live | Articles: 10
+    [warn] Node scoring parse error, using zeros
+   T- 28 (2026-06-02) | Engine: 0.0% | Market: 0.9% | Res: live | Articles: 10
+   T- 27 (2026-06-03) | Engine: 0.2% | Market: 0.9% | Res: live | Articles: 10
+   T- 26 (2026-06-04) | Engine: 0.1% | Market: 0.9% | Res: live | Articles: 10
+    [warn] Node scoring parse error, using zeros
+   T- 25 (2026-06-05) | Engine: 0.0% | Market: 0.9% | Res: live | Articles: 10
+   T- 24 (2026-06-06) | Engine: 0.1% | Market: 1.1% | Res: live | Articles: 10
+   T- 23 (2026-06-07) | Engine: 2.8% | Market: 1.2% | Res: live | Articles: 10
+   T- 22 (2026-06-08) | Engine: 0.1% | Market: 0.8% | Res: live | Articles: 10
+   T- 21 (2026-06-09) | Engine: 0.1% | Market: 0.7% | Res: live | Articles: 10
+   T- 20 (2026-06-10) | Engine: 0.0% | Market: 0.7% | Res: live | Articles: 0
+   T- 19 (2026-06-11) | Engine: 0.0% | Market: 0.4% | Res: live | Articles: 0
+   T- 18 (2026-06-12) | Engine: 0.0% | Market: 0.8% | Res: live | Articles: 0
+   T- 17 (2026-06-13) | Engine: 0.0% | Market: 0.7% | Res: live | Articles: 0
+   T- 16 (2026-06-14) | Engine: 0.0% | Market: 0.5% | Res: live | Articles: 0
+   T- 15 (2026-06-15) | Engine: 0.0% | Market: 0.4% | Res: live | Articles: 0
+   T- 14 (2026-06-16) | Engine: 0.1% | Market: 0.4% | Res: live | Articles: 10
+   T- 13 (2026-06-17) | Engine: 0.1% | Market: 0.4% | Res: live | Articles: 10
+   T- 12 (2026-06-18) | Engine: 0.1% | Market: 0.4% | Res: live | Articles: 10
+  [checkpoint] 588 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── China invades Taiwan 2026 (live) ──
+  ✗ No event found for slug: will-china-invade-taiwan-in-2026
+  ✗ No Polymarket data — skipping
+
+── India strikes Pakistan by Dec 31 2026 (live) ──
+  Sub-market: December 31, 2026 | Resolution: None | History: 200 days
+  [checkpoint] 588 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+  Results saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+████████████████████████████████████████████████████████████
+  BACKTEST RESULTS — Mach 2
+████████████████████████████████████████████████████████████
+
+  Resolved rows:  509
+  Live rows:      79
+
+  Engine Brier:   0.1626
+  Market Brier:   0.0959
+  Delta:          +0.0667  (engine WORSE)
+
+  Engine beats market: 339/509 snapshots
+
+  BY RESOLUTION:
+    Resolved Yes (n=72): Engine 0.9379 | Market 0.5946
+    Resolved No  (n=437): Engine 0.0348 | Market 0.0138
+
+  BY SNAPSHOT:
+    T- 90: Engine 0.1378 | Market 0.0299
+    T- 89: Engine 0.0171 | Market 0.0308
+    T- 88: Engine 0.0024 | Market 0.0305
+    T- 87: Engine 0.0010 | Market 0.0210
+    T- 86: Engine 0.1291 | Market 0.0210
+    T- 85: Engine 0.1576 | Market 0.0272
+    T- 84: Engine 0.0899 | Market 0.0240
+    T- 83: Engine 0.1114 | Market 0.0241
+    T- 82: Engine 0.1577 | Market 0.0212
+    T- 81: Engine 0.1396 | Market 0.0184
+    T- 80: Engine 0.0000 | Market 0.0125
+    T- 79: Engine 0.0013 | Market 0.0117
+    T- 78: Engine 0.1839 | Market 0.0114
+    T- 77: Engine 0.0000 | Market 0.0144
+    T- 76: Engine 0.0611 | Market 0.0122
+    T- 75: Engine 0.0024 | Market 0.0105
+    T- 74: Engine 0.0010 | Market 0.0105
+    T- 73: Engine 0.0612 | Market 0.0116
+    T- 72: Engine 0.0010 | Market 0.0156
+    T- 71: Engine 0.1145 | Market 0.0164
+    T- 70: Engine 0.0001 | Market 0.0159
+    T- 69: Engine 0.0958 | Market 0.0165
+    T- 68: Engine 0.1185 | Market 0.0165
+    T- 67: Engine 0.0406 | Market 0.0159
+    T- 66: Engine 0.0121 | Market 0.0187
+    T- 65: Engine 0.0862 | Market 0.0288
+    T- 64: Engine 0.1443 | Market 0.0287
+    T- 63: Engine 0.1168 | Market 0.0236
+    T- 62: Engine 0.0120 | Market 0.0249
+    T- 61: Engine 0.0309 | Market 0.0317
+    T- 60: Engine 0.0316 | Market 0.0312
+    T- 59: Engine 0.0032 | Market 0.0220
+    T- 58: Engine 0.0478 | Market 0.0172
+    T- 57: Engine 0.0142 | Market 0.0181
+    T- 56: Engine 0.0108 | Market 0.0191
+    T- 55: Engine 0.0183 | Market 0.0184
+    T- 54: Engine 0.0561 | Market 0.0220
+    T- 53: Engine 0.0443 | Market 0.0193
+    T- 52: Engine 0.0615 | Market 0.0200
+    T- 51: Engine 0.0618 | Market 0.0168
+    T- 50: Engine 0.0352 | Market 0.0203
+    T- 49: Engine 0.0026 | Market 0.0163
+    T- 48: Engine 0.1020 | Market 0.0167
+    T- 47: Engine 0.0001 | Market 0.0189
+    T- 46: Engine 0.0167 | Market 0.0144
+    T- 45: Engine 0.0540 | Market 0.0197
+    T- 44: Engine 0.0242 | Market 0.0177
+    T- 43: Engine 0.0395 | Market 0.0144
+    T- 42: Engine 0.0000 | Market 0.0150
+    T- 41: Engine 0.0000 | Market 0.0120
+    T- 40: Engine 0.0000 | Market 0.0146
+    T- 39: Engine 0.1946 | Market 0.0678
+    T- 38: Engine 0.2228 | Market 0.0995
+    T- 37: Engine 0.1152 | Market 0.0873
+    T- 36: Engine 0.2102 | Market 0.0672
+    T- 35: Engine 0.1284 | Market 0.0574
+    T- 34: Engine 0.1637 | Market 0.0576
+    T- 33: Engine 0.2779 | Market 0.1157
+    T- 32: Engine 0.1696 | Market 0.1298
+    T- 31: Engine 0.2155 | Market 0.1341
+    T- 30: Engine 0.2826 | Market 0.1234
+    T- 29: Engine 0.3110 | Market 0.1071
+    T- 28: Engine 0.2579 | Market 0.0991
+    T- 27: Engine 0.2824 | Market 0.1166
+    T- 26: Engine 0.2966 | Market 0.1402
+    T- 25: Engine 0.2847 | Market 0.1599
+    T- 24: Engine 0.3479 | Market 0.1712
+    T- 23: Engine 0.2793 | Market 0.1727
+    T- 22: Engine 0.2959 | Market 0.1708
+    T- 21: Engine 0.3210 | Market 0.1727
+    T- 20: Engine 0.2782 | Market 0.1910
+    T- 19: Engine 0.2786 | Market 0.1851
+    T- 18: Engine 0.2866 | Market 0.1823
+    T- 17: Engine 0.2876 | Market 0.1874
+    T- 16: Engine 0.2623 | Market 0.1812
+    T- 15: Engine 0.2724 | Market 0.2215
+    T- 14: Engine 0.2735 | Market 0.2153
+    T- 13: Engine 0.2854 | Market 0.2332
+    T- 12: Engine 0.2837 | Market 0.2216
+    T- 11: Engine 0.2872 | Market 0.2096
+    T- 10: Engine 0.2731 | Market 0.2095
+    T-  9: Engine 0.2818 | Market 0.2004
+    T-  8: Engine 0.2686 | Market 0.1939
+    T-  7: Engine 0.2835 | Market 0.1938
+    T-  6: Engine 0.2855 | Market 0.2117
+    T-  5: Engine 0.2605 | Market 0.2070
+    T-  4: Engine 0.2845 | Market 0.2048
+    T-  3: Engine 0.2823 | Market 0.2117
+    T-  2: Engine 0.2856 | Market 0.2315
+    T-  1: Engine 0.2803 | Market 0.2341
+
+  CALIBRATION TABLE (engine bins vs actual resolution rate):
+    0%–10%: n=432, actual rate=15%
+    10%–30%: n=36, actual rate=14%
+    30%–60%: n=26, actual rate=8%
+    60%–101%: n=15, actual rate=0%
+
+  LIVE MARKETS (no Brier — comparison only):
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 4.2% | Edge -4.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 3.4% | Edge -3.1%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.4% | Market 3.4% | Edge -3.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 3.4% | Edge -3.1%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 3.4% | Edge -3.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.7% | Market 3.4% | Edge -2.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.6% | Market 3.4% | Edge -2.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 3.4% | Edge -3.1%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 3.6% | Edge -3.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 8.5% | Market 3.6% | Edge +4.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 3.6% | Edge -3.6%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 3.6% | Edge -3.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 3.6% | Edge -3.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.6% | Market 3.6% | Edge -3.1%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.7% | Market 3.6% | Edge -3.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.4% | Market 3.6% | Edge -3.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 3.6% | Edge -3.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 2.8% | Market 3.6% | Edge -0.9%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 21.7% | Market 2.5% | Edge +19.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 2.5% | Edge -2.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 1.2% | Market 2.5% | Edge -1.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.6% | Market 2.1% | Edge -1.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.9% | Market 2.5% | Edge -1.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.7% | Market 2.4% | Edge -1.6%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 2.5% | Edge -2.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.8% | Market 2.5% | Edge -1.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.8% | Market 2.5% | Edge -1.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.3% | Market 2.2% | Edge -1.9%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.3% | Market 2.1% | Edge -1.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.5% | Market 1.8% | Edge -1.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 2.1% | Edge -1.9%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.3% | Market 1.9% | Edge -1.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.3% | Market 1.6% | Edge -1.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.4% | Market 1.5% | Edge -1.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 1.6% | Edge -1.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.3% | Market 1.5% | Edge -1.1%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 3.5% | Market 1.6% | Edge +2.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 1.7% | Edge -1.6%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 1.9% | Edge -1.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 1.6% | Edge -1.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.5% | Market 1.6% | Edge -1.1%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 1.9% | Edge -1.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 1.8% | Edge -1.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.5% | Market 1.8% | Edge -1.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.0% | Market 2.1% | Edge -2.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 1.1% | Edge -1.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.3% | Market 0.9% | Edge -0.6%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 1.7% | Edge -1.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 1.5% | Edge -1.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 1.2% | Market 1.2% | Edge -0.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 1.1% | Market 1.4% | Edge -0.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 1.8% | Edge -1.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.3% | Market 1.6% | Edge -1.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 1.6% | Edge -1.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 1.6% | Edge -1.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 1.5% | Edge -1.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 1.5% | Edge -1.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 1.3% | Edge -1.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.3% | Market 1.1% | Edge -0.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 0.9% | Edge -0.9%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 0.9% | Edge -0.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.0% | Market 0.9% | Edge -0.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.0% | Market 0.9% | Edge -0.9%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.2% | Market 0.9% | Edge -0.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 0.9% | Edge -0.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.0% | Market 0.9% | Edge -0.9%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 1.1% | Edge -1.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 2.8% | Market 1.2% | Edge +1.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 0.8% | Edge -0.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 0.7% | Edge -0.6%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.0% | Market 0.7% | Edge -0.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.0% | Market 0.4% | Edge -0.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.0% | Market 0.8% | Edge -0.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.0% | Market 0.7% | Edge -0.6%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.0% | Market 0.5% | Edge -0.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.0% | Market 0.4% | Edge -0.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 0.4% | Edge -0.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 0.4% | Edge -0.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 0.1% | Market 0.4% | Edge -0.2%
+

@@ -1,0 +1,47 @@
+
+============================================================
+  CONTAMINATION CHECK — US-Iran T-90
+============================================================
+
+  Snapshot date: 2025-11-30
+  Correct headlines (10): US-Iran Nov 2025
+  Wrong headlines   (10): China-Taiwan Jul 2024
+
+  Node                              Correct    Wrong    Delta
+  ----------------------------------------------------------
+  WinProbability                       0.00     0.00     0.00
+  WarCosts                             0.00     0.00     0.00
+  PatronDeterrence                     0.00     0.00     0.00
+  NuclearDeterrence                    0.00     0.00     0.00
+  CommitmentProblem                    0.00     0.00     0.00
+  Patience                             0.30     0.00     0.30 ← MOVES
+  DemocraticPeace                      0.00     0.00     0.00
+  PreferenceAlignment                  0.30     0.00     0.30 ← MOVES
+  HardlineClaims                       0.30     0.00     0.30 ← MOVES
+  AudienceCosts                        0.30     0.00     0.30 ← MOVES
+  MobilizationSignal                   0.00     0.00     0.00
+  TriggerType                          0.00     0.00     0.00
+  ValueThreatGravity                   0.25     0.00     0.25 ← MOVES
+  ThirdPartyMilitaryInvolvement        0.00     0.00     0.00
+  RoutineMilitaryPressure              0.25     0.00     0.25 ← MOVES
+  OperationalPreparation               0.00     0.00     0.00
+  LiveViolenceObserved                 0.00     0.00     0.00
+  LiveUltimatumDeadline                0.00     0.00     0.00
+  LiveMediationAccepted                0.00     0.00     0.00
+  LiveAbatementSignal                  0.00     0.00     0.00
+
+  Max delta across nodes: 0.30
+  ✓ PASS — GNews headlines are doing the work. Proceed with full backtest.
+
+── China invades Taiwan 2024 ──
+  Sub-market: Will China invade Taiwan in 2024? | Resolution: 0 | History: 352 days
+  ✗ T- 90 (2024-10-02) | Engine: 70.0% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 89 (2024-10-03) | Engine: 70.0% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 88 (2024-10-04) | Engine: 69.2% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 87 (2024-10-05) | Engine: 70.2% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 86 (2024-10-06) | Engine: 67.4% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 85 (2024-10-07) | Engine: 70.5% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 84 (2024-10-08) | Engine: 68.1% | Market: 4.0% | Res: 0 | Articles: 10
+  ✗ T- 83 (2024-10-09) | Engine: 70.3% | Market: 3.9% | Res: 0 | Articles: 10
+  ✗ T- 82 (2024-10-10) | Engine: 70.3% | Market: 3.8% | Res: 0 | Articles: 10
+  ✗ T- 81 (2024-10-11) | Engine: 67.4% | Market: 3.6% | Res: 0 | Articles: 10

@@ -137,6 +137,24 @@ EXPERT_PRIORS = {
                 "troop-presence/show-of-force language, which the literature "
                 "shows is empirically null."
     },
+
+    # ── SUPPRESSOR CLUSTER (June 22 2026) ──────────────────────────────────
+    "OperationalFeasibility": {
+        "beta": -1.50, "se": 0.60, "source": "expert_prior_suppressor_v1",
+        "note": "Military feasibility. Oneal 2003 beta=-1.73, Park 2013 beta=-2.63. Applied inverted: w+=alpha*(1-feasibility). STATIC prior."
+    },
+    "InitiatorSurvivalRisk": {
+        "beta": -1.20, "se": 0.50, "source": "expert_prior_suppressor_v1",
+        "note": "Leader removal-if-failure. Goemans 2008 war_defeat HR=3.597. High=suppresses war. LOW=inverted (leader needs war). STATIC prior."
+    },
+    "PatronMoralHazard": {
+        "beta": +0.60, "se": 0.35, "source": "expert_prior_suppressor_v1",
+        "note": "Patron emboldening ENHANCER. Shea 2014 ally_support beta=+3.81 shrunk to 0.60. Split from PatronDeterrence to fix sign conflict."
+    },
+    "SubstitutionPath": {
+        "beta": -1.10, "se": 0.45, "source": "expert_prior_suppressor_v1",
+        "note": "Non-military substitution suppressor. Gibler-Owsiak 2018 beta=-1.287, Schultz 2014 beta=-1.09. Opposes CommitmentProblem."
+    },
 }
 
 

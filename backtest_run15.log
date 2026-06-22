@@ -1,0 +1,888 @@
+
+============================================================
+  CONTAMINATION CHECK — US-Iran T-90
+============================================================
+
+  Snapshot date: 2025-11-30
+  Correct headlines (10): US-Iran Nov 2025
+  Wrong headlines   (10): China-Taiwan Jul 2024
+
+  Node                              Correct    Wrong    Delta
+  ----------------------------------------------------------
+  WinProbability                       0.00     0.00     0.00
+  WarCosts                             0.00     0.00     0.00
+  PatronDeterrence                     0.00     0.00     0.00
+  NuclearDeterrence                    0.00     0.00     0.00
+  CommitmentProblem                    0.00     0.00     0.00
+  Patience                             0.25     0.00     0.25 ← MOVES
+  DemocraticPeace                      0.00     0.00     0.00
+  PreferenceAlignment                  0.25     0.00     0.25 ← MOVES
+  HardlineClaims                       0.25     0.00     0.25 ← MOVES
+  AudienceCosts                        0.25     0.00     0.25 ← MOVES
+  MobilizationSignal                   0.00     0.00     0.00
+  TriggerType                          0.00     0.00     0.00
+  ValueThreatGravity                   0.25     0.00     0.25 ← MOVES
+  ThirdPartyMilitaryInvolvement        0.00     0.00     0.00
+  LiveNonviolentMilitaryPressure       0.00     0.00     0.00
+  LiveViolenceObserved                 0.00     0.00     0.00
+  LiveUltimatumDeadline                0.00     0.00     0.00
+  LiveMediationAccepted                0.00     0.00     0.00
+  LiveAbatementSignal                  0.00     0.00     0.00
+
+  Max delta across nodes: 0.25
+  ✗ FAIL — Scores barely move. Training data contamination likely.
+    Recommendation: restrict backtest to post-Aug 2025 markets only.
+
+  ⚠ Contamination check failed. Run with --leakage to review.
+  Continuing anyway — interpret results with caution.
+
+
+── China invades Taiwan 2024 ──
+  Sub-market: Will China invade Taiwan in 2024? | Resolution: 0 | History: 352 days
+  ✗ T- 90 (2024-10-02) | Engine: 8.7% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 89 (2024-10-03) | Engine: 7.8% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 88 (2024-10-04) | Engine: 7.8% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 87 (2024-10-05) | Engine: 8.0% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 86 (2024-10-06) | Engine: 6.7% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 85 (2024-10-07) | Engine: 7.2% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 84 (2024-10-08) | Engine: 7.2% | Market: 4.0% | Res: 0 | Articles: 10
+  ✗ T- 83 (2024-10-09) | Engine: 7.1% | Market: 3.9% | Res: 0 | Articles: 10
+  ✗ T- 82 (2024-10-10) | Engine: 6.7% | Market: 3.8% | Res: 0 | Articles: 10
+  ✗ T- 81 (2024-10-11) | Engine: 7.0% | Market: 3.6% | Res: 0 | Articles: 10
+  ✗ T- 80 (2024-10-12) | Engine: 6.6% | Market: 3.7% | Res: 0 | Articles: 10
+  ✗ T- 79 (2024-10-13) | Engine: 9.7% | Market: 3.6% | Res: 0 | Articles: 10
+  ✗ T- 78 (2024-10-14) | Engine: 9.7% | Market: 3.8% | Res: 0 | Articles: 10
+  ✗ T- 77 (2024-10-15) | Engine: 9.6% | Market: 5.0% | Res: 0 | Articles: 10
+  ✗ T- 76 (2024-10-16) | Engine: 10.8% | Market: 6.1% | Res: 0 | Articles: 10
+  ✗ T- 75 (2024-10-17) | Engine: 10.8% | Market: 6.5% | Res: 0 | Articles: 10
+  ✗ T- 74 (2024-10-18) | Engine: 9.7% | Market: 4.8% | Res: 0 | Articles: 10
+  ✗ T- 73 (2024-10-19) | Engine: 10.4% | Market: 4.5% | Res: 0 | Articles: 10
+  ✗ T- 72 (2024-10-20) | Engine: 12.9% | Market: 5.1% | Res: 0 | Articles: 10
+  ✗ T- 71 (2024-10-21) | Engine: 10.6% | Market: 4.5% | Res: 0 | Articles: 10
+  ✗ T- 70 (2024-10-22) | Engine: 10.6% | Market: 5.8% | Res: 0 | Articles: 10
+  ✗ T- 69 (2024-10-23) | Engine: 12.0% | Market: 6.0% | Res: 0 | Articles: 10
+  ✗ T- 68 (2024-10-24) | Engine: 12.0% | Market: 5.9% | Res: 0 | Articles: 10
+  ✗ T- 67 (2024-10-25) | Engine: 12.3% | Market: 6.0% | Res: 0 | Articles: 10
+  ✗ T- 66 (2024-10-26) | Engine: 12.3% | Market: 6.0% | Res: 0 | Articles: 10
+  ✗ T- 65 (2024-10-27) | Engine: 11.5% | Market: 6.0% | Res: 0 | Articles: 10
+  ✗ T- 64 (2024-10-28) | Engine: 12.1% | Market: 4.7% | Res: 0 | Articles: 10
+  ✗ T- 63 (2024-10-29) | Engine: 8.8% | Market: 5.7% | Res: 0 | Articles: 10
+  ✗ T- 62 (2024-10-30) | Engine: 8.3% | Market: 5.3% | Res: 0 | Articles: 10
+  ✗ T- 61 (2024-10-31) | Engine: 7.2% | Market: 5.7% | Res: 0 | Articles: 10
+  ✗ T- 60 (2024-11-01) | Engine: 7.3% | Market: 5.1% | Res: 0 | Articles: 10
+  ✗ T- 59 (2024-11-02) | Engine: 6.8% | Market: 5.1% | Res: 0 | Articles: 10
+  ✗ T- 58 (2024-11-03) | Engine: 6.4% | Market: 4.8% | Res: 0 | Articles: 10
+  ✗ T- 57 (2024-11-04) | Engine: 6.6% | Market: 4.8% | Res: 0 | Articles: 10
+  ✗ T- 56 (2024-11-05) | Engine: 6.7% | Market: 4.7% | Res: 0 | Articles: 10
+  ✗ T- 55 (2024-11-06) | Engine: 6.5% | Market: 4.5% | Res: 0 | Articles: 10
+  ✗ T- 54 (2024-11-07) | Engine: 5.4% | Market: 4.1% | Res: 0 | Articles: 10
+  ✗ T- 53 (2024-11-08) | Engine: 5.0% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 52 (2024-11-09) | Engine: 5.2% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 51 (2024-11-10) | Engine: 5.2% | Market: 3.0% | Res: 0 | Articles: 10
+  ✗ T- 50 (2024-11-11) | Engine: 5.7% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 49 (2024-11-12) | Engine: 5.6% | Market: 3.8% | Res: 0 | Articles: 10
+  ✗ T- 48 (2024-11-13) | Engine: 5.5% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 47 (2024-11-14) | Engine: 6.5% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 46 (2024-11-15) | Engine: 5.2% | Market: 3.0% | Res: 0 | Articles: 10
+  ✗ T- 45 (2024-11-16) | Engine: 5.4% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 44 (2024-11-17) | Engine: 5.7% | Market: 3.0% | Res: 0 | Articles: 10
+  ✗ T- 43 (2024-11-18) | Engine: 7.8% | Market: 2.8% | Res: 0 | Articles: 10
+  ✗ T- 42 (2024-11-19) | Engine: 6.7% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 41 (2024-11-20) | Engine: 6.7% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 40 (2024-11-21) | Engine: 6.2% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 39 (2024-11-22) | Engine: 6.7% | Market: 3.3% | Res: 0 | Articles: 10
+  ✗ T- 38 (2024-11-23) | Engine: 6.5% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 37 (2024-11-24) | Engine: 6.2% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 36 (2024-11-25) | Engine: 6.6% | Market: 2.8% | Res: 0 | Articles: 10
+  ✗ T- 35 (2024-11-26) | Engine: 9.0% | Market: 2.6% | Res: 0 | Articles: 10
+  ✗ T- 34 (2024-11-27) | Engine: 9.8% | Market: 2.8% | Res: 0 | Articles: 10
+  ✗ T- 33 (2024-11-28) | Engine: 9.4% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 32 (2024-11-29) | Engine: 9.7% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 31 (2024-11-30) | Engine: 9.4% | Market: 2.8% | Res: 0 | Articles: 10
+  ✗ T- 30 (2024-12-01) | Engine: 9.0% | Market: 2.8% | Res: 0 | Articles: 10
+  ✗ T- 29 (2024-12-02) | Engine: 8.7% | Market: 2.8% | Res: 0 | Articles: 10
+  ✗ T- 28 (2024-12-03) | Engine: 8.5% | Market: 2.6% | Res: 0 | Articles: 10
+  ✗ T- 27 (2024-12-04) | Engine: 9.5% | Market: 2.5% | Res: 0 | Articles: 10
+  ✗ T- 26 (2024-12-05) | Engine: 8.1% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 25 (2024-12-06) | Engine: 7.7% | Market: 2.1% | Res: 0 | Articles: 10
+  ✗ T- 24 (2024-12-07) | Engine: 8.0% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 23 (2024-12-08) | Engine: 10.4% | Market: 2.1% | Res: 0 | Articles: 10
+  ✗ T- 22 (2024-12-09) | Engine: 10.3% | Market: 2.2% | Res: 0 | Articles: 10
+  ✗ T- 21 (2024-12-10) | Engine: 12.2% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 20 (2024-12-11) | Engine: 10.7% | Market: 2.7% | Res: 0 | Articles: 10
+  ✗ T- 19 (2024-12-12) | Engine: 11.8% | Market: 2.1% | Res: 0 | Articles: 10
+  ✗ T- 18 (2024-12-13) | Engine: 9.7% | Market: 2.1% | Res: 0 | Articles: 10
+  ✗ T- 17 (2024-12-14) | Engine: 9.9% | Market: 2.7% | Res: 0 | Articles: 10
+  ✗ T- 16 (2024-12-15) | Engine: 9.8% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T- 15 (2024-12-16) | Engine: 12.3% | Market: 2.3% | Res: 0 | Articles: 10
+  ✗ T- 14 (2024-12-17) | Engine: 12.6% | Market: 2.1% | Res: 0 | Articles: 10
+  ✗ T- 13 (2024-12-18) | Engine: 11.6% | Market: 1.7% | Res: 0 | Articles: 10
+  ✗ T- 12 (2024-12-19) | Engine: 8.1% | Market: 1.4% | Res: 0 | Articles: 10
+  ✗ T- 11 (2024-12-20) | Engine: 8.7% | Market: 1.7% | Res: 0 | Articles: 10
+  ✗ T- 10 (2024-12-21) | Engine: 9.1% | Market: 1.6% | Res: 0 | Articles: 10
+  ✗ T-  9 (2024-12-22) | Engine: 8.9% | Market: 1.5% | Res: 0 | Articles: 10
+  ✗ T-  8 (2024-12-23) | Engine: 8.5% | Market: 1.6% | Res: 0 | Articles: 10
+  ✗ T-  7 (2024-12-24) | Engine: 8.2% | Market: 1.2% | Res: 0 | Articles: 10
+  ✗ T-  6 (2024-12-25) | Engine: 8.0% | Market: 0.9% | Res: 0 | Articles: 10
+  ✗ T-  5 (2024-12-26) | Engine: 7.3% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T-  4 (2024-12-27) | Engine: 7.8% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T-  3 (2024-12-28) | Engine: 7.8% | Market: 0.7% | Res: 0 | Articles: 10
+  ✗ T-  2 (2024-12-29) | Engine: 7.7% | Market: 0.2% | Res: 0 | Articles: 10
+  ✗ T-  1 (2024-12-30) | Engine: 7.1% | Market: 0.6% | Res: 0 | Articles: 10
+  [checkpoint] 90 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── China invades Taiwan 2025 ──
+  Sub-market: Will China invade Taiwan in 2025? | Resolution: 0 | History: 338 days
+  ✗ T- 90 (2025-10-02) | Engine: 6.4% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 89 (2025-10-03) | Engine: 9.9% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 88 (2025-10-04) | Engine: 8.4% | Market: 2.6% | Res: 0 | Articles: 10
+  ✗ T- 87 (2025-10-05) | Engine: 8.6% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 86 (2025-10-06) | Engine: 7.5% | Market: 2.5% | Res: 0 | Articles: 10
+  ✗ T- 85 (2025-10-07) | Engine: 10.0% | Market: 2.8% | Res: 0 | Articles: 10
+  ✗ T- 84 (2025-10-08) | Engine: 7.1% | Market: 2.8% | Res: 0 | Articles: 10
+  ✗ T- 83 (2025-10-09) | Engine: 12.7% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 82 (2025-10-10) | Engine: 10.9% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 81 (2025-10-11) | Engine: 8.0% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 80 (2025-10-12) | Engine: 7.5% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 79 (2025-10-13) | Engine: 7.9% | Market: 4.1% | Res: 0 | Articles: 10
+  ✗ T- 78 (2025-10-14) | Engine: 6.8% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 77 (2025-10-15) | Engine: 7.0% | Market: 3.3% | Res: 0 | Articles: 10
+  ✗ T- 76 (2025-10-16) | Engine: 7.4% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 75 (2025-10-17) | Engine: 6.1% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 74 (2025-10-18) | Engine: 5.9% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 73 (2025-10-19) | Engine: 8.1% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 72 (2025-10-20) | Engine: 6.1% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 71 (2025-10-21) | Engine: 5.8% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 70 (2025-10-22) | Engine: 7.8% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 69 (2025-10-23) | Engine: 5.8% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 68 (2025-10-24) | Engine: 6.8% | Market: 3.0% | Res: 0 | Articles: 10
+  ✗ T- 67 (2025-10-25) | Engine: 7.4% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 66 (2025-10-26) | Engine: 7.2% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 65 (2025-10-27) | Engine: 8.0% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 64 (2025-10-28) | Engine: 6.2% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 63 (2025-10-29) | Engine: 6.7% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 62 (2025-10-30) | Engine: 7.0% | Market: 3.0% | Res: 0 | Articles: 10
+  ✗ T- 61 (2025-10-31) | Engine: 8.5% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 60 (2025-11-01) | Engine: 6.8% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 59 (2025-11-02) | Engine: 7.1% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 58 (2025-11-03) | Engine: 6.3% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 57 (2025-11-04) | Engine: 10.7% | Market: 2.5% | Res: 0 | Articles: 10
+  ✗ T- 56 (2025-11-05) | Engine: 7.9% | Market: 2.5% | Res: 0 | Articles: 10
+  ✗ T- 55 (2025-11-06) | Engine: 7.4% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 54 (2025-11-07) | Engine: 7.0% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T- 53 (2025-11-08) | Engine: 6.1% | Market: 2.1% | Res: 0 | Articles: 10
+  ✗ T- 52 (2025-11-09) | Engine: 6.6% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 51 (2025-11-10) | Engine: 7.0% | Market: 2.2% | Res: 0 | Articles: 10
+  ✗ T- 50 (2025-11-11) | Engine: 6.5% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 49 (2025-11-12) | Engine: 5.9% | Market: 2.2% | Res: 0 | Articles: 10
+  ✗ T- 48 (2025-11-13) | Engine: 6.6% | Market: 2.5% | Res: 0 | Articles: 10
+  ✗ T- 47 (2025-11-14) | Engine: 8.0% | Market: 2.3% | Res: 0 | Articles: 10
+  ✗ T- 46 (2025-11-15) | Engine: 6.3% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 45 (2025-11-16) | Engine: 10.1% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 44 (2025-11-17) | Engine: 10.9% | Market: 2.2% | Res: 0 | Articles: 10
+  ✗ T- 43 (2025-11-18) | Engine: 11.1% | Market: 2.3% | Res: 0 | Articles: 10
+  ✗ T- 42 (2025-11-19) | Engine: 12.4% | Market: 2.2% | Res: 0 | Articles: 10
+  ✗ T- 41 (2025-11-20) | Engine: 9.2% | Market: 1.4% | Res: 0 | Articles: 10
+  ✗ T- 40 (2025-11-21) | Engine: 9.1% | Market: 1.5% | Res: 0 | Articles: 10
+  ✗ T- 39 (2025-11-22) | Engine: 9.2% | Market: 1.9% | Res: 0 | Articles: 10
+  ✗ T- 38 (2025-11-23) | Engine: 12.5% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T- 37 (2025-11-24) | Engine: 12.4% | Market: 1.7% | Res: 0 | Articles: 10
+  ✗ T- 36 (2025-11-25) | Engine: 8.5% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T- 35 (2025-11-26) | Engine: 9.8% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T- 34 (2025-11-27) | Engine: 9.3% | Market: 1.7% | Res: 0 | Articles: 10
+  ✗ T- 33 (2025-11-28) | Engine: 8.8% | Market: 1.7% | Res: 0 | Articles: 10
+  ✗ T- 32 (2025-11-29) | Engine: 8.8% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T- 31 (2025-11-30) | Engine: 7.3% | Market: 1.5% | Res: 0 | Articles: 10
+  ✗ T- 30 (2025-12-01) | Engine: 7.4% | Market: 1.3% | Res: 0 | Articles: 10
+  ✗ T- 29 (2025-12-02) | Engine: 7.7% | Market: 1.1% | Res: 0 | Articles: 10
+  ✗ T- 28 (2025-12-03) | Engine: 6.9% | Market: 1.1% | Res: 0 | Articles: 10
+  ✗ T- 27 (2025-12-04) | Engine: 7.6% | Market: 1.1% | Res: 0 | Articles: 10
+  ✗ T- 26 (2025-12-05) | Engine: 9.7% | Market: 1.2% | Res: 0 | Articles: 10
+  ✗ T- 25 (2025-12-06) | Engine: 10.8% | Market: 1.1% | Res: 0 | Articles: 10
+  ✗ T- 24 (2025-12-07) | Engine: 6.6% | Market: 0.7% | Res: 0 | Articles: 10
+  ✗ T- 23 (2025-12-08) | Engine: 11.6% | Market: 0.4% | Res: 0 | Articles: 10
+  ✗ T- 22 (2025-12-09) | Engine: 10.5% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 21 (2025-12-10) | Engine: 9.3% | Market: 1.1% | Res: 0 | Articles: 10
+  ✗ T- 20 (2025-12-11) | Engine: 9.4% | Market: 0.9% | Res: 0 | Articles: 10
+  ✗ T- 19 (2025-12-12) | Engine: 9.2% | Market: 0.7% | Res: 0 | Articles: 10
+  ✗ T- 18 (2025-12-13) | Engine: 8.1% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 17 (2025-12-14) | Engine: 10.1% | Market: 0.6% | Res: 0 | Articles: 10
+  ✗ T- 16 (2025-12-15) | Engine: 7.1% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 15 (2025-12-16) | Engine: 9.3% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 14 (2025-12-17) | Engine: 9.7% | Market: 0.4% | Res: 0 | Articles: 10
+  ✗ T- 13 (2025-12-18) | Engine: 10.6% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 12 (2025-12-19) | Engine: 14.5% | Market: 0.6% | Res: 0 | Articles: 10
+  ✗ T- 11 (2025-12-20) | Engine: 12.4% | Market: 0.8% | Res: 0 | Articles: 10
+  ✗ T- 10 (2025-12-21) | Engine: 11.4% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T-  9 (2025-12-22) | Engine: 11.2% | Market: 0.4% | Res: 0 | Articles: 10
+  ✗ T-  8 (2025-12-23) | Engine: 11.5% | Market: 0.3% | Res: 0 | Articles: 10
+  ✗ T-  7 (2025-12-24) | Engine: 10.7% | Market: 0.2% | Res: 0 | Articles: 10
+  ✗ T-  6 (2025-12-25) | Engine: 12.0% | Market: 0.2% | Res: 0 | Articles: 10
+  ✗ T-  5 (2025-12-26) | Engine: 10.7% | Market: 0.1% | Res: 0 | Articles: 10
+  ✗ T-  4 (2025-12-27) | Engine: 9.6% | Market: 0.1% | Res: 0 | Articles: 10
+  ✗ T-  3 (2025-12-28) | Engine: 9.7% | Market: 0.1% | Res: 0 | Articles: 10
+  ✗ T-  2 (2025-12-29) | Engine: 10.2% | Market: 0.1% | Res: 0 | Articles: 10
+  ✗ T-  1 (2025-12-30) | Engine: 12.0% | Market: 0.4% | Res: 0 | Articles: 10
+  [checkpoint] 180 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── Trump ends Ukraine war 90 days ──
+  Sub-market: Trump ends Ukraine war in first 90 days? | Resolution: 0 | History: 184 days
+  ✗ T- 90 (2025-01-19) | Engine: 81.1% | Market: 34.0% | Res: 0 | Articles: 10
+  ✗ T- 89 (2025-01-20) | Engine: 78.7% | Market: 34.5% | Res: 0 | Articles: 10
+  ✗ T- 88 (2025-01-21) | Engine: 75.8% | Market: 34.5% | Res: 0 | Articles: 10
+  ✗ T- 87 (2025-01-22) | Engine: 68.3% | Market: 28.5% | Res: 0 | Articles: 10
+  ✗ T- 86 (2025-01-23) | Engine: 71.7% | Market: 28.5% | Res: 0 | Articles: 10
+  ✗ T- 85 (2025-01-24) | Engine: 68.7% | Market: 32.5% | Res: 0 | Articles: 10
+  ✗ T- 84 (2025-01-25) | Engine: 76.6% | Market: 30.5% | Res: 0 | Articles: 10
+  ✗ T- 83 (2025-01-26) | Engine: 76.5% | Market: 30.5% | Res: 0 | Articles: 10
+  ✗ T- 82 (2025-01-27) | Engine: 78.0% | Market: 28.5% | Res: 0 | Articles: 10
+  ✗ T- 81 (2025-01-28) | Engine: 77.2% | Market: 26.5% | Res: 0 | Articles: 10
+  ✗ T- 80 (2025-01-29) | Engine: 75.8% | Market: 21.5% | Res: 0 | Articles: 10
+  ✗ T- 79 (2025-01-30) | Engine: 73.9% | Market: 20.5% | Res: 0 | Articles: 10
+  ✗ T- 78 (2025-01-31) | Engine: 73.2% | Market: 20.5% | Res: 0 | Articles: 10
+  ✗ T- 77 (2025-02-01) | Engine: 78.2% | Market: 22.5% | Res: 0 | Articles: 10
+  ✗ T- 76 (2025-02-02) | Engine: 78.0% | Market: 20.5% | Res: 0 | Articles: 10
+  ✗ T- 75 (2025-02-03) | Engine: 73.8% | Market: 17.5% | Res: 0 | Articles: 10
+  ✗ T- 74 (2025-02-04) | Engine: 75.1% | Market: 18.0% | Res: 0 | Articles: 10
+  ✗ T- 73 (2025-02-05) | Engine: 75.8% | Market: 19.5% | Res: 0 | Articles: 10
+  ✗ T- 72 (2025-02-06) | Engine: 72.7% | Market: 24.0% | Res: 0 | Articles: 10
+  ✗ T- 71 (2025-02-07) | Engine: 73.7% | Market: 25.5% | Res: 0 | Articles: 10
+  ✗ T- 70 (2025-02-08) | Engine: 74.2% | Market: 25.0% | Res: 0 | Articles: 10
+  ✗ T- 69 (2025-02-09) | Engine: 77.2% | Market: 25.5% | Res: 0 | Articles: 10
+  ✗ T- 68 (2025-02-10) | Engine: 71.9% | Market: 25.5% | Res: 0 | Articles: 10
+  ✗ T- 67 (2025-02-11) | Engine: 76.5% | Market: 25.5% | Res: 0 | Articles: 10
+  ✗ T- 66 (2025-02-12) | Engine: 77.9% | Market: 27.5% | Res: 0 | Articles: 10
+  ✗ T- 65 (2025-02-13) | Engine: 75.7% | Market: 35.5% | Res: 0 | Articles: 10
+  ✗ T- 64 (2025-02-14) | Engine: 70.1% | Market: 35.5% | Res: 0 | Articles: 10
+  ✗ T- 63 (2025-02-15) | Engine: 72.5% | Market: 31.5% | Res: 0 | Articles: 10
+  ✗ T- 62 (2025-02-16) | Engine: 72.6% | Market: 32.5% | Res: 0 | Articles: 10
+  ✗ T- 61 (2025-02-17) | Engine: 75.1% | Market: 37.5% | Res: 0 | Articles: 10
+  ✗ T- 60 (2025-02-18) | Engine: 77.0% | Market: 37.5% | Res: 0 | Articles: 10
+  ✗ T- 59 (2025-02-19) | Engine: 81.2% | Market: 31.5% | Res: 0 | Articles: 10
+  ✗ T- 58 (2025-02-20) | Engine: 76.3% | Market: 27.5% | Res: 0 | Articles: 10
+  ✗ T- 57 (2025-02-21) | Engine: 82.2% | Market: 28.5% | Res: 0 | Articles: 10
+  ✗ T- 56 (2025-02-22) | Engine: 83.1% | Market: 29.5% | Res: 0 | Articles: 10
+  ✗ T- 55 (2025-02-23) | Engine: 80.2% | Market: 29.5% | Res: 0 | Articles: 10
+  ✗ T- 54 (2025-02-24) | Engine: 78.0% | Market: 32.5% | Res: 0 | Articles: 10
+  ✗ T- 53 (2025-02-25) | Engine: 76.3% | Market: 30.5% | Res: 0 | Articles: 10
+  ✗ T- 52 (2025-02-26) | Engine: 76.8% | Market: 31.0% | Res: 0 | Articles: 10
+  ✗ T- 51 (2025-02-27) | Engine: 76.8% | Market: 28.5% | Res: 0 | Articles: 10
+  ✗ T- 50 (2025-02-28) | Engine: 80.0% | Market: 28.5% | Res: 0 | Articles: 10
+  ✗ T- 49 (2025-03-01) | Engine: 82.3% | Market: 22.5% | Res: 0 | Articles: 10
+  ✗ T- 48 (2025-03-02) | Engine: 78.6% | Market: 18.5% | Res: 0 | Articles: 10
+  ✗ T- 47 (2025-03-03) | Engine: 82.0% | Market: 21.5% | Res: 0 | Articles: 10
+  ✗ T- 46 (2025-03-04) | Engine: 83.3% | Market: 19.5% | Res: 0 | Articles: 10
+  ✗ T- 45 (2025-03-05) | Engine: 80.0% | Market: 26.0% | Res: 0 | Articles: 10
+  ✗ T- 44 (2025-03-06) | Engine: 82.8% | Market: 25.5% | Res: 0 | Articles: 10
+  ✗ T- 43 (2025-03-07) | Engine: 78.1% | Market: 22.5% | Res: 0 | Articles: 10
+  ✗ T- 42 (2025-03-08) | Engine: 82.9% | Market: 23.5% | Res: 0 | Articles: 10
+  ✗ T- 41 (2025-03-09) | Engine: 77.5% | Market: 22.5% | Res: 0 | Articles: 10
+  ✗ T- 40 (2025-03-10) | Engine: 75.3% | Market: 24.5% | Res: 0 | Articles: 10
+  ✗ T- 39 (2025-03-11) | Engine: 73.9% | Market: 26.5% | Res: 0 | Articles: 10
+  ✗ T- 38 (2025-03-12) | Engine: 66.4% | Market: 39.5% | Res: 0 | Articles: 10
+  ✗ T- 37 (2025-03-13) | Engine: 67.6% | Market: 37.5% | Res: 0 | Articles: 10
+  ✗ T- 36 (2025-03-14) | Engine: 72.2% | Market: 32.5% | Res: 0 | Articles: 10
+  ✗ T- 35 (2025-03-15) | Engine: 75.9% | Market: 33.5% | Res: 0 | Articles: 10
+  ✗ T- 34 (2025-03-16) | Engine: 76.3% | Market: 31.5% | Res: 0 | Articles: 10
+  ✗ T- 33 (2025-03-17) | Engine: 74.7% | Market: 35.5% | Res: 0 | Articles: 10
+  ✗ T- 32 (2025-03-18) | Engine: 79.8% | Market: 35.5% | Res: 0 | Articles: 10
+  ✗ T- 31 (2025-03-19) | Engine: 80.5% | Market: 24.5% | Res: 0 | Articles: 10
+  ✗ T- 30 (2025-03-20) | Engine: 69.3% | Market: 19.5% | Res: 0 | Articles: 10
+  ✗ T- 29 (2025-03-21) | Engine: 75.8% | Market: 14.0% | Res: 0 | Articles: 10
+  ✗ T- 28 (2025-03-22) | Engine: 73.5% | Market: 14.5% | Res: 0 | Articles: 10
+  ✗ T- 27 (2025-03-23) | Engine: 75.2% | Market: 15.5% | Res: 0 | Articles: 10
+  ✗ T- 26 (2025-03-24) | Engine: 76.9% | Market: 15.5% | Res: 0 | Articles: 10
+  ✗ T- 25 (2025-03-25) | Engine: 78.2% | Market: 13.5% | Res: 0 | Articles: 10
+  ✗ T- 24 (2025-03-26) | Engine: 63.7% | Market: 15.5% | Res: 0 | Articles: 10
+  ✗ T- 23 (2025-03-27) | Engine: 70.0% | Market: 13.5% | Res: 0 | Articles: 10
+  ✗ T- 22 (2025-03-28) | Engine: 74.9% | Market: 8.5% | Res: 0 | Articles: 10
+  ✗ T- 21 (2025-03-29) | Engine: 75.0% | Market: 7.5% | Res: 0 | Articles: 10
+  ✗ T- 20 (2025-03-30) | Engine: 76.3% | Market: 6.5% | Res: 0 | Articles: 10
+  ✗ T- 19 (2025-03-31) | Engine: 76.6% | Market: 6.5% | Res: 0 | Articles: 10
+  ✗ T- 18 (2025-04-01) | Engine: 77.9% | Market: 6.5% | Res: 0 | Articles: 10
+  ✗ T- 17 (2025-04-02) | Engine: 74.3% | Market: 6.5% | Res: 0 | Articles: 10
+  ✗ T- 16 (2025-04-03) | Engine: 75.8% | Market: 4.5% | Res: 0 | Articles: 10
+  ✗ T- 15 (2025-04-04) | Engine: 80.9% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 14 (2025-04-05) | Engine: 80.7% | Market: 3.8% | Res: 0 | Articles: 10
+  ✗ T- 13 (2025-04-06) | Engine: 76.8% | Market: 3.0% | Res: 0 | Articles: 10
+  ✗ T- 12 (2025-04-07) | Engine: 79.3% | Market: 3.5% | Res: 0 | Articles: 10
+  ✗ T- 11 (2025-04-08) | Engine: 79.1% | Market: 3.0% | Res: 0 | Articles: 10
+  ✗ T- 10 (2025-04-09) | Engine: 79.5% | Market: 2.8% | Res: 0 | Articles: 10
+  ✗ T-  9 (2025-04-10) | Engine: 80.4% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T-  8 (2025-04-11) | Engine: 74.5% | Market: 2.5% | Res: 0 | Articles: 10
+  ✗ T-  7 (2025-04-12) | Engine: 75.4% | Market: 2.1% | Res: 0 | Articles: 10
+  ✗ T-  6 (2025-04-13) | Engine: 76.2% | Market: 1.4% | Res: 0 | Articles: 10
+  ✗ T-  5 (2025-04-14) | Engine: 79.8% | Market: 0.9% | Res: 0 | Articles: 10
+  ✗ T-  4 (2025-04-15) | Engine: 74.2% | Market: 1.2% | Res: 0 | Articles: 10
+  ✗ T-  3 (2025-04-16) | Engine: 74.3% | Market: 1.1% | Res: 0 | Articles: 10
+  ✗ T-  2 (2025-04-17) | Engine: 69.7% | Market: 0.8% | Res: 0 | Articles: 10
+  ✗ T-  1 (2025-04-18) | Engine: 76.9% | Market: 1.1% | Res: 0 | Articles: 10
+  [checkpoint] 270 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── China invades Taiwan 2025 ──
+  Sub-market: Will China invade Taiwan in 2025? | Resolution: 0 | History: 338 days
+  ✗ T- 90 (2025-10-02) | Engine: 6.4% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 89 (2025-10-03) | Engine: 9.9% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 88 (2025-10-04) | Engine: 9.8% | Market: 2.6% | Res: 0 | Articles: 10
+  ✗ T- 87 (2025-10-05) | Engine: 8.6% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 86 (2025-10-06) | Engine: 7.4% | Market: 2.5% | Res: 0 | Articles: 10
+  ✗ T- 85 (2025-10-07) | Engine: 8.3% | Market: 2.8% | Res: 0 | Articles: 10
+  ✗ T- 84 (2025-10-08) | Engine: 7.1% | Market: 2.8% | Res: 0 | Articles: 10
+  ✗ T- 83 (2025-10-09) | Engine: 12.7% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 82 (2025-10-10) | Engine: 10.9% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 81 (2025-10-11) | Engine: 9.1% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 80 (2025-10-12) | Engine: 7.5% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 79 (2025-10-13) | Engine: 7.9% | Market: 4.1% | Res: 0 | Articles: 10
+  ✗ T- 78 (2025-10-14) | Engine: 6.8% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 77 (2025-10-15) | Engine: 7.0% | Market: 3.3% | Res: 0 | Articles: 10
+  ✗ T- 76 (2025-10-16) | Engine: 7.4% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 75 (2025-10-17) | Engine: 6.1% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 74 (2025-10-18) | Engine: 6.0% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 73 (2025-10-19) | Engine: 8.1% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 72 (2025-10-20) | Engine: 6.1% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 71 (2025-10-21) | Engine: 5.7% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 70 (2025-10-22) | Engine: 7.8% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 69 (2025-10-23) | Engine: 5.8% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 68 (2025-10-24) | Engine: 6.7% | Market: 3.0% | Res: 0 | Articles: 10
+  ✗ T- 67 (2025-10-25) | Engine: 7.1% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 66 (2025-10-26) | Engine: 7.1% | Market: 3.1% | Res: 0 | Articles: 10
+  ✗ T- 65 (2025-10-27) | Engine: 7.9% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 64 (2025-10-28) | Engine: 6.9% | Market: 3.2% | Res: 0 | Articles: 10
+  ✗ T- 63 (2025-10-29) | Engine: 7.5% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 62 (2025-10-30) | Engine: 7.8% | Market: 3.0% | Res: 0 | Articles: 10
+  ✗ T- 61 (2025-10-31) | Engine: 9.3% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 60 (2025-11-01) | Engine: 7.4% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 59 (2025-11-02) | Engine: 7.7% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 58 (2025-11-03) | Engine: 6.9% | Market: 2.9% | Res: 0 | Articles: 10
+  ✗ T- 57 (2025-11-04) | Engine: 11.6% | Market: 2.5% | Res: 0 | Articles: 10
+  ✗ T- 56 (2025-11-05) | Engine: 8.6% | Market: 2.5% | Res: 0 | Articles: 10
+  ✗ T- 55 (2025-11-06) | Engine: 8.1% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 54 (2025-11-07) | Engine: 7.6% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T- 53 (2025-11-08) | Engine: 6.6% | Market: 2.1% | Res: 0 | Articles: 10
+  ✗ T- 52 (2025-11-09) | Engine: 7.1% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 51 (2025-11-10) | Engine: 7.5% | Market: 2.2% | Res: 0 | Articles: 10
+  ✗ T- 50 (2025-11-11) | Engine: 6.2% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 49 (2025-11-12) | Engine: 6.3% | Market: 2.2% | Res: 0 | Articles: 10
+  ✗ T- 48 (2025-11-13) | Engine: 7.1% | Market: 2.5% | Res: 0 | Articles: 10
+  ✗ T- 47 (2025-11-14) | Engine: 8.4% | Market: 2.3% | Res: 0 | Articles: 10
+  ✗ T- 46 (2025-11-15) | Engine: 6.6% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 45 (2025-11-16) | Engine: 11.8% | Market: 2.4% | Res: 0 | Articles: 10
+  ✗ T- 44 (2025-11-17) | Engine: 11.2% | Market: 2.2% | Res: 0 | Articles: 10
+  ✗ T- 43 (2025-11-18) | Engine: 9.8% | Market: 2.3% | Res: 0 | Articles: 10
+  ✗ T- 42 (2025-11-19) | Engine: 12.7% | Market: 2.2% | Res: 0 | Articles: 10
+  ✗ T- 41 (2025-11-20) | Engine: 9.4% | Market: 1.4% | Res: 0 | Articles: 10
+  ✗ T- 40 (2025-11-21) | Engine: 9.2% | Market: 1.5% | Res: 0 | Articles: 10
+  ✗ T- 39 (2025-11-22) | Engine: 9.4% | Market: 1.9% | Res: 0 | Articles: 10
+  ✗ T- 38 (2025-11-23) | Engine: 12.1% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T- 37 (2025-11-24) | Engine: 12.5% | Market: 1.7% | Res: 0 | Articles: 10
+  ✗ T- 36 (2025-11-25) | Engine: 8.4% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T- 35 (2025-11-26) | Engine: 9.9% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T- 34 (2025-11-27) | Engine: 9.4% | Market: 1.7% | Res: 0 | Articles: 10
+  ✗ T- 33 (2025-11-28) | Engine: 9.0% | Market: 1.7% | Res: 0 | Articles: 10
+  ✗ T- 32 (2025-11-29) | Engine: 8.9% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T- 31 (2025-11-30) | Engine: 7.3% | Market: 1.5% | Res: 0 | Articles: 10
+  ✗ T- 30 (2025-12-01) | Engine: 7.5% | Market: 1.3% | Res: 0 | Articles: 10
+  ✗ T- 29 (2025-12-02) | Engine: 7.8% | Market: 1.1% | Res: 0 | Articles: 10
+  ✗ T- 28 (2025-12-03) | Engine: 7.0% | Market: 1.1% | Res: 0 | Articles: 10
+  ✗ T- 27 (2025-12-04) | Engine: 9.1% | Market: 1.1% | Res: 0 | Articles: 10
+  ✗ T- 26 (2025-12-05) | Engine: 9.8% | Market: 1.2% | Res: 0 | Articles: 10
+  ✗ T- 25 (2025-12-06) | Engine: 10.2% | Market: 1.1% | Res: 0 | Articles: 10
+  ✗ T- 24 (2025-12-07) | Engine: 6.6% | Market: 0.7% | Res: 0 | Articles: 10
+  ✗ T- 23 (2025-12-08) | Engine: 11.9% | Market: 0.4% | Res: 0 | Articles: 10
+  ✗ T- 22 (2025-12-09) | Engine: 10.0% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 21 (2025-12-10) | Engine: 9.8% | Market: 1.1% | Res: 0 | Articles: 10
+  ✗ T- 20 (2025-12-11) | Engine: 9.4% | Market: 0.9% | Res: 0 | Articles: 10
+  ✗ T- 19 (2025-12-12) | Engine: 9.2% | Market: 0.7% | Res: 0 | Articles: 10
+  ✗ T- 18 (2025-12-13) | Engine: 8.1% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 17 (2025-12-14) | Engine: 10.1% | Market: 0.6% | Res: 0 | Articles: 10
+  ✗ T- 16 (2025-12-15) | Engine: 7.1% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 15 (2025-12-16) | Engine: 9.3% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 14 (2025-12-17) | Engine: 9.7% | Market: 0.4% | Res: 0 | Articles: 10
+  ✗ T- 13 (2025-12-18) | Engine: 10.6% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T- 12 (2025-12-19) | Engine: 14.5% | Market: 0.6% | Res: 0 | Articles: 10
+  ✗ T- 11 (2025-12-20) | Engine: 12.4% | Market: 0.8% | Res: 0 | Articles: 10
+  ✗ T- 10 (2025-12-21) | Engine: 11.3% | Market: 0.5% | Res: 0 | Articles: 10
+  ✗ T-  9 (2025-12-22) | Engine: 11.4% | Market: 0.4% | Res: 0 | Articles: 10
+  ✗ T-  8 (2025-12-23) | Engine: 11.5% | Market: 0.3% | Res: 0 | Articles: 10
+  ✗ T-  7 (2025-12-24) | Engine: 10.7% | Market: 0.2% | Res: 0 | Articles: 10
+  ✗ T-  6 (2025-12-25) | Engine: 11.7% | Market: 0.2% | Res: 0 | Articles: 10
+  ✗ T-  5 (2025-12-26) | Engine: 10.5% | Market: 0.1% | Res: 0 | Articles: 10
+  ✗ T-  4 (2025-12-27) | Engine: 9.4% | Market: 0.1% | Res: 0 | Articles: 10
+  ✗ T-  3 (2025-12-28) | Engine: 9.7% | Market: 0.1% | Res: 0 | Articles: 10
+  ✗ T-  2 (2025-12-29) | Engine: 10.2% | Market: 0.1% | Res: 0 | Articles: 10
+  ✗ T-  1 (2025-12-30) | Engine: 12.0% | Market: 0.4% | Res: 0 | Articles: 10
+  [checkpoint] 360 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── US military action vs Venezuela (Jan 15) ──
+  Sub-market: January 15, 2026 | Resolution: 1 | History: 23 days
+  ✗ T- 33 (2025-12-13) | Engine: 9.7% | Market: 33.5% | Res: 1 | Articles: 10
+  ✗ T- 32 (2025-12-14) | Engine: 11.3% | Market: 33.5% | Res: 1 | Articles: 10
+  ✗ T- 31 (2025-12-15) | Engine: 12.0% | Market: 25.5% | Res: 1 | Articles: 10
+  ✗ T- 30 (2025-12-16) | Engine: 12.4% | Market: 26.0% | Res: 1 | Articles: 10
+  ✗ T- 29 (2025-12-17) | Engine: 12.4% | Market: 25.5% | Res: 1 | Articles: 10
+  ✗ T- 28 (2025-12-18) | Engine: 26.3% | Market: 31.5% | Res: 1 | Articles: 10
+  ✗ T- 27 (2025-12-19) | Engine: 20.4% | Market: 27.0% | Res: 1 | Articles: 10
+  ✗ T- 26 (2025-12-20) | Engine: 21.3% | Market: 29.0% | Res: 1 | Articles: 10
+  ✗ T- 25 (2025-12-21) | Engine: 20.3% | Market: 28.5% | Res: 1 | Articles: 10
+  ✗ T- 24 (2025-12-22) | Engine: 19.4% | Market: 23.5% | Res: 1 | Articles: 10
+  ✗ T- 23 (2025-12-23) | Engine: 20.3% | Market: 20.5% | Res: 1 | Articles: 10
+  ✗ T- 22 (2025-12-24) | Engine: 17.0% | Market: 20.5% | Res: 1 | Articles: 10
+  ✓ T- 21 (2025-12-25) | Engine: 21.3% | Market: 17.0% | Res: 1 | Articles: 10
+  ✓ T- 20 (2025-12-26) | Engine: 22.9% | Market: 15.5% | Res: 1 | Articles: 10
+  ✓ T- 19 (2025-12-27) | Engine: 18.3% | Market: 17.0% | Res: 1 | Articles: 10
+  ✓ T- 18 (2025-12-28) | Engine: 16.8% | Market: 15.5% | Res: 1 | Articles: 10
+  ✓ T- 17 (2025-12-29) | Engine: 23.0% | Market: 18.0% | Res: 1 | Articles: 10
+  ✗ T- 16 (2025-12-30) | Engine: 23.3% | Market: 23.5% | Res: 1 | Articles: 10
+  ✓ T- 15 (2025-12-31) | Engine: 22.9% | Market: 11.5% | Res: 1 | Articles: 10
+  ✓ T- 14 (2026-01-01) | Engine: 24.3% | Market: 14.0% | Res: 1 | Articles: 10
+  ✓ T- 13 (2026-01-02) | Engine: 23.6% | Market: 7.0% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): 'Looking at the headlines from 2026-01-03:\n\nThe headlines describe a US military strike/operation that captured Venezuela\'s Maduro, with the US planning to "run" Venezuela and tap its oil reserves. This is clearly an active military operation, not just posturing.\n\n**LiveNonviolentMilitaryPressure**: '
+  ✓ T- 12 (2026-01-03) | Engine: 19.4% | Market: 10.5% | Res: 1 | Articles: 10
+  ✓ T- 11 (2026-01-04) | Engine: 38.3% | Market: 10.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): 'Looking at the headlines from 2026-01-05:\n\n**LiveNonviolentMilitaryPressure**: The headlines reference a "Venezuela raid," "Venezuela operation," "US military intervention," and "Venezuela attack" — these indicate an actual military operation has already occurred (this is the triggering event). Beyo'
+  ✓ T- 10 (2026-01-05) | Engine: 29.2% | Market: 10.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): 'Looking at the headlines from 2026-01-06, I need to assess the situation:\n\n**Context from headlines:**\n- There has been a US military operation in Venezuela (references to "US armed aggression," "US Military Ops in Venezuela," "US military intervention," "Venezuela operation")\n- Trump is announcing '
+  ✓ T-  9 (2026-01-06) | Engine: 33.2% | Market: 10.5% | Res: 1 | Articles: 10
+  ✓ T-  8 (2026-01-07) | Engine: 22.4% | Market: 10.5% | Res: 1 | Articles: 10
+  ✓ T-  7 (2026-01-08) | Engine: 22.3% | Market: 10.5% | Res: 1 | Articles: 10
+  ✓ T-  6 (2026-01-09) | Engine: 23.0% | Market: 10.5% | Res: 1 | Articles: 10
+  ✓ T-  5 (2026-01-10) | Engine: 32.6% | Market: 10.5% | Res: 1 | Articles: 10
+  ✓ T-  4 (2026-01-11) | Engine: 25.1% | Market: 10.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): 'Looking at the headlines dated 2026-01-12:\n\n**LiveNonviolentMilitaryPressure (7-day window):** The headlines reference a "US intervention in Venezuela" (Colombian rebels calling for national accord "after the US intervention"), "Russia\'s fearsome arsenal fizzled in Venezuela," and Trump calling hims'
+  ✓ T-  3 (2026-01-12) | Engine: 22.5% | Market: 10.5% | Res: 1 | Articles: 10
+  ✓ T-  2 (2026-01-13) | Engine: 27.1% | Market: 10.5% | Res: 1 | Articles: 10
+  ✓ T-  1 (2026-01-14) | Engine: 18.4% | Market: 10.5% | Res: 1 | Articles: 10
+  [checkpoint] 393 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── US strikes Iran by Feb 28 2026 ──
+  Sub-market: February 28 | Resolution: 1 | History: 40 days
+  ✗ T- 39 (2026-01-20) | Engine: 13.2% | Market: 43.0% | Res: 1 | Articles: 10
+  ✗ T- 38 (2026-01-21) | Engine: 13.6% | Market: 34.5% | Res: 1 | Articles: 10
+  ✗ T- 37 (2026-01-22) | Engine: 15.8% | Market: 39.0% | Res: 1 | Articles: 10
+  ✗ T- 36 (2026-01-23) | Engine: 14.4% | Market: 46.5% | Res: 1 | Articles: 10
+  ✗ T- 35 (2026-01-24) | Engine: 22.8% | Market: 53.0% | Res: 1 | Articles: 10
+  ✗ T- 34 (2026-01-25) | Engine: 18.4% | Market: 51.5% | Res: 1 | Articles: 10
+  ✗ T- 33 (2026-01-26) | Engine: 19.6% | Market: 52.0% | Res: 1 | Articles: 10
+  ✗ T- 32 (2026-01-27) | Engine: 19.5% | Market: 42.5% | Res: 1 | Articles: 10
+  ✗ T- 31 (2026-01-28) | Engine: 30.3% | Market: 44.0% | Res: 1 | Articles: 10
+  ✗ T- 30 (2026-01-29) | Engine: 28.3% | Market: 48.5% | Res: 1 | Articles: 10
+  ✗ T- 29 (2026-01-30) | Engine: 25.4% | Market: 59.0% | Res: 1 | Articles: 10
+  ✗ T- 28 (2026-01-31) | Engine: 33.7% | Market: 55.5% | Res: 1 | Articles: 10
+  ✗ T- 27 (2026-02-01) | Engine: 33.6% | Market: 49.5% | Res: 1 | Articles: 10
+  ✗ T- 26 (2026-02-02) | Engine: 22.7% | Market: 33.0% | Res: 1 | Articles: 10
+  ✓ T- 25 (2026-02-03) | Engine: 26.1% | Market: 23.5% | Res: 1 | Articles: 10
+  ✗ T- 24 (2026-02-04) | Engine: 22.4% | Market: 23.5% | Res: 1 | Articles: 10
+  ✗ T- 23 (2026-02-05) | Engine: 21.4% | Market: 25.5% | Res: 1 | Articles: 10
+  ✗ T- 22 (2026-02-06) | Engine: 19.9% | Market: 25.5% | Res: 1 | Articles: 10
+  ✗ T- 21 (2026-02-07) | Engine: 26.8% | Market: 28.5% | Res: 1 | Articles: 10
+  ✗ T- 20 (2026-02-08) | Engine: 20.8% | Market: 21.5% | Res: 1 | Articles: 10
+  ✗ T- 19 (2026-02-09) | Engine: 18.6% | Market: 22.5% | Res: 1 | Articles: 10
+  ✗ T- 18 (2026-02-10) | Engine: 22.1% | Market: 25.5% | Res: 1 | Articles: 10
+  ✓ T- 17 (2026-02-11) | Engine: 30.7% | Market: 20.5% | Res: 1 | Articles: 10
+  ✓ T- 16 (2026-02-12) | Engine: 24.5% | Market: 17.5% | Res: 1 | Articles: 10
+  ✓ T- 15 (2026-02-13) | Engine: 17.4% | Market: 12.5% | Res: 1 | Articles: 10
+  ✓ T- 14 (2026-02-14) | Engine: 18.6% | Market: 12.5% | Res: 1 | Articles: 10
+  ✓ T- 13 (2026-02-15) | Engine: 17.6% | Market: 12.5% | Res: 1 | Articles: 10
+  ✓ T- 12 (2026-02-16) | Engine: 16.7% | Market: 13.5% | Res: 1 | Articles: 10
+  ✓ T- 11 (2026-02-17) | Engine: 24.2% | Market: 18.5% | Res: 1 | Articles: 10
+  ✓ T- 10 (2026-02-18) | Engine: 20.7% | Market: 18.5% | Res: 1 | Articles: 10
+  ✓ T-  9 (2026-02-19) | Engine: 25.5% | Market: 22.5% | Res: 1 | Articles: 10
+  ✓ T-  8 (2026-02-20) | Engine: 25.6% | Market: 25.5% | Res: 1 | Articles: 10
+  ✗ T-  7 (2026-02-21) | Engine: 19.1% | Market: 25.5% | Res: 1 | Articles: 10
+  ✓ T-  6 (2026-02-22) | Engine: 19.2% | Market: 17.5% | Res: 1 | Articles: 10
+  ✗ T-  5 (2026-02-23) | Engine: 15.3% | Market: 19.5% | Res: 1 | Articles: 10
+  ✗ T-  4 (2026-02-24) | Engine: 19.3% | Market: 20.5% | Res: 1 | Articles: 10
+  ✓ T-  3 (2026-02-25) | Engine: 22.8% | Market: 17.5% | Res: 1 | Articles: 10
+  ✓ T-  2 (2026-02-26) | Engine: 17.2% | Market: 9.5% | Res: 1 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): 'Looking at the headlines dated 2026-02-27:\n\n**LiveNonviolentMilitaryPressure (7-day window):**\n- "US-Iran Nuclear talks end in Geneva, Vienna meeting planned amid military buildup" — indicates military buildup\n- "Iran Can\'t Sink A US Navy Supercarrier, But Tehran May Still Try" — suggests carrier de'
+  ✓ T-  1 (2026-02-27) | Engine: 21.7% | Market: 8.5% | Res: 1 | Articles: 10
+  [checkpoint] 432 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── India strikes Pakistan by Dec 31 2025 (No) ──
+  Sub-market: December 31 | Resolution: 0 | History: 80 days
+  ✓ T- 77 (2025-10-15) | Engine: 4.8% | Market: 13.0% | Res: 0 | Articles: 10
+  ✓ T- 76 (2025-10-16) | Engine: 4.1% | Market: 11.5% | Res: 0 | Articles: 10
+  ✓ T- 75 (2025-10-17) | Engine: 4.9% | Market: 12.5% | Res: 0 | Articles: 10
+  ✗ T- 74 (2025-10-18) | Engine: 17.5% | Market: 12.5% | Res: 0 | Articles: 10
+  ✗ T- 73 (2025-10-19) | Engine: 13.2% | Market: 12.5% | Res: 0 | Articles: 10
+  ✗ T- 72 (2025-10-20) | Engine: 18.1% | Market: 12.5% | Res: 0 | Articles: 10
+  ✗ T- 71 (2025-10-21) | Engine: 12.0% | Market: 11.5% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): 'Looking at the headlines dated 2025-10-22:\n\n**LiveNonviolentMilitaryPressure (7-day window):**\n- "Military decoration citations tell tales of courage, tactical acumen displayed during Op Sindoor" — This refers to decorations/awards for a past operation, not current mobilization or deployment.\n- "Pak'
+  ✓ T- 70 (2025-10-22) | Engine: 10.8% | Market: 11.0% | Res: 0 | Articles: 10
+  ✓ T- 69 (2025-10-23) | Engine: 10.1% | Market: 11.0% | Res: 0 | Articles: 10
+  ✓ T- 68 (2025-10-24) | Engine: 10.5% | Market: 11.0% | Res: 0 | Articles: 10
+  ✗ T- 67 (2025-10-25) | Engine: 12.5% | Market: 9.5% | Res: 0 | Articles: 10
+  ✓ T- 66 (2025-10-26) | Engine: 10.5% | Market: 11.0% | Res: 0 | Articles: 10
+  ✓ T- 65 (2025-10-27) | Engine: 10.6% | Market: 11.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): 'Looking at the headlines dated 2025-10-28:\n\n**LiveNonviolentMilitaryPressure (7-day window):** The headline about IAF potentially vacating Ayni Air Base in Tajikistan suggests a withdrawal rather than an offensive posture shift. Trump\'s references to "seven jets shot down" and using tariffs to end t'
+  ✓ T- 64 (2025-10-28) | Engine: 8.7% | Market: 11.5% | Res: 0 | Articles: 10
+  ✓ T- 63 (2025-10-29) | Engine: 9.3% | Market: 11.5% | Res: 0 | Articles: 10
+  ✗ T- 62 (2025-10-30) | Engine: 12.1% | Market: 12.0% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): 'I\'ll analyze each headline against the five live-dynamic q-parents.\n\n**LiveNonviolentMilitaryPressure (7-day window):**\n- "\'India prepared for Operation Sindoor 2.0\': Army Chief Upendra Dwivedi" — This is a clear offensive posture signal, referencing readiness for a repeat of a prior military operat'
+  ✗ T- 61 (2025-10-31) | Engine: 12.2% | Market: 11.5% | Res: 0 | Articles: 10
+  ✗ T- 60 (2025-11-01) | Engine: 11.9% | Market: 10.5% | Res: 0 | Articles: 10
+  ✗ T- 59 (2025-11-02) | Engine: 11.5% | Market: 8.0% | Res: 0 | Articles: 10
+  ✗ T- 58 (2025-11-03) | Engine: 11.2% | Market: 8.0% | Res: 0 | Articles: 10
+  ✗ T- 57 (2025-11-04) | Engine: 16.4% | Market: 7.5% | Res: 0 | Articles: 10
+  ✗ T- 56 (2025-11-05) | Engine: 10.7% | Market: 7.0% | Res: 0 | Articles: 10
+  ✗ T- 55 (2025-11-06) | Engine: 9.3% | Market: 4.5% | Res: 0 | Articles: 10
+  ✗ T- 54 (2025-11-07) | Engine: 9.2% | Market: 4.2% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): 'Looking at the headlines dated 2025-11-08:\n\n**LiveNonviolentMilitaryPressure (7-day window):**\n- "Pakistan\'s navy is set to have Chinese subs in 2026" — this is a future acquisition, not a current mobilization or alert.\n- "Bad news for pro-Pakistan Turkey as India\'s friend to acquire \'Super\' Rafale '
+  ✗ T- 53 (2025-11-08) | Engine: 10.4% | Market: 4.2% | Res: 0 | Articles: 10
+  ✗ T- 52 (2025-11-09) | Engine: 10.5% | Market: 4.5% | Res: 0 | Articles: 10
+  ✗ T- 51 (2025-11-10) | Engine: 10.8% | Market: 3.3% | Res: 0 | Articles: 10
+  ✗ T- 50 (2025-11-11) | Engine: 15.9% | Market: 13.7% | Res: 0 | Articles: 10
+  ✗ T- 49 (2025-11-12) | Engine: 20.3% | Market: 16.9% | Res: 0 | Articles: 10
+  ✓ T- 48 (2025-11-13) | Engine: 18.1% | Market: 21.6% | Res: 0 | Articles: 10
+  ✓ T- 47 (2025-11-14) | Engine: 16.6% | Market: 21.5% | Res: 0 | Articles: 10
+  ✓ T- 46 (2025-11-15) | Engine: 15.3% | Market: 17.8% | Res: 0 | Articles: 10
+  ✓ T- 45 (2025-11-16) | Engine: 14.5% | Market: 17.0% | Res: 0 | Articles: 10
+  ✗ T- 44 (2025-11-17) | Engine: 19.8% | Market: 14.7% | Res: 0 | Articles: 10
+  ✗ T- 43 (2025-11-18) | Engine: 16.6% | Market: 14.1% | Res: 0 | Articles: 10
+  ✗ T- 42 (2025-11-19) | Engine: 18.9% | Market: 13.4% | Res: 0 | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): 'I\'ll analyze each live-dynamic q-parent based on the headlines dated 2025-11-20.\n\n**Context from headlines:** There was a "May war" between India and Pakistan that has since ended. Trump claims credit for ending the conflict via tariff threats. Airspace closures remain in effect. Pakistan claims "mi'
+  ✗ T- 41 (2025-11-20) | Engine: 21.7% | Market: 8.9% | Res: 0 | Articles: 10
+  ✗ T- 40 (2025-11-21) | Engine: 13.8% | Market: 10.8% | Res: 0 | Articles: 10
+  ✗ T- 39 (2025-11-22) | Engine: 15.6% | Market: 9.8% | Res: 0 | Articles: 10
+  ✗ T- 38 (2025-11-23) | Engine: 15.2% | Market: 10.2% | Res: 0 | Articles: 10
+  ✗ T- 37 (2025-11-24) | Engine: 13.6% | Market: 9.7% | Res: 0 | Articles: 10
+  ✗ T- 36 (2025-11-25) | Engine: 15.6% | Market: 10.1% | Res: 0 | Articles: 10
+  ✗ T- 35 (2025-11-26) | Engine: 11.3% | Market: 10.0% | Res: 0 | Articles: 10
+  ✗ T- 34 (2025-11-27) | Engine: 10.7% | Market: 10.1% | Res: 0 | Articles: 10
+  ✗ T- 33 (2025-11-28) | Engine: 10.0% | Market: 9.9% | Res: 0 | Articles: 10
+  ✗ T- 32 (2025-11-29) | Engine: 13.2% | Market: 9.2% | Res: 0 | Articles: 10
+  ✗ T- 31 (2025-11-30) | Engine: 14.0% | Market: 9.3% | Res: 0 | Articles: 10
+  ✗ T- 30 (2025-12-01) | Engine: 12.4% | Market: 10.8% | Res: 0 | Articles: 10
+  ✗ T- 29 (2025-12-02) | Engine: 12.7% | Market: 7.8% | Res: 0 | Articles: 10
+  ✗ T- 28 (2025-12-03) | Engine: 14.4% | Market: 6.9% | Res: 0 | Articles: 10
+  ✗ T- 27 (2025-12-04) | Engine: 9.8% | Market: 5.8% | Res: 0 | Articles: 10
+  ✗ T- 26 (2025-12-05) | Engine: 9.2% | Market: 5.9% | Res: 0 | Articles: 10
+  ✗ T- 25 (2025-12-06) | Engine: 11.3% | Market: 6.3% | Res: 0 | Articles: 10
+  ✗ T- 24 (2025-12-07) | Engine: 9.3% | Market: 5.5% | Res: 0 | Articles: 10
+  ✗ T- 23 (2025-12-08) | Engine: 15.3% | Market: 5.5% | Res: 0 | Articles: 10
+  ✗ T- 22 (2025-12-09) | Engine: 13.3% | Market: 3.4% | Res: 0 | Articles: 10
+  ✗ T- 21 (2025-12-10) | Engine: 15.0% | Market: 3.9% | Res: 0 | Articles: 10
+  ✗ T- 20 (2025-12-11) | Engine: 13.2% | Market: 3.8% | Res: 0 | Articles: 10
+  ✗ T- 19 (2025-12-12) | Engine: 13.9% | Market: 3.6% | Res: 0 | Articles: 10
+  ✗ T- 18 (2025-12-13) | Engine: 12.2% | Market: 4.6% | Res: 0 | Articles: 10
+  ✗ T- 17 (2025-12-14) | Engine: 10.5% | Market: 5.0% | Res: 0 | Articles: 10
+  ✗ T- 16 (2025-12-15) | Engine: 12.2% | Market: 0.9% | Res: 0 | Articles: 10
+  ✗ T- 15 (2025-12-16) | Engine: 11.3% | Market: 1.4% | Res: 0 | Articles: 10
+  ✗ T- 14 (2025-12-17) | Engine: 11.7% | Market: 1.5% | Res: 0 | Articles: 10
+  ✗ T- 13 (2025-12-18) | Engine: 10.4% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T- 12 (2025-12-19) | Engine: 14.1% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T- 11 (2025-12-20) | Engine: 9.9% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T- 10 (2025-12-21) | Engine: 11.5% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T-  9 (2025-12-22) | Engine: 7.9% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T-  8 (2025-12-23) | Engine: 9.7% | Market: 1.8% | Res: 0 | Articles: 10
+  ✗ T-  7 (2025-12-24) | Engine: 12.7% | Market: 1.6% | Res: 0 | Articles: 10
+  ✗ T-  6 (2025-12-25) | Engine: 10.5% | Market: 1.4% | Res: 0 | Articles: 10
+  ✗ T-  5 (2025-12-26) | Engine: 12.6% | Market: 1.4% | Res: 0 | Articles: 10
+  ✗ T-  4 (2025-12-27) | Engine: 14.4% | Market: 1.4% | Res: 0 | Articles: 10
+  ✗ T-  3 (2025-12-28) | Engine: 11.7% | Market: 1.1% | Res: 0 | Articles: 10
+  ✗ T-  2 (2025-12-29) | Engine: 11.6% | Market: 1.2% | Res: 0 | Articles: 10
+  ✗ T-  1 (2025-12-30) | Engine: 11.2% | Market: 0.3% | Res: 0 | Articles: 10
+  [checkpoint] 509 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── China invades Taiwan by Jun 30 2026 (live) ──
+  Sub-market: Will China invade Taiwan by June 30, 2026? | Resolution: None | History: 160 days
+   T- 90 (2026-04-01) | Engine: 3.4% | Market: 4.2% | Res: live | Articles: 10
+   T- 89 (2026-04-02) | Engine: 3.4% | Market: 3.4% | Res: live | Articles: 10
+   T- 88 (2026-04-03) | Engine: 3.5% | Market: 3.4% | Res: live | Articles: 10
+   T- 87 (2026-04-04) | Engine: 3.7% | Market: 3.4% | Res: live | Articles: 10
+   T- 86 (2026-04-05) | Engine: 3.4% | Market: 3.4% | Res: live | Articles: 10
+   T- 85 (2026-04-06) | Engine: 4.9% | Market: 3.4% | Res: live | Articles: 10
+   T- 84 (2026-04-07) | Engine: 5.7% | Market: 3.4% | Res: live | Articles: 10
+   T- 83 (2026-04-08) | Engine: 5.9% | Market: 3.4% | Res: live | Articles: 10
+   T- 82 (2026-04-09) | Engine: 11.8% | Market: 3.6% | Res: live | Articles: 10
+   T- 81 (2026-04-10) | Engine: 10.8% | Market: 3.6% | Res: live | Articles: 10
+   T- 80 (2026-04-11) | Engine: 8.5% | Market: 3.6% | Res: live | Articles: 10
+   T- 79 (2026-04-12) | Engine: 7.6% | Market: 3.6% | Res: live | Articles: 10
+   T- 78 (2026-04-13) | Engine: 7.3% | Market: 3.6% | Res: live | Articles: 10
+   T- 77 (2026-04-14) | Engine: 6.6% | Market: 3.6% | Res: live | Articles: 10
+    [warn] Node scoring parse error (all 3 tiers), using zeros
+    [warn] raw response (first 300 chars): 'Looking at the headlines dated 2026-04-15, I need to assess each indicator specifically for the **China-Taiwan** dyad.\n\n**Analysis of headlines:**\n\nThe headlines are predominantly about:\n1. US-China tensions related to the **Strait of Hormuz** and **Iran**, not Taiwan\n2. China "tests blockade" - but'
+   T- 76 (2026-04-15) | Engine: 7.0% | Market: 3.6% | Res: live | Articles: 10
+   T- 75 (2026-04-16) | Engine: 5.9% | Market: 3.6% | Res: live | Articles: 10
+   T- 74 (2026-04-17) | Engine: 8.5% | Market: 3.6% | Res: live | Articles: 10
+   T- 73 (2026-04-18) | Engine: 8.2% | Market: 3.6% | Res: live | Articles: 10
+   T- 72 (2026-04-19) | Engine: 14.7% | Market: 2.5% | Res: live | Articles: 10
+   T- 71 (2026-04-20) | Engine: 11.5% | Market: 2.5% | Res: live | Articles: 10
+   T- 70 (2026-04-21) | Engine: 8.2% | Market: 2.5% | Res: live | Articles: 10
+   T- 69 (2026-04-22) | Engine: 7.4% | Market: 2.1% | Res: live | Articles: 10
+   T- 68 (2026-04-23) | Engine: 7.7% | Market: 2.5% | Res: live | Articles: 10
+   T- 67 (2026-04-24) | Engine: 7.3% | Market: 2.4% | Res: live | Articles: 10
+   T- 66 (2026-04-25) | Engine: 8.0% | Market: 2.5% | Res: live | Articles: 10
+   T- 65 (2026-04-26) | Engine: 6.7% | Market: 2.5% | Res: live | Articles: 10
+   T- 64 (2026-04-27) | Engine: 7.4% | Market: 2.5% | Res: live | Articles: 10
+   T- 63 (2026-04-28) | Engine: 7.9% | Market: 2.2% | Res: live | Articles: 10
+   T- 62 (2026-04-29) | Engine: 7.8% | Market: 2.1% | Res: live | Articles: 10
+   T- 61 (2026-04-30) | Engine: 7.6% | Market: 1.8% | Res: live | Articles: 10
+   T- 60 (2026-05-01) | Engine: 7.2% | Market: 2.1% | Res: live | Articles: 10
+   T- 59 (2026-05-02) | Engine: 6.7% | Market: 1.9% | Res: live | Articles: 10
+   T- 58 (2026-05-03) | Engine: 6.5% | Market: 1.6% | Res: live | Articles: 10
+   T- 57 (2026-05-04) | Engine: 6.6% | Market: 1.5% | Res: live | Articles: 10
+   T- 56 (2026-05-05) | Engine: 6.8% | Market: 1.6% | Res: live | Articles: 10
+   T- 55 (2026-05-06) | Engine: 6.9% | Market: 1.5% | Res: live | Articles: 10
+   T- 54 (2026-05-07) | Engine: 7.3% | Market: 1.6% | Res: live | Articles: 10
+   T- 53 (2026-05-08) | Engine: 6.6% | Market: 1.7% | Res: live | Articles: 10
+   T- 52 (2026-05-09) | Engine: 6.6% | Market: 1.9% | Res: live | Articles: 10
+   T- 51 (2026-05-10) | Engine: 5.8% | Market: 1.6% | Res: live | Articles: 10
+   T- 50 (2026-05-11) | Engine: 6.3% | Market: 1.6% | Res: live | Articles: 10
+   T- 49 (2026-05-12) | Engine: 5.8% | Market: 1.9% | Res: live | Articles: 10
+   T- 48 (2026-05-13) | Engine: 8.1% | Market: 1.8% | Res: live | Articles: 10
+   T- 47 (2026-05-14) | Engine: 9.0% | Market: 1.8% | Res: live | Articles: 10
+   T- 46 (2026-05-15) | Engine: 4.5% | Market: 2.1% | Res: live | Articles: 10
+   T- 45 (2026-05-16) | Engine: 5.6% | Market: 1.1% | Res: live | Articles: 10
+   T- 44 (2026-05-17) | Engine: 6.9% | Market: 0.9% | Res: live | Articles: 10
+   T- 43 (2026-05-18) | Engine: 6.4% | Market: 1.7% | Res: live | Articles: 10
+   T- 42 (2026-05-19) | Engine: 8.3% | Market: 1.5% | Res: live | Articles: 10
+   T- 41 (2026-05-20) | Engine: 7.9% | Market: 1.2% | Res: live | Articles: 10
+   T- 40 (2026-05-21) | Engine: 7.7% | Market: 1.4% | Res: live | Articles: 10
+   T- 39 (2026-05-22) | Engine: 6.6% | Market: 1.8% | Res: live | Articles: 10
+   T- 38 (2026-05-23) | Engine: 8.8% | Market: 1.6% | Res: live | Articles: 10
+   T- 37 (2026-05-24) | Engine: 7.3% | Market: 1.6% | Res: live | Articles: 10
+   T- 36 (2026-05-25) | Engine: 7.6% | Market: 1.6% | Res: live | Articles: 10
+   T- 35 (2026-05-26) | Engine: 7.8% | Market: 1.5% | Res: live | Articles: 10
+   T- 34 (2026-05-27) | Engine: 6.8% | Market: 1.5% | Res: live | Articles: 10
+   T- 33 (2026-05-28) | Engine: 8.5% | Market: 1.3% | Res: live | Articles: 10
+   T- 32 (2026-05-29) | Engine: 7.2% | Market: 1.1% | Res: live | Articles: 10
+   T- 31 (2026-05-30) | Engine: 6.7% | Market: 0.9% | Res: live | Articles: 10
+   T- 30 (2026-05-31) | Engine: 7.1% | Market: 0.9% | Res: live | Articles: 10
+   T- 29 (2026-06-01) | Engine: 8.4% | Market: 0.9% | Res: live | Articles: 10
+   T- 28 (2026-06-02) | Engine: 8.1% | Market: 0.9% | Res: live | Articles: 10
+   T- 27 (2026-06-03) | Engine: 7.2% | Market: 0.9% | Res: live | Articles: 10
+   T- 26 (2026-06-04) | Engine: 6.8% | Market: 0.9% | Res: live | Articles: 10
+   T- 25 (2026-06-05) | Engine: 8.0% | Market: 0.9% | Res: live | Articles: 10
+   T- 24 (2026-06-06) | Engine: 7.8% | Market: 1.1% | Res: live | Articles: 10
+   T- 23 (2026-06-07) | Engine: 12.5% | Market: 1.2% | Res: live | Articles: 10
+   T- 22 (2026-06-08) | Engine: 9.5% | Market: 0.8% | Res: live | Articles: 10
+   T- 21 (2026-06-09) | Engine: 9.7% | Market: 0.7% | Res: live | Articles: 10
+   T- 20 (2026-06-10) | Engine: 7.9% | Market: 0.7% | Res: live | Articles: 0
+   T- 19 (2026-06-11) | Engine: 7.4% | Market: 0.4% | Res: live | Articles: 0
+   T- 18 (2026-06-12) | Engine: 7.0% | Market: 0.8% | Res: live | Articles: 0
+   T- 17 (2026-06-13) | Engine: 6.7% | Market: 0.7% | Res: live | Articles: 0
+   T- 16 (2026-06-14) | Engine: 6.4% | Market: 0.5% | Res: live | Articles: 0
+   T- 15 (2026-06-15) | Engine: 6.2% | Market: 0.4% | Res: live | Articles: 0
+   T- 14 (2026-06-16) | Engine: 7.1% | Market: 0.4% | Res: live | Articles: 10
+   T- 13 (2026-06-17) | Engine: 7.8% | Market: 0.4% | Res: live | Articles: 10
+   T- 12 (2026-06-18) | Engine: 7.7% | Market: 0.4% | Res: live | Articles: 10
+   T- 11 (2026-06-19) | Engine: 6.1% | Market: 0.4% | Res: live | Articles: 10
+  [checkpoint] 589 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+── China invades Taiwan 2026 (live) ──
+  ✗ No event found for slug: will-china-invade-taiwan-in-2026
+  ✗ No Polymarket data — skipping
+
+── India strikes Pakistan by Dec 31 2026 (live) ──
+  Sub-market: December 31, 2026 | Resolution: None | History: 200 days
+  [checkpoint] 589 rows saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+  Results saved → /Users/kapurao/predictioneering/pipeline/backtest_results.json
+
+████████████████████████████████████████████████████████████
+  BACKTEST RESULTS — Mach 3.1 (unified formula, polarity flip)
+████████████████████████████████████████████████████████████
+
+  Resolved rows:  419  (Z_t=2 excluded: 0)
+  Live rows:      80
+
+  Engine Brier:   0.1142
+  Market Brier:   0.1043
+  Delta:          +0.0099  (engine WORSE)
+
+  Engine beats market: 49/419 snapshots
+
+  BY RESOLUTION:
+    Resolved Yes (n=72): Engine 0.6171 | Market 0.5946
+    Resolved No  (n=347): Engine 0.0099 | Market 0.0026
+
+  BY SNAPSHOT:
+    T- 90: Engine 0.0053 | Market 0.0013
+    T- 89: Engine 0.0086 | Market 0.0013
+    T- 88: Engine 0.0076 | Market 0.0010
+    T- 87: Engine 0.0070 | Market 0.0009
+    T- 86: Engine 0.0052 | Market 0.0010
+    T- 85: Engine 0.0073 | Market 0.0011
+    T- 84: Engine 0.0051 | Market 0.0011
+    T- 83: Engine 0.0125 | Market 0.0012
+    T- 82: Engine 0.0094 | Market 0.0011
+    T- 81: Engine 0.0066 | Market 0.0011
+    T- 80: Engine 0.0052 | Market 0.0012
+    T- 79: Engine 0.0073 | Market 0.0016
+    T- 78: Engine 0.0062 | Market 0.0012
+    T- 77: Engine 0.0053 | Market 0.0054
+    T- 76: Engine 0.0060 | Market 0.0048
+    T- 75: Engine 0.0054 | Market 0.0055
+    T- 74: Engine 0.0117 | Market 0.0050
+    T- 73: Engine 0.0103 | Market 0.0050
+    T- 72: Engine 0.0143 | Market 0.0050
+    T- 71: Engine 0.0081 | Market 0.0043
+    T- 70: Engine 0.0088 | Market 0.0043
+    T- 69: Engine 0.0078 | Market 0.0044
+    T- 68: Engine 0.0086 | Market 0.0044
+    T- 67: Engine 0.0104 | Market 0.0037
+    T- 66: Engine 0.0091 | Market 0.0044
+    T- 65: Engine 0.0093 | Market 0.0045
+    T- 64: Engine 0.0077 | Market 0.0044
+    T- 63: Engine 0.0066 | Market 0.0047
+    T- 62: Engine 0.0081 | Market 0.0048
+    T- 61: Engine 0.0090 | Market 0.0045
+    T- 60: Engine 0.0074 | Market 0.0038
+    T- 59: Engine 0.0072 | Market 0.0027
+    T- 58: Engine 0.0063 | Market 0.0026
+    T- 57: Engine 0.0140 | Market 0.0023
+    T- 56: Engine 0.0074 | Market 0.0021
+    T- 55: Engine 0.0063 | Market 0.0013
+    T- 54: Engine 0.0055 | Market 0.0010
+    T- 53: Engine 0.0054 | Market 0.0009
+    T- 52: Engine 0.0058 | Market 0.0010
+    T- 51: Engine 0.0062 | Market 0.0008
+    T- 50: Engine 0.0091 | Market 0.0051
+    T- 49: Engine 0.0130 | Market 0.0077
+    T- 48: Engine 0.0112 | Market 0.0123
+    T- 47: Engine 0.0113 | Market 0.0121
+    T- 46: Engine 0.0086 | Market 0.0085
+    T- 45: Engine 0.0120 | Market 0.0077
+    T- 44: Engine 0.0167 | Market 0.0059
+    T- 43: Engine 0.0139 | Market 0.0054
+    T- 42: Engine 0.0179 | Market 0.0049
+    T- 41: Engine 0.0172 | Market 0.0023
+    T- 40: Engine 0.0099 | Market 0.0033
+    T- 39: Engine 0.1601 | Market 0.0673
+    T- 38: Engine 0.1609 | Market 0.0882
+    T- 37: Engine 0.1526 | Market 0.0766
+    T- 36: Engine 0.1550 | Market 0.0596
+    T- 35: Engine 0.1273 | Market 0.0464
+    T- 34: Engine 0.1407 | Market 0.0493
+    T- 33: Engine 0.2494 | Market 0.1140
+    T- 32: Engine 0.2463 | Market 0.1305
+    T- 31: Engine 0.2165 | Market 0.1464
+    T- 30: Engine 0.2193 | Market 0.1376
+    T- 29: Engine 0.2267 | Market 0.1217
+    T- 28: Engine 0.1701 | Market 0.1122
+    T- 27: Engine 0.1845 | Market 0.1320
+    T- 26: Engine 0.2083 | Market 0.1596
+    T- 25: Engine 0.2038 | Market 0.1835
+    T- 24: Engine 0.2126 | Market 0.1957
+    T- 23: Engine 0.2191 | Market 0.1984
+    T- 22: Engine 0.2300 | Market 0.1981
+    T- 21: Engine 0.2020 | Market 0.2005
+    T- 20: Engine 0.2112 | Market 0.2221
+    T- 19: Engine 0.2300 | Market 0.2152
+    T- 18: Engine 0.2229 | Market 0.2119
+    T- 17: Engine 0.1856 | Market 0.2179
+    T- 16: Engine 0.1989 | Market 0.2111
+    T- 15: Engine 0.2201 | Market 0.2583
+    T- 14: Engine 0.2138 | Market 0.2510
+    T- 13: Engine 0.2183 | Market 0.2719
+    T- 12: Engine 0.2354 | Market 0.2583
+    T- 11: Engine 0.1671 | Market 0.2443
+    T- 10: Engine 0.1963 | Market 0.2443
+    T-  9: Engine 0.1735 | Market 0.2337
+    T-  8: Engine 0.1998 | Market 0.2261
+    T-  7: Engine 0.2171 | Market 0.2261
+    T-  6: Engine 0.2152 | Market 0.2470
+    T-  5: Engine 0.2025 | Market 0.2415
+    T-  4: Engine 0.2097 | Market 0.2389
+    T-  3: Engine 0.2057 | Market 0.2470
+    T-  2: Engine 0.2095 | Market 0.2700
+    T-  1: Engine 0.2209 | Market 0.2731
+
+  CALIBRATION TABLE (engine bins vs actual resolution rate):
+    0%–10%: n=218, actual rate=0%
+    10%–30%: n=194, actual rate=33%
+    30%–60%: n=7, actual rate=100%
+
+  LIVE MARKETS (no Brier — comparison only):
+    China invades Taiwan by Jun 30 2026 (live)         Engine 3.4% | Market 4.2% | Edge -0.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 3.4% | Market 3.4% | Edge +0.1%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 3.5% | Market 3.4% | Edge +0.1%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 3.7% | Market 3.4% | Edge +0.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 3.4% | Market 3.4% | Edge +0.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 4.9% | Market 3.4% | Edge +1.6%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 5.7% | Market 3.4% | Edge +2.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 5.9% | Market 3.4% | Edge +2.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 11.8% | Market 3.6% | Edge +8.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 10.8% | Market 3.6% | Edge +7.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 8.5% | Market 3.6% | Edge +4.9%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.6% | Market 3.6% | Edge +3.9%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.3% | Market 3.6% | Edge +3.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.6% | Market 3.6% | Edge +3.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.0% | Market 3.6% | Edge +3.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 5.9% | Market 3.6% | Edge +2.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 8.5% | Market 3.6% | Edge +4.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 8.2% | Market 3.6% | Edge +4.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 14.7% | Market 2.5% | Edge +12.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 11.5% | Market 2.5% | Edge +9.1%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 8.2% | Market 2.5% | Edge +5.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.4% | Market 2.1% | Edge +5.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.7% | Market 2.5% | Edge +5.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.3% | Market 2.4% | Edge +4.9%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 8.0% | Market 2.5% | Edge +5.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.7% | Market 2.5% | Edge +4.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.4% | Market 2.5% | Edge +4.9%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.9% | Market 2.2% | Edge +5.6%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.8% | Market 2.1% | Edge +5.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.6% | Market 1.8% | Edge +5.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.2% | Market 2.1% | Edge +5.1%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.7% | Market 1.9% | Edge +4.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.5% | Market 1.6% | Edge +4.9%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.6% | Market 1.5% | Edge +5.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.8% | Market 1.6% | Edge +5.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.9% | Market 1.5% | Edge +5.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.3% | Market 1.6% | Edge +5.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.6% | Market 1.7% | Edge +5.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.6% | Market 1.9% | Edge +4.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 5.8% | Market 1.6% | Edge +4.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.3% | Market 1.6% | Edge +4.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 5.8% | Market 1.9% | Edge +3.9%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 8.1% | Market 1.8% | Edge +6.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 9.0% | Market 1.8% | Edge +7.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 4.5% | Market 2.1% | Edge +2.5%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 5.6% | Market 1.1% | Edge +4.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.9% | Market 0.9% | Edge +6.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.4% | Market 1.7% | Edge +4.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 8.3% | Market 1.5% | Edge +6.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.9% | Market 1.2% | Edge +6.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.7% | Market 1.4% | Edge +6.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.6% | Market 1.8% | Edge +4.9%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 8.8% | Market 1.6% | Edge +7.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.3% | Market 1.6% | Edge +5.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.6% | Market 1.6% | Edge +6.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.8% | Market 1.5% | Edge +6.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.8% | Market 1.5% | Edge +5.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 8.5% | Market 1.3% | Edge +7.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.2% | Market 1.1% | Edge +6.1%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.7% | Market 0.9% | Edge +5.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.1% | Market 0.9% | Edge +6.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 8.4% | Market 0.9% | Edge +7.6%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 8.1% | Market 0.9% | Edge +7.1%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.2% | Market 0.9% | Edge +6.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.8% | Market 0.9% | Edge +5.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 8.0% | Market 0.9% | Edge +7.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.8% | Market 1.1% | Edge +6.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 12.5% | Market 1.2% | Edge +11.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 9.5% | Market 0.8% | Edge +8.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 9.7% | Market 0.7% | Edge +9.0%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.9% | Market 0.7% | Edge +7.2%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.4% | Market 0.4% | Edge +7.1%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.0% | Market 0.8% | Edge +6.3%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.7% | Market 0.7% | Edge +6.1%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.4% | Market 0.5% | Edge +5.9%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.2% | Market 0.4% | Edge +5.8%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.1% | Market 0.4% | Edge +6.7%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.8% | Market 0.4% | Edge +7.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 7.7% | Market 0.4% | Edge +7.4%
+    China invades Taiwan by Jun 30 2026 (live)         Engine 6.1% | Market 0.4% | Edge +5.8%
+
