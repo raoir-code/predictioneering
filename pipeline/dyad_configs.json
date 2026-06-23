@@ -22,8 +22,9 @@
     },
     "crisis_context": "CRISIS CONTEXT: China conducts recurring large-scale military exercises around Taiwan as part of the ongoing Fourth Taiwan Strait Crisis sequence (2022-present). Exercises, ADIZ incursions, patrol announcements, arms sale reactions, and blockade warnings are routine features of this rivalry \u2014 they occur continuously and do not indicate imminent invasion. When scoring headlines: distinguish routine coercive pressure (exercises, patrols, diplomatic protests) from genuine operational preparation (evacuation orders, airspace closure, confirmed amphibious staging). Score RoutineMilitaryPressure for standard exercises and rhetoric. Score OperationalPreparation only for concrete force positioning indicating imminent action.",
     "suppressor_static": {
-      "OperationalFeasibility": 0.15,
+      "OperationalFeasibility": 0.3,
       "InitiatorSurvivalRisk": 0.85,
+      "PatronMoralHazard": 0.1,
       "SubstitutionPath": 0.7
     }
   },
@@ -50,9 +51,10 @@
     },
     "crisis_context": "CRISIS CONTEXT: This is an ongoing war market asking about peace/ceasefire termination, NOT a conflict onset market. YES resolution means a peace deal was reached, not that violence occurred. The violence-onset scoring model does not apply. Score with polarity inverted: de-escalation signals are positive for YES resolution, escalation signals are negative.",
     "suppressor_static": {
-      "OperationalFeasibility": 0.5,
-      "InitiatorSurvivalRisk": 0.75,
-      "SubstitutionPath": 0.3
+      "OperationalFeasibility": 0.8,
+      "InitiatorSurvivalRisk": 0.6,
+      "PatronMoralHazard": 0.3,
+      "SubstitutionPath": 0.4
     }
   },
   "US-Iran": {
@@ -81,9 +83,10 @@
     "acute_phase_onset_date": "2026-01-20",
     "event_date": null,
     "suppressor_static": {
-      "OperationalFeasibility": 0.6,
+      "OperationalFeasibility": 0.85,
       "InitiatorSurvivalRisk": 0.2,
-      "SubstitutionPath": 0.25
+      "PatronMoralHazard": 0.4,
+      "SubstitutionPath": 0.35
     }
   },
   "Israel-Iran": {
@@ -156,8 +159,9 @@
     "crisis_context": "CRISIS CONTEXT: India and Pakistan fought Operation Sindoor May 7-10, 2025 \u2014 a brief armed conflict triggered by the Pahalgam terrorist attack. India conducted missile strikes on Pakistani territory. A US-mediated ceasefire ended the conflict May 10, 2025. The backtest scoring period (October-December 2025) is POST-CEASEFIRE. When scoring headlines: nuclear threats, BrahMos range claims, army chief warnings, and capability discussions are post-conflict rhetoric from the winning side, NOT indicators of imminent new conflict. Score RoutineMilitaryPressure for speeches and capability claims. Score OperationalPreparation ONLY for new verified troop movements or mobilization orders.",
     "suppressor_static": {
       "OperationalFeasibility": 0.7,
-      "InitiatorSurvivalRisk": 0.15,
-      "SubstitutionPath": 0.4
+      "InitiatorSurvivalRisk": 0.65,
+      "PatronMoralHazard": 0.5,
+      "SubstitutionPath": 0.45
     }
   },
   "NATO-Russia": {
@@ -210,8 +214,9 @@
     "event_date": "2026-01-03",
     "suppressor_static": {
       "OperationalFeasibility": 0.9,
-      "InitiatorSurvivalRisk": 0.1,
-      "SubstitutionPath": 0.2
+      "InitiatorSurvivalRisk": 0.05,
+      "PatronMoralHazard": 0.15,
+      "SubstitutionPath": 0.1
     }
   },
   "US-Cuba": {

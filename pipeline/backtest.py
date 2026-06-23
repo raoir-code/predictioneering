@@ -401,7 +401,7 @@ CRITICAL DISTINCTION for military pressure nodes:
 
 - RoutineMilitaryPressure (7-day window): 0 = none or genuinely quiet. 0.25 = standard exercises / patrols / symbolic demonstrations / post-conflict rhetoric. 0.60 = elevated rhetoric with capability claims but no operational movement. Do NOT score operational preparation here.
 
-- OperationalPreparation (7-day window): 0 = no operational signals. 0.25 = unusual but ambiguous movement. 0.60 = confirmed strike-range deployment / force protection changes / airspace closure / logistics buildup. 1.00 = all of the above WITH a binding deadline present.
+- OperationalPreparation (7-day window): SCORE HIGH ONLY for irreversible operational acts. 0 = no operational signals, OR routine exercises, ADIZ violations, rhetoric, arms sale announcements, patrols, capability claims — score ZERO even if alarming in tone. 0.25 = unusual but genuinely ambiguous movement (not standard exercises). 0.60 = confirmed irreversible act: strike packages moving to forward positions, named airspace/maritime closure zones activated, evacuation orders issued, confirmed munitions/logistics buildup at forward bases, allied operational coordination for specific contingency. 1.00 = 0.60 criteria MET AND a binding named deadline with stated consequences exists publicly. CRITICAL: chronic rivalry features (PLA exercises, ADIZ incursions, naval patrols, missile tests, diplomatic protests) score 0 here — use RoutineMilitaryPressure.
 
 - LiveViolenceObserved (7-day window): 0 = no violence this window. 0.50 = minor/isolated incident. 0.90 = serious clash / strike / raid / attack on military personnel / cross-border fire. A full-scale attack is excluded (it becomes the outcome, not a predictor).
     IMPORTANT: {trigger_context}
@@ -894,28 +894,28 @@ def run_backtest(dry_run=False):
 
             # ── ICB Weibull transport ──────────────────────────────────────
             import math as _math
-            _crisis_onset = _parse_date_str(_dyad_meta.get('crisis_onset_date') if _dyad_meta else None)
+            # Gate removed (Run 21): Weibull boost fires always.
+            # Discrimination comes from suppressor cluster (structural) +
+            # acute q node scores from LLM (semantic). If OP≈0 (Taiwan
+            # chronic exercises), _acute_core≈0 → boost≈0 naturally.
             _acute_onset  = _parse_date_str(_dyad_meta.get('acute_phase_onset_date') if _dyad_meta else None)
             _event_date   = _parse_date_str(_dyad_meta.get('event_date') if _dyad_meta else None)
             _icb_boost = 0.0
-            if _crisis_onset and snapshot_date >= _crisis_onset:
-                _clock = _acute_onset if (_acute_onset and snapshot_date >= _acute_onset) else _crisis_onset
-                _A = max((snapshot_date - _clock).days, 0)
-                _F = _weibull_residual(_A, max(days_remaining, 0))
-                _qc = q_components
-                _acute_core = (
-                    _qc.get('OperationalPreparation', 0)
-                  + _qc.get('LiveViolenceObserved',   0)
-                  + _qc.get('LiveUltimatumDeadline',  0)
-                  + _qc.get('MobilizationSignal',     0)
-                )
-                _abatement  = abs(_qc.get('LiveAbatementSignal', 0))
-                _live_boost = _F * max(0.0, _acute_core - _abatement)
-                _icb_boost  = ICB_TRANSPORT_RHO * _live_boost
-                _bl = _math.log(max(engine_p_base,1e-6)/max(1-engine_p_base,1e-6))
-                engine_p = round(1/(1+_math.exp(-(_bl+_icb_boost))),4)
-            else:
-                engine_p = engine_p_base
+            _clock = _acute_onset if (_acute_onset and snapshot_date >= _acute_onset) else snapshot_date
+            _A = max((snapshot_date - _clock).days, 0)
+            _F = _weibull_residual(_A, max(days_remaining, 0))
+            _qc = q_components
+            _acute_core = (
+                _qc.get('OperationalPreparation', 0)
+              + _qc.get('LiveViolenceObserved',   0)
+              + _qc.get('LiveUltimatumDeadline',  0)
+              + _qc.get('MobilizationSignal',     0)
+            )
+            _abatement  = abs(_qc.get('LiveAbatementSignal', 0))
+            _live_boost = _F * max(0.0, _acute_core - _abatement)
+            _icb_boost  = ICB_TRANSPORT_RHO * _live_boost
+            _bl = _math.log(max(engine_p_base,1e-6)/max(1-engine_p_base,1e-6))
+            engine_p = round(1/(1+_math.exp(-(_bl+_icb_boost))),4)
             # ── end ICB transport ──────────────────────────────────────────
 
             # Brier scores (resolved markets; Z_t=2 filtered in print_results)
