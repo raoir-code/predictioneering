@@ -913,7 +913,7 @@ def run_backtest(dry_run=False):
             )
             _abatement  = abs(_qc.get('LiveAbatementSignal', 0))
             _live_boost = _F * max(0.0, _acute_core - _abatement)
-            _icb_boost  = ICB_TRANSPORT_RHO * _live_boost
+            _icb_boost  = ICB_TRANSPORT_RHO * _live_boost if z_t != 2 else 0.0
             _bl = _math.log(max(engine_p_base,1e-6)/max(1-engine_p_base,1e-6))
             engine_p = round(1/(1+_math.exp(-(_bl+_icb_boost))),4)
             # ── end ICB transport ──────────────────────────────────────────
