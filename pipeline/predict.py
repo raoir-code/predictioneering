@@ -29,7 +29,7 @@ import requests
 # ============================================================
 # PATHS
 # ============================================================
-CLASSIFIED_FEED = "docs/classified_feed.json"
+CLASSIFIED_FEED = "pipeline/classified_feed.json"
 ALPHA_FILE      = "alpha/conflict_onset.json"
 
 # ============================================================
@@ -133,7 +133,7 @@ NODE_RUBRICS = {
     "PatronDeterrence":    "Did a NEW patron commitment signal occur: explicit security guarantee reaffirmed, patron military assets moved to theater, patron issued credible deterrence statement, or patron withdrew support? +0.5 = patron visibly committed to defender (deters initiator). -0.5 = patron signal weakened or withdrawn.",
     "NuclearDeterrence":   "Did a NEW nuclear signal occur: nuclear test, new delivery system deployment, nuclear alert status change, or explicit nuclear threat? +0.5 = nuclear threat escalated. -0.5 = nuclear de-escalation. This should almost ALWAYS be 0.",
     "CommitmentProblem":   "Did a NEW event change the credibility or urgency of threats: public ultimatums, force deployments near the adversary, events that make today's deal harder to sustain tomorrow? +0.5 = commitment problem worsened. -0.5 = credible commitment mechanism created.",
-    "MobilizationSignal":  "Did a NEW costly military mobilization signal occur, specifically: reserve call-up, conscription order, formal mobilization decree, military alert status escalation, or troop activation orders? This is DISTINCT from WinProbability (capability balance) and PatronDeterrence (alliance signaling) -- score this node ONLY for the act of mobilizing/activating forces, not for generic troop presence, deployment location, or base posture (those belong to WinProbability). +0.5 to +1.0 = clear mobilization order issued (the literature shows this predicts escalation risk, Levin-Banchik 2021). 0 = generic troop movement, exercises, or presence without a mobilization/call-up order -- the literature (Fuhrmann & Sechser 2014) finds this channel statistically null, do NOT score it as mobilization. Almost always 0 unless an explicit call-up/activation order is reported."
+    "MobilizationSignal":  "Did a NEW costly military mobilization signal occur, specifically: reserve call-up, conscription order, formal mobilization decree, military alert status escalation, or troop activation orders? This is DISTINCT from WinProbability (capability balance) and PatronDeterrence (alliance signaling) -- score this node ONLY for the act of mobilizing/activating forces, not for generic troop presence, deployment location, or base posture (those belong to WinProbability). +0.5 to +1.0 = clear mobilization order issued (the literature shows this predicts escalation risk, Levin-Banchik 2021). 0 = generic troop movement, exercises, or presence without a mobilization/call-up order -- the literature (Fuhrmann & Sechser 2014) finds this channel statistically null, do NOT score it as mobilization. Almost always 0 unless an explicit call-up/activation order is reported.",
     "Patience":            "Did a NEW domestic political instability event occur affecting leadership survival or time horizon: protests, coup signals, election shocks, elite rupture, or resignation risk? +0.5 = leadership under pressure, shorter time horizon. -0.5 = leadership consolidated, longer horizon.",
     "DemocraticPeace":     "Did a NEW major institutional rupture occur: coup, emergency rule, election cancellation, or constitutional suspension? This should almost ALWAYS be 0. +0.5 = democratic institutions weakened. -0.5 = democratic consolidation.",
     "PreferenceAlignment": "Did a NEW formal diplomatic alignment shift occur: signed agreement, formal rupture, diplomatic recognition, coalition change, or explicit policy reversal? +0.5 = preferences diverged. -0.5 = preferences converged.",
@@ -352,7 +352,7 @@ Return:
 """
 
     payload = {
-        "model":    "claude-sonnet-4-20250514",
+        "model":    "claude-sonnet-4-6",
         "max_tokens": 220,
         "temperature": 0,
         "system":   STRICT_NODE_SYSTEM,

@@ -104,6 +104,8 @@ def scrape_live_feed():
                 "event_slug":     event.get("slug", ""),
                 "question":       m.get("question", "") or m.get("groupItemTitle", ""),
                 "market_id":      m.get("id", ""),
+                "description":    m.get("description", "") or "",
+                "resolution_source": m.get("resolutionSource", "") or "",
                 "token_yes":      token_yes,
                 "market_price":   None,
                 "end_date":       (m.get("endDateIso") or m.get("endDate") or "")[:10],
