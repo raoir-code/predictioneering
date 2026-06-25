@@ -327,7 +327,7 @@ ICB_COEF = {
 # Z_t=0: quiet dyad -- use Mach 2 structural formula.
 # Z_t=1: active pre-war crisis -- use q_full as primary probability.
 #        Counterfactual validated: Brier 0.0675 vs market 0.1043.
-# Z_t=2: ongoing war, inverted-polarity market -- included in Brier with polarity-flipped engine_p.
+# Z_t=2: ongoing war, inverted-polarity market -- exclude from Brier.
 DYAD_REGIME = {
     "China-Taiwan":   0,
     "India-Pakistan": 0,
@@ -875,7 +875,7 @@ def run_backtest(dry_run=False):
             # Mach 3 regime routing (June 18 2026):
             # Z_t=0 -> Mach 2 structural formula.
             # Z_t=1 -> q_full as primary probability (crisis reference class).
-            # Z_t=2 -> polarity-flipped engine_p stored; included in Brier in print_results.
+            # Z_t=2 -> Mach 2 stored but excluded from Brier in print_results.
             for node, today_val in q_components.items():
                 hl = HALF_LIFE_DAYS.get(node)
                 if hl is None:
@@ -913,7 +913,7 @@ def run_backtest(dry_run=False):
             )
             _abatement  = abs(_qc.get('LiveAbatementSignal', 0))
             _live_boost = _F * max(0.0, _acute_core - _abatement)
-            _icb_boost  = ICB_TRANSPORT_RHO * _live_boost if z_t != 2 else 0.0
+            _icb_boost  = ICB_TRANSPORT_RHO * _live_boost
             _bl = _math.log(max(engine_p_base,1e-6)/max(1-engine_p_base,1e-6))
             engine_p = round(1/(1+_math.exp(-(_bl+_icb_boost))),4)
             # ── end ICB transport ──────────────────────────────────────────
@@ -969,8 +969,8 @@ def run_backtest(dry_run=False):
 def print_results(rows):
     all_resolved = [r for r in rows if r["resolution"] is not None]
     live         = [r for r in rows if r["resolution"] is None]
-    resolved  = all_resolved
-    excluded2 = []  # Z_t=2 now included with polarity-flipped engine_p
+    resolved  = [r for r in all_resolved if r.get("z_t", 0) != 2]
+    excluded2 = [r for r in all_resolved if r.get("z_t", 0) == 2]
 
     if not resolved:
         print("\nNo resolved markets to score yet.")
@@ -978,13 +978,13 @@ def print_results(rows):
 
     resolved_scored = [r for r in resolved if r["b_engine"] is not None]
     mean_b_engine = sum(r["b_engine"] for r in resolved_scored) / len(resolved_scored) if resolved_scored else float("nan")
-    mean_b_market = sum(r["b_market"] for r in resolved_scored) / len(resolved_scored) if resolved_scored else float("nan")
+    mean_b_market = sum(r["b_market"] for r in resolved) / len(resolved)
     wins = sum(1 for r in resolved_scored if r["b_engine"] < r["b_market"])
 
     print("\n" + "█"*60)
-    print("  BACKTEST RESULTS — Mach 3.2 (polarity-flipped Z_t=2 included)")
+    print("  BACKTEST RESULTS — Mach 3.1 (unified formula, polarity flip)")
     print("█"*60)
-    print(f"\n  Resolved rows:  {len(resolved)}  (Z_t=2 polarity-flipped: included)")
+    print(f"\n  Resolved rows:  {len(resolved)}  (Z_t=2 excluded: {len(excluded2)})")
     print(f"  Live rows:      {len(live)}")
     print(f"\n  Engine Brier:   {mean_b_engine:.4f}")
     print(f"  Market Brier:   {mean_b_market:.4f}")
