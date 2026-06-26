@@ -1,0 +1,1186 @@
+{
+  "665374": {
+    "contract_hash": "223e1cdec315",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "The U.S. must commence a military offensive intended to establish control over any portion of Iranian territory before end of 2026.",
+      "legalese_flags": [
+        "Requires intent to 'establish control over any portion of Iran' \u2014 this excludes airstrikes, naval actions, or limited kinetic operations that do not aim at territorial control",
+        "Deadline of December 31, 2026",
+        "Land control baseline set as of November 4, 2025"
+      ],
+      "confidence": "high",
+      "rationale": "An invasion intended to establish territorial control is a specific, narrow form of kinetic military action (subset of general conflict onset), excluding airstrikes, cyber operations, proxy conflicts, or limited military engagements without territorial objectives.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.15,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "Even if US-Iran conflict onset occurs (airstrikes, naval clashes, proxy escalation), a full ground invasion intended to establish territorial control over Iranian territory is an extremely unlikely form it would take \u2014 the US has no recent precedent for invading a country of Iran's size and capability, and doctrine strongly favors standoff strikes; P(B|\u00acA) is essentially zero since invasion cannot happen without conflict onset."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A full-scale U.S. ground invasion of Iran would be immediately and unambiguously reported worldwide, but the resolution criterion's requirement for intent to 'establish control over territory' introduces ambiguity \u2014 limited ground incursions, special operations raids, or temporary seizures could spark disputes over whether they meet the threshold, creating moderate resolution risk."
+    }
+  },
+  "567621": {
+    "contract_hash": "5fe71e8ea948",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "China must commence a military offensive intended to establish control over any portion of Taiwan (inhabited territory) by end of 2026.",
+      "legalese_flags": [
+        "Requires 'military offensive intended to establish control' \u2014 not just any kinetic action but invasion with territorial intent",
+        "Excludes uninhabited islands \u2014 narrower than general conflict onset",
+        "Resolution requires official confirmation by China, Taiwan, UN, or UNSC permanent member, or consensus of credible reporting",
+        "Deadline: December 31, 2026, 11:59 PM ET"
+      ],
+      "confidence": "high",
+      "rationale": "This is a subset of general conflict onset because it requires a specific form of kinetic action \u2014 an invasion intended to establish territorial control \u2014 rather than any military clash, skirmish, blockade, or strike between China and Taiwan.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.15,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "Even if a China-Taiwan conflict onset occurs (which itself is very unlikely by 2026), most plausible conflict scenarios involve blockades, missile strikes, or seizure of outlying islands rather than a full military offensive intended to establish control over inhabited Taiwanese territory; the contract's strict requirement for an invasion with territorial intent over inhabited territory makes this a narrow subset of conflict onset, while P(B|\u00acA) is essentially zero since no invasion can happen without conflict."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "low",
+      "rationale": "A full-scale Chinese invasion of Taiwan's inhabited territory would be among the most consequential global events imaginable and would be reported instantly and unambiguously by every major wire service; the resolution criteria are clear enough that distinguishing an actual invasion from lesser provocations (blockades, missile strikes, exercises) is straightforward, and the exclusion of uninhabited islands further reduces edge-case ambiguity."
+    }
+  },
+  "956590": {
+    "contract_hash": "c8d5229143cb",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "China must commence a military offensive intended to establish control over any inhabited portion of Taiwan (ROC) by June 30, 2026.",
+      "legalese_flags": [
+        "Requires 'military offensive intended to establish control' \u2014 not just any kinetic action but invasion specifically",
+        "Uninhabited islands excluded",
+        "Must target territory under ROC administration",
+        "Resolution requires official confirmation by specified bodies or credible reporting consensus"
+      ],
+      "confidence": "high",
+      "rationale": "An invasion to establish control is a specific, high-threshold subset of conflict onset \u2014 it excludes blockades, limited strikes, coercive gray-zone actions, and other kinetic military actions short of an invasion aimed at territorial control.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.15,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "A full-scale invasion to establish control over inhabited Taiwan is the most extreme and unlikely form of China-Taiwan conflict onset; even if conflict occurs (e.g., blockade, missile strikes, seizure of outlying uninhabited features), the probability it takes the specific form of an invasion to control inhabited territory within this short timeframe is low, while absent any conflict onset the probability is essentially zero."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "low",
+      "rationale": "A full-scale Chinese military invasion of inhabited Taiwanese territory would be among the most globally covered events in history, immediately and unambiguously reported by all major wire services and governments; however, the small residual resolution risk comes from edge cases like limited kinetic actions (e.g., blockade or seizure of outlying inhabited islands) where debate could arise over whether they constitute an 'offensive intended to establish control.'"
+    }
+  },
+  "1107582": {
+    "contract_hash": "66a53bb808c8",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "YES if a US-initiated drone, missile, or air strike physically impacts Cuban soil by December 31, 2026.",
+      "legalese_flags": [
+        "limited to aerial bombs, drones, or missiles only \u2014 excludes naval, ground, cyber, or other kinetic actions",
+        "includes intelligence agency and other U.S. government operatives, not just military",
+        "must physically impact ground territory of Cuba",
+        "resolution text appears truncated"
+      ],
+      "confidence": "high",
+      "rationale": "The contract specifies a particular subset of kinetic military action (aerial/missile strikes only) within the US-Cuba dyad, making it a narrower form of conflict onset than the engine's broader estimate of any kinetic military action.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.35,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "Even if a US-Cuba conflict onset occurred (which itself is extremely unlikely), it would most likely involve naval blockade, sanctions enforcement, or covert operations rather than a direct air/drone/missile strike on Cuban soil; the contract is a strict subset requiring a very specific kinetic form, and absent conflict onset, the probability is essentially zero."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A US airstrike on Cuba would be an extraordinary, globally reported event with unambiguous observability, but the resolution text appears truncated and the exclusion of naval/ground/cyber actions plus inclusion of intelligence operatives could create edge-case ambiguity if a covert operation occurred that didn't clearly fit the aerial strike definition."
+    }
+  },
+  "1385754": {
+    "contract_hash": "a50074d29486",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "France, the UK, or Germany must initiate a drone, missile, or air strike on Iranian soil or an Iranian embassy/consulate by June 30, 2026.",
+      "legalese_flags": [
+        "Limited to aerial bombs, drones, or missiles only \u2014 excludes ground operations, naval action, cyber, sabotage",
+        "Must impact Iranian ground territory or official Iranian embassy/consulate specifically",
+        "Multi-actor disjunction: any one of France, UK, or Germany qualifies",
+        "Deadline: June 30, 2026, 11:59 PM ET",
+        "Strike must be launched by military forces of the specified countries"
+      ],
+      "confidence": "high",
+      "rationale": "The contract asks about a specific form of kinetic military action (air/missile/drone strikes) by a specified set of actors against Iran, which is a narrower subset of general conflict onset between this dyad \u2014 it excludes other forms of military escalation such as ground operations, naval engagements, cyber attacks, or proxy conflict.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.02,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "Even if a broader conflict involving Iran occurs, the probability that France, UK, or Germany specifically initiate air/drone/missile strikes on Iranian soil is extremely low \u2014 these countries have no historical precedent for striking Iran, lack strategic motivation to do so independently of the US, and would face enormous political and legal barriers; absent any conflict onset, the probability is essentially zero."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "low",
+      "rationale": "A military strike by France, UK, or Germany on Iranian soil would be an extraordinarily major geopolitical event reported immediately and unambiguously by all major wire services; the extremely low baseline probability of this event and the clear, well-defined resolution criteria make resolution risk minimal."
+    }
+  },
+  "1107878": {
+    "contract_hash": "f94859192c04",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "The U.S. must commence a military offensive intended to establish control over any portion of Cuban land territory by December 31, 2026.",
+      "legalese_flags": [
+        "Requires intent to 'establish control over' land territory, not just any kinetic action",
+        "Excludes naval engagements, airstrikes, or limited operations that don't aim for territorial control",
+        "Specifies 'military offensive' \u2014 defensive or retaliatory actions without territorial control intent may not qualify"
+      ],
+      "confidence": "high",
+      "rationale": "This is a specific form of conflict onset (ground invasion with territorial control intent) between the US-Cuba dyad, making it a subset of the broader conflict onset probability which would include any kinetic military action.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.15,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "A full-scale invasion to establish territorial control over Cuba is an extreme subset of any US-Cuba conflict onset; even if some militarized dispute occurred (e.g., naval confrontation, limited strikes), the probability it would escalate to a ground invasion intended to seize territory is very low given post-Cold War US policy, international law constraints, and the lack of any political momentum toward such action."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A full-scale U.S. military invasion of Cuba would be unmistakably reported by all major news outlets, but the resolution criteria's requirement to establish 'intent to establish control over territory' introduces ambiguity \u2014 limited military actions (e.g., a raid, evacuation operation, or strike) could spark disputes over whether they qualify as an invasion aimed at territorial control."
+    }
+  },
+  "677407": {
+    "contract_hash": "ec2ef960d75b",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "equivalent",
+      "win_condition_summary": "A military encounter involving the use of force (missile strikes, artillery fire, gunfire, or direct military engagement) between Chinese and Taiwanese military forces must occur between November 11, 2025 and December 31, 2026.",
+      "legalese_flags": [
+        "Non-violent actions such as warning shots, artillery fire into uninhabited areas, or missile launches into uninhabited areas appear to be excluded (text truncated)",
+        "Resolution text is truncated, potentially missing additional exclusions or clarifications",
+        "Start date is November 11, 2025, not immediate",
+        "Requires direct engagement between PRC and ROC military forces specifically"
+      ],
+      "confidence": "high",
+      "rationale": "The contract asks about kinetic military action between China and Taiwan within a defined timeframe, which is essentially a conflict onset question for this dyad, though the truncated resolution text introduces minor uncertainty about excluded categories.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.85,
+      "p_b_given_not_a": 0.0,
+      "confidence": "medium",
+      "rationale": "The market is largely equivalent to engine event A (conflict onset), but the contract appears to exclude warning shots and strikes into uninhabited areas, requiring direct force engagement between PRC and ROC forces specifically, which slightly narrows the definition versus a broader conflict-onset coding; P(B|\u00acA) is effectively zero since without conflict onset there would be no direct military clash; the 0.85 reflects that some low-level conflict-onset scenarios (e.g., blockade incidents, gray-zone escalation coded as onset) might not meet the contract's apparent requirement for direct use-of-force engagement."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A genuine military clash between China and Taiwan would be globally reported immediately by all major wire services, but the resolution criteria's exclusion of warning shots, fire into uninhabited areas, and the truncated resolution text create meaningful ambiguity about whether borderline incidents (e.g., a brief exchange near disputed features) would qualify."
+    }
+  },
+  "604470": {
+    "contract_hash": "5a0223ff0011",
+    "scholar": {
+      "contract_type": "binary_threshold",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "China must establish an aerial or naval blockade of Taiwan preventing commercial traffic by threat or use of force for at least 24 hours before June 30, 2026.",
+      "legalese_flags": [
+        "Requires specifically a blockade (aerial or naval), not any kinetic military action",
+        "Must prevent normal ingress/egress of foreign commercial traffic",
+        "Must last \u2265 24 hours",
+        "Must cover part or whole of main island of Taiwan (Formosa)",
+        "Deadline: June 30, 2026, 11:59 PM ET"
+      ],
+      "confidence": "high",
+      "rationale": "A blockade is a specific form of kinetic/coercive military action within the broader China-Taiwan conflict onset space; it is a narrower subset since conflict onset could occur via missile strikes, amphibious invasion, or other means without a formal blockade.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.25,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "A blockade is a strict subset of conflict onset; if conflict occurs it could take many forms (missile strikes, island seizure, limited skirmishes) with a full naval/aerial blockade being only one possible mode\u2014historically China's military exercises have involved simulated blockades but never an actual one, and many conflict scenarios wouldn't involve a sustained 24-hour commercial-traffic-blocking blockade; absent conflict onset, probability of a blockade is essentially zero."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A full naval or aerial blockade of Taiwan would be one of the most consequential geopolitical events in decades and would be massively reported by all major wire services in real time; however, resolution risk is medium because ambiguity could arise around whether actions constitute a true 'blockade' versus aggressive military exercises, whether commercial traffic was actually 'prevented' versus voluntarily rerouted, and whether the 24-hour threshold was met\u2014gray-zone scenarios short of a declared blockade could be contested."
+    }
+  },
+  "1115301": {
+    "contract_hash": "812c2b9fa7b5",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "The U.S. must commence a military offensive intended to establish control over any portion of Greenland's land territory by December 31, 2026.",
+      "legalese_flags": [
+        "Requires 'military offensive intended to establish control' \u2014 not just any kinetic action but specifically an invasion with territorial control intent",
+        "Specific geographic target: Greenland land territory as recognized by Denmark",
+        "Deadline: December 31, 2026, 11:59 PM ET"
+      ],
+      "confidence": "high",
+      "rationale": "This is a subset of general US-Denmark conflict onset because it requires a specific form of military action (invasion of Greenland with intent to establish territorial control), which is narrower than any kinetic military action between the dyad.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.6,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "A US-Denmark conflict onset could take forms other than a full invasion of Greenland (e.g., naval confrontation, coercive diplomacy with limited military posturing), so P(B|A) is well below 1.0; however, absent any conflict onset, a US military invasion of Greenland to establish territorial control is essentially impossible, making P(B|\u00acA) \u2248 0."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A full U.S. military invasion of Greenland would be globally headline news and instantly verifiable, but the win condition's requirement that the offensive be 'intended to establish control' introduces interpretive ambiguity \u2014 gray-zone scenarios (e.g., expanded military basing, coercive deployments framed as security operations) could create disputes about whether the threshold was met."
+    }
+  },
+  "994894": {
+    "contract_hash": "5e0d6c85f257",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "equivalent",
+      "win_condition_summary": "YES if Greek and Turkish military forces engage in direct kinetic military action (missile strikes, artillery fire, gunfire, etc.) by June 30, 2026.",
+      "legalese_flags": [
+        "Excludes warning shots",
+        "Excludes missile launches landing in territorial waters/airspace",
+        "Resolution text appears truncated \u2014 possible additional exclusions or conditions not visible",
+        "Requires 'use of force' not merely provocative or non-violent actions"
+      ],
+      "confidence": "high",
+      "rationale": "The contract directly asks about kinetic military engagement between the specified Turkey-Greece dyad, which aligns with the engine's conflict-onset probability object, though the exclusion of warning shots and some edge cases makes it very slightly narrower than the broadest definition of conflict onset \u2014 but functionally equivalent.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 1.0,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "The market event is equivalent to the engine's conflict onset for this dyad; despite decades of tensions, airspace violations, and near-misses, Greece and Turkey have not engaged in direct kinetic military action since 1996 (Imia/Kardak), and even that was extremely limited, making both conditional probabilities cleanly map to equivalence."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A direct kinetic engagement between NATO allies Greece and Turkey would be immediately and widely reported by all major wire services, but the exclusions for warning shots and near-misses create threshold ambiguity\u2014especially given the history of Aegean incidents that blur the line between provocative maneuvers and actual kinetic action\u2014and the truncated resolution text introduces additional uncertainty about hidden conditions."
+    }
+  },
+  "677408": {
+    "contract_hash": "63d856ea8f89",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "equivalent",
+      "win_condition_summary": "A military encounter involving the use of force (missile strikes, artillery fire, exchange of gunfire, or other direct military engagement) between Chinese and Philippine military forces must occur between November 11, 2025 and December 31, 2026.",
+      "legalese_flags": [
+        "Excludes non-violent actions such as warning shots, artillery fire into uninhabited areas, or missile launches that land in uninhabited areas",
+        "Requires 'use of force' \u2014 water cannon incidents, ramming, or gray-zone tactics may not qualify",
+        "Resolution text appears truncated \u2014 full exclusion criteria may not be visible",
+        "Specific start date of November 11, 2025"
+      ],
+      "confidence": "high",
+      "rationale": "The contract directly asks about kinetic military clash (conflict onset) between the specified China-Philippines dyad within the given timeframe, matching the engine's probability object for interstate conflict onset.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.85,
+      "p_b_given_not_a": 0.02,
+      "confidence": "medium",
+      "rationale": "The contract is nearly equivalent to the engine event but has a narrower definition of 'military clash' \u2014 excluding gray-zone tactics like water cannons and ramming that dominate current China-Philippines tensions, so even if a conflict onset occurs, there's roughly a 15% chance it stays below the 'use of force' threshold; P(B|\u00acA) is very low but not zero given the possibility of accidental escalation from ongoing South China Sea friction."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A genuine military clash between China and the Philippines would be immediately and widely reported by major wire services, but the resolution criterion's distinction between qualifying 'use of force' and excluded gray-zone tactics (water cannon, ramming, warning shots, shots into uninhabited areas) creates significant threshold ambiguity, especially given that South China Sea incidents frequently fall in this gray zone, and the resolution text appears truncated."
+    }
+  },
+  "1633611": {
+    "contract_hash": "3c9f85d0bc9f",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "China must commence a military offensive intended to establish control over any inhabited portion of Taiwan (ROC) by December 31, 2027.",
+      "legalese_flags": [
+        "Requires intent to establish control \u2014 not all kinetic actions qualify, only invasion-level offensives",
+        "Excludes uninhabited islands \u2014 e.g., some disputed islets would not count",
+        "Must target ROC-administered territory specifically",
+        "Resolution requires official confirmation by specified entities or consensus of credible reporting"
+      ],
+      "confidence": "high",
+      "rationale": "The contract asks about a specific form of conflict onset \u2014 an invasion to establish territorial control \u2014 which is a subset of the broader category of kinetic military action or conflict onset between China and Taiwan, as it excludes lesser escalatory actions like blockades, limited strikes, or clashes over uninhabited islands.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.35,
+      "p_b_given_not_a": 0.0,
+      "confidence": "medium",
+      "rationale": "Conflict onset (engine event A) encompasses a broad range of kinetic actions (blockades, strikes, missile attacks, seizure of outlying islands including uninhabited ones), but the contract requires a full military offensive intended to establish control over an *inhabited* portion of Taiwan \u2014 a strict subset representing the most escalatory scenario; even if some form of China-Taiwan conflict begins, it is more likely to start as a blockade, limited strikes, or seizure of minor features rather than a full amphibious invasion of inhabited territory, hence P(B|A) is well below 1; P(B|\u00acA) is essentially 0 since an invasion cannot happen without conflict onset."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A full-scale military invasion of Taiwan would be immediately and unambiguously reported worldwide, but edge cases (e.g., seizure of small inhabited outlying islands like Kinmen, blockade operations, or ambiguous 'gray zone' escalations) could create disputes about whether the action constitutes an 'invasion intended to establish control,' introducing meaningful resolution risk around the intent and scope thresholds."
+    }
+  },
+  "1178057": {
+    "contract_hash": "841e511f392d",
+    "scholar": {
+      "contract_type": "binary_threshold",
+      "contract_polarity": "status_quo",
+      "relation_to_engine_event": "overlap",
+      "win_condition_summary": "YES requires both that the US initiates military action against Iran AND that the Iranian regime survives those strikes by June 30, 2026",
+      "legalese_flags": [
+        "compound condition: requires both US military strikes AND regime survival",
+        "resolution criteria appear truncated \u2014 full conditions for regime survival and military action acknowledgment are unclear",
+        "regime survival is a distinct question from conflict onset",
+        "deadline of June 30, 2026"
+      ],
+      "confidence": "medium",
+      "rationale": "This is a compound market that presupposes US military strikes (a conflict-onset event) but resolves on whether the regime survives them, making it an overlapping event \u2014 the engine's conflict probability informs the strike precondition, but the ultimate resolution depends on regime durability, which is a separate question.",
+      "translator_route": "PASS_TRANSLATION"
+    },
+    "clergy": null,
+    "glass": null
+  },
+  "1171858": {
+    "contract_hash": "e3f8925d47ea",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "equivalent",
+      "win_condition_summary": "A direct military encounter involving the use of force (missile strikes, artillery fire, gunfire, or other kinetic engagement) between NATO country military forces and Russian military forces must occur by June 30, 2026.",
+      "legalese_flags": [
+        "Excludes non-violent incidents like airspace violations and warning shots",
+        "Requires use of force between military forces specifically (not proxies)",
+        "Deadline of June 30, 2026, 11:59 PM ET",
+        "Start date of January 12 (presumably 2025)",
+        "Resolution text appears truncated \u2014 full exclusion list may be incomplete"
+      ],
+      "confidence": "high",
+      "rationale": "The contract asks about kinetic military action (use of force) between NATO and Russia within a defined time horizon, which maps directly to interstate conflict onset for this dyad, with exclusions only for non-violent incidents.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.95,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "The market and engine event are essentially equivalent \u2014 both concern direct NATO-Russia military conflict onset involving kinetic force; P(B|A) is slightly below 1.0 only to account for edge cases where conflict onset might involve proxies or non-kinetic actions excluded by the contract's strict definition, but a true NATO-Russia conflict onset would almost certainly involve qualifying kinetic engagement; P(B|\u00acA) is effectively zero since without conflict onset there would be no direct military clash."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A direct NATO-Russia kinetic military clash would be one of the most consequential geopolitical events in decades and would be immediately reported by all major wire services; however, resolution risk is medium because ambiguity exists around edge cases (e.g., whether a shoot-down of a drone counts, whether forces were acting in official NATO capacity, whether an incident involved 'warning shots' vs. actual use of force), the resolution text appears truncated with potentially incomplete exclusions, and attribution in a contested incident could be disputed."
+    }
+  },
+  "1633606": {
+    "contract_hash": "c433a67182ba",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "China must commence a military offensive intended to establish control over any inhabited portion of Taiwan (ROC) by September 30, 2026.",
+      "legalese_flags": [
+        "Requires intent to 'establish control' \u2014 not just kinetic action but invasion with territorial objective",
+        "Excludes uninhabited islands \u2014 a blockade or strike on uninhabited territory would not qualify",
+        "Resolution requires official confirmation by specific entities or consensus of credible reporting",
+        "Specifies 'military offensive' \u2014 excludes other forms of kinetic action like limited strikes or blockades without invasion intent"
+      ],
+      "confidence": "high",
+      "rationale": "The contract requires a specific type of conflict onset \u2014 an invasion with intent to establish territorial control \u2014 which is a narrower subset of general kinetic military action or conflict onset between China and Taiwan.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.15,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "Even if the engine detects 'conflict onset' between China and Taiwan (which could include blockades, missile strikes, gray-zone escalation, or clashes around offshore islands), the contract requires a full-scale military offensive intended to establish control over inhabited Taiwanese territory \u2014 an amphibious invasion \u2014 which is a very narrow and extreme subset of possible conflict scenarios; historically, most militarized disputes in this dyad have been coercive actions short of invasion, and P(B|\u00acA) is essentially zero since no invasion can occur without conflict onset."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A full-scale Chinese invasion of Taiwan would be immediately and unambiguously reported by all major wire services, but the resolution criteria's requirements around 'intent to establish control,' exclusion of blockades/limited strikes, and distinguishing an invasion from other military actions introduce meaningful threshold ambiguity that could complicate edge-case scenarios."
+    }
+  },
+  "1121887": {
+    "contract_hash": "f0361a1522c1",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must initiate a drone, missile, or air strike on Yemeni soil or a Yemeni embassy/consulate by June 30, 2026.",
+      "legalese_flags": [
+        "Limited to aerial bombs, drones, or missiles only \u2014 excludes ground operations, naval actions, cyber, or special forces",
+        "Includes strikes on Yemen embassies/consulates anywhere, which is unusual",
+        "Specifies Israeli military forces as the actor \u2014 proxy actions excluded",
+        "Deadline of June 30, 2026, 11:59 PM Israeli local time"
+      ],
+      "confidence": "high",
+      "rationale": "The contract asks about a specific type of kinetic military action (aerial/missile strikes) by Israel against Yemen, which is a narrower subset of the broader conflict-onset probability for the Israel-Yemen dyad.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.9,
+      "p_b_given_not_a": 0.02,
+      "confidence": "high",
+      "rationale": "Israel has already conducted multiple air strikes on Yemen (Houthi targets in Hodeidah and Sanaa) in 2024-2025, establishing a strong pattern; given any conflict onset between Israel and Yemen, air/missile strikes are by far the most likely form, and given the long timeframe to June 2026 with ongoing Houthi-Israel hostilities, the subset relationship holds tightly \u2014 P(B|\u00acA) is near zero since without conflict onset these strikes wouldn't occur."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "low",
+      "rationale": "Israeli airstrikes on Yemen (as have already occurred in 2024-2025 against Houthi targets) are widely and immediately reported by major wire services, the IDF itself, and regional media, making verification straightforward; the main resolution criteria are clear and the event type is highly observable."
+    }
+  },
+  "1124834": {
+    "contract_hash": "444030875a1b",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "equivalent",
+      "win_condition_summary": "A direct military encounter involving the use of force (missile strikes, artillery fire, gunfire, or other direct military engagement) between US and Russian military forces must occur by December 31, 2026.",
+      "legalese_flags": [
+        "Excludes non-violent actions such as airspace violations and warning shots",
+        "Requires 'use of force' \u2014 direct kinetic engagement between the two militaries",
+        "Window starts January 6, 2026",
+        "Resolution text appears truncated but core definition is clear"
+      ],
+      "confidence": "high",
+      "rationale": "The contract asks about direct kinetic military engagement between US and Russian forces, which maps closely to interstate conflict onset for this specific dyad, with a clear threshold of 'use of force' excluding non-violent provocations.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 1.0,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "The contract event and engine event are equivalent \u2014 both describe a direct US-Russia military clash involving use of force within the same timeframe, so P(B|A)=1 and P(B|\u00acA)=0."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A direct US-Russia military clash would be a globally transformative event instantly covered by all major outlets, making observability high; however, resolution risk is medium due to potential ambiguity around proxy engagements, whether forces were officially 'US/Russian military,' gray-zone incidents (e.g., mercenaries), disputes over whether warning shots or accidental fire constitute 'use of force,' and the noted truncation of resolution text."
+    }
+  },
+  "687642": {
+    "contract_hash": "2519dbb1376c",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "equivalent",
+      "win_condition_summary": "A military encounter involving the use of force (missile strikes, artillery fire, gunfire, or other direct military engagement) between Chinese and Japanese military forces must occur before December 31, 2026.",
+      "legalese_flags": [
+        "Non-violent actions such as warning shots, artillery into uninhabited areas, or missile launches landing in uninhabited zones are explicitly excluded",
+        "Resolution text appears truncated \u2014 full exclusion criteria may not be visible",
+        "Start date is November 17, 2025, not immediate"
+      ],
+      "confidence": "high",
+      "rationale": "The contract directly asks about kinetic military conflict onset between China and Japan, matching the engine's conflict-onset probability object for the China-Japan dyad, with exclusions for non-violent provocations that slightly narrow the scope but remain consistent with meaningful conflict onset.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.9,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "The market is essentially equivalent to conflict onset but with a stricter definition excluding warning shots and non-violent provocations; given actual conflict onset between China and Japan, there is a very high (~90%) probability it would involve direct use of force meeting the contract's criteria, and absent conflict onset the probability is effectively zero since accidental engagements leading to actual force exchange between these two powers without broader conflict onset is extremely unlikely."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "An actual military clash between China and Japan would be immediately and extensively reported by all major wire services, but the exclusion of warning shots, missiles into uninhabited areas, and other non-violent encounters creates significant threshold ambiguity \u2014 borderline incidents (e.g., a brief exchange of fire near disputed islands) could generate conflicting interpretations, and the apparently truncated resolution text adds further uncertainty about the full criteria."
+    }
+  },
+  "1107381": {
+    "contract_hash": "93134fd456e1",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "YES if a US-initiated drone, missile, or air strike physically impacts Mexican soil by December 31, 2026.",
+      "legalese_flags": [
+        "limited to aerial bombs, drones, or missiles \u2014 excludes ground operations, special forces raids, cyber attacks, naval action",
+        "includes intelligence agency and other US government operatives, not just military",
+        "requires physical impact on Mexican ground territory",
+        "resolution by announcement or credible reporting"
+      ],
+      "confidence": "high",
+      "rationale": "The contract specifies a particular subset of kinetic military action (aerial/missile strikes only) rather than all forms of interstate conflict onset between the US and Mexico.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.35,
+      "p_b_given_not_a": 0.005,
+      "confidence": "medium",
+      "rationale": "If US-Mexico conflict onset occurs, it would most likely involve ground/special forces operations against cartels rather than drone/missile strikes on a neighboring ally's soil; aerial strikes are a strict subset of possible conflict forms and politically/diplomatically extreme even in a conflict scenario, though Trump administration rhetoric about bombing cartels makes it non-negligible."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "low",
+      "rationale": "A US aerial strike on Mexican soil would be an unprecedented, dramatic escalation that would be immediately and unambiguously reported by all major wire services, with both governments issuing statements; the resolution criteria are clear and well-defined, though the exclusion of covert special forces raids (vs. inclusion of intelligence agency drone strikes) could create a narrow gray zone in highly unlikely edge cases."
+    }
+  },
+  "1170144": {
+    "contract_hash": "0bfd5a2e235b",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "The US Congress must pass a formal declaration of war against Iran, signed into law, by December 31, 2026.",
+      "legalese_flags": [
+        "Requires formal Congressional declaration of war under Article I, Section 8 \u2014 not AUMF, executive orders, or military actions alone",
+        "AUMFs and presidential military actions explicitly excluded",
+        "Must be signed into law",
+        "Extremely narrow legal mechanism that has not been used since WWII"
+      ],
+      "confidence": "high",
+      "rationale": "A formal declaration of war is a hyper-specific legal subset of conflict onset; kinetic military action, strikes, or even large-scale hostilities would not resolve YES without the specific Congressional declaration, making this far narrower than general conflict onset.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.02,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "A formal Congressional declaration of war has not been used since 1942; even if the US and Iran entered armed conflict, it would almost certainly proceed under an AUMF or executive authority rather than a formal declaration of war, making P(B|A) extremely low."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "low",
+      "rationale": "A formal Congressional declaration of war would be an extraordinarily major, unambiguous, and widely reported event; the resolution criterion is legally precise and easily verifiable through official Congressional records and wire services, with virtually no risk of ambiguity since AUMFs and military strikes are explicitly excluded."
+    }
+  },
+  "1090496": {
+    "contract_hash": "eb7524eec4ba",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "equivalent",
+      "win_condition_summary": "A direct military encounter involving the use of force (missile strikes, artillery fire, gunfire, or other direct military engagement) between NATO country forces and Russian military forces occurs by December 31, 2026.",
+      "legalese_flags": [
+        "Explicitly excludes non-violent actions like airspace violations and warning shots",
+        "Requires use of force \u2014 direct military engagement",
+        "Covers any NATO member, not a specific one",
+        "Resolution window starts January 2, 2026",
+        "Resolution source not specified"
+      ],
+      "confidence": "high",
+      "rationale": "The contract asks about the onset of kinetic military action between NATO and Russia, which directly maps to the engine's conflict-onset probability for the NATO-Russia dyad, with a clear definition of 'military encounter' requiring use of force.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.95,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "The market and engine event are essentially equivalent \u2014 both concern direct military conflict between NATO and Russia \u2014 though the market's explicit exclusion of warning shots and airspace violations slightly narrows the definition, so P(B|A) is 0.95 rather than 1.0; P(B|\u00acA) is effectively zero since without conflict onset there would be no use-of-force engagement."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A direct NATO-Russia military clash would be globally headline news and immediately verifiable, but edge cases (proxy forces, ambiguous incidents like drone intercepts, disputed 'warning shots' vs. 'gunfire,' or covert engagements) could create threshold ambiguity, and the lack of a specified resolution source adds discretion risk."
+    }
+  },
+  "677356": {
+    "contract_hash": "5450f6022318",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "India must initiate a drone, missile, or air strike that impacts Pakistani territory by December 31, 2026.",
+      "legalese_flags": [
+        "Limited to aerial bombs, drones, or missiles \u2014 excludes ground incursions, naval actions, artillery, or other kinetic action",
+        "Strike must impact Pakistani territory \u2014 intercepted missiles/drones that don't reach Pakistan do not count",
+        "India must be the initiator \u2014 a Pakistani strike on India would not qualify",
+        "Resolution text appears truncated regarding intercepted missiles"
+      ],
+      "confidence": "high",
+      "rationale": "The contract asks about a specific type of Indian kinetic military action (aerial/missile strikes) against Pakistan, which is a narrower subset of general conflict onset between the India-Pakistan dyad.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.55,
+      "p_b_given_not_a": 0.005,
+      "confidence": "medium",
+      "rationale": "If an India-Pakistan conflict onset occurs, there's a moderate probability it involves Indian-initiated air/drone/missile strikes on Pakistani territory (as in 2019 Balakot), but conflict could also manifest as ground skirmishes, artillery exchanges along the LoC, or Pakistani-initiated actions that wouldn't qualify; P(B|\u00acA) is near zero since without conflict onset, unprovoked Indian strikes on Pakistan are extremely unlikely but not impossible given escalatory crises."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A confirmed Indian airstrike on Pakistani territory (as in the 2019 Balakot strike) would be widely and immediately reported by global wire services, but the resolution criteria create ambiguity around edge cases: intercepted munitions that partially impact territory, debris landing on Pakistani soil, covert drone strikes that neither side confirms, or disputed attribution could all complicate resolution, and the noted truncation of resolution text regarding intercepted missiles adds further risk."
+    }
+  },
+  "665459": {
+    "contract_hash": "d997c27422be",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "North Korea must commence a military offensive intended to establish control over any portion of South Korea before end of 2026.",
+      "legalese_flags": [
+        "Requires 'military offensive intended to establish control' \u2014 excludes provocations, shelling, skirmishes, or limited strikes that don't aim to seize territory",
+        "Must be an 'invasion' specifically, not just kinetic conflict onset"
+      ],
+      "confidence": "high",
+      "rationale": "An invasion intended to establish territorial control is a specific, narrow subset of all possible kinetic military actions or conflict onsets between this dyad \u2014 it excludes artillery exchanges, naval clashes, limited strikes, and other forms of escalation short of invasion.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.15,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "Even if a conflict onset occurs between North and South Korea, the vast majority of plausible scenarios involve provocations, limited strikes, artillery exchanges, or skirmishes rather than a full-scale invasion intended to seize territory; a true invasion is an extremely specific and escalatory subset of conflict onset, and P(B|\u00acA) is essentially zero since an invasion necessarily implies conflict onset."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A full-scale North Korean invasion of South Korea would be immediately and unambiguously reported by all major wire services, but the resolution criterion's requirement that the offensive be 'intended to establish control' over territory (as opposed to a large-scale provocation, incursion, or limited cross-border attack) introduces threshold ambiguity that could make edge cases difficult to adjudicate."
+    }
+  },
+  "1811266": {
+    "contract_hash": "3f87ac4089b6",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "China must commence a military offensive intended to establish control over any inhabited portion of Taiwan (ROC) by June 30, 2027.",
+      "legalese_flags": [
+        "Requires intent to 'establish control' \u2014 not just kinetic action but invasion specifically",
+        "Excludes uninhabited islands \u2014 e.g., a strike on uninhabited islets would not qualify",
+        "Must be a 'military offensive' \u2014 blockades, cyberattacks, or limited strikes without invasion intent may not qualify",
+        "Resolution requires official confirmation by named entities or consensus of credible reporting"
+      ],
+      "confidence": "high",
+      "rationale": "The contract requires a full invasion (military offensive to establish control), which is a specific subset of all possible kinetic conflict onset scenarios between China and Taiwan; lesser escalations like blockades, limited strikes, or clashes short of invasion would not resolve YES.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.55,
+      "p_b_given_not_a": 0.0,
+      "confidence": "medium",
+      "rationale": "If a China-Taiwan conflict onset occurs by mid-2027, it could take many forms (blockade, limited strikes, gray-zone escalation), so the probability it specifically manifests as a full military offensive intended to establish control over inhabited territory is moderate (~55%); absent any conflict onset, a full invasion is essentially impossible, so P(B|\u00acA)\u22480."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A full-scale Chinese military invasion of Taiwan would be unmistakably reported by all major wire services, but the resolution criterion's requirement to establish 'intent to establish control' (vs. a large-scale punitive strike or blockade) and the exclusion of uninhabited islands could create threshold ambiguity in gray-zone scenarios short of a clear amphibious invasion."
+    }
+  },
+  "665484": {
+    "contract_hash": "ac9ef94d94db",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "equivalent",
+      "win_condition_summary": "YES if Israeli and Turkish military forces engage in a direct military clash involving the use of force (missile strikes, artillery fire, gunfire, or other direct military engagement) before December 31, 2026.",
+      "legalese_flags": [
+        "Non-violent actions explicitly excluded (warning shots, artillery into uninhabited areas, missiles into territorial waters/airspace)",
+        "Resolution text appears truncated \u2014 full exclusion criteria may not be visible",
+        "Requires engagement between official military forces of both states, not proxies"
+      ],
+      "confidence": "high",
+      "rationale": "The contract directly asks about kinetic military action between the Israel-Turkey dyad within a specified deadline, which is essentially conflict onset between these two states, matching the engine's probability object A.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.95,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "The market is essentially equivalent to the engine event (direct Israel-Turkey military clash); despite rhetorical tensions, NATO membership and mutual deterrence make proxy conflicts far more likely than direct engagement, and the exclusion of non-violent actions and proxy forces means P(B|\u00acA) is effectively zero, while P(B|A) is near 1.0 with slight discount for edge cases where conflict onset might involve only excluded categories."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A direct military clash between two NATO-allied (Turkey) and major US-allied (Israel) states would be globally front-page news and immediately verifiable, but the resolution criteria's exclusion of warning shots, fire into uninhabited areas, and other edge cases\u2014combined with a potentially truncated resolution text\u2014creates meaningful ambiguity about whether a borderline incident qualifies."
+    }
+  },
+  "1116981": {
+    "contract_hash": "5d0e756911b4",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "The U.S. must commence a military offensive intended to establish control over Mexican land territory by December 31, 2026.",
+      "legalese_flags": [
+        "Requires intent to 'establish control over any portion of Mexican land territory' \u2014 not just kinetic action but a territorial-control objective",
+        "Excludes airstrikes, special operations, or cross-border raids that don't aim to establish territorial control",
+        "Resolution based on 'consensus of credible reporting' \u2014 subjective standard"
+      ],
+      "confidence": "high",
+      "rationale": "This is a subset of general US-Mexico conflict onset because it requires a specific form of military action (ground invasion with territorial control intent), excluding other kinetic actions like airstrikes, drone operations, or limited cross-border raids.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.15,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "Even if some form of US-Mexico conflict onset occurs (e.g., cross-border strikes, special operations against cartels), the contract requires a full land invasion with intent to establish territorial control\u2014an extraordinarily escalatory step with no modern precedent; most plausible conflict scenarios involve limited kinetic actions far short of invasion, so P(B|A) is low; P(B|\u00acA) is essentially zero since no invasion can happen without conflict onset."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A full-scale U.S. military invasion of Mexico to establish territorial control would be unmistakably reported by all major wire services, but the resolution criterion's requirement to distinguish intent to 'establish control over territory' from cross-border raids, special operations, or limited incursions introduces significant threshold ambiguity, and the 'consensus of credible reporting' standard adds subjectivity."
+    }
+  },
+  "2382771": {
+    "contract_hash": "04b02d7e3eb7",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israeli military ground forces must conduct operations within Iranian terrestrial territory, confirmed by June 30, 2026.",
+      "legalese_flags": [
+        "Excludes aerial and maritime operations \u2014 only ground forces on Iranian soil qualify",
+        "Start date of February 28, 2026 \u2014 operations before that date do not count",
+        "Requires official confirmation",
+        "Specific dyad: Israel-Iran direct ground engagement on Iranian territory"
+      ],
+      "confidence": "high",
+      "rationale": "A ground operation in Iran by Israel is a specific, narrow form of kinetic military action (boots on the ground) within the broader Israel-Iran conflict onset probability, making it a subset of the engine's event A.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.03,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "Even if Israel-Iran conflict onset occurs, a ground operation on Iranian soil is extraordinarily unlikely given the 1,000+ km distance, lack of contiguous borders, massive logistical challenges, and Israel's strong preference for air/cyber/special operations; historically Israel has never conducted ground operations in Iran, and even in escalatory scenarios (e.g., strikes on nuclear facilities) these would be aerial, not ground-based."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "low",
+      "rationale": "An Israeli ground operation on Iranian soil would be an extraordinarily significant geopolitical event, immediately and extensively covered by all major wire services and governments, making confirmation or non-occurrence straightforward; the resolution criteria are clear and unambiguous."
+    }
+  },
+  "677404": {
+    "contract_hash": "5887829df762",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "equivalent",
+      "win_condition_summary": "A military clash involving the use of force (kinetic weapons, gunfire, artillery, missiles, or even hand-to-hand melee combat) between Chinese and Indian military forces must occur between January 29, 2025 and December 31, 2026.",
+      "legalese_flags": [
+        "Includes hand-to-hand combat with melee weapons as qualifying (broader than typical kinetic definitions)",
+        "References 2020 Galwan Valley incident as a qualifying example",
+        "Specific time window: January 29, 2025 to December 31, 2026 11:59 PM ET",
+        "Resolution criteria text appears truncated"
+      ],
+      "confidence": "high",
+      "rationale": "The contract directly asks whether a kinetic military clash occurs between China and India within the specified timeframe, which maps closely to the engine's conflict-onset probability for the China-India dyad.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 1.0,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "The market is equivalent to the engine event \u2014 any military clash between China and India qualifies, and the broad definition (including hand-to-hand melee as in Galwan 2020) makes it fully equivalent to conflict onset for this dyad."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A significant China-India military clash would be widely reported by major wire services (as Galwan was in 2020), giving high observability, but the broad inclusion of hand-to-hand/melee combat creates moderate resolution risk since small-scale scuffles along the LAC may generate conflicting reports about whether they constitute a qualifying 'clash involving use of force,' and the truncated resolution text adds further ambiguity."
+    }
+  },
+  "1439093": {
+    "contract_hash": "405770cfca52",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "equivalent",
+      "win_condition_summary": "YES if there is a direct military encounter involving use of force (missile strikes, artillery fire, gunfire, or other direct military engagement) between US and Cuban military forces before December 31, 2026.",
+      "legalese_flags": [
+        "Non-violent actions such as warning shots, artillery into uninhabited areas, or missile launches into territorial waters appear to be excluded",
+        "Resolution text is truncated but the visible portion defines 'military encounter' as use of force / direct military engagement",
+        "Deadline is December 31, 2026"
+      ],
+      "confidence": "high",
+      "rationale": "The contract asks about kinetic military action between US and Cuban forces within a defined time horizon, which directly maps to the engine's conflict onset probability for the US-Cuba dyad.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 1.0,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "The market event is equivalent to the engine event (direct military clash between US and Cuba), so P(B|A)=1 and P(B|\u00acA)=0 by definition."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A direct US-Cuba military clash would be immediately and widely reported by all major wire services, but the exclusion of warning shots and non-violent actions creates a gray zone where borderline incidents (e.g., shots fired near but not at forces) could produce ambiguity, and the truncated resolution text adds uncertainty about the full criteria."
+    }
+  },
+  "648872": {
+    "contract_hash": "cce64bffda13",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "equivalent",
+      "win_condition_summary": "A direct military encounter involving the use of force (missile strikes, artillery fire, gunfire, or other kinetic engagement) between US and Russian military forces must occur between May 28 and June 30, 2026.",
+      "legalese_flags": [
+        "Narrow time window: May 28 to June 30, 2026 only",
+        "Excludes non-violent incidents such as airspace violations and warning shots",
+        "Requires direct engagement between US and Russian military forces specifically",
+        "Resolution source field is blank"
+      ],
+      "confidence": "high",
+      "rationale": "The contract directly asks about kinetic military action between the US-Russia dyad within a specified horizon, matching the engine's conflict-onset probability object, though the time window is narrower than a typical horizon.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.85,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "The contract is essentially equivalent to a direct US-Russia military clash, but the narrow 34-day window (May 28 - June 30, 2026) means that even if the engine estimates conflict onset broadly, the clash must occur in that specific window, slightly reducing P(B|A); P(B|\u00acA) is effectively zero since without conflict onset there would be no direct kinetic engagement between US and Russian forces."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A direct US-Russia military clash would be one of the most widely and immediately reported events in modern history, but the resolution source field is blank, the narrow time window creates edge-case risks, and distinguishing proxy forces from direct military engagement (e.g., contractors vs. regulars, or ambiguous incidents) could introduce definitional disputes."
+    }
+  },
+  "1057402": {
+    "contract_hash": "1de94737a08b",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Thailand must initiate a drone, missile, or air strike on Cambodian soil or a Cambodian embassy/consulate by June 30, 2026.",
+      "legalese_flags": [
+        "Limited to aerial bombs, drones, or missiles only \u2014 excludes ground incursions, naval actions, artillery, special operations",
+        "Requires impact on Cambodian ground territory or official embassy/consulate",
+        "Must be launched by Thai military forces specifically"
+      ],
+      "confidence": "high",
+      "rationale": "The contract specifies a particular type of kinetic military action (aerial/missile strikes) by the Thailand-Cambodia dyad, which is a narrower form of conflict onset than the engine's general interstate conflict probability.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.15,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "Even if a Thailand-Cambodia conflict onset occurred, the probability it would take the specific form of a Thai air/drone/missile strike on Cambodian soil is very low \u2014 Thailand-Cambodia tensions historically manifest as border skirmishes and ground clashes (e.g., Preah Vihear 2008-2011), not aerial strikes; P(B|\u00acA) is essentially zero as there is no plausible scenario for such a strike absent conflict onset."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "low",
+      "rationale": "A Thai military air or missile strike on Cambodia would be an extraordinary, unprecedented event that would dominate global news coverage instantly and unambiguously; the near-zero probability of occurrence also means the almost-certain 'No' resolution is trivially verifiable."
+    }
+  },
+  "1179940": {
+    "contract_hash": "63cf4cc83879",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "equivalent",
+      "win_condition_summary": "A military encounter involving the use of force (missile strikes, artillery fire, exchange of gunfire, or other direct military engagement) between US and Chinese military forces must occur before December 31, 2026.",
+      "legalese_flags": [
+        "Non-violent actions like warning shots, artillery into uninhabited areas, or missile launches into uninhabited areas are explicitly excluded",
+        "Resolution criteria text appears truncated but the visible portion clearly defines kinetic engagement",
+        "Deadline is December 31, 2026"
+      ],
+      "confidence": "high",
+      "rationale": "The contract asks directly about kinetic military clash between the US-China dyad within a defined horizon, which is essentially conflict onset / violent escalation \u2014 matching the engine's probability object A.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.95,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "The market and engine event are equivalent \u2014 both measure direct military clash between US and China; the contract's explicit exclusion of non-violent encounters (warning shots, missiles into uninhabited areas) makes P(B|A) slightly below 1.0 since some low-level conflict onsets might not meet the strict kinetic engagement threshold, but most genuine conflict onsets would; P(B|\u00acA) is essentially zero since without conflict onset there is no clash."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A direct military clash between the US and China would be among the most consequential geopolitical events imaginable and would be reported instantly by all major wire services; however, the exclusion of warning shots, shots into uninhabited areas, and other gray-zone incidents introduces threshold ambiguity about what qualifies, and the noted truncation of resolution criteria adds further uncertainty about edge cases."
+    }
+  },
+  "677406": {
+    "contract_hash": "71e8a0dab2d1",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Russia must initiate a drone, missile, or air strike on Polish soil or any official Polish embassy/consulate between September 9, 2025 and June 30, 2026.",
+      "legalese_flags": [
+        "limited to aerial bombs, drones, or missiles only \u2014 excludes ground incursion, cyber, naval, or other kinetic action",
+        "includes strikes on Polish embassies/consulates abroad, not just Polish territory",
+        "specific window starts September 9, 2025"
+      ],
+      "confidence": "high",
+      "rationale": "The contract asks about a specific type of kinetic military action (aerial/missile strike) by Russia against Poland, which is a narrower form of conflict onset than the general interstate conflict probability the engine estimates for the Russia-Poland dyad.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.35,
+      "p_b_given_not_a": 0.001,
+      "confidence": "medium",
+      "rationale": "Even if a Russia-Poland conflict onset occurs, it is more likely to begin with hybrid/cyber/proxy actions or an accidental incursion rather than a deliberate drone/missile/air strike on NATO member Poland; the strike form specified is a strict subset of conflict onset, and the probability of an unprovoked deliberate aerial strike on a NATO ally remains extremely low even conditional on broader conflict, though embassy strikes abroad provide a slight additional pathway."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "low",
+      "rationale": "A Russian military strike on NATO member Poland or its embassies would be an unprecedented, world-historic event reported instantly and unambiguously by all major wire services, making both a YES and NO outcome clearly verifiable."
+    }
+  },
+  "1116581": {
+    "contract_hash": "3a8a2349ee77",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "The U.S. must commence a military offensive intended to establish control over Colombian land territory by end of 2026.",
+      "legalese_flags": [
+        "requires intent to 'establish control over any portion of Colombian land territory' \u2014 not just any kinetic action but a territorial-control invasion",
+        "excludes airstrikes, naval actions, special operations raids, or limited strikes that don't aim at territorial control"
+      ],
+      "confidence": "high",
+      "rationale": "The contract requires a specific form of conflict onset \u2014 a ground invasion aimed at territorial control \u2014 which is a narrower subset of the broader category of kinetic military action or violent escalation between the US and Colombia.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.15,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "Even if some form of US-Colombia conflict onset occurs (e.g., limited strikes, special operations against drug targets, coercive military actions), the probability it takes the specific form of a territorial-control invasion is very low; the US has not invaded a Latin American country in this manner in decades, and the contract requires intent to establish control over land territory, which is an extreme escalation far beyond plausible limited military actions."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A full-scale U.S. military invasion to seize Colombian territory would be unmistakably reported by all major wire services, but the resolution criterion's requirement to assess 'intent to establish control over territory' introduces subjective judgment \u2014 smaller military operations (e.g., sustained ground presence framed as counter-narcotics) could create ambiguity about whether they meet the territorial-control threshold."
+    }
+  },
+  "681313": {
+    "contract_hash": "87a7b0e42708",
+    "scholar": {
+      "contract_type": "territorial_control",
+      "contract_polarity": "ambiguous",
+      "relation_to_engine_event": "superset",
+      "win_condition_summary": "The US assumes primary operational authority over the Panama Canal by end of 2026, whether through diplomacy, military action, or any other means.",
+      "legalese_flags": [
+        "Resolution includes diplomatic agreement, military action, or 'any other means'",
+        "Official announcement of agreement suffices even before actual transfer",
+        "Specific asset (Panama Canal) rather than general conflict onset",
+        "Deadline: December 31, 2026"
+      ],
+      "confidence": "high",
+      "rationale": "The contract asks about US control of the Panama Canal, which could be achieved via military action (a subset of conflict onset) OR via diplomatic agreement or other non-kinetic means, making the YES condition a superset of the engine's conflict-onset probability since conflict is only one pathway to resolution.",
+      "translator_route": "PASS_TRANSLATION"
+    },
+    "clergy": null,
+    "glass": null
+  },
+  "665243": {
+    "contract_hash": "edc9bf8720bb",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "overlap",
+      "win_condition_summary": "Any NATO member invokes Article 5 of the North Atlantic Treaty between November 5, 2025 and December 31, 2026.",
+      "legalese_flags": [
+        "Article 5 invocation is a political/legal act, not identical to kinetic conflict onset \u2014 it could be invoked in response to a cyberattack, terrorism, or non-Russia scenarios",
+        "Invocation does not require kinetic military action to have occurred or to follow",
+        "Any NATO member can invoke, not just in response to Russia \u2014 could be triggered by any actor or event",
+        "Window starts November 5, 2025, not market creation date"
+      ],
+      "confidence": "medium",
+      "rationale": "Article 5 invocation is related to but distinct from kinetic conflict onset: it is a formal collective-defense trigger that could be invoked for non-kinetic attacks, non-Russia threats, or even without subsequent military action, making it an overlapping but not equivalent event to Russia-NATO conflict onset.",
+      "translator_route": "PASS_TRANSLATION"
+    },
+    "clergy": null,
+    "glass": null
+  },
+  "1183503": {
+    "contract_hash": "4f92c65dbdd8",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "equivalent",
+      "win_condition_summary": "A military encounter involving the use of force (missile strikes, artillery fire, exchange of gunfire, or other direct military engagement) between US and Danish military forces must occur before December 31, 2026.",
+      "legalese_flags": [
+        "Non-violent actions such as warning shots, artillery into uninhabited areas, or missile launches into territorial waters are excluded",
+        "Resolution criteria text appears truncated but the included portion clearly defines kinetic engagement"
+      ],
+      "confidence": "high",
+      "rationale": "The contract directly asks about kinetic military conflict onset between the US and Denmark, matching the engine's conflict-onset probability object for this dyad.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 1.0,
+      "p_b_given_not_a": 0.0,
+      "confidence": "high",
+      "rationale": "The market is equivalent to the engine event: a direct military clash between the US and Denmark, two NATO allies with no history of armed conflict against each other, so P(B|A)=1.0 and P(B|\u00acA)=0.0."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "low",
+      "rationale": "A direct military clash between two NATO allies (US and Denmark) would be an unprecedented, globally headline-dominating event instantly reported by all major wire services, and the resolution criterion of kinetic engagement is clearly defined and unambiguous."
+    }
+  },
+  "2643405": {
+    "contract_hash": "4865dca8bebc",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "The US government must publicly and officially announce a naval blockade on Iran, Iranian ports, or the Strait of Hormuz by July 31, 2026.",
+      "legalese_flags": [
+        "requires official announcement rather than actual kinetic action",
+        "partial or targeted blockade qualifies",
+        "limited to naval blockade specifically",
+        "announcement suffices without enforcement"
+      ],
+      "confidence": "high",
+      "rationale": "A naval blockade announcement is a specific form of military escalation/action within the broader US-Iran conflict onset space, making it a subset of the engine's general kinetic military action probability.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.15,
+      "p_b_given_not_a": 0.005,
+      "confidence": "medium",
+      "rationale": "Even if US-Iran conflict onset occurs, a formally announced naval blockade is only one of many possible escalation forms (airstrikes, cyber, proxy conflict being far more likely); historically the US has not declared a formal blockade on Iran even during peak tensions, and a blockade is an act of war under international law that the US has been reluctant to formally declare since the Cuban Missile Crisis, though current hawkish rhetoric on Iran raises P(B|\u00acA) slightly above zero."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "An official US announcement of a naval blockade would be immediately and unambiguously reported by all major wire services, but resolution risk exists because ambiguity could arise over whether enhanced maritime interdiction operations, sanctions enforcement, or 'maximum pressure' naval posturing constitute an officially announced 'blockade' versus something short of that term."
+    }
+  },
+  "2382819": {
+    "contract_hash": "40c825d6b773",
+    "scholar": {
+      "contract_type": "binary_threshold",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "China must establish an aerial or naval blockade of Taiwan lasting at least 24 hours, preventing normal commercial traffic by threat or use of force, by December 31, 2026.",
+      "legalese_flags": [
+        "Requires blockade specifically \u2014 not any kinetic military action",
+        "Must prevent normal commercial ingress/egress by threat or use of force",
+        "Minimum 24-hour duration threshold",
+        "Must cover part or whole of Taiwan's main island (Formosa)",
+        "Includes both declared and de facto blockades",
+        "Resolution text appears truncated"
+      ],
+      "confidence": "high",
+      "rationale": "A naval/aerial blockade is a specific form of kinetic military escalation within the China-Taiwan dyad, making it a narrower subset of the broader conflict-onset probability object.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.35,
+      "p_b_given_not_a": 0.0,
+      "confidence": "medium",
+      "rationale": "A blockade is a strict subset of conflict onset; if conflict occurs it could take many forms (missile strikes, seizure of outlying islands, cyber attacks, air/naval skirmishes) with a full or partial blockade being only one possible modality \u2014 historically PLA planning considers blockade as a major escalation step but not the only or most likely initial action; P(B|\u00acA) is essentially zero since a 24-hour enforced blockade preventing commercial traffic inherently constitutes conflict onset."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A full naval/aerial blockade of Taiwan would be a globally covered, unmistakable event reported by all major wire services in real time; however, resolution risk is medium because distinguishing a 'de facto blockade' from large-scale military exercises (like August 2022) involves subjective judgment about whether normal commercial traffic was truly prevented by force, and the truncated resolution text adds ambiguity about exact criteria."
+    }
+  },
+  "2643404": {
+    "contract_hash": "52914a7fa25a",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "The US government must publicly and officially announce a naval blockade on Iran or on ships traveling to/from Iranian ports or transiting the Strait of Hormuz by June 30, 2026.",
+      "legalese_flags": [
+        "requires official US government announcement",
+        "partial or targeted blockade qualifies",
+        "only announcement required, not actual enforcement",
+        "specific to naval blockade \u2014 a specific form of military action",
+        "deadline of June 30, 2026"
+      ],
+      "confidence": "high",
+      "rationale": "A naval blockade is a specific form of kinetic/military escalation within the US-Iran dyad, making it a subset of the broader conflict onset probability.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.08,
+      "p_b_given_not_a": 0.001,
+      "confidence": "high",
+      "rationale": "Even if US-Iran conflict onset occurs, a formal naval blockade announcement is a very specific and escalatory step that the US has historically avoided even during heightened tensions (e.g., the US has used 'maximum pressure' sanctions, maritime interdictions, and shows of force but never declared a formal blockade on Iran); a blockade is an act of war under international law and would be an extreme measure even within a conflict scenario."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "An official US government announcement of a naval blockade would be immediately and unambiguously reported by all major wire services, but resolution risk is medium because there could be ambiguity about whether targeted sanctions enforcement, interdiction operations, or enhanced maritime patrols constitute a formal 'blockade' announcement versus something short of one."
+    }
+  },
+  "2643406": {
+    "contract_hash": "dd96548c34a0",
+    "scholar": {
+      "contract_type": "binary_threshold",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "The US government must publicly and officially announce a naval blockade on Iran or on ships traveling to/from Iranian ports or transiting the Strait of Hormuz by December 31, 2026.",
+      "legalese_flags": [
+        "requires official US government announcement",
+        "partial or targeted blockade qualifies",
+        "announcement only \u2014 no requirement for actual enforcement or implementation",
+        "specific to naval blockade \u2014 does not cover other forms of kinetic military action",
+        "resolution text appears truncated"
+      ],
+      "confidence": "high",
+      "rationale": "A naval blockade announcement is a specific subset of potential kinetic military actions or conflict escalation between the US and Iran; it does not capture airstrikes, ground operations, or other forms of conflict onset.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.15,
+      "p_b_given_not_a": 0.005,
+      "confidence": "medium",
+      "rationale": "Even if US-Iran conflict onset occurs, a formal naval blockade announcement is a very specific and escalatory step that the US has historically avoided even during heightened tensions (e.g., preferring 'maritime security operations' or sanctions enforcement); most conflict scenarios would involve airstrikes or cyber operations rather than a declared blockade, which is legally an act of war under international law, making P(B|A) low but non-negligible given current maximum pressure rhetoric."
+    },
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "An official US announcement of a naval blockade on Iran would be immediately and unambiguously reported by all major wire services, making observability high; however, resolution risk is medium because distinguishing a formal 'blockade' announcement from intensified sanctions enforcement, maritime interdiction operations, or partial naval actions could introduce threshold ambiguity, and the noted truncation of the resolution text adds further uncertainty."
+    }
+  },
+  "1809581": {
+    "contract_hash": "806642476f8d",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct a drone, missile, or air strike that impacts within Damascus Governorate by June 30, 2026.",
+      "legalese_flags": [
+        "Limited to Damascus Governorate specifically, not all of Syria",
+        "Only aerial bombs, drones, or missiles qualify \u2014 ground operations excluded",
+        "Intercepted missiles or drones do not count",
+        "Surface-to-air missile strikes excluded",
+        "Resolution text appears truncated"
+      ],
+      "confidence": "high",
+      "rationale": "The contract asks about a specific type of kinetic military action (air/missile strikes) against a specific geographic target (Damascus Governorate), making it a narrower subset of the general Israel-Syria conflict onset probability.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.85,
+      "p_b_given_not_a": 0.35,
+      "confidence": "medium",
+      "rationale": "Israel has frequently struck targets in Damascus Governorate historically (especially Iranian/Hezbollah assets), and even absent a broader conflict onset, periodic strikes on Damascus are common enough that P(B|\u00acA) is substantial; given actual conflict onset, Damascus as the capital and major military hub would almost certainly be targeted, though a small discount applies for the possibility conflict focuses elsewhere in Syria."
+    },
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "medium",
+      "rationale": "Israeli strikes in/near Damascus are widely reported by multiple sources (SOHR, Reuters, AP), but distinguishing whether a strike impacted within Damascus Governorate specifically (vs. nearby areas like Rural Damascus), whether intercepted missiles count as not qualifying, and the exclusion of certain strike types introduces meaningful ambiguity that could complicate resolution, especially with truncated resolution text."
+    }
+  }
+}

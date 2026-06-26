@@ -240,7 +240,8 @@
       "OperationalFeasibility": 0.85,
       "InitiatorSurvivalRisk": 0.1,
       "SubstitutionPath": 0.5
-    }
+    },
+    "crisis_context": "CRISIS CONTEXT: By June 2026, the US shifted Cuba from ordinary sanctions hostility into heightened coercive pressure following the Venezuela operation. Trump publicly suggested a Cuba operation could mirror Venezuela. Surveillance overflights and contingency planning are active. This is NOT yet a kinetic crisis \u2014 routine rhetoric should not fire the crisis clock. Concrete military deployments, blockade enforcement, evacuation orders, or confirmed strike packages should. Score OperationalPreparation only for irreversible operational acts, not rhetoric."
   },
   "US-Mexico": {
     "label": "United States and Mexico",
@@ -705,5 +706,804 @@
       "InitiatorSurvivalRisk": 0.8,
       "SubstitutionPath": 0.6
     }
+  },
+  "Russia-US": {
+    "label": "Russia vs. United States",
+    "baseline": {
+      "WinProbability": -0.8,
+      "WarCosts": -1.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 2.8,
+      "CommitmentProblem": 1.4,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.2,
+      "PreferenceAlignment": -1.5,
+      "HardlineClaims": 1.5,
+      "AudienceCosts": 1.8
+    },
+    "query": "(Russia AND \"United States\" OR USA) AND (tensions OR military OR nuclear OR sanctions OR NATO OR Ukraine OR conflict OR diplomacy)",
+    "reasoning": "The Russia-US dyad is defined by extreme nuclear deterrence (both possess massive arsenals making direct war catastrophic), deeply opposed preferences across European security, NATO expansion, and spheres of influence, yet direct conflict is powerfully constrained by mutual assured destruction. The US holds conventional military superiority (negative WinProbability favoring the defender/US), Russia is autocratic while the US is democratic (positive DemocraticPeace indicating mixed regimes), and commitment problems are elevated due to shifting power dynamics and credibility concerns around NATO commitments and arms control agreements.",
+    "reasoning_notes": "PatronDeterrence is low because neither state relies on an external patron for its security\u2014they are themselves the great power patrons. AudienceCosts are elevated on both sides given domestic nationalist pressures in Russia and bipartisan hawkishness in the US.",
+    "baseline_source": "auto"
+  },
+  "France/UK/Germany-Iran": {
+    "label": "France/UK/Germany vs Iran (E3-Iran)",
+    "baseline": {
+      "WinProbability": 1.2,
+      "WarCosts": -1.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 1.2,
+      "CommitmentProblem": 1.5,
+      "Patience": 0.2,
+      "DemocraticPeace": 1.3,
+      "PreferenceAlignment": -1.4,
+      "HardlineClaims": 1.8,
+      "AudienceCosts": 1.5
+    },
+    "query": "(France OR UK OR Germany OR \"E3\" OR \"European\") AND (Iran OR Tehran OR \"nuclear program\" OR JCPOA OR \"Iran sanctions\" OR \"uranium enrichment\")",
+    "reasoning": "The E3 collectively hold significant conventional military superiority over Iran (with UK and France being nuclear powers), creating a meaningful WinProbability advantage, while Iran's advancing nuclear threshold capability and proximity to weapons-grade enrichment creates moderate nuclear deterrence and a severe commitment problem since any deal could be undermined by Iran's ongoing enrichment trajectory. Preference alignment is strongly negative due to fundamental disagreements over Iran's nuclear program, regional behavior, and support for proxies, while the democratic-autocratic divide and high audience costs on both sides (European public opinion on nonproliferation, Iranian regime legitimacy tied to resistance) make compromise politically costly.",
+    "baseline_source": "auto"
+  },
+  "Israel-Lebanon": {
+    "label": "Israel\u2013Lebanon",
+    "baseline": {
+      "WinProbability": 1.2,
+      "WarCosts": -0.8,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.5,
+      "CommitmentProblem": 1.6,
+      "Patience": -0.8,
+      "DemocraticPeace": 0.8,
+      "PreferenceAlignment": -1.5,
+      "HardlineClaims": 2.2,
+      "AudienceCosts": 2.0
+    },
+    "query": "Israel AND Lebanon AND (Hezbollah OR border OR ceasefire OR military OR strikes OR conflict OR war OR UNIFIL OR \"Blue Line\")",
+    "reasoning": "Israel holds a decisive conventional military advantage over Lebanon/Hezbollah, driving WinProbability positive, while the commitment problem is high because Hezbollah's rearmament cycles and Iranian patronage make any ceasefire inherently unstable and power shifts expected. Hardline claims are elevated due to the Shebaa Farms dispute, ongoing border tensions, and Hezbollah's ideological rejection of Israel, while audience costs are high on both sides given Israeli domestic pressure for security operations and Hezbollah's entrenchment as a resistance movement; nuclear deterrence is low but nonzero reflecting Israel's undeclared arsenal creating some asymmetric constraint.",
+    "baseline_source": "auto"
+  },
+  "Israel-Indonesia": {
+    "label": "Israel\u2013Indonesia",
+    "baseline": {
+      "WinProbability": 0.8,
+      "WarCosts": -1.5,
+      "PatronDeterrence": 0.3,
+      "NuclearDeterrence": 0.8,
+      "CommitmentProblem": 0.4,
+      "Patience": 0.3,
+      "DemocraticPeace": 0.3,
+      "PreferenceAlignment": -1.3,
+      "HardlineClaims": 0.8,
+      "AudienceCosts": 1.5
+    },
+    "query": "Israel Indonesia relations OR diplomacy OR recognition OR Palestine OR normalization",
+    "reasoning": "Israel and Indonesia have no diplomatic relations, driven largely by Indonesia's strong solidarity with Palestine and its status as the world's largest Muslim-majority country, creating significant preference misalignment and high audience costs on the Indonesian side against normalization. However, geographic distance makes direct military conflict extremely unlikely, war costs are high due to lack of proximity and economic logic, and there are no active territorial disputes between them, keeping hardline claims and commitment problems relatively low despite political tensions.",
+    "baseline_source": "auto"
+  },
+  "Israel-Multiple": {
+    "label": "Israel vs. Multiple Adversaries (Iran-axis: Iran, Hezbollah, Hamas, Syria)",
+    "baseline": {
+      "WinProbability": 0.6,
+      "WarCosts": -0.5,
+      "PatronDeterrence": 0.8,
+      "NuclearDeterrence": 1.2,
+      "CommitmentProblem": 1.8,
+      "Patience": -0.8,
+      "DemocraticPeace": 1.5,
+      "PreferenceAlignment": -1.8,
+      "HardlineClaims": 2.5,
+      "AudienceCosts": 2.2
+    },
+    "query": "(Israel AND (Iran OR Hezbollah OR Hamas OR Syria OR \"axis of resistance\")) AND (war OR conflict OR strike OR military OR attack OR ceasefire OR escalation)",
+    "reasoning": "Israel holds a significant conventional military advantage over its combined adversaries (including undeclared nuclear capability providing asymmetric deterrence), but faces a deeply hostile multi-front threat environment with fundamentally opposed preferences over territorial control, Palestinian statehood, and Iranian regional influence, creating extreme commitment problems since power shifts from Iranian nuclear development and militia armament make durable bargains nearly impossible. High audience costs on both sides (Israeli domestic security politics, resistance ideology for Iran-axis actors), combined with active territorial disputes (Gaza, Golan, southern Lebanon, West Bank) and predominantly autocratic adversaries, create a structurally conflict-prone dyad with limited patron deterrence since no single great power provides a binding security guarantee to the adversary coalition.",
+    "baseline_source": "auto"
+  },
+  "UAE-Qatar": {
+    "label": "UAE\u2013Qatar",
+    "baseline": {
+      "WinProbability": 0.6,
+      "WarCosts": -1.2,
+      "PatronDeterrence": 0.8,
+      "NuclearDeterrence": 0.0,
+      "CommitmentProblem": 0.8,
+      "Patience": 0.5,
+      "DemocraticPeace": 1.5,
+      "PreferenceAlignment": -0.8,
+      "HardlineClaims": 1.0,
+      "AudienceCosts": 1.2
+    },
+    "query": "(UAE OR \"United Arab Emirates\") AND Qatar AND (relations OR dispute OR blockade OR diplomacy OR tension OR reconciliation OR \"Al Ula\")",
+    "reasoning": "The UAE holds a conventional military edge over Qatar but deep economic interdependence within the GCC and shared hydrocarbon markets impose significant war costs; both are autocracies with divergent foreign policy preferences (Qatar's support for Islamist movements vs. UAE's opposition), though the 2021 Al-Ula reconciliation reduced but did not eliminate underlying tensions. No nuclear deterrence applies, and while the US Al Udeid base in Qatar provides some indirect patron protection, there is no explicit US defense commitment favoring either side against the other, keeping PatronDeterrence modest.",
+    "baseline_source": "auto"
+  },
+  "Russia-Unknown": {
+    "label": "Russia-Unknown (Generic Adversary)",
+    "baseline": {
+      "WinProbability": 0.3,
+      "WarCosts": -0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 1.5,
+      "CommitmentProblem": 1.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.0,
+      "PreferenceAlignment": -0.5,
+      "HardlineClaims": 1.0,
+      "AudienceCosts": 1.0
+    },
+    "query": "Russia AND (military OR conflict OR tensions OR threat OR border OR security)",
+    "reasoning": "Without a specified adversary, values reflect Russia's general structural profile: a militarily capable but economically constrained autocratic state with nuclear weapons, moderate revisionist preferences, and leadership that faces some domestic pressure but operates with relatively unconstrained executive authority. Nuclear deterrence is set moderately high given Russia's arsenal is relevant to virtually any potential adversary, while other values reflect generic mid-range tension rather than any specific bilateral dynamic.",
+    "note": "This baseline is a placeholder; accurate modeling requires specifying the second state in the dyad to set values for PatronDeterrence, WinProbability, PreferenceAlignment, and HardlineClaims appropriately.",
+    "baseline_source": "auto"
+  },
+  "Israel-Saudi Arabia": {
+    "label": "Israel\u2013Saudi Arabia",
+    "baseline": {
+      "WinProbability": 0.8,
+      "WarCosts": -0.8,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.8,
+      "CommitmentProblem": 0.8,
+      "Patience": -0.3,
+      "DemocraticPeace": 0.8,
+      "PreferenceAlignment": -0.5,
+      "HardlineClaims": 1.0,
+      "AudienceCosts": 1.5
+    },
+    "query": "(Israel AND \"Saudi Arabia\") AND (normalization OR diplomacy OR relations OR conflict OR \"Abraham Accords\" OR Iran OR defense OR recognition OR Palestine)",
+    "reasoning": "Israel holds a significant military advantage including an undeclared nuclear arsenal, giving it a positive WinProbability and moderate NuclearDeterrence, though direct conflict between these two is historically unlikely; the dyad's tension is shaped more by the Palestinian issue and regional alignment than by bilateral territorial disputes. Preference alignment is moderately negative due to disagreements over Palestinian statehood and Jerusalem, but both share concern over Iran, and audience costs are elevated because Saudi domestic/religious opinion constrains normalization while Israeli politics constrain territorial concessions, making this a complex case where structural conflict drivers coexist with significant shared strategic interests.",
+    "baseline_source": "auto"
+  },
+  "Israel-Palestine": {
+    "label": "Israel\u2013Palestine",
+    "baseline": {
+      "WinProbability": 1.5,
+      "WarCosts": -0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.3,
+      "CommitmentProblem": 1.8,
+      "Patience": -1.5,
+      "DemocraticPeace": 1.2,
+      "PreferenceAlignment": -1.8,
+      "HardlineClaims": 2.8,
+      "AudienceCosts": 2.5
+    },
+    "query": "Israel Palestine conflict OR war OR Gaza OR West Bank OR ceasefire OR negotiations OR Hamas OR IDF",
+    "reasoning": "Israel holds an overwhelming conventional military advantage (high WinProbability), while deeply contested territorial claims over Jerusalem, the West Bank, and Gaza, combined with irreconcilable national aspirations, drive HardlineClaims and PreferenceAlignment to near-extreme values. Severe commitment problems arise from shifting power dynamics (settlement expansion, demographic changes, and fragmented Palestinian authority making credible long-term deals nearly impossible), while high audience costs on both sides\u2014Israeli domestic politics and Palestinian popular mobilization\u2014lock leaders into hardline positions with very short time horizons for compromise.",
+    "baseline_source": "auto"
+  },
+  "Israel-SaudiArabia": {
+    "label": "Israel vs. Saudi Arabia",
+    "baseline": {
+      "WinProbability": 0.8,
+      "WarCosts": -0.8,
+      "PatronDeterrence": 0.8,
+      "NuclearDeterrence": 0.8,
+      "CommitmentProblem": 0.8,
+      "Patience": 0.2,
+      "DemocraticPeace": 1.2,
+      "PreferenceAlignment": -0.5,
+      "HardlineClaims": 0.8,
+      "AudienceCosts": 1.5
+    },
+    "query": "(Israel AND \"Saudi Arabia\") AND (normalization OR diplomacy OR relations OR Iran OR Palestine OR \"Abraham Accords\" OR defense OR military)",
+    "reasoning": "Israel holds a significant military edge including presumed nuclear capability, making WinProbability and NuclearDeterrence modestly positive for the challenger; both states are autocratic/hybrid regimes with audience costs driven by domestic constituencies (Saudi public opinion on Palestine, Israeli coalition politics). Despite shared strategic alignment against Iran pushing preferences toward convergence, the Palestinian issue and lack of formal relations keep PreferenceAlignment slightly negative and HardlineClaims moderate, while the normalization track and economic complementarities impose meaningful war costs and suggest this dyad is far from a direct military confrontation scenario.",
+    "baseline_source": "auto"
+  },
+  "Israel-Oman": {
+    "label": "Israel\u2013Oman",
+    "baseline": {
+      "WinProbability": 1.2,
+      "WarCosts": -0.8,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.8,
+      "CommitmentProblem": 0.4,
+      "Patience": 0.8,
+      "DemocraticPeace": 1.0,
+      "PreferenceAlignment": -0.4,
+      "HardlineClaims": 0.3,
+      "AudienceCosts": 0.5
+    },
+    "query": "(Israel AND Oman) AND (diplomacy OR relations OR normalization OR military OR Gulf OR \"Abraham Accords\")",
+    "reasoning": "Israel holds a significant military advantage including an undeclared nuclear arsenal, which provides moderate nuclear deterrence even against a non-nuclear Oman, though the two states have no direct territorial disputes and Oman has historically pursued a neutral, mediating foreign policy in the region. Oman has engaged in quiet diplomacy with Israel (hosting Netanyahu in 2018) but has not formally normalized relations; both are non-democratic, preference divergence is mild rather than acute, and there are no active hardline claims or significant commitment problems between them.",
+    "baseline_source": "auto"
+  },
+  "US-Lebanon": {
+    "label": "US\u2013Lebanon",
+    "baseline": {
+      "WinProbability": 1.8,
+      "WarCosts": -0.5,
+      "PatronDeterrence": 0.3,
+      "NuclearDeterrence": 0.5,
+      "CommitmentProblem": 1.2,
+      "Patience": 0.5,
+      "DemocraticPeace": 0.5,
+      "PreferenceAlignment": -0.8,
+      "HardlineClaims": 0.8,
+      "AudienceCosts": 0.8
+    },
+    "query": "(US OR \"United States\" OR America) AND (Lebanon OR Hezbollah OR Beirut) AND (military OR sanctions OR diplomacy OR conflict OR troops)",
+    "reasoning": "The US holds overwhelming military superiority over Lebanon, but direct interstate conflict is unlikely; the main friction runs through Hezbollah's role as an Iranian proxy, creating commitment problems and misaligned preferences on security architecture. Lebanon lacks a credible great-power patron willing to deter the US militarily, and while Lebanon is nominally democratic its fragmented sectarian governance and Hezbollah's dual state/militia status push DemocraticPeace slightly positive and complicate bargaining credibility.",
+    "notes": "PatronDeterrence is low because while Iran backs Hezbollah, it does not provide a formal defense guarantee to the Lebanese state against the US; NuclearDeterrence is minimal, reflecting only the marginal constraint that US nuclear status imposes on escalation logic rather than any mutual nuclear balance.",
+    "baseline_source": "auto"
+  },
+  "Venezuela-Israel": {
+    "label": "Venezuela\u2013Israel",
+    "baseline": {
+      "WinProbability": -1.5,
+      "WarCosts": -0.3,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 1.0,
+      "CommitmentProblem": 0.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5,
+      "PreferenceAlignment": -1.5,
+      "HardlineClaims": 0.5,
+      "AudienceCosts": 1.2
+    },
+    "query": "(Venezuela AND Israel) AND (relations OR diplomacy OR conflict OR Maduro OR sanctions OR Palestine OR severed)",
+    "reasoning": "Venezuela severed diplomatic ties with Israel in 2009 and has been a vocal critic aligned with Iran, creating strong preference divergence and rhetorical hostility, though the two states lack geographic proximity, significant economic interdependence, or any realistic theater for direct military confrontation, making actual conflict extremely unlikely. Israel's vastly superior military capability, undisclosed nuclear arsenal, and the geographic distance between the two states all serve as strong deterrents, while Maduro's autocratic regime and use of anti-Israel rhetoric for domestic mobilization elevate audience costs and democratic peace friction.",
+    "source": "IR structural analysis",
+    "baseline_source": "auto"
+  },
+  "US-Israel": {
+    "label": "US\u2013Israel",
+    "baseline": {
+      "WinProbability": 1.5,
+      "WarCosts": -1.8,
+      "PatronDeterrence": 0.0,
+      "NuclearDeterrence": 1.5,
+      "CommitmentProblem": 0.3,
+      "Patience": 0.5,
+      "DemocraticPeace": -1.2,
+      "PreferenceAlignment": 1.2,
+      "HardlineClaims": 0.2,
+      "AudienceCosts": 0.5
+    },
+    "query": "(US OR \"United States\" OR America) AND Israel AND (relations OR military OR aid OR diplomacy OR tension OR alliance OR weapons OR Gaza OR Iran)",
+    "reasoning": "The US-Israel dyad is fundamentally an alliance rather than a rivalry, so conflict probability is extremely low: preferences are broadly aligned, both are democracies (strong democratic peace effect), economic and military interdependence imposes massive war costs, and there are no territorial disputes between them. The US has overwhelming military superiority (high WinProbability if hypothetically a challenger), Israel possesses an undeclared nuclear arsenal providing some deterrence, but PatronDeterrence is set to 0 because no external patron defends Israel against the US \u2014 rather, the US itself is Israel's patron; commitment problems and audience costs are low given the deep institutionalized relationship, though periodic tensions over issues like settlements and Gaza policy introduce modest friction.",
+    "baseline_source": "auto"
+  },
+  "Israel-Azerbaijan": {
+    "label": "Israel\u2013Azerbaijan",
+    "baseline": {
+      "WinProbability": 0.8,
+      "WarCosts": -1.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.5,
+      "CommitmentProblem": 0.3,
+      "Patience": 0.5,
+      "DemocraticPeace": 1.2,
+      "PreferenceAlignment": 1.2,
+      "HardlineClaims": 0.3,
+      "AudienceCosts": 0.3
+    },
+    "query": "(Israel AND Azerbaijan) AND (military OR cooperation OR arms OR Iran OR diplomacy OR relations)",
+    "reasoning": "Israel and Azerbaijan are strategic partners with strongly aligned interests centered on countering Iran, extensive arms trade, and energy cooperation, making conflict between them extremely unlikely. Both are non-democracies or flawed democracies (DemocraticPeace slightly positive as neither constrains the other via democratic norms), but the positive preference alignment and absence of territorial disputes or serious grievances keep all conflict-inducing nodes low; Israel's significant military superiority gives it a positive WinProbability but this is largely irrelevant given the cooperative relationship.",
+    "baseline_source": "auto"
+  },
+  "Cuba-Israel": {
+    "label": "Cuba\u2013Israel",
+    "baseline": {
+      "WinProbability": -1.2,
+      "WarCosts": -0.3,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.8,
+      "CommitmentProblem": 0.3,
+      "Patience": 0.2,
+      "DemocraticPeace": 1.5,
+      "PreferenceAlignment": -1.5,
+      "HardlineClaims": 0.5,
+      "AudienceCosts": 1.0
+    },
+    "query": "Cuba AND Israel AND (diplomacy OR relations OR UN OR Palestine OR sanctions)",
+    "reasoning": "Cuba and Israel have had no diplomatic relations since 1973, and Cuba has been a consistent critic of Israel at the UN and a supporter of Palestinian statehood, producing strong preference misalignment and ideological opposition (one communist autocracy, one democracy). However, the dyad has essentially zero risk of direct military conflict due to geographic distance, lack of shared borders or contested territory, Cuba's vast military inferiority relative to Israel, and the absence of any strategic imperative for armed confrontation \u2014 making this primarily a diplomatic rivalry rather than a militarized one.",
+    "baseline_source": "auto"
+  },
+  "Israel-Kuwait": {
+    "label": "Israel\u2013Kuwait",
+    "baseline": {
+      "WinProbability": 1.2,
+      "WarCosts": -0.8,
+      "PatronDeterrence": 0.8,
+      "NuclearDeterrence": 0.8,
+      "CommitmentProblem": 0.5,
+      "Patience": 0.3,
+      "DemocraticPeace": 1.0,
+      "PreferenceAlignment": -1.3,
+      "HardlineClaims": 0.8,
+      "AudienceCosts": 1.2
+    },
+    "query": "Israel Kuwait relations OR diplomacy OR normalization OR conflict OR threat",
+    "reasoning": "Israel holds a significant military advantage over Kuwait including an undeclared nuclear arsenal, but the dyad lacks direct territorial disputes or border proximity, making direct conflict unlikely; Kuwait has no formal relations with Israel and remains aligned with the broader Arab/Palestinian cause, producing opposed preferences and moderate audience costs, though the US presence in Kuwait provides some indirect restraining effect on both sides. The lack of shared borders, limited economic interdependence, and Kuwait's reliance on US security patronage all reduce the risk of direct military confrontation despite persistent political hostility.",
+    "baseline_source": "auto"
+  },
+  "Israel-Iraq": {
+    "label": "Israel\u2013Iraq",
+    "baseline": {
+      "WinProbability": 0.8,
+      "WarCosts": -0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.8,
+      "CommitmentProblem": 0.8,
+      "Patience": -0.3,
+      "DemocraticPeace": 1.2,
+      "PreferenceAlignment": -1.3,
+      "HardlineClaims": 1.0,
+      "AudienceCosts": 1.2
+    },
+    "query": "Israel Iraq relations OR military OR threat OR militia OR Iran proxy",
+    "reasoning": "Israel holds a significant conventional and nuclear-capable military advantage over a weakened post-2003 Iraq, which lacks effective central military power and has no nuclear deterrent, though Israel's undeclared arsenal provides some asymmetric deterrence. Iraq's fragmented governance, the presence of Iran-aligned militias that have targeted Israel-linked interests, deep historical enmity (including the 1981 Osirak strike), and opposing positions on the Palestinian issue create substantial preference divergence and moderate hardline claims, though the lack of direct contiguity and Iraq's internal instability reduce the immediacy of a conventional interstate conflict.",
+    "baseline_source": "auto"
+  },
+  "Saudi Arabia-UAE": {
+    "label": "Saudi Arabia vs. UAE",
+    "baseline": {
+      "WinProbability": 0.6,
+      "WarCosts": -1.4,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "CommitmentProblem": 0.6,
+      "Patience": 0.4,
+      "DemocraticPeace": 1.5,
+      "PreferenceAlignment": 0.4,
+      "HardlineClaims": 0.5,
+      "AudienceCosts": 0.5
+    },
+    "query": "(Saudi Arabia AND UAE) OR (Saudi Arabia AND \"United Arab Emirates\") AND (rivalry OR tensions OR dispute OR relations OR OPEC OR Yemen OR diplomacy)",
+    "reasoning": "Saudi Arabia and the UAE are both autocratic Gulf monarchies with deep economic interdependence (high war costs) and broadly aligned interests as GCC partners, though they have experienced growing strategic divergence over Yemen, OPEC+ quotas, and regional influence competition, creating moderate commitment problems and slightly misaligned preferences. Saudi Arabia holds a conventional military advantage in size, neither possesses nuclear weapons, and no major external patron is committed to defending one against the other, while both regimes face low domestic audience costs but have shown increasing willingness to pursue independent foreign policies.",
+    "source": "IR structural analysis",
+    "baseline_source": "auto"
+  },
+  "US-North Korea": {
+    "label": "US\u2013North Korea",
+    "baseline": {
+      "WinProbability": 1.5,
+      "WarCosts": -1.5,
+      "PatronDeterrence": 1.0,
+      "NuclearDeterrence": 1.8,
+      "CommitmentProblem": 1.8,
+      "Patience": -1.0,
+      "DemocraticPeace": 1.5,
+      "PreferenceAlignment": -1.8,
+      "HardlineClaims": 2.2,
+      "AudienceCosts": 1.5
+    },
+    "query": "(\"United States\" OR US OR America) AND (\"North Korea\" OR DPRK OR Pyongyang) AND (nuclear OR missile OR sanctions OR diplomacy OR tensions OR military)",
+    "reasoning": "The US holds overwhelming conventional military superiority (high WinProbability) but North Korea's growing nuclear arsenal creates meaningful nuclear deterrence, while the catastrophic costs of a Korean peninsula war\u2014including millions of South Korean and Japanese civilians at risk\u2014impose severe war costs. Extreme preference divergence, a totalitarian regime facing a democracy (high DemocraticPeace), severe commitment problems driven by North Korea's ongoing nuclear/missile development shifting future power dynamics, and hardline claims over denuclearization and the Korean peninsula make this one of the most structurally conflict-prone dyads, moderated primarily by nuclear deterrence and war costs; PatronDeterrence reflects China's partial patronage of North Korea which somewhat constrains US action but falls short of a formal defense pact.",
+    "baseline_source": "auto"
+  },
+  "US-Saudi Arabia": {
+    "label": "US \u2013 Saudi Arabia",
+    "baseline": {
+      "WinProbability": -1.8,
+      "WarCosts": -1.5,
+      "PatronDeterrence": 0.0,
+      "NuclearDeterrence": 1.5,
+      "CommitmentProblem": 0.8,
+      "Patience": 0.5,
+      "DemocraticPeace": 1.2,
+      "PreferenceAlignment": 0.3,
+      "HardlineClaims": 0.2,
+      "AudienceCosts": 1.0
+    },
+    "query": "(US OR \"United States\" OR America) AND (\"Saudi Arabia\" OR Riyadh OR MBS) AND (relations OR military OR oil OR arms OR security OR diplomacy)",
+    "reasoning": "The US holds overwhelming military superiority (WinProbability strongly favoring defender/US), and deep economic interdependence through oil markets and arms sales creates high war costs; there are no territorial disputes and no realistic conflict scenario, but the democracy-autocracy gap, Saudi hedging toward China/Russia (moderate commitment problems), and divergent preferences on human rights and energy policy create diplomatic friction. Nuclear deterrence is moderate given the US arsenal acts as a background constraint, while Saudi audience costs reflect MBS's domestic need to assert sovereignty and the US Congress's periodic pushback on the relationship.",
+    "baseline_source": "auto"
+  },
+  "Israel-Malaysia": {
+    "label": "Israel\u2013Malaysia",
+    "baseline": {
+      "WinProbability": 1.2,
+      "WarCosts": -0.3,
+      "PatronDeterrence": 0.3,
+      "NuclearDeterrence": 0.8,
+      "CommitmentProblem": 0.4,
+      "Patience": 0.3,
+      "DemocraticPeace": 0.5,
+      "PreferenceAlignment": -1.5,
+      "HardlineClaims": 0.8,
+      "AudienceCosts": 1.5
+    },
+    "query": "Israel AND Malaysia AND (relations OR conflict OR diplomacy OR sanctions OR Palestine OR boycott)",
+    "reasoning": "Israel and Malaysia have no diplomatic relations, with Malaysia being one of the most vocally anti-Israel Muslim-majority states, driven by strong solidarity with Palestine \u2014 yielding high preference divergence and significant audience costs on the Malaysian side. However, the dyad is geographically distant with minimal direct territorial disputes and very low economic interdependence, making actual military conflict extremely unlikely; Israel holds a clear military advantage including an undeclared nuclear capability, though the distance and lack of direct strategic competition keep most conflict indicators moderate.",
+    "baseline_source": "auto"
+  },
+  "Germany-Iran": {
+    "label": "Germany\u2013Iran",
+    "baseline": {
+      "WinProbability": 0.6,
+      "WarCosts": -1.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.3,
+      "CommitmentProblem": 1.2,
+      "Patience": 0.5,
+      "DemocraticPeace": 1.0,
+      "PreferenceAlignment": -1.2,
+      "HardlineClaims": 0.8,
+      "AudienceCosts": 1.0
+    },
+    "query": "(Germany AND Iran) AND (nuclear OR sanctions OR diplomacy OR JCPOA OR tensions OR hostage OR \"Revolutionary Guard\")",
+    "reasoning": "Germany is a major NATO power with conventional military advantages but lacks independent power projection to the Middle East, yielding only a moderate positive WinProbability; trade ties (historically significant German exports to Iran) and EU diplomatic engagement create moderate war costs. Iran's nuclear program drives a meaningful commitment problem, the democracy-autocracy gap pushes DemocraticPeace positive, and their preferences diverge significantly over nuclear proliferation, Israel policy, and regional order, though this is not an active territorial dispute dyad so HardlineClaims remain moderate.",
+    "baseline_source": "auto"
+  },
+  "Indonesia-Israel": {
+    "label": "Indonesia\u2013Israel",
+    "baseline": {
+      "WinProbability": -0.8,
+      "WarCosts": -0.5,
+      "PatronDeterrence": 1.0,
+      "NuclearDeterrence": 1.0,
+      "CommitmentProblem": 0.4,
+      "Patience": 0.5,
+      "DemocraticPeace": 0.3,
+      "PreferenceAlignment": -1.5,
+      "HardlineClaims": 0.8,
+      "AudienceCosts": 1.5
+    },
+    "query": "Indonesia Israel relations OR diplomacy OR Palestine OR recognition OR normalization",
+    "reasoning": "Indonesia and Israel have no diplomatic relations, driven primarily by Indonesia's strong solidarity with Palestine and its status as the world's largest Muslim-majority country, creating deep preference misalignment and significant domestic audience costs against normalization. However, geographic distance, lack of direct territorial disputes, Israel's qualitative military edge and undeclared nuclear capability, and US patronage of Israel all serve as strong structural deterrents against any direct military confrontation, making this a politically hostile but militarily low-risk dyad.",
+    "baseline_source": "auto"
+  },
+  "Israel-Afghanistan": {
+    "label": "Israel\u2013Afghanistan",
+    "baseline": {
+      "WinProbability": 1.2,
+      "WarCosts": -0.3,
+      "PatronDeterrence": 0.3,
+      "NuclearDeterrence": 0.5,
+      "CommitmentProblem": 0.8,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5,
+      "PreferenceAlignment": -1.5,
+      "HardlineClaims": 0.5,
+      "AudienceCosts": 1.0
+    },
+    "query": "Israel AND Afghanistan AND (Taliban OR relations OR threat OR conflict OR diplomacy)",
+    "reasoning": "Israel holds a massive conventional and technological military advantage over Taliban-ruled Afghanistan, but the two states have no shared border, minimal economic interdependence, and no direct territorial dispute, making direct interstate conflict extremely unlikely despite deep ideological hostility. Afghanistan under the Taliban is a pariah autocracy with no recognition of Israel and strong rhetorical opposition, but the geographic distance, lack of patron deterrence for Afghanistan, and absence of concrete contested claims keep escalation risk structurally very low.",
+    "baseline_source": "auto"
+  },
+  "Saudi Arabia-Israel": {
+    "label": "Saudi Arabia vs Israel",
+    "baseline": {
+      "WinProbability": -0.8,
+      "WarCosts": -1.0,
+      "PatronDeterrence": 1.5,
+      "NuclearDeterrence": 1.2,
+      "CommitmentProblem": 0.8,
+      "Patience": 0.4,
+      "DemocraticPeace": 1.2,
+      "PreferenceAlignment": -0.6,
+      "HardlineClaims": 1.2,
+      "AudienceCosts": 1.8
+    },
+    "query": "(Saudi Arabia AND Israel) AND (normalization OR relations OR diplomacy OR conflict OR military OR \"Abraham Accords\" OR Palestine OR Iran OR \"recognition\")",
+    "reasoning": "Israel holds a significant military edge including an undeclared nuclear arsenal (hence moderate nuclear deterrence and negative WinProbability for Saudi Arabia as challenger), while the US serves as a strong patron to Israel though not under a formal mutual defense treaty, warranting moderate PatronDeterrence. Both autocratic-leaning regimes face high domestic audience costs around the Palestinian issue, which constrains normalization despite converging strategic interests vis-\u00e0-vis Iran, resulting in moderately opposed preference alignment and elevated hardline claims related to Jerusalem and Palestinian statehood.",
+    "baseline_source": "auto"
+  },
+  "Australia-Iran": {
+    "label": "Australia\u2013Iran",
+    "baseline": {
+      "WinProbability": 0.6,
+      "WarCosts": -0.8,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.3,
+      "CommitmentProblem": 0.6,
+      "Patience": 0.4,
+      "DemocraticPeace": 1.0,
+      "PreferenceAlignment": -1.0,
+      "HardlineClaims": 0.4,
+      "AudienceCosts": 0.8
+    },
+    "query": "(Australia AND Iran) AND (sanctions OR nuclear OR diplomacy OR tensions OR military OR \"Middle East\")",
+    "reasoning": "Australia and Iran have no direct territorial dispute or proximity-based security dilemma, but their preferences diverge significantly due to Australia's alignment with the US-led Western order and Iran's adversarial stance toward it, reflected in Australian sanctions enforcement and participation in Middle East coalitions. Australia holds a conventional military edge and benefits from distance and alliance networks, while Iran's nuclear ambitions create modest deterrence effects; the lack of direct territorial claims and geographic separation keep hardline claims and war costs relatively low, though the democracy-autocracy gap and Australia's alliance-driven audience costs sustain underlying friction.",
+    "baseline_source": "auto"
+  },
+  "Pakistan-Israel": {
+    "label": "Pakistan\u2013Israel",
+    "baseline": {
+      "WinProbability": -0.8,
+      "WarCosts": -0.3,
+      "PatronDeterrence": 1.2,
+      "NuclearDeterrence": 2.5,
+      "CommitmentProblem": 0.8,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.0,
+      "PreferenceAlignment": -1.5,
+      "HardlineClaims": 1.0,
+      "AudienceCosts": 1.8
+    },
+    "query": "(Pakistan AND Israel) AND (relations OR nuclear OR conflict OR diplomacy OR recognition OR threat OR normalization)",
+    "reasoning": "Pakistan and Israel are non-contiguous adversaries with no diplomatic relations; their hostility is driven by Pakistan's strong ideological solidarity with the Palestinian cause and deep domestic audience costs against normalization, yielding high preference divergence and audience lock-in. Both are nuclear-armed states (Israel undeclared, Pakistan overt), producing strong nuclear deterrence, while Israel's qualitative military edge gives it an advantage; however, geographic distance and the US patron relationship with Israel add further deterrent layers, and the lack of direct borders or economic interdependence keeps war costs moderate rather than extreme.",
+    "baseline_source": "auto"
+  },
+  "Qatar-Israel": {
+    "label": "Qatar\u2013Israel",
+    "baseline": {
+      "WinProbability": -0.8,
+      "WarCosts": -1.0,
+      "PatronDeterrence": 1.5,
+      "NuclearDeterrence": 1.0,
+      "CommitmentProblem": 0.8,
+      "Patience": 0.5,
+      "DemocraticPeace": 0.8,
+      "PreferenceAlignment": -1.2,
+      "HardlineClaims": 1.5,
+      "AudienceCosts": 1.8
+    },
+    "query": "Qatar Israel relations OR diplomacy OR Hamas OR Gaza OR mediation OR hostages OR normalization",
+    "reasoning": "Qatar and Israel have deeply opposed preferences due to Qatar's financial and political support for Hamas and its role as a mediator in the Gaza conflict, but direct military confrontation is highly unlikely given geographic distance, Israel's significant military superiority (including presumed nuclear capability), and the US acting as a patron/restraining influence on both sides given its major military base in Qatar and alliance with Israel. High audience costs reflect domestic political constraints on both sides\u2014Qatar's identity as a pro-Palestinian mediator and Israel's domestic pressure regarding hostages and Gaza\u2014while the indirect nature of their rivalry (through Hamas) elevates commitment problems without pushing toward direct war.",
+    "baseline_source": "auto"
+  },
+  "Israel-Bangladesh": {
+    "label": "Israel\u2013Bangladesh",
+    "baseline": {
+      "WinProbability": 1.2,
+      "WarCosts": -0.3,
+      "PatronDeterrence": 0.3,
+      "NuclearDeterrence": 0.5,
+      "CommitmentProblem": 0.3,
+      "Patience": 0.2,
+      "DemocraticPeace": 0.8,
+      "PreferenceAlignment": -1.2,
+      "HardlineClaims": 0.3,
+      "AudienceCosts": 1.0
+    },
+    "query": "Israel AND Bangladesh AND (relations OR diplomacy OR recognition OR conflict OR Muslim)",
+    "reasoning": "Bangladesh does not recognize Israel and has strong pro-Palestinian domestic sentiment, creating preference misalignment and audience costs on the Bangladeshi side, but the two states have no shared border, no direct territorial disputes, and negligible economic interdependence, making actual militarized conflict extremely unlikely. Israel holds a significant military advantage including an undeclared nuclear capability, but the geographic distance and lack of direct strategic competition keep most conflict-relevant nodes at low or moderate levels.",
+    "notes": "This is a politically hostile but geographically distant dyad with near-zero probability of direct military confrontation.",
+    "baseline_source": "auto"
+  },
+  "Bangladesh-Israel": {
+    "label": "Bangladesh\u2013Israel",
+    "baseline": {
+      "WinProbability": -1.5,
+      "WarCosts": -0.5,
+      "PatronDeterrence": 1.0,
+      "NuclearDeterrence": 1.0,
+      "CommitmentProblem": 0.3,
+      "Patience": 0.2,
+      "DemocraticPeace": 0.8,
+      "PreferenceAlignment": -1.5,
+      "HardlineClaims": 0.5,
+      "AudienceCosts": 1.5
+    },
+    "query": "Bangladesh Israel relations OR diplomacy OR recognition OR conflict OR Palestine",
+    "reasoning": "Bangladesh does not recognize Israel and has strongly pro-Palestinian foreign policy positions driven by domestic Islamic constituencies (high audience costs, negative preference alignment), but the two states have no territorial dispute, no shared border, and minimal direct military interaction, making actual conflict extremely unlikely. Israel holds a massive conventional military advantage and an undeclared nuclear arsenal, while Bangladesh has no patron committed to its defense against Israel specifically, though the geographic distance and lack of strategic interaction keep most escalation indicators low.",
+    "baseline_source": "auto"
+  },
+  "Israel-Tunisia": {
+    "label": "Israel\u2013Tunisia",
+    "baseline": {
+      "WinProbability": 1.4,
+      "WarCosts": -0.3,
+      "PatronDeterrence": 0.3,
+      "NuclearDeterrence": 0.8,
+      "CommitmentProblem": 0.4,
+      "Patience": 0.2,
+      "DemocraticPeace": 1.0,
+      "PreferenceAlignment": -1.2,
+      "HardlineClaims": 0.8,
+      "AudienceCosts": 1.0
+    },
+    "query": "Israel Tunisia relations OR diplomacy OR conflict OR normalization OR boycott",
+    "reasoning": "Israel holds a decisive military advantage over Tunisia including presumed nuclear capability, but the geographic distance and minimal economic interdependence make direct conflict highly unlikely; the dyad is characterized by political hostility (Tunisia has no diplomatic relations, strong anti-normalization sentiment, and aligns with Palestinian causes) but lacks the territorial contiguity or active disputes that would elevate escalation risks significantly. Tunisia's democratic backsliding under Saied and Israel's rightward shift keep DemocraticPeace moderately positive, while audience costs reflect domestic pressures in both states against any rapprochement.",
+    "baseline_source": "auto"
+  },
+  "Pakistan-Afghanistan": {
+    "label": "Pakistan\u2013Afghanistan",
+    "baseline": {
+      "WinProbability": 0.8,
+      "WarCosts": -0.5,
+      "PatronDeterrence": 0.3,
+      "NuclearDeterrence": 0.5,
+      "CommitmentProblem": 1.5,
+      "Patience": -1.0,
+      "DemocraticPeace": 1.5,
+      "PreferenceAlignment": -1.5,
+      "HardlineClaims": 2.0,
+      "AudienceCosts": 1.5
+    },
+    "query": "(Pakistan AND Afghanistan) AND (border OR Durand OR Taliban OR TTP OR military OR strike OR tensions OR diplomacy OR conflict)",
+    "reasoning": "Pakistan holds a significant conventional military advantage including nuclear weapons over Taliban-ruled Afghanistan, but the Durand Line dispute, cross-border TTP sanctuaries, and deep mutual distrust create severe commitment problems and opposed preferences. Both sides are led by regimes with short time horizons and high audience costs\u2014Pakistan's military-dominated state faces domestic pressure on terrorism, while the Taliban government is ideologically rigid\u2014and the absence of any democratic accountability on either side removes institutional constraints on escalation.",
+    "sources": [],
+    "baseline_source": "auto"
+  },
+  "Iran-Israel": {
+    "label": "Iran\u2013Israel",
+    "baseline": {
+      "WinProbability": -0.8,
+      "WarCosts": -0.5,
+      "PatronDeterrence": 1.5,
+      "NuclearDeterrence": 1.2,
+      "CommitmentProblem": 1.6,
+      "Patience": -0.8,
+      "DemocraticPeace": 1.5,
+      "PreferenceAlignment": -1.8,
+      "HardlineClaims": 2.2,
+      "AudienceCosts": 2.2
+    },
+    "query": "Iran Israel conflict OR attack OR military OR nuclear OR strike OR tensions OR retaliation OR proxy",
+    "reasoning": "Iran and Israel have deeply opposed preferences (existential hostility, proxy warfare, nuclear program disputes) with high audience costs on both sides driven by ideological commitment and domestic politics; Israel holds a conventional military advantage (negative WinProbability for Iran as challenger) and possesses an undeclared nuclear arsenal creating asymmetric nuclear deterrence. The US patron commitment to Israel is significant but not a formal mutual defense treaty, commitment problems are high due to Iran's potential nuclear breakout shifting future power balances, and both regimes\u2014one theocratic autocracy, one flawed democracy with hawkish politics\u2014generate strong democratic peace penalties.",
+    "baseline_source": "auto"
+  },
+  "Japan-Iran": {
+    "label": "Japan\u2013Iran",
+    "baseline": {
+      "WinProbability": 0.6,
+      "WarCosts": -1.2,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.3,
+      "CommitmentProblem": 0.4,
+      "Patience": 0.8,
+      "DemocraticPeace": 0.5,
+      "PreferenceAlignment": -0.5,
+      "HardlineClaims": 0.2,
+      "AudienceCosts": 0.3
+    },
+    "query": "Japan AND Iran AND (diplomacy OR sanctions OR oil OR nuclear OR tensions OR relations)",
+    "reasoning": "Japan and Iran have no direct territorial disputes, significant geographic separation, and historically maintained pragmatic economic relations centered on energy imports, making this an extremely low-conflict dyad with no realistic pathway to bilateral war. Japan's alignment with the US-led sanctions regime creates mild preference divergence, but Japan has traditionally sought to maintain diplomatic channels with Iran and there are no hardline claims or commitment problems driving escalation between them.",
+    "baseline_source": "auto"
+  },
+  "Israel-Jordan": {
+    "label": "Israel\u2013Jordan",
+    "baseline": {
+      "WinProbability": 1.2,
+      "WarCosts": -1.2,
+      "PatronDeterrence": 1.0,
+      "NuclearDeterrence": 1.2,
+      "CommitmentProblem": 0.8,
+      "Patience": 0.5,
+      "DemocraticPeace": 0.8,
+      "PreferenceAlignment": -0.5,
+      "HardlineClaims": 1.0,
+      "AudienceCosts": 1.5
+    },
+    "query": "(Israel AND Jordan) AND (relations OR tensions OR border OR diplomacy OR military OR West Bank OR Palestinian OR peace treaty OR Al-Aqsa)",
+    "reasoning": "Israel and Jordan have a formal peace treaty (1994) and extensive security cooperation, which keeps war costs high and provides moderate preference alignment, but the relationship is strained by the Palestinian issue, Jerusalem/Al-Aqsa disputes, and strong Jordanian public hostility to Israel that generates significant audience costs for Amman. Israel holds a clear conventional military advantage and possesses an undeclared nuclear capability that provides asymmetric nuclear deterrence, while Jordan benefits from a US security partnership (moderate patron deterrence) but lacks a formal mutual defense treaty.",
+    "baseline_source": "auto"
+  },
+  "Israel-Pakistan": {
+    "label": "Israel\u2013Pakistan",
+    "baseline": {
+      "WinProbability": 0.5,
+      "WarCosts": -0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 2.0,
+      "CommitmentProblem": 0.5,
+      "Patience": -0.3,
+      "DemocraticPeace": 1.2,
+      "PreferenceAlignment": -1.5,
+      "HardlineClaims": 0.8,
+      "AudienceCosts": 1.8
+    },
+    "query": "(Israel AND Pakistan) AND (relations OR nuclear OR conflict OR diplomacy OR recognition OR threat OR military)",
+    "reasoning": "Israel and Pakistan have no diplomatic relations and deep ideological hostility\u2014Pakistan refuses to recognize Israel and has strong domestic audience costs tied to the Palestinian cause and Islamic solidarity\u2014but the dyad lacks direct territorial disputes or geographic contiguity, keeping hardline claims moderate. Both are nuclear-armed states (NuclearDeterrence is high), Israel holds a qualitative military edge but Pakistan has a larger conventional force and nuclear arsenal creating rough balance, and the absence of economic ties means war costs are only modestly peace-inducing; preference alignment is strongly negative given Pakistan's alignment with the broader Muslim world on the Palestine issue.",
+    "baseline_source": "auto"
+  },
+  "Israel-Cuba": {
+    "label": "Israel\u2013Cuba",
+    "baseline": {
+      "WinProbability": 1.2,
+      "WarCosts": -0.3,
+      "PatronDeterrence": 0.3,
+      "NuclearDeterrence": 0.5,
+      "CommitmentProblem": 0.3,
+      "Patience": 0.4,
+      "DemocraticPeace": 1.2,
+      "PreferenceAlignment": -1.3,
+      "HardlineClaims": 0.3,
+      "AudienceCosts": 0.5
+    },
+    "query": "Israel Cuba relations OR diplomacy OR conflict OR sanctions OR UN vote",
+    "reasoning": "Israel and Cuba have had no diplomatic relations since 1973 and Cuba is a vocal critic of Israel in international fora, particularly regarding Palestine, yielding strongly opposed preferences but minimal direct strategic interaction. The dyad has essentially no territorial disputes, negligible economic interdependence (low war costs but also low stakes), a large Israeli military advantage, and no patron deterrence or nuclear deterrence relevant to a direct confrontation; the conflict potential is very low due to geographic distance and absence of contested issues.",
+    "baseline_source": "auto"
+  },
+  "Iran-Saudi Arabia": {
+    "label": "Iran\u2013Saudi Arabia",
+    "baseline": {
+      "WinProbability": 0.3,
+      "WarCosts": -0.8,
+      "PatronDeterrence": 1.2,
+      "NuclearDeterrence": 0.3,
+      "CommitmentProblem": 1.3,
+      "Patience": -0.5,
+      "DemocraticPeace": 1.5,
+      "PreferenceAlignment": -1.5,
+      "HardlineClaims": 1.5,
+      "AudienceCosts": 1.8
+    },
+    "query": "(Iran AND \"Saudi Arabia\") AND (tensions OR conflict OR diplomacy OR military OR proxy OR Yemen OR nuclear OR normalization OR OPEC)",
+    "reasoning": "Iran and Saudi Arabia are rival autocracies with deeply opposed sectarian and geopolitical preferences (Sunni-Shia rivalry, competing regional influence in Yemen, Iraq, Lebanon, and Syria), driving high commitment problems, negative preference alignment, and significant audience costs on both sides. Despite the 2023 China-brokered normalization, structural rivalry persists; Saudi Arabia benefits from a moderate US patron deterrence effect, neither side has nuclear weapons yet (though Iran's program creates low-level nuclear salience), and Iran holds a slight conventional edge in asymmetric/missile capabilities offset by Saudi Arabia's superior air power and arms imports.",
+    "doc": "Iran-Saudi Arabia dyad baseline",
+    "baseline_source": "auto"
+  },
+  "Canada-Iran": {
+    "label": "Canada\u2013Iran",
+    "baseline": {
+      "WinProbability": 0.3,
+      "WarCosts": -0.5,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.3,
+      "CommitmentProblem": 0.5,
+      "Patience": 0.5,
+      "DemocraticPeace": 1.2,
+      "PreferenceAlignment": -1.3,
+      "HardlineClaims": 0.5,
+      "AudienceCosts": 1.2
+    },
+    "query": "(Canada AND Iran) AND (sanctions OR diplomacy OR nuclear OR relations OR conflict OR IRGC OR hostage OR detention)",
+    "reasoning": "Canada and Iran have deeply strained relations\u2014Canada closed its embassy in 2012, designated the IRGC as a terrorist entity, and maintains strong sanctions, reflecting significant preference misalignment and audience costs driven by domestic diaspora politics. However, geographic distance, minimal economic interdependence, and the absence of territorial disputes or direct military confrontation keep the risk of armed conflict structurally very low, with Canada holding a modest conventional edge as a NATO member but no direct patron deterrence commitment applying to this dyad.",
+    "baseline_source": "auto"
+  },
+  "Iran-Kuwait": {
+    "label": "Iran\u2013Kuwait",
+    "baseline": {
+      "WinProbability": 0.8,
+      "WarCosts": -0.8,
+      "PatronDeterrence": 1.8,
+      "NuclearDeterrence": 0.3,
+      "CommitmentProblem": 0.7,
+      "Patience": -0.3,
+      "DemocraticPeace": 1.0,
+      "PreferenceAlignment": -0.6,
+      "HardlineClaims": 0.5,
+      "AudienceCosts": 0.6
+    },
+    "query": "Iran Kuwait relations OR tensions OR military OR diplomacy OR Gulf security",
+    "reasoning": "Iran holds a significant conventional military advantage over Kuwait, but Kuwait benefits from strong US patron deterrence (hosting US troops and having a defense cooperation agreement) that substantially restrains Iranian aggression. The dyad features moderate preference misalignment due to Iran's revisionist regional posture versus Kuwait's status-quo Gulf Arab orientation, though territorial disputes are relatively minor compared to other Iranian dyads, and both sides have economic incentives (oil markets, Gulf shipping) to avoid direct conflict.",
+    "baseline_source": "auto"
+  },
+  "Israel-Qatar": {
+    "label": "Israel\u2013Qatar",
+    "baseline": {
+      "WinProbability": 1.2,
+      "WarCosts": -0.8,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.8,
+      "CommitmentProblem": 1.0,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.8,
+      "PreferenceAlignment": -1.2,
+      "HardlineClaims": 1.2,
+      "AudienceCosts": 1.5
+    },
+    "query": "Israel AND Qatar AND (Hamas OR negotiations OR diplomacy OR mediation OR Gaza OR conflict OR relations)",
+    "reasoning": "Israel holds a decisive conventional military advantage and undeclared nuclear capability, while Qatar lacks a major patron committed to its defense in a bilateral confrontation, though direct war is structurally unlikely given geographic distance and indirect rivalry. The dyad is characterized by deep preference misalignment over Hamas patronage and Palestinian issues, significant audience costs on both sides driven by domestic constituencies, and Qatar's role as a mediator/Hamas host creating ongoing commitment problems, but meaningful war costs from economic interdependence and US relationships constrain escalation.",
+    "notes": "This is primarily an indirect rivalry dyad\u2014Israel and Qatar are not neighbors and conflict manifests through proxy dynamics (Qatar's hosting of Hamas leadership, funding flows) rather than direct territorial disputes, which moderates several escalation parameters.",
+    "baseline_source": "auto"
+  },
+  "Turkey-Greece": {
+    "label": "Greece and Turkey",
+    "baseline": {
+      "WinProbability": 0.0,
+      "WarCosts": -0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 0.5,
+      "PreferenceAlignment": -0.5,
+      "Patience": -0.5,
+      "DemocraticPeace": 0.0,
+      "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.0,
+      "AudienceCosts": 0.5
+    },
+    "query": "\"Greece\" AND (\"Turkey\" OR \"Aegean\" OR \"Cyprus\" OR \"airspace\" OR \"Erdogan\")",
+    "baseline_source": "verified"
+  },
+  "North Korea-South Korea": {
+    "label": "North Korea and South Korea",
+    "baseline": {
+      "WinProbability": -0.5,
+      "WarCosts": -0.5,
+      "HardlineClaims": 0.5,
+      "CommitmentProblem": 1.0,
+      "PreferenceAlignment": -0.5,
+      "Patience": -1.0,
+      "DemocraticPeace": 2.0,
+      "PatronDeterrence": 1.5,
+      "NuclearDeterrence": 2.0,
+      "AudienceCosts": 0.5
+    },
+    "query": "\"North Korea\" AND (\"South Korea\" OR \"Seoul\" OR \"DMZ\" OR \"provocation\" OR \"missile\")",
+    "baseline_source": "verified"
   }
 }
