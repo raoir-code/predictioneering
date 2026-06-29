@@ -42,9 +42,14 @@ echo "[4/4] Translator..." | tee -a "$LOGFILE"
 $PYTHON -u pipeline/translator.py >> "$LOGFILE" 2>&1
 echo "Translator done." | tee -a "$LOGFILE"
 
+# Step 5: Resolver (check for resolved markets, update Brier score)
+echo "[5/5] Resolver..." | tee -a "$LOGFILE"
+$PYTHON -u pipeline/resolver.py >> "$LOGFILE" 2>&1
+echo "Resolver done." | tee -a "$LOGFILE"
+
 # Git push
 echo "Pushing to GitHub..." | tee -a "$LOGFILE"
-git add pipeline/classified_feed.json predictions/log.jsonl pipeline/translator_cache.json
+git add pipeline/classified_feed.json predictions/log.jsonl pipeline/translator_cache.json predictions/brier_log.jsonl predictions/brier_summary.json
 git commit -m "Daily predictions: $(date +%Y-%m-%d)" >> "$LOGFILE" 2>&1 || echo "Nothing to commit." | tee -a "$LOGFILE"
 git push >> "$LOGFILE" 2>&1
 
