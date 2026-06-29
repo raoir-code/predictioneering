@@ -54,6 +54,7 @@ NODES = [
     "HardlineClaims",
     "AudienceCosts",
     "MobilizationSignal",
+    "SubstitutionPath",
 ]
 
 TOGGLE_RANGES = {
@@ -66,6 +67,7 @@ TOGGLE_RANGES = {
     "DemocraticPeace":     (-2.0, 2.0),
     "PreferenceAlignment": (-2.0, 2.0),
     "HardlineClaims":      (0.0,  3.0),
+    "SubstitutionPath":    (-3.0, 3.0),
     "AudienceCosts":       (0.0,  3.0),
     "MobilizationSignal":  (0.0,  2.0),
 }
@@ -150,6 +152,7 @@ NODE_RUBRICS = {
     "PreferenceAlignment": "Did a NEW formal diplomatic alignment shift occur: signed agreement, ceasefire, truce, formal rupture, diplomatic recognition, coalition change, or explicit policy reversal? +0.5 = preferences diverged (rupture, breakdown, withdrawal from talks). -0.5 = preferences converged (ceasefire announced, deal signed, talks resumed, de-escalation agreement). IMPORTANT: a ceasefire or truce announcement — even fragile or partial — scores -0.5 here as a substitution path opening. A ceasefire violation that collapses the framework scores +0.5.",
     "HardlineClaims":      "Did a NEW operational flashpoint occur: strike, seizure, border clash, naval confrontation, airspace incident, or direct sovereignty challenge? +0.5 = new territorial/issue escalation. -0.5 = territorial/issue resolution or de-escalation. IMPORTANT: retaliatory strikes or exchanges that occur WITHIN an active ceasefire/truce framework score 0 here — the ceasefire framework itself is the dominant mechanism (PreferenceAlignment), not the individual exchange. Only score +0.5 if this represents a NEW escalation outside any existing framework.",
     "AudienceCosts":       "Did a NEW domestic political event raise the cost of backing down: nationalist mobilization, public commitment by leader, domestic pressure to act, or major protest demanding action? +0.5 = audience costs raised (harder to back down). -0.5 = domestic pressure reduced.",
+    "SubstitutionPath":    "Did a NEW event open or close a viable off-ramp — a concrete mechanism by which the initiator can get what they want WITHOUT fighting? +0.5 = substitution path opened: ceasefire framework announced, interim deal reached, monitoring channel established, verified halt-attack commitment, mediator mechanism activated, asset-release or maritime reopening implementation begun. -0.5 = substitution path closed: talks formally collapsed, framework rejected, ultimatum issued with no negotiation offer, ceasefire formally abandoned, mediator quit. CRITICAL: mere talks scheduled, envoys meeting, or rhetorical calls for negotiations score 0 — cheap talk is NOT a substitution path. Only concrete implementation mechanisms qualify. Ongoing mechanisms already in place score 0 (not new). Score 0 if ambiguous.",
 }
 
 NODE_GATES = {
@@ -160,6 +163,7 @@ NODE_GATES = {
     "DemocraticPeace":     ["coup", "emergency", "cancel", "suspend", "constitutional"],
     "AudienceCosts":       ["protest", "nationalist", "rally", "domestic", "pressure", "demand"],
     "MobilizationSignal":  ["mobiliz", "call-up", "callup", "conscript", "reserve activ", "activate reserv", "alert status", "general mobilization"],
+    "SubstitutionPath":    ["ceasefire", "peace talk", "halt attack", "halt fire", "stand down", "mediator", "deal framework", "talks collapsed", "talks failed", "ultimatum", "framework rejected", "de-escalat", "doha", "implementation", "monitoring channel", "diplomatic channel", "asset release", "maritime reopen"],
 }
 
 # ============================================================
@@ -193,7 +197,11 @@ def predict_probability(toggles: Dict[str, float], days_remaining: int, alpha: D
     w     = (alpha.get("WinProbability", 0.0) * toggles.get("WinProbability", 0.0)
            + alpha.get("WarCosts", 0.0)       * toggles.get("WarCosts", 0.0)
            + alpha.get("PatronDeterrence_w", alpha.get("PatronDeterrence", 0.0)) * toggles.get("PatronDeterrence", 0.0)
-           + alpha.get("NuclearDeterrence", 0.0) * toggles.get("NuclearDeterrence", 0.0))
+           + alpha.get("NuclearDeterrence", 0.0) * toggles.get("NuclearDeterrence", 0.0)
+           + alpha.get("OperationalFeasibility_w", -1.50) * (1.0 - toggles.get("OperationalFeasibility", 0.5))
+           + alpha.get("InitiatorSurvivalRisk_w",  -1.20) * toggles.get("InitiatorSurvivalRisk", 0.5)
+           + alpha.get("PatronMoralHazard_w",       +0.60) * toggles.get("PatronMoralHazard", 0.0)
+           + alpha.get("SubstitutionPath_w",        -1.10) * toggles.get("SubstitutionPath", 0.5))
     Omega = (alpha.get("CommitmentProblem", 0.0) * toggles.get("CommitmentProblem", 0.0)
            + alpha.get("Patience", 0.0)          * toggles.get("Patience", 0.0)
            + alpha.get("MobilizationSignal", 0.0) * toggles.get("MobilizationSignal", 0.0))
@@ -204,10 +212,15 @@ def predict_probability(toggles: Dict[str, float], days_remaining: int, alpha: D
     WarPolitics = (alpha.get("PreferenceAlignment", 0.0) * toggles.get("PreferenceAlignment", 0.0)
                  + alpha.get("HardlineClaims", 0.0)      * toggles.get("HardlineClaims", 0.0)
                  + alpha.get("AudienceCosts", 0.0)        * toggles.get("AudienceCosts", 0.0))
-    # Total log-odds shift
-    log_odds_shift = WarPayoff + WarPolitics
-    base_log_odds  = math.log(BASE_RATE_ANNUAL / (1 - BASE_RATE_ANNUAL))
-    p_annual       = 1 / (1 + math.exp(-(base_log_odds + log_odds_shift)))
+    # HardlineClaims direct channel (matches backtest.py)
+    HardlineDirect = toggles.get("HardlineClaims", 0.0)
+
+    # SSPE shrinkage — matches backtest.py Mach 3.1
+    SSPE_SHRINKAGE  = 0.25
+    sspe_deviations = WarPayoff + WarPolitics + HardlineDirect
+    log_odds_shift  = SSPE_SHRINKAGE * sspe_deviations
+    base_log_odds   = math.log(BASE_RATE_ANNUAL / (1 - BASE_RATE_ANNUAL))
+    p_annual        = 1 / (1 + math.exp(-(base_log_odds + log_odds_shift)))
     lam            = -math.log(max(1e-12, 1 - p_annual))
     p_window       = 1 - math.exp(-lam * (max(1, days_remaining) / 365.0))
     return {
@@ -458,10 +471,18 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         deltas, evidence = score_all_nodes(label, packet, features)
         print(f"  Moves this week: {list(deltas.keys()) or ['none']}")
 
-        toggles = baseline.copy()
+        # Merge suppressor_static into toggles
+        suppressor_static = config.get("suppressor_static", {})
+        toggles = {**baseline, **suppressor_static}
         for node, delta in deltas.items():
-            if node in toggles:
+            # SubstitutionPath delta adjusts the static suppressor value
+            if node == "SubstitutionPath":
+                current = toggles.get("SubstitutionPath", 0.5)
+                toggles["SubstitutionPath"] = clamp(node, current + delta)
+            elif node in toggles:
                 toggles[node] = clamp(node, toggles[node] + delta)
+            else:
+                toggles[node] = clamp(node, delta)
 
         print(f"  Toggles: {json.dumps({k: round(v,3) for k,v in toggles.items()})}")
 
