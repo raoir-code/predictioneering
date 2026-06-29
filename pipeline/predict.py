@@ -33,6 +33,28 @@ CLASSIFIED_FEED = "pipeline/classified_feed.json"
 ALPHA_FILE      = "alpha/conflict_onset.json"
 
 # ============================================================
+# BACKTEST ENGINE IMPORTS — predict.py is a thin orchestration shell.
+# All scoring logic lives in backtest.py (the calibrated engine).
+# ─────────────────────────────────────────────────────────────────────
+from pipeline.backtest import (
+    predict_probability     as _predict_probability,
+    score_nodes_call_a,
+    score_nodes_call_b,
+    build_q_components,
+    q_with_subset,
+    apply_deltas            as _apply_deltas,
+    load_dyad_suppressor_static,
+    load_dyad_baseline      as _load_dyad_baseline,
+    ALPHA                   as _ALPHA,
+    Q0,
+    Q_SHRINKAGE,
+    DYAD_REGIME,
+    HALF_LIFE_DAYS,
+    DECAY_FACTOR,
+    _weibull_residual,
+    _parse_date_str,
+)
+
 # ENGINE CONFIG
 # ============================================================
 BASE_RATE_ANNUAL = 0.03
@@ -460,48 +482,96 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         query    = config["query"]
 
         print(f"  Fetching GNews for: {label}...")
+        today = datetime.now(timezone.utc).date()
         try:
-            packet, features = fetch_gnews(query)
-            print(f"  Articles: {features['article_volume']} | conflict_hits: {features['conflict_hits']} | official_hits: {features['official_hits']}")
+            articles = score_nodes_call_a.__globals__["fetch_gnews"](dyad, today)
+            print(f"  Articles: {len(articles)}")
         except Exception as ex:
             print(f"  [error] GNews failed: {ex}")
-            packet, features = [], {"article_volume": 0, "conflict_hits": 0, "official_hits": 0}
+            articles = []
 
-        print(f"  Scoring {len(NODES)} nodes via Claude...")
-        deltas, evidence = score_all_nodes(label, packet, features)
-        print(f"  Moves this week: {list(deltas.keys()) or ['none']}")
+        # Two-call scoring — matches backtest.py exactly
+        print(f"  Scoring nodes via Claude (call A: SSPE + onset)...")
+        call_a = score_nodes_call_a(dyad, articles, today)
+        trigger_was_violent = call_a.get("TriggerType", 0.0) >= 0.60
+        print(f"  Scoring nodes via Claude (call B: live acute)...")
+        call_b = score_nodes_call_b(dyad, articles, today, trigger_was_violent)
 
-        # Merge suppressor_static into toggles
+        # Apply SSPE deltas to baseline (call_a contains SSPE node deltas)
         suppressor_static = config.get("suppressor_static", {})
-        toggles = {**baseline, **suppressor_static}
-        for node, delta in deltas.items():
-            # SubstitutionPath delta adjusts the static suppressor value
-            if node == "SubstitutionPath":
-                current = toggles.get("SubstitutionPath", 0.5)
-                toggles["SubstitutionPath"] = clamp(node, current + delta)
-            elif node in toggles:
-                toggles[node] = clamp(node, toggles[node] + delta)
-            else:
-                toggles[node] = clamp(node, delta)
+        baseline_with_suppressors = {**baseline, **suppressor_static}
+        toggles = _apply_deltas(baseline_with_suppressors, call_a)
 
-        print(f"  Toggles: {json.dumps({k: round(v,3) for k,v in toggles.items()})}")
+        # Build q_logit from node memory (no decay for daily pipeline — use today's values)
+        q_static = config.get("q_static", {})
+        q_components = build_q_components(toggles, call_a, call_b, q_static)
+        node_memory = {}
+        for node, val in q_components.items():
+            hl = HALF_LIFE_DAYS.get(node)
+            if hl is None:
+                node_memory[node] = val
+            else:
+                node_memory[node] = val  # no decay on daily pipeline
+        q_logit = sum(v * Q_SHRINKAGE.get(k, 0.50) for k, v in node_memory.items())
+
+        print(f"  q_logit={q_logit:.3f} | TriggerType={call_a.get('TriggerType',0):.2f} | OP={call_b.get('OperationalPreparation',0):.2f} | LVO={call_b.get('LiveViolenceObserved',0):.2f}")
+        print(f"  Toggles: {json.dumps({k: round(v,3) for k,v in toggles.items() if k in baseline})}") 
 
         now_utc = datetime.now(timezone.utc).isoformat()
 
-        for m in dyad_markets:
-            days_rem = days_until(m.get("end_date", ""))
-            result   = predict_probability(toggles, days_rem, alpha)
+        # Weibull transport params from dyad config
+        dyad_meta    = config
+        acute_onset  = _parse_date_str(dyad_meta.get("acute_phase_onset_date"))
+        event_date   = _parse_date_str(dyad_meta.get("event_date"))
+        z_t          = DYAD_REGIME.get(dyad, 0)
 
-            m["our_prediction"]  = result["p_window"]
+        for m in dyad_markets:
+            days_rem    = days_until(m.get("end_date", ""))
+            market_window = max(days_rem, 1)
+
+            # Use backtest's predict_probability with q_logit
+            engine_p_raw = _predict_probability(toggles, days_rem, q_logit=q_logit)
+
+            # ICB Weibull transport — matches backtest.py Run 21 exactly
+            _clock = acute_onset if (acute_onset and today >= acute_onset) else today
+            _A = max((today - _clock).days, 0)
+            _F = _weibull_residual(_A, max(days_rem, 0))
+            _acute_core = (
+                q_components.get("OperationalPreparation", 0)
+                + q_components.get("LiveViolenceObserved", 0)
+                + q_components.get("LiveUltimatumDeadline", 0)
+                + q_components.get("MobilizationSignal", 0)
+            )
+            _abatement  = abs(q_components.get("LiveAbatementSignal", 0))
+            _live_boost = _F * max(0.0, _acute_core - _abatement)
+            _icb_boost  = 3.0 * _live_boost  # ICB_TRANSPORT_RHO = 3.0
+
+            # Apply boost in log-odds space (matches backtest.py exactly)
+            import math as _math
+            _post_res = bool(event_date and today >= event_date)
+            if _post_res:
+                _icb_boost = 0.0
+            _bl = _math.log(max(engine_p_raw, 1e-6) / max(1 - engine_p_raw, 1e-6))
+            engine_p_boosted = round(1 / (1 + _math.exp(-(_bl + _icb_boost))), 4)
+
+            # Horizon scaling
+            horizon_scale = max(days_rem, 1) / market_window
+            engine_p_scaled = 1 - (1 - engine_p_boosted) ** horizon_scale
+            engine_p_final = round(
+                1 - engine_p_scaled if z_t == 2 else engine_p_scaled, 4
+            )
+
+            m["our_prediction"]  = engine_p_final
             m["prediction_at"]   = now_utc
             m["_toggles"]        = toggles
-            m["_deltas"]         = deltas
-            m["_evidence"]       = evidence
-            m["_log_odds_shift"] = result["log_odds_shift"]
+            m["_q_logit"]        = round(q_logit, 4)
+            m["_icb_boost"]      = round(_icb_boost, 4)
+            m["_acute_core"]     = round(_acute_core, 4)
+            m["_z_t"]            = z_t
 
-            edge = round((result["p_window"] - (m.get("market_price") or 0)) * 100, 1)
+            edge = round((engine_p_final - (m.get("market_price") or 0)) * 100, 1)
             print(f"  ✓ {m['question'][:70]}")
-            print(f"    engine={result['p_window']:.3f}  market={m.get('market_price',0):.3f}  edge={edge:+.1f}pp  days={days_rem}")
+            print(f"    engine={engine_p_final:.4f}  market={m.get('market_price',0):.3f}  edge={edge:+.1f}pp  days={days_rem}  boost={_icb_boost:.4f}")
 
     if dry_run:
         print("\n[DRY RUN] Not writing to disk.")
