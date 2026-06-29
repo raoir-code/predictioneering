@@ -353,6 +353,8 @@ Q_PARENTS_STATIC = ["ProtractedConflict", "GeographicProximity"]
 NODE_RUBRICS = """
 Score each node as a delta from baseline: -2.0 (strongly dampens conflict), -1.0 (moderately dampens), 0 (no signal), +1.0 (moderately escalates), +2.0 (strongly escalates). Use the full range — reserve ±2.0 for acute crisis signals like carrier group deployments, direct strikes, formal declarations.
 
+CRITICAL — DOUBLE-COUNTING GUARD: Each nonzero delta must be justified by a DISTINCT evidence atom. A single headline justifies ONE nonzero node delta only. If the same event plausibly fires multiple nodes, score ONLY the most direct mechanism and zero the rest. Examples: "Deal signed" → PreferenceAlignment only. "Ceasefire violated, retaliatory strike" → HardlineClaims only if outside ceasefire framework, else 0. "Arms sale approved" → PatronDeterrence only. "Mobilization order" → MobilizationSignal only. When in doubt, score the most structurally upstream node and zero the rest.
+
 - WinProbability: military balance shifts, capability demonstrations, exercises, troop deployment/presence/withdrawal. Only move if explicit military-operational signals. Do NOT score mobilization/call-up/conscription orders here -- those belong to MobilizationSignal.
 - WarCosts: trade disruption, sanctions, economic decoupling increases costs (→ -0.5). Economic normalization decreases costs (→ +0.5).
 - PatronDeterrence: patron commitment signals (US to Taiwan, etc). Strong commitment → -0.5. Weakening/ambiguity → +0.5.
@@ -360,8 +362,8 @@ Score each node as a delta from baseline: -2.0 (strongly dampens conflict), -1.0
 - CommitmentProblem: power shift fears, arms race signals → +0.5. Stabilization → -0.5.
 - Patience: elections, leadership instability, domestic pressure to act → +0.5. Stability → -0.5.
 - DemocraticPeace: democratic backsliding → +0.5. Institutional strengthening → -0.5.
-- PreferenceAlignment: formal diplomatic breakdown → +0.5. Talks/agreements → -0.5.
-- HardlineClaims: territorial rhetoric, sovereignty claims escalating → +0.5. De-escalation → -0.5.
+- PreferenceAlignment: formal diplomatic breakdown, framework collapse, official withdrawal from deal → +0.5. Ceasefire announced, deal signed, formal agreement reached, talks resumed after collapse → -0.5. IMPORTANT: mere talks scheduled or envoys meeting score 0 — only concrete formal shifts qualify. Routine ceasefire violations managed within the framework do NOT fire this node.
+- HardlineClaims: territorial rhetoric, sovereignty claims escalating → +0.5. De-escalation → -0.5. IMPORTANT: retaliatory strikes or exchanges that occur WITHIN an active ceasefire/truce framework score 0 — the ceasefire framework is the dominant mechanism (PreferenceAlignment), not the individual exchange. Only score +0.5 for NEW escalation outside any existing framework.
 - AudienceCosts: domestic political pressure to act -- protests, nationalist rallies, public pressure → +0.5. Public war fatigue → -0.5. (NOT military mobilization -- that belongs to MobilizationSignal.)
 - MobilizationSignal: ONLY score this for an explicit reserve call-up, conscription order, formal mobilization decree, or military alert-status escalation -- the act of activating/calling up forces, not their presence or deployment location (that is WinProbability). Clear mobilization order → +1.0 to +2.0. Generic troop movement, exercises, or presence without an explicit call-up order → 0 (the literature finds this channel statistically null; do not infer mobilization from deployment alone). Almost always 0.
 """
