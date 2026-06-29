@@ -63,7 +63,7 @@
       "WinProbability": -1.0,
       "WarCosts": 1.0,
       "HardlineClaims": 0.5,
-      "CommitmentProblem": 1.0,
+      "CommitmentProblem": 0.65,
       "PreferenceAlignment": -0.5,
       "Patience": 0.0,
       "DemocraticPeace": 1.5,
@@ -78,15 +78,15 @@
       "ProtractedConflict": 0.3,
       "GeographicProximity": 0.0
     },
-    "crisis_context": "CRISIS CONTEXT: The US and Israel struck Iranian nuclear sites in June 2025 (the Twelve-Day War). In early 2026, the Trump administration issued nuclear ultimatums with a February 28 deadline while indirect US-Iran talks occurred in Oman and Turkey. These talks were procedural \u2014 occurring alongside active military planning, not instead of it. The strike happened February 28, 2026. When scoring headlines: diplomatic talks during this period do NOT indicate de-escalation. Score OperationalPreparation high if carrier groups, airspace activity, or force positioning appear. Score ProceduralDiplomacy (weak negative) for talk scheduling. Score ConcreteStandDown only for verified force withdrawals or explicit stand-down orders.",
+    "crisis_context": "CRISIS CONTEXT: US-Iran is now a fragile post-strike implementation crisis, not a pre-strike ultimatum crisis. The February 28, 2026 strike already occurred. By mid-to-late June 2026, the relevant bargaining environment is an interim peace/MOU framework involving ceasefire maintenance, Strait of Hormuz reopening, frozen-asset release, sanctions relief, and follow-on nuclear/security negotiations. Diplomatic talks, mediator channels, technical implementation meetings, and asset-release logistics should now be treated as real de-escalatory/substitution-path evidence UNLESS paired with explicit force deployments, ultimatums, or verified ceasefire collapse. Score SubstitutionPath positively when there are verified halt-attack commitments, implementation mechanisms, maritime reopening procedures, demobilization, or mediator-run incident channels. Score CommitmentProblem UPWARD when either side rejects implementation terms, resumes strikes, issues public ultimatums, disputes Hormuz control, or signals that today's deal cannot bind tomorrow's behavior. Score MobilizationSignal or HardlineClaims ONLY for new force movement, alert changes, strike packages, evacuation orders, or concrete operational preparation \u2014 NOT for routine rhetoric, accusations, or talk scheduling. PreferenceAlignment fires ONLY on formal structural shifts: deal signed, framework formally collapsed, official MOU withdrawal, or coalition/recognition change. Routine ceasefire violations that are managed within the framework do NOT fire PreferenceAlignment \u2014 they fire CommitmentProblem.",
     "crisis_onset_date": "2025-11-01",
     "acute_phase_onset_date": "2026-01-20",
     "event_date": null,
     "suppressor_static": {
       "OperationalFeasibility": 0.85,
       "InitiatorSurvivalRisk": 0.2,
-      "PatronMoralHazard": 0.4,
-      "SubstitutionPath": 0.35
+      "PatronMoralHazard": 0.5,
+      "SubstitutionPath": 0.6
     }
   },
   "Israel-Iran": {

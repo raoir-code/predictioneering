@@ -121,7 +121,18 @@ A nonzero move requires ALL of:
 3. It represents a NEW change, not repetition or commentary.
 4. Strong enough that a human forecaster would treat it as a real weekly shock.
 
-Hierarchy: In a NORMAL week, ZERO nodes move. In an UNUSUAL week, ONE node moves.
+Hierarchy: In a NORMAL week, ZERO nodes move. In an UNUSUAL week, ONE or TWO nodes move.
+
+CRITICAL — DOUBLE-COUNTING GUARD:
+Each nonzero delta must be justified by a DISTINCT evidence atom in the headlines.
+A single headline can only justify ONE nonzero node delta.
+If the same event would plausibly fire multiple nodes, score ONLY the most direct mechanism
+and zero the others. Examples:
+- "Deal signed" → PreferenceAlignment -0.5 only. NOT also CommitmentProblem and AudienceCosts.
+- "Ceasefire violated, retaliatory strike" → CommitmentProblem +0.5 only. NOT also HardlineClaims.
+- "Arms sale approved" → PatronDeterrence +0.5 only. NOT also WinProbability.
+- "Mobilization order issued" → MobilizationSignal +0.5 only. NOT also WinProbability.
+If in doubt about which node is primary, score the most structurally upstream node and zero the rest.
 
 Return valid JSON only:
 {"delta": -0.5 | 0 | 0.5, "event": "One sentence naming the specific event, or 'none'."}
