@@ -235,8 +235,8 @@ def fetch_gnews(query: str) -> Tuple[List[Dict], Dict]:
         raise RuntimeError("Missing GNEWS_API_KEY")
 
     now    = datetime.now(timezone.utc)
-    cutoff = now - timedelta(days=3)
-    start  = cutoff - timedelta(days=7)
+    cutoff = now
+    start  = now - timedelta(days=3)
 
     params = {
         "q":       query,
