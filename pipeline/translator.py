@@ -29,7 +29,7 @@ TRANSLATOR_CACHE = Path("pipeline/translator_cache.json")
 PREDICTIONS_LOG  = Path("predictions/log.jsonl")
 
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
-CLAUDE_MODEL      = "claude-opus-4-6"   # intentionally deprecated — do not upgrade yet
+CLAUDE_MODEL      = "claude-sonnet-4-6"  # unified model string across pipeline
 MAX_TOKENS        = 900
 API_URL           = "https://api.anthropic.com/v1/messages"
 
@@ -266,10 +266,16 @@ The full formula is: P(B) = P(B|A)×P(A) + P(B|¬A)×(1−P(A))
 
 Be honest. Return null for both if too uncertain to estimate reliably.
 
+IMPORTANT: p_b_given_not_a must be expressed as a rate over a REFERENCE PERIOD.
+Also output p_b_given_not_a_reference_days: the number of days your p_b_given_not_a estimate implicitly assumes.
+Example: if you think Israel strikes Damascus ~35% of months, set p_b_given_not_a=0.35 and p_b_given_not_a_reference_days=30.
+The Bettor will scale this to the actual contract window deterministically. Do NOT pre-scale it yourself.
+
 Return ONLY valid JSON:
 {
   "p_b_given_a": 0.75,
   "p_b_given_not_a": 0.05,
+  "p_b_given_not_a_reference_days": 30,
   "confidence": "high|medium|low",
   "rationale": "one sentence"
 }"""
@@ -341,11 +347,30 @@ Legalese flags: {'; '.join(flags) if flags else 'none'}"""
 # ─────────────────────────────────────────────────────────────────────
 
 def bettor(engine_p: float, market_p: float, volume_usd: float,
-           scholar: dict, clergy: dict, glass: dict) -> dict:
+           scholar: dict, clergy: dict, glass: dict,
+           days_remaining: float = 365.0) -> dict:
     """Pure math — no Claude call."""
     polarity        = scholar.get("contract_polarity", "conflict")
     p_b_given_a     = clergy.get("p_b_given_a")
-    p_b_given_not_a = clergy.get("p_b_given_not_a")
+    p_b_given_not_a_raw      = clergy.get("p_b_given_not_a")
+    ref_days        = clergy.get("p_b_given_not_a_reference_days") or 365.0
+
+    # Deterministic horizon scaling of P(B|¬A)
+    # Converts from reference-period rate to contract-window rate
+    p_b_given_not_a = None
+    if p_b_given_not_a_raw is not None:
+        if p_b_given_not_a_raw > 0.0:
+            scale = min(days_remaining, ref_days) / ref_days
+            p_b_given_not_a = round(
+                1.0 - (1.0 - p_b_given_not_a_raw) ** scale, 6
+            )
+        else:
+            p_b_given_not_a = 0.0
+
+    # Flag if p_b_given_not_a_raw is suspiciously high (CGPT flag)
+    if p_b_given_not_a_raw is not None and p_b_given_not_a_raw > 0.05:
+        print(f"    [bettor] ⚠️  p_b_given_not_a_raw={p_b_given_not_a_raw} > 0.05 "
+              f"(ref={ref_days}d → scaled={p_b_given_not_a})")
     observability   = glass.get("outcome_observability", "medium")
     resolution_risk = glass.get("resolution_risk", "medium")
 
@@ -530,8 +555,18 @@ def translate_market(market: dict, cache: dict) -> dict:
                "bet_direction": "PASS", "observability": None,
                "resolution_risk": None}
     else:
+        # Compute days remaining for horizon scaling
+        end_date_str = market.get("end_date", "")
+        try:
+            from datetime import date as _date
+            end_dt = _date.fromisoformat(end_date_str[:10])
+            days_remaining = max(1.0, float((end_dt - _date.today()).days))
+        except Exception:
+            days_remaining = 365.0
+
         bet = bettor(float(engine_p), float(market_p or 0),
-                     volume, scholar, clergy, glass)
+                     volume, scholar, clergy, glass,
+                     days_remaining=days_remaining)
 
     market.update({
         "translator_route":           "TRANSLATE",
