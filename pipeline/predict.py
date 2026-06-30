@@ -517,6 +517,12 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         print(f"  q_logit={q_logit:.3f} | TriggerType={call_a.get('TriggerType',0):.2f} | OP={call_b.get('OperationalPreparation',0):.2f} | LVO={call_b.get('LiveViolenceObserved',0):.2f}")
         print(f"  Toggles: {json.dumps({k: round(v,3) for k,v in toggles.items() if k in baseline})}") 
 
+        try:
+            from pipeline import context_keeper
+            context_keeper.maybe_refresh_event_triggered(dyad, call_a, call_b, today)
+        except Exception as ex:
+            print(f"  [warn] context_keeper failed (non-fatal, predictions unaffected): {ex}")
+
         now_utc = datetime.now(timezone.utc).isoformat()
 
         # Weibull transport params from dyad config

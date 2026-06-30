@@ -124,6 +124,7 @@ Respond ONLY with valid JSON in this exact format:
     "AudienceCosts": 0.0
   },
   "query": "boolean GNews search query string",
+  "crisis_context": "1-3 sentence summary of this dyad's current structural situation (recent history, active disputes, anything a news-reading model would need to know to avoid misreading routine events as novel ones), followed by explicit guidance on how to score specific named nodes given this situation. If there is genuinely nothing notable about this dyad's current state, write a brief sentence saying so rather than inventing detail -- a short honest 'no notable active crisis dynamics for this dyad' is correct and useful, a fabricated specific event is not.",
   "reasoning": "two sentences explaining the key baseline choices"
 }"""
 
