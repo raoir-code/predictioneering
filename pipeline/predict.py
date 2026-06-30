@@ -444,7 +444,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
     with open(CLASSIFIED_FEED) as f:
         markets = json.load(f)
 
-    core = [m for m in markets if m.get("bucket") == "CORE" and m.get("our_prediction") is None and not m.get("resolved")]
+    core = [m for m in markets if m.get("bucket") == "CORE" and not m.get("resolved")]
     if filter_dyad:
         core = [m for m in core if filter_dyad.lower() in (m.get("dyad") or "").lower()]
 
