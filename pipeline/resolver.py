@@ -28,6 +28,7 @@ from collections import defaultdict
 PREDICTIONS_LOG  = Path("predictions/log.jsonl")
 BRIER_LOG        = Path("predictions/brier_log.jsonl")
 BRIER_SUMMARY    = Path("predictions/brier_summary.json")
+CLASSIFIED_FEED  = Path("pipeline/classified_feed.json")
 
 GAMMA_API        = "https://gamma-api.polymarket.com/markets/{market_id}"
 DRY_RUN          = "--dry-run" in sys.argv
@@ -136,6 +137,43 @@ def load_brier_log() -> set:
             except Exception:
                 continue
     return seen
+
+
+
+# ─────────────────────────────────────────────────────────────────────
+# MARKET SUNSET — stop translator/predict from re-touching resolved markets
+# ─────────────────────────────────────────────────────────────────────
+
+def sunset_market_in_feed(market_id: str, outcome: int) -> bool:
+    """
+    Flag a resolved market in classified_feed.json so translator.py and
+    predict.py stop re-processing it daily with a frozen market_price.
+    Does NOT delete the entry — preserves it for audit/debugging.
+    Returns True if a matching market was found and flagged.
+    """
+    if not CLASSIFIED_FEED.exists():
+        print(f"    [resolver] {CLASSIFIED_FEED} not found — cannot sunset {market_id}")
+        return False
+
+    with open(CLASSIFIED_FEED) as f:
+        feed = json.load(f)
+
+    found = False
+    for m in feed:
+        if m.get("market_id") == market_id:
+            m["resolved"]         = True
+            m["resolved_outcome"] = outcome
+            m["resolved_at"]      = datetime.now(timezone.utc).isoformat()
+            found = True
+            break
+
+    if not found:
+        return False
+
+    with open(CLASSIFIED_FEED, "w") as f:
+        json.dump(feed, f, indent=2, default=str)
+
+    return True
 
 
 # ─────────────────────────────────────────────────────────────────────
@@ -302,6 +340,13 @@ def run_resolver():
               f"engine={entry['brier_engine']} market={entry['brier_market']}")
 
         new_resolutions.append(entry)
+
+        if not DRY_RUN:
+            sunset_ok = sunset_market_in_feed(market_id, status["outcome"])
+            if sunset_ok:
+                print(f"    → Sunset: flagged resolved in classified_feed.json")
+            else:
+                print(f"    → Sunset: market not present in classified_feed.json (already cycled out)")
 
     print(f"\n{'='*60}")
     print(f"  New resolutions found: {len(new_resolutions)}")
