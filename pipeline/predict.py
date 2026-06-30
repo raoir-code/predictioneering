@@ -552,6 +552,42 @@ def run(dry_run: bool = False, filter_dyad: str = None):
             _live_boost = _F * max(0.0, _acute_core - _abatement)
             _icb_boost  = 3.0 * _live_boost  # ICB_TRANSPORT_RHO = 3.0
 
+            # -- Operational prep lag gate ----------------------------------
+            # If acute signal fires but the operation can't physically complete
+            # before the contract closes, discount the boost proportionally.
+            # Anchored to decision_detected_at (set once on first detection,
+            # reset when signal abates) so repeat headlines don't roll the clock.
+            _OP_LAG_DAYS = {
+                "missile_strike":  1,
+                "airstrike":       2,
+                "raid":            1,
+                "naval_blockade":  3,
+                "ground_invasion": 14,
+            }
+            _action_type     = dyad_meta.get("action_type", "airstrike")
+            _lag_days        = _OP_LAG_DAYS.get(_action_type, 2)
+            _detected_str    = dyad_meta.get("decision_detected_at")
+            _detected_date   = _parse_date_str(_detected_str) if _detected_str else None
+
+            if _acute_core > 0 and _icb_boost > 0:
+                if _detected_date is None:
+                    dyad_meta["decision_detected_at"] = str(today)
+                    config["decision_detected_at"]    = str(today)
+                    _detected_date = today
+
+                _days_since_detection = max((today - _detected_date).days, 0)
+                _lag_remaining        = max(_lag_days - _days_since_detection, 0)
+
+                if _lag_remaining > 0 and days_rem > 0:
+                    if _lag_remaining >= days_rem:
+                        _icb_boost = 0.0
+                    else:
+                        _lag_discount = 1.0 - (_lag_remaining / max(days_rem, 1))
+                        _icb_boost   *= _lag_discount
+            elif _acute_core == 0 and _detected_date is not None:
+                dyad_meta.pop("decision_detected_at", None)
+                config.pop("decision_detected_at", None)
+
             # Apply boost in log-odds space (matches backtest.py exactly)
             import math as _math
             _post_res = bool(event_date and today >= event_date)
