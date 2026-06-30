@@ -556,6 +556,11 @@ about this specific dyad's actors interacting, exclude it entirely from
 consideration for every node -- do not let it influence any score, even
 indirectly or partially.
 
+Perform this relevance check SILENTLY, internally, in your own reasoning only.
+Do NOT write out a relevance analysis, do NOT list or discuss headlines one
+by one, do NOT explain which headlines you excluded or why. Output ONLY the
+final JSON object as instructed below -- zero preceding text of any kind.
+
 {NODE_RUBRICS}
 {RUBRIC_ONSET_ADDITION}
 
@@ -614,11 +619,16 @@ about this specific dyad's actors interacting, exclude it entirely from
 consideration for every node -- do not let it influence any score, even
 indirectly or partially.
 
+Perform this relevance check SILENTLY, internally, in your own reasoning only.
+Do NOT write out a relevance analysis, do NOT list or discuss headlines one
+by one, do NOT explain which headlines you excluded or why. Output ONLY the
+final JSON object as instructed below -- zero preceding text of any kind.
+
 {RUBRIC_LIVE_TEMPLATE.format(trigger_context=trigger_context, crisis_context=_crisis_ctx)}
 
 Return ONLY valid JSON with no preamble, explanation, or markdown. Example: {{"LiveNonviolentMilitaryPressure": 0, "LiveViolenceObserved": 0, "LiveUltimatumDeadline": 0, "LiveMediationAccepted": 0, "LiveAbatementSignal": 0}}"""
 
-    return _call_claude_json(prompt, expected, max_tokens=400)
+    return _call_claude_json(prompt, expected, max_tokens=600)
 
 # ── Q-SUBMODEL DECOMPOSITION ────────────────────────────────────────────
 # Pure arithmetic, additive in logit space -- free post-hoc attribution
