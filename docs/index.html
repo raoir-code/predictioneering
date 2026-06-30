@@ -6,6 +6,7 @@
 <title>PREDICTIONEERING — Geopolitical Forecasting</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root {
     --bg:       #0a0c0f;
@@ -405,6 +406,27 @@
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border2); }
+
+  /* -- Chart section -- */
+  .chart-section { border-bottom:1px solid var(--border); padding:24px 40px; background:var(--bg2); }
+  .chart-header  { display:flex; align-items:center; gap:16px; margin-bottom:16px; }
+  .chart-title   { font-size:10px; letter-spacing:0.2em; color:var(--text-dim); text-transform:uppercase; }
+  .market-selector { background:var(--bg3); border:1px solid var(--border2); color:var(--text); font-family:var(--mono); font-size:11px; padding:4px 8px; border-radius:3px; cursor:pointer; flex:1; max-width:480px; }
+  .market-selector:focus { outline:none; border-color:var(--blue); }
+  .chart-canvas-wrap { position:relative; height:200px; }
+  .chart-empty { color:var(--text-dim); font-size:11px; padding:48px 0; text-align:center; }
+  /* -- Brier history section -- */
+  .brier-section { padding:24px 40px 40px; background:var(--bg); }
+  .brier-section-title { font-size:10px; letter-spacing:0.2em; color:var(--text-dim); text-transform:uppercase; margin-bottom:16px; }
+  .brier-table { width:100%; border-collapse:collapse; }
+  .brier-table th { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim); text-align:left; padding:6px 12px 6px 0; border-bottom:1px solid var(--border); }
+  .brier-table td { padding:8px 12px 8px 0; font-size:12px; border-bottom:1px solid var(--border); color:var(--text); }
+  .brier-table td.right { text-align:right; }
+  .outcome-yes { color:var(--green); }
+  .outcome-no  { color:var(--red); }
+  .brier-win  { color:var(--green); }
+  .brier-loss { color:var(--red); }
+  .brier-empty { color:var(--text-dim); font-size:11px; padding:32px 0; text-align:center; }
 </style>
 </head>
 <body>
@@ -453,6 +475,19 @@
   <span class="last-updated" id="last-updated">Loading...</span>
 </div>
 
+<div class="chart-section" id="chart-section" style="display:none">
+  <div class="chart-header">
+    <span class="chart-title">Price History</span>
+    <select class="market-selector" id="market-selector" onchange="onMarketSelect()">
+      <option value="">-- select a CORE market --</option>
+    </select>
+  </div>
+  <div class="chart-canvas-wrap" id="chart-wrap">
+    <div class="chart-empty" id="chart-empty">Select a market above to view price history.</div>
+    <canvas id="price-chart" style="display:none"></canvas>
+  </div>
+</div>
+
 <main>
   <div id="loading">
     <span class="cursor">Loading market feed</span>
@@ -476,6 +511,13 @@
     </table>
   </div>
 </main>
+
+<div class="brier-section">
+  <div class="brier-section-title">Resolved Markets -- Brier Track Record</div>
+  <div id="brier-content">
+    <div class="brier-empty">No resolved markets yet -- check back after tonight's resolutions.</div>
+  </div>
+</div>
 
 <footer>
   <div>PREDICTIONEERING · God's DAG v2 · <a href="https://github.com/raoir-code/predictioneering" target="_blank">github.com/raoir-code/predictioneering</a></div>
@@ -687,7 +729,125 @@ function escHtml(s) {
 }
 
 // ── Boot ───────────────────────────────────────────────────────────────────
+
+// -- Price chart --
+let predictionLog = [];
+let activeChart = null;
+
+async function loadPredictionsLog() {
+  try {
+    const r = await fetch('predictions_log.jsonl');
+    if (!r.ok) return;
+    const text = await r.text();
+    predictionLog = text.trim().split('\n').filter(Boolean).map(l => {
+      try { return JSON.parse(l); } catch { return null; }
+    }).filter(Boolean);
+    buildMarketSelector();
+    document.getElementById('chart-section').style.display = '';
+  } catch(e) { /* no log yet */ }
+}
+
+function buildMarketSelector() {
+  const sel = document.getElementById('market-selector');
+  const markets = {};
+  for (const e of predictionLog) {
+    if (!e.market_id || e.conditional_p == null) continue;
+    if (!markets[e.market_id]) markets[e.market_id] = e.market_label || e.market_id;
+  }
+  for (const [id, label] of Object.entries(markets)) {
+    const opt = document.createElement('option');
+    opt.value = id;
+    opt.textContent = label.length > 80 ? label.slice(0,80) + '...' : label;
+    sel.appendChild(opt);
+  }
+}
+
+function onMarketSelect() {
+  const id = document.getElementById('market-selector').value;
+  if (!id) return;
+  const entries = predictionLog.filter(e => e.market_id === id && e.conditional_p != null)
+    .sort((a,b) => a.timestamp.localeCompare(b.timestamp));
+  const labels  = entries.map(e => e.timestamp.slice(0,10));
+  const ourData = entries.map(e => +(e.conditional_p * 100).toFixed(2));
+  const mktData = entries.map(e => e.market_p != null ? +(e.market_p * 100).toFixed(2) : null);
+  const canvas  = document.getElementById('price-chart');
+  const empty   = document.getElementById('chart-empty');
+  if (entries.length === 0) { canvas.style.display='none'; empty.style.display=''; return; }
+  canvas.style.display = ''; empty.style.display = 'none';
+  if (activeChart) activeChart.destroy();
+  activeChart = new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label:'Our Prediction', data:ourData, borderColor:'#00e676', backgroundColor:'rgba(0,230,118,0.06)', pointRadius:3, tension:0.3, borderWidth:2 },
+        { label:'Market Price',   data:mktData, borderColor:'#ffb300', backgroundColor:'rgba(255,179,0,0.06)',  pointRadius:3, tension:0.3, borderWidth:2, spanGaps:true }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins: {
+        legend: { labels: { color:'#7a9ab0', font:{ family:'IBM Plex Mono', size:11 } } },
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + '%' } }
+      },
+      scales: {
+        x: { ticks:{ color:'#4a6070', font:{family:'IBM Plex Mono',size:10}, maxTicksLimit:8 }, grid:{color:'#1e2730'} },
+        y: { min:0, ticks:{ color:'#4a6070', font:{family:'IBM Plex Mono',size:10}, callback: v => v+'%' }, grid:{color:'#1e2730'} }
+      }
+    }
+  });
+}
+
+// -- Brier history --
+async function loadBrierLog() {
+  try {
+    const r = await fetch('brier_log.jsonl');
+    if (!r.ok) return;
+    const text = await r.text();
+    const entries = text.trim().split('\n').filter(Boolean).map(l => {
+      try { return JSON.parse(l); } catch { return null; }
+    }).filter(Boolean);
+    if (entries.length) renderBrierHistory(entries);
+  } catch(e) { /* no brier log yet */ }
+}
+
+function renderBrierHistory(entries) {
+  const avgOur = (entries.reduce((s,e) => s + (e.brier_conditional ?? e.brier_engine ?? 0), 0) / entries.length).toFixed(4);
+  const avgMkt = (entries.reduce((s,e) => s + (e.brier_market ?? 0), 0) / entries.length).toFixed(4);
+  const edge   = ((parseFloat(avgMkt) - parseFloat(avgOur)) * 100).toFixed(2);
+  const edgeCls = parseFloat(edge) > 0 ? 'brier-win' : 'brier-loss';
+  let html = '<div style="margin-bottom:16px;font-size:12px;color:var(--text-mid)">' +
+    entries.length + ' resolved &nbsp;|&nbsp; Our Brier: <span class="' + edgeCls + '" style="font-weight:500">' + avgOur + '</span> &nbsp;|&nbsp;' +
+    ' Market Brier: <span style="font-weight:500">' + avgMkt + '</span> &nbsp;|&nbsp;' +
+    ' Edge: <span class="' + edgeCls + '">' + (parseFloat(edge)>0?'+':'') + edge + 'pp</span></div>' +
+    '<table class="brier-table"><thead><tr>' +
+    '<th>Market</th><th class="right">Dyad</th><th class="right">Our P</th><th class="right">Mkt P</th>' +
+    '<th class="right">Outcome</th><th class="right">Our Brier</th><th class="right">Mkt Brier</th><th>Resolved</th>' +
+    '</tr></thead><tbody>';
+  for (const e of entries.slice().reverse()) {
+    const outcome  = e.outcome === 1 ? '<span class="outcome-yes">YES</span>' : '<span class="outcome-no">NO</span>';
+    const ourBrier = (e.brier_conditional ?? e.brier_engine ?? 0).toFixed(4);
+    const mktBrier = (e.brier_market ?? 0).toFixed(4);
+    const ourCls   = parseFloat(ourBrier) <= parseFloat(mktBrier) ? 'brier-win' : 'brier-loss';
+    const date     = (e.resolved_at ?? '').slice(0,10);
+    const label    = (e.market_label ?? e.market_id ?? '?');
+    html += '<tr>' +
+      '<td title="' + label + '">' + (label.length>60?label.slice(0,60)+'...':label) + '</td>' +
+      '<td class="right" style="color:var(--text-dim);font-size:11px">' + (e.dyad??'--') + '</td>' +
+      '<td class="right">' + (e.our_prediction!=null?(e.our_prediction*100).toFixed(1)+'%':'--') + '</td>' +
+      '<td class="right">' + (e.market_price!=null?(e.market_price*100).toFixed(1)+'%':'--') + '</td>' +
+      '<td class="right">' + outcome + '</td>' +
+      '<td class="right ' + ourCls + '">' + ourBrier + '</td>' +
+      '<td class="right">' + mktBrier + '</td>' +
+      '<td style="color:var(--text-dim);font-size:11px">' + date + '</td></tr>';
+  }
+  html += '</tbody></table>';
+  document.getElementById('brier-content').innerHTML = html;
+}
+
 loadFeed();
+loadPredictionsLog();
+loadBrierLog();
 </script>
 </body>
 </html>
