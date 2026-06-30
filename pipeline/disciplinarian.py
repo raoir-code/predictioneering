@@ -102,6 +102,12 @@ Rules:
 - NuclearDeterrence should be high only where both sides have nuclear weapons or one side has them and they are relevant to the dyad.
 - Also generate a GNews search query (boolean, English) that would pull relevant headlines for this dyad.
 
+GNews query construction rules (these matter -- a badly built query silently feeds the wrong news into this dyad's predictions):
+1. BOTH actors in the dyad must be independently required via AND. Never let one actor's name live only inside an OR-list as one option among several -- that lets unrelated news (about the other OR-options) pass through as if it were about this dyad.
+2. Generic action/conflict words (military, strike, conflict, war, tensions, diplomacy, threat, relations) are ONLY safe as qualifiers layered on top of an already-confirmed pair of actors. Never use them as part of what establishes that the pair is present -- they match almost any news story on earth and will pull in unrelated wars.
+3. If an actor's name is also a common word, an adjective, a ship/aircraft registry, a sports team name, or otherwise has frequent unrelated usage in English-language news (e.g. "Panama" as in Panama-flagged vessel, "Georgia" as in the US state, "Chad" as in a person's name), pair that actor's own clause with a disambiguating term specific to it (e.g. its capital, head of state, or the geographic feature actually in dispute) rather than relying on the other actor's OR-list to rescue precision.
+4. Prefer multi-word or proper-noun terms (place names, leader names, specific disputed territories) over single common nouns wherever possible, since they have far lower false-positive collision rates with unrelated news.
+
 Respond ONLY with valid JSON in this exact format:
 {
   "label": "human readable dyad name",
