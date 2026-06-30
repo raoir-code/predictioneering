@@ -603,7 +603,7 @@ def run_translator():
 
     feed  = json.loads(CLASSIFIED_FEED.read_text())
     cache = _load_cache()
-    core  = [m for m in feed if m.get("bucket") == "CORE"]
+    core  = [m for m in feed if m.get("bucket") == "CORE" and not m.get("resolved")]
 
     mode = "SCHOLAR-ONLY" if SCHOLAR_ONLY else "FULL"
     print(f"\nTranslator [{mode}]: {len(core)} CORE markets")
@@ -657,6 +657,8 @@ def _append_log(feed: list):
     with open(PREDICTIONS_LOG, "a") as f:
         for market in feed:
             if market.get("bucket") != "CORE":
+                continue
+            if market.get("resolved"):
                 continue
             if market.get("our_prediction") is None:
                 continue
