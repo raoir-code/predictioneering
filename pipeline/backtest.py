@@ -245,14 +245,46 @@ DYAD_QUERIES = {
     "US-domestic":    '"United States" AND ("civil unrest" OR "militia")',
 }
 
+_DYAD_CONFIGS_CACHE = None
+
+def _load_dyad_query(dyad):
+    """
+    Resolve the GNews query string for a dyad, in priority order:
+      1. pipeline/dyad_configs.json "query" field (the real, curated queries)
+      2. Legacy DYAD_QUERIES dict (small hardcoded fallback set)
+      3. The bare dyad string itself (last resort -- usually yields 0 articles,
+         since dyad names like "Israel-Yemen" rarely appear verbatim in headlines)
+    """
+    global _DYAD_CONFIGS_CACHE
+    if _DYAD_CONFIGS_CACHE is None:
+        config_path = ROOT / "pipeline" / "dyad_configs.json"
+        if config_path.exists():
+            _DYAD_CONFIGS_CACHE = json.loads(config_path.read_text())
+        else:
+            _DYAD_CONFIGS_CACHE = {}
+
+    cfg = _DYAD_CONFIGS_CACHE.get(dyad)
+    if cfg and cfg.get("query"):
+        return cfg["query"]
+
+    if dyad in DYAD_QUERIES:
+        return DYAD_QUERIES[dyad]
+
+    print(f"    [fetch_gnews] WARNING: no query found for dyad '{dyad}' in "
+          f"dyad_configs.json or DYAD_QUERIES -- falling back to bare dyad "
+          f"string as query (likely yields 0 articles).")
+    return dyad
+
+
 def fetch_gnews(dyad, as_of_date):
     """Fetch GNews headlines for a dyad, date-locked to as_of_date. Cached."""
-    cache_key = f"{dyad.replace('-','_')}_{as_of_date.strftime('%Y%m%d')}"
+    safe_dyad = re.sub(r'[^A-Za-z0-9_]+', '_', dyad)
+    cache_key = f"{safe_dyad}_{as_of_date.strftime('%Y%m%d')}"
     cache_file = GNEWS_CACHE / f"{cache_key}.json"
     if cache_file.exists():
         return json.loads(cache_file.read_text())
 
-    query = DYAD_QUERIES.get(dyad, dyad)
+    query = _load_dyad_query(dyad)
     # GNews: to= param locks the date ceiling
     params = {
         "q":        query,
@@ -264,7 +296,13 @@ def fetch_gnews(dyad, as_of_date):
         "sortby":   "publishedAt",
     }
     r = requests.get("https://gnews.io/api/v4/search", params=params, timeout=30)
-    articles = r.json().get("articles", [])
+    body = r.json()
+    articles = body.get("articles", [])
+    if not articles:
+        print(f"    [fetch_gnews] {dyad}: 0 articles. status={r.status_code} "
+              f"query={query!r} response_keys={list(body.keys())}")
+        if "errors" in body:
+            print(f"    [fetch_gnews] {dyad}: API error detail: {body['errors']}")
     result = [{"title": a["title"], "description": a.get("description", ""),
                "publishedAt": a["publishedAt"]} for a in articles]
     cache_file.write_text(json.dumps(result))
