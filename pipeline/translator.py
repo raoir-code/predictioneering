@@ -502,6 +502,7 @@ def translate_market(market: dict, cache: dict) -> dict:
     route = scholar.get("translator_route", "PASS_TRANSLATION")
 
     if route != "TRANSLATE":
+        print(f"    [filter] {route} -- skipping")
         cache[market_id] = {"contract_hash": chash, "scholar": scholar,
                             "clergy": None, "glass": None}
         return _pass_fields(market, scholar, route)
