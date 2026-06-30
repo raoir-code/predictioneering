@@ -276,6 +276,25 @@ def _load_dyad_query(dyad):
     return dyad
 
 
+def _load_dyad_crisis_context(dyad):
+    """
+    Resolve the crisis_context string for a dyad from dyad_configs.json.
+    Returns "" if none is set -- caller omits the section entirely rather
+    than printing an empty header. Reuses _DYAD_CONFIGS_CACHE.
+    """
+    global _DYAD_CONFIGS_CACHE
+    if _DYAD_CONFIGS_CACHE is None:
+        config_path = ROOT / "pipeline" / "dyad_configs.json"
+        if config_path.exists():
+            _DYAD_CONFIGS_CACHE = json.loads(config_path.read_text())
+        else:
+            _DYAD_CONFIGS_CACHE = {}
+    cfg = _DYAD_CONFIGS_CACHE.get(dyad)
+    if cfg and cfg.get("crisis_context"):
+        return cfg["crisis_context"]
+    return ""
+
+
 def fetch_gnews(dyad, as_of_date):
     """Fetch GNews headlines for a dyad, date-locked to as_of_date. Cached."""
     safe_dyad = re.sub(r'[^A-Za-z0-9_]+', '_', dyad)
@@ -539,12 +558,17 @@ def score_nodes_call_a(dyad, articles, as_of_date):
         f"- {a['title']} ({a['publishedAt'][:10]})"
         for a in articles
     )
+    _crisis_ctx_a = _load_dyad_crisis_context(dyad)
+    _crisis_block_a = (
+        f"CRISIS CONTEXT FOR THIS DYAD:\n{_crisis_ctx_a}\n\n"
+        if _crisis_ctx_a else ""
+    )
     prompt = f"""Dyad: {dyad}
 Date: {as_of_date}
 Headlines:
 {headlines}
 
-EVIDENCE RELEVANCE GATE (apply BEFORE scoring any node):
+{_crisis_block_a}EVIDENCE RELEVANCE GATE (apply BEFORE scoring any node):
 Before using any headline as evidence, verify it genuinely concerns THIS dyad's
 named actors in direct relationship to each other -- not a different conflict,
 a different country pair, or a third party that merely shares a keyword with
@@ -577,7 +601,7 @@ def score_nodes_call_b(dyad, articles, as_of_date, trigger_was_violent):
     whatever already set TriggerType, or the same triggering event gets
     double-counted for the rest of its 7-day rolling window.
     """
-    _crisis_ctx = ""  # default; overwritten below from dyad_configs if available
+    _crisis_ctx = _load_dyad_crisis_context(dyad)  # was dead code, always ""
     expected = Q_PARENTS_LIVE
     if not articles:
         return {n: 0.0 for n in expected}
