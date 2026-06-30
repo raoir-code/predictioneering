@@ -49,7 +49,13 @@ echo "Resolver done." | tee -a "$LOGFILE"
 
 # Git push
 echo "Pushing to GitHub..." | tee -a "$LOGFILE"
-git add pipeline/classified_feed.json predictions/log.jsonl pipeline/translator_cache.json predictions/brier_log.jsonl predictions/brier_summary.json
+for f in pipeline/classified_feed.json predictions/log.jsonl pipeline/translator_cache.json predictions/brier_log.jsonl predictions/brier_summary.json; do
+    if [ -f "$f" ]; then
+        git add "$f"
+    else
+        echo "  [skip] $f does not exist yet (nothing resolved/written to it today)" | tee -a "$LOGFILE"
+    fi
+done
 git commit -m "Daily predictions: $(date +%Y-%m-%d)" >> "$LOGFILE" 2>&1 || echo "Nothing to commit." | tee -a "$LOGFILE"
 git push >> "$LOGFILE" 2>&1
 
