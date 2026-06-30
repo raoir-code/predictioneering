@@ -621,12 +621,15 @@ function renderTable(filter) {
 
     const isCore     = (m.bucket || '').toUpperCase() === 'CORE';
     const marketPct  = m.market_price != null ? (m.market_price * 100).toFixed(1) + '%' : '—';
-    const ourPct     = m.our_prediction != null ? (m.our_prediction * 100).toFixed(1) + '%' : null;
+    const freshPred  = (window.latestPred || {})[m.market_id];
+    const ourRaw     = freshPred ? freshPred.conditional_p : m.our_prediction;
+    const predAt     = freshPred ? freshPred.timestamp : m.prediction_at;
+    const ourPct     = ourRaw != null ? (ourRaw * 100).toFixed(1) + '%' : null;
 
     // Edge calculation
     let edgeHtml = '<span class="edge-none">—</span>';
-    if (m.our_prediction != null && m.market_price != null) {
-      const edge = ((m.our_prediction - m.market_price) * 100).toFixed(1);
+    if (ourRaw != null && m.market_price != null) {
+      const edge = ((ourRaw - m.market_price) * 100).toFixed(1);
       const cls  = parseFloat(edge) > 0 ? 'edge-positive' : parseFloat(edge) < 0 ? 'edge-negative' : 'edge-none';
       edgeHtml   = `<span class="${cls}">${parseFloat(edge) > 0 ? '+' : ''}${edge}pp</span>`;
     }
@@ -640,8 +643,8 @@ function renderTable(filter) {
     }
 
     // Timestamp
-    const tsHtml = m.prediction_at
-      ? `<span class="timestamp-cell">${new Date(m.prediction_at).toISOString().replace('T', ' ').slice(0, 16)}Z</span>`
+    const tsHtml = predAt
+      ? `<span class="timestamp-cell">${new Date(predAt).toISOString().replace('T', ' ').slice(0, 16)}Z</span>`
       : '<span class="timestamp-cell" style="opacity:0.3">not yet posted</span>';
 
     // Resolution
@@ -692,7 +695,7 @@ function renderTable(filter) {
 
 // ── Stats ──────────────────────────────────────────────────────────────────
 function updateStats() {
-  const withPred   = allMarkets.filter(m => m.our_prediction != null);
+  const withPred   = allMarkets.filter(m => (window.latestPred||{})[m.market_id] || m.our_prediction != null);
   const resolved   = allMarkets.filter(m => m.resolution != null);
   const tracking   = allMarkets.filter(m =>
     (m.bucket || '').toUpperCase() === 'ADJACENT'
@@ -742,9 +745,21 @@ async function loadPredictionsLog() {
     predictionLog = text.trim().split('\n').filter(Boolean).map(l => {
       try { return JSON.parse(l); } catch { return null; }
     }).filter(Boolean);
+    buildLatestPredLookup();
     buildMarketSelector();
     document.getElementById('chart-section').style.display = '';
   } catch(e) { /* no log yet */ }
+}
+
+function buildLatestPredLookup() {
+  window.latestPred = {};
+  for (const e of predictionLog) {
+    if (!e.market_id || e.conditional_p == null) continue;
+    const existing = window.latestPred[e.market_id];
+    if (!existing || e.timestamp > existing.timestamp) {
+      window.latestPred[e.market_id] = e;
+    }
+  }
 }
 
 function buildMarketSelector() {
