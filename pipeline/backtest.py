@@ -544,6 +544,18 @@ Date: {as_of_date}
 Headlines:
 {headlines}
 
+EVIDENCE RELEVANCE GATE (apply BEFORE scoring any node):
+Before using any headline as evidence, verify it genuinely concerns THIS dyad's
+named actors in direct relationship to each other -- not a different conflict,
+a different country pair, or a third party that merely shares a keyword with
+one of the actors. Examples of false matches to exclude: a ship "flagged" to
+a country is not that country acting; a missile or strike in an unrelated war
+involving only one of the two actors is not evidence for THIS dyad even if the
+headline matched this dyad's search terms. If a headline is not genuinely
+about this specific dyad's actors interacting, exclude it entirely from
+consideration for every node -- do not let it influence any score, even
+indirectly or partially.
+
 {NODE_RUBRICS}
 {RUBRIC_ONSET_ADDITION}
 
@@ -589,6 +601,18 @@ def score_nodes_call_b(dyad, articles, as_of_date, trigger_was_violent):
 Date: {as_of_date}
 Headlines:
 {headlines}
+
+EVIDENCE RELEVANCE GATE (apply BEFORE scoring any node):
+Before using any headline as evidence, verify it genuinely concerns THIS dyad's
+named actors in direct relationship to each other -- not a different conflict,
+a different country pair, or a third party that merely shares a keyword with
+one of the actors. Examples of false matches to exclude: a ship "flagged" to
+a country is not that country acting; a missile or strike in an unrelated war
+involving only one of the two actors is not evidence for THIS dyad even if the
+headline matched this dyad's search terms. If a headline is not genuinely
+about this specific dyad's actors interacting, exclude it entirely from
+consideration for every node -- do not let it influence any score, even
+indirectly or partially.
 
 {RUBRIC_LIVE_TEMPLATE.format(trigger_context=trigger_context, crisis_context=_crisis_ctx)}
 
