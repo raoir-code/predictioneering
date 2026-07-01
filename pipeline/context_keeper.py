@@ -293,7 +293,7 @@ def _verify_candidate(dyad, old_context, new_context, headlines):
     prompt = f"""Dyad: {dyad}
 
 OLD crisis_context:
-{oold_context if old_context else "(none)"}
+{old_context if old_context else "(none)"}
 
 PROPOSED NEW crisis_context:
 {new_context}
