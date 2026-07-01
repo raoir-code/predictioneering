@@ -191,7 +191,7 @@ def _load_recent_headlines(dyad, as_of_date, days=HEADLINE_WINDOW_DAYS):
     safe_dyad = re.sub(r'[^A-Za-z0-9_]+', '_', dyad)
     for i in range(days):
         d = as_of_date - timedelta(days=i)
-        cache_file = GNEWS_CACHE / f"{ase_dyad}_{d.strftime('%Y%m%d')}.json"
+        cache_file = GNEWS_CACHE / f"{safe_dyad}_{d.strftime('%Y%m%d')}.json"
         if cache_file.exists():
             try:
                 articles = json.loads(cache_file.read_text())
