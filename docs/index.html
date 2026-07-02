@@ -822,7 +822,18 @@ async function loadBrierLog() {
     const entries = text.trim().split('\n').filter(Boolean).map(l => {
       try { return JSON.parse(l); } catch { return null; }
     }).filter(Boolean);
-    if (entries.length) renderBrierHistory(entries);
+    if (entries.length) {
+      renderBrierHistory(entries);
+
+      const avgOur = entries.reduce((sum, e) =>
+        sum + (e.brier_conditional ?? e.brier_engine ?? 0), 0) / entries.length;
+      const avgMkt = entries.reduce((sum, e) =>
+        sum + (e.brier_market ?? 0), 0) / entries.length;
+
+      document.getElementById('stat-resolved').textContent = entries.length;
+      document.getElementById('stat-brier').textContent = avgOur.toFixed(4);
+      document.getElementById('stat-baseline').textContent = avgMkt.toFixed(4);
+    }
   } catch(e) { /* no brier log yet */ }
 }
 
