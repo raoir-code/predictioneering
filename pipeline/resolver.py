@@ -58,19 +58,37 @@ def fetch_market_status(market_id: str) -> dict | None:
                 return None
             data = data[0]
 
-        resolved     = data.get("resolved", False)
-        outcome_str  = data.get("resolutionTitle") or data.get("resolution") or ""
+        closed       = bool(data.get("closed", False))
+        uma_status   = data.get("umaResolutionStatus", "")
+        resolved     = closed and uma_status == "resolved"
         end_date     = data.get("endDate") or data.get("end_date") or ""
         question     = data.get("question") or data.get("title") or ""
 
-        # Parse binary outcome
+        # Outcome lives in outcomes/outcomePrices, not a resolutionTitle field
         outcome = None
+        raw_resolution = ""
         if resolved:
-            o = outcome_str.strip().lower()
-            if o in ("yes", "true", "1"):
-                outcome = 1
-            elif o in ("no", "false", "0"):
-                outcome = 0
+            try:
+                outcomes_list = json.loads(data.get("outcomes", "[]"))
+                prices_list   = json.loads(data.get("outcomePrices", "[]"))
+            except (json.JSONDecodeError, TypeError):
+                outcomes_list, prices_list = [], []
+
+            raw_resolution = f"{outcomes_list}:{prices_list}"
+
+            if len(outcomes_list) == len(prices_list) and outcomes_list:
+                for name, price in zip(outcomes_list, prices_list):
+                    try:
+                        p = float(price)
+                    except (TypeError, ValueError):
+                        continue
+                    if p >= 0.99:
+                        o = str(name).strip().lower()
+                        if o in ("yes", "true", "1"):
+                            outcome = 1
+                        elif o in ("no", "false", "0"):
+                            outcome = 0
+                        break
             # If we can't parse, leave None — will skip Brier computation
 
         return {
@@ -78,7 +96,7 @@ def fetch_market_status(market_id: str) -> dict | None:
             "outcome":    outcome,
             "end_date":   end_date[:10] if end_date else "",
             "question":   question,
-            "raw_resolution": outcome_str,
+            "raw_resolution": raw_resolution,
         }
 
     except urllib.error.HTTPError as e:
