@@ -19,6 +19,8 @@ import time
 from datetime import datetime, timezone, date
 from pathlib import Path
 import urllib.request
+import re as _re
+import calendar as _calendar
 
 # ─────────────────────────────────────────────────────────────────────
 # CONFIG
@@ -49,14 +51,104 @@ UNSCORABLE_DYADS  = {
 # HYGIENE FILTER
 # ─────────────────────────────────────────────────────────────────────
 
+_MONTHS = {
+    "january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6,
+    "july": 7, "august": 8, "september": 9, "october": 10, "november": 11, "december": 12
+}
+
+def _parse_deadline_from_question(question: str, scraped_date_hint: date = None):
+    """
+    Question text is the authoritative deadline source (endDate from Polymarket's
+    Gamma API is unreliable for grouped/serial markets -- confirmed July 1-2, 2026).
+    Returns a date, or None if unparseable.
+    """
+    q = (question or "").lower().strip()
+
+    m = _re.search(r'(?:by|in|on)\s+(\w+)\s+(\d{1,2}),?\s*(\d{4})', q)
+    if m and m.group(1) in _MONTHS:
+        try:
+            return date(int(m.group(3)), _MONTHS[m.group(1)], int(m.group(2)))
+        except ValueError:
+            pass
+
+    m = _re.search(r'before (\d{4})', q)
+    if m:
+        return date(int(m.group(1)) - 1, 12, 31)
+
+    m = _re.search(r'(?:by end of|in) (\d{4})', q)
+    if m:
+        return date(int(m.group(1)), 12, 31)
+
+    m = _re.search(r'by (\w+)\s+(\d{4})', q)
+    if m and m.group(1) in _MONTHS:
+        month, year = _MONTHS[m.group(1)], int(m.group(2))
+        last_day = _calendar.monthrange(year, month)[1]
+        return date(year, month, last_day)
+
+    m = _re.search(r'by (\w+)\s+(\d{1,2})\??\s*$', q)
+    if m and m.group(1) in _MONTHS and scraped_date_hint:
+        month, day = _MONTHS[m.group(1)], int(m.group(2))
+        for cy in (scraped_date_hint.year, scraped_date_hint.year + 1):
+            try:
+                cand = date(cy, month, day)
+            except ValueError:
+                continue
+            if cand >= scraped_date_hint:
+                return cand
+
+    m = _re.search(r'by (\w+)\??\s*$', q)
+    if m and m.group(1) in _MONTHS and scraped_date_hint:
+        month = _MONTHS[m.group(1)]
+        for cy in (scraped_date_hint.year, scraped_date_hint.year + 1):
+            last_day = _calendar.monthrange(cy, month)[1]
+            cand = date(cy, month, last_day)
+            if cand >= scraped_date_hint:
+                return cand
+
+    return None
+
+
+def _get_market_deadline(market: dict):
+    """Returns (deadline_or_None, source_tag, mismatch_flag)."""
+    question = market.get("question", "")
+    end_raw  = (market.get("end_date") or "")[:10]
+
+    scraped_hint = None
+    scraped_at = market.get("scraped_at")
+    if scraped_at:
+        try:
+            scraped_hint = datetime.fromisoformat(scraped_at.replace("Z", "+00:00")).date()
+        except Exception:
+            pass
+
+    q_deadline = _parse_deadline_from_question(question, scraped_hint)
+
+    end_deadline = None
+    if end_raw:
+        try:
+            end_deadline = date.fromisoformat(end_raw)
+        except ValueError:
+            pass
+
+    if q_deadline:
+        mismatch = bool(end_deadline and end_deadline != q_deadline)
+        if mismatch:
+            print(f"    [DATE_MISMATCH] question says {q_deadline}, end_date says {end_deadline} — using question text")
+        return q_deadline, "question_text", mismatch
+
+    if end_deadline:
+        print(f"    [DATE_MISMATCH_FALLBACK] unparseable question text, falling back to end_date={end_deadline} — UNVERIFIED")
+        return end_deadline, "endDate_fallback", False
+
+    return None, "unknown", False
+
+
 def _is_expired(market: dict) -> bool:
-    end = market.get("end_date", "")
-    if not end:
+    """Question text is authoritative; end_date is a cross-check only (see _get_market_deadline)."""
+    deadline, _source, _mismatch = _get_market_deadline(market)
+    if deadline is None:
         return False
-    try:
-        return date.fromisoformat(end[:10]) < date.today()
-    except ValueError:
-        return False
+    return deadline < date.today()
 
 
 def _is_scoreable(market: dict) -> bool:
