@@ -1182,5 +1182,69 @@
       "resolution_risk": "medium",
       "rationale": "Israeli strikes in/near Damascus are widely reported by multiple sources (SOHR, Reuters, AP), but distinguishing whether a strike impacted within Damascus Governorate specifically (vs. nearby areas like Rural Damascus), whether intercepted missiles count as not qualifying, and the exclusion of certain strike types introduces meaningful ambiguity that could complicate resolution, especially with truncated resolution text."
     }
+  },
+  "1107307": {
+    "contract_hash": "d8747d4196ac",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "A US-initiated drone, missile, or airstrike physically impacts Colombian soil, as announced or credibly reported by December 31.",
+      "legalese_flags": [
+        "Restricted to aerial/drone/missile strikes only \u2014 excludes ground incursions, naval actions, cyber attacks, or other kinetic modalities",
+        "Requires physical impact on Colombian soil \u2014 strikes that are intercepted or fail to impact do not qualify",
+        "Includes non-military U.S. operatives (intelligence agencies, other government operatives), broadening the actor definition beyond standard military",
+        "Deadline mismatch: title/question say December 31 but dyad deadline listed as 2026-01-31",
+        "Resolution depends on 'announced or credibly reported' \u2014 introduces ambiguity around covert or deniable operations",
+        "No minimum damage or casualty threshold specified"
+      ],
+      "confidence": "high",
+      "rationale": "The contract is a subset of conflict onset because it requires a specific kinetic modality (aerial/drone/missile strike) rather than any form of US-Colombia military conflict or violent escalation.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.35,
+      "p_b_given_not_a": 0.0015,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "low",
+      "rationale": "US-Colombia conflict onset is extremely unlikely given the alliance relationship; even if tensions escalated to 'conflict onset,' a direct aerial strike on Colombian soil is a very specific modality that would be historically unprecedented and politically catastrophic, though the broadened actor definition (including CIA/intelligence operatives) slightly raises P(B|A); the tiny P(B|\u00acA) reflects the near-zero but non-zero base rate of covert US drone/missile strikes on nominally allied soil, as seen in rare cases like Pakistan."
+    },
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While a confirmed US airstrike on Colombia would likely generate major wire coverage, the inclusion of non-military operatives (CIA/covert ops) plus the 'credibly reported' standard for deniable strikes, the deadline mismatch between December 31 and January 31 2026, and the ambiguity around intercepted vs. impacting strikes create substantial resolution risk that Polymarket admins would face significant discretionary judgment calls."
+    }
+  },
+  "1107737": {
+    "contract_hash": "159f3e6e2fa8",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "The US must commence a military offensive specifically intended to establish territorial control over some portion of Venezuela between November 3, 2025 and December 31, 2026.",
+      "legalese_flags": [
+        "Requires 'military offensive intended to establish control' \u2014 excludes airstrikes, raids, or limited kinetic actions not aimed at territorial control",
+        "Territorial control framing narrows this to invasion/occupation scenarios, not general conflict onset",
+        "Start window begins November 3, 2025 (not from current date), creating a bounded resolution period",
+        "Contract deadline (December 31, 2026) extends beyond the engine horizon (March 31, 2026)",
+        "Sovereign territory baseline fixed at September 6, 2025 \u2014 excludes disputed or contested zones",
+        "Resolution by 'consensus of credible sources' introduces interpretive ambiguity"
+      ],
+      "confidence": "high",
+      "rationale": "The YES condition requires a specific form of conflict onset \u2014 a territorial-control-seeking invasion \u2014 which is a narrower subset of the engine's broader conflict onset/kinetic action probability object, excluding airstrikes, naval actions, special operations raids, or other kinetic escalations that don't aim at territorial control.",
+      "translator_route": "TRANSLATE"
+    },
+    "clergy": {
+      "p_b_given_a": 0.25,
+      "p_b_given_not_a": 0.003,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "low",
+      "rationale": "Even if US-Venezuela conflict onset occurs, it would most likely take the form of airstrikes, special operations, or blockade rather than a full territorial-control invasion; the strict 'military offensive to establish territorial control' requirement makes YES resolution very narrow even conditional on conflict, and near-zero absent conflict given no historical precedent for US territorial invasion of Venezuela."
+    },
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "A full-scale U.S. invasion would be highly visible and immediately reported, but the narrow 'territorial control' framing, exclusion of airstrikes/raids, 'consensus of credible sources' standard, and the ambiguous boundary between limited military action and qualifying invasion create substantial risk that even a significant U.S. military operation might not clearly satisfy the resolution criterion."
+    }
   }
 }
