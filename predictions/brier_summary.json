@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-07-04T11:04:18.582409+00:00",
-  "n_resolved": 11,
-  "brier_conditional_mean": 0.011215,
+  "last_updated": "2026-07-05T19:09:04.104503+00:00",
+  "n_resolved": 12,
+  "brier_conditional_mean": 0.01028,
   "brier_engine_mean": 7e-06,
-  "brier_market_mean": 0.000271,
-  "edge_vs_market": -0.010944,
+  "brier_market_mean": 0.00025,
+  "edge_vs_market": -0.01003,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -126,6 +126,17 @@
       "brier_conditional": 0.12292,
       "brier_market": 6e-06,
       "resolved_at": "2026-07-02T01:47:00.050519+00:00"
+    },
+    {
+      "market_id": "2382771",
+      "market_label": "Will Israel launch a ground operation in Iran by June 30, 2026?",
+      "dyad": "Israel-Iran",
+      "outcome": 0,
+      "conditional_p": 0.0,
+      "market_p": 0.005,
+      "brier_conditional": 0.0,
+      "brier_market": 2.5e-05,
+      "resolved_at": "2026-07-05T19:09:01.739142+00:00"
     }
   ]
 }
