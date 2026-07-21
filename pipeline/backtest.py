@@ -734,7 +734,7 @@ def predict_probability(toggles, days_remaining, q_logit=0.0):
            + a.get("MobilizationSignal", 0.0) * t.get("MobilizationSignal", 0))
 
     # Tier 3: credibility-adjusted war value
-    w_over_pi = w + a["DemocraticPeace"] * t.get("DemocraticPeace", 0)
+    w_over_pi = w + a["DemocraticPeace"] * (-t.get("DemocraticPeace", 0))
 
     # Tier 4: war pressure
     WarPayoff   = Omega + w_over_pi

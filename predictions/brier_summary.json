@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-07-13T14:38:10.063757+00:00",
-  "n_resolved": 12,
-  "brier_conditional_mean": 0.01028,
-  "brier_engine_mean": 7e-06,
-  "brier_market_mean": 0.00025,
-  "edge_vs_market": -0.01003,
+  "last_updated": "2026-07-20T15:40:13.843544+00:00",
+  "n_resolved": 14,
+  "brier_conditional_mean": 0.149733,
+  "brier_engine_mean": 0.13938,
+  "brier_market_mean": 0.080781,
+  "edge_vs_market": -0.068952,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -137,6 +137,28 @@
       "brier_conditional": 0.0,
       "brier_market": 2.5e-05,
       "resolved_at": "2026-07-05T19:09:01.739142+00:00"
+    },
+    {
+      "market_id": "2643405",
+      "market_label": "Will the US announce a blockade on Iran by July 31?",
+      "dyad": "US-Iran",
+      "outcome": 1,
+      "conditional_p": 0.0056,
+      "market_p": 0.145,
+      "brier_conditional": 0.988831,
+      "brier_market": 0.731025,
+      "resolved_at": "2026-07-14T14:44:22.720114+00:00"
+    },
+    {
+      "market_id": "2643406",
+      "market_label": "Will the US announce a blockade on Iran by December 31?",
+      "dyad": "US-Iran",
+      "outcome": 1,
+      "conditional_p": 0.008,
+      "market_p": 0.37,
+      "brier_conditional": 0.984064,
+      "brier_market": 0.3969,
+      "resolved_at": "2026-07-14T14:44:23.429192+00:00"
     }
   ]
 }

@@ -213,7 +213,8 @@ def load_alpha() -> Dict[str, float]:
     return alpha
 
 
-def predict_probability(toggles: Dict[str, float], days_remaining: int, alpha: Dict[str, float]) -> Dict[str, float]:
+def _LEGACY_UNUSED_predict_probability(toggles: Dict[str, float], days_remaining: int, alpha: Dict[str, float]) -> Dict[str, float]:
+    """SUPERSEDED — not called. Live path imports predict_probability from backtest.py (see line ~40, aliased _predict_probability). Kept for reference only."""
     # Mach 2 four-tier structured DAG formula
     # Tier 2: war payoff and effective weight
     w     = (alpha.get("WinProbability", 0.0) * toggles.get("WinProbability", 0.0)
