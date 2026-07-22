@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-07-20T15:40:13.843544+00:00",
-  "n_resolved": 14,
-  "brier_conditional_mean": 0.149733,
-  "brier_engine_mean": 0.13938,
-  "brier_market_mean": 0.080781,
-  "edge_vs_market": -0.068952,
+  "last_updated": "2026-07-22T16:46:44.912823+00:00",
+  "n_resolved": 15,
+  "brier_conditional_mean": 0.201421,
+  "brier_engine_mean": 0.193867,
+  "brier_market_mean": 0.125277,
+  "edge_vs_market": -0.076144,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -159,6 +159,17 @@
       "brier_conditional": 0.984064,
       "brier_market": 0.3969,
       "resolved_at": "2026-07-14T14:44:23.429192+00:00"
+    },
+    {
+      "market_id": "677408",
+      "market_label": "China x Philippines military clash before 2027?",
+      "dyad": "China-Philippines",
+      "outcome": 1,
+      "conditional_p": 0.0382,
+      "market_p": 0.135,
+      "brier_conditional": 0.925059,
+      "brier_market": 0.748225,
+      "resolved_at": "2026-07-22T16:46:37.357807+00:00"
     }
   ]
 }
