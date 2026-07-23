@@ -26,7 +26,9 @@
       "InitiatorSurvivalRisk": 0.85,
       "PatronMoralHazard": 0.1,
       "SubstitutionPath": 0.7
-    }
+    },
+    "action_type": "missile_strike",
+    "action_type_reasoning": "China has hundreds of short-range ballistic missiles (e.g., DF-15, DF-16) and land-attack cruise missiles already deployed opposite Taiwan in eastern theater rocket force bases, capable of striking Taiwan with essentially zero additional deployment time beyond a launch order, making missile_strike the fastest plausible kinetic action — while gray_zone_incident is also near-instantaneous (PLA Navy/Coast Guard patrols near Taiwan's waters are routine), missile_strike represents the fastest escalatory kinetic military action China could initiate."
   },
   "Russia-Ukraine": {
     "label": "Russia and Ukraine",
@@ -55,7 +57,9 @@
       "InitiatorSurvivalRisk": 0.6,
       "PatronMoralHazard": 0.3,
       "SubstitutionPath": 0.4
-    }
+    },
+    "action_type": "gray_zone_incident",
+    "action_type_reasoning": "Russia and Ukraine are in an active war with forces in direct contact along a long front line, meaning incidents—sabotage, drone harassment, skirmishes—require zero additional deployment and can occur at any moment."
   },
   "US-Iran": {
     "label": "United States and Iran",
@@ -87,7 +91,9 @@
       "InitiatorSurvivalRisk": 0.2,
       "PatronMoralHazard": 0.5,
       "SubstitutionPath": 0.6
-    }
+    },
+    "action_type": "missile_strike",
+    "action_type_reasoning": "The US maintains forward-deployed naval assets (carrier strike groups, guided-missile destroyers) and air bases throughout the Persian Gulf region (Bahrain, Qatar, UAE, etc.) with cruise missiles and strike aircraft already within range of Iranian territory, making a missile strike or airstrike executable within hours — as demonstrated by the January 2020 Soleimani strike."
   },
   "Israel-Iran": {
     "label": "Israel and Iran",
@@ -110,7 +116,9 @@
       "OperationalFeasibility": 0.55,
       "InitiatorSurvivalRisk": 0.3,
       "SubstitutionPath": 0.35
-    }
+    },
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Israel has demonstrated the capability to strike Iran directly with ballistic missiles and air-launched standoff weapons (as shown in the October 2024 strikes), and maintains forward-deployed assets and range to execute a missile or air strike on Iranian territory with relatively short preparation time, making missile_strike the fastest plausible initiated kinetic action."
   },
   "North Korea-US": {
     "label": "North Korea and the United States",
@@ -133,7 +141,9 @@
       "OperationalFeasibility": 0.3,
       "InitiatorSurvivalRisk": 0.95,
       "SubstitutionPath": 0.5
-    }
+    },
+    "action_type": "missile_strike",
+    "action_type_reasoning": "North Korea possesses ICBMs and intermediate-range ballistic missiles capable of striking US territories (including Guam and potentially the continental US) with minimal preparation time, making a missile strike the fastest physically plausible initiated military action."
   },
   "India-Pakistan": {
     "label": "India and Pakistan",
@@ -162,7 +172,9 @@
       "InitiatorSurvivalRisk": 0.65,
       "PatronMoralHazard": 0.5,
       "SubstitutionPath": 0.45
-    }
+    },
+    "action_type": "missile_strike",
+    "action_type_reasoning": "India and Pakistan share a long, heavily militarized land border with forward-deployed forces and both possess short- and medium-range ballistic and cruise missiles capable of striking each other's territory within minutes of a launch decision, making missile_strike the fastest plausible initiated kinetic action."
   },
   "NATO-Russia": {
     "label": "NATO and Russia",
@@ -185,7 +197,9 @@
       "OperationalFeasibility": 0.2,
       "InitiatorSurvivalRisk": 0.8,
       "SubstitutionPath": 0.6
-    }
+    },
+    "action_type": "gray_zone_incident",
+    "action_type_reasoning": "NATO and Russian military forces are already routinely co-located in contested spaces — aircraft intercepts over the Baltic/Black Sea, naval encounters, and frontier patrols along the NATO-Russia border — making a gray zone incident (e.g., dangerous interception, jamming, drone incursion, GPS spoofing, or cable-cutting) the fastest physically plausible initiated action with near-zero lead time."
   },
   "US-Venezuela": {
     "label": "United States and Venezuela",
@@ -217,7 +231,9 @@
       "InitiatorSurvivalRisk": 0.05,
       "PatronMoralHazard": 0.15,
       "SubstitutionPath": 0.1
-    }
+    },
+    "action_type": "airstrike",
+    "action_type_reasoning": "The US has forward-deployed air and naval assets in the Caribbean (e.g., bases in Puerto Rico, Curaçao, and carrier groups) well within strike range of Venezuela, making an airstrike or missile strike the fastest plausible kinetic action without requiring the lengthy buildup needed for a ground invasion or naval blockade."
   },
   "US-Cuba": {
     "label": "United States and Cuba",
@@ -241,7 +257,9 @@
       "InitiatorSurvivalRisk": 0.1,
       "SubstitutionPath": 0.5
     },
-    "crisis_context": "CRISIS CONTEXT: By June 2026, the US shifted Cuba from ordinary sanctions hostility into heightened coercive pressure following the Venezuela operation. Trump publicly suggested a Cuba operation could mirror Venezuela. Surveillance overflights and contingency planning are active. This is NOT yet a kinetic crisis — routine rhetoric should not fire the crisis clock. Concrete military deployments, blockade enforcement, evacuation orders, or confirmed strike packages should. Score OperationalPreparation only for irreversible operational acts, not rhetoric."
+    "crisis_context": "CRISIS CONTEXT: By June 2026, the US shifted Cuba from ordinary sanctions hostility into heightened coercive pressure following the Venezuela operation. Trump publicly suggested a Cuba operation could mirror Venezuela. Surveillance overflights and contingency planning are active. This is NOT yet a kinetic crisis — routine rhetoric should not fire the crisis clock. Concrete military deployments, blockade enforcement, evacuation orders, or confirmed strike packages should. Score OperationalPreparation only for irreversible operational acts, not rhetoric.",
+    "action_type": "naval_blockade",
+    "action_type_reasoning": "The US maintains significant naval assets at Naval Station Guantanamo Bay and throughout the Caribbean, with a history of blockading Cuba (1962 quarantine), making a naval blockade of the island the fastest large-scale plausible military action, though airstrike or missile_strike from nearby bases or ships could technically be faster as a single kinetic event — but given the historical pattern and Cuba's island geography with chokepoint-relevant ports, naval_blockade is the most characteristic fastest-plausible initiated action for this dyad."
   },
   "US-Mexico": {
     "label": "United States and Mexico",
@@ -265,7 +283,9 @@
       "InitiatorSurvivalRisk": 0.05,
       "SubstitutionPath": 0.65
     },
-    "crisis_context": "CRISIS CONTEXT — US-Mexico dyad (initialized Jul 2025)\n\nThis dyad covers the bilateral relationship between the United States and Mexico, which as of mid-2025 is under significant strain across multiple dimensions. Key background factors:\n\n1. MIGRATION & BORDER ENFORCEMENT: The US under the Trump administration has maintained aggressive border enforcement postures, including military deployments to the southern border, expanded use of Title 42-era authorities or successors, and pressure on Mexico to interdict northbound migration. Mexico has intermittently cooperated but also pushed back on sovereignty grounds. Routine border operations and troop rotations should not be scored as novel escalation unless they represent a clear departure from the current elevated baseline.\n\n2. FENTANYL & CARTEL OPERATIONS: The US has designated certain Mexican cartels as terrorist organizations or threatened to do so. There has been recurring US rhetoric about unilateral military action against cartels on Mexican soil. Mexico has firmly rejected any such intervention as a sovereignty violation. Scoring guidance: distinguish between (a) rhetorical threats or legislative proposals, which are now part of the baseline and should be scored modestly on nodes like \"public threat\" or \"demand,\" and (b) actual operational preparation or cross-border kinetic action, which would represent genuine escalation.\n\n3. TRADE & ECONOMIC LEVERAGE: USMCA remains the governing trade framework, but tariff threats, particularly related to fentanyl and migration conditionality, have been a recurring tool. New tariff impositions or threats should be evaluated against whether they represent incremental escalation or repetition of prior patterns.\n\n4. DIPLOMATIC RELATIONS: Relations are functional but tense. There have been periods of diplomatic friction including ambassador recalls or summons, public rebukes, and competing narratives. The baseline diplomatic temperature is cool but not severed.\n\nSCORING GUIDANCE FOR KEY NODES:\n- \"Military mobilization\" / \"Show of force\": The US has already normalized military presence at the border. Score only genuinely new deployments, repositioning toward offensive posture, or named operations targeting Mexican territory.\n- \"Threat of force\" / \"Public demand\": Cartel-related military rhetoric from US officials is now baseline. Score only if specificity increases (named targets, timelines, ultimatums) or if it comes from the President with operational framing.\n- \"Economic sanctions / coercion\": Tariff threats tied to migration/fentanyl are recurring. Score new actual impositions or significant expansions, not repetitions of prior threats.\n- \"Diplomatic protest\" / \"Recall of ambassador\": Evaluate against the already-strained baseline. Routine expressions of displeasure are low-signal; formal diplomatic downgrades are high-signal."
+    "crisis_context": "CRISIS CONTEXT — US-Mexico dyad (initialized Jul 2025)\n\nThis dyad covers the bilateral relationship between the United States and Mexico, which as of mid-2025 is under significant strain across multiple dimensions. Key background factors:\n\n1. MIGRATION & BORDER ENFORCEMENT: The US under the Trump administration has maintained aggressive border enforcement postures, including military deployments to the southern border, expanded use of Title 42-era authorities or successors, and pressure on Mexico to interdict northbound migration. Mexico has intermittently cooperated but also pushed back on sovereignty grounds. Routine border operations and troop rotations should not be scored as novel escalation unless they represent a clear departure from the current elevated baseline.\n\n2. FENTANYL & CARTEL OPERATIONS: The US has designated certain Mexican cartels as terrorist organizations or threatened to do so. There has been recurring US rhetoric about unilateral military action against cartels on Mexican soil. Mexico has firmly rejected any such intervention as a sovereignty violation. Scoring guidance: distinguish between (a) rhetorical threats or legislative proposals, which are now part of the baseline and should be scored modestly on nodes like \"public threat\" or \"demand,\" and (b) actual operational preparation or cross-border kinetic action, which would represent genuine escalation.\n\n3. TRADE & ECONOMIC LEVERAGE: USMCA remains the governing trade framework, but tariff threats, particularly related to fentanyl and migration conditionality, have been a recurring tool. New tariff impositions or threats should be evaluated against whether they represent incremental escalation or repetition of prior patterns.\n\n4. DIPLOMATIC RELATIONS: Relations are functional but tense. There have been periods of diplomatic friction including ambassador recalls or summons, public rebukes, and competing narratives. The baseline diplomatic temperature is cool but not severed.\n\nSCORING GUIDANCE FOR KEY NODES:\n- \"Military mobilization\" / \"Show of force\": The US has already normalized military presence at the border. Score only genuinely new deployments, repositioning toward offensive posture, or named operations targeting Mexican territory.\n- \"Threat of force\" / \"Public demand\": Cartel-related military rhetoric from US officials is now baseline. Score only if specificity increases (named targets, timelines, ultimatums) or if it comes from the President with operational framing.\n- \"Economic sanctions / coercion\": Tariff threats tied to migration/fentanyl are recurring. Score new actual impositions or significant expansions, not repetitions of prior threats.\n- \"Diplomatic protest\" / \"Recall of ambassador\": Evaluate against the already-strained baseline. Routine expressions of displeasure are low-signal; formal diplomatic downgrades are high-signal.",
+    "action_type": "gray_zone_incident",
+    "action_type_reasoning": "US and Mexican forces (including border patrol, National Guard, and Mexican military) are already co-located along the shared border, making low-level incidents such as cross-border drone operations, confrontations at the border fence, or clashes with cartel-adjacent forces the fastest physically plausible action with near-zero lead time."
   },
   "US-Russia": {
     "label": "United States and Russia",
@@ -289,7 +309,9 @@
       "InitiatorSurvivalRisk": 0.7,
       "SubstitutionPath": 0.45
     },
-    "crisis_context": "CRISIS CONTEXT (US-Russia dyad, initialized Jul 2025):\n\nThe US-Russia relationship remains at its most adversarial level since the Cold War, driven primarily by Russia's ongoing war in Ukraine (launched Feb 2022) and the broader geopolitical confrontation it has produced. Key structural features of the current situation:\n\n- The Ukraine war continues with no ceasefire or settlement in place. The US has provided extensive military, economic, and intelligence support to Ukraine, which Russia treats as a proxy confrontation. Diplomatic channels between Washington and Moscow are minimal but not fully severed.\n- The Trump administration (inaugurated Jan 2025) has signaled interest in negotiating an end to the Ukraine conflict, creating diplomatic uncertainty. Any shifts in US posture toward Ukraine — whether escalatory or de-escalatory — should be evaluated for their effect on direct US-Russia crisis dynamics, not just the Ukraine theater.\n- Nuclear signaling remains elevated. Russia has periodically adjusted its declaratory nuclear doctrine and conducted nuclear exercises. The US has maintained its extended deterrence posture. These signals are now ROUTINE BACKGROUND for this dyad; they should not be scored as novel escalation unless they involve concrete changes in force posture, deployment, or doctrine beyond established patterns.\n- Sanctions, asset freezes, and diplomatic expulsions are the BASELINE state. New sanctions packages or retaliatory measures should be scored only if they represent a material expansion in scope or target set (e.g., energy sector escalation, secondary sanctions enforcement against third parties).\n- Proxy and gray-zone friction points include: cyber operations, election interference allegations, Arctic military posturing, Syria (diminished but not zero), and competition for influence in Africa and the Global South. These are ongoing and should be scored as escalatory only if a specific incident represents a qualitative departure from the established pattern.\n\nSCORING GUIDANCE FOR SPECIFIC NODES:\n\n- Hostile diplomatic/economic actions: The baseline is already very high (near-total sanctions, expelled diplomats). Score new actions only if they cross remaining thresholds (e.g., full energy embargo, severing of remaining diplomatic presence, seizure of sovereign assets).\n- Military posturing/signaling: Routine nuclear rhetoric, strategic bomber patrols, submarine deployments, and snap exercises are EXPECTED. Score as escalatory only if they involve novel geographic positioning (e.g., forward deployment to Cuba/Venezuela), unprecedented scale, or explicit coupling to a specific threat scenario.\n- Kinetic triggers: Any direct military engagement between US and Russian forces — even accidental — would be an extreme escalation. Near-misses (e.g., intercepts over the Black Sea, Baltic, or Arctic) have occurred before; score based on severity, proximity, and whether rules of engagement appear to"
+    "crisis_context": "CRISIS CONTEXT (US-Russia dyad, initialized Jul 2025):\n\nThe US-Russia relationship remains at its most adversarial level since the Cold War, driven primarily by Russia's ongoing war in Ukraine (launched Feb 2022) and the broader geopolitical confrontation it has produced. Key structural features of the current situation:\n\n- The Ukraine war continues with no ceasefire or settlement in place. The US has provided extensive military, economic, and intelligence support to Ukraine, which Russia treats as a proxy confrontation. Diplomatic channels between Washington and Moscow are minimal but not fully severed.\n- The Trump administration (inaugurated Jan 2025) has signaled interest in negotiating an end to the Ukraine conflict, creating diplomatic uncertainty. Any shifts in US posture toward Ukraine — whether escalatory or de-escalatory — should be evaluated for their effect on direct US-Russia crisis dynamics, not just the Ukraine theater.\n- Nuclear signaling remains elevated. Russia has periodically adjusted its declaratory nuclear doctrine and conducted nuclear exercises. The US has maintained its extended deterrence posture. These signals are now ROUTINE BACKGROUND for this dyad; they should not be scored as novel escalation unless they involve concrete changes in force posture, deployment, or doctrine beyond established patterns.\n- Sanctions, asset freezes, and diplomatic expulsions are the BASELINE state. New sanctions packages or retaliatory measures should be scored only if they represent a material expansion in scope or target set (e.g., energy sector escalation, secondary sanctions enforcement against third parties).\n- Proxy and gray-zone friction points include: cyber operations, election interference allegations, Arctic military posturing, Syria (diminished but not zero), and competition for influence in Africa and the Global South. These are ongoing and should be scored as escalatory only if a specific incident represents a qualitative departure from the established pattern.\n\nSCORING GUIDANCE FOR SPECIFIC NODES:\n\n- Hostile diplomatic/economic actions: The baseline is already very high (near-total sanctions, expelled diplomats). Score new actions only if they cross remaining thresholds (e.g., full energy embargo, severing of remaining diplomatic presence, seizure of sovereign assets).\n- Military posturing/signaling: Routine nuclear rhetoric, strategic bomber patrols, submarine deployments, and snap exercises are EXPECTED. Score as escalatory only if they involve novel geographic positioning (e.g., forward deployment to Cuba/Venezuela), unprecedented scale, or explicit coupling to a specific threat scenario.\n- Kinetic triggers: Any direct military engagement between US and Russian forces — even accidental — would be an extreme escalation. Near-misses (e.g., intercepts over the Black Sea, Baltic, or Arctic) have occurred before; score based on severity, proximity, and whether rules of engagement appear to",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Both states possess ICBMs and forward-deployed nuclear and conventional missile assets capable of striking each other within minutes to hours, making missile_strike the fastest physically plausible initiated kinetic action between these two nuclear superpowers despite the vast geographic separation."
   },
   "US-China": {
     "label": "United States and China",
@@ -307,7 +329,9 @@
     },
     "query": "\"China\" AND (\"United States\" OR \"Pentagon\" OR \"trade war\" OR \"South China Sea\") NOT Taiwan",
     "baseline_source": "verified",
-    "crisis_context": "CRISIS CONTEXT (US-China dyad, initialized Jul 2025):\n\nAs of early July 2025, the US-China relationship remains characterized by sustained strategic competition across multiple domains — trade/tariffs, technology controls, Taiwan, South China Sea, and military posturing — but without an acute crisis trigger in the trailing week. No specific precipitating event (e.g., Taiwan Strait transit incident, new tariff escalation, diplomatic expulsion, or military confrontation) has been identified in the most recent headline window. The baseline is one of elevated but managed tension, with both sides maintaining robust deterrence postures while preserving diplomatic communication channels (albeit sometimes strained).\n\nKEY CONTEXT FOR NODE SCORING:\n\n- MILITARY POSTURING / SIGNALING: Routine PLA exercises near Taiwan, South China Sea patrols, and US freedom-of-navigation operations should be scored as BASELINE activity unless they involve unusual scale, proximity, or novel capabilities. Do not inflate routine deployments into escalatory signals.\n\n- TRADE / ECONOMIC COERCION: The US maintains extensive export controls (chips, AI) and tariffs; China maintains retaliatory tariffs and rare-earth export restrictions. These are STANDING CONDITIONS, not new escalatory moves, unless a fresh round of restrictions or retaliatory measures is announced.\n\n- DIPLOMATIC COMMUNICATION: Channels exist but are inconsistent. Score diplomatic engagement nodes based on whether contacts are expanding, contracting, or stable relative to the 2024-2025 baseline of intermittent high-level engagement.\n\n- TAIWAN-RELATED TRIGGERS: No new Taiwan crisis is active. Score Taiwan-related nodes (arms sales, transit, PLA encirclement exercises) only if evidence points to a departure from the recurring pattern of periodic tensions.\n\n- CYBER / INFORMATION OPERATIONS: Ongoing baseline of mutual cyber espionage and influence operations (e.g., Volt Typhoon-type infrastructure pre-positioning attributed to China). Treat as standing background unless a specific new incident or public attribution occurs.\n\n- PRECIPITATING EVENT NODES: No precipitating event has occurred as of this initialization. These nodes should require strong, specific evidence to score above baseline. Avoid conflating accumulated structural tensions with an acute trigger.\n\n- ALLIANCE / THIRD-PARTY DYNAMICS: US alliance-building in the Indo-Pacific (AUKUS, Japan, Philippines) and China's counter-alignment efforts are ongoing structural features. Score as escalatory only if a new commitment, deployment, or confrontation involving allies occurs.\n\nGENERAL GUIDANCE: This dyad sits at a chronically elevated but sub-crisis level. The default prior for most escalation nodes should reflect managed competition, not imminent conflict. Evidence must show a clear departure from this"
+    "crisis_context": "CRISIS CONTEXT (US-China dyad, initialized Jul 2025):\n\nAs of early July 2025, the US-China relationship remains characterized by sustained strategic competition across multiple domains — trade/tariffs, technology controls, Taiwan, South China Sea, and military posturing — but without an acute crisis trigger in the trailing week. No specific precipitating event (e.g., Taiwan Strait transit incident, new tariff escalation, diplomatic expulsion, or military confrontation) has been identified in the most recent headline window. The baseline is one of elevated but managed tension, with both sides maintaining robust deterrence postures while preserving diplomatic communication channels (albeit sometimes strained).\n\nKEY CONTEXT FOR NODE SCORING:\n\n- MILITARY POSTURING / SIGNALING: Routine PLA exercises near Taiwan, South China Sea patrols, and US freedom-of-navigation operations should be scored as BASELINE activity unless they involve unusual scale, proximity, or novel capabilities. Do not inflate routine deployments into escalatory signals.\n\n- TRADE / ECONOMIC COERCION: The US maintains extensive export controls (chips, AI) and tariffs; China maintains retaliatory tariffs and rare-earth export restrictions. These are STANDING CONDITIONS, not new escalatory moves, unless a fresh round of restrictions or retaliatory measures is announced.\n\n- DIPLOMATIC COMMUNICATION: Channels exist but are inconsistent. Score diplomatic engagement nodes based on whether contacts are expanding, contracting, or stable relative to the 2024-2025 baseline of intermittent high-level engagement.\n\n- TAIWAN-RELATED TRIGGERS: No new Taiwan crisis is active. Score Taiwan-related nodes (arms sales, transit, PLA encirclement exercises) only if evidence points to a departure from the recurring pattern of periodic tensions.\n\n- CYBER / INFORMATION OPERATIONS: Ongoing baseline of mutual cyber espionage and influence operations (e.g., Volt Typhoon-type infrastructure pre-positioning attributed to China). Treat as standing background unless a specific new incident or public attribution occurs.\n\n- PRECIPITATING EVENT NODES: No precipitating event has occurred as of this initialization. These nodes should require strong, specific evidence to score above baseline. Avoid conflating accumulated structural tensions with an acute trigger.\n\n- ALLIANCE / THIRD-PARTY DYNAMICS: US alliance-building in the Indo-Pacific (AUKUS, Japan, Philippines) and China's counter-alignment efforts are ongoing structural features. Score as escalatory only if a new commitment, deployment, or confrontation involving allies occurs.\n\nGENERAL GUIDANCE: This dyad sits at a chronically elevated but sub-crisis level. The default prior for most escalation nodes should reflect managed competition, not imminent conflict. Evidence must show a clear departure from this",
+    "action_type": "gray_zone_incident",
+    "action_type_reasoning": "US and Chinese naval and air forces already operate in close proximity in the South China Sea and Taiwan Strait on a near-daily basis, making a gray-zone incident (dangerous intercept, laser illumination, wake turbulence buzzing, drone harassment) the fastest physically plausible initiated action with essentially zero additional deployment needed."
   },
   "China-Japan": {
     "label": "China and Japan",
@@ -325,7 +349,9 @@
     },
     "query": "\"China\" AND (\"Japan\" OR \"Senkaku\" OR \"Diaoyu\" OR \"JMSDF\" OR \"East China Sea\")",
     "baseline_source": "verified",
-    "crisis_context": "CRISIS CONTEXT: As of early July 2025, the China-Japan dyad operates at an elevated but largely stable baseline of strategic competition. No acute crisis or precipitating military incident is known to have occurred in the trailing period. Key structural friction points remain: (1) recurring Chinese military and coast guard activity near the Senkaku/Diaoyu Islands in the East China Sea, including routine intrusions into the contiguous zone and periodic entries into territorial waters; (2) tensions over Taiwan contingency planning, with Japan increasingly signaling alignment with US deterrence posture; (3) Japanese defense buildup under the 2022 National Security Strategy, including counterstrike capability acquisition; (4) economic friction around semiconductor export controls and critical mineral supply chains; (5) historical memory issues that periodically flare diplomatically.\n\nSCORING GUIDANCE FOR NAMED NODES:\n\n- Nodes related to MILITARY POSTURING or FORCE DEPLOYMENT near the Senkaku/Diaoyu Islands: Chinese coast guard and navy patrols in this area are routine and persistent. Score these as baseline activity unless there is a clear qualitative escalation (e.g., armed vessels entering territorial waters, landing attempts, sustained multi-day territorial water presence, or deployment of naval combatants beyond normal patterns). Do not treat standard contiguous-zone patrols as novel escalatory signals.\n\n- Nodes related to DIPLOMATIC SIGNALING or RHETORIC: Harsh rhetoric from both sides on Taiwan, Senkaku, or historical issues is recurrent. Score elevated only if rhetoric is paired with concrete policy actions (e.g., ambassador recalls, sanctions announcements, suspension of bilateral mechanisms).\n\n- Nodes related to ECONOMIC COERCION or SANCTIONS: Japan's alignment with US-led semiconductor and technology restrictions is an ongoing structural factor. Score as escalatory only if new specific measures are announced or if China retaliates with targeted economic countermeasures against Japan specifically.\n\n- Nodes related to ALLIANCE COORDINATION (US-Japan): Deepening US-Japan military integration is a trend, not an event. Score as escalatory only if tied to a specific contingency activation, new basing announcement in proximity to disputed areas, or joint operational activity that departs from routine exercises.\n\n- Nodes related to PRECIPITATING INCIDENTS or TRIGGERS: No known precipitating incident is active. Any genuine novel incident (e.g., collision at sea, aircraft intercept with contact, use of water cannon against Japanese vessels, Chinese military aircraft entering Japanese airspace) should be scored with full weight as a new escalatory event.\n\n- Nodes related to DOMESTIC POLITICAL DRIVERS: Watch for Japanese election cycles or Chinese domestic nationalist mobilization that could incentivize harder-line postures. These are background factors unless"
+    "crisis_context": "CRISIS CONTEXT: As of early July 2025, the China-Japan dyad operates at an elevated but largely stable baseline of strategic competition. No acute crisis or precipitating military incident is known to have occurred in the trailing period. Key structural friction points remain: (1) recurring Chinese military and coast guard activity near the Senkaku/Diaoyu Islands in the East China Sea, including routine intrusions into the contiguous zone and periodic entries into territorial waters; (2) tensions over Taiwan contingency planning, with Japan increasingly signaling alignment with US deterrence posture; (3) Japanese defense buildup under the 2022 National Security Strategy, including counterstrike capability acquisition; (4) economic friction around semiconductor export controls and critical mineral supply chains; (5) historical memory issues that periodically flare diplomatically.\n\nSCORING GUIDANCE FOR NAMED NODES:\n\n- Nodes related to MILITARY POSTURING or FORCE DEPLOYMENT near the Senkaku/Diaoyu Islands: Chinese coast guard and navy patrols in this area are routine and persistent. Score these as baseline activity unless there is a clear qualitative escalation (e.g., armed vessels entering territorial waters, landing attempts, sustained multi-day territorial water presence, or deployment of naval combatants beyond normal patterns). Do not treat standard contiguous-zone patrols as novel escalatory signals.\n\n- Nodes related to DIPLOMATIC SIGNALING or RHETORIC: Harsh rhetoric from both sides on Taiwan, Senkaku, or historical issues is recurrent. Score elevated only if rhetoric is paired with concrete policy actions (e.g., ambassador recalls, sanctions announcements, suspension of bilateral mechanisms).\n\n- Nodes related to ECONOMIC COERCION or SANCTIONS: Japan's alignment with US-led semiconductor and technology restrictions is an ongoing structural factor. Score as escalatory only if new specific measures are announced or if China retaliates with targeted economic countermeasures against Japan specifically.\n\n- Nodes related to ALLIANCE COORDINATION (US-Japan): Deepening US-Japan military integration is a trend, not an event. Score as escalatory only if tied to a specific contingency activation, new basing announcement in proximity to disputed areas, or joint operational activity that departs from routine exercises.\n\n- Nodes related to PRECIPITATING INCIDENTS or TRIGGERS: No known precipitating incident is active. Any genuine novel incident (e.g., collision at sea, aircraft intercept with contact, use of water cannon against Japanese vessels, Chinese military aircraft entering Japanese airspace) should be scored with full weight as a new escalatory event.\n\n- Nodes related to DOMESTIC POLITICAL DRIVERS: Watch for Japanese election cycles or Chinese domestic nationalist mobilization that could incentivize harder-line postures. These are background factors unless",
+    "action_type": "gray_zone_incident",
+    "action_type_reasoning": "Chinese coast guard and maritime militia vessels already routinely operate in the contiguous zone and territorial waters around the Senkaku/Diaoyu Islands alongside Japanese Coast Guard patrols, making a ramming, water-cannon, or drone-harassment incident executable with near-zero additional lead time."
   },
   "China-Philippines": {
     "label": "China and the Philippines",
@@ -343,7 +369,9 @@
     },
     "query": "\"China\" AND (\"Philippines\" OR \"South China Sea\" OR \"Scarborough\" OR \"BRP\" OR \"Manila\")",
     "baseline_source": "verified",
-    "crisis_context": "CRISIS CONTEXT: The China-Philippines dyad centers on competing sovereignty claims in the South China Sea (SCS), particularly around the Second Thomas Shoal (Ayungin Shoal), Scarborough Shoal, and features within the Philippine exclusive economic zone. Since 2023, tensions have escalated through repeated confrontations between China Coast Guard (CCG) / maritime militia vessels and Philippine Coast Guard (PCG) / Navy resupply missions to the BRP Sierra Madre at Second Thomas Shoal. Incidents have included water-cannon use, hull-ramming, and a June 2024 confrontation in which Philippine sailors were injured and equipment seized. A provisional arrangement on resupply missions was reportedly reached in mid-2024 but its durability remains uncertain. The Philippines has deepened its alliance with the United States, including expanded EDCA basing access, joint patrols, and trilateral exercises with Japan. China continues gray-zone pressure — deploying CCG and militia vessels, installing floating barriers, and conducting island-building — while avoiding kinetic escalation that would trigger the US-Philippines Mutual Defense Treaty.\n\nSCORING GUIDANCE FOR NAMED NODES:\n\n- Nodes related to MILITARY BUILDUP / FORCE POSTURE: Routine CCG or militia deployments near contested features should score as baseline presence, not escalation, unless vessel numbers or asset types (e.g., PLAN warships replacing CCG cutters) materially exceed recent norms. New Philippine basing construction or pre-positioning under EDCA is structural, not crisis-triggering, unless tied to a specific contingency order.\n\n- Nodes related to PRECIPITATING INCIDENT / TRIGGER EVENT: A new physical confrontation at Second Thomas Shoal, Scarborough Shoal, or other contested feature (ramming, boarding, use of weapons including water cannons causing injury, seizure of supplies) should score high. Distinguish between a genuinely new incident and recycled reporting of past 2024 confrontations.\n\n- Nodes related to DIPLOMATIC SIGNALING / CRISIS COMMUNICATION: Harsh rhetoric from Chinese MFA or PLA Southern Theater Command is routine; score elevated only if it includes explicit ultimatums, deadlines, or novel red-line language (e.g., threatening to tow the Sierra Madre). Philippine diplomatic protests (note verbales) are frequent; score elevated only if accompanied by treaty-invocation language or formal requests for US/allied intervention.\n\n- Nodes related to THIRD-PARTY INVOLVEMENT: US freedom-of-navigation operations (FONOPs) and joint exercises are recurring and should be scored as baseline unless they occur in direct temporal/spatial response to a specific Chinese provocation. Japan, Australia, or other partner naval deploy"
+    "crisis_context": "CRISIS CONTEXT: The China-Philippines dyad centers on competing sovereignty claims in the South China Sea (SCS), particularly around the Second Thomas Shoal (Ayungin Shoal), Scarborough Shoal, and features within the Philippine exclusive economic zone. Since 2023, tensions have escalated through repeated confrontations between China Coast Guard (CCG) / maritime militia vessels and Philippine Coast Guard (PCG) / Navy resupply missions to the BRP Sierra Madre at Second Thomas Shoal. Incidents have included water-cannon use, hull-ramming, and a June 2024 confrontation in which Philippine sailors were injured and equipment seized. A provisional arrangement on resupply missions was reportedly reached in mid-2024 but its durability remains uncertain. The Philippines has deepened its alliance with the United States, including expanded EDCA basing access, joint patrols, and trilateral exercises with Japan. China continues gray-zone pressure — deploying CCG and militia vessels, installing floating barriers, and conducting island-building — while avoiding kinetic escalation that would trigger the US-Philippines Mutual Defense Treaty.\n\nSCORING GUIDANCE FOR NAMED NODES:\n\n- Nodes related to MILITARY BUILDUP / FORCE POSTURE: Routine CCG or militia deployments near contested features should score as baseline presence, not escalation, unless vessel numbers or asset types (e.g., PLAN warships replacing CCG cutters) materially exceed recent norms. New Philippine basing construction or pre-positioning under EDCA is structural, not crisis-triggering, unless tied to a specific contingency order.\n\n- Nodes related to PRECIPITATING INCIDENT / TRIGGER EVENT: A new physical confrontation at Second Thomas Shoal, Scarborough Shoal, or other contested feature (ramming, boarding, use of weapons including water cannons causing injury, seizure of supplies) should score high. Distinguish between a genuinely new incident and recycled reporting of past 2024 confrontations.\n\n- Nodes related to DIPLOMATIC SIGNALING / CRISIS COMMUNICATION: Harsh rhetoric from Chinese MFA or PLA Southern Theater Command is routine; score elevated only if it includes explicit ultimatums, deadlines, or novel red-line language (e.g., threatening to tow the Sierra Madre). Philippine diplomatic protests (note verbales) are frequent; score elevated only if accompanied by treaty-invocation language or formal requests for US/allied intervention.\n\n- Nodes related to THIRD-PARTY INVOLVEMENT: US freedom-of-navigation operations (FONOPs) and joint exercises are recurring and should be scored as baseline unless they occur in direct temporal/spatial response to a specific Chinese provocation. Japan, Australia, or other partner naval deploy",
+    "action_type": "gray_zone_incident",
+    "action_type_reasoning": "Chinese and Philippine coast guard and maritime militia vessels are already routinely co-located at disputed features like Second Thomas Shoal, enabling near-zero-lag incidents such as water cannon use, ramming, or laser harassment without any new deployment."
   },
   "Israel-Yemen": {
     "label": "Israel and Yemen (Houthis)",
@@ -361,7 +389,9 @@
     },
     "query": "\"Israel\" AND (\"Yemen\" OR \"Houthi\" OR \"Red Sea\" OR \"missile\" OR \"drone\")",
     "baseline_source": "verified",
-    "crisis_context": "CRISIS CONTEXT: Israel and Yemen's Ansar Allah (Houthis) have been in an active, escalating military confrontation since late 2023. The Houthis began launching ballistic missiles, cruise missiles, and drones at Israeli territory in solidarity with Gaza, and Israel responded with multiple rounds of airstrikes against Houthi-controlled ports, airports, power infrastructure, and military targets in Yemen (notably Hodeidah and Sanaa). As of mid-2025, this cycle continues: the Houthis maintain a declared posture of ongoing attacks against Israel (and Red Sea shipping linked to Israel), and Israel has conducted repeated deep-strike operations into Yemen. The United States has also conducted parallel strikes against Houthi targets, complicating attribution but reinforcing the military pressure on Ansar Allah. There is no diplomatic channel between the parties; hostilities are open and recurring.\n\nKEY SITUATIONAL ANCHORS FOR SCORING:\n\n- MILITARY CONFRONTATION IS ALREADY UNDERWAY. Nodes related to \"first use of force,\" \"initial military escalation,\" or \"crossing the threshold to armed conflict\" should be scored as ALREADY SATISFIED, not as future contingencies. The dyad has moved well past the crisis-trigger phase.\n\n- ROUTINE HOUTHI MISSILE/DRONE LAUNCHES toward Israel (including interceptions) should be treated as CONTINUATION OF BASELINE HOSTILITIES, not as novel escalatory signals, unless they involve a qualitative leap (e.g., successful mass-casualty strike on Israeli soil, use of a new weapons system, or Iranian-supplied advanced capability not previously employed).\n\n- ISRAELI AIRSTRIKES ON YEMEN should similarly be treated as continuation unless they represent a significant escalation in scope (e.g., ground incursion, sustained air campaign against civilian governance infrastructure, or strikes explicitly targeting Iranian personnel/assets in Yemen).\n\n- NODES RELATED TO DIPLOMATIC DE-ESCALATION or ceasefire should be scored with high skepticism given the absence of any communication channel and both sides' stated maximalist positions. Any diplomatic signal would be genuinely novel.\n\n- IRAN'S ROLE is critical context: Houthi capability depends on Iranian supply chains. Evidence of enhanced Iranian weapons transfers, IRGC advisory presence, or direct Iranian coordination of Houthi strikes against Israel should be scored as escalatory for this dyad, as it raises the ceiling of Houthi capability and signals deeper proxy-war commitment.\n\n- RED SEA / BAB AL-MANDAB SHIPPING DISRUPTION is a parallel theater. Houthi attacks on commercial shipping are relevant to this dyad insofar as Israel frames them as part of the bilateral conflict, but pure anti-shipping activity without an explicit Israel"
+    "crisis_context": "CRISIS CONTEXT: Israel and Yemen's Ansar Allah (Houthis) have been in an active, escalating military confrontation since late 2023. The Houthis began launching ballistic missiles, cruise missiles, and drones at Israeli territory in solidarity with Gaza, and Israel responded with multiple rounds of airstrikes against Houthi-controlled ports, airports, power infrastructure, and military targets in Yemen (notably Hodeidah and Sanaa). As of mid-2025, this cycle continues: the Houthis maintain a declared posture of ongoing attacks against Israel (and Red Sea shipping linked to Israel), and Israel has conducted repeated deep-strike operations into Yemen. The United States has also conducted parallel strikes against Houthi targets, complicating attribution but reinforcing the military pressure on Ansar Allah. There is no diplomatic channel between the parties; hostilities are open and recurring.\n\nKEY SITUATIONAL ANCHORS FOR SCORING:\n\n- MILITARY CONFRONTATION IS ALREADY UNDERWAY. Nodes related to \"first use of force,\" \"initial military escalation,\" or \"crossing the threshold to armed conflict\" should be scored as ALREADY SATISFIED, not as future contingencies. The dyad has moved well past the crisis-trigger phase.\n\n- ROUTINE HOUTHI MISSILE/DRONE LAUNCHES toward Israel (including interceptions) should be treated as CONTINUATION OF BASELINE HOSTILITIES, not as novel escalatory signals, unless they involve a qualitative leap (e.g., successful mass-casualty strike on Israeli soil, use of a new weapons system, or Iranian-supplied advanced capability not previously employed).\n\n- ISRAELI AIRSTRIKES ON YEMEN should similarly be treated as continuation unless they represent a significant escalation in scope (e.g., ground incursion, sustained air campaign against civilian governance infrastructure, or strikes explicitly targeting Iranian personnel/assets in Yemen).\n\n- NODES RELATED TO DIPLOMATIC DE-ESCALATION or ceasefire should be scored with high skepticism given the absence of any communication channel and both sides' stated maximalist positions. Any diplomatic signal would be genuinely novel.\n\n- IRAN'S ROLE is critical context: Houthi capability depends on Iranian supply chains. Evidence of enhanced Iranian weapons transfers, IRGC advisory presence, or direct Iranian coordination of Houthi strikes against Israel should be scored as escalatory for this dyad, as it raises the ceiling of Houthi capability and signals deeper proxy-war commitment.\n\n- RED SEA / BAB AL-MANDAB SHIPPING DISRUPTION is a parallel theater. Houthi attacks on commercial shipping are relevant to this dyad insofar as Israel frames them as part of the bilateral conflict, but pure anti-shipping activity without an explicit Israel",
+    "action_type": "airstrike",
+    "action_type_reasoning": "Israel has already conducted long-range airstrikes against Houthi targets in Yemen (e.g., Hodeidah port strikes in 2024), using fighter aircraft with aerial refueling and/or standoff munitions, making airstrike the fastest plausible initiated kinetic action across the ~2,000 km distance."
   },
   "Israel-Turkey": {
     "label": "Israel and Turkey",
@@ -379,7 +409,9 @@
     },
     "query": "\"Israel\" AND (\"Turkey\" OR \"Erdogan\" OR \"Ankara\" OR \"flotilla\" OR \"Gaza\")",
     "baseline_source": "verified",
-    "crisis_context": "CRISIS CONTEXT — Israel-Turkey (initialized Jul 2025)\n\nBackground: Israel-Turkey relations have deteriorated sharply since October 2023. Turkey recalled its ambassador, suspended bilateral trade (May 2024), and President Erdoğan has repeatedly used maximalist rhetoric comparing Israeli leadership to Nazi-era figures and expressing solidarity with Hamas. Turkey joined South Africa's ICJ genocide case against Israel. Israel reciprocated by recalling its own diplomats and imposing counter-measures. Despite the rhetorical escalation, the two states retain NATO-adjacent institutional links (Turkey is a NATO member; Israel has deep NATO-partner interoperability), and there is no active military confrontation or forward-deployed threat between them. The Eastern Mediterranean remains a zone of overlapping interests (Cyprus EEZ, gas infrastructure, Syria buffer dynamics) but not active military friction between these two actors specifically.\n\nAs of Jul 2025, no headlines were available to update the picture, so the baseline is the frozen diplomatic rupture and trade embargo from 2024, with no indication of either normalization moves or further escalation toward kinetic risk.\n\nSCORING GUIDANCE FOR NAMED NODES:\n\n— Diplomatic severance / hostile rhetoric: Already largely priced in. Erdoğan's inflammatory statements and ambassador recalls are the STATUS QUO, not new triggers. Score rhetoric nodes only if statements cross into explicit threat-of-force language (e.g., direct military threats, blockade announcements) or if there is a surprising reversal toward normalization.\n\n— Trade embargo / economic coercion: Turkey's trade suspension is already in effect. Score economic-pressure nodes only for EXPANSION (e.g., secondary sanctions, energy transit disruption, seizure of assets) or RELAXATION (quiet resumption of trade, back-channel commodity flows).\n\n— Military posturing / force deployment: There is NO current military standoff. Any evidence of naval deployments directed at the other party, airspace incidents, or forward-positioning in Syria/Cyprus context should be scored as genuinely novel and escalatory. Do not inflate routine Turkish naval exercises in the Eastern Med as Israel-directed unless explicitly linked.\n\n— Proxy / indirect confrontation: Turkey's political support for Hamas is established background. Score proxy nodes only for evidence of material military support (arms transfers, training, logistics) rather than political endorsement, which is already baseline.\n\n— Precipitating / trigger events: No specific trigger event has occurred as of this initialization. Any new incident (e.g., interdiction of Turkish vessels, strikes affecting Turkish personnel in Syria/Lebanon, intelligence operations on Turkish soil) should be treated as a genuine novel trigger and scored accordingly.\n\n— Alliance / third-party dynamics: Watch for NATO-related friction (e.g., Turkey blocking Israel-NATO cooperation"
+    "crisis_context": "CRISIS CONTEXT — Israel-Turkey (initialized Jul 2025)\n\nBackground: Israel-Turkey relations have deteriorated sharply since October 2023. Turkey recalled its ambassador, suspended bilateral trade (May 2024), and President Erdoğan has repeatedly used maximalist rhetoric comparing Israeli leadership to Nazi-era figures and expressing solidarity with Hamas. Turkey joined South Africa's ICJ genocide case against Israel. Israel reciprocated by recalling its own diplomats and imposing counter-measures. Despite the rhetorical escalation, the two states retain NATO-adjacent institutional links (Turkey is a NATO member; Israel has deep NATO-partner interoperability), and there is no active military confrontation or forward-deployed threat between them. The Eastern Mediterranean remains a zone of overlapping interests (Cyprus EEZ, gas infrastructure, Syria buffer dynamics) but not active military friction between these two actors specifically.\n\nAs of Jul 2025, no headlines were available to update the picture, so the baseline is the frozen diplomatic rupture and trade embargo from 2024, with no indication of either normalization moves or further escalation toward kinetic risk.\n\nSCORING GUIDANCE FOR NAMED NODES:\n\n— Diplomatic severance / hostile rhetoric: Already largely priced in. Erdoğan's inflammatory statements and ambassador recalls are the STATUS QUO, not new triggers. Score rhetoric nodes only if statements cross into explicit threat-of-force language (e.g., direct military threats, blockade announcements) or if there is a surprising reversal toward normalization.\n\n— Trade embargo / economic coercion: Turkey's trade suspension is already in effect. Score economic-pressure nodes only for EXPANSION (e.g., secondary sanctions, energy transit disruption, seizure of assets) or RELAXATION (quiet resumption of trade, back-channel commodity flows).\n\n— Military posturing / force deployment: There is NO current military standoff. Any evidence of naval deployments directed at the other party, airspace incidents, or forward-positioning in Syria/Cyprus context should be scored as genuinely novel and escalatory. Do not inflate routine Turkish naval exercises in the Eastern Med as Israel-directed unless explicitly linked.\n\n— Proxy / indirect confrontation: Turkey's political support for Hamas is established background. Score proxy nodes only for evidence of material military support (arms transfers, training, logistics) rather than political endorsement, which is already baseline.\n\n— Precipitating / trigger events: No specific trigger event has occurred as of this initialization. Any new incident (e.g., interdiction of Turkish vessels, strikes affecting Turkish personnel in Syria/Lebanon, intelligence operations on Turkish soil) should be treated as a genuine novel trigger and scored accordingly.\n\n— Alliance / third-party dynamics: Watch for NATO-related friction (e.g., Turkey blocking Israel-NATO cooperation",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Israel possesses long-range ballistic and cruise missiles (e.g., Jericho series) as well as submarine-launched cruise missiles capable of reaching Turkey without needing to cross intermediate land borders or deploy forward forces, making a missile strike the fastest plausible kinetic action across the ~800+ km distance separating the two non-adjacent states."
   },
   "Israel-Syria": {
     "label": "Israel and Syria",
@@ -402,7 +434,9 @@
       "OperationalFeasibility": 0.7,
       "InitiatorSurvivalRisk": 0.25,
       "SubstitutionPath": 0.45
-    }
+    },
+    "action_type": "airstrike",
+    "action_type_reasoning": "Israel routinely conducts airstrikes against targets inside Syria with essentially zero additional deployment needed, as IAF assets are already postured and have repeatedly struck Syrian and Iranian-linked targets on very short notice."
   },
   "US-Denmark": {
     "label": "United States and Denmark (Greenland)",
@@ -425,7 +459,9 @@
       "OperationalFeasibility": 0.95,
       "InitiatorSurvivalRisk": 0.05,
       "SubstitutionPath": 0.75
-    }
+    },
+    "action_type": "airstrike",
+    "action_type_reasoning": "The US and Denmark are NATO allies with no history of bilateral military friction, no shared border, and no contested spaces where forces routinely confront each other; the fastest physically plausible (though politically implausible) initiated action would be a US airstrike leveraging forward-deployed assets in Europe or carrier-based aviation, as there is no co-location of opposing forces that would enable a gray-zone incident or faster option."
   },
   "US-Colombia": {
     "label": "United States and Colombia",
@@ -448,7 +484,9 @@
       "OperationalFeasibility": 0.85,
       "InitiatorSurvivalRisk": 0.05,
       "SubstitutionPath": 0.6
-    }
+    },
+    "action_type": "airstrike",
+    "action_type_reasoning": "The US has no land border with Colombia but maintains forward-deployed military assets in the region (Southern Command, carrier groups, bases in nearby countries, and historical joint counter-narcotics operations), making an airstrike or missile strike the fastest plausible initiated kinetic action, with airstrike being slightly more operationally realistic given existing regional basing and overflight capabilities."
   },
   "China-India": {
     "label": "China and India",
@@ -471,7 +509,9 @@
       "OperationalFeasibility": 0.45,
       "InitiatorSurvivalRisk": 0.6,
       "SubstitutionPath": 0.5
-    }
+    },
+    "action_type": "gray_zone_incident",
+    "action_type_reasoning": "Chinese and Indian forces are already co-located along the disputed Line of Actual Control (LAC) in the Himalayas, where physical confrontations (rock-throwing, shoving, patrol standoffs) have occurred repeatedly, making a gray-zone incident the fastest plausible action with near-zero lead time."
   },
   "Russia-Poland": {
     "label": "Russia and Poland",
@@ -495,7 +535,9 @@
       "InitiatorSurvivalRisk": 0.7,
       "SubstitutionPath": 0.55
     },
-    "crisis_context": "CRISIS CONTEXT: As of early July 2025, the Russia-Poland dyad exists in a state of elevated structural tension but no active bilateral military crisis. Poland is a frontline NATO member that has undertaken a major defense buildup since Russia's 2022 full-scale invasion of Ukraine, including increased military spending (targeting 4%+ of GDP), deployment of additional NATO forces on Polish territory, and construction of fortifications along its eastern border (Shield East program). Poland hosts key NATO infrastructure including the Aegis Ashore missile defense site at Redzikowo, which Russia has repeatedly identified as a threat. Diplomatic relations are essentially frozen; Poland expelled a large number of Russian diplomats in 2022 and bilateral engagement remains minimal. Poland has been among the most vocal NATO members supporting Ukraine with military aid and advocating for stronger deterrence postures.\n\nKey structural features of this dyad:\n- No territorial dispute exists directly between Russia and Poland, but Poland borders the Russian exclave of Kaliningrad and shares a border with Belarus (a Russian military proxy).\n- The primary escalation pathway runs through spillover from the Russia-Ukraine war (e.g., missile or drone incidents near or across Polish territory, as occurred in November 2022 with the Przewodów incident) or through provocations in the Baltic/Kaliningrad corridor.\n- Russia engages in regular hybrid activities targeting Poland, including cyberattacks, disinformation campaigns, and occasional GPS jamming in the Baltic region.\n\nSCORING GUIDANCE:\n- MILITARY BUILDUP / ARMS RACING nodes: Poland's ongoing defense expansion and NATO force posture enhancements are now BASELINE for this dyad. Score these nodes as elevated only if there is evidence of new, abnormal surges beyond the already-high tempo (e.g., emergency mobilization, snap deployments to the Suwałki Gap, or Russian force concentration near Kaliningrad beyond routine garrison levels).\n- DIPLOMATIC DETERIORATION nodes: Relations are already near-floor. Score further deterioration only for concrete new actions (e.g., full embassy closure, formal severance of remaining consular ties, expulsion of remaining staff).\n- TRIGGER / PRECIPITATING EVENT nodes: No specific precipitating incident is active. Any cross-border kinetic incident (missile/drone overflight, airspace violation with hostile intent), sabotage of critical infrastructure attributed to Russia, or direct military confrontation (even accidental) should be scored as a genuine novel trigger, not routine.\n- HOSTILE RHETORIC nodes: Both sides regularly issue adversarial statements. Score only rhetoric that represents a material escalation beyond the current norm — e.g., explicit threats of military action against the other, nuclear signaling specifically directed at Poland, or official declarations"
+    "crisis_context": "CRISIS CONTEXT: As of early July 2025, the Russia-Poland dyad exists in a state of elevated structural tension but no active bilateral military crisis. Poland is a frontline NATO member that has undertaken a major defense buildup since Russia's 2022 full-scale invasion of Ukraine, including increased military spending (targeting 4%+ of GDP), deployment of additional NATO forces on Polish territory, and construction of fortifications along its eastern border (Shield East program). Poland hosts key NATO infrastructure including the Aegis Ashore missile defense site at Redzikowo, which Russia has repeatedly identified as a threat. Diplomatic relations are essentially frozen; Poland expelled a large number of Russian diplomats in 2022 and bilateral engagement remains minimal. Poland has been among the most vocal NATO members supporting Ukraine with military aid and advocating for stronger deterrence postures.\n\nKey structural features of this dyad:\n- No territorial dispute exists directly between Russia and Poland, but Poland borders the Russian exclave of Kaliningrad and shares a border with Belarus (a Russian military proxy).\n- The primary escalation pathway runs through spillover from the Russia-Ukraine war (e.g., missile or drone incidents near or across Polish territory, as occurred in November 2022 with the Przewodów incident) or through provocations in the Baltic/Kaliningrad corridor.\n- Russia engages in regular hybrid activities targeting Poland, including cyberattacks, disinformation campaigns, and occasional GPS jamming in the Baltic region.\n\nSCORING GUIDANCE:\n- MILITARY BUILDUP / ARMS RACING nodes: Poland's ongoing defense expansion and NATO force posture enhancements are now BASELINE for this dyad. Score these nodes as elevated only if there is evidence of new, abnormal surges beyond the already-high tempo (e.g., emergency mobilization, snap deployments to the Suwałki Gap, or Russian force concentration near Kaliningrad beyond routine garrison levels).\n- DIPLOMATIC DETERIORATION nodes: Relations are already near-floor. Score further deterioration only for concrete new actions (e.g., full embassy closure, formal severance of remaining consular ties, expulsion of remaining staff).\n- TRIGGER / PRECIPITATING EVENT nodes: No specific precipitating incident is active. Any cross-border kinetic incident (missile/drone overflight, airspace violation with hostile intent), sabotage of critical infrastructure attributed to Russia, or direct military confrontation (even accidental) should be scored as a genuine novel trigger, not routine.\n- HOSTILE RHETORIC nodes: Both sides regularly issue adversarial statements. Score only rhetoric that represents a material escalation beyond the current norm — e.g., explicit threats of military action against the other, nuclear signaling specifically directed at Poland, or official declarations",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Russia has Iskander missiles deployed in Kaliningrad, which is adjacent to Poland, giving it the capability to strike Polish territory with very short flight times and minimal additional deployment needed, making a missile strike the fastest plausible initiated kinetic action."
   },
   "Thailand-Cambodia": {
     "label": "Thailand and Cambodia",
@@ -519,7 +561,9 @@
       "InitiatorSurvivalRisk": 0.5,
       "SubstitutionPath": 0.55
     },
-    "crisis_context": "CRISIS CONTEXT: Thailand and Cambodia share a long land border with periodic tensions rooted in overlapping territorial claims, most notably around the Preah Vihear temple area (ICJ rulings in 1962 and 2013 largely favoring Cambodia). Military clashes occurred in 2008-2011 near Preah Vihear, but relations have been broadly stable since, with bilateral cooperation on trade, labor migration, and border demarcation continuing. As of mid-2025, no active military confrontation or acute diplomatic crisis is evident. Relations are managed through routine diplomatic channels, ASEAN frameworks, and periodic bilateral summits. Cambodia's domestic politics (under Hun Manet since 2023) and Thailand's post-2023 political landscape have not produced significant new friction points. Cross-border irritants include illegal border crossings, smuggling, labor disputes, and occasional nationalist rhetoric around Preah Vihear, but none currently at crisis level.\n\nSCORING GUIDANCE FOR NAMED NODES:\n\n- Nodes related to TERRITORIAL DISPUTES or BORDER INCIDENTS: Score conservatively. The Preah Vihear dispute is legally settled but emotionally potent. Routine border patrol activities or minor incidents should not be scored as escalatory unless accompanied by troop buildups, diplomatic protests, or nationalist mobilization. Any renewed rhetoric specifically invoking Preah Vihear sovereignty should be flagged as potentially escalatory given historical precedent.\n\n- Nodes related to MILITARY MOBILIZATION or FORCE POSTURE: Baseline military presence along the border is normal. Score elevated only if there are reports of unusual troop movements, forward deployments, or cancellation of military-to-military cooperation (e.g., joint exercises). Note that both countries conduct routine border security operations against smuggling and trafficking that should not be conflated with interstate military preparation.\n\n- Nodes related to DIPLOMATIC SIGNALS or POLITICAL RHETORIC: Routine bilateral meetings, ASEAN-context interactions, and trade discussions should be scored as stabilizing. Nationalist rhetoric from opposition figures or media in either country around Preah Vihear is a recurring background feature and should only be scored as escalatory if adopted by senior government officials or accompanied by policy actions.\n\n- Nodes related to ALLIANCE or THIRD-PARTY INVOLVEMENT: Cambodia's close relationship with China and Thailand's alliance with the US create a latent great-power overlay, but this has not been a direct driver of bilateral tension. Score third-party involvement nodes only if there is evidence of external actors actively encouraging confrontation or providing military support specifically directed at the other party.\n\n- Nodes related to ECONOMIC INTERDEPENDENCE or COOPERATION: Thailand is a major trade partner and employer of Cambodian migrant labor. Economic"
+    "crisis_context": "CRISIS CONTEXT: Thailand and Cambodia share a long land border with periodic tensions rooted in overlapping territorial claims, most notably around the Preah Vihear temple area (ICJ rulings in 1962 and 2013 largely favoring Cambodia). Military clashes occurred in 2008-2011 near Preah Vihear, but relations have been broadly stable since, with bilateral cooperation on trade, labor migration, and border demarcation continuing. As of mid-2025, no active military confrontation or acute diplomatic crisis is evident. Relations are managed through routine diplomatic channels, ASEAN frameworks, and periodic bilateral summits. Cambodia's domestic politics (under Hun Manet since 2023) and Thailand's post-2023 political landscape have not produced significant new friction points. Cross-border irritants include illegal border crossings, smuggling, labor disputes, and occasional nationalist rhetoric around Preah Vihear, but none currently at crisis level.\n\nSCORING GUIDANCE FOR NAMED NODES:\n\n- Nodes related to TERRITORIAL DISPUTES or BORDER INCIDENTS: Score conservatively. The Preah Vihear dispute is legally settled but emotionally potent. Routine border patrol activities or minor incidents should not be scored as escalatory unless accompanied by troop buildups, diplomatic protests, or nationalist mobilization. Any renewed rhetoric specifically invoking Preah Vihear sovereignty should be flagged as potentially escalatory given historical precedent.\n\n- Nodes related to MILITARY MOBILIZATION or FORCE POSTURE: Baseline military presence along the border is normal. Score elevated only if there are reports of unusual troop movements, forward deployments, or cancellation of military-to-military cooperation (e.g., joint exercises). Note that both countries conduct routine border security operations against smuggling and trafficking that should not be conflated with interstate military preparation.\n\n- Nodes related to DIPLOMATIC SIGNALS or POLITICAL RHETORIC: Routine bilateral meetings, ASEAN-context interactions, and trade discussions should be scored as stabilizing. Nationalist rhetoric from opposition figures or media in either country around Preah Vihear is a recurring background feature and should only be scored as escalatory if adopted by senior government officials or accompanied by policy actions.\n\n- Nodes related to ALLIANCE or THIRD-PARTY INVOLVEMENT: Cambodia's close relationship with China and Thailand's alliance with the US create a latent great-power overlay, but this has not been a direct driver of bilateral tension. Score third-party involvement nodes only if there is evidence of external actors actively encouraging confrontation or providing military support specifically directed at the other party.\n\n- Nodes related to ECONOMIC INTERDEPENDENCE or COOPERATION: Thailand is a major trade partner and employer of Cambodian migrant labor. Economic",
+    "action_type": "ground_invasion",
+    "action_type_reasoning": "Thailand and Cambodia share a land border with a history of armed clashes (notably around Preah Vihear temple in 2008-2011), both sides maintain troops along disputed border areas, and a limited ground incursion or cross-border military action is the fastest plausible escalation given existing forward-deployed forces and active territorial disputes."
   },
   "US-Panama": {
     "label": "United States and Panama",
@@ -542,7 +586,9 @@
       "OperationalFeasibility": 0.9,
       "InitiatorSurvivalRisk": 0.05,
       "SubstitutionPath": 0.65
-    }
+    },
+    "action_type": "raid",
+    "action_type_reasoning": "The US has a history of military intervention in Panama (1989 invasion), maintains significant military presence in the region with bases in nearby locations and forces capable of rapid deployment (e.g., Southern Command, 82nd Airborne), and the proximity of Panama via short air/sea transit makes a special operations raid the fastest plausible initiated kinetic action beyond routine presence."
   },
   "Europe(France/UK/Germany)-Iran": {
     "label": "Europe and Iran",
@@ -602,7 +648,9 @@
     },
     "query": "Israel AND Lebanon AND (Hezbollah OR border OR ceasefire OR military OR strikes OR conflict OR war OR UNIFIL OR \"Blue Line\")",
     "reasoning": "Israel holds a decisive conventional military advantage over Lebanon/Hezbollah, driving WinProbability positive, while the commitment problem is high because Hezbollah's rearmament cycles and Iranian patronage make any ceasefire inherently unstable and power shifts expected. Hardline claims are elevated due to the Shebaa Farms dispute, ongoing border tensions, and Hezbollah's ideological rejection of Israel, while audience costs are high on both sides given Israeli domestic pressure for security operations and Hezbollah's entrenchment as a resistance movement; nuclear deterrence is low but nonzero reflecting Israel's undeclared arsenal creating some asymmetric constraint.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "airstrike",
+    "action_type_reasoning": "Israel has repeatedly conducted airstrikes into Lebanon with minimal lead time using forward-deployed aircraft and standoff munitions, and this remains the fastest kinetic action it can initiate against Lebanese (and Hezbollah) targets, as demonstrated extensively in recent and historical operations."
   },
   "Israel-Multiple": {
     "label": "Israel vs. Multiple Adversaries (Iran-axis: Iran, Hezbollah, Hamas, Syria)",
@@ -638,7 +686,9 @@
     },
     "query": "(UAE OR \"United Arab Emirates\") AND Qatar AND (relations OR dispute OR blockade OR diplomacy OR tension OR reconciliation OR \"Al Ula\")",
     "reasoning": "The UAE holds a conventional military edge over Qatar but deep economic interdependence within the GCC and shared hydrocarbon markets impose significant war costs; both are autocracies with divergent foreign policy preferences (Qatar's support for Islamist movements vs. UAE's opposition), though the 2021 Al-Ula reconciliation reduced but did not eliminate underlying tensions. No nuclear deterrence applies, and while the US Al Udeid base in Qatar provides some indirect patron protection, there is no explicit US defense commitment favoring either side against the other, keeping PatronDeterrence modest.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "gray_zone_incident",
+    "action_type_reasoning": "UAE and Qatar share a short land border and have recent history of severe diplomatic friction (2017 blockade), and with close proximity across the Persian Gulf, patrol vessels and aircraft operate in overlapping airspace/waters, making a gray zone incident (airspace incursion, intercept of aircraft/vessel, or border friction) the fastest plausible action."
   },
   "Russia-Unknown": {
     "label": "Russia-Unknown (Generic Adversary)",
@@ -675,7 +725,9 @@
     },
     "query": "(Israel AND \"Saudi Arabia\") AND (normalization OR diplomacy OR relations OR conflict OR \"Abraham Accords\" OR Iran OR defense OR recognition OR Palestine)",
     "reasoning": "Israel holds a significant military advantage including an undeclared nuclear arsenal, giving it a positive WinProbability and moderate NuclearDeterrence, though direct conflict between these two is historically unlikely; the dyad's tension is shaped more by the Palestinian issue and regional alignment than by bilateral territorial disputes. Preference alignment is moderately negative due to disagreements over Palestinian statehood and Jerusalem, but both share concern over Iran, and audience costs are elevated because Saudi domestic/religious opinion constrains normalization while Israeli politics constrain territorial concessions, making this a complex case where structural conflict drivers coexist with significant shared strategic interests.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Israel possesses long-range ballistic and cruise missiles (e.g., Jericho series) as well as F-35I strike aircraft with aerial refueling capability that can reach Saudi Arabia without needing a land border or forward basing, making a standoff missile strike the fastest plausible initiated kinetic action across the roughly 1,000+ km distance separating the two states."
   },
   "Israel-Palestine": {
     "label": "Israel–Palestine",
@@ -693,7 +745,9 @@
     },
     "query": "Israel Palestine conflict OR war OR Gaza OR West Bank OR ceasefire OR negotiations OR Hamas OR IDF",
     "reasoning": "Israel holds an overwhelming conventional military advantage (high WinProbability), while deeply contested territorial claims over Jerusalem, the West Bank, and Gaza, combined with irreconcilable national aspirations, drive HardlineClaims and PreferenceAlignment to near-extreme values. Severe commitment problems arise from shifting power dynamics (settlement expansion, demographic changes, and fragmented Palestinian authority making credible long-term deals nearly impossible), while high audience costs on both sides—Israeli domestic politics and Palestinian popular mobilization—lock leaders into hardline positions with very short time horizons for compromise.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "gray_zone_incident",
+    "action_type_reasoning": "Israeli and Palestinian forces/populations are already co-located in contested spaces across the West Bank and Gaza border areas, with routine friction including settler violence, checkpoint confrontations, drone surveillance, and demolitions requiring zero additional deployment."
   },
   "Israel-Oman": {
     "label": "Israel–Oman",
@@ -711,7 +765,9 @@
     },
     "query": "(Israel AND Oman) AND (diplomacy OR relations OR normalization OR military OR Gulf OR \"Abraham Accords\")",
     "reasoning": "Israel holds a significant military advantage including an undeclared nuclear arsenal, which provides moderate nuclear deterrence even against a non-nuclear Oman, though the two states have no direct territorial disputes and Oman has historically pursued a neutral, mediating foreign policy in the region. Oman has engaged in quiet diplomacy with Israel (hosting Netanyahu in 2018) but has not formally normalized relations; both are non-democratic, preference divergence is mild rather than acute, and there are no active hardline claims or significant commitment problems between them.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Israel and Oman do not share a border and have no routine co-located forces in contested space, but Israel possesses long-range ballistic and cruise missiles (e.g., Jericho series) as well as submarine-launched cruise missiles capable of reaching Oman, making a standoff missile strike the fastest physically plausible initiated action across the ~1,500 km distance."
   },
   "US-Lebanon": {
     "label": "US–Lebanon",
@@ -730,7 +786,9 @@
     "query": "(US OR \"United States\" OR America) AND (Lebanon OR Hezbollah OR Beirut) AND (military OR sanctions OR diplomacy OR conflict OR troops)",
     "reasoning": "The US holds overwhelming military superiority over Lebanon, but direct interstate conflict is unlikely; the main friction runs through Hezbollah's role as an Iranian proxy, creating commitment problems and misaligned preferences on security architecture. Lebanon lacks a credible great-power patron willing to deter the US militarily, and while Lebanon is nominally democratic its fragmented sectarian governance and Hezbollah's dual state/militia status push DemocraticPeace slightly positive and complicate bargaining credibility.",
     "notes": "PatronDeterrence is low because while Iran backs Hezbollah, it does not provide a formal defense guarantee to the Lebanese state against the US; NuclearDeterrence is minimal, reflecting only the marginal constraint that US nuclear status imposes on escalation logic rather than any mutual nuclear balance.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "The US maintains naval assets in the Eastern Mediterranean (including periodic carrier strike group presence) and has cruise missile capability well within range of Lebanon, making a missile strike the fastest plausible initiated kinetic action — as demonstrated by past US strikes in the region — without requiring ground deployment or sustained operations."
   },
   "Venezuela-Israel": {
     "label": "Venezuela–Israel",
@@ -749,7 +807,9 @@
     "query": "(Venezuela AND Israel) AND (relations OR diplomacy OR conflict OR Maduro OR sanctions OR Palestine OR severed)",
     "reasoning": "Venezuela severed diplomatic ties with Israel in 2009 and has been a vocal critic aligned with Iran, creating strong preference divergence and rhetorical hostility, though the two states lack geographic proximity, significant economic interdependence, or any realistic theater for direct military confrontation, making actual conflict extremely unlikely. Israel's vastly superior military capability, undisclosed nuclear arsenal, and the geographic distance between the two states all serve as strong deterrents, while Maduro's autocratic regime and use of anti-Israel rhetoric for domestic mobilization elevate audience costs and democratic peace friction.",
     "source": "IR structural analysis",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Venezuela and Israel have no shared border, no proximity, and no forward-deployed forces near each other; while Venezuela has expressed strong hostility toward Israel (severing diplomatic ties), it lacks the conventional military reach to strike Israel directly, making the fastest physically plausible initiated action a long-range missile strike—though even this is barely plausible given Venezuela's limited missile inventory and range—so missile_strike serves as the least-implausible placeholder for this non-adjacent, hostile but geographically distant dyad."
   },
   "US-Israel": {
     "label": "US–Israel",
@@ -767,7 +827,9 @@
     },
     "query": "(US OR \"United States\" OR America) AND Israel AND (relations OR military OR aid OR diplomacy OR tension OR alliance OR weapons OR Gaza OR Iran)",
     "reasoning": "The US-Israel dyad is fundamentally an alliance rather than a rivalry, so conflict probability is extremely low: preferences are broadly aligned, both are democracies (strong democratic peace effect), economic and military interdependence imposes massive war costs, and there are no territorial disputes between them. The US has overwhelming military superiority (high WinProbability if hypothetically a challenger), Israel possesses an undeclared nuclear arsenal providing some deterrence, but PatronDeterrence is set to 0 because no external patron defends Israel against the US — rather, the US itself is Israel's patron; commitment problems and audience costs are low given the deep institutionalized relationship, though periodic tensions over issues like settlements and Gaza policy introduce modest friction.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "The US maintains extensive forward-deployed naval and air assets in the Middle East (carrier strike groups, bases in the region) with missile and airstrike capability covering Israel, making a missile strike the fastest physically plausible kinetic action, though this dyad involves close allies with essentially no plausible conflict channel, so this is a least-implausible placeholder."
   },
   "Israel-Azerbaijan": {
     "label": "Israel–Azerbaijan",
@@ -785,7 +847,9 @@
     },
     "query": "(Israel AND Azerbaijan) AND (military OR cooperation OR arms OR Iran OR diplomacy OR relations)",
     "reasoning": "Israel and Azerbaijan are strategic partners with strongly aligned interests centered on countering Iran, extensive arms trade, and energy cooperation, making conflict between them extremely unlikely. Both are non-democracies or flawed democracies (DemocraticPeace slightly positive as neither constrains the other via democratic norms), but the positive preference alignment and absence of territorial disputes or serious grievances keep all conflict-inducing nodes low; Israel's significant military superiority gives it a positive WinProbability but this is largely irrelevant given the cooperative relationship.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Israel and Azerbaijan have no shared border and are separated by significant distance (with Iran and/or Turkey in between), but Israel possesses long-range strike capabilities (aircraft, cruise missiles, and has demonstrated willingness to conduct distant strikes); Azerbaijan also operates Israeli-made weapons, but as the more likely initiator in a hypothetical scenario Israel could execute a long-range missile or air strike as the fastest plausible kinetic option, though this dyad has virtually no bilateral friction and the scenario is highly implausible."
   },
   "Cuba-Israel": {
     "label": "Cuba–Israel",
@@ -803,7 +867,9 @@
     },
     "query": "Cuba AND Israel AND (diplomacy OR relations OR UN OR Palestine OR sanctions)",
     "reasoning": "Cuba and Israel have had no diplomatic relations since 1973, and Cuba has been a consistent critic of Israel at the UN and a supporter of Palestinian statehood, producing strong preference misalignment and ideological opposition (one communist autocracy, one democracy). However, the dyad has essentially zero risk of direct military conflict due to geographic distance, lack of shared borders or contested territory, Cuba's vast military inferiority relative to Israel, and the absence of any strategic imperative for armed confrontation — making this primarily a diplomatic rivalry rather than a militarized one.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Cuba and Israel are separated by thousands of miles of ocean with no shared border, no forward-deployed forces near each other, no routine military interactions, and no realistic conventional military capability on Cuba's part to project power to Israel (or vice versa); Israel has long-range strike capabilities (cruise missiles, submarines) that could theoretically reach Cuba but this is extremely implausible, making missile_strike/airstrike the least-implausible placeholder for the fastest physically possible initiated kinetic action in this essentially non-conflict dyad."
   },
   "Israel-Kuwait": {
     "label": "Israel–Kuwait",
@@ -821,7 +887,9 @@
     },
     "query": "Israel Kuwait relations OR diplomacy OR normalization OR conflict OR threat",
     "reasoning": "Israel holds a significant military advantage over Kuwait including an undeclared nuclear arsenal, but the dyad lacks direct territorial disputes or border proximity, making direct conflict unlikely; Kuwait has no formal relations with Israel and remains aligned with the broader Arab/Palestinian cause, producing opposed preferences and moderate audience costs, though the US presence in Kuwait provides some indirect restraining effect on both sides. The lack of shared borders, limited economic interdependence, and Kuwait's reliance on US security patronage all reduce the risk of direct military confrontation despite persistent political hostility.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Israel and Kuwait share no land border and have no routine co-located forces, but Israel possesses long-range ballistic missiles (Jericho series) and air-launched cruise missiles capable of reaching Kuwait (~1,500 km), making a missile strike the fastest physically plausible initiated action against a non-adjacent adversary with which it has no diplomatic relations."
   },
   "Israel-Iraq": {
     "label": "Israel–Iraq",
@@ -839,7 +907,9 @@
     },
     "query": "Israel Iraq relations OR military OR threat OR militia OR Iran proxy",
     "reasoning": "Israel holds a significant conventional and nuclear-capable military advantage over a weakened post-2003 Iraq, which lacks effective central military power and has no nuclear deterrent, though Israel's undeclared arsenal provides some asymmetric deterrence. Iraq's fragmented governance, the presence of Iran-aligned militias that have targeted Israel-linked interests, deep historical enmity (including the 1981 Osirak strike), and opposing positions on the Palestinian issue create substantial preference divergence and moderate hardline claims, though the lack of direct contiguity and Iraq's internal instability reduce the immediacy of a conventional interstate conflict.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Israel has demonstrated long-range strike capability against Iraq historically (1981 Osirak reactor) and possesses ballistic missiles (Jericho series) and air-launched standoff weapons that can reach Iraqi territory without needing a shared border or forward basing, making a missile or air-delivered strike the fastest plausible kinetic action."
   },
   "Saudi Arabia-UAE": {
     "label": "Saudi Arabia vs. UAE",
@@ -858,7 +928,9 @@
     "query": "(Saudi Arabia AND UAE) OR (Saudi Arabia AND \"United Arab Emirates\") AND (rivalry OR tensions OR dispute OR relations OR OPEC OR Yemen OR diplomacy)",
     "reasoning": "Saudi Arabia and the UAE are both autocratic Gulf monarchies with deep economic interdependence (high war costs) and broadly aligned interests as GCC partners, though they have experienced growing strategic divergence over Yemen, OPEC+ quotas, and regional influence competition, creating moderate commitment problems and slightly misaligned preferences. Saudi Arabia holds a conventional military advantage in size, neither possesses nuclear weapons, and no major external patron is committed to defending one against the other, while both regimes face low domestic audience costs but have shown increasing willingness to pursue independent foreign policies.",
     "source": "IR structural analysis",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "airstrike",
+    "action_type_reasoning": "Despite sharing a land border and being GCC allies, these states have experienced growing strategic rivalry (e.g., Yemen war divergence, economic competition); however, there is no active territorial dispute or hostile posture warranting ground_invasion, and their air forces could deliver a fast strike across the short distance, making airstrike the fastest plausible kinetic option beyond gray-zone activity, which lacks a contested co-location venue between these two states."
   },
   "US-Saudi Arabia": {
     "label": "US – Saudi Arabia",
@@ -876,7 +948,9 @@
     },
     "query": "(US OR \"United States\" OR America) AND (\"Saudi Arabia\" OR Riyadh OR MBS) AND (relations OR military OR oil OR arms OR security OR diplomacy)",
     "reasoning": "The US holds overwhelming military superiority (WinProbability strongly favoring defender/US), and deep economic interdependence through oil markets and arms sales creates high war costs; there are no territorial disputes and no realistic conflict scenario, but the democracy-autocracy gap, Saudi hedging toward China/Russia (moderate commitment problems), and divergent preferences on human rights and energy policy create diplomatic friction. Nuclear deterrence is moderate given the US arsenal acts as a background constraint, while Saudi audience costs reflect MBS's domestic need to assert sovereignty and the US Congress's periodic pushback on the relationship.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "airstrike",
+    "action_type_reasoning": "The US maintains significant forward-deployed air and naval assets in the Persian Gulf region (including bases in Qatar, Bahrain, and carrier strike groups), giving it the capability to execute an airstrike against Saudi targets within hours, making this the fastest plausible kinetic action despite the lack of active hostility between the two allied states."
   },
   "Israel-Malaysia": {
     "label": "Israel–Malaysia",
@@ -894,7 +968,9 @@
     },
     "query": "Israel AND Malaysia AND (relations OR conflict OR diplomacy OR sanctions OR Palestine OR boycott)",
     "reasoning": "Israel and Malaysia have no diplomatic relations, with Malaysia being one of the most vocally anti-Israel Muslim-majority states, driven by strong solidarity with Palestine — yielding high preference divergence and significant audience costs on the Malaysian side. However, the dyad is geographically distant with minimal direct territorial disputes and very low economic interdependence, making actual military conflict extremely unlikely; Israel holds a clear military advantage including an undeclared nuclear capability, though the distance and lack of direct strategic competition keep most conflict indicators moderate.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Israel and Malaysia have no shared border, no routine military co-location, and are separated by thousands of kilometers, but Israel possesses long-range ballistic missiles (Jericho series) and submarine-launched cruise missiles capable of reaching Malaysia, making a missile strike the fastest physically plausible—though extremely unlikely—initiated kinetic action."
   },
   "Germany-Iran": {
     "label": "Germany–Iran",
@@ -930,7 +1006,9 @@
     },
     "query": "Indonesia Israel relations OR diplomacy OR Palestine OR recognition OR normalization",
     "reasoning": "Indonesia and Israel have no diplomatic relations, driven primarily by Indonesia's strong solidarity with Palestine and its status as the world's largest Muslim-majority country, creating deep preference misalignment and significant domestic audience costs against normalization. However, geographic distance, lack of direct territorial disputes, Israel's qualitative military edge and undeclared nuclear capability, and US patronage of Israel all serve as strong structural deterrents against any direct military confrontation, making this a politically hostile but militarily low-risk dyad.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Indonesia and Israel have no shared border, no routine co-location of forces, and are separated by thousands of kilometers; Israel possesses long-range strike capabilities (submarine-launched cruise missiles, long-range air strikes with refueling) that could theoretically reach Indonesian interests, but more realistically Indonesia lacks comparable reach, making a missile or airstrike the least-implausible fast kinetic option for either side as a low-commitment placeholder given the absence of any realistic near-term conflict channel."
   },
   "Israel-Afghanistan": {
     "label": "Israel–Afghanistan",
@@ -948,7 +1026,9 @@
     },
     "query": "Israel AND Afghanistan AND (Taliban OR relations OR threat OR conflict OR diplomacy)",
     "reasoning": "Israel holds a massive conventional and technological military advantage over Taliban-ruled Afghanistan, but the two states have no shared border, minimal economic interdependence, and no direct territorial dispute, making direct interstate conflict extremely unlikely despite deep ideological hostility. Afghanistan under the Taliban is a pariah autocracy with no recognition of Israel and strong rhetorical opposition, but the geographic distance, lack of patron deterrence for Afghanistan, and absence of concrete contested claims keep escalation risk structurally very low.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Israel has no shared border with Afghanistan and no routine force co-location, but possesses long-range strike capabilities (ballistic missiles, cruise missiles, and long-range air assets with aerial refueling) that could theoretically reach Afghanistan, making a standoff missile strike the fastest physically plausible initiated action across the ~2,500 km distance."
   },
   "Australia-Iran": {
     "label": "Australia–Iran",
@@ -966,7 +1046,9 @@
     },
     "query": "(Australia AND Iran) AND (sanctions OR nuclear OR diplomacy OR tensions OR military OR \"Middle East\")",
     "reasoning": "Australia and Iran have no direct territorial dispute or proximity-based security dilemma, but their preferences diverge significantly due to Australia's alignment with the US-led Western order and Iran's adversarial stance toward it, reflected in Australian sanctions enforcement and participation in Middle East coalitions. Australia holds a conventional military edge and benefits from distance and alliance networks, while Iran's nuclear ambitions create modest deterrence effects; the lack of direct territorial claims and geographic separation keep hardline claims and war costs relatively low, though the democracy-autocracy gap and Australia's alliance-driven audience costs sustain underlying friction.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "airstrike",
+    "action_type_reasoning": "Australia and Iran share no border and have no routine co-location of forces in contested spaces; however, Australia has deployed air assets to the Middle East (e.g., operations in Iraq/Syria) and could leverage forward-based aircraft or refueling assets in the Persian Gulf region, making an airstrike the fastest physically plausible initiated kinetic action, though still a low-probability placeholder given minimal bilateral friction."
   },
   "Bangladesh-Israel": {
     "label": "Bangladesh–Israel",
@@ -984,7 +1066,9 @@
     },
     "query": "Bangladesh Israel relations OR diplomacy OR recognition OR conflict OR Palestine",
     "reasoning": "Bangladesh does not recognize Israel and has strongly pro-Palestinian foreign policy positions driven by domestic Islamic constituencies (high audience costs, negative preference alignment), but the two states have no territorial dispute, no shared border, and minimal direct military interaction, making actual conflict extremely unlikely. Israel holds a massive conventional military advantage and an undeclared nuclear arsenal, while Bangladesh has no patron committed to its defense against Israel specifically, though the geographic distance and lack of strategic interaction keep most escalation indicators low.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Bangladesh and Israel share no border, have no routine military co-location, and are separated by thousands of kilometers; Israel possesses long-range strike capabilities (ballistic missiles, submarine-launched cruise missiles) that could theoretically reach Bangladesh, making a missile strike the fastest physically plausible initiated kinetic action, though the scenario is extremely unlikely."
   },
   "Israel-Tunisia": {
     "label": "Israel–Tunisia",
@@ -1002,7 +1086,9 @@
     },
     "query": "Israel Tunisia relations OR diplomacy OR conflict OR normalization OR boycott",
     "reasoning": "Israel holds a decisive military advantage over Tunisia including presumed nuclear capability, but the geographic distance and minimal economic interdependence make direct conflict highly unlikely; the dyad is characterized by political hostility (Tunisia has no diplomatic relations, strong anti-normalization sentiment, and aligns with Palestinian causes) but lacks the territorial contiguity or active disputes that would elevate escalation risks significantly. Tunisia's democratic backsliding under Saied and Israel's rightward shift keep DemocraticPeace moderately positive, while audience costs reflect domestic pressures in both states against any rapprochement.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Israel has no shared border with Tunisia and they are separated by over 2,000 km, but Israel has demonstrated long-range strike capability (including the 1985 bombing of PLO headquarters in Tunis), possesses cruise missiles and aircraft with refueling capacity that can reach Tunisia, making a missile or air strike the fastest plausible initiated action."
   },
   "Pakistan-Afghanistan": {
     "label": "Pakistan–Afghanistan",
@@ -1021,7 +1107,9 @@
     "query": "(Pakistan AND Afghanistan) AND (border OR Durand OR Taliban OR TTP OR military OR strike OR tensions OR diplomacy OR conflict)",
     "reasoning": "Pakistan holds a significant conventional military advantage including nuclear weapons over Taliban-ruled Afghanistan, but the Durand Line dispute, cross-border TTP sanctuaries, and deep mutual distrust create severe commitment problems and opposed preferences. Both sides are led by regimes with short time horizons and high audience costs—Pakistan's military-dominated state faces domestic pressure on terrorism, while the Taliban government is ideologically rigid—and the absence of any democratic accountability on either side removes institutional constraints on escalation.",
     "sources": [],
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "raid",
+    "action_type_reasoning": "Pakistan and Afghanistan share a long, porous land border with active militant activity, and Pakistan has repeatedly conducted cross-border raids and airstrikes (e.g., operations against TTP sanctuaries in Afghan territory), making a quick cross-border raid the fastest plausible initiated kinetic action."
   },
   "Japan-Iran": {
     "label": "Japan–Iran",
@@ -1039,7 +1127,9 @@
     },
     "query": "Japan AND Iran AND (diplomacy OR sanctions OR oil OR nuclear OR tensions OR relations)",
     "reasoning": "Japan and Iran have no direct territorial disputes, significant geographic separation, and historically maintained pragmatic economic relations centered on energy imports, making this an extremely low-conflict dyad with no realistic pathway to bilateral war. Japan's alignment with the US-led sanctions regime creates mild preference divergence, but Japan has traditionally sought to maintain diplomatic channels with Iran and there are no hardline claims or commitment problems driving escalation between them.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Japan and Iran share no border and have no routine military co-location, but Japan possesses naval assets periodically deployed to the Middle East (e.g., MSDF escort operations in the Gulf of Aden/Arabian Sea) and advanced air-launched cruise missiles; however, the most plausible fastest kinetic option would be a long-range missile or airstrike from forward-deployed naval platforms, making missile_strike the least-implausible floor given the distance and lack of direct friction."
   },
   "Israel-Jordan": {
     "label": "Israel–Jordan",
@@ -1057,7 +1147,9 @@
     },
     "query": "(Israel AND Jordan) AND (relations OR tensions OR border OR diplomacy OR military OR West Bank OR Palestinian OR peace treaty OR Al-Aqsa)",
     "reasoning": "Israel and Jordan have a formal peace treaty (1994) and extensive security cooperation, which keeps war costs high and provides moderate preference alignment, but the relationship is strained by the Palestinian issue, Jerusalem/Al-Aqsa disputes, and strong Jordanian public hostility to Israel that generates significant audience costs for Amman. Israel holds a clear conventional military advantage and possesses an undeclared nuclear capability that provides asymmetric nuclear deterrence, while Jordan benefits from a US security partnership (moderate patron deterrence) but lacks a formal mutual defense treaty.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "airstrike",
+    "action_type_reasoning": "Israel and Jordan share a land border and Israel has extensive air force capabilities that could reach any point in Jordan within minutes, making airstrike the fastest plausible kinetic action; however, the two states have a peace treaty and military cooperation, so while a ground raid across the border is also physically fast, airstrike represents the fastest initiated kinetic option given Israel's standoff strike posture and the relatively short distances involved."
   },
   "Israel-Pakistan": {
     "label": "Israel–Pakistan",
@@ -1075,7 +1167,9 @@
     },
     "query": "(Israel AND Pakistan) AND (relations OR nuclear OR conflict OR diplomacy OR recognition OR threat OR military)",
     "reasoning": "Israel and Pakistan have no diplomatic relations and deep ideological hostility—Pakistan refuses to recognize Israel and has strong domestic audience costs tied to the Palestinian cause and Islamic solidarity—but the dyad lacks direct territorial disputes or geographic contiguity, keeping hardline claims moderate. Both are nuclear-armed states (NuclearDeterrence is high), Israel holds a qualitative military edge but Pakistan has a larger conventional force and nuclear arsenal creating rough balance, and the absence of economic ties means war costs are only modestly peace-inducing; preference alignment is strongly negative given Pakistan's alignment with the broader Muslim world on the Palestine issue.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Israel and Pakistan have no shared border and are separated by over 2,000 km, but Israel possesses long-range ballistic missiles (Jericho series) and submarine-launched cruise missiles capable of reaching Pakistan, making a missile strike the fastest physically plausible initiated kinetic action despite the distance."
   },
   "Iran-Saudi Arabia": {
     "label": "Iran–Saudi Arabia",
@@ -1094,7 +1188,9 @@
     "query": "(Iran AND \"Saudi Arabia\") AND (tensions OR conflict OR diplomacy OR military OR proxy OR Yemen OR nuclear OR normalization OR OPEC)",
     "reasoning": "Iran and Saudi Arabia are rival autocracies with deeply opposed sectarian and geopolitical preferences (Sunni-Shia rivalry, competing regional influence in Yemen, Iraq, Lebanon, and Syria), driving high commitment problems, negative preference alignment, and significant audience costs on both sides. Despite the 2023 China-brokered normalization, structural rivalry persists; Saudi Arabia benefits from a moderate US patron deterrence effect, neither side has nuclear weapons yet (though Iran's program creates low-level nuclear salience), and Iran holds a slight conventional edge in asymmetric/missile capabilities offset by Saudi Arabia's superior air power and arms imports.",
     "doc": "Iran-Saudi Arabia dyad baseline",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Iran possesses medium- and long-range ballistic missiles (e.g., Shahab-3, Emad) and cruise missiles capable of striking Saudi territory across the Persian Gulf with minimal preparation time, as demonstrated by the Iran-linked 2019 Abqaiq-Khurais attack; this is faster than a naval blockade or ground invasion given the lack of a shared land border and the short flight times involved."
   },
   "Canada-Iran": {
     "label": "Canada–Iran",
@@ -1112,7 +1208,9 @@
     },
     "query": "(Canada AND Iran) AND (sanctions OR diplomacy OR nuclear OR relations OR conflict OR IRGC OR hostage OR detention)",
     "reasoning": "Canada and Iran have deeply strained relations—Canada closed its embassy in 2012, designated the IRGC as a terrorist entity, and maintains strong sanctions, reflecting significant preference misalignment and audience costs driven by domestic diaspora politics. However, geographic distance, minimal economic interdependence, and the absence of territorial disputes or direct military confrontation keep the risk of armed conflict structurally very low, with Canada holding a modest conventional edge as a NATO member but no direct patron deterrence commitment applying to this dyad.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "airstrike",
+    "action_type_reasoning": "Canada and Iran share no border and have no routine co-location of forces, but Canada possesses CF-18 fighters and has previously deployed air assets to the Middle East (e.g., anti-ISIS operations); with allied basing access in the region (e.g., Kuwait), an airstrike is the fastest physically plausible kinetic action, though still requiring significant deployment."
   },
   "Iran-Kuwait": {
     "label": "Iran–Kuwait",
@@ -1130,7 +1228,9 @@
     },
     "query": "Iran Kuwait relations OR tensions OR military OR diplomacy OR Gulf security",
     "reasoning": "Iran holds a significant conventional military advantage over Kuwait, but Kuwait benefits from strong US patron deterrence (hosting US troops and having a defense cooperation agreement) that substantially restrains Iranian aggression. The dyad features moderate preference misalignment due to Iran's revisionist regional posture versus Kuwait's status-quo Gulf Arab orientation, though territorial disputes are relatively minor compared to other Iranian dyads, and both sides have economic incentives (oil markets, Gulf shipping) to avoid direct conflict.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Iran possesses short- and medium-range ballistic missiles (e.g., Fateh, Shahab series) that can easily reach Kuwait across the relatively short distance of the Persian Gulf (~200-300 km), making a missile strike the fastest plausible initiated kinetic action; while Iran has naval assets that could harass Kuwaiti shipping, the two do not have routine co-located patrols in contested space that would justify gray_zone_incident, and they share no land border."
   },
   "Israel-Qatar": {
     "label": "Israel–Qatar",
@@ -1149,7 +1249,9 @@
     "query": "Israel AND Qatar AND (Hamas OR negotiations OR diplomacy OR mediation OR Gaza OR conflict OR relations)",
     "reasoning": "Israel holds a decisive conventional military advantage and undeclared nuclear capability, while Qatar lacks a major patron committed to its defense in a bilateral confrontation, though direct war is structurally unlikely given geographic distance and indirect rivalry. The dyad is characterized by deep preference misalignment over Hamas patronage and Palestinian issues, significant audience costs on both sides driven by domestic constituencies, and Qatar's role as a mediator/Hamas host creating ongoing commitment problems, but meaningful war costs from economic interdependence and US relationships constrain escalation.",
     "notes": "This is primarily an indirect rivalry dyad—Israel and Qatar are not neighbors and conflict manifests through proxy dynamics (Qatar's hosting of Hamas leadership, funding flows) rather than direct territorial disputes, which moderates several escalation parameters.",
-    "baseline_source": "auto"
+    "baseline_source": "auto",
+    "action_type": "missile_strike",
+    "action_type_reasoning": "Israel and Qatar have no shared border and are separated by ~1,500 km, but Israel possesses long-range ballistic missiles (Jericho series) and submarine-launched cruise missiles capable of reaching Qatar, making a missile strike the fastest physically plausible initiated action without needing to transit hostile airspace or deploy ground forces."
   },
   "Turkey-Greece": {
     "label": "Greece and Turkey",
@@ -1167,7 +1269,9 @@
     },
     "query": "\"Greece\" AND (\"Turkey\" OR \"Aegean\" OR \"Cyprus\" OR \"airspace\" OR \"Erdogan\")",
     "baseline_source": "verified",
-    "crisis_context": "CRISIS CONTEXT: Turkey and Greece are NATO allies with a long history of bilateral tensions centered on Aegean Sea continental shelf and airspace disputes, competing claims over maritime boundaries in the Eastern Mediterranean (exacerbated by hydrocarbon exploration rights), the status of Cyprus, treatment of ethnic/religious minorities, and periodic migration-related friction. As of mid-2025, no acute military crisis is underway. Relations have been in a relative détente phase since the February 2023 earthquakes prompted mutual humanitarian assistance, followed by a series of high-level diplomatic meetings aimed at confidence-building. However, structural disputes remain unresolved: sovereignty over certain Aegean islets, the delimitation of exclusive economic zones (EEZ), flight information region (FIR) violations, and the militarization of eastern Aegean islands are recurring flashpoints. Both countries maintain significant military assets in proximity, and Greek-Turkish aerial encounters (mock dogfights, FIR violations) are routine rather than exceptional.\n\nNODE-SCORING GUIDANCE:\n\n- MILITARY POSTURING / MOBILIZATION nodes: Greek and Turkish air forces routinely intercept each other over the Aegean; Turkish naval vessels periodically operate near disputed areas. These should be scored as BASELINE behavior unless there is a clear qualitative escalation (e.g., live-fire exercises in disputed waters, unusual force concentration, deployment of assets not normally stationed in the Aegean/Eastern Med theater, or suspension of existing deconfliction mechanisms).\n\n- DIPLOMATIC DETERIORATION nodes: Periodic sharp rhetoric from officials on both sides (especially around sovereignty, EEZ, or Cyprus) is normal. Score escalation only if accompanied by concrete actions such as recall of ambassadors, cancellation of scheduled bilateral talks, formal protests at international bodies, or withdrawal from confidence-building agreements.\n\n- TRIGGER / PRECIPITATING EVENT nodes: No known precipitating event as of early July 2025. Any new hydrocarbon exploration announcements in disputed waters, unilateral NOTAM/NAVTEX declarations covering contested zones, or incidents involving physical contact between military assets should be scored as genuinely novel triggers.\n\n- THIRD-PARTY INVOLVEMENT nodes: Watch for shifts in US, EU, or NATO posture that could embolden or restrain either side. Also monitor Russia's role in any energy or arms deals with Turkey, and developments in the Cyprus reunification process.\n\n- DOMESTIC POLITICAL PRESSURE nodes: Turkish elections are not imminent, but nationalist rhetoric can spike around anniversaries or domestic political stress. Greek domestic politics can similarly amplify Aegean issues. Score these as escalatory only if they translate into policy actions or military directives.\n\n- DE-ESCALATION / DIPLOMACY nodes: The ongoing exploratory talks process (which"
+    "crisis_context": "CRISIS CONTEXT: Turkey and Greece are NATO allies with a long history of bilateral tensions centered on Aegean Sea continental shelf and airspace disputes, competing claims over maritime boundaries in the Eastern Mediterranean (exacerbated by hydrocarbon exploration rights), the status of Cyprus, treatment of ethnic/religious minorities, and periodic migration-related friction. As of mid-2025, no acute military crisis is underway. Relations have been in a relative détente phase since the February 2023 earthquakes prompted mutual humanitarian assistance, followed by a series of high-level diplomatic meetings aimed at confidence-building. However, structural disputes remain unresolved: sovereignty over certain Aegean islets, the delimitation of exclusive economic zones (EEZ), flight information region (FIR) violations, and the militarization of eastern Aegean islands are recurring flashpoints. Both countries maintain significant military assets in proximity, and Greek-Turkish aerial encounters (mock dogfights, FIR violations) are routine rather than exceptional.\n\nNODE-SCORING GUIDANCE:\n\n- MILITARY POSTURING / MOBILIZATION nodes: Greek and Turkish air forces routinely intercept each other over the Aegean; Turkish naval vessels periodically operate near disputed areas. These should be scored as BASELINE behavior unless there is a clear qualitative escalation (e.g., live-fire exercises in disputed waters, unusual force concentration, deployment of assets not normally stationed in the Aegean/Eastern Med theater, or suspension of existing deconfliction mechanisms).\n\n- DIPLOMATIC DETERIORATION nodes: Periodic sharp rhetoric from officials on both sides (especially around sovereignty, EEZ, or Cyprus) is normal. Score escalation only if accompanied by concrete actions such as recall of ambassadors, cancellation of scheduled bilateral talks, formal protests at international bodies, or withdrawal from confidence-building agreements.\n\n- TRIGGER / PRECIPITATING EVENT nodes: No known precipitating event as of early July 2025. Any new hydrocarbon exploration announcements in disputed waters, unilateral NOTAM/NAVTEX declarations covering contested zones, or incidents involving physical contact between military assets should be scored as genuinely novel triggers.\n\n- THIRD-PARTY INVOLVEMENT nodes: Watch for shifts in US, EU, or NATO posture that could embolden or restrain either side. Also monitor Russia's role in any energy or arms deals with Turkey, and developments in the Cyprus reunification process.\n\n- DOMESTIC POLITICAL PRESSURE nodes: Turkish elections are not imminent, but nationalist rhetoric can spike around anniversaries or domestic political stress. Greek domestic politics can similarly amplify Aegean issues. Score these as escalatory only if they translate into policy actions or military directives.\n\n- DE-ESCALATION / DIPLOMACY nodes: The ongoing exploratory talks process (which",
+    "action_type": "gray_zone_incident",
+    "action_type_reasoning": "Turkish and Greek naval vessels, coast guard ships, and fighter jets already routinely operate in close proximity in the disputed Aegean Sea and Eastern Mediterranean, with frequent intercepts, mock dogfights, and territorial-waters violations making a gray-zone incident essentially zero-lead-time."
   },
   "North Korea-South Korea": {
     "label": "North Korea and South Korea",
@@ -1184,6 +1288,8 @@
       "AudienceCosts": 0.5
     },
     "query": "\"North Korea\" AND (\"South Korea\" OR \"Seoul\" OR \"DMZ\" OR \"provocation\" OR \"missile\")",
-    "baseline_source": "verified"
+    "baseline_source": "verified",
+    "action_type": "gray_zone_incident",
+    "action_type_reasoning": "North and South Korean forces are already in direct proximity along the DMZ and the Northern Limit Line at sea, where incidents such as artillery exchanges, mine placements, drone incursions, and naval skirmishes have occurred repeatedly with essentially zero preparation time."
   }
 }

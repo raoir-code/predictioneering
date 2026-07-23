@@ -559,11 +559,13 @@ def run(dry_run: bool = False, filter_dyad: str = None):
             # Anchored to decision_detected_at (set once on first detection,
             # reset when signal abates) so repeat headlines don't roll the clock.
             _OP_LAG_DAYS = {
-                "missile_strike":  1,
-                "airstrike":       2,
-                "raid":            1,
-                "naval_blockade":  3,
-                "ground_invasion": 14,
+                "gray_zone_incident": 0,
+                "missile_strike":     1,
+                "raid":               1,
+                "seizure_boarding":   1,
+                "airstrike":          2,
+                "naval_blockade":     3,
+                "ground_invasion":    14,
             }
             _action_type     = dyad_meta.get("action_type", "airstrike")
             _lag_days        = _OP_LAG_DAYS.get(_action_type, 2)

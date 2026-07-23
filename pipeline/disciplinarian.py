@@ -98,6 +98,60 @@ Nodes and their meaning:
 - HardlineClaims: active territorial disputes / hardline bargaining positions. Higher = more contested. Range: 0.0 to 3.0.
 - AudienceCosts: domestic political pressure making backing down costly. Higher = more locked in. Range: 0.0 to 3.0.
 
+Also set action_type: the FASTEST physically plausible military action this dyad's
+likely initiator could realistically execute, from this exact 7-value set:
+gray_zone_incident, missile_strike, raid, seizure_boarding, airstrike,
+naval_blockade, ground_invasion.
+This is a minimum-feasibility floor used to gate implausibly-fast market
+resolutions -- it is NOT a prediction of what will happen or what is most
+likely, only the fastest thing that is physically possible given real
+constraints. Reason like a military planner, not a pundit:
+- gray_zone_incident: near-zero lead time. Use when forces are ALREADY
+  co-located in contested space and an incident needs no new deployment --
+  coast guard ramming, water cannon use, cable-cutting, drone harassment.
+  E.g. China-Philippines (vessels already present in disputed shoals).
+- seizure_boarding: ~1 day lag. Intercepting/boarding a vessel or aircraft --
+  faster than a raid on land territory, but needs a dispatched
+  interceptor/boarding team, so not zero-lag like gray_zone_incident.
+- missile_strike / airstrike / raid: fastest deployable kinetic strike
+  options once forces are dispatched.
+- naval_blockade / ground_invasion: sustained denial-of-access or
+  territorial-control operations, longest lead times.
+- Do the two states share a land border? If yes, a fast raid or limited
+  ground action may be faster than any naval option -- but shared border
+  alone does NOT justify ground_invasion. Allied or friction-free
+  neighbors (e.g. Gulf Cooperation Council states) should NOT default to
+  ground_invasion just because a border exists; that requires corroborating
+  history of friction, disputed territory, or active hostility, not
+  geography alone.
+- Is the initiator's most relevant force separated by open ocean or a strait?
+  If so, any kinetic action realistically requires naval/air assets first --
+  do not default to ground_invasion just because that is the dramatic outcome.
+- Does the initiator already have forward-deployed bases, carrier presence,
+  or missile range covering the target? This can make missile_strike or
+  airstrike plausible even across long distances.
+- Does the target have a coastline that is economically or militarily
+  chokepoint-relevant (e.g. a strait, a major port)? This can make
+  naval_blockade the realistic fast option even without land access.
+- Are opposing vessels/aircraft/patrols already routinely co-located in
+  contested space (e.g. South China Sea shoals, disputed strait)? If so,
+  gray_zone_incident is very likely the true fastest-plausible floor --
+  do not overlook it in favor of a more dramatic category.
+- If there is genuinely no plausible near-term conflict channel (no border,
+  no basing, no history of friction, allied or non-adjacent states), still
+  pick the least-implausible category rather than leaving it unset -- default
+  toward airstrike/missile_strike as the lowest-commitment placeholder, and
+  say so plainly in action_type_reasoning.
+Bare-minimum discipline only -- this is a categorical judgment call using your
+general knowledge of geography and force posture, not a targeting-grade
+calculation. One sentence of reasoning is enough.
+
+Note: this field does NOT cover political/speech acts (e.g. a blockade
+ANNOUNCEMENT vs. an actual blockade) or reactive engagements (e.g. air
+defenses firing in response to an incoming strike). Those need contract-level
+or escalation-ladder handling, not a dyad-level fallback -- classify only the
+fastest INITIATED physical action here.
+
 Rules:
 - Use your knowledge of IR history, territorial disputes, regime types, and military balance.
 - Be theoretically conservative -- only set extreme values (2.0+) for genuinely extreme cases.
@@ -126,6 +180,8 @@ Respond ONLY with valid JSON in this exact format:
     "HardlineClaims": 0.0,
     "AudienceCosts": 0.0
   },
+  "action_type": "one of: gray_zone_incident, missile_strike, raid, seizure_boarding, airstrike, naval_blockade, ground_invasion",
+  "action_type_reasoning": "one sentence -- geography/basing/doctrine reasoning for the fastest plausible action",
   "query": "boolean GNews search query string",
   "crisis_context": "1-3 sentence summary of this dyad's current structural situation (recent history, active disputes, anything a news-reading model would need to know to avoid misreading routine events as novel ones), followed by explicit guidance on how to score specific named nodes given this situation. If there is genuinely nothing notable about this dyad's current state, write a brief sentence saying so rather than inventing detail -- a short honest 'no notable active crisis dynamics for this dyad' is correct and useful, a fabricated specific event is not.",
   "reasoning": "two sentences explaining the key baseline choices"
