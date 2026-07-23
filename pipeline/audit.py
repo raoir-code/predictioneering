@@ -38,7 +38,7 @@ TARGET_DYADS = [
     "NATO-Russia",
     "India-Pakistan",
     "US-Venezuela",
-    "NorthKorea-SouthKorea",
+    "North Korea-South Korea",
     "China-Philippines",
     "Israel-Iran",
 ]

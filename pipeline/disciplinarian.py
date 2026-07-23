@@ -19,6 +19,9 @@ import time
 import requests
 from datetime import datetime, timezone
 
+sys.path.insert(0, os.path.dirname(__file__))
+from dyad_registry import canonicalize, UnknownDyadError, find_fuzzy_match
+
 # ── Config ──────────────────────────────────────────────────────────────────
 
 ANTHROPIC_API     = "https://api.anthropic.com/v1/messages"
@@ -239,18 +242,42 @@ def run_disciplinarian(dry_run=False):
             result = classify_market(question, event_title)
             m["bucket"]         = result.get("bucket", "NOISE")
             m["bucket_reason"]  = result.get("reason", "")
-            m["dyad"]           = result.get("dyad")
             m["relevant_nodes"] = result.get("relevant_nodes", [])
             counts[m["bucket"]] = counts.get(m["bucket"], 0) + 1
+
+            raw_dyad = result.get("dyad")
+            if raw_dyad:
+                try:
+                    canonical_dyad, is_bilateral = canonicalize(
+                        raw_dyad, known_bilateral_keys=set(dyad_configs.keys())
+                    )
+                    m["dyad"] = canonical_dyad
+                except UnknownDyadError:
+                    fuzzy_hit = find_fuzzy_match(raw_dyad, dyad_configs.keys())
+                    m["dyad"] = raw_dyad
+                    if fuzzy_hit:
+                        m["dyad_needs_registry_review"] = True
+                        print("        ⚠️  LIKELY DUPLICATE DYAD: '" + raw_dyad +
+                              "' resembles existing '" + fuzzy_hit +
+                              "' -- add to dyad_registry.py ALIASES, skipping auto-baseline")
+                    else:
+                        print("        [new dyad, no fuzzy match] '" + raw_dyad + "'")
+            else:
+                m["dyad"] = None
 
             bucket_icon = {"CORE": "✅", "ADJACENT": "🟡", "NOISE": "❌"}.get(m["bucket"], "?")
             print("  " + str(i+1).rjust(3) + ". " + bucket_icon + " [" + m["bucket"].ljust(8) + "] " + question[:65])
             if m["dyad"]:
                 print("        Dyad: " + str(m["dyad"]) + " | Nodes: " + str(m["relevant_nodes"]))
 
-            # Auto-generate baseline for unknown dyads
-            dyad_key = result.get("dyad")
-            if dyad_key and dyad_key not in dyad_configs:
+            # Auto-generate baseline for unknown dyads.
+            # Skipped for dyads flagged dyad_needs_registry_review -- auto-generating
+            # a baseline under an unreviewed key is the exact mechanism that produced
+            # the Russia-NATO/NATO-Russia PatronDeterrence split (2026-06-22).
+            dyad_key = m.get("dyad")
+            if m.get("dyad_needs_registry_review"):
+                pass
+            elif dyad_key and dyad_key not in dyad_configs:
                 try:
                     print("        [new dyad] Generating baseline for '" + dyad_key + "'...")
                     new_config = generate_baseline(dyad_key)

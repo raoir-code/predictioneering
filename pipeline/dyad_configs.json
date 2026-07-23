@@ -20,7 +20,7 @@
       "ProtractedConflict": 0.3,
       "GeographicProximity": 0.35
     },
-    "crisis_context": "CRISIS CONTEXT: China conducts recurring large-scale military exercises around Taiwan as part of the ongoing Fourth Taiwan Strait Crisis sequence (2022-present). Exercises, ADIZ incursions, patrol announcements, arms sale reactions, and blockade warnings are routine features of this rivalry \u2014 they occur continuously and do not indicate imminent invasion. When scoring headlines: distinguish routine coercive pressure (exercises, patrols, diplomatic protests) from genuine operational preparation (evacuation orders, airspace closure, confirmed amphibious staging). Score RoutineMilitaryPressure for standard exercises and rhetoric. Score OperationalPreparation only for concrete force positioning indicating imminent action.",
+    "crisis_context": "CRISIS CONTEXT: China conducts recurring large-scale military exercises around Taiwan as part of the ongoing Fourth Taiwan Strait Crisis sequence (2022-present). Exercises, ADIZ incursions, patrol announcements, arms sale reactions, and blockade warnings are routine features of this rivalry — they occur continuously and do not indicate imminent invasion. When scoring headlines: distinguish routine coercive pressure (exercises, patrols, diplomatic protests) from genuine operational preparation (evacuation orders, airspace closure, confirmed amphibious staging). Score RoutineMilitaryPressure for standard exercises and rhetoric. Score OperationalPreparation only for concrete force positioning indicating imminent action.",
     "suppressor_static": {
       "OperationalFeasibility": 0.3,
       "InitiatorSurvivalRisk": 0.85,
@@ -78,7 +78,7 @@
       "ProtractedConflict": 0.3,
       "GeographicProximity": 0.0
     },
-    "crisis_context": "CRISIS CONTEXT: US-Iran is now a fragile post-strike implementation crisis, not a pre-strike ultimatum crisis. The February 28, 2026 strike already occurred. As of early July 2026, the relevant bargaining environment is an interim peace/MOU framework involving ceasefire maintenance, Strait of Hormuz reopening, frozen-asset release, sanctions relief, and follow-on nuclear/security negotiations. The crisis has moved into a mid-implementation phase where the key dynamics are: (1) whether ceasefire terms and asset-release timelines are being honored, (2) whether Hormuz maritime transit is normalizing, (3) whether follow-on nuclear/security talks are progressing or stalling, and (4) whether domestic political pressures on either side are undermining implementation commitments. No headlines are available for the trailing week ending early July 2026, so no material factual update is warranted; the structural situation should be presumed unchanged from late June 2026 absent contrary evidence. This is the second consecutive low-activity cycle (OP=0.25, LVO=0.50 this cycle; OP=0.00, LVO=0.50 prior cycle), reinforcing that the dyad is in implementation drift rather than active crisis movement. Diplomatic talks, mediator channels, technical implementation meetings, and asset-release logistics should now be treated as real de-escalatory/substitution-path evidence UNLESS paired with explicit force deployments, ultimatums, or verified ceasefire collapse. Score SubstitutionPath positively when there are verified halt-attack commitments, implementation mechanisms, maritime reopening procedures, demobilization, or mediator-run incident channels. Score CommitmentProblem UPWARD when either side rejects implementation terms, resumes strikes, issues public ultimatums, disputes Hormuz control, signals that today's deal cannot bind tomorrow's behavior, misses agreed implementation deadlines, or when credible reports indicate covert reconstitution of struck nuclear/military facilities. Score MobilizationSignal or HardlineClaims ONLY for new force movement, alert changes, strike packages, evacuation orders, or concrete operational preparation \u2014 NOT for routine rhetoric, accusations, or talk scheduling. PreferenceAlignment fires ONLY on formal structural shifts: deal signed, framework formally collapsed, official MOU withdrawal, or coalition/recognition change. Routine ceasefire violations that are managed within the framework do NOT fire PreferenceAlignment \u2014 they fire CommitmentProblem. NOTE: Absence of headlines for the trailing period should NOT be interpreted as either escalation or de-escalation; scoring should default to the last known structural state unless new evidence arrives. Consecutive low-activity cycles suggest stable implementation drift; absent new",
+    "crisis_context": "CRISIS CONTEXT: US-Iran is now a fragile post-strike implementation crisis, not a pre-strike ultimatum crisis. The February 28, 2026 strike already occurred. As of early July 2026, the relevant bargaining environment is an interim peace/MOU framework involving ceasefire maintenance, Strait of Hormuz reopening, frozen-asset release, sanctions relief, and follow-on nuclear/security negotiations. The crisis has moved into a mid-implementation phase where the key dynamics are: (1) whether ceasefire terms and asset-release timelines are being honored, (2) whether Hormuz maritime transit is normalizing, (3) whether follow-on nuclear/security talks are progressing or stalling, and (4) whether domestic political pressures on either side are undermining implementation commitments. No headlines are available for the trailing week ending early July 2026, so no material factual update is warranted; the structural situation should be presumed unchanged from late June 2026 absent contrary evidence. This is the second consecutive low-activity cycle (OP=0.25, LVO=0.50 this cycle; OP=0.00, LVO=0.50 prior cycle), reinforcing that the dyad is in implementation drift rather than active crisis movement. Diplomatic talks, mediator channels, technical implementation meetings, and asset-release logistics should now be treated as real de-escalatory/substitution-path evidence UNLESS paired with explicit force deployments, ultimatums, or verified ceasefire collapse. Score SubstitutionPath positively when there are verified halt-attack commitments, implementation mechanisms, maritime reopening procedures, demobilization, or mediator-run incident channels. Score CommitmentProblem UPWARD when either side rejects implementation terms, resumes strikes, issues public ultimatums, disputes Hormuz control, signals that today's deal cannot bind tomorrow's behavior, misses agreed implementation deadlines, or when credible reports indicate covert reconstitution of struck nuclear/military facilities. Score MobilizationSignal or HardlineClaims ONLY for new force movement, alert changes, strike packages, evacuation orders, or concrete operational preparation — NOT for routine rhetoric, accusations, or talk scheduling. PreferenceAlignment fires ONLY on formal structural shifts: deal signed, framework formally collapsed, official MOU withdrawal, or coalition/recognition change. Routine ceasefire violations that are managed within the framework do NOT fire PreferenceAlignment — they fire CommitmentProblem. NOTE: Absence of headlines for the trailing period should NOT be interpreted as either escalation or de-escalation; scoring should default to the last known structural state unless new evidence arrives. Consecutive low-activity cycles suggest stable implementation drift; absent new",
     "crisis_onset_date": "2025-11-01",
     "acute_phase_onset_date": "2026-01-20",
     "event_date": null,
@@ -156,7 +156,7 @@
       "ProtractedConflict": 0.3,
       "GeographicProximity": 0.35
     },
-    "crisis_context": "CRISIS CONTEXT: India and Pakistan fought Operation Sindoor May 7-10, 2025 \u2014 a brief armed conflict triggered by the Pahalgam terrorist attack. India conducted missile strikes on Pakistani territory. A US-mediated ceasefire ended the conflict May 10, 2025. The backtest scoring period (October-December 2025) is POST-CEASEFIRE. When scoring headlines: nuclear threats, BrahMos range claims, army chief warnings, and capability discussions are post-conflict rhetoric from the winning side, NOT indicators of imminent new conflict. Score RoutineMilitaryPressure for speeches and capability claims. Score OperationalPreparation ONLY for new verified troop movements or mobilization orders.",
+    "crisis_context": "CRISIS CONTEXT: India and Pakistan fought Operation Sindoor May 7-10, 2025 — a brief armed conflict triggered by the Pahalgam terrorist attack. India conducted missile strikes on Pakistani territory. A US-mediated ceasefire ended the conflict May 10, 2025. The backtest scoring period (October-December 2025) is POST-CEASEFIRE. When scoring headlines: nuclear threats, BrahMos range claims, army chief warnings, and capability discussions are post-conflict rhetoric from the winning side, NOT indicators of imminent new conflict. Score RoutineMilitaryPressure for speeches and capability claims. Score OperationalPreparation ONLY for new verified troop movements or mobilization orders.",
     "suppressor_static": {
       "OperationalFeasibility": 0.7,
       "InitiatorSurvivalRisk": 0.65,
@@ -241,7 +241,7 @@
       "InitiatorSurvivalRisk": 0.1,
       "SubstitutionPath": 0.5
     },
-    "crisis_context": "CRISIS CONTEXT: By June 2026, the US shifted Cuba from ordinary sanctions hostility into heightened coercive pressure following the Venezuela operation. Trump publicly suggested a Cuba operation could mirror Venezuela. Surveillance overflights and contingency planning are active. This is NOT yet a kinetic crisis \u2014 routine rhetoric should not fire the crisis clock. Concrete military deployments, blockade enforcement, evacuation orders, or confirmed strike packages should. Score OperationalPreparation only for irreversible operational acts, not rhetoric."
+    "crisis_context": "CRISIS CONTEXT: By June 2026, the US shifted Cuba from ordinary sanctions hostility into heightened coercive pressure following the Venezuela operation. Trump publicly suggested a Cuba operation could mirror Venezuela. Surveillance overflights and contingency planning are active. This is NOT yet a kinetic crisis — routine rhetoric should not fire the crisis clock. Concrete military deployments, blockade enforcement, evacuation orders, or confirmed strike packages should. Score OperationalPreparation only for irreversible operational acts, not rhetoric."
   },
   "US-Mexico": {
     "label": "United States and Mexico",
@@ -265,7 +265,7 @@
       "InitiatorSurvivalRisk": 0.05,
       "SubstitutionPath": 0.65
     },
-    "crisis_context": "CRISIS CONTEXT \u2014 US-Mexico dyad (initialized Jul 2025)\n\nThis dyad covers the bilateral relationship between the United States and Mexico, which as of mid-2025 is under significant strain across multiple dimensions. Key background factors:\n\n1. MIGRATION & BORDER ENFORCEMENT: The US under the Trump administration has maintained aggressive border enforcement postures, including military deployments to the southern border, expanded use of Title 42-era authorities or successors, and pressure on Mexico to interdict northbound migration. Mexico has intermittently cooperated but also pushed back on sovereignty grounds. Routine border operations and troop rotations should not be scored as novel escalation unless they represent a clear departure from the current elevated baseline.\n\n2. FENTANYL & CARTEL OPERATIONS: The US has designated certain Mexican cartels as terrorist organizations or threatened to do so. There has been recurring US rhetoric about unilateral military action against cartels on Mexican soil. Mexico has firmly rejected any such intervention as a sovereignty violation. Scoring guidance: distinguish between (a) rhetorical threats or legislative proposals, which are now part of the baseline and should be scored modestly on nodes like \"public threat\" or \"demand,\" and (b) actual operational preparation or cross-border kinetic action, which would represent genuine escalation.\n\n3. TRADE & ECONOMIC LEVERAGE: USMCA remains the governing trade framework, but tariff threats, particularly related to fentanyl and migration conditionality, have been a recurring tool. New tariff impositions or threats should be evaluated against whether they represent incremental escalation or repetition of prior patterns.\n\n4. DIPLOMATIC RELATIONS: Relations are functional but tense. There have been periods of diplomatic friction including ambassador recalls or summons, public rebukes, and competing narratives. The baseline diplomatic temperature is cool but not severed.\n\nSCORING GUIDANCE FOR KEY NODES:\n- \"Military mobilization\" / \"Show of force\": The US has already normalized military presence at the border. Score only genuinely new deployments, repositioning toward offensive posture, or named operations targeting Mexican territory.\n- \"Threat of force\" / \"Public demand\": Cartel-related military rhetoric from US officials is now baseline. Score only if specificity increases (named targets, timelines, ultimatums) or if it comes from the President with operational framing.\n- \"Economic sanctions / coercion\": Tariff threats tied to migration/fentanyl are recurring. Score new actual impositions or significant expansions, not repetitions of prior threats.\n- \"Diplomatic protest\" / \"Recall of ambassador\": Evaluate against the already-strained baseline. Routine expressions of displeasure are low-signal; formal diplomatic downgrades are high-signal."
+    "crisis_context": "CRISIS CONTEXT — US-Mexico dyad (initialized Jul 2025)\n\nThis dyad covers the bilateral relationship between the United States and Mexico, which as of mid-2025 is under significant strain across multiple dimensions. Key background factors:\n\n1. MIGRATION & BORDER ENFORCEMENT: The US under the Trump administration has maintained aggressive border enforcement postures, including military deployments to the southern border, expanded use of Title 42-era authorities or successors, and pressure on Mexico to interdict northbound migration. Mexico has intermittently cooperated but also pushed back on sovereignty grounds. Routine border operations and troop rotations should not be scored as novel escalation unless they represent a clear departure from the current elevated baseline.\n\n2. FENTANYL & CARTEL OPERATIONS: The US has designated certain Mexican cartels as terrorist organizations or threatened to do so. There has been recurring US rhetoric about unilateral military action against cartels on Mexican soil. Mexico has firmly rejected any such intervention as a sovereignty violation. Scoring guidance: distinguish between (a) rhetorical threats or legislative proposals, which are now part of the baseline and should be scored modestly on nodes like \"public threat\" or \"demand,\" and (b) actual operational preparation or cross-border kinetic action, which would represent genuine escalation.\n\n3. TRADE & ECONOMIC LEVERAGE: USMCA remains the governing trade framework, but tariff threats, particularly related to fentanyl and migration conditionality, have been a recurring tool. New tariff impositions or threats should be evaluated against whether they represent incremental escalation or repetition of prior patterns.\n\n4. DIPLOMATIC RELATIONS: Relations are functional but tense. There have been periods of diplomatic friction including ambassador recalls or summons, public rebukes, and competing narratives. The baseline diplomatic temperature is cool but not severed.\n\nSCORING GUIDANCE FOR KEY NODES:\n- \"Military mobilization\" / \"Show of force\": The US has already normalized military presence at the border. Score only genuinely new deployments, repositioning toward offensive posture, or named operations targeting Mexican territory.\n- \"Threat of force\" / \"Public demand\": Cartel-related military rhetoric from US officials is now baseline. Score only if specificity increases (named targets, timelines, ultimatums) or if it comes from the President with operational framing.\n- \"Economic sanctions / coercion\": Tariff threats tied to migration/fentanyl are recurring. Score new actual impositions or significant expansions, not repetitions of prior threats.\n- \"Diplomatic protest\" / \"Recall of ambassador\": Evaluate against the already-strained baseline. Routine expressions of displeasure are low-signal; formal diplomatic downgrades are high-signal."
   },
   "US-Russia": {
     "label": "United States and Russia",
@@ -289,7 +289,7 @@
       "InitiatorSurvivalRisk": 0.7,
       "SubstitutionPath": 0.45
     },
-    "crisis_context": "CRISIS CONTEXT (US-Russia dyad, initialized Jul 2025):\n\nThe US-Russia relationship remains at its most adversarial level since the Cold War, driven primarily by Russia's ongoing war in Ukraine (launched Feb 2022) and the broader geopolitical confrontation it has produced. Key structural features of the current situation:\n\n- The Ukraine war continues with no ceasefire or settlement in place. The US has provided extensive military, economic, and intelligence support to Ukraine, which Russia treats as a proxy confrontation. Diplomatic channels between Washington and Moscow are minimal but not fully severed.\n- The Trump administration (inaugurated Jan 2025) has signaled interest in negotiating an end to the Ukraine conflict, creating diplomatic uncertainty. Any shifts in US posture toward Ukraine \u2014 whether escalatory or de-escalatory \u2014 should be evaluated for their effect on direct US-Russia crisis dynamics, not just the Ukraine theater.\n- Nuclear signaling remains elevated. Russia has periodically adjusted its declaratory nuclear doctrine and conducted nuclear exercises. The US has maintained its extended deterrence posture. These signals are now ROUTINE BACKGROUND for this dyad; they should not be scored as novel escalation unless they involve concrete changes in force posture, deployment, or doctrine beyond established patterns.\n- Sanctions, asset freezes, and diplomatic expulsions are the BASELINE state. New sanctions packages or retaliatory measures should be scored only if they represent a material expansion in scope or target set (e.g., energy sector escalation, secondary sanctions enforcement against third parties).\n- Proxy and gray-zone friction points include: cyber operations, election interference allegations, Arctic military posturing, Syria (diminished but not zero), and competition for influence in Africa and the Global South. These are ongoing and should be scored as escalatory only if a specific incident represents a qualitative departure from the established pattern.\n\nSCORING GUIDANCE FOR SPECIFIC NODES:\n\n- Hostile diplomatic/economic actions: The baseline is already very high (near-total sanctions, expelled diplomats). Score new actions only if they cross remaining thresholds (e.g., full energy embargo, severing of remaining diplomatic presence, seizure of sovereign assets).\n- Military posturing/signaling: Routine nuclear rhetoric, strategic bomber patrols, submarine deployments, and snap exercises are EXPECTED. Score as escalatory only if they involve novel geographic positioning (e.g., forward deployment to Cuba/Venezuela), unprecedented scale, or explicit coupling to a specific threat scenario.\n- Kinetic triggers: Any direct military engagement between US and Russian forces \u2014 even accidental \u2014 would be an extreme escalation. Near-misses (e.g., intercepts over the Black Sea, Baltic, or Arctic) have occurred before; score based on severity, proximity, and whether rules of engagement appear to"
+    "crisis_context": "CRISIS CONTEXT (US-Russia dyad, initialized Jul 2025):\n\nThe US-Russia relationship remains at its most adversarial level since the Cold War, driven primarily by Russia's ongoing war in Ukraine (launched Feb 2022) and the broader geopolitical confrontation it has produced. Key structural features of the current situation:\n\n- The Ukraine war continues with no ceasefire or settlement in place. The US has provided extensive military, economic, and intelligence support to Ukraine, which Russia treats as a proxy confrontation. Diplomatic channels between Washington and Moscow are minimal but not fully severed.\n- The Trump administration (inaugurated Jan 2025) has signaled interest in negotiating an end to the Ukraine conflict, creating diplomatic uncertainty. Any shifts in US posture toward Ukraine — whether escalatory or de-escalatory — should be evaluated for their effect on direct US-Russia crisis dynamics, not just the Ukraine theater.\n- Nuclear signaling remains elevated. Russia has periodically adjusted its declaratory nuclear doctrine and conducted nuclear exercises. The US has maintained its extended deterrence posture. These signals are now ROUTINE BACKGROUND for this dyad; they should not be scored as novel escalation unless they involve concrete changes in force posture, deployment, or doctrine beyond established patterns.\n- Sanctions, asset freezes, and diplomatic expulsions are the BASELINE state. New sanctions packages or retaliatory measures should be scored only if they represent a material expansion in scope or target set (e.g., energy sector escalation, secondary sanctions enforcement against third parties).\n- Proxy and gray-zone friction points include: cyber operations, election interference allegations, Arctic military posturing, Syria (diminished but not zero), and competition for influence in Africa and the Global South. These are ongoing and should be scored as escalatory only if a specific incident represents a qualitative departure from the established pattern.\n\nSCORING GUIDANCE FOR SPECIFIC NODES:\n\n- Hostile diplomatic/economic actions: The baseline is already very high (near-total sanctions, expelled diplomats). Score new actions only if they cross remaining thresholds (e.g., full energy embargo, severing of remaining diplomatic presence, seizure of sovereign assets).\n- Military posturing/signaling: Routine nuclear rhetoric, strategic bomber patrols, submarine deployments, and snap exercises are EXPECTED. Score as escalatory only if they involve novel geographic positioning (e.g., forward deployment to Cuba/Venezuela), unprecedented scale, or explicit coupling to a specific threat scenario.\n- Kinetic triggers: Any direct military engagement between US and Russian forces — even accidental — would be an extreme escalation. Near-misses (e.g., intercepts over the Black Sea, Baltic, or Arctic) have occurred before; score based on severity, proximity, and whether rules of engagement appear to"
   },
   "US-China": {
     "label": "United States and China",
@@ -307,24 +307,7 @@
     },
     "query": "\"China\" AND (\"United States\" OR \"Pentagon\" OR \"trade war\" OR \"South China Sea\") NOT Taiwan",
     "baseline_source": "verified",
-    "crisis_context": "CRISIS CONTEXT (US-China dyad, initialized Jul 2025):\n\nAs of early July 2025, the US-China relationship remains characterized by sustained strategic competition across multiple domains \u2014 trade/tariffs, technology controls, Taiwan, South China Sea, and military posturing \u2014 but without an acute crisis trigger in the trailing week. No specific precipitating event (e.g., Taiwan Strait transit incident, new tariff escalation, diplomatic expulsion, or military confrontation) has been identified in the most recent headline window. The baseline is one of elevated but managed tension, with both sides maintaining robust deterrence postures while preserving diplomatic communication channels (albeit sometimes strained).\n\nKEY CONTEXT FOR NODE SCORING:\n\n- MILITARY POSTURING / SIGNALING: Routine PLA exercises near Taiwan, South China Sea patrols, and US freedom-of-navigation operations should be scored as BASELINE activity unless they involve unusual scale, proximity, or novel capabilities. Do not inflate routine deployments into escalatory signals.\n\n- TRADE / ECONOMIC COERCION: The US maintains extensive export controls (chips, AI) and tariffs; China maintains retaliatory tariffs and rare-earth export restrictions. These are STANDING CONDITIONS, not new escalatory moves, unless a fresh round of restrictions or retaliatory measures is announced.\n\n- DIPLOMATIC COMMUNICATION: Channels exist but are inconsistent. Score diplomatic engagement nodes based on whether contacts are expanding, contracting, or stable relative to the 2024-2025 baseline of intermittent high-level engagement.\n\n- TAIWAN-RELATED TRIGGERS: No new Taiwan crisis is active. Score Taiwan-related nodes (arms sales, transit, PLA encirclement exercises) only if evidence points to a departure from the recurring pattern of periodic tensions.\n\n- CYBER / INFORMATION OPERATIONS: Ongoing baseline of mutual cyber espionage and influence operations (e.g., Volt Typhoon-type infrastructure pre-positioning attributed to China). Treat as standing background unless a specific new incident or public attribution occurs.\n\n- PRECIPITATING EVENT NODES: No precipitating event has occurred as of this initialization. These nodes should require strong, specific evidence to score above baseline. Avoid conflating accumulated structural tensions with an acute trigger.\n\n- ALLIANCE / THIRD-PARTY DYNAMICS: US alliance-building in the Indo-Pacific (AUKUS, Japan, Philippines) and China's counter-alignment efforts are ongoing structural features. Score as escalatory only if a new commitment, deployment, or confrontation involving allies occurs.\n\nGENERAL GUIDANCE: This dyad sits at a chronically elevated but sub-crisis level. The default prior for most escalation nodes should reflect managed competition, not imminent conflict. Evidence must show a clear departure from this"
-  },
-  "Greece-Turkey": {
-    "label": "Greece and Turkey",
-    "baseline": {
-      "WinProbability": 0.0,
-      "WarCosts": -0.5,
-      "HardlineClaims": 0.5,
-      "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -0.5,
-      "Patience": -0.5,
-      "DemocraticPeace": 0.0,
-      "PatronDeterrence": 0.5,
-      "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5
-    },
-    "query": "\"Greece\" AND (\"Turkey\" OR \"Aegean\" OR \"Cyprus\" OR \"airspace\" OR \"Erdogan\")",
-    "baseline_source": "verified"
+    "crisis_context": "CRISIS CONTEXT (US-China dyad, initialized Jul 2025):\n\nAs of early July 2025, the US-China relationship remains characterized by sustained strategic competition across multiple domains — trade/tariffs, technology controls, Taiwan, South China Sea, and military posturing — but without an acute crisis trigger in the trailing week. No specific precipitating event (e.g., Taiwan Strait transit incident, new tariff escalation, diplomatic expulsion, or military confrontation) has been identified in the most recent headline window. The baseline is one of elevated but managed tension, with both sides maintaining robust deterrence postures while preserving diplomatic communication channels (albeit sometimes strained).\n\nKEY CONTEXT FOR NODE SCORING:\n\n- MILITARY POSTURING / SIGNALING: Routine PLA exercises near Taiwan, South China Sea patrols, and US freedom-of-navigation operations should be scored as BASELINE activity unless they involve unusual scale, proximity, or novel capabilities. Do not inflate routine deployments into escalatory signals.\n\n- TRADE / ECONOMIC COERCION: The US maintains extensive export controls (chips, AI) and tariffs; China maintains retaliatory tariffs and rare-earth export restrictions. These are STANDING CONDITIONS, not new escalatory moves, unless a fresh round of restrictions or retaliatory measures is announced.\n\n- DIPLOMATIC COMMUNICATION: Channels exist but are inconsistent. Score diplomatic engagement nodes based on whether contacts are expanding, contracting, or stable relative to the 2024-2025 baseline of intermittent high-level engagement.\n\n- TAIWAN-RELATED TRIGGERS: No new Taiwan crisis is active. Score Taiwan-related nodes (arms sales, transit, PLA encirclement exercises) only if evidence points to a departure from the recurring pattern of periodic tensions.\n\n- CYBER / INFORMATION OPERATIONS: Ongoing baseline of mutual cyber espionage and influence operations (e.g., Volt Typhoon-type infrastructure pre-positioning attributed to China). Treat as standing background unless a specific new incident or public attribution occurs.\n\n- PRECIPITATING EVENT NODES: No precipitating event has occurred as of this initialization. These nodes should require strong, specific evidence to score above baseline. Avoid conflating accumulated structural tensions with an acute trigger.\n\n- ALLIANCE / THIRD-PARTY DYNAMICS: US alliance-building in the Indo-Pacific (AUKUS, Japan, Philippines) and China's counter-alignment efforts are ongoing structural features. Score as escalatory only if a new commitment, deployment, or confrontation involving allies occurs.\n\nGENERAL GUIDANCE: This dyad sits at a chronically elevated but sub-crisis level. The default prior for most escalation nodes should reflect managed competition, not imminent conflict. Evidence must show a clear departure from this"
   },
   "China-Japan": {
     "label": "China and Japan",
@@ -360,24 +343,7 @@
     },
     "query": "\"China\" AND (\"Philippines\" OR \"South China Sea\" OR \"Scarborough\" OR \"BRP\" OR \"Manila\")",
     "baseline_source": "verified",
-    "crisis_context": "CRISIS CONTEXT: The China-Philippines dyad centers on competing sovereignty claims in the South China Sea (SCS), particularly around the Second Thomas Shoal (Ayungin Shoal), Scarborough Shoal, and features within the Philippine exclusive economic zone. Since 2023, tensions have escalated through repeated confrontations between China Coast Guard (CCG) / maritime militia vessels and Philippine Coast Guard (PCG) / Navy resupply missions to the BRP Sierra Madre at Second Thomas Shoal. Incidents have included water-cannon use, hull-ramming, and a June 2024 confrontation in which Philippine sailors were injured and equipment seized. A provisional arrangement on resupply missions was reportedly reached in mid-2024 but its durability remains uncertain. The Philippines has deepened its alliance with the United States, including expanded EDCA basing access, joint patrols, and trilateral exercises with Japan. China continues gray-zone pressure \u2014 deploying CCG and militia vessels, installing floating barriers, and conducting island-building \u2014 while avoiding kinetic escalation that would trigger the US-Philippines Mutual Defense Treaty.\n\nSCORING GUIDANCE FOR NAMED NODES:\n\n- Nodes related to MILITARY BUILDUP / FORCE POSTURE: Routine CCG or militia deployments near contested features should score as baseline presence, not escalation, unless vessel numbers or asset types (e.g., PLAN warships replacing CCG cutters) materially exceed recent norms. New Philippine basing construction or pre-positioning under EDCA is structural, not crisis-triggering, unless tied to a specific contingency order.\n\n- Nodes related to PRECIPITATING INCIDENT / TRIGGER EVENT: A new physical confrontation at Second Thomas Shoal, Scarborough Shoal, or other contested feature (ramming, boarding, use of weapons including water cannons causing injury, seizure of supplies) should score high. Distinguish between a genuinely new incident and recycled reporting of past 2024 confrontations.\n\n- Nodes related to DIPLOMATIC SIGNALING / CRISIS COMMUNICATION: Harsh rhetoric from Chinese MFA or PLA Southern Theater Command is routine; score elevated only if it includes explicit ultimatums, deadlines, or novel red-line language (e.g., threatening to tow the Sierra Madre). Philippine diplomatic protests (note verbales) are frequent; score elevated only if accompanied by treaty-invocation language or formal requests for US/allied intervention.\n\n- Nodes related to THIRD-PARTY INVOLVEMENT: US freedom-of-navigation operations (FONOPs) and joint exercises are recurring and should be scored as baseline unless they occur in direct temporal/spatial response to a specific Chinese provocation. Japan, Australia, or other partner naval deploy"
-  },
-  "NorthKorea-SouthKorea": {
-    "label": "North Korea and South Korea",
-    "baseline": {
-      "WinProbability": -0.5,
-      "WarCosts": -0.5,
-      "HardlineClaims": 0.5,
-      "CommitmentProblem": 1.0,
-      "PreferenceAlignment": -0.5,
-      "Patience": -1.0,
-      "DemocraticPeace": 2.0,
-      "PatronDeterrence": 1.5,
-      "NuclearDeterrence": 2.0,
-      "AudienceCosts": 0.5
-    },
-    "query": "\"North Korea\" AND (\"South Korea\" OR \"Seoul\" OR \"DMZ\" OR \"provocation\" OR \"missile\")",
-    "baseline_source": "verified"
+    "crisis_context": "CRISIS CONTEXT: The China-Philippines dyad centers on competing sovereignty claims in the South China Sea (SCS), particularly around the Second Thomas Shoal (Ayungin Shoal), Scarborough Shoal, and features within the Philippine exclusive economic zone. Since 2023, tensions have escalated through repeated confrontations between China Coast Guard (CCG) / maritime militia vessels and Philippine Coast Guard (PCG) / Navy resupply missions to the BRP Sierra Madre at Second Thomas Shoal. Incidents have included water-cannon use, hull-ramming, and a June 2024 confrontation in which Philippine sailors were injured and equipment seized. A provisional arrangement on resupply missions was reportedly reached in mid-2024 but its durability remains uncertain. The Philippines has deepened its alliance with the United States, including expanded EDCA basing access, joint patrols, and trilateral exercises with Japan. China continues gray-zone pressure — deploying CCG and militia vessels, installing floating barriers, and conducting island-building — while avoiding kinetic escalation that would trigger the US-Philippines Mutual Defense Treaty.\n\nSCORING GUIDANCE FOR NAMED NODES:\n\n- Nodes related to MILITARY BUILDUP / FORCE POSTURE: Routine CCG or militia deployments near contested features should score as baseline presence, not escalation, unless vessel numbers or asset types (e.g., PLAN warships replacing CCG cutters) materially exceed recent norms. New Philippine basing construction or pre-positioning under EDCA is structural, not crisis-triggering, unless tied to a specific contingency order.\n\n- Nodes related to PRECIPITATING INCIDENT / TRIGGER EVENT: A new physical confrontation at Second Thomas Shoal, Scarborough Shoal, or other contested feature (ramming, boarding, use of weapons including water cannons causing injury, seizure of supplies) should score high. Distinguish between a genuinely new incident and recycled reporting of past 2024 confrontations.\n\n- Nodes related to DIPLOMATIC SIGNALING / CRISIS COMMUNICATION: Harsh rhetoric from Chinese MFA or PLA Southern Theater Command is routine; score elevated only if it includes explicit ultimatums, deadlines, or novel red-line language (e.g., threatening to tow the Sierra Madre). Philippine diplomatic protests (note verbales) are frequent; score elevated only if accompanied by treaty-invocation language or formal requests for US/allied intervention.\n\n- Nodes related to THIRD-PARTY INVOLVEMENT: US freedom-of-navigation operations (FONOPs) and joint exercises are recurring and should be scored as baseline unless they occur in direct temporal/spatial response to a specific Chinese provocation. Japan, Australia, or other partner naval deploy"
   },
   "Israel-Yemen": {
     "label": "Israel and Yemen (Houthis)",
@@ -413,7 +379,7 @@
     },
     "query": "\"Israel\" AND (\"Turkey\" OR \"Erdogan\" OR \"Ankara\" OR \"flotilla\" OR \"Gaza\")",
     "baseline_source": "verified",
-    "crisis_context": "CRISIS CONTEXT \u2014 Israel-Turkey (initialized Jul 2025)\n\nBackground: Israel-Turkey relations have deteriorated sharply since October 2023. Turkey recalled its ambassador, suspended bilateral trade (May 2024), and President Erdo\u011fan has repeatedly used maximalist rhetoric comparing Israeli leadership to Nazi-era figures and expressing solidarity with Hamas. Turkey joined South Africa's ICJ genocide case against Israel. Israel reciprocated by recalling its own diplomats and imposing counter-measures. Despite the rhetorical escalation, the two states retain NATO-adjacent institutional links (Turkey is a NATO member; Israel has deep NATO-partner interoperability), and there is no active military confrontation or forward-deployed threat between them. The Eastern Mediterranean remains a zone of overlapping interests (Cyprus EEZ, gas infrastructure, Syria buffer dynamics) but not active military friction between these two actors specifically.\n\nAs of Jul 2025, no headlines were available to update the picture, so the baseline is the frozen diplomatic rupture and trade embargo from 2024, with no indication of either normalization moves or further escalation toward kinetic risk.\n\nSCORING GUIDANCE FOR NAMED NODES:\n\n\u2014 Diplomatic severance / hostile rhetoric: Already largely priced in. Erdo\u011fan's inflammatory statements and ambassador recalls are the STATUS QUO, not new triggers. Score rhetoric nodes only if statements cross into explicit threat-of-force language (e.g., direct military threats, blockade announcements) or if there is a surprising reversal toward normalization.\n\n\u2014 Trade embargo / economic coercion: Turkey's trade suspension is already in effect. Score economic-pressure nodes only for EXPANSION (e.g., secondary sanctions, energy transit disruption, seizure of assets) or RELAXATION (quiet resumption of trade, back-channel commodity flows).\n\n\u2014 Military posturing / force deployment: There is NO current military standoff. Any evidence of naval deployments directed at the other party, airspace incidents, or forward-positioning in Syria/Cyprus context should be scored as genuinely novel and escalatory. Do not inflate routine Turkish naval exercises in the Eastern Med as Israel-directed unless explicitly linked.\n\n\u2014 Proxy / indirect confrontation: Turkey's political support for Hamas is established background. Score proxy nodes only for evidence of material military support (arms transfers, training, logistics) rather than political endorsement, which is already baseline.\n\n\u2014 Precipitating / trigger events: No specific trigger event has occurred as of this initialization. Any new incident (e.g., interdiction of Turkish vessels, strikes affecting Turkish personnel in Syria/Lebanon, intelligence operations on Turkish soil) should be treated as a genuine novel trigger and scored accordingly.\n\n\u2014 Alliance / third-party dynamics: Watch for NATO-related friction (e.g., Turkey blocking Israel-NATO cooperation"
+    "crisis_context": "CRISIS CONTEXT — Israel-Turkey (initialized Jul 2025)\n\nBackground: Israel-Turkey relations have deteriorated sharply since October 2023. Turkey recalled its ambassador, suspended bilateral trade (May 2024), and President Erdoğan has repeatedly used maximalist rhetoric comparing Israeli leadership to Nazi-era figures and expressing solidarity with Hamas. Turkey joined South Africa's ICJ genocide case against Israel. Israel reciprocated by recalling its own diplomats and imposing counter-measures. Despite the rhetorical escalation, the two states retain NATO-adjacent institutional links (Turkey is a NATO member; Israel has deep NATO-partner interoperability), and there is no active military confrontation or forward-deployed threat between them. The Eastern Mediterranean remains a zone of overlapping interests (Cyprus EEZ, gas infrastructure, Syria buffer dynamics) but not active military friction between these two actors specifically.\n\nAs of Jul 2025, no headlines were available to update the picture, so the baseline is the frozen diplomatic rupture and trade embargo from 2024, with no indication of either normalization moves or further escalation toward kinetic risk.\n\nSCORING GUIDANCE FOR NAMED NODES:\n\n— Diplomatic severance / hostile rhetoric: Already largely priced in. Erdoğan's inflammatory statements and ambassador recalls are the STATUS QUO, not new triggers. Score rhetoric nodes only if statements cross into explicit threat-of-force language (e.g., direct military threats, blockade announcements) or if there is a surprising reversal toward normalization.\n\n— Trade embargo / economic coercion: Turkey's trade suspension is already in effect. Score economic-pressure nodes only for EXPANSION (e.g., secondary sanctions, energy transit disruption, seizure of assets) or RELAXATION (quiet resumption of trade, back-channel commodity flows).\n\n— Military posturing / force deployment: There is NO current military standoff. Any evidence of naval deployments directed at the other party, airspace incidents, or forward-positioning in Syria/Cyprus context should be scored as genuinely novel and escalatory. Do not inflate routine Turkish naval exercises in the Eastern Med as Israel-directed unless explicitly linked.\n\n— Proxy / indirect confrontation: Turkey's political support for Hamas is established background. Score proxy nodes only for evidence of material military support (arms transfers, training, logistics) rather than political endorsement, which is already baseline.\n\n— Precipitating / trigger events: No specific trigger event has occurred as of this initialization. Any new incident (e.g., interdiction of Turkish vessels, strikes affecting Turkish personnel in Syria/Lebanon, intelligence operations on Turkish soil) should be treated as a genuine novel trigger and scored accordingly.\n\n— Alliance / third-party dynamics: Watch for NATO-related friction (e.g., Turkey blocking Israel-NATO cooperation"
   },
   "Israel-Syria": {
     "label": "Israel and Syria",
@@ -529,7 +495,7 @@
       "InitiatorSurvivalRisk": 0.7,
       "SubstitutionPath": 0.55
     },
-    "crisis_context": "CRISIS CONTEXT: As of early July 2025, the Russia-Poland dyad exists in a state of elevated structural tension but no active bilateral military crisis. Poland is a frontline NATO member that has undertaken a major defense buildup since Russia's 2022 full-scale invasion of Ukraine, including increased military spending (targeting 4%+ of GDP), deployment of additional NATO forces on Polish territory, and construction of fortifications along its eastern border (Shield East program). Poland hosts key NATO infrastructure including the Aegis Ashore missile defense site at Redzikowo, which Russia has repeatedly identified as a threat. Diplomatic relations are essentially frozen; Poland expelled a large number of Russian diplomats in 2022 and bilateral engagement remains minimal. Poland has been among the most vocal NATO members supporting Ukraine with military aid and advocating for stronger deterrence postures.\n\nKey structural features of this dyad:\n- No territorial dispute exists directly between Russia and Poland, but Poland borders the Russian exclave of Kaliningrad and shares a border with Belarus (a Russian military proxy).\n- The primary escalation pathway runs through spillover from the Russia-Ukraine war (e.g., missile or drone incidents near or across Polish territory, as occurred in November 2022 with the Przewod\u00f3w incident) or through provocations in the Baltic/Kaliningrad corridor.\n- Russia engages in regular hybrid activities targeting Poland, including cyberattacks, disinformation campaigns, and occasional GPS jamming in the Baltic region.\n\nSCORING GUIDANCE:\n- MILITARY BUILDUP / ARMS RACING nodes: Poland's ongoing defense expansion and NATO force posture enhancements are now BASELINE for this dyad. Score these nodes as elevated only if there is evidence of new, abnormal surges beyond the already-high tempo (e.g., emergency mobilization, snap deployments to the Suwa\u0142ki Gap, or Russian force concentration near Kaliningrad beyond routine garrison levels).\n- DIPLOMATIC DETERIORATION nodes: Relations are already near-floor. Score further deterioration only for concrete new actions (e.g., full embassy closure, formal severance of remaining consular ties, expulsion of remaining staff).\n- TRIGGER / PRECIPITATING EVENT nodes: No specific precipitating incident is active. Any cross-border kinetic incident (missile/drone overflight, airspace violation with hostile intent), sabotage of critical infrastructure attributed to Russia, or direct military confrontation (even accidental) should be scored as a genuine novel trigger, not routine.\n- HOSTILE RHETORIC nodes: Both sides regularly issue adversarial statements. Score only rhetoric that represents a material escalation beyond the current norm \u2014 e.g., explicit threats of military action against the other, nuclear signaling specifically directed at Poland, or official declarations"
+    "crisis_context": "CRISIS CONTEXT: As of early July 2025, the Russia-Poland dyad exists in a state of elevated structural tension but no active bilateral military crisis. Poland is a frontline NATO member that has undertaken a major defense buildup since Russia's 2022 full-scale invasion of Ukraine, including increased military spending (targeting 4%+ of GDP), deployment of additional NATO forces on Polish territory, and construction of fortifications along its eastern border (Shield East program). Poland hosts key NATO infrastructure including the Aegis Ashore missile defense site at Redzikowo, which Russia has repeatedly identified as a threat. Diplomatic relations are essentially frozen; Poland expelled a large number of Russian diplomats in 2022 and bilateral engagement remains minimal. Poland has been among the most vocal NATO members supporting Ukraine with military aid and advocating for stronger deterrence postures.\n\nKey structural features of this dyad:\n- No territorial dispute exists directly between Russia and Poland, but Poland borders the Russian exclave of Kaliningrad and shares a border with Belarus (a Russian military proxy).\n- The primary escalation pathway runs through spillover from the Russia-Ukraine war (e.g., missile or drone incidents near or across Polish territory, as occurred in November 2022 with the Przewodów incident) or through provocations in the Baltic/Kaliningrad corridor.\n- Russia engages in regular hybrid activities targeting Poland, including cyberattacks, disinformation campaigns, and occasional GPS jamming in the Baltic region.\n\nSCORING GUIDANCE:\n- MILITARY BUILDUP / ARMS RACING nodes: Poland's ongoing defense expansion and NATO force posture enhancements are now BASELINE for this dyad. Score these nodes as elevated only if there is evidence of new, abnormal surges beyond the already-high tempo (e.g., emergency mobilization, snap deployments to the Suwałki Gap, or Russian force concentration near Kaliningrad beyond routine garrison levels).\n- DIPLOMATIC DETERIORATION nodes: Relations are already near-floor. Score further deterioration only for concrete new actions (e.g., full embassy closure, formal severance of remaining consular ties, expulsion of remaining staff).\n- TRIGGER / PRECIPITATING EVENT nodes: No specific precipitating incident is active. Any cross-border kinetic incident (missile/drone overflight, airspace violation with hostile intent), sabotage of critical infrastructure attributed to Russia, or direct military confrontation (even accidental) should be scored as a genuine novel trigger, not routine.\n- HOSTILE RHETORIC nodes: Both sides regularly issue adversarial statements. Score only rhetoric that represents a material escalation beyond the current norm — e.g., explicit threats of military action against the other, nuclear signaling specifically directed at Poland, or official declarations"
   },
   "Thailand-Cambodia": {
     "label": "Thailand and Cambodia",
@@ -601,140 +567,6 @@
       "SubstitutionPath": 0.5
     }
   },
-  "USA-Iran": {
-    "label": "United States and Iran",
-    "baseline": {
-      "WinProbability": -1.0,
-      "WarCosts": 1.0,
-      "HardlineClaims": 0.5,
-      "CommitmentProblem": 1.0,
-      "PreferenceAlignment": -0.5,
-      "Patience": 0.0,
-      "DemocraticPeace": 1.5,
-      "PatronDeterrence": 0.5,
-      "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.0
-    },
-    "query": "\"Iran\" AND (\"United States\" OR US OR \"American\" OR Tehran OR \"nuclear\") NOT Venezuela",
-    "baseline_source": "verified",
-    "suppressor_static": {
-      "OperationalFeasibility": 0.6,
-      "InitiatorSurvivalRisk": 0.2,
-      "SubstitutionPath": 0.25
-    }
-  },
-  "USA-Venezuela": {
-    "label": "United States and Venezuela",
-    "baseline": {
-      "WinProbability": -1.5,
-      "WarCosts": 0.5,
-      "HardlineClaims": 0.5,
-      "CommitmentProblem": 0.5,
-      "PreferenceAlignment": -0.5,
-      "Patience": -0.5,
-      "DemocraticPeace": 1.5,
-      "PatronDeterrence": 0.5,
-      "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.0
-    },
-    "query": "\"Venezuela\" AND (\"United States\" OR \"Maduro\" OR \"sanctions\" OR \"military\" OR \"Guyana\")",
-    "baseline_source": "verified",
-    "suppressor_static": {
-      "OperationalFeasibility": 0.9,
-      "InitiatorSurvivalRisk": 0.1,
-      "SubstitutionPath": 0.2
-    }
-  },
-  "USA-Denmark": {
-    "label": "United States and Denmark (Greenland)",
-    "baseline": {
-      "WinProbability": -2.0,
-      "WarCosts": 1.5,
-      "HardlineClaims": 0.5,
-      "CommitmentProblem": 0.0,
-      "PreferenceAlignment": -0.5,
-      "Patience": 0.0,
-      "DemocraticPeace": -1.0,
-      "PatronDeterrence": 0.5,
-      "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.0
-    },
-    "query": "\"Greenland\" AND (\"United States\" OR \"Denmark\" OR \"Trump\" OR \"annexation\" OR \"sovereignty\")",
-    "baseline_source": "verified",
-    "suppressor_static": {
-      "OperationalFeasibility": 0.95,
-      "InitiatorSurvivalRisk": 0.05,
-      "SubstitutionPath": 0.75
-    }
-  },
-  "USA-Colombia": {
-    "label": "United States and Colombia",
-    "baseline": {
-      "WinProbability": -2.0,
-      "WarCosts": 0.5,
-      "HardlineClaims": 0.5,
-      "CommitmentProblem": 0.0,
-      "PreferenceAlignment": -0.5,
-      "Patience": -0.5,
-      "DemocraticPeace": 0.5,
-      "PatronDeterrence": 0.5,
-      "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.0
-    },
-    "query": "\"Colombia\" AND (\"United States\" OR \"tariff\" OR \"military\" OR \"deportation\" OR \"Petro\")",
-    "baseline_source": "verified",
-    "suppressor_static": {
-      "OperationalFeasibility": 0.85,
-      "InitiatorSurvivalRisk": 0.05,
-      "SubstitutionPath": 0.6
-    }
-  },
-  "Russia-NATO": {
-    "label": "NATO and Russia",
-    "baseline": {
-      "WinProbability": 0.5,
-      "WarCosts": -1.0,
-      "HardlineClaims": 0.5,
-      "CommitmentProblem": 1.5,
-      "PreferenceAlignment": -0.5,
-      "Patience": 0.0,
-      "DemocraticPeace": 1.0,
-      "PatronDeterrence": 0.5,
-      "NuclearDeterrence": 2.0,
-      "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.5
-    },
-    "query": "\"NATO\" AND (\"Russia\" OR \"Putin\" OR \"Article 5\" OR \"escalation\" OR \"alliance\")",
-    "baseline_source": "verified",
-    "suppressor_static": {
-      "OperationalFeasibility": 0.2,
-      "InitiatorSurvivalRisk": 0.8,
-      "SubstitutionPath": 0.6
-    }
-  },
-  "Russia-US": {
-    "label": "Russia vs. United States",
-    "baseline": {
-      "WinProbability": -0.8,
-      "WarCosts": -1.5,
-      "PatronDeterrence": 0.5,
-      "NuclearDeterrence": 2.8,
-      "CommitmentProblem": 1.4,
-      "Patience": -0.5,
-      "DemocraticPeace": 1.2,
-      "PreferenceAlignment": -1.5,
-      "HardlineClaims": 1.5,
-      "AudienceCosts": 1.8
-    },
-    "query": "(Russia AND \"United States\" OR USA) AND (tensions OR military OR nuclear OR sanctions OR NATO OR Ukraine OR conflict OR diplomacy)",
-    "reasoning": "The Russia-US dyad is defined by extreme nuclear deterrence (both possess massive arsenals making direct war catastrophic), deeply opposed preferences across European security, NATO expansion, and spheres of influence, yet direct conflict is powerfully constrained by mutual assured destruction. The US holds conventional military superiority (negative WinProbability favoring the defender/US), Russia is autocratic while the US is democratic (positive DemocraticPeace indicating mixed regimes), and commitment problems are elevated due to shifting power dynamics and credibility concerns around NATO commitments and arms control agreements.",
-    "reasoning_notes": "PatronDeterrence is low because neither state relies on an external patron for its security\u2014they are themselves the great power patrons. AudienceCosts are elevated on both sides given domestic nationalist pressures in Russia and bipartisan hawkishness in the US.",
-    "baseline_source": "auto"
-  },
   "France/UK/Germany-Iran": {
     "label": "France/UK/Germany vs Iran (E3-Iran)",
     "baseline": {
@@ -752,10 +584,10 @@
     "query": "(France OR UK OR Germany OR \"E3\" OR \"European\") AND (Iran OR Tehran OR \"nuclear program\" OR JCPOA OR \"Iran sanctions\" OR \"uranium enrichment\")",
     "reasoning": "The E3 collectively hold significant conventional military superiority over Iran (with UK and France being nuclear powers), creating a meaningful WinProbability advantage, while Iran's advancing nuclear threshold capability and proximity to weapons-grade enrichment creates moderate nuclear deterrence and a severe commitment problem since any deal could be undermined by Iran's ongoing enrichment trajectory. Preference alignment is strongly negative due to fundamental disagreements over Iran's nuclear program, regional behavior, and support for proxies, while the democratic-autocratic divide and high audience costs on both sides (European public opinion on nonproliferation, Iranian regime legitimacy tied to resistance) make compromise politically costly.",
     "baseline_source": "auto",
-    "crisis_context": "CRISIS CONTEXT \u2014 France/UK/Germany (E3) vs. Iran dyad, initialized July 2025\n\nBACKGROUND: The E3 group (France, UK, Germany) engages Iran primarily through the nuclear file (JCPOA legacy), regional security concerns (Iran's proxy network, Red Sea/Houthi operations, Iraq/Syria), and human rights issues. Since the collapse of effective JCPOA compliance (2023\u20132024), the E3 has pursued a dual-track approach: diplomatic engagement attempts alongside escalating sanctions and threat of referring Iran back to the UN Security Council via the snapback mechanism. The UK has been additionally involved in Red Sea naval operations against Houthi forces (Iranian-backed). France maintains a military presence in the Gulf and has periodically detained or sanctioned Iranian operatives on European soil. Germany has historically served as a diplomatic interlocutor but has hardened its posture amid hostage diplomacy cases and IRGC-linked plots in Europe.\n\nKEY STANDING TENSIONS:\n- Iran's uranium enrichment continues to advance (near-weapons-grade levels at 60%, with IAEA reporting reduced cooperation on monitoring).\n- E3 snapback mechanism at the UN Security Council was triggered in late 2024/early 2025, reimposing UN sanctions. Iran views this as a hostile escalation.\n- Ongoing Iranian-linked assassination/surveillance plots targeting dissidents on European soil periodically spike tensions.\n- Houthi Red Sea campaign implicates Iran indirectly in confrontation with UK/French naval assets.\n- Iran's deepening military cooperation with Russia (drones, missiles for Ukraine war) is a major E3 grievance.\n\nSCORING GUIDANCE FOR NAMED NODES:\n- Diplomatic signals / political threats: Baseline rhetoric between E3 and Iran is already elevated. Routine condemnations of enrichment or human rights should be scored as NORMAL POSTURING, not escalatory. Score higher only if there are new ultimatums, embassy expulsions, or explicit military threat language.\n- Military posture / force movements: UK and French naval deployments in the Gulf/Red Sea are STANDING OPERATIONS. Score higher only for surge deployments, new asset types, or explicit Iran-directed positioning (vs. Houthi-directed).\n- Sanctions / economic coercion: Post-snapback, a new baseline of heavy sanctions exists. Score incremental EU/national sanctions as moderate unless they target novel sectors (e.g., full energy embargo) or represent coordinated E3 action beyond existing frameworks.\n- Nuclear escalation indicators: Any IAEA report showing further enrichment increases, new centrifuge installations, or expulsion of inspectors should be scored HIGH"
+    "crisis_context": "CRISIS CONTEXT — France/UK/Germany (E3) vs. Iran dyad, initialized July 2025\n\nBACKGROUND: The E3 group (France, UK, Germany) engages Iran primarily through the nuclear file (JCPOA legacy), regional security concerns (Iran's proxy network, Red Sea/Houthi operations, Iraq/Syria), and human rights issues. Since the collapse of effective JCPOA compliance (2023–2024), the E3 has pursued a dual-track approach: diplomatic engagement attempts alongside escalating sanctions and threat of referring Iran back to the UN Security Council via the snapback mechanism. The UK has been additionally involved in Red Sea naval operations against Houthi forces (Iranian-backed). France maintains a military presence in the Gulf and has periodically detained or sanctioned Iranian operatives on European soil. Germany has historically served as a diplomatic interlocutor but has hardened its posture amid hostage diplomacy cases and IRGC-linked plots in Europe.\n\nKEY STANDING TENSIONS:\n- Iran's uranium enrichment continues to advance (near-weapons-grade levels at 60%, with IAEA reporting reduced cooperation on monitoring).\n- E3 snapback mechanism at the UN Security Council was triggered in late 2024/early 2025, reimposing UN sanctions. Iran views this as a hostile escalation.\n- Ongoing Iranian-linked assassination/surveillance plots targeting dissidents on European soil periodically spike tensions.\n- Houthi Red Sea campaign implicates Iran indirectly in confrontation with UK/French naval assets.\n- Iran's deepening military cooperation with Russia (drones, missiles for Ukraine war) is a major E3 grievance.\n\nSCORING GUIDANCE FOR NAMED NODES:\n- Diplomatic signals / political threats: Baseline rhetoric between E3 and Iran is already elevated. Routine condemnations of enrichment or human rights should be scored as NORMAL POSTURING, not escalatory. Score higher only if there are new ultimatums, embassy expulsions, or explicit military threat language.\n- Military posture / force movements: UK and French naval deployments in the Gulf/Red Sea are STANDING OPERATIONS. Score higher only for surge deployments, new asset types, or explicit Iran-directed positioning (vs. Houthi-directed).\n- Sanctions / economic coercion: Post-snapback, a new baseline of heavy sanctions exists. Score incremental EU/national sanctions as moderate unless they target novel sectors (e.g., full energy embargo) or represent coordinated E3 action beyond existing frameworks.\n- Nuclear escalation indicators: Any IAEA report showing further enrichment increases, new centrifuge installations, or expulsion of inspectors should be scored HIGH"
   },
   "Israel-Lebanon": {
-    "label": "Israel\u2013Lebanon",
+    "label": "Israel–Lebanon",
     "baseline": {
       "WinProbability": 1.2,
       "WarCosts": -0.8,
@@ -770,24 +602,6 @@
     },
     "query": "Israel AND Lebanon AND (Hezbollah OR border OR ceasefire OR military OR strikes OR conflict OR war OR UNIFIL OR \"Blue Line\")",
     "reasoning": "Israel holds a decisive conventional military advantage over Lebanon/Hezbollah, driving WinProbability positive, while the commitment problem is high because Hezbollah's rearmament cycles and Iranian patronage make any ceasefire inherently unstable and power shifts expected. Hardline claims are elevated due to the Shebaa Farms dispute, ongoing border tensions, and Hezbollah's ideological rejection of Israel, while audience costs are high on both sides given Israeli domestic pressure for security operations and Hezbollah's entrenchment as a resistance movement; nuclear deterrence is low but nonzero reflecting Israel's undeclared arsenal creating some asymmetric constraint.",
-    "baseline_source": "auto"
-  },
-  "Israel-Indonesia": {
-    "label": "Israel\u2013Indonesia",
-    "baseline": {
-      "WinProbability": 0.8,
-      "WarCosts": -1.5,
-      "PatronDeterrence": 0.3,
-      "NuclearDeterrence": 0.8,
-      "CommitmentProblem": 0.4,
-      "Patience": 0.3,
-      "DemocraticPeace": 0.3,
-      "PreferenceAlignment": -1.3,
-      "HardlineClaims": 0.8,
-      "AudienceCosts": 1.5
-    },
-    "query": "Israel Indonesia relations OR diplomacy OR recognition OR Palestine OR normalization",
-    "reasoning": "Israel and Indonesia have no diplomatic relations, driven largely by Indonesia's strong solidarity with Palestine and its status as the world's largest Muslim-majority country, creating significant preference misalignment and high audience costs on the Indonesian side against normalization. However, geographic distance makes direct military conflict extremely unlikely, war costs are high due to lack of proximity and economic logic, and there are no active territorial disputes between them, keeping hardline claims and commitment problems relatively low despite political tensions.",
     "baseline_source": "auto"
   },
   "Israel-Multiple": {
@@ -809,7 +623,7 @@
     "baseline_source": "auto"
   },
   "UAE-Qatar": {
-    "label": "UAE\u2013Qatar",
+    "label": "UAE–Qatar",
     "baseline": {
       "WinProbability": 0.6,
       "WarCosts": -1.2,
@@ -846,7 +660,7 @@
     "baseline_source": "auto"
   },
   "Israel-Saudi Arabia": {
-    "label": "Israel\u2013Saudi Arabia",
+    "label": "Israel–Saudi Arabia",
     "baseline": {
       "WinProbability": 0.8,
       "WarCosts": -0.8,
@@ -864,7 +678,7 @@
     "baseline_source": "auto"
   },
   "Israel-Palestine": {
-    "label": "Israel\u2013Palestine",
+    "label": "Israel–Palestine",
     "baseline": {
       "WinProbability": 1.5,
       "WarCosts": -0.5,
@@ -878,29 +692,11 @@
       "AudienceCosts": 2.5
     },
     "query": "Israel Palestine conflict OR war OR Gaza OR West Bank OR ceasefire OR negotiations OR Hamas OR IDF",
-    "reasoning": "Israel holds an overwhelming conventional military advantage (high WinProbability), while deeply contested territorial claims over Jerusalem, the West Bank, and Gaza, combined with irreconcilable national aspirations, drive HardlineClaims and PreferenceAlignment to near-extreme values. Severe commitment problems arise from shifting power dynamics (settlement expansion, demographic changes, and fragmented Palestinian authority making credible long-term deals nearly impossible), while high audience costs on both sides\u2014Israeli domestic politics and Palestinian popular mobilization\u2014lock leaders into hardline positions with very short time horizons for compromise.",
-    "baseline_source": "auto"
-  },
-  "Israel-SaudiArabia": {
-    "label": "Israel vs. Saudi Arabia",
-    "baseline": {
-      "WinProbability": 0.8,
-      "WarCosts": -0.8,
-      "PatronDeterrence": 0.8,
-      "NuclearDeterrence": 0.8,
-      "CommitmentProblem": 0.8,
-      "Patience": 0.2,
-      "DemocraticPeace": 1.2,
-      "PreferenceAlignment": -0.5,
-      "HardlineClaims": 0.8,
-      "AudienceCosts": 1.5
-    },
-    "query": "(Israel AND \"Saudi Arabia\") AND (normalization OR diplomacy OR relations OR Iran OR Palestine OR \"Abraham Accords\" OR defense OR military)",
-    "reasoning": "Israel holds a significant military edge including presumed nuclear capability, making WinProbability and NuclearDeterrence modestly positive for the challenger; both states are autocratic/hybrid regimes with audience costs driven by domestic constituencies (Saudi public opinion on Palestine, Israeli coalition politics). Despite shared strategic alignment against Iran pushing preferences toward convergence, the Palestinian issue and lack of formal relations keep PreferenceAlignment slightly negative and HardlineClaims moderate, while the normalization track and economic complementarities impose meaningful war costs and suggest this dyad is far from a direct military confrontation scenario.",
+    "reasoning": "Israel holds an overwhelming conventional military advantage (high WinProbability), while deeply contested territorial claims over Jerusalem, the West Bank, and Gaza, combined with irreconcilable national aspirations, drive HardlineClaims and PreferenceAlignment to near-extreme values. Severe commitment problems arise from shifting power dynamics (settlement expansion, demographic changes, and fragmented Palestinian authority making credible long-term deals nearly impossible), while high audience costs on both sides—Israeli domestic politics and Palestinian popular mobilization—lock leaders into hardline positions with very short time horizons for compromise.",
     "baseline_source": "auto"
   },
   "Israel-Oman": {
-    "label": "Israel\u2013Oman",
+    "label": "Israel–Oman",
     "baseline": {
       "WinProbability": 1.2,
       "WarCosts": -0.8,
@@ -918,7 +714,7 @@
     "baseline_source": "auto"
   },
   "US-Lebanon": {
-    "label": "US\u2013Lebanon",
+    "label": "US–Lebanon",
     "baseline": {
       "WinProbability": 1.8,
       "WarCosts": -0.5,
@@ -937,7 +733,7 @@
     "baseline_source": "auto"
   },
   "Venezuela-Israel": {
-    "label": "Venezuela\u2013Israel",
+    "label": "Venezuela–Israel",
     "baseline": {
       "WinProbability": -1.5,
       "WarCosts": -0.3,
@@ -956,7 +752,7 @@
     "baseline_source": "auto"
   },
   "US-Israel": {
-    "label": "US\u2013Israel",
+    "label": "US–Israel",
     "baseline": {
       "WinProbability": 1.5,
       "WarCosts": -1.8,
@@ -970,11 +766,11 @@
       "AudienceCosts": 0.5
     },
     "query": "(US OR \"United States\" OR America) AND Israel AND (relations OR military OR aid OR diplomacy OR tension OR alliance OR weapons OR Gaza OR Iran)",
-    "reasoning": "The US-Israel dyad is fundamentally an alliance rather than a rivalry, so conflict probability is extremely low: preferences are broadly aligned, both are democracies (strong democratic peace effect), economic and military interdependence imposes massive war costs, and there are no territorial disputes between them. The US has overwhelming military superiority (high WinProbability if hypothetically a challenger), Israel possesses an undeclared nuclear arsenal providing some deterrence, but PatronDeterrence is set to 0 because no external patron defends Israel against the US \u2014 rather, the US itself is Israel's patron; commitment problems and audience costs are low given the deep institutionalized relationship, though periodic tensions over issues like settlements and Gaza policy introduce modest friction.",
+    "reasoning": "The US-Israel dyad is fundamentally an alliance rather than a rivalry, so conflict probability is extremely low: preferences are broadly aligned, both are democracies (strong democratic peace effect), economic and military interdependence imposes massive war costs, and there are no territorial disputes between them. The US has overwhelming military superiority (high WinProbability if hypothetically a challenger), Israel possesses an undeclared nuclear arsenal providing some deterrence, but PatronDeterrence is set to 0 because no external patron defends Israel against the US — rather, the US itself is Israel's patron; commitment problems and audience costs are low given the deep institutionalized relationship, though periodic tensions over issues like settlements and Gaza policy introduce modest friction.",
     "baseline_source": "auto"
   },
   "Israel-Azerbaijan": {
-    "label": "Israel\u2013Azerbaijan",
+    "label": "Israel–Azerbaijan",
     "baseline": {
       "WinProbability": 0.8,
       "WarCosts": -1.0,
@@ -992,7 +788,7 @@
     "baseline_source": "auto"
   },
   "Cuba-Israel": {
-    "label": "Cuba\u2013Israel",
+    "label": "Cuba–Israel",
     "baseline": {
       "WinProbability": -1.2,
       "WarCosts": -0.3,
@@ -1006,11 +802,11 @@
       "AudienceCosts": 1.0
     },
     "query": "Cuba AND Israel AND (diplomacy OR relations OR UN OR Palestine OR sanctions)",
-    "reasoning": "Cuba and Israel have had no diplomatic relations since 1973, and Cuba has been a consistent critic of Israel at the UN and a supporter of Palestinian statehood, producing strong preference misalignment and ideological opposition (one communist autocracy, one democracy). However, the dyad has essentially zero risk of direct military conflict due to geographic distance, lack of shared borders or contested territory, Cuba's vast military inferiority relative to Israel, and the absence of any strategic imperative for armed confrontation \u2014 making this primarily a diplomatic rivalry rather than a militarized one.",
+    "reasoning": "Cuba and Israel have had no diplomatic relations since 1973, and Cuba has been a consistent critic of Israel at the UN and a supporter of Palestinian statehood, producing strong preference misalignment and ideological opposition (one communist autocracy, one democracy). However, the dyad has essentially zero risk of direct military conflict due to geographic distance, lack of shared borders or contested territory, Cuba's vast military inferiority relative to Israel, and the absence of any strategic imperative for armed confrontation — making this primarily a diplomatic rivalry rather than a militarized one.",
     "baseline_source": "auto"
   },
   "Israel-Kuwait": {
-    "label": "Israel\u2013Kuwait",
+    "label": "Israel–Kuwait",
     "baseline": {
       "WinProbability": 1.2,
       "WarCosts": -0.8,
@@ -1028,7 +824,7 @@
     "baseline_source": "auto"
   },
   "Israel-Iraq": {
-    "label": "Israel\u2013Iraq",
+    "label": "Israel–Iraq",
     "baseline": {
       "WinProbability": 0.8,
       "WarCosts": -0.5,
@@ -1064,26 +860,8 @@
     "source": "IR structural analysis",
     "baseline_source": "auto"
   },
-  "US-North Korea": {
-    "label": "US\u2013North Korea",
-    "baseline": {
-      "WinProbability": 1.5,
-      "WarCosts": -1.5,
-      "PatronDeterrence": 1.0,
-      "NuclearDeterrence": 1.8,
-      "CommitmentProblem": 1.8,
-      "Patience": -1.0,
-      "DemocraticPeace": 1.5,
-      "PreferenceAlignment": -1.8,
-      "HardlineClaims": 2.2,
-      "AudienceCosts": 1.5
-    },
-    "query": "(\"United States\" OR US OR America) AND (\"North Korea\" OR DPRK OR Pyongyang) AND (nuclear OR missile OR sanctions OR diplomacy OR tensions OR military)",
-    "reasoning": "The US holds overwhelming conventional military superiority (high WinProbability) but North Korea's growing nuclear arsenal creates meaningful nuclear deterrence, while the catastrophic costs of a Korean peninsula war\u2014including millions of South Korean and Japanese civilians at risk\u2014impose severe war costs. Extreme preference divergence, a totalitarian regime facing a democracy (high DemocraticPeace), severe commitment problems driven by North Korea's ongoing nuclear/missile development shifting future power dynamics, and hardline claims over denuclearization and the Korean peninsula make this one of the most structurally conflict-prone dyads, moderated primarily by nuclear deterrence and war costs; PatronDeterrence reflects China's partial patronage of North Korea which somewhat constrains US action but falls short of a formal defense pact.",
-    "baseline_source": "auto"
-  },
   "US-Saudi Arabia": {
-    "label": "US \u2013 Saudi Arabia",
+    "label": "US – Saudi Arabia",
     "baseline": {
       "WinProbability": -1.8,
       "WarCosts": -1.5,
@@ -1101,7 +879,7 @@
     "baseline_source": "auto"
   },
   "Israel-Malaysia": {
-    "label": "Israel\u2013Malaysia",
+    "label": "Israel–Malaysia",
     "baseline": {
       "WinProbability": 1.2,
       "WarCosts": -0.3,
@@ -1115,11 +893,11 @@
       "AudienceCosts": 1.5
     },
     "query": "Israel AND Malaysia AND (relations OR conflict OR diplomacy OR sanctions OR Palestine OR boycott)",
-    "reasoning": "Israel and Malaysia have no diplomatic relations, with Malaysia being one of the most vocally anti-Israel Muslim-majority states, driven by strong solidarity with Palestine \u2014 yielding high preference divergence and significant audience costs on the Malaysian side. However, the dyad is geographically distant with minimal direct territorial disputes and very low economic interdependence, making actual military conflict extremely unlikely; Israel holds a clear military advantage including an undeclared nuclear capability, though the distance and lack of direct strategic competition keep most conflict indicators moderate.",
+    "reasoning": "Israel and Malaysia have no diplomatic relations, with Malaysia being one of the most vocally anti-Israel Muslim-majority states, driven by strong solidarity with Palestine — yielding high preference divergence and significant audience costs on the Malaysian side. However, the dyad is geographically distant with minimal direct territorial disputes and very low economic interdependence, making actual military conflict extremely unlikely; Israel holds a clear military advantage including an undeclared nuclear capability, though the distance and lack of direct strategic competition keep most conflict indicators moderate.",
     "baseline_source": "auto"
   },
   "Germany-Iran": {
-    "label": "Germany\u2013Iran",
+    "label": "Germany–Iran",
     "baseline": {
       "WinProbability": 0.6,
       "WarCosts": -1.0,
@@ -1137,7 +915,7 @@
     "baseline_source": "auto"
   },
   "Indonesia-Israel": {
-    "label": "Indonesia\u2013Israel",
+    "label": "Indonesia–Israel",
     "baseline": {
       "WinProbability": -0.8,
       "WarCosts": -0.5,
@@ -1155,7 +933,7 @@
     "baseline_source": "auto"
   },
   "Israel-Afghanistan": {
-    "label": "Israel\u2013Afghanistan",
+    "label": "Israel–Afghanistan",
     "baseline": {
       "WinProbability": 1.2,
       "WarCosts": -0.3,
@@ -1172,26 +950,8 @@
     "reasoning": "Israel holds a massive conventional and technological military advantage over Taliban-ruled Afghanistan, but the two states have no shared border, minimal economic interdependence, and no direct territorial dispute, making direct interstate conflict extremely unlikely despite deep ideological hostility. Afghanistan under the Taliban is a pariah autocracy with no recognition of Israel and strong rhetorical opposition, but the geographic distance, lack of patron deterrence for Afghanistan, and absence of concrete contested claims keep escalation risk structurally very low.",
     "baseline_source": "auto"
   },
-  "Saudi Arabia-Israel": {
-    "label": "Saudi Arabia vs Israel",
-    "baseline": {
-      "WinProbability": -0.8,
-      "WarCosts": -1.0,
-      "PatronDeterrence": 1.5,
-      "NuclearDeterrence": 1.2,
-      "CommitmentProblem": 0.8,
-      "Patience": 0.4,
-      "DemocraticPeace": 1.2,
-      "PreferenceAlignment": -0.6,
-      "HardlineClaims": 1.2,
-      "AudienceCosts": 1.8
-    },
-    "query": "(Saudi Arabia AND Israel) AND (normalization OR relations OR diplomacy OR conflict OR military OR \"Abraham Accords\" OR Palestine OR Iran OR \"recognition\")",
-    "reasoning": "Israel holds a significant military edge including an undeclared nuclear arsenal (hence moderate nuclear deterrence and negative WinProbability for Saudi Arabia as challenger), while the US serves as a strong patron to Israel though not under a formal mutual defense treaty, warranting moderate PatronDeterrence. Both autocratic-leaning regimes face high domestic audience costs around the Palestinian issue, which constrains normalization despite converging strategic interests vis-\u00e0-vis Iran, resulting in moderately opposed preference alignment and elevated hardline claims related to Jerusalem and Palestinian statehood.",
-    "baseline_source": "auto"
-  },
   "Australia-Iran": {
-    "label": "Australia\u2013Iran",
+    "label": "Australia–Iran",
     "baseline": {
       "WinProbability": 0.6,
       "WarCosts": -0.8,
@@ -1208,63 +968,8 @@
     "reasoning": "Australia and Iran have no direct territorial dispute or proximity-based security dilemma, but their preferences diverge significantly due to Australia's alignment with the US-led Western order and Iran's adversarial stance toward it, reflected in Australian sanctions enforcement and participation in Middle East coalitions. Australia holds a conventional military edge and benefits from distance and alliance networks, while Iran's nuclear ambitions create modest deterrence effects; the lack of direct territorial claims and geographic separation keep hardline claims and war costs relatively low, though the democracy-autocracy gap and Australia's alliance-driven audience costs sustain underlying friction.",
     "baseline_source": "auto"
   },
-  "Pakistan-Israel": {
-    "label": "Pakistan\u2013Israel",
-    "baseline": {
-      "WinProbability": -0.8,
-      "WarCosts": -0.3,
-      "PatronDeterrence": 1.2,
-      "NuclearDeterrence": 2.5,
-      "CommitmentProblem": 0.8,
-      "Patience": -0.5,
-      "DemocraticPeace": 1.0,
-      "PreferenceAlignment": -1.5,
-      "HardlineClaims": 1.0,
-      "AudienceCosts": 1.8
-    },
-    "query": "(Pakistan AND Israel) AND (relations OR nuclear OR conflict OR diplomacy OR recognition OR threat OR normalization)",
-    "reasoning": "Pakistan and Israel are non-contiguous adversaries with no diplomatic relations; their hostility is driven by Pakistan's strong ideological solidarity with the Palestinian cause and deep domestic audience costs against normalization, yielding high preference divergence and audience lock-in. Both are nuclear-armed states (Israel undeclared, Pakistan overt), producing strong nuclear deterrence, while Israel's qualitative military edge gives it an advantage; however, geographic distance and the US patron relationship with Israel add further deterrent layers, and the lack of direct borders or economic interdependence keeps war costs moderate rather than extreme.",
-    "baseline_source": "auto"
-  },
-  "Qatar-Israel": {
-    "label": "Qatar\u2013Israel",
-    "baseline": {
-      "WinProbability": -0.8,
-      "WarCosts": -1.0,
-      "PatronDeterrence": 1.5,
-      "NuclearDeterrence": 1.0,
-      "CommitmentProblem": 0.8,
-      "Patience": 0.5,
-      "DemocraticPeace": 0.8,
-      "PreferenceAlignment": -1.2,
-      "HardlineClaims": 1.5,
-      "AudienceCosts": 1.8
-    },
-    "query": "Qatar Israel relations OR diplomacy OR Hamas OR Gaza OR mediation OR hostages OR normalization",
-    "reasoning": "Qatar and Israel have deeply opposed preferences due to Qatar's financial and political support for Hamas and its role as a mediator in the Gaza conflict, but direct military confrontation is highly unlikely given geographic distance, Israel's significant military superiority (including presumed nuclear capability), and the US acting as a patron/restraining influence on both sides given its major military base in Qatar and alliance with Israel. High audience costs reflect domestic political constraints on both sides\u2014Qatar's identity as a pro-Palestinian mediator and Israel's domestic pressure regarding hostages and Gaza\u2014while the indirect nature of their rivalry (through Hamas) elevates commitment problems without pushing toward direct war.",
-    "baseline_source": "auto"
-  },
-  "Israel-Bangladesh": {
-    "label": "Israel\u2013Bangladesh",
-    "baseline": {
-      "WinProbability": 1.2,
-      "WarCosts": -0.3,
-      "PatronDeterrence": 0.3,
-      "NuclearDeterrence": 0.5,
-      "CommitmentProblem": 0.3,
-      "Patience": 0.2,
-      "DemocraticPeace": 0.8,
-      "PreferenceAlignment": -1.2,
-      "HardlineClaims": 0.3,
-      "AudienceCosts": 1.0
-    },
-    "query": "Israel AND Bangladesh AND (relations OR diplomacy OR recognition OR conflict OR Muslim)",
-    "reasoning": "Bangladesh does not recognize Israel and has strong pro-Palestinian domestic sentiment, creating preference misalignment and audience costs on the Bangladeshi side, but the two states have no shared border, no direct territorial disputes, and negligible economic interdependence, making actual militarized conflict extremely unlikely. Israel holds a significant military advantage including an undeclared nuclear capability, but the geographic distance and lack of direct strategic competition keep most conflict-relevant nodes at low or moderate levels.",
-    "notes": "This is a politically hostile but geographically distant dyad with near-zero probability of direct military confrontation.",
-    "baseline_source": "auto"
-  },
   "Bangladesh-Israel": {
-    "label": "Bangladesh\u2013Israel",
+    "label": "Bangladesh–Israel",
     "baseline": {
       "WinProbability": -1.5,
       "WarCosts": -0.5,
@@ -1282,7 +987,7 @@
     "baseline_source": "auto"
   },
   "Israel-Tunisia": {
-    "label": "Israel\u2013Tunisia",
+    "label": "Israel–Tunisia",
     "baseline": {
       "WinProbability": 1.4,
       "WarCosts": -0.3,
@@ -1300,7 +1005,7 @@
     "baseline_source": "auto"
   },
   "Pakistan-Afghanistan": {
-    "label": "Pakistan\u2013Afghanistan",
+    "label": "Pakistan–Afghanistan",
     "baseline": {
       "WinProbability": 0.8,
       "WarCosts": -0.5,
@@ -1314,30 +1019,12 @@
       "AudienceCosts": 1.5
     },
     "query": "(Pakistan AND Afghanistan) AND (border OR Durand OR Taliban OR TTP OR military OR strike OR tensions OR diplomacy OR conflict)",
-    "reasoning": "Pakistan holds a significant conventional military advantage including nuclear weapons over Taliban-ruled Afghanistan, but the Durand Line dispute, cross-border TTP sanctuaries, and deep mutual distrust create severe commitment problems and opposed preferences. Both sides are led by regimes with short time horizons and high audience costs\u2014Pakistan's military-dominated state faces domestic pressure on terrorism, while the Taliban government is ideologically rigid\u2014and the absence of any democratic accountability on either side removes institutional constraints on escalation.",
+    "reasoning": "Pakistan holds a significant conventional military advantage including nuclear weapons over Taliban-ruled Afghanistan, but the Durand Line dispute, cross-border TTP sanctuaries, and deep mutual distrust create severe commitment problems and opposed preferences. Both sides are led by regimes with short time horizons and high audience costs—Pakistan's military-dominated state faces domestic pressure on terrorism, while the Taliban government is ideologically rigid—and the absence of any democratic accountability on either side removes institutional constraints on escalation.",
     "sources": [],
     "baseline_source": "auto"
   },
-  "Iran-Israel": {
-    "label": "Iran\u2013Israel",
-    "baseline": {
-      "WinProbability": -0.8,
-      "WarCosts": -0.5,
-      "PatronDeterrence": 1.5,
-      "NuclearDeterrence": 1.2,
-      "CommitmentProblem": 1.6,
-      "Patience": -0.8,
-      "DemocraticPeace": 1.5,
-      "PreferenceAlignment": -1.8,
-      "HardlineClaims": 2.2,
-      "AudienceCosts": 2.2
-    },
-    "query": "Iran Israel conflict OR attack OR military OR nuclear OR strike OR tensions OR retaliation OR proxy",
-    "reasoning": "Iran and Israel have deeply opposed preferences (existential hostility, proxy warfare, nuclear program disputes) with high audience costs on both sides driven by ideological commitment and domestic politics; Israel holds a conventional military advantage (negative WinProbability for Iran as challenger) and possesses an undeclared nuclear arsenal creating asymmetric nuclear deterrence. The US patron commitment to Israel is significant but not a formal mutual defense treaty, commitment problems are high due to Iran's potential nuclear breakout shifting future power balances, and both regimes\u2014one theocratic autocracy, one flawed democracy with hawkish politics\u2014generate strong democratic peace penalties.",
-    "baseline_source": "auto"
-  },
   "Japan-Iran": {
-    "label": "Japan\u2013Iran",
+    "label": "Japan–Iran",
     "baseline": {
       "WinProbability": 0.6,
       "WarCosts": -1.2,
@@ -1355,7 +1042,7 @@
     "baseline_source": "auto"
   },
   "Israel-Jordan": {
-    "label": "Israel\u2013Jordan",
+    "label": "Israel–Jordan",
     "baseline": {
       "WinProbability": 1.2,
       "WarCosts": -1.2,
@@ -1373,7 +1060,7 @@
     "baseline_source": "auto"
   },
   "Israel-Pakistan": {
-    "label": "Israel\u2013Pakistan",
+    "label": "Israel–Pakistan",
     "baseline": {
       "WinProbability": 0.5,
       "WarCosts": -0.5,
@@ -1387,29 +1074,11 @@
       "AudienceCosts": 1.8
     },
     "query": "(Israel AND Pakistan) AND (relations OR nuclear OR conflict OR diplomacy OR recognition OR threat OR military)",
-    "reasoning": "Israel and Pakistan have no diplomatic relations and deep ideological hostility\u2014Pakistan refuses to recognize Israel and has strong domestic audience costs tied to the Palestinian cause and Islamic solidarity\u2014but the dyad lacks direct territorial disputes or geographic contiguity, keeping hardline claims moderate. Both are nuclear-armed states (NuclearDeterrence is high), Israel holds a qualitative military edge but Pakistan has a larger conventional force and nuclear arsenal creating rough balance, and the absence of economic ties means war costs are only modestly peace-inducing; preference alignment is strongly negative given Pakistan's alignment with the broader Muslim world on the Palestine issue.",
-    "baseline_source": "auto"
-  },
-  "Israel-Cuba": {
-    "label": "Israel\u2013Cuba",
-    "baseline": {
-      "WinProbability": 1.2,
-      "WarCosts": -0.3,
-      "PatronDeterrence": 0.3,
-      "NuclearDeterrence": 0.5,
-      "CommitmentProblem": 0.3,
-      "Patience": 0.4,
-      "DemocraticPeace": 1.2,
-      "PreferenceAlignment": -1.3,
-      "HardlineClaims": 0.3,
-      "AudienceCosts": 0.5
-    },
-    "query": "Israel Cuba relations OR diplomacy OR conflict OR sanctions OR UN vote",
-    "reasoning": "Israel and Cuba have had no diplomatic relations since 1973 and Cuba is a vocal critic of Israel in international fora, particularly regarding Palestine, yielding strongly opposed preferences but minimal direct strategic interaction. The dyad has essentially no territorial disputes, negligible economic interdependence (low war costs but also low stakes), a large Israeli military advantage, and no patron deterrence or nuclear deterrence relevant to a direct confrontation; the conflict potential is very low due to geographic distance and absence of contested issues.",
+    "reasoning": "Israel and Pakistan have no diplomatic relations and deep ideological hostility—Pakistan refuses to recognize Israel and has strong domestic audience costs tied to the Palestinian cause and Islamic solidarity—but the dyad lacks direct territorial disputes or geographic contiguity, keeping hardline claims moderate. Both are nuclear-armed states (NuclearDeterrence is high), Israel holds a qualitative military edge but Pakistan has a larger conventional force and nuclear arsenal creating rough balance, and the absence of economic ties means war costs are only modestly peace-inducing; preference alignment is strongly negative given Pakistan's alignment with the broader Muslim world on the Palestine issue.",
     "baseline_source": "auto"
   },
   "Iran-Saudi Arabia": {
-    "label": "Iran\u2013Saudi Arabia",
+    "label": "Iran–Saudi Arabia",
     "baseline": {
       "WinProbability": 0.3,
       "WarCosts": -0.8,
@@ -1428,7 +1097,7 @@
     "baseline_source": "auto"
   },
   "Canada-Iran": {
-    "label": "Canada\u2013Iran",
+    "label": "Canada–Iran",
     "baseline": {
       "WinProbability": 0.3,
       "WarCosts": -0.5,
@@ -1442,11 +1111,11 @@
       "AudienceCosts": 1.2
     },
     "query": "(Canada AND Iran) AND (sanctions OR diplomacy OR nuclear OR relations OR conflict OR IRGC OR hostage OR detention)",
-    "reasoning": "Canada and Iran have deeply strained relations\u2014Canada closed its embassy in 2012, designated the IRGC as a terrorist entity, and maintains strong sanctions, reflecting significant preference misalignment and audience costs driven by domestic diaspora politics. However, geographic distance, minimal economic interdependence, and the absence of territorial disputes or direct military confrontation keep the risk of armed conflict structurally very low, with Canada holding a modest conventional edge as a NATO member but no direct patron deterrence commitment applying to this dyad.",
+    "reasoning": "Canada and Iran have deeply strained relations—Canada closed its embassy in 2012, designated the IRGC as a terrorist entity, and maintains strong sanctions, reflecting significant preference misalignment and audience costs driven by domestic diaspora politics. However, geographic distance, minimal economic interdependence, and the absence of territorial disputes or direct military confrontation keep the risk of armed conflict structurally very low, with Canada holding a modest conventional edge as a NATO member but no direct patron deterrence commitment applying to this dyad.",
     "baseline_source": "auto"
   },
   "Iran-Kuwait": {
-    "label": "Iran\u2013Kuwait",
+    "label": "Iran–Kuwait",
     "baseline": {
       "WinProbability": 0.8,
       "WarCosts": -0.8,
@@ -1464,7 +1133,7 @@
     "baseline_source": "auto"
   },
   "Israel-Qatar": {
-    "label": "Israel\u2013Qatar",
+    "label": "Israel–Qatar",
     "baseline": {
       "WinProbability": 1.2,
       "WarCosts": -0.8,
@@ -1479,7 +1148,7 @@
     },
     "query": "Israel AND Qatar AND (Hamas OR negotiations OR diplomacy OR mediation OR Gaza OR conflict OR relations)",
     "reasoning": "Israel holds a decisive conventional military advantage and undeclared nuclear capability, while Qatar lacks a major patron committed to its defense in a bilateral confrontation, though direct war is structurally unlikely given geographic distance and indirect rivalry. The dyad is characterized by deep preference misalignment over Hamas patronage and Palestinian issues, significant audience costs on both sides driven by domestic constituencies, and Qatar's role as a mediator/Hamas host creating ongoing commitment problems, but meaningful war costs from economic interdependence and US relationships constrain escalation.",
-    "notes": "This is primarily an indirect rivalry dyad\u2014Israel and Qatar are not neighbors and conflict manifests through proxy dynamics (Qatar's hosting of Hamas leadership, funding flows) rather than direct territorial disputes, which moderates several escalation parameters.",
+    "notes": "This is primarily an indirect rivalry dyad—Israel and Qatar are not neighbors and conflict manifests through proxy dynamics (Qatar's hosting of Hamas leadership, funding flows) rather than direct territorial disputes, which moderates several escalation parameters.",
     "baseline_source": "auto"
   },
   "Turkey-Greece": {
@@ -1498,7 +1167,7 @@
     },
     "query": "\"Greece\" AND (\"Turkey\" OR \"Aegean\" OR \"Cyprus\" OR \"airspace\" OR \"Erdogan\")",
     "baseline_source": "verified",
-    "crisis_context": "CRISIS CONTEXT: Turkey and Greece are NATO allies with a long history of bilateral tensions centered on Aegean Sea continental shelf and airspace disputes, competing claims over maritime boundaries in the Eastern Mediterranean (exacerbated by hydrocarbon exploration rights), the status of Cyprus, treatment of ethnic/religious minorities, and periodic migration-related friction. As of mid-2025, no acute military crisis is underway. Relations have been in a relative d\u00e9tente phase since the February 2023 earthquakes prompted mutual humanitarian assistance, followed by a series of high-level diplomatic meetings aimed at confidence-building. However, structural disputes remain unresolved: sovereignty over certain Aegean islets, the delimitation of exclusive economic zones (EEZ), flight information region (FIR) violations, and the militarization of eastern Aegean islands are recurring flashpoints. Both countries maintain significant military assets in proximity, and Greek-Turkish aerial encounters (mock dogfights, FIR violations) are routine rather than exceptional.\n\nNODE-SCORING GUIDANCE:\n\n- MILITARY POSTURING / MOBILIZATION nodes: Greek and Turkish air forces routinely intercept each other over the Aegean; Turkish naval vessels periodically operate near disputed areas. These should be scored as BASELINE behavior unless there is a clear qualitative escalation (e.g., live-fire exercises in disputed waters, unusual force concentration, deployment of assets not normally stationed in the Aegean/Eastern Med theater, or suspension of existing deconfliction mechanisms).\n\n- DIPLOMATIC DETERIORATION nodes: Periodic sharp rhetoric from officials on both sides (especially around sovereignty, EEZ, or Cyprus) is normal. Score escalation only if accompanied by concrete actions such as recall of ambassadors, cancellation of scheduled bilateral talks, formal protests at international bodies, or withdrawal from confidence-building agreements.\n\n- TRIGGER / PRECIPITATING EVENT nodes: No known precipitating event as of early July 2025. Any new hydrocarbon exploration announcements in disputed waters, unilateral NOTAM/NAVTEX declarations covering contested zones, or incidents involving physical contact between military assets should be scored as genuinely novel triggers.\n\n- THIRD-PARTY INVOLVEMENT nodes: Watch for shifts in US, EU, or NATO posture that could embolden or restrain either side. Also monitor Russia's role in any energy or arms deals with Turkey, and developments in the Cyprus reunification process.\n\n- DOMESTIC POLITICAL PRESSURE nodes: Turkish elections are not imminent, but nationalist rhetoric can spike around anniversaries or domestic political stress. Greek domestic politics can similarly amplify Aegean issues. Score these as escalatory only if they translate into policy actions or military directives.\n\n- DE-ESCALATION / DIPLOMACY nodes: The ongoing exploratory talks process (which"
+    "crisis_context": "CRISIS CONTEXT: Turkey and Greece are NATO allies with a long history of bilateral tensions centered on Aegean Sea continental shelf and airspace disputes, competing claims over maritime boundaries in the Eastern Mediterranean (exacerbated by hydrocarbon exploration rights), the status of Cyprus, treatment of ethnic/religious minorities, and periodic migration-related friction. As of mid-2025, no acute military crisis is underway. Relations have been in a relative détente phase since the February 2023 earthquakes prompted mutual humanitarian assistance, followed by a series of high-level diplomatic meetings aimed at confidence-building. However, structural disputes remain unresolved: sovereignty over certain Aegean islets, the delimitation of exclusive economic zones (EEZ), flight information region (FIR) violations, and the militarization of eastern Aegean islands are recurring flashpoints. Both countries maintain significant military assets in proximity, and Greek-Turkish aerial encounters (mock dogfights, FIR violations) are routine rather than exceptional.\n\nNODE-SCORING GUIDANCE:\n\n- MILITARY POSTURING / MOBILIZATION nodes: Greek and Turkish air forces routinely intercept each other over the Aegean; Turkish naval vessels periodically operate near disputed areas. These should be scored as BASELINE behavior unless there is a clear qualitative escalation (e.g., live-fire exercises in disputed waters, unusual force concentration, deployment of assets not normally stationed in the Aegean/Eastern Med theater, or suspension of existing deconfliction mechanisms).\n\n- DIPLOMATIC DETERIORATION nodes: Periodic sharp rhetoric from officials on both sides (especially around sovereignty, EEZ, or Cyprus) is normal. Score escalation only if accompanied by concrete actions such as recall of ambassadors, cancellation of scheduled bilateral talks, formal protests at international bodies, or withdrawal from confidence-building agreements.\n\n- TRIGGER / PRECIPITATING EVENT nodes: No known precipitating event as of early July 2025. Any new hydrocarbon exploration announcements in disputed waters, unilateral NOTAM/NAVTEX declarations covering contested zones, or incidents involving physical contact between military assets should be scored as genuinely novel triggers.\n\n- THIRD-PARTY INVOLVEMENT nodes: Watch for shifts in US, EU, or NATO posture that could embolden or restrain either side. Also monitor Russia's role in any energy or arms deals with Turkey, and developments in the Cyprus reunification process.\n\n- DOMESTIC POLITICAL PRESSURE nodes: Turkish elections are not imminent, but nationalist rhetoric can spike around anniversaries or domestic political stress. Greek domestic politics can similarly amplify Aegean issues. Score these as escalatory only if they translate into policy actions or military directives.\n\n- DE-ESCALATION / DIPLOMACY nodes: The ongoing exploratory talks process (which"
   },
   "North Korea-South Korea": {
     "label": "North Korea and South Korea",
