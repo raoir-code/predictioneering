@@ -18,6 +18,9 @@ import hashlib
 import time
 from datetime import datetime, timezone, date
 from pathlib import Path
+
+sys.path.insert(0, os.path.dirname(__file__))
+from clergyman_ontology import get_anchor_range, clamp_to_range, derive_severity_band
 import urllib.request
 import re as _re
 import calendar as _calendar
@@ -345,9 +348,52 @@ CLERGYMAN_SYSTEM = """You are the Clergyman module in a geopolitical prediction-
 The engine estimates P(A) = probability of conflict onset between the specified dyad.
 The Legal Scholar has determined the relation between contract event B and engine event A.
 
-Your job: estimate two conditional probabilities using historical knowledge of this dyad's conflict patterns and base rates of this type of military action.
+Your job has two parts:
 
-P(B|A)   = probability that, given conflict onset occurs, it takes the specific form in the contract
+PART 1 -- CLASSIFY the contract onto two axes (deterministic code will use these
+to assign a probability range; you do NOT set the range yourself):
+
+manifestation_family: one of
+  - "political_act": the contract resolves on an announcement, declaration,
+    authorization, or other political/speech act -- NOT a physical operation.
+    E.g. "will X announce a blockade" is political_act even though "blockade"
+    appears in the text. Political acts are typically CHEAP and can precede
+    or accompany physical action -- do not treat them as a weak version of
+    the physical event.
+  - "kinetic_or_coercive_action": the contract resolves on an actual physical
+    military action occurring.
+
+requirement_burden: one of, in order of INCREASING restrictiveness (each tier
+adds a necessary condition beyond the previous, which can only hold or lower
+the true probability, never raise it):
+  - "broad": any qualifying action in a wide category satisfies this (e.g.
+    "any US military action against Iran")
+  - "method_specific": a particular method/action type is named (e.g.
+    "a naval blockade", "an airstrike") but no specific target or duration
+  - "target_specific": a particular target, location, or actor is named
+    (e.g. "a strike on Fordow", "action in Damascus specifically")
+  - "persistent": the contract requires the action to be SUSTAINED over time,
+    not a single instance (e.g. "a blockade lasting 7+ days")
+  - "territorial_control": the contract requires establishing or holding
+    territory, the most restrictive tier (e.g. "invade AND hold territory")
+
+Also record action_type (reuse this dyad\'s known action_type categories:
+gray_zone_incident, missile_strike, raid, seizure_boarding, airstrike,
+naval_blockade, ground_invasion) if the contract\'s method is physical and
+identifiable -- null if manifestation_family is political_act or the method
+is unspecified.
+
+PART 2 -- ESTIMATE, using historical knowledge of this dyad\'s conflict patterns:
+
+P(B|A)   = probability that, given conflict onset occurs, it takes the specific
+           form in the contract. Reason using conjunctive logic: each additional
+           requirement (method, target, duration, territorial control) can only
+           hold this probability flat or lower it relative to a broader
+           contract on the same dyad -- never raise it. A blockade is MORE
+           dramatic than a single airstrike but requires persistence and
+           geographic coverage, which makes it LESS likely given conflict
+           occurs, not more -- severity and conditional probability are
+           different axes, do not conflate them.
 P(B|¬A)  = probability that, given NO conflict onset, the contract still resolves YES
 
 For strict subsets: P(B|¬A) ≈ 0
@@ -365,11 +411,14 @@ The Bettor will scale this to the actual contract window deterministically. Do N
 
 Return ONLY valid JSON:
 {
+  "manifestation_family": "political_act|kinetic_or_coercive_action",
+  "requirement_burden": "broad|method_specific|target_specific|persistent|territorial_control",
+  "action_type": "one of the 7 categories, or null",
   "p_b_given_a": 0.75,
   "p_b_given_not_a": 0.05,
   "p_b_given_not_a_reference_days": 30,
   "confidence": "high|medium|low",
-  "rationale": "one sentence"
+  "rationale": "one sentence -- must name which requirement_burden modifiers drove your estimate"
 }"""
 
 
@@ -389,9 +438,28 @@ Legalese flags: {'; '.join(flags) if flags else 'none'}"""
 
     result = _claude_call(CLERGYMAN_SYSTEM, user_content)
     if result:
+        manifestation_family = result.get("manifestation_family", "kinetic_or_coercive_action")
+        requirement_burden   = result.get("requirement_burden", "broad")
+        raw_pba               = result.get("p_b_given_a")
+
+        try:
+            anchor_range = get_anchor_range(manifestation_family, requirement_burden)
+            clamped_pba, was_clamped = clamp_to_range(raw_pba, anchor_range)
+        except ValueError as e:
+            print(f"    [clergy] ⚠️  ontology error: {e} -- using raw value unclamped")
+            anchor_range, clamped_pba, was_clamped = None, raw_pba, False
+
+        result["p_b_given_a_raw"] = raw_pba
+        result["p_b_given_a"]     = clamped_pba
+        result["anchor_range"]    = list(anchor_range) if anchor_range else None
+        result["was_clamped"]     = was_clamped
+        result["severity_band"]   = derive_severity_band(result.get("action_type"))
+
         pba  = result.get("p_b_given_a")
         pbna = result.get("p_b_given_not_a")
-        print(f"    [clergy] P(B|A)={pba} P(B|¬A)={pbna} conf={result.get('confidence')}")
+        clamp_note = f" [CLAMPED from {raw_pba}]" if was_clamped else ""
+        print(f"    [clergy] {manifestation_family}/{requirement_burden} "
+              f"P(B|A)={pba}{clamp_note} P(B|¬A)={pbna} conf={result.get('confidence')}")
     return result
 
 
@@ -545,7 +613,13 @@ def _pass_fields(market: dict, scholar: dict | None, reason: str) -> dict:
         "scholar_confidence":         scholar.get("confidence") if scholar else None,
         "scholar_rationale":          scholar.get("rationale") if scholar else None,
         "p_b_given_a":                None,
+        "p_b_given_a_raw":            None,
         "p_b_given_not_a":            None,
+        "manifestation_family":       None,
+        "requirement_burden":         None,
+        "severity_band":              None,
+        "anchor_range":               None,
+        "was_clamped":                None,
         "clergy_confidence":          None,
         "clergy_rationale":           None,
         "outcome_observability":      None,
@@ -672,7 +746,13 @@ def translate_market(market: dict, cache: dict) -> dict:
         "scholar_confidence":         scholar.get("confidence"),
         "scholar_rationale":          scholar.get("rationale"),
         "p_b_given_a":                clergy.get("p_b_given_a"),
+        "p_b_given_a_raw":            clergy.get("p_b_given_a_raw"),
         "p_b_given_not_a":            clergy.get("p_b_given_not_a"),
+        "manifestation_family":       clergy.get("manifestation_family"),
+        "requirement_burden":         clergy.get("requirement_burden"),
+        "severity_band":              clergy.get("severity_band"),
+        "anchor_range":               clergy.get("anchor_range"),
+        "was_clamped":                clergy.get("was_clamped"),
         "clergy_confidence":          clergy.get("confidence"),
         "clergy_rationale":           clergy.get("rationale"),
         "outcome_observability":      bet.get("observability"),
@@ -772,7 +852,13 @@ def _append_log(feed: list):
                 "translator_route":         market.get("translator_route"),
                 "translator_verdict":       market.get("translator_verdict"),
                 "p_b_given_a":              market.get("p_b_given_a"),
+                "p_b_given_a_raw":          market.get("p_b_given_a_raw"),
                 "p_b_given_not_a":          market.get("p_b_given_not_a"),
+                "manifestation_family":     market.get("manifestation_family"),
+                "requirement_burden":       market.get("requirement_burden"),
+                "severity_band":            market.get("severity_band"),
+                "anchor_range":             market.get("anchor_range"),
+                "was_clamped":              market.get("was_clamped"),
                 "outcome_observability":    market.get("outcome_observability"),
                 "resolution_risk":          market.get("resolution_risk"),
                 "kelly_fraction":           market.get("kelly_fraction"),
