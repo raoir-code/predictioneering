@@ -37,6 +37,10 @@ ALIASES = {
 
 NON_BILATERAL = {
     "Russia-Unknown",
+    "US-Unknown",  # "any country expels a US ambassador" -- undefined counterparty,
+                   # same pattern as Russia-Unknown. Added 2026-07-24.
+    "US-Unknown",  # "any country expels a US ambassador" -- undefined counterparty,
+                   # same pattern as Russia-Unknown. Added 2026-07-24.
     "US-LatinAmerica",
     "Israel-Multiple",
     "Europe(France/UK/Germany)-Iran",

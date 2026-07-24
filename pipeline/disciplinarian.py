@@ -205,7 +205,7 @@ def save_dyad_configs(configs):
 def generate_baseline(dyad):
     payload = {
         "model": MODEL,
-        "max_tokens": 400,
+        "max_tokens": 900,
         "system": BASELINE_SYSTEM_PROMPT,
         "messages": [{"role": "user", "content": "Generate a baseline for this dyad: " + dyad}],
     }
