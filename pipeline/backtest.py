@@ -295,8 +295,23 @@ def _load_dyad_crisis_context(dyad):
     return ""
 
 
-def fetch_gnews(dyad, as_of_date):
-    """Fetch GNews headlines for a dyad, date-locked to as_of_date. Cached."""
+def fetch_gnews(dyad, as_of_date, max_retries=3, base_sleep=3.0):
+    """Fetch GNews headlines for a dyad, date-locked to as_of_date. Cached.
+
+    Retries transient network failures (SSL errors, timeouts, connection
+    errors) up to max_retries times with backoff before giving up. On total
+    failure, falls back to the most recent prior day's cached articles for
+    this dyad rather than silently proceeding with zero evidence -- treating
+    a network failure as "nothing happened" was confirmed as the root cause
+    of a 20x same-day engine_p swing on US-Iran, July 13 2026 (SSL fetch
+    failure -> zero evidence -> engine_p=0.03, vs a later successful fetch
+    on the same underlying reality -> engine_p=0.64-0.99). See work log
+    2026-07-24.
+
+    Does NOT write a cache file for as_of_date when falling back to stale
+    data -- deliberate, so a later successful fetch (same-day retry, or the
+    next day) is not permanently blocked from getting fresh data.
+    """
     safe_dyad = re.sub(r'[^A-Za-z0-9_]+', '_', dyad)
     cache_key = f"{safe_dyad}_{as_of_date.strftime('%Y%m%d')}"
     cache_file = GNEWS_CACHE / f"{cache_key}.json"
@@ -304,7 +319,6 @@ def fetch_gnews(dyad, as_of_date):
         return json.loads(cache_file.read_text())
 
     query = _load_dyad_query(dyad)
-    # GNews: to= param locks the date ceiling
     params = {
         "q":        query,
         "lang":     "en",
@@ -314,19 +328,51 @@ def fetch_gnews(dyad, as_of_date):
         "apikey":   GNEWS_KEY,
         "sortby":   "publishedAt",
     }
-    r = requests.get("https://gnews.io/api/v4/search", params=params, timeout=30)
-    body = r.json()
-    articles = body.get("articles", [])
-    if not articles:
-        print(f"    [fetch_gnews] {dyad}: 0 articles. status={r.status_code} "
-              f"query={query!r} response_keys={list(body.keys())}")
-        if "errors" in body:
-            print(f"    [fetch_gnews] {dyad}: API error detail: {body['errors']}")
-    result = [{"title": a["title"], "description": a.get("description", ""),
-               "publishedAt": a["publishedAt"]} for a in articles]
-    cache_file.write_text(json.dumps(result))
-    time.sleep(0.5)
-    return result
+
+    last_exception = None
+    for attempt in range(1, max_retries + 1):
+        try:
+            r = requests.get("https://gnews.io/api/v4/search", params=params, timeout=30)
+            body = r.json()
+            articles = body.get("articles", [])
+            if not articles:
+                print(f"    [fetch_gnews] {dyad}: 0 articles. status={r.status_code} "
+                      f"query={query!r} response_keys={list(body.keys())}")
+                if "errors" in body:
+                    print(f"    [fetch_gnews] {dyad}: API error detail: {body['errors']}")
+            result = [{"title": a["title"], "description": a.get("description", ""),
+                       "publishedAt": a["publishedAt"]} for a in articles]
+            cache_file.write_text(json.dumps(result))
+            time.sleep(0.5)
+            return result
+        except Exception as ex:
+            last_exception = ex
+            print(f"    [fetch_gnews] \u26a0\ufe0f  {dyad}: attempt {attempt}/{max_retries} failed -- "
+                  f"{type(ex).__name__}: {ex}")
+            if attempt < max_retries:
+                time.sleep(base_sleep * attempt)
+
+    print(f"    [fetch_gnews] \u26a0\ufe0f\u26a0\ufe0f  {dyad}: ALL {max_retries} FETCH ATTEMPTS FAILED "
+          f"({type(last_exception).__name__}: {last_exception}) -- searching for fallback cache")
+
+    fallback_candidates = sorted(GNEWS_CACHE.glob(f"{safe_dyad}_*.json"), reverse=True)
+    for candidate in fallback_candidates:
+        try:
+            candidate_date_str = candidate.stem.replace(f"{safe_dyad}_", "")
+            candidate_date = datetime.strptime(candidate_date_str, "%Y%m%d").date()
+        except Exception:
+            continue
+        if candidate_date >= as_of_date:
+            continue
+        age_days = (as_of_date - candidate_date).days
+        print(f"    [fetch_gnews] \u26a0\ufe0f  {dyad}: FALLBACK -- using cached articles from "
+              f"{candidate_date.isoformat()} (STALE, {age_days}d old). NOT caching this as "
+              f"{as_of_date.isoformat()}'s data -- next run will retry fresh.")
+        return json.loads(candidate.read_text())
+
+    print(f"    [fetch_gnews] \u26a0\ufe0f\u26a0\ufe0f\u26a0\ufe0f  {dyad}: NO FALLBACK AVAILABLE -- returning "
+          f"zero evidence. This prediction run should be treated as LOW CONFIDENCE / STALE.")
+    return []
 
 # ─────────────────────────────────────────────────────────────────────
 # CLAUDE NODE SCORER
