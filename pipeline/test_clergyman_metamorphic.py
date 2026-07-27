@@ -41,13 +41,33 @@ SCENARIOS = [
      "blockade on Iran, regardless of whether the blockade is ever enforced"),
 ]
 
+# Option B scenarios (2026-07-27): SAME contract, SAME requirement_burden tier
+# as scenario 5, but with contrasting structural context. If Option B is
+# actually working, these should NOT land at the same point in the range --
+# high WarCosts (prohibitive) should suppress relative to low WarCosts
+# (permissive), holding everything else about the contract identical. This
+# is the thing the existing 8 scenarios cannot test at all, since none of
+# them ever pass _toggles.
+OPTION_B_SCENARIOS = [
+    ("9_persistent_blockade_high_warcosts",
+     "A US naval blockade of Iranian shipping sustained for at least 7 consecutive days",
+     {"WinProbability": -1.0, "WarCosts": -1.8, "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.2, "AudienceCosts": 0.5}),
+    ("10_persistent_blockade_low_warcosts",
+     "A US naval blockade of Iranian shipping sustained for at least 7 consecutive days",
+     {"WinProbability": -1.0, "WarCosts": 1.5, "PatronDeterrence": 0.5,
+      "NuclearDeterrence": 0.2, "AudienceCosts": 0.5}),
+]
 
-def run_scenario(name, win_cond):
+
+def run_scenario(name, win_cond, toggles=None):
     market = {
         "label": win_cond,
         "question": win_cond,
         "description": win_cond,
     }
+    if toggles:
+        market["_toggles"] = toggles
     scholar_output = {
         "relation_to_engine_event": "subset",
         "win_condition_summary": win_cond,
@@ -64,6 +84,15 @@ def main():
         print(f"--- {name} ---")
         print(f"    win_condition: {win_cond}")
         result = run_scenario(name, win_cond)
+        results[name] = result
+        print()
+
+    print(f"Running {len(OPTION_B_SCENARIOS)} Option B structural-context scenarios...\n")
+    for name, win_cond, toggles in OPTION_B_SCENARIOS:
+        print(f"--- {name} ---")
+        print(f"    win_condition: {win_cond}")
+        print(f"    toggles: WarCosts={toggles['WarCosts']}")
+        result = run_scenario(name, win_cond, toggles=toggles)
         results[name] = result
         print()
 
@@ -121,6 +150,27 @@ def main():
     check(
         f"Blockade (scenario 4={p4}) != Invasion (scenario 6={p6}) -- the original bug",
         p4 is not None and p6 is not None and p4 != p6,
+    )
+
+    # Option B invariants
+    p9  = pba("9_persistent_blockade_high_warcosts")
+    p10 = pba("10_persistent_blockade_low_warcosts")
+    check(
+        f"Both Option B scenarios used real structural context "
+        f"(9={results.get('9_persistent_blockade_high_warcosts',{}).get('used_structural_context')}, "
+        f"10={results.get('10_persistent_blockade_low_warcosts',{}).get('used_structural_context')})",
+        results.get("9_persistent_blockade_high_warcosts", {}).get("used_structural_context") is True
+        and results.get("10_persistent_blockade_low_warcosts", {}).get("used_structural_context") is True,
+    )
+    check(
+        f"IDENTICAL contract, high WarCosts (9={p9}) <= low WarCosts (10={p10}) -- "
+        f"structural context must actually move the number, not just be present in the prompt",
+        p9 is not None and p10 is not None and p9 <= p10,
+    )
+    check(
+        f"Option B scenarios still respect the anchor range (both must be within "
+        f"the 'persistent' tier range, same as scenarios 4/5)",
+        p9 is not None and p10 is not None and 0.08 <= p9 <= 0.35 and 0.08 <= p10 <= 0.35,
     )
 
     print()

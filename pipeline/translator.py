@@ -43,7 +43,7 @@ import calendar as _calendar
 # applying whatever fix is live right now.
 # ─────────────────────────────────────────────────────────────────────
 LEGAL_SCHOLAR_PROMPT_VERSION = "v1"
-CLERGYMAN_PROMPT_VERSION     = "v2"  # v2 = two-axis ontology (Jul 23) + political-act P(B|notA) fix (Jul 27)
+CLERGYMAN_PROMPT_VERSION     = "v3"  # v3 = Option B: real structural primitives (WarCosts, WinProbability, PatronDeterrence, NuclearDeterrence, AudienceCosts) inform within-range positioning (Jul 27)
 SPYGLASS_PROMPT_VERSION      = "v1"
 
 # ─────────────────────────────────────────────────────────────────────
@@ -480,6 +480,51 @@ The full formula is: P(B) = P(B|A)×P(A) + P(B|¬A)×(1−P(A))
 
 Be honest. Return null for both if too uncertain to estimate reliably.
 
+PART 3 -- USE REAL STRUCTURAL CONTEXT WHEN AVAILABLE (Option B, 2026-07-27):
+
+If a STRUCTURAL CONTEXT block is provided below, it contains this specific
+dyad's actual Mach 2 primitive values -- not generic historical pattern-
+matching, the real computed state of THIS relationship today. Use it to
+decide WHERE within your assigned anchor range to land, the same way a real
+analyst would condition on the belligerents' actual capabilities and
+constraints rather than a generic base rate. You still do NOT get to move
+outside the range the deterministic ontology assigned you -- this only
+changes your positioning within it, and your rationale must name which
+specific primitive(s) moved you and in which direction.
+
+General reasoning patterns (not rigid rules -- reason like an analyst, not
+a lookup table):
+- WarCosts very negative (high cost of war) + a "persistent" or
+  "territorial_control" tier contract (sustained/costly options: blockade,
+  invasion) -> lean toward the LOW end of your range. The structural cost
+  of sustaining that specific option is real and should suppress it.
+- WarCosts near zero or positive (cheap war) -> less reason to suppress
+  costly-tier options; can sit higher in the range if other signals support it.
+- WinProbability strongly favorable (decisive capability edge) -> a swift,
+  decisive form of the contract's named action becomes relatively more
+  plausible; lean higher within the range for that specific action type.
+  WinProbability unfavorable -> lean lower, especially for anything requiring
+  sustained commitment.
+- NuclearDeterrence high -> large-scale/sustained kinetic options
+  (persistent, territorial_control tiers) become LESS plausible (nuclear
+  deterrence suppresses escalation to that level) -- lean toward the low end
+  for those tiers specifically. This can push political_act contracts the
+  OTHER way (toward the high end) since limited signaling substitutes for
+  action that's structurally deterred.
+- PatronDeterrence high for the TARGET of the contract's action -> the
+  named action becomes less plausible (a committed external patron raises
+  the cost/risk of escalating against their client) -- lean lower.
+- AudienceCosts high -> a leader who has publicly committed faces real
+  pressure to follow through visibly; this can support leaning higher for
+  formal_official political-act contracts specifically (the credibility
+  cost of an empty formal announcement is higher, so formal announcements
+  become more informative/likely when domestic audience costs are already
+  elevated), independent of the kinetic-tier effects above.
+
+If no STRUCTURAL CONTEXT block is provided (older cached markets, or a dyad
+without toggle data yet), fall back to PART 2's historical-pattern reasoning
+alone -- do not invent numbers.
+
 IMPORTANT: p_b_given_not_a must be expressed as a rate over a REFERENCE PERIOD.
 Also output p_b_given_not_a_reference_days: the number of days your p_b_given_not_a estimate implicitly assumes.
 Example: if you think Israel strikes Damascus ~35% of months, set p_b_given_not_a=0.35 and p_b_given_not_a_reference_days=30.
@@ -495,8 +540,40 @@ Return ONLY valid JSON:
   "p_b_given_not_a": 0.05,
   "p_b_given_not_a_reference_days": 30,
   "confidence": "high|medium|low",
-  "rationale": "one sentence -- must name which requirement_burden modifiers drove your estimate"
+  "used_structural_context": true,
+  "rationale": "one sentence -- must name which requirement_burden modifiers drove your estimate, AND which structural primitive(s) if a STRUCTURAL CONTEXT block was provided"
 }"""
+
+
+def _format_structural_context(toggles: dict) -> str:
+    """Formats the subset of Mach 2 structural primitives relevant to
+    instrument-choice reasoning (Option B) into a labeled block for the
+    Clergyman prompt. Returns "" if toggles is empty/missing so callers can
+    cleanly omit the whole block rather than send an empty section header.
+    """
+    if not toggles:
+        return ""
+
+    relevant = ["WinProbability", "WarCosts", "PatronDeterrence",
+                "NuclearDeterrence", "AudienceCosts"]
+    present = {k: toggles.get(k) for k in relevant if toggles.get(k) is not None}
+    if not present:
+        return ""
+
+    lines = [
+        "STRUCTURAL CONTEXT (this dyad's real current Mach 2 primitive values, "
+        "not generic history -- see PART 3 for how to use these):",
+    ]
+    legend = {
+        "WinProbability":   "positive = challenger capability advantage, negative = disadvantage",
+        "WarCosts":         "negative = HIGH cost of war (peace-inducing), positive = low cost",
+        "PatronDeterrence": "0-3, higher = stronger external patron commitment to the target",
+        "NuclearDeterrence": "0-3, higher = stronger mutual nuclear deterrence constraint",
+        "AudienceCosts":    "0-3, higher = more domestic political lock-in on leaders",
+    }
+    for k, v in present.items():
+        lines.append(f"  {k} = {v}  ({legend[k]})")
+    return "\n".join(lines)
 
 
 def clergyman(market: dict, dyad: str, scholar_output: dict) -> dict | None:
@@ -505,6 +582,7 @@ def clergyman(market: dict, dyad: str, scholar_output: dict) -> dict | None:
     win_cond = scholar_output.get("win_condition_summary", "")
     flags    = scholar_output.get("legalese_flags", [])
     desc     = market.get("description", "")[:300]
+    structural_block = _format_structural_context(market.get("_toggles", {}))
 
     user_content = f"""Market: {label}
 Dyad: {dyad}
@@ -512,9 +590,12 @@ Relation to engine event: {relation}
 Win condition: {win_cond}
 Resolution criteria excerpt: {desc}
 Legalese flags: {'; '.join(flags) if flags else 'none'}"""
+    if structural_block:
+        user_content += f"\n\n{structural_block}"
 
     result = _claude_call(CLERGYMAN_SYSTEM, user_content)
     if result:
+        result["used_structural_context"] = bool(structural_block)
         # Claude sometimes returns the JSON string "null" (in quotes) instead
         # of a bare JSON null for political_act_formality on kinetic markets,
         # per the schema's "formal_official|informal_rhetorical|null" hint --
@@ -729,6 +810,7 @@ def _pass_fields(market: dict, scholar: dict | None, reason: str) -> dict:
         "p_b_given_not_a":            None,
         "manifestation_family":       None,
         "political_act_formality":    None,
+        "used_structural_context":    None,
         "requirement_burden":         None,
         "severity_band":              None,
         "anchor_range":               None,
@@ -877,6 +959,7 @@ def translate_market(market: dict, cache: dict) -> dict:
         "p_b_given_not_a":            clergy.get("p_b_given_not_a"),
         "manifestation_family":       clergy.get("manifestation_family"),
         "political_act_formality":    clergy.get("political_act_formality"),
+        "used_structural_context":    clergy.get("used_structural_context"),
         "requirement_burden":         clergy.get("requirement_burden"),
         "severity_band":              clergy.get("severity_band"),
         "anchor_range":               clergy.get("anchor_range"),
@@ -985,6 +1068,7 @@ def _append_log(feed: list):
                 "p_b_given_not_a":          market.get("p_b_given_not_a"),
                 "manifestation_family":     market.get("manifestation_family"),
                 "political_act_formality":  market.get("political_act_formality"),
+                "used_structural_context":  market.get("used_structural_context"),
                 "requirement_burden":       market.get("requirement_burden"),
                 "severity_band":            market.get("severity_band"),
                 "anchor_range":             market.get("anchor_range"),
