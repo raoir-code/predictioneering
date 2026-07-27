@@ -463,7 +463,7 @@ The Bettor will scale this to the actual contract window deterministically. Do N
 Return ONLY valid JSON:
 {
   "manifestation_family": "political_act|kinetic_or_coercive_action",
-  "political_act_formality": "formal_official|informal_rhetorical|null",
+  "political_act_formality": "formal_official|informal_rhetorical (omit or use JSON null if manifestation_family is kinetic_or_coercive_action)",
   "requirement_burden": "broad|method_specific|target_specific|persistent|territorial_control",
   "action_type": "one of the 7 categories, or null",
   "p_b_given_a": 0.75,
@@ -490,6 +490,16 @@ Legalese flags: {'; '.join(flags) if flags else 'none'}"""
 
     result = _claude_call(CLERGYMAN_SYSTEM, user_content)
     if result:
+        # Claude sometimes returns the JSON string "null" (in quotes) instead
+        # of a bare JSON null for political_act_formality on kinetic markets,
+        # per the schema's "formal_official|informal_rhetorical|null" hint --
+        # that's valid on Claude's end (it's following the literal string in
+        # the schema) but Python parses '"null"' as the truthy string "null",
+        # not None. Normalize here, once, before anything downstream reads it
+        # (the debug print, the log write, and any future consumer).
+        if result.get("political_act_formality") in ("null", "None", ""):
+            result["political_act_formality"] = None
+
         manifestation_family = result.get("manifestation_family", "kinetic_or_coercive_action")
         requirement_burden   = result.get("requirement_burden", "broad")
         raw_pba               = result.get("p_b_given_a")
