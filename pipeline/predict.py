@@ -53,6 +53,7 @@ from pipeline.backtest import (
     DECAY_FACTOR,
     _weibull_residual,
     _parse_date_str,
+    HORIZON_REFERENCE_DAYS,
 )
 
 # ENGINE CONFIG
@@ -534,7 +535,15 @@ def run(dry_run: bool = False, filter_dyad: str = None):
 
         for m in dyad_markets:
             days_rem    = days_until(m.get("end_date", ""))
-            market_window = max(days_rem, 1)
+            # Was: market_window = max(days_rem, 1) -- which made horizon_scale
+            # ALWAYS equal 1.0 (days_rem / days_rem), a silent no-op that
+            # diverged from what Run 21 actually validated. Now imports the
+            # same 90-day reference window backtest.py uses, so a long-dated
+            # contract (500 days out) genuinely gets scaled UP toward the
+            # cumulative-hazard estimate, and a same-day contract genuinely
+            # gets scaled down near-zero absent strong live evidence -- same
+            # behavior Run 21 was scored against, restored to live.
+            market_window = HORIZON_REFERENCE_DAYS
 
             # Use backtest's predict_probability with q_logit
             engine_p_raw = _predict_probability(toggles, days_rem, q_logit=q_logit)

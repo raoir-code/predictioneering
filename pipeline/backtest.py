@@ -133,6 +133,17 @@ SLATE = [
 # ── Snapshot offsets (days before end_date) ───────────────────────────
 SNAPSHOT_OFFSETS = list(range(90, 0, -1))
 
+# The horizon-scaling reference window. This is NOT a theoretically-derived
+# "true contract duration" -- it's the same 90-day constant SNAPSHOT_OFFSETS
+# already uses, and Run 21's canonical Brier benchmark was measured against
+# horizon_scale computed with THIS number. predict.py previously redefined
+# its own local market_window = max(days_rem, 1), which made horizon_scale
+# always equal 1.0 in the live pipeline -- a silent no-op that diverged from
+# what was actually backtested. Import this constant rather than redefining
+# it, so backtest and live can't drift apart on this again without it being
+# a visible, deliberate change in one place.
+HORIZON_REFERENCE_DAYS = max(SNAPSHOT_OFFSETS)
+
 # ─────────────────────────────────────────────────────────────────────
 # POLYMARKET DATA LAYER
 # ─────────────────────────────────────────────────────────────────────
@@ -1038,7 +1049,7 @@ def run_backtest(dry_run=False):
               f"History: {len(sm['history'])} days")
 
         # 2. Run snapshots
-        market_window = min(max(SNAPSHOT_OFFSETS), len(sm['history']))  # actual days in this market
+        market_window = min(HORIZON_REFERENCE_DAYS, len(sm['history']))  # actual days in this market
         node_memory = {}  # decay memory — reset per dyad
         for offset in SNAPSHOT_OFFSETS:
             snapshot_date = end_date - timedelta(days=offset)
