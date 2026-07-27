@@ -43,7 +43,7 @@ import calendar as _calendar
 # applying whatever fix is live right now.
 # ─────────────────────────────────────────────────────────────────────
 LEGAL_SCHOLAR_PROMPT_VERSION = "v1"
-CLERGYMAN_PROMPT_VERSION     = "v3"  # v3 = Option B: real structural primitives (WarCosts, WinProbability, PatronDeterrence, NuclearDeterrence, AudienceCosts) inform within-range positioning (Jul 27)
+CLERGYMAN_PROMPT_VERSION     = "v4"  # v4 = anchor range itself now scales with WarCosts (was static per-tier, fighting Option B's within-range positioning by clamping it back to a generic-dyad floor) (Jul 27)
 SPYGLASS_PROMPT_VERSION      = "v1"
 
 # ─────────────────────────────────────────────────────────────────────
@@ -609,26 +609,30 @@ Legalese flags: {'; '.join(flags) if flags else 'none'}"""
         manifestation_family = result.get("manifestation_family", "kinetic_or_coercive_action")
         requirement_burden   = result.get("requirement_burden", "broad")
         raw_pba               = result.get("p_b_given_a")
+        war_costs_for_range   = market.get("_toggles", {}).get("WarCosts")
 
         try:
-            anchor_range = get_anchor_range(manifestation_family, requirement_burden)
+            anchor_range = get_anchor_range(manifestation_family, requirement_burden,
+                                             war_costs=war_costs_for_range)
             clamped_pba, was_clamped = clamp_to_range(raw_pba, anchor_range)
         except ValueError as e:
             print(f"    [clergy] ⚠️  ontology error: {e} -- using raw value unclamped")
             anchor_range, clamped_pba, was_clamped = None, raw_pba, False
 
-        result["p_b_given_a_raw"] = raw_pba
-        result["p_b_given_a"]     = clamped_pba
-        result["anchor_range"]    = list(anchor_range) if anchor_range else None
-        result["was_clamped"]     = was_clamped
-        result["severity_band"]   = derive_severity_band(result.get("action_type"))
+        result["p_b_given_a_raw"]      = raw_pba
+        result["p_b_given_a"]          = clamped_pba
+        result["anchor_range"]         = list(anchor_range) if anchor_range else None
+        result["was_clamped"]          = was_clamped
+        result["war_costs_used_for_range"] = war_costs_for_range
+        result["severity_band"]        = derive_severity_band(result.get("action_type"))
 
         pba  = result.get("p_b_given_a")
         pbna = result.get("p_b_given_not_a")
         formality = result.get("political_act_formality")
         formality_note = f"/{formality}" if formality else ""
+        range_note = f" range={anchor_range}" if war_costs_for_range is not None else ""
         clamp_note = f" [CLAMPED from {raw_pba}]" if was_clamped else ""
-        print(f"    [clergy] {manifestation_family}{formality_note}/{requirement_burden} "
+        print(f"    [clergy] {manifestation_family}{formality_note}/{requirement_burden}{range_note} "
               f"P(B|A)={pba}{clamp_note} P(B|¬A)={pbna} conf={result.get('confidence')}")
     return result
 
@@ -815,6 +819,7 @@ def _pass_fields(market: dict, scholar: dict | None, reason: str) -> dict:
         "severity_band":              None,
         "anchor_range":               None,
         "was_clamped":                None,
+        "war_costs_used_for_range":   None,
         "clergy_confidence":          None,
         "clergy_rationale":           None,
         "outcome_observability":      None,
@@ -964,6 +969,7 @@ def translate_market(market: dict, cache: dict) -> dict:
         "severity_band":              clergy.get("severity_band"),
         "anchor_range":               clergy.get("anchor_range"),
         "was_clamped":                clergy.get("was_clamped"),
+        "war_costs_used_for_range":   clergy.get("war_costs_used_for_range"),
         "clergy_confidence":          clergy.get("confidence"),
         "clergy_rationale":           clergy.get("rationale"),
         "outcome_observability":      bet.get("observability"),
@@ -1073,6 +1079,7 @@ def _append_log(feed: list):
                 "severity_band":            market.get("severity_band"),
                 "anchor_range":             market.get("anchor_range"),
                 "was_clamped":              market.get("was_clamped"),
+                "war_costs_used_for_range": market.get("war_costs_used_for_range"),
                 "outcome_observability":    market.get("outcome_observability"),
                 "resolution_risk":          market.get("resolution_risk"),
                 "kelly_fraction":           market.get("kelly_fraction"),

@@ -17,6 +17,7 @@ import os
 
 sys.path.insert(0, os.path.dirname(__file__))
 from translator import clergyman
+from clergyman_ontology import get_anchor_range
 
 DYAD = "US-Iran"
 
@@ -163,14 +164,28 @@ def main():
         and results.get("10_persistent_blockade_low_warcosts", {}).get("used_structural_context") is True,
     )
     check(
-        f"IDENTICAL contract, high WarCosts (9={p9}) <= low WarCosts (10={p10}) -- "
-        f"structural context must actually move the number, not just be present in the prompt",
-        p9 is not None and p10 is not None and p9 <= p10,
+        f"IDENTICAL contract, high WarCosts (9={p9}) < low WarCosts (10={p10}) -- "
+        f"STRICT inequality required. A tie would mean the anchor-range clamp is "
+        f"still erasing the structural signal (this was a real bug found 2026-07-27: "
+        f"the original weak <= let a 0.08==0.08 tie pass as if it were a difference).",
+        p9 is not None and p10 is not None and p9 < p10,
+    )
+    range9  = get_anchor_range("kinetic_or_coercive_action", "persistent",
+                                war_costs=OPTION_B_SCENARIOS[0][2]["WarCosts"])
+    range10 = get_anchor_range("kinetic_or_coercive_action", "persistent",
+                                war_costs=OPTION_B_SCENARIOS[1][2]["WarCosts"])
+    check(
+        f"Each Option B scenario respects its OWN dynamically-scaled range "
+        f"(9: p={p9} in {range9}, 10: p={p10} in {range10}) -- not the old static "
+        f"(0.08, 0.35) both used to share regardless of WarCosts",
+        p9 is not None and p10 is not None
+        and range9[0] <= p9 <= range9[1] and range10[0] <= p10 <= range10[1],
     )
     check(
-        f"Option B scenarios still respect the anchor range (both must be within "
-        f"the 'persistent' tier range, same as scenarios 4/5)",
-        p9 is not None and p10 is not None and 0.08 <= p9 <= 0.35 and 0.08 <= p10 <= 0.35,
+        f"High-WarCosts range floor ({range9[0]}) is genuinely lower than "
+        f"low-WarCosts range floor ({range10[0]}) -- the range itself moved, "
+        f"not just where Clergyman happened to land inside a frozen range",
+        range9[0] < range10[0],
     )
 
     print()

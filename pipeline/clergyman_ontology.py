@@ -90,13 +90,59 @@ ANCHOR_RANGES_KINETIC = {
 ANCHOR_RANGE_POLITICAL_ACT = (0.30, 0.90)
 
 
-def get_anchor_range(manifestation_family: str, requirement_burden: str) -> tuple:
+def war_costs_range_multiplier(war_costs) -> float:
+    """
+    Returns a bounded multiplier applied to BOTH the floor and ceiling of a
+    kinetic anchor range, so tier ordering (broad >= method_specific >= ...)
+    survives automatically -- scaling low and high by the same factor can
+    never invert their relative order.
+
+    war_costs: this dyad's real WarCosts primitive (-2.0 to 2.0; negative =
+    high cost of war/peace-inducing, per the existing baseline convention).
+    None or missing -> multiplier 1.0 (no change, same as before this fix).
+
+    Piecewise linear, anchored at WarCosts=0 -> 1.0x (the "average dyad"
+    case the original static ranges were implicitly built for):
+      WarCosts = -2.0 (max cost)  -> 0.6x  (suppress toward the floor)
+      WarCosts =  0.0 (average)   -> 1.0x  (unchanged)
+      WarCosts = +2.0 (min cost)  -> 1.3x  (permit toward the ceiling)
+
+    HONESTY NOTE (2026-07-27): 0.6/1.3 are hand-set judgment calls, same
+    category as the original static ranges themselves -- NOT independently
+    calibrated against resolved markets. This makes the range responsive to
+    real per-dyad structural data instead of frozen at one generic value for
+    every dyad; it does not make the specific bend-points "real." Revisit
+    once enough resolved markets exist to check both the ranges AND this
+    multiplier against actual outcomes -- do not tune to market prices.
+
+    Asymmetric on purpose: a prohibitively costly war can crush likelihood
+    further than a cheap war should be allowed to inflate it -- judgment
+    call, not derived from data.
+    """
+    if war_costs is None:
+        return 1.0
+    wc = max(-2.0, min(2.0, float(war_costs)))
+    if wc <= 0:
+        return 1.0 + (wc / 2.0) * 0.4   # -2.0 -> 0.6, 0.0 -> 1.0
+    return 1.0 + (wc / 2.0) * 0.3        # 0.0 -> 1.0, +2.0 -> 1.3
+
+
+def get_anchor_range(manifestation_family: str, requirement_burden: str,
+                      war_costs=None) -> tuple:
     """
     Returns (low, high) for P(B|A), deterministically, from the two
     classification axes. Clergyman does NOT get to pick its own range --
     it only picks a value INSIDE the range it's assigned, and must explain
     which modifier moved it (this prevents the same model from inventing
     both its ruler and its measurement).
+
+    war_costs (Option B follow-up, 2026-07-27): if provided, scales the
+    kinetic range by war_costs_range_multiplier() so a dyad's real economic
+    cost of war can actually move the floor/ceiling, not just influence
+    where Clergyman lands inside a range frozen at the generic-dyad case.
+    Political-act ranges are NOT scaled -- an announcement is cheap
+    regardless of how expensive the underlying physical war would be, so
+    there's no theoretical reason for WarCosts to move that range.
     """
     if manifestation_family == "political_act":
         return ANCHOR_RANGE_POLITICAL_ACT
@@ -106,7 +152,15 @@ def get_anchor_range(manifestation_family: str, requirement_burden: str) -> tupl
             f"Unknown requirement_burden '{requirement_burden}' -- add it to "
             f"ANCHOR_RANGES_KINETIC deliberately rather than defaulting."
         )
-    return ANCHOR_RANGES_KINETIC[requirement_burden]
+    low, high = ANCHOR_RANGES_KINETIC[requirement_burden]
+    mult = war_costs_range_multiplier(war_costs)
+    # Absolute sanity bounds regardless of multiplier -- never let scaling
+    # push a range to a degenerate extreme.
+    scaled_low  = max(0.01, min(0.97, low * mult))
+    scaled_high = max(0.02, min(0.98, high * mult))
+    if scaled_low >= scaled_high:
+        scaled_low = max(0.01, scaled_high - 0.01)
+    return (round(scaled_low, 4), round(scaled_high, 4))
 
 
 def clamp_to_range(value: float, range_tuple: tuple) -> tuple:
