@@ -21,7 +21,7 @@ import json
 import math
 import time
 import argparse
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, date
 from typing import Dict, List, Tuple, Any
 
 import requests
@@ -55,6 +55,7 @@ from pipeline.backtest import (
     _parse_date_str,
     HORIZON_REFERENCE_DAYS,
 )
+from pipeline.translator import _get_market_deadline
 
 # ENGINE CONFIG
 # ============================================================
@@ -534,7 +535,20 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         z_t          = DYAD_REGIME.get(dyad, 0)
 
         for m in dyad_markets:
-            days_rem    = days_until(m.get("end_date", ""))
+            # Was: days_rem = days_until(m.get("end_date", "")) -- read the
+            # raw, known-unreliable end_date field directly (confirmed
+            # corrupted for grouped/serial markets, July 1-2 2026), bypassing
+            # the question-text-first fix that already exists in
+            # translator.py's _get_market_deadline(). Only the boolean
+            # is_expired() gate was ever wired to the fix; every quantitative
+            # days-remaining calculation (horizon_scale, Weibull transport)
+            # was still silently using the corrupted field. Found live,
+            # 2026-07-27.
+            _deadline, _deadline_source, _deadline_mismatch = _get_market_deadline(m)
+            if _deadline is not None:
+                days_rem = max(1, (_deadline - datetime.now(timezone.utc).date()).days)
+            else:
+                days_rem = days_until(m.get("end_date", ""))
             # Was: market_window = max(days_rem, 1) -- which made horizon_scale
             # ALWAYS equal 1.0 (days_rem / days_rem), a silent no-op that
             # diverged from what Run 21 actually validated. Now imports the

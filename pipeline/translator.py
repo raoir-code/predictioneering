@@ -85,8 +85,19 @@ def _parse_deadline_from_question(question: str, scraped_date_hint: date = None)
     Question text is the authoritative deadline source (endDate from Polymarket's
     Gamma API is unreliable for grouped/serial markets -- confirmed July 1-2, 2026).
     Returns a date, or None if unparseable.
+
+    scraped_date_hint is used as a fallback anchor for year-less deadlines ("by
+    July 21") only if today's real date is unavailable for some reason -- it is
+    NOT the primary anchor. Using scraped_at as primary was a live bug (found
+    2026-07-27): the weekly disciplinarian cadence means scraped_at can trail
+    today by up to ~7 days, and if a year-less deadline falls in that gap, the
+    old logic concluded "already past scraped_at, must mean next year" and
+    silently rolled a genuinely-expired-6-days-ago market a full year into the
+    future instead of flagging it as expired. Anchoring to today fixes this.
     """
     q = (question or "").lower().strip()
+    _today = date.today()
+    _anchor = max(scraped_date_hint, _today) if scraped_date_hint else _today
 
     m = _re.search(r'(?:by|in|on)\s+(\w+)\s+(\d{1,2}),?\s*(\d{4})', q)
     if m and m.group(1) in _MONTHS:
@@ -110,24 +121,38 @@ def _parse_deadline_from_question(question: str, scraped_date_hint: date = None)
         return date(year, month, last_day)
 
     m = _re.search(r'by (\w+)\s+(\d{1,2})\??\s*$', q)
-    if m and m.group(1) in _MONTHS and scraped_date_hint:
+    if m and m.group(1) in _MONTHS:
         month, day = _MONTHS[m.group(1)], int(m.group(2))
-        for cy in (scraped_date_hint.year, scraped_date_hint.year + 1):
-            try:
-                cand = date(cy, month, day)
-            except ValueError:
-                continue
-            if cand >= scraped_date_hint:
-                return cand
+        try:
+            cand = date(_anchor.year, month, day)
+        except ValueError:
+            cand = None
+        if cand is not None:
+            # Only roll forward a year if the naive candidate is implausibly
+            # stale (~10+ months in the past) -- that pattern only happens
+            # near a real calendar year boundary (e.g. scraped late Dec,
+            # deadline "Jan 5"). A candidate that's merely a few days past
+            # the anchor almost certainly means the deadline just passed and
+            # this market should be flagged expired, NOT silently pushed a
+            # full year into the future (found live, 2026-07-27: "by July 21"
+            # scraped July 24 was rolling to 2027-07-21 instead of correctly
+            # reading as an already-expired 2026-07-21 market).
+            if (_anchor - cand).days > 300:
+                try:
+                    cand = date(_anchor.year + 1, month, day)
+                except ValueError:
+                    pass
+            return cand
 
     m = _re.search(r'by (\w+)\??\s*$', q)
-    if m and m.group(1) in _MONTHS and scraped_date_hint:
+    if m and m.group(1) in _MONTHS:
         month = _MONTHS[m.group(1)]
-        for cy in (scraped_date_hint.year, scraped_date_hint.year + 1):
-            last_day = _calendar.monthrange(cy, month)[1]
-            cand = date(cy, month, last_day)
-            if cand >= scraped_date_hint:
-                return cand
+        last_day = _calendar.monthrange(_anchor.year, month)[1]
+        cand = date(_anchor.year, month, last_day)
+        if (_anchor - cand).days > 300:
+            next_last_day = _calendar.monthrange(_anchor.year + 1, month)[1]
+            cand = date(_anchor.year + 1, month, next_last_day)
+        return cand
 
     return None
 
@@ -822,13 +847,15 @@ def translate_market(market: dict, cache: dict) -> dict:
                "bet_direction": "PASS", "observability": None,
                "resolution_risk": None}
     else:
-        # Compute days remaining for horizon scaling
-        end_date_str = market.get("end_date", "")
-        try:
-            from datetime import date as _date
-            end_dt = _date.fromisoformat(end_date_str[:10])
-            days_remaining = max(1.0, float((end_dt - _date.today()).days))
-        except Exception:
+        # Compute days remaining for horizon scaling. Was reading end_date
+        # directly (same bug as predict.py's days_rem -- fixed 2026-07-27):
+        # route through _get_market_deadline() instead, since that's the
+        # whole reason this function exists and it was previously only
+        # wired into the boolean _is_expired() gate, not here.
+        _deadline, _deadline_source, _deadline_mismatch = _get_market_deadline(market)
+        if _deadline is not None:
+            days_remaining = max(1.0, float((_deadline - date.today()).days))
+        else:
             days_remaining = 365.0
 
         bet = bettor(float(engine_p), float(market_p or 0),
