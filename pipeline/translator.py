@@ -20,7 +20,7 @@ from datetime import datetime, timezone, date
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(__file__))
-from clergyman_ontology import get_anchor_range, clamp_to_range, derive_severity_band
+from clergyman_ontology import get_anchor_range, clamp_to_range, derive_severity_band, deterministic_position_within_range
 import urllib.request
 import re as _re
 import calendar as _calendar
@@ -43,7 +43,7 @@ import calendar as _calendar
 # applying whatever fix is live right now.
 # ─────────────────────────────────────────────────────────────────────
 LEGAL_SCHOLAR_PROMPT_VERSION = "v1"
-CLERGYMAN_PROMPT_VERSION     = "v4"  # v4 = anchor range itself now scales with WarCosts (was static per-tier, fighting Option B's within-range positioning by clamping it back to a generic-dyad floor) (Jul 27)
+CLERGYMAN_PROMPT_VERSION     = "v5"  # v5 = blend LLM guess with a deterministic position-within-range formula for kinetic contracts (LLM's raw number wasn't tracking WarCosts/WinProbability/PatronDeterrence/NuclearDeterrence despite correct rationale text -- was mostly narration, not real sensitivity) (Jul 27)
 SPYGLASS_PROMPT_VERSION      = "v1"
 
 # ─────────────────────────────────────────────────────────────────────
@@ -609,7 +609,8 @@ Legalese flags: {'; '.join(flags) if flags else 'none'}"""
         manifestation_family = result.get("manifestation_family", "kinetic_or_coercive_action")
         requirement_burden   = result.get("requirement_burden", "broad")
         raw_pba               = result.get("p_b_given_a")
-        war_costs_for_range   = market.get("_toggles", {}).get("WarCosts")
+        toggles_for_position  = market.get("_toggles", {})
+        war_costs_for_range   = toggles_for_position.get("WarCosts")
 
         try:
             anchor_range = get_anchor_range(manifestation_family, requirement_burden,
@@ -619,8 +620,39 @@ Legalese flags: {'; '.join(flags) if flags else 'none'}"""
             print(f"    [clergy] ⚠️  ontology error: {e} -- using raw value unclamped")
             anchor_range, clamped_pba, was_clamped = None, raw_pba, False
 
+        # Blend LLM judgment with a deterministic position estimate for
+        # kinetic contracts (2026-07-27 finding: Clergyman's raw guess was
+        # nearly identical -- 0.06 both times -- across a WarCosts=-1.8 vs
+        # +1.5 swing, even though its rationale correctly described the
+        # right direction in words. The deterministic range-shift was doing
+        # all the real work; the LLM's point estimate wasn't tracking the
+        # data. Fix: don't rely on the LLM's raw number as the primary
+        # driver of WHERE within the range to sit -- compute that
+        # deterministically from WinProbability/PatronDeterrence/
+        # NuclearDeterrence too, and let the LLM's guess be a minority
+        # input (tie-breaker / sanity check), not the main signal.
+        # Political-act contracts are NOT blended -- no deterministic
+        # position formula has been built for that family, left to the LLM
+        # as before; scope discipline, not an oversight.
+        LLM_BLEND_WEIGHT = 0.3
+        deterministic_pba = None
+        if (manifestation_family == "kinetic_or_coercive_action"
+                and anchor_range is not None and clamped_pba is not None):
+            deterministic_pba = deterministic_position_within_range(
+                toggles_for_position, anchor_range, requirement_burden
+            )
+            blended_pba = round(
+                LLM_BLEND_WEIGHT * clamped_pba
+                + (1 - LLM_BLEND_WEIGHT) * deterministic_pba,
+                4,
+            )
+        else:
+            blended_pba = clamped_pba
+
         result["p_b_given_a_raw"]      = raw_pba
-        result["p_b_given_a"]          = clamped_pba
+        result["p_b_given_a_llm_clamped"] = clamped_pba
+        result["p_b_given_a_deterministic"] = deterministic_pba
+        result["p_b_given_a"]          = blended_pba
         result["anchor_range"]         = list(anchor_range) if anchor_range else None
         result["was_clamped"]          = was_clamped
         result["war_costs_used_for_range"] = war_costs_for_range
@@ -632,8 +664,11 @@ Legalese flags: {'; '.join(flags) if flags else 'none'}"""
         formality_note = f"/{formality}" if formality else ""
         range_note = f" range={anchor_range}" if war_costs_for_range is not None else ""
         clamp_note = f" [CLAMPED from {raw_pba}]" if was_clamped else ""
+        blend_note = (f" [llm={result.get('p_b_given_a_llm_clamped')} "
+                      f"det={result.get('p_b_given_a_deterministic')} -> blended]"
+                      if deterministic_pba is not None else "")
         print(f"    [clergy] {manifestation_family}{formality_note}/{requirement_burden}{range_note} "
-              f"P(B|A)={pba}{clamp_note} P(B|¬A)={pbna} conf={result.get('confidence')}")
+              f"P(B|A)={pba}{clamp_note}{blend_note} P(B|¬A)={pbna} conf={result.get('confidence')}")
     return result
 
 
@@ -820,6 +855,8 @@ def _pass_fields(market: dict, scholar: dict | None, reason: str) -> dict:
         "anchor_range":               None,
         "was_clamped":                None,
         "war_costs_used_for_range":   None,
+        "p_b_given_a_llm_clamped":    None,
+        "p_b_given_a_deterministic":  None,
         "clergy_confidence":          None,
         "clergy_rationale":           None,
         "outcome_observability":      None,
@@ -970,6 +1007,8 @@ def translate_market(market: dict, cache: dict) -> dict:
         "anchor_range":               clergy.get("anchor_range"),
         "was_clamped":                clergy.get("was_clamped"),
         "war_costs_used_for_range":   clergy.get("war_costs_used_for_range"),
+        "p_b_given_a_llm_clamped":    clergy.get("p_b_given_a_llm_clamped"),
+        "p_b_given_a_deterministic":  clergy.get("p_b_given_a_deterministic"),
         "clergy_confidence":          clergy.get("confidence"),
         "clergy_rationale":           clergy.get("rationale"),
         "outcome_observability":      bet.get("observability"),
@@ -1080,6 +1119,8 @@ def _append_log(feed: list):
                 "anchor_range":             market.get("anchor_range"),
                 "was_clamped":              market.get("was_clamped"),
                 "war_costs_used_for_range": market.get("war_costs_used_for_range"),
+                "p_b_given_a_llm_clamped":  market.get("p_b_given_a_llm_clamped"),
+                "p_b_given_a_deterministic": market.get("p_b_given_a_deterministic"),
                 "outcome_observability":    market.get("outcome_observability"),
                 "resolution_risk":          market.get("resolution_risk"),
                 "kelly_fraction":           market.get("kelly_fraction"),

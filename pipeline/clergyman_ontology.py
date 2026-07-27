@@ -127,6 +127,62 @@ def war_costs_range_multiplier(war_costs) -> float:
     return 1.0 + (wc / 2.0) * 0.3        # 0.0 -> 1.0, +2.0 -> 1.3
 
 
+def deterministic_position_within_range(toggles: dict, range_tuple: tuple,
+                                         requirement_burden: str) -> float:
+    """
+    Computes a deterministic point estimate WITHIN a kinetic anchor range,
+    from real structural primitives -- direct fix for a finding on
+    2026-07-27: Clergyman's own raw guess barely moved between a WarCosts=
+    -1.8 scenario and a WarCosts=+1.5 scenario (0.06 both times) even though
+    its RATIONALE correctly described the right directional logic for both.
+    The range-shift alone (via war_costs_range_multiplier) was doing all the
+    real differentiation; the LLM's point-estimate wasn't tracking the data
+    at all, just narrating around it. This is the same lesson already
+    applied once today at the range level (don't trust the LLM to set its
+    own boundary) -- applied one level deeper (don't trust it to reliably
+    place a point inside the boundary either, at least not alone).
+
+    Only WinProbability, PatronDeterrence, and NuclearDeterrence are used
+    here -- WarCosts already did its job shifting the range itself, using it
+    again to also move position would double-count the same primitive
+    through two channels. AudienceCosts has no clean theoretical mapping to
+    kinetic-tier positioning (its real justified use is in the political_act
+    formal_official case, left to the LLM); not included here on purpose,
+    not an oversight.
+
+    Returns a value inside range_tuple. requirement_burden is accepted for
+    future tier-specific weighting but not yet used differentially -- the
+    same weights apply at every tier for now (documented simplification, not
+    hidden).
+    """
+    low, high = range_tuple
+
+    win  = toggles.get("WinProbability")
+    patron = toggles.get("PatronDeterrence")
+    nuclear = toggles.get("NuclearDeterrence")
+
+    if win is None and patron is None and nuclear is None:
+        # No usable structural signal -- sit at the range midpoint rather
+        # than guessing a direction with nothing to base it on.
+        return round((low + high) / 2.0, 4)
+
+    win_norm     = (win / 2.0) if win is not None else 0.0        # [-1, 1]
+    patron_norm  = (patron / 3.0) if patron is not None else 0.0  # [0, 1]
+    nuclear_norm = (nuclear / 3.0) if nuclear is not None else 0.0  # [0, 1]
+
+    # Favorable win probability -> higher position (decisive action more
+    # plausible). Strong patron backing for the target, or strong mutual
+    # nuclear deterrence, -> lower position (both raise the real cost/risk
+    # of escalating to this specific action).
+    raw_signal = 0.5 * win_norm - 0.3 * patron_norm - 0.2 * nuclear_norm
+    raw_signal = max(-1.0, min(1.0, raw_signal))
+
+    position_fraction = 0.5 + 0.5 * raw_signal  # midpoint when signal is 0
+    value = low + position_fraction * (high - low)
+    return round(max(low, min(high, value)), 4)
+
+
+
 def get_anchor_range(manifestation_family: str, requirement_burden: str,
                       war_costs=None) -> tuple:
     """
