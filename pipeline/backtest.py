@@ -22,8 +22,10 @@ CACHE_DIR  = ROOT / "cache"
 GNEWS_CACHE = CACHE_DIR / "gnews"
 POLY_CACHE  = CACHE_DIR / "polymarket"
 RESULTS_OUT = ROOT / "pipeline" / "backtest_results.json"
+LOGS_DIR    = ROOT / "logs"
+NODE_SCORING_FAILURES_LOG = LOGS_DIR / "node_scoring_failures.jsonl"
 
-for d in [GNEWS_CACHE, POLY_CACHE]:
+for d in [GNEWS_CACHE, POLY_CACHE, LOGS_DIR]:
     d.mkdir(parents=True, exist_ok=True)
 
 # ── API keys ──────────────────────────────────────────────────────────
@@ -520,15 +522,52 @@ CRITICAL DISTINCTION for military pressure nodes:
 Return ONLY valid JSON, no preamble: {{"RoutineMilitaryPressure": 0, "OperationalPreparation": 0, "LiveViolenceObserved": 0, "LiveUltimatumDeadline": 0, "LiveMediationAccepted": 0, "LiveAbatementSignal": 0}}
 """
 
-def _call_claude_json(prompt, expected_fields, max_tokens, retries=1):
+def _log_node_scoring_failure(dyad, as_of_date, reason, raw_excerpt=None):
+    """Append a structured record every time this function is about to return
+    zeros instead of a real score. This is the same failure shape as the
+    fetch_gnews bug (network/parse failure silently treated as 'nothing
+    happening') -- the historical audit found 33 of those going undetected
+    for weeks because the only trace was a stdout print line nobody was
+    grepping. This writes a permanent, greppable, structured record instead,
+    so a future audit of THIS failure mode doesn't require re-discovering it
+    from raw pipeline logs the way the GNews one did.
+    """
+    record = {
+        "timestamp": datetime.now().isoformat(),
+        "dyad": dyad,
+        "as_of_date": str(as_of_date) if as_of_date else None,
+        "reason": reason,
+        "raw_excerpt": raw_excerpt,
+    }
+    try:
+        with open(NODE_SCORING_FAILURES_LOG, "a") as f:
+            f.write(json.dumps(record) + "\n")
+    except Exception as e:
+        print(f"    [warn] could not write node_scoring_failures.jsonl: {e}")
+
+
+def _call_claude_json(prompt, expected_fields, max_tokens, retries=3,
+                       dyad=None, as_of_date=None):
     """Shared Claude call + JSON parse, used by both Call A and Call B.
 
     The network call is wrapped separately from the JSON-parsing step below --
     a dropped connection or read timeout (e.g. from a laptop sleep/wake cycle)
     is a different failure mode than the model returning malformed JSON, and
-    previously crashed the whole script since nothing caught it. Retries once
-    before falling back to zeros, since a fresh attempt right after a timeout
-    usually just works.
+    previously crashed the whole script since nothing caught it. Retries with
+    linear backoff before falling back to zeros -- most of these are transient
+    (ReadTimeout/ConnectionError), same root cause class as the fetch_gnews
+    bug, and a fresh attempt after a short wait usually just works.
+
+    IMPORTANT: unlike fetch_gnews, there is no existing per-dyad cache of
+    prior node scores to fall back to here (GNews had cache/gnews/ already;
+    nothing analogous exists for node scores). Building that cache is real
+    scope, not a quick patch -- deliberately not done here. What this DOES
+    fix: (1) more retries with real backoff instead of one immediate retry,
+    which should reduce how often this fires at all, and (2) every remaining
+    failure gets a loud, permanent, structured log entry via
+    _log_node_scoring_failure() instead of a print statement that vanishes
+    into stdout -- this is what let 33 GNews failures go undetected for
+    weeks, and this function had the same blind spot.
     """
     headers = {
         "x-api-key": ANTHROPIC_KEY,
@@ -551,16 +590,27 @@ def _call_claude_json(prompt, expected_fields, max_tokens, retries=1):
             break
         except requests.exceptions.RequestException as e:
             if attempt < retries:
-                print(f"    [warn] API request failed ({type(e).__name__}), retrying once...")
+                wait = 2.0 * (attempt + 1)
+                print(f"    [warn] API request failed ({type(e).__name__}), "
+                      f"retrying in {wait:.0f}s... (attempt {attempt+1}/{retries})")
+                time.sleep(wait)
                 continue
-            print(f"    [warn] API request failed ({type(e).__name__}) after retry, using zeros")
+            print(f"    [warn] \u26a0\ufe0f\u26a0\ufe0f  API request failed ({type(e).__name__}) "
+                  f"after {retries} retries -- returning zeros. THIS RUN IS DEGRADED.")
+            _log_node_scoring_failure(dyad, as_of_date,
+                                       f"request_exception:{type(e).__name__}: {e}")
             return {n: 0.0 for n in expected_fields}
         except ValueError:
-            print(f"    [warn] API returned non-JSON response, using zeros")
+            print(f"    [warn] \u26a0\ufe0f\u26a0\ufe0f  API returned non-JSON response -- "
+                  f"returning zeros. THIS RUN IS DEGRADED.")
+            _log_node_scoring_failure(dyad, as_of_date, "non_json_http_response")
             return {n: 0.0 for n in expected_fields}
 
     if "content" not in resp:
-        print(f"    [warn] Claude API error: {resp.get('error', {}).get('message', 'unknown')}")
+        err_msg = resp.get('error', {}).get('message', 'unknown')
+        print(f"    [warn] \u26a0\ufe0f\u26a0\ufe0f  Claude API error: {err_msg} -- "
+              f"returning zeros. THIS RUN IS DEGRADED.")
+        _log_node_scoring_failure(dyad, as_of_date, f"api_error: {err_msg}")
         return {n: 0.0 for n in expected_fields}
     text = resp["content"][0]["text"].strip()
 
@@ -590,8 +640,10 @@ def _call_claude_json(prompt, expected_fields, max_tokens, retries=1):
             return {n: float(parsed.get(n, 0.0)) for n in expected_fields}
         except Exception:
             continue
-    print(f"    [warn] Node scoring parse error (all 3 tiers), using zeros")
+    print(f"    [warn] \u26a0\ufe0f\u26a0\ufe0f  Node scoring parse error (all 3 tiers) -- "
+          f"returning zeros. THIS RUN IS DEGRADED.")
     print(f"    [warn] raw response (first 300 chars): {text[:300]!r}")
+    _log_node_scoring_failure(dyad, as_of_date, "parse_error_all_3_tiers", raw_excerpt=text[:300])
     return {n: 0.0 for n in expected_fields}
 
 def score_nodes_call_a(dyad, articles, as_of_date):
@@ -636,7 +688,7 @@ final JSON object as instructed below -- zero preceding text of any kind.
 
 Return ONLY valid JSON with no preamble, explanation, or markdown. Example: {{"WinProbability": 0, "WarCosts": 0}}"""
 
-    return _call_claude_json(prompt, expected, max_tokens=700)
+    return _call_claude_json(prompt, expected, max_tokens=700, dyad=dyad, as_of_date=as_of_date)
 
 def score_nodes_call_b(dyad, articles, as_of_date, trigger_was_violent):
     """Call B: 5 live-dynamic q-parents, separate call to protect field quality.
@@ -698,7 +750,7 @@ final JSON object as instructed below -- zero preceding text of any kind.
 
 Return ONLY valid JSON with no preamble, explanation, or markdown. Example: {{"LiveNonviolentMilitaryPressure": 0, "LiveViolenceObserved": 0, "LiveUltimatumDeadline": 0, "LiveMediationAccepted": 0, "LiveAbatementSignal": 0}}"""
 
-    return _call_claude_json(prompt, expected, max_tokens=600)
+    return _call_claude_json(prompt, expected, max_tokens=600, dyad=dyad, as_of_date=as_of_date)
 
 # ── Q-SUBMODEL DECOMPOSITION ────────────────────────────────────────────
 # Pure arithmetic, additive in logit space -- free post-hoc attribution
