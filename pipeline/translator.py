@@ -621,9 +621,27 @@ def bettor(engine_p: float, market_p: float, volume_usd: float,
             conditional_p * (1 - blend_weight) + market_p * blend_weight, 4
         )
 
-    # Kelly sizing — dampened by observability and resolution risk
+    # Kelly sizing — dampened by observability, resolution risk, and now
+    # Clergyman's own confidence + whether its raw guess had to be clamped
+    # into the deterministic anchor range.
+    #
+    # Rationale (Adi, 2026-07-27): Kelly previously only looked at the SIZE
+    # of the edge (conditional_p vs market_p), with zero awareness of how
+    # confident Clergyman actually was when it produced conditional_p. A
+    # big edge built on a "confidence: low" guess is not the same bet as
+    # the same-sized edge built on a "confidence: high" guess -- the first
+    # is a real risk of betting real money behind a shaky number that only
+    # LOOKS strong on paper. was_clamped is a second, related signal: it
+    # means Clergyman's own freehand estimate disagreed with the calibrated
+    # range enough to need correcting, which is itself evidence the raw
+    # judgment wasn't especially reliable, independent of the stated
+    # confidence label.
     obs_mult  = {"high": 1.0, "medium": 0.5, "low": 0.0}.get(observability, 0.5)
     risk_mult = {"low": 1.0, "medium": 0.7, "high": 0.3}.get(resolution_risk, 0.7)
+    clergy_confidence = clergy.get("confidence", "medium")
+    clergy_conf_mult  = {"high": 1.0, "medium": 0.6, "low": 0.25}.get(clergy_confidence, 0.5)
+    was_clamped       = bool(clergy.get("was_clamped"))
+    clamp_mult        = 0.75 if was_clamped else 1.0
     kelly_fraction = 0.0
     bet_direction  = "PASS"
 
@@ -638,15 +656,18 @@ def bettor(engine_p: float, market_p: float, volume_usd: float,
                 raw_kelly = ((1 - conditional_p) * b - conditional_p) / b
             raw_kelly      = max(0.0, raw_kelly)
             kelly_fraction = round(
-                KELLY_FRACTION * raw_kelly * obs_mult * risk_mult, 4
+                KELLY_FRACTION * raw_kelly * obs_mult * risk_mult
+                * clergy_conf_mult * clamp_mult, 4
             )
             if kelly_fraction > 0:
                 bet_direction = "YES" if edge > 0 else "NO"
 
     kelly_dollars = round(kelly_fraction * BANKROLL, 2)
 
+    clamp_note = " [clamped]" if was_clamped else ""
     print(f"    [bettor] conditional_p={conditional_p} blended_p={blended_p} "
-          f"blend_weight={blend_weight} kelly=${kelly_dollars} dir={bet_direction}")
+          f"blend_weight={blend_weight} clergy_conf={clergy_confidence}{clamp_note} "
+          f"kelly=${kelly_dollars} dir={bet_direction}")
 
     return {
         "conditional_p":  conditional_p,
@@ -657,6 +678,8 @@ def bettor(engine_p: float, market_p: float, volume_usd: float,
         "bet_direction":  bet_direction,
         "observability":  observability,
         "resolution_risk": resolution_risk,
+        "clergy_confidence_mult": clergy_conf_mult,
+        "clergy_was_clamped":     was_clamped,
     }
 
 
@@ -841,6 +864,7 @@ def translate_market(market: dict, cache: dict) -> dict:
         "kelly_fraction":             bet["kelly_fraction"],
         "kelly_dollars":              bet["kelly_dollars"],
         "bet_direction":              bet["bet_direction"],
+        "kelly_clergy_confidence_mult": bet.get("clergy_confidence_mult"),
     })
     return market
 
@@ -943,6 +967,7 @@ def _append_log(feed: list):
                 "kelly_fraction":           market.get("kelly_fraction"),
                 "kelly_dollars":            market.get("kelly_dollars"),
                 "bet_direction":            market.get("bet_direction"),
+                "kelly_clergy_confidence_mult": market.get("kelly_clergy_confidence_mult"),
                 "win_condition_summary":    market.get("win_condition_summary"),
                 "legalese_flags":           market.get("legalese_flags"),
             }
