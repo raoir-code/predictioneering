@@ -26,6 +26,27 @@ import re as _re
 import calendar as _calendar
 
 # ─────────────────────────────────────────────────────────────────────
+# PROMPT VERSIONS
+#
+# The cache previously only invalidated on contract TEXT changes
+# (question + description). It had no idea when we changed our own
+# instructions to an agent. That meant the July 23 Clergyman two-axis
+# ontology fix silently had zero effect on any market that was already
+# cached before it shipped -- same market text, so "cache hit," so the
+# stale pre-fix answer got reused forever.
+#
+# Bump the relevant *_PROMPT_VERSION any time that agent's system
+# prompt changes. Old cache entries (which have no version field at
+# all) will automatically miss on first read after this change ships,
+# which is exactly what we want -- it forces a one-time re-score under
+# the current prompt for everything already cached, retroactively
+# applying whatever fix is live right now.
+# ─────────────────────────────────────────────────────────────────────
+LEGAL_SCHOLAR_PROMPT_VERSION = "v1"
+CLERGYMAN_PROMPT_VERSION     = "v2"  # v2 = two-axis ontology (Jul 23) + political-act P(B|notA) fix (Jul 27)
+SPYGLASS_PROMPT_VERSION      = "v1"
+
+# ─────────────────────────────────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────────────────────────────────
 
@@ -357,11 +378,27 @@ manifestation_family: one of
   - "political_act": the contract resolves on an announcement, declaration,
     authorization, or other political/speech act -- NOT a physical operation.
     E.g. "will X announce a blockade" is political_act even though "blockade"
-    appears in the text. Political acts are typically CHEAP and can precede
-    or accompany physical action -- do not treat them as a weak version of
-    the physical event.
+    appears in the text. Do not treat this as a weak version of the physical
+    event -- it is a different event family with its own base rate.
   - "kinetic_or_coercive_action": the contract resolves on an actual physical
     military action occurring.
+
+If manifestation_family is "political_act", ALSO classify political_act_formality:
+  - "formal_official": a government body or official acting in their OFFICIAL
+    CAPACITY makes a binding or quasi-binding statement -- e.g. State
+    Department or Defense Department statement, presidential executive order
+    or proclamation, formal Congressional authorization, official military
+    command announcement. These carry real audience costs: a government that
+    formally announces something and does not follow through pays a
+    credibility price (domestically and internationally), so a formal
+    announcement is meaningful signal, NOT cheap talk. It can still occur via
+    brinkmanship, deterrent signaling, or contingency authorization without
+    actual conflict onset, but it is closer to a costly signal than to noise.
+  - "informal_rhetorical": an offhand remark, a social media post, a campaign
+    or rally statement, or a single official's personal opinion not issued
+    through official channels or not representing settled policy. This IS
+    cheap talk -- low cost to say, easy to walk back, minimal binding force.
+  Use null only if manifestation_family is "kinetic_or_coercive_action".
 
 requirement_burden: one of, in order of INCREASING restrictiveness (each tier
 adds a necessary condition beyond the previous, which can only hold or lower
@@ -396,7 +433,21 @@ P(B|A)   = probability that, given conflict onset occurs, it takes the specific
            different axes, do not conflate them.
 P(B|¬A)  = probability that, given NO conflict onset, the contract still resolves YES
 
-For strict subsets: P(B|¬A) ≈ 0
+For strict subsets, P(B|¬A) depends on manifestation_family -- do NOT apply a
+single blanket rule:
+  - kinetic_or_coercive_action subsets: P(B|¬A) ≈ 0. A specific physical
+    action (a strike, a blockade actually being enforced) cannot occur
+    without some form of conflict onset already having happened.
+  - political_act subsets, formal_official: P(B|¬A) is NOT ≈0. A formal
+    government announcement/authorization can happen through brinkmanship,
+    deterrent posturing, or contingency planning even when no conflict onset
+    occurs -- it is a real, non-trivial event on its own base rate. Estimate
+    P(B|¬A) from how often this dyad's government has issued this specific
+    TYPE of formal statement absent an actual onset. Do not default to 0.
+  - political_act subsets, informal_rhetorical: closer to the old assumption
+    of low, but still estimate a real (not automatically zero) base rate --
+    rhetoric of this kind still has a frequency, it is just cheaper and less
+    predictive than a formal statement.
 For overlap/deal markets: both terms may be non-zero
 For equivalent markets: P(B|A)=1.0, P(B|¬A)=0.0
 
@@ -412,6 +463,7 @@ The Bettor will scale this to the actual contract window deterministically. Do N
 Return ONLY valid JSON:
 {
   "manifestation_family": "political_act|kinetic_or_coercive_action",
+  "political_act_formality": "formal_official|informal_rhetorical|null",
   "requirement_burden": "broad|method_specific|target_specific|persistent|territorial_control",
   "action_type": "one of the 7 categories, or null",
   "p_b_given_a": 0.75,
@@ -457,8 +509,10 @@ Legalese flags: {'; '.join(flags) if flags else 'none'}"""
 
         pba  = result.get("p_b_given_a")
         pbna = result.get("p_b_given_not_a")
+        formality = result.get("political_act_formality")
+        formality_note = f"/{formality}" if formality else ""
         clamp_note = f" [CLAMPED from {raw_pba}]" if was_clamped else ""
-        print(f"    [clergy] {manifestation_family}/{requirement_burden} "
+        print(f"    [clergy] {manifestation_family}{formality_note}/{requirement_burden} "
               f"P(B|A)={pba}{clamp_note} P(B|¬A)={pbna} conf={result.get('confidence')}")
     return result
 
@@ -616,6 +670,7 @@ def _pass_fields(market: dict, scholar: dict | None, reason: str) -> dict:
         "p_b_given_a_raw":            None,
         "p_b_given_not_a":            None,
         "manifestation_family":       None,
+        "political_act_formality":    None,
         "requirement_burden":         None,
         "severity_band":              None,
         "anchor_range":               None,
@@ -652,11 +707,17 @@ def translate_market(market: dict, cache: dict) -> dict:
         return _pass_fields(market, None, reason)
 
     # ── Cache check for static agent outputs ──────────────────────────
-    cached    = cache.get(market_id, {})
-    cache_hit = cached.get("contract_hash") == chash
-    scholar   = cached.get("scholar") if cache_hit else None
-    clergy    = cached.get("clergy")  if cache_hit else None
-    glass     = cached.get("glass")   if cache_hit else None
+    # Per-agent: text match AND prompt-version match, independently.
+    # A Clergyman-only prompt bump re-scores Clergyman without wasting
+    # a Scholar/Spyglass call that's still valid under its own version.
+    cached      = cache.get(market_id, {})
+    text_match  = cached.get("contract_hash") == chash
+    scholar_hit = text_match and cached.get("scholar_version") == LEGAL_SCHOLAR_PROMPT_VERSION
+    clergy_hit  = text_match and cached.get("clergy_version")  == CLERGYMAN_PROMPT_VERSION
+    glass_hit   = text_match and cached.get("glass_version")   == SPYGLASS_PROMPT_VERSION
+    scholar   = cached.get("scholar") if scholar_hit else None
+    clergy    = cached.get("clergy")  if clergy_hit  else None
+    glass     = cached.get("glass")   if glass_hit   else None
 
     # ── Legal Scholar ─────────────────────────────────────────────────
     if scholar is None:
@@ -669,14 +730,18 @@ def translate_market(market: dict, cache: dict) -> dict:
 
     if route != "TRANSLATE":
         print(f"    [filter] {route} -- skipping")
-        cache[market_id] = {"contract_hash": chash, "scholar": scholar,
-                            "clergy": None, "glass": None}
+        cache[market_id] = {"contract_hash": chash,
+                            "scholar": scholar, "scholar_version": LEGAL_SCHOLAR_PROMPT_VERSION,
+                            "clergy": None, "clergy_version": None,
+                            "glass": None, "glass_version": None}
         return _pass_fields(market, scholar, route)
 
     # ── Scholar-only mode: stop here ──────────────────────────────────
     if SCHOLAR_ONLY:
-        cache[market_id] = {"contract_hash": chash, "scholar": scholar,
-                            "clergy": None, "glass": None}
+        cache[market_id] = {"contract_hash": chash,
+                            "scholar": scholar, "scholar_version": LEGAL_SCHOLAR_PROMPT_VERSION,
+                            "clergy": None, "clergy_version": None,
+                            "glass": None, "glass_version": None}
         market.update({
             "translator_route":         "TRANSLATE",
             "translator_verdict":       "SCHOLAR_ONLY",
@@ -711,8 +776,10 @@ def translate_market(market: dict, cache: dict) -> dict:
                      "resolution_risk": "medium", "rationale": "API failure"}
 
     # ── Cache ─────────────────────────────────────────────────────────
-    cache[market_id] = {"contract_hash": chash, "scholar": scholar,
-                        "clergy": clergy, "glass": glass}
+    cache[market_id] = {"contract_hash": chash,
+                        "scholar": scholar, "scholar_version": LEGAL_SCHOLAR_PROMPT_VERSION,
+                        "clergy": clergy, "clergy_version": CLERGYMAN_PROMPT_VERSION,
+                        "glass": glass, "glass_version": SPYGLASS_PROMPT_VERSION}
 
     # ── Bettor ────────────────────────────────────────────────────────
     if engine_p is None:
@@ -749,6 +816,7 @@ def translate_market(market: dict, cache: dict) -> dict:
         "p_b_given_a_raw":            clergy.get("p_b_given_a_raw"),
         "p_b_given_not_a":            clergy.get("p_b_given_not_a"),
         "manifestation_family":       clergy.get("manifestation_family"),
+        "political_act_formality":    clergy.get("political_act_formality"),
         "requirement_burden":         clergy.get("requirement_burden"),
         "severity_band":              clergy.get("severity_band"),
         "anchor_range":               clergy.get("anchor_range"),
@@ -855,6 +923,7 @@ def _append_log(feed: list):
                 "p_b_given_a_raw":          market.get("p_b_given_a_raw"),
                 "p_b_given_not_a":          market.get("p_b_given_not_a"),
                 "manifestation_family":     market.get("manifestation_family"),
+                "political_act_formality":  market.get("political_act_formality"),
                 "requirement_burden":       market.get("requirement_burden"),
                 "severity_band":            market.get("severity_band"),
                 "anchor_range":             market.get("anchor_range"),
