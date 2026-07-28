@@ -98,6 +98,58 @@ Nodes and their meaning:
 - HardlineClaims: active territorial disputes / hardline bargaining positions. Higher = more contested. Range: 0.0 to 3.0.
 - AudienceCosts: domestic political pressure making backing down costly. Higher = more locked in. Range: 0.0 to 3.0.
 
+Also set three additional structural fields -- a systemic/third-party economic
+channel this DAG has been missing entirely. WarCosts above only prices
+BILATERAL trade between the two belligerents themselves; it has zero channel
+for damage to third parties, or for deliberate international punishment of
+the initiator. These are two DIFFERENT mechanisms and must stay separate
+fields, not be collapsed into one:
+
+- SystemicEconomicExposure (0.0 to 3.0): if conflict onset occurs for this
+  dyad, how much economic disruption would it plausibly cause OUTSIDE the
+  two belligerents themselves -- to global shipping/trade routes,
+  concentrated commodity production, or tourism/services economies that
+  depend on this region. Think broadly, not just "is there a strait nearby":
+  a major shipping lane, a globally-significant production hub (energy,
+  minerals, semiconductors, agriculture), or a tourism-dependent regional
+  economy in the blast radius. 0.0 = this conflict would be essentially
+  economically invisible to the rest of the world -- an isolated interior
+  conflict with no trade route, no major production, no tourism exposure.
+  THIS MUST SCORE NEAR ZERO for such cases -- do not inflate it just because
+  the conflict itself sounds serious or salient. That is a deliberate
+  calibration check: general geopolitical drama is not economic exposure.
+  3.0 = conflict here would meaningfully disrupt global commerce.
+
+- EconomicExposureInternalization (0.0 to 1.0): of that broader disruption,
+  how much would come back to hurt the LIKELY INITIATOR specifically -- via
+  their own import dependence on the disrupted flow, their own export
+  revenue from affected production, or pressure from allies/patrons who are
+  themselves hurt by the disruption. A country insulated from global trade
+  (already heavily sanctioned, largely autarkic, or simply not dependent on
+  the disrupted flow) should score LOW here even when SystemicEconomicExposure
+  is high -- the damage exists, but this specific actor barely feels it. A
+  war can devastate global shipping while its initiator shrugs; this field
+  is what tells the two apart.
+
+- ThirdPartySanctionsRisk (0.0 to 3.0): if this dyad's likely initiator
+  committed significant aggression, how severe would internationally-
+  coordinated economic punishment (sanctions, asset freezes, trade
+  restrictions, diplomatic isolation) plausibly be? This is a DIFFERENT
+  mechanism from EconomicExposureInternalization above -- that field is
+  about passive collateral damage bouncing back on the initiator; this one
+  is about other countries DELIBERATELY choosing to punish the initiator as
+  a political response to the act of aggression itself (the Russia 2022
+  sanctions regime is the reference case: Russia has minimal exposure to
+  Black Sea shipping disruption hurting itself, but was hit with severe
+  coordinated sanctions purely because it invaded). Consider: how
+  normatively transgressive the action would be perceived as (a clear
+  unprovoked invasion vs. a murkier gray-zone situation), how economically
+  enmeshed the likely initiator is with the states/blocs likely to sanction
+  (a country already isolated has less left to lose), and whether the
+  initiator has a shielding patron (e.g. a UNSC veto-holder, or simply not
+  being economically dependent on the Western-aligned financial system)
+  that would blunt a coordinated response.
+
 Also set action_type: the FASTEST physically plausible military action this dyad's
 likely initiator could realistically execute, from this exact 7-value set:
 gray_zone_incident, missile_strike, raid, seizure_boarding, airstrike,
@@ -157,6 +209,7 @@ Rules:
 - Be theoretically conservative -- only set extreme values (2.0+) for genuinely extreme cases.
 - PatronDeterrence should be high (2.0+) only where a major power has an explicit defense commitment (e.g. US-Taiwan, US-South Korea).
 - NuclearDeterrence should be high only where both sides have nuclear weapons or one side has them and they are relevant to the dyad.
+- SystemicEconomicExposure MUST be near 0.0 for dyads with no meaningful trade-route, commodity-production, or tourism exposure to the rest of the world -- do not let general conflict salience or how "serious-sounding" a dyad is substitute for actual measured economic exposure. This is a deliberate falsification check: if you catch yourself scoring this above ~0.5 without being able to name the specific trade route, commodity, or tourism dependency involved, it should be 0.
 - Also generate a GNews search query (boolean, English) that would pull relevant headlines for this dyad.
 
 GNews query construction rules (these matter -- a badly built query silently feeds the wrong news into this dyad's predictions):
@@ -178,7 +231,10 @@ Respond ONLY with valid JSON in this exact format:
     "DemocraticPeace": 0.0,
     "PreferenceAlignment": 0.0,
     "HardlineClaims": 0.0,
-    "AudienceCosts": 0.0
+    "AudienceCosts": 0.0,
+    "SystemicEconomicExposure": 0.0,
+    "EconomicExposureInternalization": 0.0,
+    "ThirdPartySanctionsRisk": 0.0
   },
   "action_type": "one of: gray_zone_incident, missile_strike, raid, seizure_boarding, airstrike, naval_blockade, ground_invasion",
   "action_type_reasoning": "one sentence -- geography/basing/doctrine reasoning for the fastest plausible action",

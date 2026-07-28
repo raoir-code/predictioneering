@@ -828,6 +828,16 @@ def predict_probability(toggles, days_remaining, q_logit=0.0):
     t = toggles  # shorthand
 
     # Tier 2: war payoffs + effective weights
+    # SystemicEconomicExposureCost and ThirdPartySanctionsCost (2026-07-27):
+    # hand-set expert priors, same category/pattern as OperationalFeasibility_w
+    # / InitiatorSurvivalRisk_w / SubstitutionPath_w below -- NOT GMM-fitted,
+    # since these are brand-new nodes with zero historical calibration data.
+    # Scaled to match other 0-3-range nodes (PatronDeterrence/NuclearDeterrence/
+    # AudienceCosts sit at 0.09-0.35 magnitude; -0.35/-0.40 here is consistent
+    # with that, not the -1.1/-1.5 suppressor-cluster magnitudes, which were
+    # calibrated for 0-1-range inputs).
+    systemic_exposure_cost = (t.get("SystemicEconomicExposure", 0.0)
+                               * t.get("EconomicExposureInternalization", 0.0))
     w     = (a["WinProbability"]        * t.get("WinProbability", 0)
            + a["WarCosts"]              * t.get("WarCosts", 0)
            + a["PatronDeterrence_w"]    * t.get("PatronDeterrence", 0)
@@ -836,7 +846,9 @@ def predict_probability(toggles, days_remaining, q_logit=0.0):
            + a.get("OperationalFeasibility_w", -1.50) * (1.0 - t.get("OperationalFeasibility", 0.5))
            + a.get("InitiatorSurvivalRisk_w",  -1.20) * t.get("InitiatorSurvivalRisk", 0.5)
            + a.get("PatronMoralHazard_w",       +0.60) * t.get("PatronMoralHazard", 0.0)
-           + a.get("SubstitutionPath_w",        -1.10) * t.get("SubstitutionPath", 0.5))
+           + a.get("SubstitutionPath_w",        -1.10) * t.get("SubstitutionPath", 0.5)
+           + a.get("SystemicEconomicExposureCost_w", -0.35) * systemic_exposure_cost
+           + a.get("ThirdPartySanctionsCost_w",       -0.40) * t.get("ThirdPartySanctionsRisk", 0.0))
 
     Omega = (a["CommitmentProblem"]     * t.get("CommitmentProblem", 0)
            + a["Patience"]              * t.get("Patience", 0)
