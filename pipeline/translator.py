@@ -42,7 +42,7 @@ import calendar as _calendar
 # the current prompt for everything already cached, retroactively
 # applying whatever fix is live right now.
 # ─────────────────────────────────────────────────────────────────────
-LEGAL_SCHOLAR_PROMPT_VERSION = "v1"
+LEGAL_SCHOLAR_PROMPT_VERSION = "v3"
 CLERGYMAN_PROMPT_VERSION     = "v5"  # v5 = blend LLM guess with a deterministic position-within-range formula for kinetic contracts (LLM's raw number wasn't tracking WarCosts/WinProbability/PatronDeterrence/NuclearDeterrence despite correct rationale text -- was mostly narration, not real sensitivity) (Jul 27)
 SPYGLASS_PROMPT_VERSION      = "v1"
 
@@ -343,9 +343,21 @@ Return ONLY valid JSON with these exact keys:
   "relation_to_engine_event": "equivalent|subset|superset|complement|overlap|termination|unrelated|unsupported",
   "win_condition_summary": "one sentence in plain English describing exactly what must happen for YES",
   "legalese_flags": ["list any hyper-specific resolution conditions, thresholds, named actors, deadlines, exclusions, or ambiguity in the resolution criteria"],
-  "confidence": "high|medium|low",
+  "relation_confidence": "high|medium|low",
   "rationale": "one sentence explaining the classification"
 }
+
+relation_confidence reflects ONLY how sure you are that relation_to_engine_event is
+correctly classified (equivalent/subset/superset/etc) -- NOT how clean, complete, or
+truncated the resolution criteria text is. A contract can have messy or truncated
+resolution language and still get HIGH relation_confidence if the core win condition
+is clearly a subset/equivalent/etc of interstate conflict onset. Text-quality issues
+(truncation, ambiguous exclusions, unclear thresholds) belong ONLY in legalese_flags --
+never let them lower relation_confidence.
+
+high: the relation type is clear and would not change even with the full untruncated text
+medium: you can rule out most relation types but there's a plausible alternative reading
+low: you genuinely cannot tell which relation type applies
 
 Relation definitions:
 - equivalent: contract YES condition is essentially conflict onset or kinetic military action by the dyad
@@ -369,7 +381,7 @@ def legal_scholar(market: dict, dyad: str) -> dict | None:
 
     user_content = f"""Market title: {label}
 Market question: {question}
-Resolution criteria: {description[:600]}
+Resolution criteria: {description[:4000]}
 Resolution source: {res_source[:200]}
 Dyad: {dyad}
 Deadline: {deadline}"""
@@ -377,7 +389,7 @@ Deadline: {deadline}"""
     result = _claude_call(LEGAL_SCHOLAR_SYSTEM, user_content)
     if result:
         relation   = result.get("relation_to_engine_event", "unsupported")
-        confidence = result.get("confidence", "low")
+        confidence = result.get("relation_confidence", "low")
         route      = _derive_route(relation, confidence)
         result["translator_route"] = route  # overwrite Claude's suggestion
         print(f"    [scholar] {relation} | {route} | {confidence} | "
@@ -842,7 +854,7 @@ def _pass_fields(market: dict, scholar: dict | None, reason: str) -> dict:
         "contract_polarity":          scholar.get("contract_polarity") if scholar else None,
         "win_condition_summary":      scholar.get("win_condition_summary") if scholar else None,
         "legalese_flags":             scholar.get("legalese_flags", []) if scholar else [],
-        "scholar_confidence":         scholar.get("confidence") if scholar else None,
+        "scholar_confidence":         scholar.get("relation_confidence") if scholar else None,
         "scholar_rationale":          scholar.get("rationale") if scholar else None,
         "p_b_given_a":                None,
         "p_b_given_a_raw":            None,
@@ -932,7 +944,7 @@ def translate_market(market: dict, cache: dict) -> dict:
             "contract_polarity":        scholar.get("contract_polarity"),
             "win_condition_summary":    scholar.get("win_condition_summary"),
             "legalese_flags":           scholar.get("legalese_flags", []),
-            "scholar_confidence":       scholar.get("confidence"),
+            "scholar_confidence":       scholar.get("relation_confidence"),
             "scholar_rationale":        scholar.get("rationale"),
             "conditional_p":            None,
             "blended_p":                None,
@@ -994,7 +1006,7 @@ def translate_market(market: dict, cache: dict) -> dict:
         "contract_polarity":          scholar.get("contract_polarity"),
         "win_condition_summary":      scholar.get("win_condition_summary"),
         "legalese_flags":             scholar.get("legalese_flags", []),
-        "scholar_confidence":         scholar.get("confidence"),
+        "scholar_confidence":         scholar.get("relation_confidence"),
         "scholar_rationale":          scholar.get("rationale"),
         "p_b_given_a":                clergy.get("p_b_given_a"),
         "p_b_given_a_raw":            clergy.get("p_b_given_a_raw"),
