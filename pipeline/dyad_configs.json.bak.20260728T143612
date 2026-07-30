@@ -12,10 +12,7 @@
       "PatronDeterrence": 2.0,
       "NuclearDeterrence": 0.6,
       "AudienceCosts": 1.0,
-      "PatronMoralHazard": 0.5,
-      "SystemicEconomicExposure": 2.8,
-      "EconomicExposureInternalization": 0.7,
-      "ThirdPartySanctionsRisk": 2.2
+      "PatronMoralHazard": 0.5
     },
     "query": "\"China\" AND (\"Taiwan\" OR \"PLA\" OR \"strait\" OR \"invasion\" OR \"blockade\")",
     "baseline_source": "verified",
@@ -46,10 +43,7 @@
       "PatronDeterrence": 1.5,
       "NuclearDeterrence": 1.8,
       "AudienceCosts": 1.0,
-      "PatronMoralHazard": 1.5,
-      "SystemicEconomicExposure": 2.4,
-      "EconomicExposureInternalization": 0.35,
-      "ThirdPartySanctionsRisk": 2.7
+      "PatronMoralHazard": 1.5
     },
     "query": "\"Russia\" AND (\"Ukraine\" OR \"Zelensky\" OR \"Putin\" OR \"Kyiv\" OR \"ceasefire\")",
     "baseline_source": "verified",
@@ -80,10 +74,7 @@
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.2,
       "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.0,
-      "SystemicEconomicExposure": 2.6,
-      "EconomicExposureInternalization": 0.4,
-      "ThirdPartySanctionsRisk": 0.4
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Iran\" AND (\"United States\" OR US OR \"American\" OR Tehran OR \"nuclear\") NOT Venezuela",
     "baseline_source": "verified",
@@ -91,7 +82,7 @@
       "ProtractedConflict": 0.3,
       "GeographicProximity": 0.0
     },
-    "crisis_context": "CRISIS CONTEXT: US-Iran is now a fragile post-strike implementation crisis, not a pre-strike ultimatum crisis. The February 28, 2026 strike already occurred. As of mid-July 2026, the relevant bargaining environment is an interim peace/MOU framework involving ceasefire maintenance, Strait of Hormuz reopening, frozen-asset release, sanctions relief, and follow-on nuclear/security negotiations. The crisis has moved into a mid-implementation phase where the key dynamics are: (1) whether ceasefire terms and asset-release timelines are being honored, (2) whether Hormuz maritime transit is normalizing, (3) whether follow-on nuclear/security talks are progressing or stalling, and (4) whether domestic political pressures on either side are undermining implementation commitments. No headlines are available for the trailing week ending mid-July 2026, so no material factual update is warranted; the structural situation should be presumed unchanged from late June 2026 absent contrary evidence. This is now the fourth consecutive low-activity cycle (OP=0.60, LVO=0.90 this cycle; OP=0.00, LVO=0.90 prior cycle; OP=0.25, LVO=0.50 before that; OP=0.00, LVO=0.50 before that). The elevated OP=0.60 and LVO=0.90 this cycle, in the absence of any new headlines, likely reflect model uncertainty from continued data absence rather than genuine escalation or volatility; absent contradictory evidence, treat the situation as structurally stable implementation drift. However, the OP uptick to 0.60 warrants mild caution: if future cycles produce corroborating headlines suggesting implementation friction, stalled talks, or covert reconstitution, this should be treated as an early signal rather than noise. For now, without headline evidence, maintain the stable-implementation baseline. Diplomatic talks, mediator channels, technical implementation meetings, and asset-release logistics should now be treated as real de-escalatory/substitution-path evidence UNLESS paired with explicit force deployments, ultimatums, or verified ceasefire collapse. Score SubstitutionPath positively when there are verified halt-attack commitments, implementation mechanisms, maritime reopening procedures, demobilization, or mediator-run incident channels. Score CommitmentProblem UPWARD when either side rejects implementation terms, resumes strikes, issues public ultimatums, disputes Hormuz control, signals that today's deal cannot bind tomorrow's behavior, misses agreed implementation deadlines, or when credible reports indicate covert reconstitution of struck nuclear/military facilities. Score Mobilization",
+    "crisis_context": "CRISIS CONTEXT: US-Iran is now a fragile post-strike implementation crisis, not a pre-strike ultimatum crisis. The February 28, 2026 strike already occurred. As of mid-July 2026, the relevant bargaining environment is an interim peace/MOU framework involving ceasefire maintenance, Strait of Hormuz reopening, frozen-asset release, sanctions relief, and follow-on nuclear/security negotiations. The crisis has moved into a mid-implementation phase where the key dynamics are: (1) whether ceasefire terms and asset-release timelines are being honored, (2) whether Hormuz maritime transit is normalizing, (3) whether follow-on nuclear/security talks are progressing or stalling, and (4) whether domestic political pressures on either side are undermining implementation commitments. No headlines are available for the trailing week ending mid-July 2026, so no material factual update is warranted; the structural situation should be presumed unchanged from late June 2026 absent contrary evidence. This is now the third consecutive low-activity cycle (OP=0.00, LVO=0.90 this cycle; OP=0.25, LVO=0.50 prior cycle; OP=0.00, LVO=0.50 before that), strongly reinforcing that the dyad is in stable implementation drift rather than active crisis movement. The elevated LVO=0.90 this cycle likely reflects model uncertainty from data absence rather than genuine volatility; absent contradictory evidence, treat the situation as structurally stable. Diplomatic talks, mediator channels, technical implementation meetings, and asset-release logistics should now be treated as real de-escalatory/substitution-path evidence UNLESS paired with explicit force deployments, ultimatums, or verified ceasefire collapse. Score SubstitutionPath positively when there are verified halt-attack commitments, implementation mechanisms, maritime reopening procedures, demobilization, or mediator-run incident channels. Score CommitmentProblem UPWARD when either side rejects implementation terms, resumes strikes, issues public ultimatums, disputes Hormuz control, signals that today's deal cannot bind tomorrow's behavior, misses agreed implementation deadlines, or when credible reports indicate covert reconstitution of struck nuclear/military facilities. Score MobilizationSignal or HardlineClaims ONLY for new force movement, alert changes, strike packages, evacuation orders, or concrete operational preparation \u2014 NOT for routine rhetoric, accusations, or talk scheduling. PreferenceAlignment fires ONLY on formal structural shifts: deal signed, framework formally collapsed, official MOU withdrawal, or coalition/recognition change. Routine ceasefire violations that are managed within the framework do NOT fire PreferenceAlignment",
     "crisis_onset_date": "2025-11-01",
     "acute_phase_onset_date": "2026-01-20",
     "event_date": null,
@@ -117,10 +108,7 @@
       "PatronDeterrence": 1.5,
       "NuclearDeterrence": 0.8,
       "AudienceCosts": 1.0,
-      "PatronMoralHazard": 0.5,
-      "SystemicEconomicExposure": 2.4,
-      "EconomicExposureInternalization": 0.5,
-      "ThirdPartySanctionsRisk": 1.4
+      "PatronMoralHazard": 0.5
     },
     "query": "\"Iran\" AND (\"Israel\" OR \"IDF\" OR \"nuclear\" OR \"strike\" OR \"airstrike\")",
     "baseline_source": "verified",
@@ -130,8 +118,7 @@
       "SubstitutionPath": 0.35
     },
     "action_type": "missile_strike",
-    "action_type_reasoning": "Israel has demonstrated the capability to strike Iran directly with ballistic missiles and air-launched standoff weapons (as shown in the October 2024 strikes), and maintains forward-deployed assets and range to execute a missile or air strike on Iranian territory with relatively short preparation time, making missile_strike the fastest plausible initiated kinetic action.",
-    "crisis_context": "CRISIS CONTEXT \u2014 Israel-Iran dyad (as of late June 2025)\n\nThis dyad has been triggered by an elevated combination of Operational Preparation (OP=0.60) and Lethal Violence Onset (LVO=0.90). The LVO=0.90 signal strongly suggests either a kinetic exchange has already occurred or is assessed as near-certain based on available indicators. The OP=0.60 indicates meaningful but not maximal operational preparation \u2014 consistent with a scenario where strikes or counter-strikes have been launched or are imminent, but full-scale mobilization has not been confirmed.\n\nBASELINE CONTEXT: Israel and Iran have been in a persistent shadow war involving proxy conflicts (Hezbollah, Houthis, Iraqi militias), cyber operations, covert sabotage of nuclear facilities, and targeted assassinations. Since October 2023, this shadow war has periodically escalated to direct exchanges \u2014 notably the April 2024 Iranian drone/missile barrage against Israel and Israel's retaliatory strike on Isfahan. The two states have no diplomatic relations and treat each other as existential threats. Iran's nuclear program remains a central driver of Israeli threat perception.\n\nNODE-SCORING GUIDANCE:\n\n- MILITARY BUILDUP / FORCE POSTURE: Score conservatively unless evidence shows deployments clearly beyond the elevated baseline that has persisted since late 2023. Routine IRGC exercises or Israeli Air Force readiness drills in the current environment should not be treated as novel escalation signals \u2014 look for surge indicators (reserve call-ups, forward-deployed munitions, carrier group repositioning, unusual satellite imagery of airbases).\n\n- DIPLOMATIC OFF-RAMP / DE-ESCALATION: Given LVO=0.90, weight diplomatic signals carefully. Back-channel communications (e.g., via Oman, Qatar, or indirect US-Iran messaging) should be scored as meaningful only if accompanied by observable behavioral changes (stand-downs, withdrawal of forward assets). Rhetorical calls for restraint from third parties alone should receive low weight.\n\n- LETHAL VIOLENCE / KINETIC ACTION: The LVO=0.90 baseline means analysts should NOT double-count a strike that has already occurred. If a specific kinetic event (e.g., Israeli strike on Iranian nuclear or military infrastructure, or Iranian/proxy retaliation) has already taken place, new evidence should be scored only if it represents ADDITIONAL or ESCALATORY violence beyond the triggering event. Confirmation reporting on an already-known strike should not further inflate LVO.\n\n- PROXY / THIRD-PARTY INVOLVEMENT: Hezbollah, Houthi, and Iraqi militia actions should be scored as Iran-linked escalation only when there is clear"
+    "action_type_reasoning": "Israel has demonstrated the capability to strike Iran directly with ballistic missiles and air-launched standoff weapons (as shown in the October 2024 strikes), and maintains forward-deployed assets and range to execute a missile or air strike on Iranian territory with relatively short preparation time, making missile_strike the fastest plausible initiated kinetic action."
   },
   "North Korea-US": {
     "label": "North Korea and the United States",
@@ -146,10 +133,7 @@
       "PatronDeterrence": 1.0,
       "NuclearDeterrence": 2.0,
       "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.0,
-      "SystemicEconomicExposure": 0.7,
-      "EconomicExposureInternalization": 0.1,
-      "ThirdPartySanctionsRisk": 0.4
+      "PatronMoralHazard": 0.0
     },
     "query": "\"North Korea\" AND (\"United States\" OR \"Kim\" OR \"missile\" OR \"nuclear\" OR \"ICBM\")",
     "baseline_source": "verified",
@@ -174,10 +158,7 @@
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 1.8,
       "AudienceCosts": 1.0,
-      "PatronMoralHazard": 0.5,
-      "SystemicEconomicExposure": 0.7,
-      "EconomicExposureInternalization": 0.4,
-      "ThirdPartySanctionsRisk": 1.0
+      "PatronMoralHazard": 0.5
     },
     "query": "\"India\" AND \"Pakistan\" AND (\"Kashmir\" OR \"LOC\" OR \"strike\" OR \"airstrike\" OR \"military\" OR \"border\")",
     "baseline_source": "verified",
@@ -208,10 +189,7 @@
       "PatronDeterrence": 2.0,
       "NuclearDeterrence": 2.0,
       "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.5,
-      "SystemicEconomicExposure": 2.6,
-      "EconomicExposureInternalization": 0.4,
-      "ThirdPartySanctionsRisk": 2.8
+      "PatronMoralHazard": 0.5
     },
     "query": "\"NATO\" AND (\"Russia\" OR \"Putin\" OR \"Article 5\" OR \"escalation\" OR \"alliance\")",
     "baseline_source": "verified",
@@ -236,10 +214,7 @@
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
       "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.0,
-      "SystemicEconomicExposure": 1.4,
-      "EconomicExposureInternalization": 0.3,
-      "ThirdPartySanctionsRisk": 0.4
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Venezuela\" AND (\"United States\" OR \"Maduro\" OR \"sanctions\" OR \"military\" OR \"Guyana\")",
     "baseline_source": "verified",
@@ -273,10 +248,7 @@
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
       "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.0,
-      "SystemicEconomicExposure": 0.7,
-      "EconomicExposureInternalization": 0.15,
-      "ThirdPartySanctionsRisk": 0.3
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Cuba\" AND (\"United States\" OR \"Havana\" OR \"sanctions\" OR \"embargo\" OR \"military\")",
     "baseline_source": "verified",
@@ -302,10 +274,7 @@
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
       "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.0,
-      "SystemicEconomicExposure": 2.2,
-      "EconomicExposureInternalization": 0.85,
-      "ThirdPartySanctionsRisk": 0.3
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Mexico\" AND (\"United States\" OR \"cartel\" OR \"military\" OR \"border\" OR \"tariff\") NOT \"New Mexico\"",
     "baseline_source": "verified",
@@ -331,10 +300,7 @@
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 1.8,
       "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.5,
-      "SystemicEconomicExposure": 2.4,
-      "EconomicExposureInternalization": 0.5,
-      "ThirdPartySanctionsRisk": 1.8
+      "PatronMoralHazard": 0.5
     },
     "query": "\"Russia\" AND (\"United States\" OR \"Washington\" OR \"Pentagon\" OR \"State Department\") NOT Ukraine NOT NATO",
     "baseline_source": "verified",
@@ -359,10 +325,7 @@
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5,
-      "SystemicEconomicExposure": 3.0,
-      "EconomicExposureInternalization": 0.85,
-      "ThirdPartySanctionsRisk": 1.8
+      "AudienceCosts": 0.5
     },
     "query": "\"China\" AND (\"United States\" OR \"Pentagon\" OR \"trade war\" OR \"South China Sea\") NOT Taiwan",
     "baseline_source": "verified",
@@ -382,10 +345,7 @@
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5,
-      "SystemicEconomicExposure": 2.6,
-      "EconomicExposureInternalization": 0.65,
-      "ThirdPartySanctionsRisk": 1.8
+      "AudienceCosts": 0.5
     },
     "query": "\"China\" AND (\"Japan\" OR \"Senkaku\" OR \"Diaoyu\" OR \"JMSDF\" OR \"East China Sea\")",
     "baseline_source": "verified",
@@ -405,10 +365,7 @@
       "DemocraticPeace": 1.0,
       "PatronDeterrence": 1.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 1.0,
-      "SystemicEconomicExposure": 2.4,
-      "EconomicExposureInternalization": 0.5,
-      "ThirdPartySanctionsRisk": 1.6
+      "AudienceCosts": 1.0
     },
     "query": "\"China\" AND (\"Philippines\" OR \"South China Sea\" OR \"Scarborough\" OR \"BRP\" OR \"Manila\")",
     "baseline_source": "verified",
@@ -428,10 +385,7 @@
       "DemocraticPeace": 1.5,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5,
-      "SystemicEconomicExposure": 2.4,
-      "EconomicExposureInternalization": 0.5,
-      "ThirdPartySanctionsRisk": 0.3
+      "AudienceCosts": 0.5
     },
     "query": "\"Israel\" AND (\"Yemen\" OR \"Houthi\") AND (\"missile\" OR \"drone\" OR \"strike\" OR \"Red Sea\")",
     "baseline_source": "verified",
@@ -451,10 +405,7 @@
       "DemocraticPeace": 0.5,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5,
-      "SystemicEconomicExposure": 1.6,
-      "EconomicExposureInternalization": 0.5,
-      "ThirdPartySanctionsRisk": 1.4
+      "AudienceCosts": 0.5
     },
     "query": "\"Israel\" AND (\"Turkey\" OR \"Erdogan\" OR \"Ankara\" OR \"flotilla\" OR \"Gaza\")",
     "baseline_source": "verified",
@@ -475,10 +426,7 @@
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
       "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.25,
-      "SystemicEconomicExposure": 0.8,
-      "EconomicExposureInternalization": 0.2,
-      "ThirdPartySanctionsRisk": 0.5
+      "PatronMoralHazard": 0.25
     },
     "query": "\"Israel\" AND (\"Syria\" OR \"Damascus\" OR \"airstrike\" OR \"IDF\" OR \"Golan\")",
     "baseline_source": "verified",
@@ -503,10 +451,7 @@
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
       "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.0,
-      "SystemicEconomicExposure": 1.2,
-      "EconomicExposureInternalization": 0.7,
-      "ThirdPartySanctionsRisk": 1.8
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Greenland\" AND (\"United States\" OR \"Denmark\" OR \"Trump\" OR \"annexation\" OR \"sovereignty\")",
     "baseline_source": "verified",
@@ -531,10 +476,7 @@
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
       "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.0,
-      "SystemicEconomicExposure": 0.7,
-      "EconomicExposureInternalization": 0.4,
-      "ThirdPartySanctionsRisk": 0.3
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Colombia\" AND (\"United States\" OR \"tariff\" OR \"military\" OR \"deportation\" OR \"Petro\")",
     "baseline_source": "verified",
@@ -559,10 +501,7 @@
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
       "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.5,
-      "SystemicEconomicExposure": 1.8,
-      "EconomicExposureInternalization": 0.5,
-      "ThirdPartySanctionsRisk": 1.0
+      "PatronMoralHazard": 0.5
     },
     "query": "\"China\" AND (\"India\" OR \"LAC\" OR \"Ladakh\" OR \"Galwan\" OR \"Arunachal\")",
     "baseline_source": "verified",
@@ -587,10 +526,7 @@
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 1.5,
       "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.5,
-      "SystemicEconomicExposure": 1.8,
-      "EconomicExposureInternalization": 0.4,
-      "ThirdPartySanctionsRisk": 2.8
+      "PatronMoralHazard": 0.5
     },
     "query": "\"Russia\" AND (\"Poland\" OR \"Warsaw\" OR \"NATO\" OR \"border\" OR \"Suwalki\")",
     "baseline_source": "verified",
@@ -616,10 +552,7 @@
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
       "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.25,
-      "SystemicEconomicExposure": 0.3,
-      "EconomicExposureInternalization": 0.3,
-      "ThirdPartySanctionsRisk": 0.8
+      "PatronMoralHazard": 0.25
     },
     "query": "\"Thailand\" AND (\"Cambodia\" OR \"border\" OR \"temple\" OR \"Preah Vihear\" OR \"military\")",
     "baseline_source": "verified",
@@ -645,10 +578,7 @@
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
       "AudienceCosts": 0.5,
-      "PatronMoralHazard": 0.0,
-      "SystemicEconomicExposure": 2.7,
-      "EconomicExposureInternalization": 0.7,
-      "ThirdPartySanctionsRisk": 0.4
+      "PatronMoralHazard": 0.0
     },
     "query": "\"Panama\" AND (\"United States\" OR \"canal\" OR \"Trump\" OR \"military\" OR \"sovereignty\")",
     "baseline_source": "verified",
@@ -714,10 +644,7 @@
       "DemocraticPeace": 0.8,
       "PreferenceAlignment": -1.5,
       "HardlineClaims": 2.2,
-      "AudienceCosts": 2.0,
-      "SystemicEconomicExposure": 1.6,
-      "EconomicExposureInternalization": 0.4,
-      "ThirdPartySanctionsRisk": 0.7
+      "AudienceCosts": 2.0
     },
     "query": "Israel AND Lebanon AND (Hezbollah OR border OR ceasefire OR military OR strikes OR conflict OR war OR UNIFIL OR \"Blue Line\")",
     "reasoning": "Israel holds a decisive conventional military advantage over Lebanon/Hezbollah, driving WinProbability positive, while the commitment problem is high because Hezbollah's rearmament cycles and Iranian patronage make any ceasefire inherently unstable and power shifts expected. Hardline claims are elevated due to the Shebaa Farms dispute, ongoing border tensions, and Hezbollah's ideological rejection of Israel, while audience costs are high on both sides given Israeli domestic pressure for security operations and Hezbollah's entrenchment as a resistance movement; nuclear deterrence is low but nonzero reflecting Israel's undeclared arsenal creating some asymmetric constraint.",
@@ -755,10 +682,7 @@
       "DemocraticPeace": 1.5,
       "PreferenceAlignment": -0.8,
       "HardlineClaims": 1.0,
-      "AudienceCosts": 1.2,
-      "SystemicEconomicExposure": 2.0,
-      "EconomicExposureInternalization": 0.6,
-      "ThirdPartySanctionsRisk": 0.8
+      "AudienceCosts": 1.2
     },
     "query": "(UAE OR \"United Arab Emirates\") AND Qatar AND (relations OR dispute OR blockade OR diplomacy OR tension OR reconciliation OR \"Al Ula\")",
     "reasoning": "The UAE holds a conventional military edge over Qatar but deep economic interdependence within the GCC and shared hydrocarbon markets impose significant war costs; both are autocracies with divergent foreign policy preferences (Qatar's support for Islamist movements vs. UAE's opposition), though the 2021 Al-Ula reconciliation reduced but did not eliminate underlying tensions. No nuclear deterrence applies, and while the US Al Udeid base in Qatar provides some indirect patron protection, there is no explicit US defense commitment favoring either side against the other, keeping PatronDeterrence modest.",
@@ -797,10 +721,7 @@
       "DemocraticPeace": 0.8,
       "PreferenceAlignment": -0.5,
       "HardlineClaims": 1.0,
-      "AudienceCosts": 1.5,
-      "SystemicEconomicExposure": 2.4,
-      "EconomicExposureInternalization": 0.5,
-      "ThirdPartySanctionsRisk": 1.2
+      "AudienceCosts": 1.5
     },
     "query": "(Israel AND \"Saudi Arabia\") AND (normalization OR diplomacy OR relations OR conflict OR \"Abraham Accords\" OR Iran OR defense OR recognition OR Palestine)",
     "reasoning": "Israel holds a significant military advantage including an undeclared nuclear arsenal, giving it a positive WinProbability and moderate NuclearDeterrence, though direct conflict between these two is historically unlikely; the dyad's tension is shaped more by the Palestinian issue and regional alignment than by bilateral territorial disputes. Preference alignment is moderately negative due to disagreements over Palestinian statehood and Jerusalem, but both share concern over Iran, and audience costs are elevated because Saudi domestic/religious opinion constrains normalization while Israeli politics constrain territorial concessions, making this a complex case where structural conflict drivers coexist with significant shared strategic interests.",
@@ -820,10 +741,7 @@
       "DemocraticPeace": 1.2,
       "PreferenceAlignment": -1.8,
       "HardlineClaims": 2.8,
-      "AudienceCosts": 2.5,
-      "SystemicEconomicExposure": 1.2,
-      "EconomicExposureInternalization": 0.3,
-      "ThirdPartySanctionsRisk": 0.8
+      "AudienceCosts": 2.5
     },
     "query": "Israel Palestine conflict OR war OR Gaza OR West Bank OR ceasefire OR negotiations OR Hamas OR IDF",
     "reasoning": "Israel holds an overwhelming conventional military advantage (high WinProbability), while deeply contested territorial claims over Jerusalem, the West Bank, and Gaza, combined with irreconcilable national aspirations, drive HardlineClaims and PreferenceAlignment to near-extreme values. Severe commitment problems arise from shifting power dynamics (settlement expansion, demographic changes, and fragmented Palestinian authority making credible long-term deals nearly impossible), while high audience costs on both sides\u2014Israeli domestic politics and Palestinian popular mobilization\u2014lock leaders into hardline positions with very short time horizons for compromise.",
@@ -843,10 +761,7 @@
       "DemocraticPeace": 1.0,
       "PreferenceAlignment": -0.4,
       "HardlineClaims": 0.3,
-      "AudienceCosts": 0.5,
-      "SystemicEconomicExposure": 1.8,
-      "EconomicExposureInternalization": 0.4,
-      "ThirdPartySanctionsRisk": 0.7
+      "AudienceCosts": 0.5
     },
     "query": "(Israel AND Oman) AND (diplomacy OR relations OR normalization OR military OR Gulf OR \"Abraham Accords\")",
     "reasoning": "Israel holds a significant military advantage including an undeclared nuclear arsenal, which provides moderate nuclear deterrence even against a non-nuclear Oman, though the two states have no direct territorial disputes and Oman has historically pursued a neutral, mediating foreign policy in the region. Oman has engaged in quiet diplomacy with Israel (hosting Netanyahu in 2018) but has not formally normalized relations; both are non-democratic, preference divergence is mild rather than acute, and there are no active hardline claims or significant commitment problems between them.",
@@ -866,10 +781,7 @@
       "DemocraticPeace": 0.5,
       "PreferenceAlignment": -0.8,
       "HardlineClaims": 0.8,
-      "AudienceCosts": 0.8,
-      "SystemicEconomicExposure": 0.7,
-      "EconomicExposureInternalization": 0.15,
-      "ThirdPartySanctionsRisk": 0.3
+      "AudienceCosts": 0.8
     },
     "query": "(US OR \"United States\" OR America) AND (Lebanon OR Hezbollah OR Beirut) AND (military OR sanctions OR diplomacy OR conflict OR troops)",
     "reasoning": "The US holds overwhelming military superiority over Lebanon, but direct interstate conflict is unlikely; the main friction runs through Hezbollah's role as an Iranian proxy, creating commitment problems and misaligned preferences on security architecture. Lebanon lacks a credible great-power patron willing to deter the US militarily, and while Lebanon is nominally democratic its fragmented sectarian governance and Hezbollah's dual state/militia status push DemocraticPeace slightly positive and complicate bargaining credibility.",
@@ -890,10 +802,7 @@
       "DemocraticPeace": 1.5,
       "PreferenceAlignment": -1.5,
       "HardlineClaims": 0.5,
-      "AudienceCosts": 1.2,
-      "SystemicEconomicExposure": 0.4,
-      "EconomicExposureInternalization": 0.1,
-      "ThirdPartySanctionsRisk": 0.3
+      "AudienceCosts": 1.2
     },
     "query": "(Venezuela AND Israel) AND (relations OR diplomacy OR conflict OR Maduro OR sanctions OR Palestine OR severed)",
     "reasoning": "Venezuela severed diplomatic ties with Israel in 2009 and has been a vocal critic aligned with Iran, creating strong preference divergence and rhetorical hostility, though the two states lack geographic proximity, significant economic interdependence, or any realistic theater for direct military confrontation, making actual conflict extremely unlikely. Israel's vastly superior military capability, undisclosed nuclear arsenal, and the geographic distance between the two states all serve as strong deterrents, while Maduro's autocratic regime and use of anti-Israel rhetoric for domestic mobilization elevate audience costs and democratic peace friction.",
@@ -914,10 +823,7 @@
       "DemocraticPeace": -1.2,
       "PreferenceAlignment": 1.2,
       "HardlineClaims": 0.2,
-      "AudienceCosts": 0.5,
-      "SystemicEconomicExposure": 1.8,
-      "EconomicExposureInternalization": 0.5,
-      "ThirdPartySanctionsRisk": 0.3
+      "AudienceCosts": 0.5
     },
     "query": "(US OR \"United States\" OR America) AND Israel AND (relations OR military OR aid OR diplomacy OR tension OR alliance OR weapons OR Gaza OR Iran)",
     "reasoning": "The US-Israel dyad is fundamentally an alliance rather than a rivalry, so conflict probability is extremely low: preferences are broadly aligned, both are democracies (strong democratic peace effect), economic and military interdependence imposes massive war costs, and there are no territorial disputes between them. The US has overwhelming military superiority (high WinProbability if hypothetically a challenger), Israel possesses an undeclared nuclear arsenal providing some deterrence, but PatronDeterrence is set to 0 because no external patron defends Israel against the US \u2014 rather, the US itself is Israel's patron; commitment problems and audience costs are low given the deep institutionalized relationship, though periodic tensions over issues like settlements and Gaza policy introduce modest friction.",
@@ -937,10 +843,7 @@
       "DemocraticPeace": 1.2,
       "PreferenceAlignment": 1.2,
       "HardlineClaims": 0.3,
-      "AudienceCosts": 0.3,
-      "SystemicEconomicExposure": 1.2,
-      "EconomicExposureInternalization": 0.4,
-      "ThirdPartySanctionsRisk": 1.0
+      "AudienceCosts": 0.3
     },
     "query": "(Israel AND Azerbaijan) AND (military OR cooperation OR arms OR Iran OR diplomacy OR relations)",
     "reasoning": "Israel and Azerbaijan are strategic partners with strongly aligned interests centered on countering Iran, extensive arms trade, and energy cooperation, making conflict between them extremely unlikely. Both are non-democracies or flawed democracies (DemocraticPeace slightly positive as neither constrains the other via democratic norms), but the positive preference alignment and absence of territorial disputes or serious grievances keep all conflict-inducing nodes low; Israel's significant military superiority gives it a positive WinProbability but this is largely irrelevant given the cooperative relationship.",
@@ -960,10 +863,7 @@
       "DemocraticPeace": 1.5,
       "PreferenceAlignment": -1.5,
       "HardlineClaims": 0.5,
-      "AudienceCosts": 1.0,
-      "SystemicEconomicExposure": 0.2,
-      "EconomicExposureInternalization": 0.1,
-      "ThirdPartySanctionsRisk": 0.3
+      "AudienceCosts": 1.0
     },
     "query": "Cuba AND Israel AND (diplomacy OR relations OR UN OR Palestine OR sanctions)",
     "reasoning": "Cuba and Israel have had no diplomatic relations since 1973, and Cuba has been a consistent critic of Israel at the UN and a supporter of Palestinian statehood, producing strong preference misalignment and ideological opposition (one communist autocracy, one democracy). However, the dyad has essentially zero risk of direct military conflict due to geographic distance, lack of shared borders or contested territory, Cuba's vast military inferiority relative to Israel, and the absence of any strategic imperative for armed confrontation \u2014 making this primarily a diplomatic rivalry rather than a militarized one.",
@@ -983,10 +883,7 @@
       "DemocraticPeace": 1.0,
       "PreferenceAlignment": -1.3,
       "HardlineClaims": 0.8,
-      "AudienceCosts": 1.2,
-      "SystemicEconomicExposure": 1.8,
-      "EconomicExposureInternalization": 0.4,
-      "ThirdPartySanctionsRisk": 1.2
+      "AudienceCosts": 1.2
     },
     "query": "Israel Kuwait relations OR diplomacy OR normalization OR conflict OR threat",
     "reasoning": "Israel holds a significant military advantage over Kuwait including an undeclared nuclear arsenal, but the dyad lacks direct territorial disputes or border proximity, making direct conflict unlikely; Kuwait has no formal relations with Israel and remains aligned with the broader Arab/Palestinian cause, producing opposed preferences and moderate audience costs, though the US presence in Kuwait provides some indirect restraining effect on both sides. The lack of shared borders, limited economic interdependence, and Kuwait's reliance on US security patronage all reduce the risk of direct military confrontation despite persistent political hostility.",
@@ -1006,10 +903,7 @@
       "DemocraticPeace": 1.2,
       "PreferenceAlignment": -1.3,
       "HardlineClaims": 1.0,
-      "AudienceCosts": 1.2,
-      "SystemicEconomicExposure": 1.4,
-      "EconomicExposureInternalization": 0.3,
-      "ThirdPartySanctionsRisk": 0.8
+      "AudienceCosts": 1.2
     },
     "query": "Israel Iraq relations OR military OR threat OR militia OR Iran proxy",
     "reasoning": "Israel holds a significant conventional and nuclear-capable military advantage over a weakened post-2003 Iraq, which lacks effective central military power and has no nuclear deterrent, though Israel's undeclared arsenal provides some asymmetric deterrence. Iraq's fragmented governance, the presence of Iran-aligned militias that have targeted Israel-linked interests, deep historical enmity (including the 1981 Osirak strike), and opposing positions on the Palestinian issue create substantial preference divergence and moderate hardline claims, though the lack of direct contiguity and Iraq's internal instability reduce the immediacy of a conventional interstate conflict.",
@@ -1029,10 +923,7 @@
       "DemocraticPeace": 1.5,
       "PreferenceAlignment": 0.4,
       "HardlineClaims": 0.5,
-      "AudienceCosts": 0.5,
-      "SystemicEconomicExposure": 2.4,
-      "EconomicExposureInternalization": 0.7,
-      "ThirdPartySanctionsRisk": 1.2
+      "AudienceCosts": 0.5
     },
     "query": "(Saudi Arabia AND UAE) OR (Saudi Arabia AND \"United Arab Emirates\") AND (rivalry OR tensions OR dispute OR relations OR OPEC OR Yemen OR diplomacy)",
     "reasoning": "Saudi Arabia and the UAE are both autocratic Gulf monarchies with deep economic interdependence (high war costs) and broadly aligned interests as GCC partners, though they have experienced growing strategic divergence over Yemen, OPEC+ quotas, and regional influence competition, creating moderate commitment problems and slightly misaligned preferences. Saudi Arabia holds a conventional military advantage in size, neither possesses nuclear weapons, and no major external patron is committed to defending one against the other, while both regimes face low domestic audience costs but have shown increasing willingness to pursue independent foreign policies.",
@@ -1053,10 +944,7 @@
       "DemocraticPeace": 1.2,
       "PreferenceAlignment": 0.3,
       "HardlineClaims": 0.2,
-      "AudienceCosts": 1.0,
-      "SystemicEconomicExposure": 2.7,
-      "EconomicExposureInternalization": 0.7,
-      "ThirdPartySanctionsRisk": 0.4
+      "AudienceCosts": 1.0
     },
     "query": "(US OR \"United States\" OR America) AND (\"Saudi Arabia\" OR Riyadh OR MBS) AND (relations OR military OR oil OR arms OR security OR diplomacy)",
     "reasoning": "The US holds overwhelming military superiority (WinProbability strongly favoring defender/US), and deep economic interdependence through oil markets and arms sales creates high war costs; there are no territorial disputes and no realistic conflict scenario, but the democracy-autocracy gap, Saudi hedging toward China/Russia (moderate commitment problems), and divergent preferences on human rights and energy policy create diplomatic friction. Nuclear deterrence is moderate given the US arsenal acts as a background constraint, while Saudi audience costs reflect MBS's domestic need to assert sovereignty and the US Congress's periodic pushback on the relationship.",
@@ -1076,10 +964,7 @@
       "DemocraticPeace": 0.5,
       "PreferenceAlignment": -1.5,
       "HardlineClaims": 0.8,
-      "AudienceCosts": 1.5,
-      "SystemicEconomicExposure": 0.8,
-      "EconomicExposureInternalization": 0.3,
-      "ThirdPartySanctionsRisk": 0.8
+      "AudienceCosts": 1.5
     },
     "query": "Israel AND Malaysia AND (relations OR conflict OR diplomacy OR sanctions OR Palestine OR boycott)",
     "reasoning": "Israel and Malaysia have no diplomatic relations, with Malaysia being one of the most vocally anti-Israel Muslim-majority states, driven by strong solidarity with Palestine \u2014 yielding high preference divergence and significant audience costs on the Malaysian side. However, the dyad is geographically distant with minimal direct territorial disputes and very low economic interdependence, making actual military conflict extremely unlikely; Israel holds a clear military advantage including an undeclared nuclear capability, though the distance and lack of direct strategic competition keep most conflict indicators moderate.",
@@ -1117,10 +1002,7 @@
       "DemocraticPeace": 0.3,
       "PreferenceAlignment": -1.5,
       "HardlineClaims": 0.8,
-      "AudienceCosts": 1.5,
-      "SystemicEconomicExposure": 0.8,
-      "EconomicExposureInternalization": 0.2,
-      "ThirdPartySanctionsRisk": 0.7
+      "AudienceCosts": 1.5
     },
     "query": "Indonesia Israel relations OR diplomacy OR Palestine OR recognition OR normalization",
     "reasoning": "Indonesia and Israel have no diplomatic relations, driven primarily by Indonesia's strong solidarity with Palestine and its status as the world's largest Muslim-majority country, creating deep preference misalignment and significant domestic audience costs against normalization. However, geographic distance, lack of direct territorial disputes, Israel's qualitative military edge and undeclared nuclear capability, and US patronage of Israel all serve as strong structural deterrents against any direct military confrontation, making this a politically hostile but militarily low-risk dyad.",
@@ -1140,10 +1022,7 @@
       "DemocraticPeace": 1.5,
       "PreferenceAlignment": -1.5,
       "HardlineClaims": 0.5,
-      "AudienceCosts": 1.0,
-      "SystemicEconomicExposure": 0.2,
-      "EconomicExposureInternalization": 0.1,
-      "ThirdPartySanctionsRisk": 0.4
+      "AudienceCosts": 1.0
     },
     "query": "Israel AND Afghanistan AND (Taliban OR relations OR threat OR conflict OR diplomacy)",
     "reasoning": "Israel holds a massive conventional and technological military advantage over Taliban-ruled Afghanistan, but the two states have no shared border, minimal economic interdependence, and no direct territorial dispute, making direct interstate conflict extremely unlikely despite deep ideological hostility. Afghanistan under the Taliban is a pariah autocracy with no recognition of Israel and strong rhetorical opposition, but the geographic distance, lack of patron deterrence for Afghanistan, and absence of concrete contested claims keep escalation risk structurally very low.",
@@ -1163,10 +1042,7 @@
       "DemocraticPeace": 1.0,
       "PreferenceAlignment": -1.0,
       "HardlineClaims": 0.4,
-      "AudienceCosts": 0.8,
-      "SystemicEconomicExposure": 1.2,
-      "EconomicExposureInternalization": 0.2,
-      "ThirdPartySanctionsRisk": 1.8
+      "AudienceCosts": 0.8
     },
     "query": "(Australia AND Iran) AND (sanctions OR nuclear OR diplomacy OR tensions OR military OR \"Middle East\")",
     "reasoning": "Australia and Iran have no direct territorial dispute or proximity-based security dilemma, but their preferences diverge significantly due to Australia's alignment with the US-led Western order and Iran's adversarial stance toward it, reflected in Australian sanctions enforcement and participation in Middle East coalitions. Australia holds a conventional military edge and benefits from distance and alliance networks, while Iran's nuclear ambitions create modest deterrence effects; the lack of direct territorial claims and geographic separation keep hardline claims and war costs relatively low, though the democracy-autocracy gap and Australia's alliance-driven audience costs sustain underlying friction.",
@@ -1186,10 +1062,7 @@
       "DemocraticPeace": 0.8,
       "PreferenceAlignment": -1.5,
       "HardlineClaims": 0.5,
-      "AudienceCosts": 1.5,
-      "SystemicEconomicExposure": 0.3,
-      "EconomicExposureInternalization": 0.1,
-      "ThirdPartySanctionsRisk": 0.3
+      "AudienceCosts": 1.5
     },
     "query": "Bangladesh Israel relations OR diplomacy OR recognition OR conflict OR Palestine",
     "reasoning": "Bangladesh does not recognize Israel and has strongly pro-Palestinian foreign policy positions driven by domestic Islamic constituencies (high audience costs, negative preference alignment), but the two states have no territorial dispute, no shared border, and minimal direct military interaction, making actual conflict extremely unlikely. Israel holds a massive conventional military advantage and an undeclared nuclear arsenal, while Bangladesh has no patron committed to its defense against Israel specifically, though the geographic distance and lack of strategic interaction keep most escalation indicators low.",
@@ -1209,10 +1082,7 @@
       "DemocraticPeace": 1.0,
       "PreferenceAlignment": -1.2,
       "HardlineClaims": 0.8,
-      "AudienceCosts": 1.0,
-      "SystemicEconomicExposure": 0.6,
-      "EconomicExposureInternalization": 0.2,
-      "ThirdPartySanctionsRisk": 0.8
+      "AudienceCosts": 1.0
     },
     "query": "Israel Tunisia relations OR diplomacy OR conflict OR normalization OR boycott",
     "reasoning": "Israel holds a decisive military advantage over Tunisia including presumed nuclear capability, but the geographic distance and minimal economic interdependence make direct conflict highly unlikely; the dyad is characterized by political hostility (Tunisia has no diplomatic relations, strong anti-normalization sentiment, and aligns with Palestinian causes) but lacks the territorial contiguity or active disputes that would elevate escalation risks significantly. Tunisia's democratic backsliding under Saied and Israel's rightward shift keep DemocraticPeace moderately positive, while audience costs reflect domestic pressures in both states against any rapprochement.",
@@ -1232,10 +1102,7 @@
       "DemocraticPeace": 1.5,
       "PreferenceAlignment": -1.5,
       "HardlineClaims": 2.0,
-      "AudienceCosts": 1.5,
-      "SystemicEconomicExposure": 0.3,
-      "EconomicExposureInternalization": 0.2,
-      "ThirdPartySanctionsRisk": 0.5
+      "AudienceCosts": 1.5
     },
     "query": "(Pakistan AND Afghanistan) AND (border OR Durand OR Taliban OR TTP OR military OR strike OR tensions OR diplomacy OR conflict)",
     "reasoning": "Pakistan holds a significant conventional military advantage including nuclear weapons over Taliban-ruled Afghanistan, but the Durand Line dispute, cross-border TTP sanctuaries, and deep mutual distrust create severe commitment problems and opposed preferences. Both sides are led by regimes with short time horizons and high audience costs\u2014Pakistan's military-dominated state faces domestic pressure on terrorism, while the Taliban government is ideologically rigid\u2014and the absence of any democratic accountability on either side removes institutional constraints on escalation.",
@@ -1256,10 +1123,7 @@
       "DemocraticPeace": 0.5,
       "PreferenceAlignment": -0.5,
       "HardlineClaims": 0.2,
-      "AudienceCosts": 0.3,
-      "SystemicEconomicExposure": 1.8,
-      "EconomicExposureInternalization": 0.6,
-      "ThirdPartySanctionsRisk": 2.6
+      "AudienceCosts": 0.3
     },
     "query": "Japan AND Iran AND (diplomacy OR sanctions OR oil OR nuclear OR tensions OR relations)",
     "reasoning": "Japan and Iran have no direct territorial disputes, significant geographic separation, and historically maintained pragmatic economic relations centered on energy imports, making this an extremely low-conflict dyad with no realistic pathway to bilateral war. Japan's alignment with the US-led sanctions regime creates mild preference divergence, but Japan has traditionally sought to maintain diplomatic channels with Iran and there are no hardline claims or commitment problems driving escalation between them.",
@@ -1279,10 +1143,7 @@
       "DemocraticPeace": 0.8,
       "PreferenceAlignment": -0.5,
       "HardlineClaims": 1.0,
-      "AudienceCosts": 1.5,
-      "SystemicEconomicExposure": 1.2,
-      "EconomicExposureInternalization": 0.5,
-      "ThirdPartySanctionsRisk": 1.8
+      "AudienceCosts": 1.5
     },
     "query": "(Israel AND Jordan) AND (relations OR tensions OR border OR diplomacy OR military OR West Bank OR Palestinian OR peace treaty OR Al-Aqsa)",
     "reasoning": "Israel and Jordan have a formal peace treaty (1994) and extensive security cooperation, which keeps war costs high and provides moderate preference alignment, but the relationship is strained by the Palestinian issue, Jerusalem/Al-Aqsa disputes, and strong Jordanian public hostility to Israel that generates significant audience costs for Amman. Israel holds a clear conventional military advantage and possesses an undeclared nuclear capability that provides asymmetric nuclear deterrence, while Jordan benefits from a US security partnership (moderate patron deterrence) but lacks a formal mutual defense treaty.",
@@ -1302,10 +1163,7 @@
       "DemocraticPeace": 1.2,
       "PreferenceAlignment": -1.5,
       "HardlineClaims": 0.8,
-      "AudienceCosts": 1.8,
-      "SystemicEconomicExposure": 0.8,
-      "EconomicExposureInternalization": 0.3,
-      "ThirdPartySanctionsRisk": 0.8
+      "AudienceCosts": 1.8
     },
     "query": "(Israel AND Pakistan) AND (relations OR nuclear OR conflict OR diplomacy OR recognition OR threat OR military)",
     "reasoning": "Israel and Pakistan have no diplomatic relations and deep ideological hostility\u2014Pakistan refuses to recognize Israel and has strong domestic audience costs tied to the Palestinian cause and Islamic solidarity\u2014but the dyad lacks direct territorial disputes or geographic contiguity, keeping hardline claims moderate. Both are nuclear-armed states (NuclearDeterrence is high), Israel holds a qualitative military edge but Pakistan has a larger conventional force and nuclear arsenal creating rough balance, and the absence of economic ties means war costs are only modestly peace-inducing; preference alignment is strongly negative given Pakistan's alignment with the broader Muslim world on the Palestine issue.",
@@ -1325,10 +1183,7 @@
       "DemocraticPeace": 1.5,
       "PreferenceAlignment": -1.5,
       "HardlineClaims": 1.5,
-      "AudienceCosts": 1.8,
-      "SystemicEconomicExposure": 2.7,
-      "EconomicExposureInternalization": 0.55,
-      "ThirdPartySanctionsRisk": 1.4
+      "AudienceCosts": 1.8
     },
     "query": "(Iran AND \"Saudi Arabia\") AND (tensions OR conflict OR diplomacy OR military OR proxy OR Yemen OR nuclear OR normalization OR OPEC)",
     "reasoning": "Iran and Saudi Arabia are rival autocracies with deeply opposed sectarian and geopolitical preferences (Sunni-Shia rivalry, competing regional influence in Yemen, Iraq, Lebanon, and Syria), driving high commitment problems, negative preference alignment, and significant audience costs on both sides. Despite the 2023 China-brokered normalization, structural rivalry persists; Saudi Arabia benefits from a moderate US patron deterrence effect, neither side has nuclear weapons yet (though Iran's program creates low-level nuclear salience), and Iran holds a slight conventional edge in asymmetric/missile capabilities offset by Saudi Arabia's superior air power and arms imports.",
@@ -1349,10 +1204,7 @@
       "DemocraticPeace": 1.2,
       "PreferenceAlignment": -1.3,
       "HardlineClaims": 0.5,
-      "AudienceCosts": 1.2,
-      "SystemicEconomicExposure": 1.4,
-      "EconomicExposureInternalization": 0.3,
-      "ThirdPartySanctionsRisk": 2.4
+      "AudienceCosts": 1.2
     },
     "query": "(Canada AND Iran) AND (sanctions OR diplomacy OR nuclear OR relations OR conflict OR IRGC OR hostage OR detention)",
     "reasoning": "Canada and Iran have deeply strained relations\u2014Canada closed its embassy in 2012, designated the IRGC as a terrorist entity, and maintains strong sanctions, reflecting significant preference misalignment and audience costs driven by domestic diaspora politics. However, geographic distance, minimal economic interdependence, and the absence of territorial disputes or direct military confrontation keep the risk of armed conflict structurally very low, with Canada holding a modest conventional edge as a NATO member but no direct patron deterrence commitment applying to this dyad.",
@@ -1372,10 +1224,7 @@
       "DemocraticPeace": 1.0,
       "PreferenceAlignment": -0.6,
       "HardlineClaims": 0.5,
-      "AudienceCosts": 0.6,
-      "SystemicEconomicExposure": 2.4,
-      "EconomicExposureInternalization": 0.4,
-      "ThirdPartySanctionsRisk": 1.2
+      "AudienceCosts": 0.6
     },
     "query": "Iran Kuwait relations OR tensions OR military OR diplomacy OR Gulf security",
     "reasoning": "Iran holds a significant conventional military advantage over Kuwait, but Kuwait benefits from strong US patron deterrence (hosting US troops and having a defense cooperation agreement) that substantially restrains Iranian aggression. The dyad features moderate preference misalignment due to Iran's revisionist regional posture versus Kuwait's status-quo Gulf Arab orientation, though territorial disputes are relatively minor compared to other Iranian dyads, and both sides have economic incentives (oil markets, Gulf shipping) to avoid direct conflict.",
@@ -1395,10 +1244,7 @@
       "DemocraticPeace": 0.8,
       "PreferenceAlignment": -1.2,
       "HardlineClaims": 1.2,
-      "AudienceCosts": 1.5,
-      "SystemicEconomicExposure": 1.8,
-      "EconomicExposureInternalization": 0.4,
-      "ThirdPartySanctionsRisk": 1.0
+      "AudienceCosts": 1.5
     },
     "query": "Israel AND Qatar AND (Hamas OR negotiations OR diplomacy OR mediation OR Gaza OR conflict OR relations)",
     "reasoning": "Israel holds a decisive conventional military advantage and undeclared nuclear capability, while Qatar lacks a major patron committed to its defense in a bilateral confrontation, though direct war is structurally unlikely given geographic distance and indirect rivalry. The dyad is characterized by deep preference misalignment over Hamas patronage and Palestinian issues, significant audience costs on both sides driven by domestic constituencies, and Qatar's role as a mediator/Hamas host creating ongoing commitment problems, but meaningful war costs from economic interdependence and US relationships constrain escalation.",
@@ -1419,10 +1265,7 @@
       "DemocraticPeace": 0.0,
       "PatronDeterrence": 0.5,
       "NuclearDeterrence": 0.0,
-      "AudienceCosts": 0.5,
-      "SystemicEconomicExposure": 1.8,
-      "EconomicExposureInternalization": 0.6,
-      "ThirdPartySanctionsRisk": 2.0
+      "AudienceCosts": 0.5
     },
     "query": "\"Greece\" AND (\"Turkey\" OR \"Aegean\" OR \"Cyprus\" OR \"airspace\" OR \"Erdogan\")",
     "baseline_source": "verified",
@@ -1442,10 +1285,7 @@
       "DemocraticPeace": 2.0,
       "PatronDeterrence": 1.5,
       "NuclearDeterrence": 2.0,
-      "AudienceCosts": 0.5,
-      "SystemicEconomicExposure": 1.8,
-      "EconomicExposureInternalization": 0.15,
-      "ThirdPartySanctionsRisk": 1.2
+      "AudienceCosts": 0.5
     },
     "query": "\"North Korea\" AND (\"South Korea\" OR \"Seoul\" OR \"DMZ\" OR \"provocation\" OR \"missile\")",
     "baseline_source": "verified",
@@ -1464,10 +1304,7 @@
       "DemocraticPeace": 1.5,
       "PreferenceAlignment": -1.8,
       "HardlineClaims": 1.5,
-      "AudienceCosts": 1.5,
-      "SystemicEconomicExposure": 2.4,
-      "EconomicExposureInternalization": 0.35,
-      "ThirdPartySanctionsRisk": 0.2
+      "AudienceCosts": 1.5
     },
     "action_type": "airstrike",
     "action_type_reasoning": "The US has carrier strike groups and land-based assets (B-2 bombers, cruise missile platforms) within range of Yemen; since January 2024 the US has repeatedly conducted airstrikes against Houthi targets with minimal lead time, making airstrike the fastest plausible kinetic action.",
@@ -1488,10 +1325,7 @@
       "DemocraticPeace": 1.2,
       "PreferenceAlignment": -1.4,
       "HardlineClaims": 1.2,
-      "AudienceCosts": 1.3,
-      "SystemicEconomicExposure": 2.2,
-      "EconomicExposureInternalization": 0.35,
-      "ThirdPartySanctionsRisk": 1.2
+      "AudienceCosts": 1.3
     },
     "action_type": "seizure_boarding",
     "action_type_reasoning": "Iran has previously seized British-flagged tankers in the Strait of Hormuz (e.g., Stena Impero 2019) using IRGC Navy fast boats; IRGC naval forces are permanently forward-deployed in the Persian Gulf and can intercept/board vessels within hours, making seizure_boarding the fastest plausible initiated action.",
@@ -1512,10 +1346,7 @@
       "DemocraticPeace": 1.2,
       "PreferenceAlignment": -1.2,
       "HardlineClaims": 0.5,
-      "AudienceCosts": 1.0,
-      "SystemicEconomicExposure": 1.8,
-      "EconomicExposureInternalization": 0.3,
-      "ThirdPartySanctionsRisk": 0.4
+      "AudienceCosts": 1.0
     },
     "action_type": "airstrike",
     "action_type_reasoning": "No shared border or routine co-location of forces; the Netherlands is a NATO member with forward-deployable air assets and could theoretically participate in coalition airstrikes on Iranian targets, making airstrike the least-implausible fast kinetic option for this non-adjacent dyad.",
@@ -1536,10 +1367,7 @@
       "DemocraticPeace": 1.2,
       "PreferenceAlignment": -1.3,
       "HardlineClaims": 1.2,
-      "AudienceCosts": 1.2,
-      "SystemicEconomicExposure": 2.4,
-      "EconomicExposureInternalization": 0.35,
-      "ThirdPartySanctionsRisk": 1.8
+      "AudienceCosts": 1.2
     },
     "action_type": "seizure_boarding",
     "action_type_reasoning": "Iran has repeatedly seized or boarded European-flagged or European-linked tankers in the Strait of Hormuz and Persian Gulf (e.g., Stena Impero 2019, multiple IRGC Navy boardings), making seizure/boarding the fastest plausible initiated physical action by the likely initiator (Iran) in this dyad.",
@@ -1560,10 +1388,7 @@
       "DemocraticPeace": 1.5,
       "PreferenceAlignment": -1.4,
       "HardlineClaims": 1.8,
-      "AudienceCosts": 1.5,
-      "SystemicEconomicExposure": 2.8,
-      "EconomicExposureInternalization": 0.5,
-      "ThirdPartySanctionsRisk": 1.2
+      "AudienceCosts": 1.5
     },
     "action_type": "missile_strike",
     "action_type_reasoning": "Iran maintains large inventories of ballistic missiles and cruise missiles with range covering all Gulf capitals; the 2019 Abqaiq-Khurais attack demonstrated Iran (or its proxies) can execute standoff strikes against Gulf infrastructure with minimal lead time, making missile_strike the fastest plausible kinetic action.",
@@ -1584,10 +1409,7 @@
       "DemocraticPeace": 0.5,
       "PreferenceAlignment": -0.3,
       "HardlineClaims": 0.2,
-      "AudienceCosts": 0.3,
-      "SystemicEconomicExposure": 2.4,
-      "EconomicExposureInternalization": 0.6,
-      "ThirdPartySanctionsRisk": 0.3
+      "AudienceCosts": 0.3
     },
     "action_type": "airstrike",
     "action_type_reasoning": "The US maintains Al Udeid Air Base in Qatar with substantial forward-deployed air and command assets, making an airstrike the fastest physically plausible kinetic action if one had to be initiated, though this dyad has essentially zero conflict probability.",
@@ -1629,10 +1451,7 @@
       "DemocraticPeace": 1.5,
       "PreferenceAlignment": -1.0,
       "HardlineClaims": 1.8,
-      "AudienceCosts": 1.2,
-      "SystemicEconomicExposure": 2.6,
-      "EconomicExposureInternalization": 0.55,
-      "ThirdPartySanctionsRisk": 1.4
+      "AudienceCosts": 1.2
     },
     "action_type": "missile_strike",
     "action_type_reasoning": "Iran has extensive ballistic and cruise missile arsenals with range covering all UAE territory; a missile strike is the fastest kinetic action Iran could initiate, requiring no forward deployment beyond existing launch sites.",
@@ -1653,10 +1472,7 @@
       "DemocraticPeace": 0.8,
       "PreferenceAlignment": -0.5,
       "HardlineClaims": 0.5,
-      "AudienceCosts": 0.7,
-      "SystemicEconomicExposure": 1.4,
-      "EconomicExposureInternalization": 0.4,
-      "ThirdPartySanctionsRisk": 1.8
+      "AudienceCosts": 0.7
     },
     "action_type": "seizure_boarding",
     "action_type_reasoning": "The primary conflict channel between Greece and Iran has been maritime seizures \u2014 Iran's IRGC Navy has seized Greek-flagged or Greek-operated tankers in the Persian Gulf in retaliation for Greek cooperation with US sanctions enforcement, making seizure/boarding the fastest plausible initiated action.",
@@ -1677,10 +1493,7 @@
       "DemocraticPeace": 1.0,
       "PreferenceAlignment": -0.8,
       "HardlineClaims": 0.3,
-      "AudienceCosts": 0.5,
-      "SystemicEconomicExposure": 1.4,
-      "EconomicExposureInternalization": 0.4,
-      "ThirdPartySanctionsRisk": 2.6
+      "AudienceCosts": 0.5
     },
     "action_type": "airstrike",
     "action_type_reasoning": "No shared border or routine co-location of forces; Italy has NATO air assets and bases in the Mediterranean/Middle East region capable of long-range strikes, making airstrike the fastest plausible kinetic option, though conflict between these two is extremely unlikely.",
@@ -1701,10 +1514,7 @@
       "DemocraticPeace": 1.2,
       "PreferenceAlignment": -0.8,
       "HardlineClaims": 1.4,
-      "AudienceCosts": 1.5,
-      "SystemicEconomicExposure": 2.2,
-      "EconomicExposureInternalization": 0.6,
-      "ThirdPartySanctionsRisk": 1.4
+      "AudienceCosts": 1.5
     },
     "action_type": "ground_invasion",
     "action_type_reasoning": "Israel and Egypt share a land border along the Sinai Peninsula (Philadelphi Corridor area); Israel already has forces deployed in southern Gaza adjacent to this border, making a limited ground incursion the fastest physically plausible kinetic action, though politically extremely unlikely given the Camp David Accords.",
@@ -1725,10 +1535,7 @@
       "DemocraticPeace": -0.5,
       "PreferenceAlignment": -0.5,
       "HardlineClaims": 0.2,
-      "AudienceCosts": 0.5,
-      "SystemicEconomicExposure": 1.4,
-      "EconomicExposureInternalization": 0.3,
-      "ThirdPartySanctionsRisk": 2.8
+      "AudienceCosts": 0.5
     },
     "action_type": "missile_strike",
     "action_type_reasoning": "The US has forward-deployed forces across Europe and global-reach cruise missile and air assets that could strike Ukrainian territory from standoff range with minimal lead time, though no realistic scenario currently drives this; missile_strike is the fastest physically plausible kinetic action for a superpower against a non-adjacent state where it already has regional basing.",
@@ -1749,10 +1556,7 @@
       "DemocraticPeace": 1.5,
       "PreferenceAlignment": -1.5,
       "HardlineClaims": 2.0,
-      "AudienceCosts": 1.8,
-      "SystemicEconomicExposure": 1.8,
-      "EconomicExposureInternalization": 0.55,
-      "ThirdPartySanctionsRisk": 0.4
+      "AudienceCosts": 1.8
     },
     "action_type": "airstrike",
     "action_type_reasoning": "Saudi Arabia has conducted extensive air campaigns against Houthi targets in Yemen since 2015, with forward-deployed air assets at bases near the border and a shared land border; airstrikes remain the fastest and most historically practiced kinetic option.",

@@ -1,0 +1,349 @@
+======================================================
+[1] LAUNCHD — is the job even alive?
+======================================================
+95803	1	com.predictioneering.daily
+--- detailed status (last exit code, next run) ---
+	state = running
+	program = /bin/bash
+	last exit code = 1
+	properties = inferred program | managed LWCR | has LWCR
+--- plist file integrity ---
+-rw-r--r--  1 kapurao  staff  856 Jun 26 11:19 /Users/kapurao/Library/LaunchAgents/com.predictioneering.daily.plist
+/Users/kapurao/Library/LaunchAgents/com.predictioneering.daily.plist: OK
+
+======================================================
+[2] SYSTEM SLEEP/WAKE — was the Mac even open at 9am?
+======================================================
+2026-07-30 09:13:06 -0400 Sleep               	Entering Sleep state due to 'Maintenance Sleep':TCPKeepAlive=active Using Batt (Charge:24%) 1036 secs 
+2026-07-30 09:13:08 -0400 Wake Requests       	[*process=dasd request=SleepService deltaSecs=1033 wakeAt=2026-07-30 09:30:21 info="com.apple.dasd:502:com.apple.intelligenceplatform.IntelligencePlatformCore.Pipeline.FastPass"] [process=mDNSResponder request=Maintenance deltaSecs=7198 wakeAt=2026-07-30 11:13:06 info="upkeep wake"] [process=powerd request=TCPKATurnOff deltaSecs=256091 wakeAt=2026-08-02 08:21:19] [process=powerd request=CSPNEvaluation deltaSecs=3653 wakeAt=2026-07-30 10:14:01] [process=powerd request=UserWake deltaSecs=21329 wakeAt=2026-07-30 15:08:37 info="com.apple.alarm.user-invisible-com.apple.calaccessd.travelEngine.periodicRefreshTimer,628"]           
+2026-07-30 09:13:08 -0400 PM Client Acks      	Delays to Sleep notifications: [com.apple.bluetooth.sleep is slow(1534 ms)]           
+2026-07-30 09:30:21 -0400 Assertions          	PID 472(mDNSResponder) Created MaintenanceWake "mDNSResponder:maintenance" 00:00:00  id:0x0xd00008bef [System: PrevIdle DeclUser kDisp]          
+2026-07-30 09:30:22 -0400 Assertions          	PID 472(mDNSResponder) Released MaintenanceWake "mDNSResponder:maintenance" 00:00:00  id:0x0xd00008bef [System: PrevIdle DeclUser kDisp]          
+2026-07-30 09:30:22 -0400 com.apple.sleepservices.sessionStarted	SleepService: window begins with cap time=180 secs                         	          
+2026-07-30 09:30:22 -0400 DarkWake            	DarkWake from Deep Idle [CDNP] : due to NUB.SPMI0.SW3 nub-spmi0.0x02 rtc/SleepService Using BATT (Charge:24%) 2 secs    
+2026-07-30 09:30:22 -0400 WakeDetails         	DriverReason:NUB.SPMI0.SW3 - DriverDetails:                                
+2026-07-30 09:30:22 -0400 WakeTime            	WakeTime: 0.106 sec                                                        	          
+2026-07-30 09:30:22 -0400 Kernel Client Acks  	Delays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(78 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(78 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(114 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(117 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(76 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(115 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(117 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [Codec Output driver is slow(msg: SetState to 1)(77 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(117 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(120 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(77 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(77 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(116 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(119 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(77 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(77 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(116 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(119 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(76 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(76 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(115 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(118 ms)] [AppleAVD driver is slow(msg: SetState to 1)(504 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(75 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(75 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(115 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(117 ms)] [AppleAVD driver is slow(msg: SetState to 1)(528 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(78 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(78 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(112 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(115 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(66 ms)] [Codec Output driver is slow(msg: SetState to 1)(77 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(117 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(120 ms)] [AppleAVD driver is slow(msg: SetState to 1)(443 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(77 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(76 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(115 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(117 ms)]           
+2026-07-30 09:30:22 -0400 Assertions          	PID 95777(AddressBookSourceSync) Released PreventUserIdleSystemSleep "Address Book Source Sync" 00:54:52  id:0x0x100008bba [System: PrevIdle DeclUser PushSrvc IPushSrvc kCPU kDisp]          
+2026-07-30 09:30:24 -0400 com.apple.sleepservices.sessionTerminated	SleepService: window has terminated.                                       	          
+2026-07-30 09:30:24 -0400 Sleep               	Entering Sleep state due to 'Sleep Service Back to Sleep':TCPKeepAlive=active Using Batt (Charge:24%) 949 secs  
+2026-07-30 09:30:27 -0400 Wake Requests       	[*process=dasd request=SleepService deltaSecs=945 wakeAt=2026-07-30 09:46:12 info="com.apple.dasd:502:com.apple.intelligenceplatform.IntelligencePlatformCore.Pipeline.FastPass"] [process=mDNSResponder request=Maintenance deltaSecs=7200 wakeAt=2026-07-30 11:30:27 info="upkeep wake"] [process=powerd request=TCPKATurnOff deltaSecs=255052 wakeAt=2026-08-02 08:21:19] [process=powerd request=CSPNEvaluation deltaSecs=2614 wakeAt=2026-07-30 10:14:01] [process=powerd request=UserWake deltaSecs=20290 wakeAt=2026-07-30 15:08:37 info="com.apple.alarm.user-invisible-com.apple.calaccessd.travelEngine.periodicRefreshTimer,628"]           
+2026-07-30 09:30:27 -0400 PM Client Acks      	Delays to Sleep notifications: [com.apple.bluetooth.sleep is slow(1530 ms)] [mDNSResponder is slow(2894 ms)]           
+2026-07-30 09:46:12 -0400 Assertions          	PID 472(mDNSResponder) Created MaintenanceWake "mDNSResponder:maintenance" 00:00:00  id:0x0xd00008c01 [System: PrevIdle DeclUser kDisp]          
+2026-07-30 09:46:13 -0400 Assertions          	PID 472(mDNSResponder) Released MaintenanceWake "mDNSResponder:maintenance" 00:00:00  id:0x0xd00008c01 [System: PrevIdle DeclUser kDisp]          
+2026-07-30 09:46:13 -0400 com.apple.sleepservices.sessionStarted	SleepService: window begins with cap time=180 secs                         	          
+2026-07-30 09:46:13 -0400 DarkWake            	DarkWake from Deep Idle [CDNP] : due to NUB.SPMI0.SW3 nub-spmi0.0x02 rtc/SleepService Using BATT (Charge:24%) 2 secs    
+2026-07-30 09:46:13 -0400 WakeDetails         	DriverReason:NUB.SPMI0.SW3 - DriverDetails:                                
+2026-07-30 09:46:13 -0400 WakeTime            	WakeTime: 0.106 sec                                                        	          
+2026-07-30 09:46:13 -0400 Kernel Client Acks  	Delays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(78 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(78 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(114 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(117 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(76 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(115 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(117 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [Codec Output driver is slow(msg: SetState to 1)(77 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(117 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(120 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(77 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(77 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(116 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(119 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(77 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(77 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(116 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(119 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(76 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(76 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(115 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(118 ms)] [AppleAVD driver is slow(msg: SetState to 1)(504 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(75 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(75 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(115 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(117 ms)] [AppleAVD driver is slow(msg: SetState to 1)(528 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(78 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(78 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(112 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(115 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(66 ms)] [Codec Output driver is slow(msg: SetState to 1)(77 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(117 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(120 ms)] [AppleAVD driver is slow(msg: SetState to 1)(443 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(77 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(76 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(115 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(117 ms)]           
+2026-07-30 09:46:15 -0400 com.apple.sleepservices.sessionTerminated	SleepService: window has terminated.                                       	          
+2026-07-30 09:46:15 -0400 Sleep               	Entering Sleep state due to 'Sleep Service Back to Sleep':TCPKeepAlive=active Using Batt (Charge:24%) 543 secs  
+2026-07-30 09:46:18 -0400 Wake Requests       	[*process=dasd request=SleepService deltaSecs=906 wakeAt=2026-07-30 10:01:24 info="com.apple.dasd:502:com.apple.intelligenceplatform.IntelligencePlatformCore.Pipeline.FastPass"] [process=mDNSResponder request=Maintenance deltaSecs=7200 wakeAt=2026-07-30 11:46:17 info="upkeep wake"] [process=powerd request=TCPKATurnOff deltaSecs=254101 wakeAt=2026-08-02 08:21:19] [process=powerd request=CSPNEvaluation deltaSecs=1663 wakeAt=2026-07-30 10:14:01] [process=powerd request=UserWake deltaSecs=19339 wakeAt=2026-07-30 15:08:37 info="com.apple.alarm.user-invisible-com.apple.calaccessd.travelEngine.periodicRefreshTimer,628"]           
+2026-07-30 09:46:18 -0400 PM Client Acks      	Delays to Sleep notifications: [com.apple.bluetooth.sleep is slow(1520 ms)] [mDNSResponder is slow(2899 ms)]           
+2026-07-30 09:55:17 -0400 Assertions          	PID 472(mDNSResponder) Created MaintenanceWake "mDNSResponder:maintenance" 00:00:00  id:0x0xd00008c12 [System: PrevIdle DeclUser kDisp]          
+2026-07-30 09:55:17 -0400 Assertions          	PID 472(mDNSResponder) Released MaintenanceWake "mDNSResponder:maintenance" 00:00:00  id:0x0xd00008c12 [System: PrevIdle DeclUser kDisp]          
+2026-07-30 09:55:18 -0400 Wake                	Wake from Deep Idle [CDNVA] : due to SMC.OutboxNotEmpty smc.70070000 lid/UserActivity Assertion Using BATT (Charge:24%)           
+2026-07-30 09:55:18 -0400 WakeDetails         	DriverReason:SMC.OutboxNotEmpty - DriverDetails:                           
+2026-07-30 09:55:18 -0400 WakeTime            	WakeTime: 0.108 sec                                                        	          
+2026-07-30 09:55:18 -0400 Kernel Client Acks  	Delays to Wake notifications: [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(78 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(78 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(114 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(117 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(76 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(115 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(117 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [Codec Output driver is slow(msg: SetState to 1)(77 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(117 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(120 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(77 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(77 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(116 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(119 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(77 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(77 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(116 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(119 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(76 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(76 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(115 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(118 ms)] [AppleAVD driver is slow(msg: SetState to 1)(504 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(75 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(75 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(115 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(117 ms)] [AppleAVD driver is slow(msg: SetState to 1)(528 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(78 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(78 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(112 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(115 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(66 ms)] [Codec Output driver is slow(msg: SetState to 1)(77 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(117 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(120 ms)] [AppleAVD driver is slow(msg: SetState to 1)(443 ms)] [RTBuddy(ANS2) driver is slow(msg: SetState to 2)(65 ms)] [AppleCS42L84Audio driver is slow(msg: DidChangeState to 1)(77 ms)] [Codec Output driver is slow(msg: WillChangeState to 1)(76 ms)] [AppleConvergedIPCOLYBTControl driver is slow(msg: SetState to 1)(115 ms)] [AppleMultiFunctionManager driver is slow(msg: SetState to 1)(117 ms)]           
+Total Sleep/Wakes since boot:1326
+   PreventUserIdleDisplaySleep    0
+   PreventSystemSleep             0
+   PreventUserIdleSystemSleep     1
+   pid 95917(AddressBookSourceSync): [0x00029e4800018c61] 00:00:16 PreventUserIdleSystemSleep named: "Address Book Source Sync"  
+   pid 1528(com.norton.hns): [0x00029e3f00018c58] 00:00:25 PreventUserIdleSystemSleep named: "com.norton.hns"  
+   pid 355(powerd): [0x00029e3400018c13] 00:00:36 PreventUserIdleSystemSleep named: "Powerd - Prevent sleep while display is on"  
+   pid 701(sharingd): [0x00029e4800018c5f] 00:00:16 PreventUserIdleSystemSleep named: "Handoff"  
+--- uptime / last reboot ---
+ 9:55  up 8 days, 17:29, 3 users, load averages: 5.50 8.59 7.09
+reboot time                                Tue Jul 21 16:26
+shutdown time                              Tue Jul 21 16:26
+reboot time                                Tue Jul 21 10:14
+reboot time                                Mon Jul  6 22:35
+shutdown time                              Mon Jul  6 22:35
+
+======================================================
+[3] LOCAL PIPELINE LOGS — did run_pipeline.sh even start?
+======================================================
+-rw-r--r--   1 kapurao  staff  36962 Jul 22 12:46 pipeline_20260722_072558.log
+-rw-r--r--   1 kapurao  staff  34279 Jul 22 12:47 pipeline_20260722_090456.log
+-rw-r--r--   1 kapurao  staff  33646 Jul 22 14:42 pipeline_20260722_143937.log
+-rw-r--r--   1 kapurao  staff  33396 Jul 22 14:47 pipeline_20260722_144345.log
+-rw-r--r--   1 kapurao  staff  33452 Jul 22 14:50 pipeline_20260722_144723.log
+-rw-r--r--   1 kapurao  staff  34814 Jul 23 09:56 pipeline_20260723_070325.log
+-rw-r--r--   1 kapurao  staff  34414 Jul 23 09:58 pipeline_20260723_090444.log
+-rw-r--r--   1 kapurao  staff  10904 Jul 24 10:03 pipeline_20260724_070019.log
+-rw-r--r--   1 kapurao  staff  10488 Jul 24 10:02 pipeline_20260724_090027.log
+-rw-r--r--   1 kapurao  staff  55462 Jul 25 11:55 pipeline_20260725_090002.log
+-rw-r--r--   1 kapurao  staff  50424 Jul 26 17:44 pipeline_20260726_091056.log
+-rw-r--r--   1 kapurao  staff  50786 Jul 27 13:20 pipeline_20260727_090939.log
+-rw-r--r--   1 kapurao  staff  65440 Jul 28 10:53 pipeline_20260728_090646.log
+-rw-r--r--   1 kapurao  staff  57734 Jul 29 12:36 pipeline_20260729_090720.log
+-rw-r--r--   1 kapurao  staff   2555 Jul 30 09:55 pipeline_20260730_090837.log
+--- any log files from Jul 25-29? ---
+logs//pipeline_20260729_090720.log
+  Checking [2928901] Will there be Saudi Arabian military action agains
+    → RESOLVED: outcome=1 (raw='['Yes', 'No']:['1', '0']')
+    [resolver] 2928901: no conditional_p in any prediction — skipping
+  Checking [2851434] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851433] Iran military action against a Gulf State on July 
+    → RESOLVED: outcome=0 (raw='['Yes', 'No']:['0', '1']')
+    → Brier: conditional=0.005822 engine=0.402971 market=0.265225
+    → Sunset: flagged resolved in classified_feed.json
+  Checking [2851430] Iran military action against a Gulf State on July 
+    → RESOLVED: outcome=0 (raw='['Yes', 'No']:['0', '1']')
+    → Brier: conditional=0.001076 engine=0.10595 market=0.308025
+    → Sunset: flagged resolved in classified_feed.json
+  Checking [2915512] Israel military action against Yemen by July 21?
+    → RESOLVED: outcome=0 (raw='['Yes', 'No']:['0', '1']')
+    [resolver] 2915512: no conditional_p in any prediction — skipping
+
+============================================================
+  New resolutions found: 2
+  Appended 2 entries → predictions/brier_log.jsonl
+  Summary updated → predictions/brier_summary.json
+
+  Running Brier (conditional): 0.168403
+  Running Brier (market):      0.136251
+  Edge vs market:              -0.032152
+Resolver done.
+[6/6] Context keeper sweep skipped (feed is 23h old, < 7 days).
+Syncing data files to docs/...
+Syncing data files to docs/...
+Pushing to GitHub...
+---
+logs//pipeline_20260725_090002.log
+    → Not yet resolved
+  Checking [2851429] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851432] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2928901] Will there be Saudi Arabian military action agains
+    → RESOLVED: outcome=1 (raw='['Yes', 'No']:['1', '0']')
+    [resolver] 2928901: no conditional_p in any prediction — skipping
+  Checking [2851434] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851433] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851430] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2915512] Israel military action against Yemen by July 21?
+    → Not yet resolved
+
+============================================================
+  New resolutions found: 1
+  Appended 1 entries → predictions/brier_log.jsonl
+  Summary updated → predictions/brier_summary.json
+
+  Running Brier (conditional): 0.189022
+  Running Brier (market):      0.117455
+  Edge vs market:              -0.071567
+Resolver done.
+[6/6] Context keeper sweep skipped (feed is 15h old, < 7 days).
+Syncing data files to docs/...
+Syncing data files to docs/...
+Pushing to GitHub...
+---
+logs//pipeline_20260727_090939.log
+  Checking [2851436] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851431] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851429] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851432] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2928901] Will there be Saudi Arabian military action agains
+    → RESOLVED: outcome=1 (raw='['Yes', 'No']:['1', '0']')
+    [resolver] 2928901: no conditional_p in any prediction — skipping
+  Checking [2851434] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851433] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851430] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2915512] Israel military action against Yemen by July 21?
+    → RESOLVED: outcome=0 (raw='['Yes', 'No']:['0', '1']')
+    [resolver] 2915512: no conditional_p in any prediction — skipping
+
+============================================================
+  New resolutions found: 0
+  Nothing to write.
+  Summary refreshed → predictions/brier_summary.json
+Resolver done.
+[6/6] Context keeper sweep skipped (feed is 16h old, < 7 days).
+Syncing data files to docs/...
+Syncing data files to docs/...
+Pushing to GitHub...
+---
+logs//pipeline_20260726_091056.log
+  Checking [2851436] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851431] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851429] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851432] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2928901] Will there be Saudi Arabian military action agains
+    → RESOLVED: outcome=1 (raw='['Yes', 'No']:['1', '0']')
+    [resolver] 2928901: no conditional_p in any prediction — skipping
+  Checking [2851434] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851433] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851430] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2915512] Israel military action against Yemen by July 21?
+    → RESOLVED: outcome=0 (raw='['Yes', 'No']:['0', '1']')
+    [resolver] 2915512: no conditional_p in any prediction — skipping
+
+============================================================
+  New resolutions found: 0
+  Nothing to write.
+  Summary refreshed → predictions/brier_summary.json
+Resolver done.
+[6/6] Context keeper sweep skipped (feed is 21h old, < 7 days).
+Syncing data files to docs/...
+Syncing data files to docs/...
+Pushing to GitHub...
+---
+logs//pipeline_20260728_090646.log
+    → Not yet resolved
+  Checking [2851431] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851429] Iran military action against a Gulf State on July 
+    → RESOLVED: outcome=0 (raw='['Yes', 'No']:['0', '1']')
+    [resolver] 2851429: no conditional_p in any prediction — skipping
+  Checking [2851432] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2928901] Will there be Saudi Arabian military action agains
+    → RESOLVED: outcome=1 (raw='['Yes', 'No']:['1', '0']')
+    [resolver] 2928901: no conditional_p in any prediction — skipping
+  Checking [2851434] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851433] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2851430] Iran military action against a Gulf State on July 
+    → Not yet resolved
+  Checking [2915512] Israel military action against Yemen by July 21?
+    → RESOLVED: outcome=0 (raw='['Yes', 'No']:['0', '1']')
+    [resolver] 2915512: no conditional_p in any prediction — skipping
+
+============================================================
+  New resolutions found: 0
+  Nothing to write.
+  Summary refreshed → predictions/brier_summary.json
+Resolver done.
+[6/6] Context keeper sweep skipped (feed is 21h old, < 7 days).
+Syncing data files to docs/...
+Syncing data files to docs/...
+Pushing to GitHub...
+---
+
+======================================================
+[4] GIT STATE — ran locally but didn't push?
+======================================================
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   docs/brier_log.jsonl
+	modified:   docs/classified_feed.json
+	modified:   docs/predictions_log.jsonl
+	modified:   pipeline/.context_cooldown_state.json
+	modified:   pipeline/classified_feed.json
+	modified:   pipeline/context_changelog.jsonl
+	modified:   pipeline/dyad_configs.json
+	modified:   pipeline/live_feed.json
+	modified:   pipeline/node_score_history.jsonl
+	modified:   pipeline/translator_cache.json
+	modified:   predictions/brier_log.jsonl
+	modified:   predictions/brier_summary.json
+	modified:   predictions/log.jsonl
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	diagnose.sh
+	diagnose_output.txt
+	dyad_audit.py
+	engine/derbies/.ipynb_checkpoints/
+	engine/gods_dag_v2.py
+	library/
+	pipeline/backtest.py.bak
+	pipeline/dyad_configs.json.bak.20260723T161625
+	pipeline/dyad_configs.json.bak.20260723T171654
+	pipeline/dyad_configs.json.bak.20260728T143612
+	pipeline/predict.py.bak
+	predict_run1.log
+	"predict_run1.log\356\201\226\356\200\273\356\203\201\356\203\273\356\203\271\356\204\235"
+	predictions/log.jsonl.bak.20260723T161625
+	translator_run1.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
+--- unpushed commits ---
+--- recent history ---
+211550c Add SystemicEconomicExposure/EconomicExposureInternalization/ThirdPartySanctionsRisk: generalized collateral + sanctions cost channel (not Hormuz-specific), wired into Mach 2 war payoff
+d2a5c2b Fix: blend LLM guess with deterministic position-within-range (LLM raw number wasn't tracking structural data despite correct rationale text); add API-free regression test
+e66e749 Fix: anchor range now scales with WarCosts instead of being frozen at generic-dyad values (was fighting Option B by clamping its differentiated guesses back to a tie)
+b057173 Option B: feed real Mach 2 structural primitives into Clergyman's within-range positioning
+db50b91 Fix: GNews query contamination — India-Pakistan and Israel-Yemen queries required the second actor via OR instead of AND
+7273a7d Fix: tighten HardlineClaims scope to require actual territorial/sovereignty claim (was co-firing with PreferenceAlignment on generic sanctions/rhetoric with no territorial content)
+bb1ad83 Fix: route days-remaining math through corrected deadline (was reading raw unreliable end_date); fix year-rollover bug that pushed already-passed deadlines a year forward
+2190748 Fix: horizon_scale was a silent no-op in live pipeline (market_window=days_rem canceled itself); import the same 90-day reference window backtest.py validated
+7f9425a Kelly: dampen bet size by Clergyman confidence + clamp signal, not just edge magnitude
+87a61a4 Fix: score_nodes zero-fallback — retry w/ backoff + persistent failure log (same shape as fetch_gnews fix)
+--- remote sanity ---
+origin	https://github.com/raoir-code/predictioneering.git (fetch)
+origin	https://github.com/raoir-code/predictioneering.git (push)
+--- does push even work? ---
+Everything up-to-date
+
+======================================================
+[5] PYTHON INTERPRETER — did the hardcoded path break?
+======================================================
+Python 3.11.7
+/opt/homebrew/bin/python3.11
+✔︎ JSON API packages.arm64_sequoia.jws.json
+python@3.11 3.11.7_1
+
+======================================================
+[6] API KEYS — present, non-empty, still valid?
+======================================================
+1
+1
+--- Anthropic key liveness (should NOT be 401) ---
+HTTP 200
+--- GNews key liveness ---
+HTTP 200
+
+======================================================
+[7] DISK SPACE — silently full?
+======================================================
+Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on
+/dev/disk3s1s1   228Gi    10Gi    27Gi    28%    412k  285M    0%   /
+
+======================================================
+[8] FILE TIMESTAMPS — precise last-write times
+======================================================
+Jul 29 12:36:20 2026  pipeline/classified_feed.json
+Jul 29 12:36:21 2026  docs/classified_feed.json
+Jul 29 12:36:09 2026  predictions/log.jsonl
+Jul 29 12:36:09 2026  pipeline/translator_cache.json
+Jun  8 12:49:17 2026  .env
+
+======================================================
+[9] STUCK PROCESSES — anything hung since Jul 24?
+======================================================
+kapurao          95820   9.4  0.7 411458944  62144   ??  S     9:08AM   0:03.02 /opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python -u -m pipeline.scrape_live
+
+======================================================
+[10] SHELL HISTORY — reconstruct the Jul 24 debug session
+======================================================
+
+======================================================
+DONE. Scroll up to [1] and work down.
+======================================================

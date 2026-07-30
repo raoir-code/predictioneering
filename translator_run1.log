@@ -1,0 +1,236 @@
+
+Translator [FULL]: 51 CORE markets
+============================================================
+
+  [US-Iran] Will the U.S. invade Iran before 2027?
+    [clergy] P(B|A)=0.15 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0031 blended_p=0.0691 blend_weight=0.5 kelly=$85.5 dir=NO
+
+  [China-Taiwan] Will China invade Taiwan by end of 2026?
+    [clergy] P(B|A)=0.15 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=low
+    [bettor] conditional_p=0.0022 blended_p=0.0299 blend_weight=0.5 kelly=$120.2 dir=NO
+
+  [China-Taiwan] Will China invade Taiwan by June 30, 2026?
+    [clergy] P(B|A)=0.15 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=low
+    [bettor] conditional_p=0.0 blended_p=0.0013 blend_weight=0.5 kelly=$0.0 dir=PASS
+
+  [US-Cuba] US strike on Cuba by December 31?
+    [clergy] P(B|A)=0.35 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0064 blended_p=0.2007 blend_weight=0.5 kelly=$86.1 dir=NO
+
+  [Russia-NATO] Will Russia invade a NATO country by June 30, 2026?
+    [filter] EXPIRED — skipping
+
+  [US-Venezuela] Will the US officially declare war on Venezuela by June 30, 
+    [filter] EXPIRED — skipping
+
+  [France/UK/Germany-Iran] Will France, UK, or Germany strike Iran by June 30?
+    [clergy] P(B|A)=0.02 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=low
+    [bettor] conditional_p=0.0002 blended_p=0.0014 blend_weight=0.5 kelly=$0.0 dir=PASS
+
+  [US-Cuba] Will the U.S. invade Cuba in 2026?
+    [clergy] P(B|A)=0.15 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0027 blended_p=0.0989 blend_weight=0.5 kelly=$86.3 dir=NO
+
+  [China-Taiwan] China x Taiwan military clash before 2027?
+    [clergy] P(B|A)=0.85 P(B|¬A)=0.0 conf=medium
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0127 blended_p=0.0217 blend_weight=0.1251 kelly=$74.45 dir=NO
+
+  [China-Taiwan] Will China blockade Taiwan by June 30?
+    [clergy] P(B|A)=0.25 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0001 blended_p=0.0013 blend_weight=0.5 kelly=$0.0 dir=PASS
+
+  [US-Denmark] Will the U.S. invade Greenland in 2026?
+    [clergy] P(B|A)=0.6 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0094 blended_p=0.0208 blend_weight=0.3191 kelly=$69.2 dir=NO
+
+  [Turkey-Greece] Greece x Turkey military engagement by June 30?
+    [clergy] P(B|A)=1.0 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0015 blended_p=0.0015 blend_weight=0.0 kelly=$0.0 dir=PASS
+
+  [China-Philippines] China x Philippines military clash before 2027?
+    [clergy] P(B|A)=0.85 P(B|¬A)=0.02 conf=medium
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0382 blended_p=0.0497 blend_weight=0.1183 kelly=$62.75 dir=NO
+
+  [China-Taiwan] Will China invade Taiwan by December 31, 2027?
+    [clergy] P(B|A)=0.35 P(B|¬A)=0.0 conf=medium
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0151 blended_p=0.08 blend_weight=0.5 kelly=$78.4 dir=NO
+
+  [US-Iran] Will the Iranian regime survive U.S. military strikes?
+
+  [NATO-Russia] NATO x Russia military clash by June 30, 2026?
+    [clergy] P(B|A)=0.95 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0002 blended_p=0.0003 blend_weight=0.0393 kelly=$0.0 dir=PASS
+
+  [China-Taiwan] Will China invade Taiwan by September 30, 2026?
+    [clergy] P(B|A)=0.15 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0011 blended_p=0.016 blend_weight=0.5 kelly=$84.4 dir=NO
+
+  [US-Colombia] US strike on Colombia by December 31?
+    [filter] EXPIRED — skipping
+
+  [Israel-Yemen] Israel strike on Yemen by June 30, 2026?
+    [clergy] P(B|A)=0.9 P(B|¬A)=0.02 conf=high
+    [spyglass] observability=high resolution_risk=low
+    [bettor] conditional_p=0.0209 blended_p=0.0227 blend_weight=0.0777 kelly=$66.3 dir=NO
+
+  [US-Russia] US x Russia military clash by December 31, 2026?
+    [clergy] P(B|A)=1.0 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0316 blended_p=0.0316 blend_weight=0.0 kelly=$45.6 dir=NO
+
+  [China-Japan] China x Japan military clash before 2027?
+    [clergy] P(B|A)=0.9 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0453 blended_p=0.0476 blend_weight=0.0763 kelly=$34.65 dir=NO
+
+  [US-Mexico] US strike on Mexico by December 31?
+    [clergy] P(B|A)=0.35 P(B|¬A)=0.005 conf=medium
+    [spyglass] observability=high resolution_risk=low
+    [bettor] conditional_p=0.0113 blended_p=0.0771 blend_weight=0.4924 kelly=$115.25 dir=NO
+
+  [US-Iran] Will the US officially declare war on Iran by December 31, 2
+    [clergy] P(B|A)=0.02 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=low
+    [bettor] conditional_p=0.0004 blended_p=0.0227 blend_weight=0.5 kelly=$123.9 dir=NO
+
+  [NATO-Russia] NATO x Russia military clash by December 31, 2026?
+    [clergy] P(B|A)=0.95 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0104 blended_p=0.0154 blend_weight=0.0358 kelly=$81.45 dir=NO
+
+  [India-Pakistan] Will India strike Pakistan by December 31, 2026?
+    [clergy] P(B|A)=0.55 P(B|¬A)=0.005 conf=medium
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0209 blended_p=0.0605 blend_weight=0.3194 kelly=$74.9 dir=NO
+
+  [Russia-Unknown] Will Russia invade another country in 2026?
+    [filter] UNSCORABLE_DYAD — skipping
+
+  [North Korea-South Korea] Will North Korea invade South Korea before 2027?
+    [clergy] P(B|A)=0.15 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0102 blended_p=0.0278 blend_weight=0.5 kelly=$67.9 dir=NO
+
+  [US-Venezuela] US forces in Venezuela again by June 30, 2026?
+    [filter] EXPIRED — skipping
+
+  [China-Taiwan] Will China invade Taiwan by June 30, 2027?
+    [clergy] P(B|A)=0.55 P(B|¬A)=0.0 conf=medium
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.016 blended_p=0.0504 blend_weight=0.3156 kelly=$76.3 dir=NO
+
+  [US-LatinAmerica] Will the U.S. invade a Latin American country in 2026?
+    [filter] UNSCORABLE_DYAD — skipping
+
+  [Israel-Turkey] Israel x Turkey military clash before 2027?
+    [clergy] P(B|A)=0.95 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0428 blended_p=0.0457 blend_weight=0.0347 kelly=$57.55 dir=NO
+
+  [US-Venezuela] Will the U.S. invade Venezuela by December 31, 2026?
+    [filter] EXPIRED — skipping
+
+  [US-Mexico] Will the U.S. invade Mexico in 2026?
+    [clergy] P(B|A)=0.15 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0027 blended_p=0.0259 blend_weight=0.5 kelly=$82.7 dir=NO
+
+  [Israel-Iran] Will Israel launch a ground operation in Iran by June 30, 20
+    [clergy] P(B|A)=0.03 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=low
+    [bettor] conditional_p=0.0 blended_p=0.0025 blend_weight=0.5 kelly=$0.0 dir=PASS
+
+  [China-India] China x India military clash by December 31, 2026?
+    [clergy] P(B|A)=1.0 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.045 blended_p=0.045 blend_weight=0.0 kelly=$43.75 dir=NO
+
+  [US-Cuba] US x Cuba military clash in 2026?
+    [clergy] P(B|A)=1.0 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0183 blended_p=0.0183 blend_weight=0.0 kelly=$83.45 dir=NO
+
+  [US-Russia] US x Russia military clash by June 30, 2026?
+    [clergy] P(B|A)=0.85 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0006 blended_p=0.0007 blend_weight=0.1021 kelly=$0.0 dir=PASS
+
+  [Thailand-Cambodia] Thailand strikes Cambodia by June 30, 2026?
+    [clergy] P(B|A)=0.15 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=low
+    [bettor] conditional_p=0.0001 blended_p=0.005 blend_weight=0.5 kelly=$0.0 dir=PASS
+
+  [Russia-NATO] NATO/EU troops fighting in Ukraine in June 30, 2026?
+    [filter] EXPIRED — skipping
+
+  [US-China] US x China Military clash before 2027?
+    [clergy] P(B|A)=0.95 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0533 blended_p=0.0539 blend_weight=0.0334 kelly=$0.0 dir=PASS
+
+  [Russia-Poland] Russian strike on Poland by June 30?
+    [clergy] P(B|A)=0.35 P(B|¬A)=0.001 conf=medium
+    [spyglass] observability=high resolution_risk=low
+    [bettor] conditional_p=0.0012 blended_p=0.0013 blend_weight=0.4314 kelly=$0.0 dir=PASS
+
+  [US-Colombia] Will the U.S. invade Colombia in 2026?
+    [clergy] P(B|A)=0.15 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.002 blended_p=0.0265 blend_weight=0.5 kelly=$84.05 dir=NO
+
+  [US-Panama] US takes Panama Canal before 2027?
+
+  [Russia-NATO] NATO article 5 before 2027?
+
+  [US-Denmark] US x Denmark Military clash before 2027?
+    [clergy] P(B|A)=1.0 P(B|¬A)=0.0 conf=high
+    [spyglass] observability=high resolution_risk=low
+    [bettor] conditional_p=0.0157 blended_p=0.0157 blend_weight=0.0 kelly=$0.0 dir=PASS
+
+  [US-Iran] Will the US announce a blockade on Iran by July 31?
+    [clergy] P(B|A)=0.15 P(B|¬A)=0.005 conf=medium
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0056 blended_p=0.0753 blend_weight=0.5 kelly=$84.1 dir=NO
+
+  [unknown] Will NATO countries clash with each other before 2027?
+    [filter] UNSCORABLE_DYAD — skipping
+
+  [China-Taiwan] Will China blockade Taiwan in 2026?
+    [clergy] P(B|A)=0.35 P(B|¬A)=0.0 conf=medium
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.0052 blended_p=0.028 blend_weight=0.3809 kelly=$80.5 dir=NO
+
+  [US-Iran] Will the US announce a blockade on Iran by June 30?
+    [clergy] P(B|A)=0.08 P(B|¬A)=0.001 conf=high
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.001 blended_p=0.015 blend_weight=0.5 kelly=$84.5 dir=NO
+
+  [US-Iran] Will the US announce a blockade on Iran by December 31?
+    [clergy] P(B|A)=0.15 P(B|¬A)=0.005 conf=medium
+    [spyglass] observability=high resolution_risk=medium
+    [bettor] conditional_p=0.008 blended_p=0.1822 blend_weight=0.4813 kelly=$85.6 dir=NO
+
+  [Israel-Syria] Israel military action on Damascus by June 30, 2026?
+    [clergy] P(B|A)=0.85 P(B|¬A)=0.35 conf=medium
+    [spyglass] observability=medium resolution_risk=medium
+    [bettor] conditional_p=0.3506 blended_p=0.3237 blend_weight=0.0773 kelly=$15.25 dir=YES
+
+============================================================
+  Processed: 39 | Passed: 3 | Filtered: 9 | Errors: 0
+  Wrote → pipeline/classified_feed.json
+  Appended 51 entries → predictions/log.jsonl

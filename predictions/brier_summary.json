@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-07-24T14:03:23.885174+00:00",
-  "n_resolved": 15,
-  "brier_conditional_mean": 0.201421,
-  "brier_engine_mean": 0.193867,
-  "brier_market_mean": 0.125277,
-  "edge_vs_market": -0.076144,
+  "last_updated": "2026-07-29T16:36:21.187227+00:00",
+  "n_resolved": 18,
+  "brier_conditional_mean": 0.168403,
+  "brier_engine_mean": 0.191092,
+  "brier_market_mean": 0.136251,
+  "edge_vs_market": -0.032152,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -170,6 +170,39 @@
       "brier_conditional": 0.925059,
       "brier_market": 0.748225,
       "resolved_at": "2026-07-22T16:46:37.357807+00:00"
+    },
+    {
+      "market_id": "2851404",
+      "market_label": "Israel military action against Greater Beirut by July 21?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 0,
+      "conditional_p": 0.0551,
+      "market_p": 0.011,
+      "brier_conditional": 0.003036,
+      "brier_market": 0.000121,
+      "resolved_at": "2026-07-25T15:54:57.252528+00:00"
+    },
+    {
+      "market_id": "2851433",
+      "market_label": "Iran military action against a Gulf State on July 28?",
+      "dyad": "Iran-Gulf States",
+      "outcome": 0,
+      "conditional_p": 0.0763,
+      "market_p": 0.515,
+      "brier_conditional": 0.005822,
+      "brier_market": 0.265225,
+      "resolved_at": "2026-07-29T16:36:20.604053+00:00"
+    },
+    {
+      "market_id": "2851430",
+      "market_label": "Iran military action against a Gulf State on July 25?",
+      "dyad": "Iran-Gulf States",
+      "outcome": 0,
+      "conditional_p": 0.0328,
+      "market_p": 0.555,
+      "brier_conditional": 0.001076,
+      "brier_market": 0.308025,
+      "resolved_at": "2026-07-29T16:36:20.865523+00:00"
     }
   ]
 }

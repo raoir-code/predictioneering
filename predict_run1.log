@@ -1,0 +1,367 @@
+[predict.py] Alpha loaded. 16 nodes.
+[predict.py] 51 CORE markets without predictions.
+
+============================================================
+DYAD: US-Iran (6 markets)
+============================================================
+  Fetching GNews for: United States and Iran...
+  Articles: 9 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['NuclearDeterrence', 'CommitmentProblem', 'AudienceCosts']
+  Toggles: {"WinProbability": -1.0, "WarCosts": 1.0, "HardlineClaims": 0.5, "CommitmentProblem": 0.5, "PreferenceAlignment": -0.5, "Patience": 0.0, "DemocraticPeace": 1.5, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "AudienceCosts": 0.0, "PatronMoralHazard": 0.0}
+  ✓ Will the U.S. invade Iran before 2027?
+    engine=0.021  market=0.135  edge=-11.4pp  days=188
+  ✓ Will the Iranian regime survive U.S. military strikes?
+    engine=0.000  market=0.998  edge=-99.7pp  days=4
+  ✓ Will the US officially declare war on Iran by December 31, 2026?
+    engine=0.021  market=0.045  edge=-2.4pp  days=188
+  ✓ Will the US announce a blockade on Iran by July 31?
+    engine=0.004  market=0.145  edge=-14.1pp  days=35
+  ✓ Will the US announce a blockade on Iran by June 30?
+    engine=0.000  market=0.029  edge=-2.9pp  days=4
+  ✓ Will the US announce a blockade on Iran by December 31?
+    engine=0.021  market=0.370  edge=-34.9pp  days=188
+
+============================================================
+DYAD: China-Taiwan (8 markets)
+============================================================
+  Fetching GNews for: China and Taiwan...
+  Articles: 10 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": 0.5, "WarCosts": -1.0, "HardlineClaims": 0.5, "CommitmentProblem": 0.5, "PreferenceAlignment": -0.5, "Patience": -0.5, "DemocraticPeace": 1.0, "PatronDeterrence": 2.0, "NuclearDeterrence": 0.6, "AudienceCosts": 1.0, "PatronMoralHazard": 0.5}
+  ✓ Will China invade Taiwan by end of 2026?
+    engine=0.015  market=0.058  edge=-4.3pp  days=188
+  ✓ Will China invade Taiwan by June 30, 2026?
+    engine=0.000  market=0.003  edge=-0.2pp  days=4
+  ✓ China x Taiwan military clash before 2027?
+    engine=0.015  market=0.085  edge=-7.0pp  days=188
+  ✓ Will China blockade Taiwan by June 30?
+    engine=0.000  market=0.003  edge=-0.2pp  days=4
+  ✓ Will China invade Taiwan by December 31, 2027?
+    engine=0.043  market=0.145  edge=-10.2pp  days=553
+  ✓ Will China invade Taiwan by September 30, 2026?
+    engine=0.008  market=0.031  edge=-2.3pp  days=96
+  ✓ Will China invade Taiwan by June 30, 2027?
+    engine=0.029  market=0.125  edge=-9.6pp  days=369
+  ✓ Will China blockade Taiwan in 2026?
+    engine=0.015  market=0.065  edge=-5.0pp  days=188
+
+============================================================
+DYAD: US-Cuba (3 markets)
+============================================================
+  Fetching GNews for: United States and Cuba...
+  Articles: 10 | conflict_hits: 3 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": -2.0, "WarCosts": 0.5, "HardlineClaims": 0.5, "CommitmentProblem": 0.0, "PreferenceAlignment": -0.5, "Patience": -0.5, "DemocraticPeace": 1.5, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "AudienceCosts": 0.5, "PatronMoralHazard": 0.0}
+  ✓ US strike on Cuba by December 31?
+    engine=0.018  market=0.395  edge=-37.7pp  days=188
+  ✓ Will the U.S. invade Cuba in 2026?
+    engine=0.018  market=0.195  edge=-17.7pp  days=188
+  ✓ US x Cuba military clash in 2026?
+    engine=0.018  market=0.395  edge=-37.7pp  days=188
+
+============================================================
+DYAD: Russia-NATO (3 markets)
+============================================================
+  Fetching GNews for: NATO and Russia...
+  Articles: 10 | conflict_hits: 2 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['CommitmentProblem', 'Patience']
+  Toggles: {"WinProbability": 0.5, "WarCosts": -1.0, "HardlineClaims": 0.5, "CommitmentProblem": 2.0, "PreferenceAlignment": -0.5, "Patience": 0.5, "DemocraticPeace": 1.0, "PatronDeterrence": 0.5, "NuclearDeterrence": 2.0, "AudienceCosts": 0.5, "PatronMoralHazard": 0.5}
+  ✓ Will Russia invade a NATO country by June 30, 2026?
+    engine=0.000  market=0.002  edge=-0.1pp  days=1
+  ✓ NATO/EU troops fighting in Ukraine in June 30, 2026?
+    engine=0.000  market=0.002  edge=-0.1pp  days=1
+  ✓ NATO article 5 before 2027?
+    engine=0.035  market=0.070  edge=-3.5pp  days=188
+
+============================================================
+DYAD: US-Venezuela (3 markets)
+============================================================
+  Fetching GNews for: United States and Venezuela...
+  Articles: 3 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": -1.5, "WarCosts": 0.5, "HardlineClaims": 0.5, "CommitmentProblem": 0.5, "PreferenceAlignment": -0.5, "Patience": -0.5, "DemocraticPeace": 1.5, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "AudienceCosts": 0.5, "PatronMoralHazard": 0.0}
+  ✓ Will the US officially declare war on Venezuela by June 30, 2026?
+    engine=0.000  market=0.001  edge=-0.0pp  days=1
+  ✓ US forces in Venezuela again by June 30, 2026?
+    engine=0.000  market=0.287  edge=-28.7pp  days=1
+  ✓ Will the U.S. invade Venezuela by December 31, 2026?
+    engine=0.000  market=0.065  edge=-6.5pp  days=1
+
+============================================================
+DYAD: France/UK/Germany-Iran (1 markets)
+============================================================
+  Fetching GNews for: France/UK/Germany vs Iran (E3-Iran)...
+  Articles: 8 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['Patience']
+  Toggles: {"WinProbability": 1.2, "WarCosts": -1.0, "PatronDeterrence": 0.5, "NuclearDeterrence": 1.2, "CommitmentProblem": 1.5, "Patience": 0.7, "DemocraticPeace": 1.3, "PreferenceAlignment": -1.4, "HardlineClaims": 1.8, "AudienceCosts": 1.5}
+  ✓ Will France, UK, or Germany strike Iran by June 30?
+    engine=0.009  market=0.003  edge=+0.6pp  days=4
+
+============================================================
+DYAD: US-Denmark (2 markets)
+============================================================
+  Fetching GNews for: United States and Denmark (Greenland)...
+  Articles: 6 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": -2.0, "WarCosts": 1.5, "HardlineClaims": 0.5, "CommitmentProblem": 0.0, "PreferenceAlignment": -0.5, "Patience": 0.0, "DemocraticPeace": -1.0, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "AudienceCosts": 0.5, "PatronMoralHazard": 0.0}
+  ✓ Will the U.S. invade Greenland in 2026?
+    engine=0.016  market=0.045  edge=-2.9pp  days=188
+  ✓ US x Denmark Military clash before 2027?
+    engine=0.016  market=0.020  edge=-0.4pp  days=188
+
+============================================================
+DYAD: Turkey-Greece (1 markets)
+============================================================
+  [warn] No config for 'Turkey-Greece' in dyad_configs.json — using fallback baseline.
+  [warn] No config for 'Turkey-Greece', using fallback baseline.
+  Fetching GNews for: Turkey-Greece...
+  Articles: 0 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": 0.0, "WarCosts": 0.0, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "CommitmentProblem": 0.5, "Patience": 0.0, "DemocraticPeace": 0.5, "PreferenceAlignment": -1.0, "HardlineClaims": 0.5, "AudienceCosts": 0.5, "MobilizationSignal": 0.0}
+  ✓ Greece x Turkey military engagement by June 30?
+    engine=0.002  market=0.004  edge=-0.3pp  days=4
+
+============================================================
+DYAD: China-Philippines (1 markets)
+============================================================
+  Fetching GNews for: China and the Philippines...
+  Articles: 10 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": 0.5, "WarCosts": -0.5, "HardlineClaims": 0.5, "CommitmentProblem": 0.5, "PreferenceAlignment": -0.5, "Patience": 0.0, "DemocraticPeace": 1.0, "PatronDeterrence": 1.5, "NuclearDeterrence": 0.0, "AudienceCosts": 1.0}
+  ✓ China x Philippines military clash before 2027?
+    engine=0.022  market=0.135  edge=-11.3pp  days=188
+
+============================================================
+DYAD: NATO-Russia (2 markets)
+============================================================
+  Fetching GNews for: NATO and Russia...
+  Articles: 10 | conflict_hits: 2 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['CommitmentProblem', 'Patience']
+  Toggles: {"WinProbability": 0.5, "WarCosts": -1.0, "HardlineClaims": 0.5, "CommitmentProblem": 2.0, "PreferenceAlignment": -0.5, "Patience": 0.5, "DemocraticPeace": 1.0, "PatronDeterrence": 2.0, "NuclearDeterrence": 2.0, "AudienceCosts": 0.5, "PatronMoralHazard": 0.5}
+  ✓ NATO x Russia military clash by June 30, 2026?
+    engine=0.000  market=0.004  edge=-0.3pp  days=4
+  ✓ NATO x Russia military clash by December 31, 2026?
+    engine=0.011  market=0.150  edge=-13.9pp  days=188
+
+============================================================
+DYAD: US-Colombia (2 markets)
+============================================================
+  Fetching GNews for: United States and Colombia...
+  Articles: 9 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['PatronDeterrence', 'CommitmentProblem']
+  Toggles: {"WinProbability": -2.0, "WarCosts": 0.5, "HardlineClaims": 0.5, "CommitmentProblem": 0.0, "PreferenceAlignment": -0.5, "Patience": -0.5, "DemocraticPeace": 0.5, "PatronDeterrence": 1.0, "NuclearDeterrence": 0.0, "AudienceCosts": 0.5, "PatronMoralHazard": 0.0}
+  ✓ US strike on Colombia by December 31?
+    engine=0.000  market=0.225  edge=-22.5pp  days=1
+  ✓ Will the U.S. invade Colombia in 2026?
+    engine=0.013  market=0.051  edge=-3.8pp  days=188
+
+============================================================
+DYAD: Israel-Yemen (1 markets)
+============================================================
+  Fetching GNews for: Israel and Yemen (Houthis)...
+  Articles: 3 | conflict_hits: 2 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": 0.5, "WarCosts": -0.5, "HardlineClaims": 0.5, "CommitmentProblem": 0.5, "PreferenceAlignment": -0.5, "Patience": -0.5, "DemocraticPeace": 1.5, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "AudienceCosts": 0.5}
+  ✓ Israel strike on Yemen by June 30, 2026?
+    engine=0.001  market=0.044  edge=-4.3pp  days=4
+
+============================================================
+DYAD: US-Russia (2 markets)
+============================================================
+  Fetching GNews for: United States and Russia...
+  Articles: 5 | conflict_hits: 1 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['WarCosts', 'PatronDeterrence']
+  Toggles: {"WinProbability": 0.0, "WarCosts": 0.0, "HardlineClaims": 0.5, "CommitmentProblem": 1.0, "PreferenceAlignment": -0.5, "Patience": 0.0, "DemocraticPeace": 1.5, "PatronDeterrence": 0.0, "NuclearDeterrence": 1.8, "AudienceCosts": 0.5, "PatronMoralHazard": 0.5}
+  ✓ US x Russia military clash by December 31, 2026?
+    engine=0.032  market=0.066  edge=-3.4pp  days=188
+  ✓ US x Russia military clash by June 30, 2026?
+    engine=0.001  market=0.002  edge=-0.1pp  days=4
+
+============================================================
+DYAD: China-Japan (1 markets)
+============================================================
+  Fetching GNews for: China and Japan...
+  Articles: 5 | conflict_hits: 1 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": 0.5, "WarCosts": -1.0, "HardlineClaims": 0.5, "CommitmentProblem": 0.5, "PreferenceAlignment": -0.5, "Patience": 0.0, "DemocraticPeace": 1.0, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "AudienceCosts": 0.5}
+  ✓ China x Japan military clash before 2027?
+    engine=0.050  market=0.075  edge=-2.5pp  days=188
+
+============================================================
+DYAD: US-Mexico (2 markets)
+============================================================
+  Fetching GNews for: United States and Mexico...
+  Articles: 8 | conflict_hits: 2 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['Patience']
+  Toggles: {"WinProbability": -2.0, "WarCosts": 1.0, "HardlineClaims": 0.5, "CommitmentProblem": 0.5, "PreferenceAlignment": -0.5, "Patience": 0.0, "DemocraticPeace": 0.5, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "AudienceCosts": 0.5, "PatronMoralHazard": 0.0}
+  ✓ US strike on Mexico by December 31?
+    engine=0.018  market=0.145  edge=-12.7pp  days=188
+  ✓ Will the U.S. invade Mexico in 2026?
+    engine=0.018  market=0.049  edge=-3.1pp  days=188
+
+============================================================
+DYAD: India-Pakistan (1 markets)
+============================================================
+  Fetching GNews for: India and Pakistan...
+  Articles: 10 | conflict_hits: 1 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": 0.5, "WarCosts": -0.5, "HardlineClaims": 0.5, "CommitmentProblem": 0.5, "PreferenceAlignment": -0.5, "Patience": -0.5, "DemocraticPeace": 0.5, "PatronDeterrence": 0.5, "NuclearDeterrence": 1.8, "AudienceCosts": 1.0, "PatronMoralHazard": 0.5}
+  ✓ Will India strike Pakistan by December 31, 2026?
+    engine=0.029  market=0.145  edge=-11.6pp  days=188
+
+============================================================
+DYAD: Russia-Unknown (1 markets)
+============================================================
+  Fetching GNews for: Russia-Unknown (Generic Adversary)...
+  Articles: 9 | conflict_hits: 3 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['CommitmentProblem']
+  Toggles: {"WinProbability": 0.3, "WarCosts": -0.5, "PatronDeterrence": 0.5, "NuclearDeterrence": 1.5, "CommitmentProblem": 1.5, "Patience": -0.5, "DemocraticPeace": 1.0, "PreferenceAlignment": -0.5, "HardlineClaims": 1.0, "AudienceCosts": 1.0}
+  ✓ Will Russia invade another country in 2026?
+    engine=0.061  market=0.095  edge=-3.4pp  days=188
+
+============================================================
+DYAD: North Korea-South Korea (1 markets)
+============================================================
+  [warn] No config for 'North Korea-South Korea' in dyad_configs.json — using fallback baseline.
+  [warn] No config for 'North Korea-South Korea', using fallback baseline.
+  Fetching GNews for: North Korea-South Korea...
+  Articles: 0 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": 0.0, "WarCosts": 0.0, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "CommitmentProblem": 0.5, "Patience": 0.0, "DemocraticPeace": 0.5, "PreferenceAlignment": -1.0, "HardlineClaims": 0.5, "AudienceCosts": 0.5, "MobilizationSignal": 0.0}
+  ✓ Will North Korea invade South Korea before 2027?
+    engine=0.068  market=0.045  edge=+2.2pp  days=188
+
+============================================================
+DYAD: US-LatinAmerica (1 markets)
+============================================================
+  [warn] No config for 'US-LatinAmerica' in dyad_configs.json — using fallback baseline.
+  [warn] No config for 'US-LatinAmerica', using fallback baseline.
+  Fetching GNews for: US-LatinAmerica...
+  Articles: 0 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": 0.0, "WarCosts": 0.0, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "CommitmentProblem": 0.5, "Patience": 0.0, "DemocraticPeace": 0.5, "PreferenceAlignment": -1.0, "HardlineClaims": 0.5, "AudienceCosts": 0.5, "MobilizationSignal": 0.0}
+  ✓ Will the U.S. invade a Latin American country in 2026?
+    engine=0.068  market=0.200  edge=-13.2pp  days=188
+
+============================================================
+DYAD: Israel-Turkey (1 markets)
+============================================================
+  Fetching GNews for: Israel and Turkey...
+  Articles: 9 | conflict_hits: 6 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": 0.0, "WarCosts": -0.5, "HardlineClaims": 0.5, "CommitmentProblem": 0.5, "PreferenceAlignment": -0.5, "Patience": -0.5, "DemocraticPeace": 0.5, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "AudienceCosts": 0.5}
+  ✓ Israel x Turkey military clash before 2027?
+    engine=0.045  market=0.125  edge=-8.0pp  days=188
+
+============================================================
+DYAD: Israel-Iran (1 markets)
+============================================================
+  Fetching GNews for: Israel and Iran...
+  Articles: 9 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['WarCosts', 'HardlineClaims']
+  Toggles: {"WinProbability": 0.5, "WarCosts": -1.0, "HardlineClaims": 0.0, "CommitmentProblem": 1.0, "PreferenceAlignment": -0.5, "Patience": -0.5, "DemocraticPeace": 1.0, "PatronDeterrence": 1.5, "NuclearDeterrence": 0.8, "AudienceCosts": 1.0, "PatronMoralHazard": 0.5}
+  ✓ Will Israel launch a ground operation in Iran by June 30, 2026?
+    engine=0.000  market=0.005  edge=-0.5pp  days=4
+
+============================================================
+DYAD: China-India (1 markets)
+============================================================
+  Fetching GNews for: China and India...
+  Articles: 7 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": 0.5, "WarCosts": -0.5, "HardlineClaims": 0.5, "CommitmentProblem": 0.5, "PreferenceAlignment": -0.5, "Patience": 0.0, "DemocraticPeace": 1.0, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "AudienceCosts": 0.5, "PatronMoralHazard": 0.5}
+  ✓ China x India military clash by December 31, 2026?
+    engine=0.045  market=0.090  edge=-4.5pp  days=188
+
+============================================================
+DYAD: Thailand-Cambodia (1 markets)
+============================================================
+  Fetching GNews for: Thailand and Cambodia...
+  Articles: 4 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['HardlineClaims']
+  Toggles: {"WinProbability": 0.0, "WarCosts": -0.5, "HardlineClaims": 0.0, "CommitmentProblem": 0.0, "PreferenceAlignment": -0.5, "Patience": -0.5, "DemocraticPeace": 0.5, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "AudienceCosts": 0.5, "PatronMoralHazard": 0.25}
+  ✓ Thailand strikes Cambodia by June 30, 2026?
+    engine=0.001  market=0.010  edge=-0.9pp  days=4
+
+============================================================
+DYAD: US-China (1 markets)
+============================================================
+  Fetching GNews for: United States and China...
+  Articles: 10 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['WarCosts', 'CommitmentProblem']
+  Toggles: {"WinProbability": 0.5, "WarCosts": -0.5, "HardlineClaims": 0.5, "CommitmentProblem": 1.5, "PreferenceAlignment": -0.5, "Patience": 0.0, "DemocraticPeace": 1.5, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "AudienceCosts": 0.5}
+  ✓ US x China Military clash before 2027?
+    engine=0.056  market=0.070  edge=-1.4pp  days=188
+
+============================================================
+DYAD: Russia-Poland (1 markets)
+============================================================
+  Fetching GNews for: Russia and Poland...
+  Articles: 10 | conflict_hits: 2 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": -0.5, "WarCosts": -0.5, "HardlineClaims": 0.5, "CommitmentProblem": 1.0, "PreferenceAlignment": -0.5, "Patience": 0.0, "DemocraticPeace": 1.5, "PatronDeterrence": 0.5, "NuclearDeterrence": 1.5, "AudienceCosts": 0.5, "PatronMoralHazard": 0.5}
+  ✓ Russian strike on Poland by June 30?
+    engine=0.001  market=0.002  edge=-0.1pp  days=4
+
+============================================================
+DYAD: US-Panama (1 markets)
+============================================================
+  Fetching GNews for: United States and Panama...
+  Articles: 0 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": -2.0, "WarCosts": 1.0, "HardlineClaims": 0.5, "CommitmentProblem": 0.0, "PreferenceAlignment": -0.5, "Patience": 0.0, "DemocraticPeace": -0.5, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "AudienceCosts": 0.5, "PatronMoralHazard": 0.0}
+  ✓ US takes Panama Canal before 2027?
+    engine=0.017  market=0.100  edge=-8.3pp  days=188
+
+============================================================
+DYAD: Unknown (1 markets)
+============================================================
+  [warn] No config for 'Unknown' in dyad_configs.json — using fallback baseline.
+  [warn] No config for 'Unknown', using fallback baseline.
+  Fetching GNews for: Unknown...
+  Articles: 10 | conflict_hits: 0 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": 0.0, "WarCosts": 0.0, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "CommitmentProblem": 0.5, "Patience": 0.0, "DemocraticPeace": 0.5, "PreferenceAlignment": -1.0, "HardlineClaims": 0.5, "AudienceCosts": 0.5, "MobilizationSignal": 0.0}
+  ✓ Will NATO countries clash with each other before 2027?
+    engine=0.068  market=0.064  edge=+0.4pp  days=188
+
+============================================================
+DYAD: Israel-Syria (1 markets)
+============================================================
+  Fetching GNews for: Israel and Syria...
+  Articles: 6 | conflict_hits: 1 | official_hits: 0
+  Scoring 11 nodes via Claude...
+  Moves this week: ['none']
+  Toggles: {"WinProbability": 1.0, "WarCosts": -0.5, "HardlineClaims": 0.5, "CommitmentProblem": 0.5, "PreferenceAlignment": -0.5, "Patience": -0.5, "DemocraticPeace": 1.5, "PatronDeterrence": 0.5, "NuclearDeterrence": 0.0, "AudienceCosts": 0.5, "PatronMoralHazard": 0.25}
+  ✓ Israel military action on Damascus by June 30, 2026?
+    engine=0.001  market=0.003  edge=-0.1pp  days=4
+
+[predict.py] Written to pipeline/classified_feed.json
+Now run: git add docs/classified_feed.json && git commit -m 'Predictions: first fronttest batch' && git push
