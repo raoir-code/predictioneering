@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-07-29T16:36:21.187227+00:00",
-  "n_resolved": 18,
-  "brier_conditional_mean": 0.168403,
-  "brier_engine_mean": 0.191092,
-  "brier_market_mean": 0.136251,
-  "edge_vs_market": -0.032152,
+  "last_updated": "2026-07-30T16:24:07.841526+00:00",
+  "n_resolved": 22,
+  "brier_conditional_mean": 0.219656,
+  "brier_engine_mean": 0.232135,
+  "brier_market_mean": 0.160934,
+  "edge_vs_market": -0.058722,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -203,6 +203,50 @@
       "brier_conditional": 0.001076,
       "brier_market": 0.308025,
       "resolved_at": "2026-07-29T16:36:20.865523+00:00"
+    },
+    {
+      "market_id": "2851435",
+      "market_label": "Iran military action against a Gulf State on July 30?",
+      "dyad": "Iran-Gulf States",
+      "outcome": 1,
+      "conditional_p": 0.0783,
+      "market_p": 0.45,
+      "brier_conditional": 0.849531,
+      "brier_market": 0.3025,
+      "resolved_at": "2026-07-30T14:04:03.935288+00:00"
+    },
+    {
+      "market_id": "2851431",
+      "market_label": "Iran military action against a Gulf State on July 26?",
+      "dyad": "Iran-Gulf States",
+      "outcome": 0,
+      "conditional_p": 0.0328,
+      "market_p": 0.505,
+      "brier_conditional": 0.001076,
+      "brier_market": 0.255025,
+      "resolved_at": "2026-07-30T14:04:04.632872+00:00"
+    },
+    {
+      "market_id": "2851434",
+      "market_label": "Iran military action against a Gulf State on July 29?",
+      "dyad": "Iran-Gulf States",
+      "outcome": 0,
+      "conditional_p": 0.0722,
+      "market_p": 0.51,
+      "brier_conditional": 0.005213,
+      "brier_market": 0.2601,
+      "resolved_at": "2026-07-30T14:04:05.538907+00:00"
+    },
+    {
+      "market_id": "2928902",
+      "market_label": "Will there be Saudi Arabian military action against Yemen by July 31, 2026?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.0277,
+      "market_p": 0.48,
+      "brier_conditional": 0.945367,
+      "brier_market": 0.2704,
+      "resolved_at": "2026-07-30T16:07:19.795381+00:00"
     }
   ]
 }
