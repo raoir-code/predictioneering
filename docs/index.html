@@ -695,31 +695,18 @@ function renderTable(filter) {
 
 // ── Stats ──────────────────────────────────────────────────────────────────
 function updateStats() {
-  const withPred   = allMarkets.filter(m => (window.latestPred||{})[m.market_id] || m.our_prediction != null);
-  const resolved   = allMarkets.filter(m => m.resolution != null);
-  const tracking   = allMarkets.filter(m =>
+  // stat-resolved / stat-brier / stat-baseline are owned exclusively by loadBrierLog(),
+  // which reads brier_log.jsonl -- the resolver's authoritative output. This function
+  // used to duplicate that computation from classified_feed.json using a field
+  // (m.resolution) that resolver.py never writes, and the two functions raced to
+  // write the same DOM elements. Single source of truth now.
+  const withPred = allMarkets.filter(m => (window.latestPred||{})[m.market_id] || m.our_prediction != null);
+  const tracking = allMarkets.filter(m =>
     (m.bucket || '').toUpperCase() === 'ADJACENT'
   );
 
   document.getElementById('stat-live').textContent     = withPred.length || '0';
-  document.getElementById('stat-resolved').textContent = resolved.length || '0';
   document.getElementById('stat-tracking').textContent = tracking.length || '0';
-
-  // Brier score — only compute if we have resolved predictions
-  const resolvedWithPred = resolved.filter(m => m.our_prediction != null);
-  if (resolvedWithPred.length > 0) {
-    const ourBrier = resolvedWithPred.reduce((sum, m) =>
-      sum + Math.pow(m.our_prediction - m.resolution, 2), 0
-    ) / resolvedWithPred.length;
-    const mktBrier = resolvedWithPred.reduce((sum, m) =>
-      sum + Math.pow((m.market_price_at_prediction ?? m.market_price) - m.resolution, 2), 0
-    ) / resolvedWithPred.length;
-    document.getElementById('stat-brier').textContent    = ourBrier.toFixed(4);
-    document.getElementById('stat-baseline').textContent = mktBrier.toFixed(4);
-  } else {
-    document.getElementById('stat-brier').textContent    = 'N/A';
-    document.getElementById('stat-baseline').textContent = 'N/A';
-  }
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
