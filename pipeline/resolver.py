@@ -350,6 +350,17 @@ def run_resolver():
         print(f"    → RESOLVED: outcome={status['outcome']} "
               f"(raw='{status['raw_resolution']}')")
 
+        # Sunset immediately once resolved -- independent of whether a Brier
+        # entry can be computed. A market that resolved without ever being
+        # scored must still stop being re-processed daily, and its real
+        # outcome must still reach the site, even with no prediction.
+        if not DRY_RUN:
+            sunset_ok = sunset_market_in_feed(market_id, status["outcome"])
+            if sunset_ok:
+                print(f"    → Sunset: flagged resolved in classified_feed.json")
+            else:
+                print(f"    → Sunset: market not present in classified_feed.json (already cycled out)")
+
         entry = compute_brier_entry(market_id, preds, status)
         if entry is None:
             continue
@@ -358,13 +369,6 @@ def run_resolver():
               f"engine={entry['brier_engine']} market={entry['brier_market']}")
 
         new_resolutions.append(entry)
-
-        if not DRY_RUN:
-            sunset_ok = sunset_market_in_feed(market_id, status["outcome"])
-            if sunset_ok:
-                print(f"    → Sunset: flagged resolved in classified_feed.json")
-            else:
-                print(f"    → Sunset: market not present in classified_feed.json (already cycled out)")
 
     print(f"\n{'='*60}")
     print(f"  New resolutions found: {len(new_resolutions)}")

@@ -622,8 +622,8 @@ function renderTable(filter) {
     const isCore     = (m.bucket || '').toUpperCase() === 'CORE';
     const marketPct  = m.market_price != null ? (m.market_price * 100).toFixed(1) + '%' : '—';
     const freshPred  = (window.latestPred || {})[m.market_id];
-    const ourRaw     = freshPred ? freshPred.conditional_p : m.our_prediction;
-    const predAt     = freshPred ? freshPred.timestamp : m.prediction_at;
+    const ourRaw     = freshPred ? freshPred.conditional_p : null;
+    const predAt     = freshPred ? freshPred.timestamp : null;
     const ourPct     = ourRaw != null ? (ourRaw * 100).toFixed(1) + '%' : null;
 
     // Edge calculation
@@ -649,8 +649,8 @@ function renderTable(filter) {
 
     // Resolution
     let resHtml = '<span class="resolved-open">open</span>';
-    if (m.resolution === 1)   resHtml = '<span class="resolved-yes">YES ✓</span>';
-    if (m.resolution === 0)   resHtml = '<span class="resolved-no">NO ✗</span>';
+    if (m.resolved_outcome === 1)   resHtml = '<span class="resolved-yes">YES ✓</span>';
+    if (m.resolved_outcome === 0)   resHtml = '<span class="resolved-no">NO ✗</span>';
 
     // Dyad tag
     const dyadHtml = m.dyad ? `<span class="dyad-tag">${m.dyad}</span>` : '';
