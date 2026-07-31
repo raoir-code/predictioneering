@@ -800,9 +800,21 @@ function onMarketSelect() {
   });
 }
 
+// -- First/Last prediction enrichment (additive, read-only, does not touch resolver.py or brier_log.jsonl) --
+let firstLastMap = {};
+async function loadFirstLast() {
+  try {
+    const r = await fetch('first_last.json?v=' + Date.now());
+    if (!r.ok) return;
+    const arr = await r.json();
+    for (const e of arr) firstLastMap[e.market_id] = e;
+  } catch(e) { /* optional enrichment -- table still works without it */ }
+}
+
 // -- Brier history --
 async function loadBrierLog() {
   try {
+    await loadFirstLast();
     const r = await fetch('brier_log.jsonl?v=' + Date.now());
     if (!r.ok) return;
     const text = await r.text();
@@ -834,8 +846,15 @@ function renderBrierHistory(entries) {
     ' Market Brier: <span style="font-weight:500">' + avgMkt + '</span> &nbsp;|&nbsp;' +
     ' Edge: <span class="' + edgeCls + '">' + (parseFloat(edge)>0?'+':'') + edge + 'pp</span></div>' +
     '<table class="brier-table"><thead><tr>' +
-    '<th>Market</th><th class="right">Dyad</th><th class="right">Our P</th><th class="right">Mkt P</th>' +
-    '<th class="right">Outcome</th><th class="right">Our Brier</th><th class="right">Mkt Brier</th><th>Resolved</th>' +
+    '<th>Market</th><th class="right">Dyad</th>'+
+    '<th class="right" title="Our very first logged forecast">First P</th>'+
+    '<th class="right" title="Our last logged forecast before resolution">Last P</th>'+
+    '<th class="right" title="Last minus First">&Delta;P</th>'+
+    '<th class="right">Mkt P</th>' +
+    '<th class="right">Outcome</th>'+
+    '<th class="right" title="Official scoring: anchored to first prediction">Our Brier</th>'+
+    '<th class="right" title="Informational: what Brier would be if anchored to our last forecast instead">Brier (Last)</th>'+
+    '<th class="right">Mkt Brier</th><th>Resolved</th>' +
     '</tr></thead><tbody>';
   for (const e of entries.slice().reverse()) {
     const outcome  = e.outcome === 1 ? '<span class="outcome-yes">YES</span>' : '<span class="outcome-no">NO</span>';
@@ -844,13 +863,22 @@ function renderBrierHistory(entries) {
     const ourCls   = parseFloat(ourBrier) <= parseFloat(mktBrier) ? 'brier-win' : 'brier-loss';
     const date     = (e.resolved_at ?? '').slice(0,10);
     const label    = (e.market_label ?? e.market_id ?? '?');
+    const fl = firstLastMap[e.market_id];
+    const firstP = fl ? (fl.first_p*100).toFixed(1)+'%' : '--';
+    const lastP  = fl ? (fl.last_p*100).toFixed(1)+'%' : '--';
+    const deltaP = fl ? (fl.delta_p>=0?'+':'') + (fl.delta_p*100).toFixed(1)+'pp' : '--';
+    const brierLast = (fl && fl.brier_last != null) ? fl.brier_last.toFixed(4) : '--';
+    const lastCls = (fl && fl.brier_delta != null) ? (fl.brier_delta <= 0 ? 'brier-win' : 'brier-loss') : '';
     html += '<tr>' +
       '<td title="' + label + '">' + (label.length>60?label.slice(0,60)+'...':label) + '</td>' +
       '<td class="right" style="color:var(--text-dim);font-size:11px">' + (e.dyad??'--') + '</td>' +
-      '<td class="right">' + ((e.conditional_p ?? e.engine_p) != null ? ((e.conditional_p ?? e.engine_p)*100).toFixed(1)+'%' : '--') + '</td>' +
+      '<td class="right" style="color:var(--text-dim)">' + firstP + '</td>' +
+      '<td class="right" style="color:var(--text-dim)">' + lastP + '</td>' +
+      '<td class="right" style="color:var(--text-dim);font-size:11px">' + deltaP + '</td>' +
       '<td class="right">' + (e.market_p_at_first != null ? (e.market_p_at_first*100).toFixed(1)+'%' : '--') + '</td>' +
       '<td class="right">' + outcome + '</td>' +
       '<td class="right ' + ourCls + '">' + ourBrier + '</td>' +
+      '<td class="right ' + lastCls + '">' + brierLast + '</td>' +
       '<td class="right">' + mktBrier + '</td>' +
       '<td style="color:var(--text-dim);font-size:11px">' + date + '</td></tr>';
   }
