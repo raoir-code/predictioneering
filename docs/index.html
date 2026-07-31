@@ -841,10 +841,25 @@ function renderBrierHistory(entries) {
   const avgMkt = (entries.reduce((s,e) => s + (e.brier_market ?? 0), 0) / entries.length).toFixed(4);
   const edge   = ((parseFloat(avgMkt) - parseFloat(avgOur)) * 100).toFixed(2);
   const edgeCls = parseFloat(edge) > 0 ? 'brier-win' : 'brier-loss';
-  let html = '<div style="margin-bottom:16px;font-size:12px;color:var(--text-mid)">' +
+  const withFl = entries.filter(e => firstLastMap[e.market_id] && firstLastMap[e.market_id].brier_last != null);
+  let resLine = 'not enough data';
+  if (withFl.length) {
+    const avgOurRes = (withFl.reduce((s,e)=> s + firstLastMap[e.market_id].brier_last, 0) / withFl.length);
+    const avgMktRes = (withFl.reduce((s,e)=> {
+      const fl = firstLastMap[e.market_id];
+      return s + (fl.brier_market_last != null ? fl.brier_market_last : (e.brier_market ?? 0));
+    }, 0) / withFl.length);
+    const edgeRes = ((avgMktRes - avgOurRes) * 100).toFixed(2);
+    const resCls = parseFloat(edgeRes) > 0 ? 'brier-win' : 'brier-loss';
+    resLine = withFl.length + ' resolved &nbsp;|&nbsp; Our Brier: <span class="' + resCls + '" style="font-weight:500">' + avgOurRes.toFixed(4) + '</span> &nbsp;|&nbsp;' +
+      ' Market Brier: <span style="font-weight:500">' + avgMktRes.toFixed(4) + '</span> &nbsp;|&nbsp;' +
+      ' Edge: <span class="' + resCls + '">' + (parseFloat(edgeRes)>0?'+':'') + edgeRes + 'pp</span>';
+  }
+  let html = '<div style="margin-bottom:4px;font-size:12px;color:var(--text-mid)"><b>At Posting</b>: ' +
     entries.length + ' resolved &nbsp;|&nbsp; Our Brier: <span class="' + edgeCls + '" style="font-weight:500">' + avgOur + '</span> &nbsp;|&nbsp;' +
     ' Market Brier: <span style="font-weight:500">' + avgMkt + '</span> &nbsp;|&nbsp;' +
     ' Edge: <span class="' + edgeCls + '">' + (parseFloat(edge)>0?'+':'') + edge + 'pp</span></div>' +
+    '<div style="margin-bottom:16px;font-size:12px;color:var(--text-mid)"><b>At Resolution</b>: ' + resLine + '</div>' +
     '<table class="brier-table"><thead><tr>' +
     '<th>Market</th><th class="right">Dyad</th>'+
     '<th class="right" title="Our very first logged forecast">First P</th>'+
