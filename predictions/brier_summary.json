@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-07-31T15:00:10.899684+00:00",
-  "n_resolved": 23,
-  "brier_conditional_mean": 0.210219,
-  "brier_engine_mean": 0.233351,
-  "brier_market_mean": 0.165246,
-  "edge_vs_market": -0.044973,
+  "last_updated": "2026-08-01T13:05:46.319714+00:00",
+  "n_resolved": 25,
+  "brier_conditional_mean": 0.193449,
+  "brier_engine_mean": 0.243979,
+  "brier_market_mean": 0.152057,
+  "edge_vs_market": -0.041392,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -258,6 +258,28 @@
       "brier_conditional": 0.002611,
       "brier_market": 0.2601,
       "resolved_at": "2026-07-31T15:00:10.087305+00:00"
+    },
+    {
+      "market_id": "2995865",
+      "market_label": "Iran invades Kuwait by July 31?",
+      "dyad": "Iran-Kuwait",
+      "outcome": 0,
+      "conditional_p": 0.0,
+      "market_p": 0.02,
+      "brier_conditional": 0.0,
+      "brier_market": 0.0004,
+      "resolved_at": "2026-08-01T13:05:41.836134+00:00"
+    },
+    {
+      "market_id": "2747333",
+      "market_label": "Will Israel launch a ground operation in Iran by July 31, 2026?",
+      "dyad": "Israel-Iran",
+      "outcome": 0,
+      "conditional_p": 0.0343,
+      "market_p": 0.0195,
+      "brier_conditional": 0.001176,
+      "brier_market": 0.00038,
+      "resolved_at": "2026-08-01T13:05:42.439520+00:00"
     }
   ]
 }
