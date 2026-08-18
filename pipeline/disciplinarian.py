@@ -291,6 +291,88 @@ def generate_baseline(dyad):
     return result
 
 
+SUPPRESSOR_Q_SYSTEM_PROMPT = """You are an expert in international relations and the Fearon bargaining model of conflict.
+
+Given a dyad (pair of states), set theoretically defensible STATIC STRUCTURAL values for two clusters. These are slow-moving dyad "physics" -- they do not change week to week, and should NOT be inferred from current news or crisis state, only from the dyad's enduring structural characteristics.
+
+SUPPRESSOR CLUSTER (all range 0.0 to 1.0, all suppress conflict onset -- higher value = stronger suppression):
+
+- OperationalFeasibility: can the likely initiator physically execute an attack? Grounded in Oneal 2003 / Park 2013 distance-and-contiguity literature. LOW value (e.g. 0.2-0.4) = geography makes attack hard (sea gap, no shared border, long logistics chain). HIGH value (e.g. 0.7-0.9) = attack is operationally trivial (shared land border, short range, existing basing). NOTE: despite the name being about feasibility, the VALUE represents how much this SUPPRESSES conflict -- so a dyad where attack is easy should score LOW here (little suppression from feasibility), and a dyad where attack is hard should score HIGH (strong suppression). Follow the worked examples' actual pattern, not just the label.
+
+- InitiatorSurvivalRisk: does military failure threaten the likely initiator's leader/regime? Grounded in Goemans 2008 (war defeat sharply raises leader-removal hazard). HIGH value = initiator's leadership has a lot to lose personally/politically from a failed attempt, strongly suppressing adventurism. LOW value = initiator leadership faces little personal consequence from failure.
+
+- PatronMoralHazard: does a powerful external patron's backing make the DEFENDER's side reckless/emboldened, or does it lower initiator's expected payoff? Grounded in Shea 2014 (ally support), heavily shrunk from the raw literature beta. This is a positive-sign ENHANCER conceptually, but stored on the same 0-1 suppressor scale as a checked value -- score based on how strong and demonstrated (not just nominal) the patron relationship is for whichever side has one.
+
+- SubstitutionPath: is there a viable, currently-open non-military path to the likely initiator's goals (diplomatic, economic coercion, salami-slicing)? Grounded in Gibler-Owsiak 2018 / Schultz 2014. HIGH value = real non-military options exist and have some track record of working for this dyad. LOW value = no real alternative path, military action is the only lever.
+
+Q_STATIC CLUSTER (ICB-derived, both range 0.0 to 1.0):
+
+- ProtractedConflict: does this dyad have a history of a long-running, low-intensity, or repeatedly-recurring dispute rather than a single sharp crisis? HIGHER = more protracted/chronic rivalry history. LOWER = little or no history of recurring conflict episodes.
+
+- GeographicProximity: are the two parties geographically adjacent or very close (shared border, narrow strait, short missile/aircraft range)? HIGHER = very close/adjacent. LOWER = geographically distant, requiring significant force projection.
+
+Assess each dyad on its OWN real-world structural characteristics. Do not default to the same values across dyads -- a dyad with genuine chronic rivalry history should score meaningfully differently on ProtractedConflict than one with no such history, and geographically adjacent dyads should score differently on GeographicProximity than geographically distant ones.
+
+Return ONLY valid JSON in this exact shape, no markdown fences, no commentary:
+{
+  "suppressor_static": {
+    "OperationalFeasibility": <float 0.0-1.0>,
+    "InitiatorSurvivalRisk": <float 0.0-1.0>,
+    "PatronMoralHazard": <float 0.0-1.0>,
+    "SubstitutionPath": <float 0.0-1.0>
+  },
+  "q_static": {
+    "ProtractedConflict": <float 0.0-1.0>,
+    "GeographicProximity": <float 0.0-1.0>
+  }
+}
+"""
+
+
+def generate_suppressor_and_q_static(dyad):
+    payload = {
+        "model": MODEL,
+        "max_tokens": 1500,
+        "system": SUPPRESSOR_Q_SYSTEM_PROMPT,
+        "messages": [{"role": "user", "content": "Generate suppressor_static and q_static for this dyad: " + dyad}],
+    }
+
+    resp = requests.post(
+        ANTHROPIC_API,
+        headers={
+            "Content-Type": "application/json",
+            "x-api-key": os.environ["ANTHROPIC_API_KEY"],
+            "anthropic-version": "2023-06-01",
+        },
+        json=payload,
+        timeout=30,
+    )
+
+    if resp.status_code != 200:
+        raise RuntimeError("API error " + str(resp.status_code) + ": " + resp.text[:200])
+
+    text = resp.json()["content"][0]["text"].strip()
+
+    # This prompt tends to reason in prose before producing JSON (same spirit
+    # as Clergyman's own `rationale` field) -- confirmed 2026-08-18 that
+    # forbidding commentary just gets ignored, and truncating that reasoning
+    # away loses a real audit trail. Rather than fight the model, find the
+    # JSON wherever it lands: locate the first '{' and let json.JSONDecoder
+    # parse from there, ignoring any prose before or after.
+    start = text.find("{")
+    if start == -1:
+        raise RuntimeError(
+            "No JSON object found in response (possibly truncated by "
+            "max_tokens -- response was " + str(len(text)) + " chars): "
+            + text[:300]
+        )
+    result, _ = json.JSONDecoder().raw_decode(text[start:])
+    result["suppressor_source"] = "auto"
+    result["q_source"] = "auto"
+    result["raw_reasoning"] = text[:start].strip() or None
+    return result
+
+
 # ── Classification ────────────────────────────────────────────────────────────
 
 def classify_market(question, event_title):
@@ -393,11 +475,22 @@ def run_disciplinarian(dry_run=False):
                 try:
                     print("        [new dyad] Generating baseline for '" + dyad_key + "'...")
                     new_config = generate_baseline(dyad_key)
+                    print("        [new dyad] Generating suppressor_static + q_static for '" + dyad_key + "'...")
+                    supp_q = generate_suppressor_and_q_static(dyad_key)
+                    new_config["suppressor_static"] = supp_q["suppressor_static"]
+                    new_config["q_static"]          = supp_q["q_static"]
+                    new_config["suppressor_source"] = supp_q["suppressor_source"]
+                    new_config["q_source"]          = supp_q["q_source"]
+                    # Only save once ALL parts succeeded -- a dyad half-saved with
+                    # baseline but no suppressor/q_static would be silently skipped
+                    # on every future run (dyad_key already "in dyad_configs"),
+                    # reproducing the exact bug found 2026-08-18 for every dyad
+                    # discovered from here on. Atomic or nothing.
                     dyad_configs[dyad_key] = new_config
                     new_configs_added += 1
-                    print("        [new dyad] saved (auto) -- " + new_config.get("reasoning", ""))
+                    print("        [new dyad] saved (auto, full architecture) -- " + new_config.get("reasoning", ""))
                 except Exception as be:
-                    print("        [new dyad] baseline generation failed: " + str(be))
+                    print("        [new dyad] baseline/suppressor generation failed, dyad NOT saved (will retry next run): " + str(be))
 
         except Exception as e:
             m["bucket"]        = "ERROR"
