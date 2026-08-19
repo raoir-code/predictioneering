@@ -11,6 +11,7 @@ export ANTHROPIC_API_KEY=$(grep ANTHROPIC_API_KEY .env | cut -d'=' -f2)
 export GNEWS_API_KEY=$(grep GNEWS_API_KEY .env | cut -d'=' -f2)
 
 PYTHON=/opt/homebrew/bin/python3.11
+GIT=$(which git)
 LOG_DIR="$REPO_DIR/logs"
 mkdir -p "$LOG_DIR"
 LOGFILE="$LOG_DIR/pipeline_$(date +%Y%m%d_%H%M%S).log"
@@ -61,12 +62,12 @@ if [ -f "predictions/brier_log.jsonl" ]; then cp predictions/brier_log.jsonl doc
 echo "Pushing to GitHub..." | tee -a "$LOGFILE"
 for f in pipeline/classified_feed.json predictions/log.jsonl pipeline/translator_cache.json predictions/brier_log.jsonl predictions/brier_summary.json pipeline/dyad_configs.json pipeline/context_changelog.jsonl pipeline/node_score_history.jsonl pipeline/.context_cooldown_state.json docs/classified_feed.json docs/predictions_log.jsonl docs/brier_log.jsonl docs/index.html; do
     if [ -f "$f" ]; then
-        git add "$f"
+        $GIT add "$f"
     else
         echo "  [skip] $f does not exist yet" | tee -a "$LOGFILE"
     fi
 done
-git commit -m "Daily predictions: $(date +%Y-%m-%d)" >> "$LOGFILE" 2>&1 || echo "Nothing to commit." | tee -a "$LOGFILE"
-git push >> "$LOGFILE" 2>&1
+$GIT commit -m "Daily predictions: $(date +%Y-%m-%d)" >> "$LOGFILE" 2>&1 || echo "Nothing to commit." | tee -a "$LOGFILE"
+$GIT push >> "$LOGFILE" 2>&1
 
 echo "=== Pipeline complete: $(date) ===" | tee -a "$LOGFILE"
