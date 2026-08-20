@@ -50,7 +50,7 @@ DYAD_CONFIGS_PATH   = ROOT / "pipeline" / "dyad_configs.json"
 CHANGELOG_PATH       = ROOT / "pipeline" / "context_changelog.jsonl"
 COOLDOWN_STATE_PATH  = ROOT / "pipeline" / ".context_cooldown_state.json"
 NODE_HISTORY_PATH    = ROOT / "pipeline" / "node_score_history.jsonl"
-GNEWS_CACHE          = ROOT / "pipeline" / "cache" / "gnews"
+GNEWS_CACHE          = ROOT / "cache" / "gnews"
 
 ANTHROPIC_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 
