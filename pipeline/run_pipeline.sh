@@ -22,12 +22,16 @@ echo "[1/6] Scraping Polymarket..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.scrape_live >> "$LOGFILE" 2>&1
 echo "Scrape done." | tee -a "$LOGFILE"
 
-FEED_AGE=$(( ($(date +%s) - $(stat -f %m pipeline/classified_feed.json)) / 3600 ))
-if [ "$FEED_AGE" -gt 168 ]; then
-    echo "[2/6] Disciplinarian (full re-run -- feed is ${FEED_AGE}h old)..." | tee -a "$LOGFILE"
+if [ -f pipeline/.last_weekly_run ]; then
+    WEEKLY_AGE=$(( ($(date +%s) - $(stat -f %m pipeline/.last_weekly_run)) / 3600 ))
+else
+    WEEKLY_AGE=999999
+fi
+if [ "$WEEKLY_AGE" -gt 168 ]; then
+    echo "[2/6] Disciplinarian (full re-run -- weekly marker is ${WEEKLY_AGE}h old)..." | tee -a "$LOGFILE"
     $PYTHON -u -m pipeline.disciplinarian >> "$LOGFILE" 2>&1
 else
-    echo "[2/6] Disciplinarian skipped (feed is ${FEED_AGE}h old, < 7 days)." | tee -a "$LOGFILE"
+    echo "[2/6] Disciplinarian skipped (weekly marker is ${WEEKLY_AGE}h old, < 7 days)." | tee -a "$LOGFILE"
 fi
 
 echo "[3/6] Engine (predict.py)..." | tee -a "$LOGFILE"
@@ -42,11 +46,13 @@ echo "[5/6] Resolver..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.resolver >> "$LOGFILE" 2>&1
 echo "Resolver done." | tee -a "$LOGFILE"
 
-if [ "$FEED_AGE" -gt 168 ]; then
-    echo "[6/6] Context keeper weekly sweep (feed is ${FEED_AGE}h old)..." | tee -a "$LOGFILE"
+if [ "$WEEKLY_AGE" -gt 168 ]; then
+    echo "[6/6] Context keeper weekly sweep (weekly marker is ${WEEKLY_AGE}h old)..." | tee -a "$LOGFILE"
     $PYTHON -u -m pipeline.context_keeper --sweep >> "$LOGFILE" 2>&1
+    touch pipeline/.last_weekly_run
+    echo "  [weekly marker] pipeline/.last_weekly_run updated." | tee -a "$LOGFILE"
 else
-    echo "[6/6] Context keeper sweep skipped (feed is ${FEED_AGE}h old, < 7 days)." | tee -a "$LOGFILE"
+    echo "[6/6] Context keeper sweep skipped (weekly marker is ${WEEKLY_AGE}h old, < 7 days)." | tee -a "$LOGFILE"
 fi
 
 echo "Syncing data files to docs/..." | tee -a "$LOGFILE"
