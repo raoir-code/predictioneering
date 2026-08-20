@@ -335,7 +335,7 @@ def fetch_gnews(dyad, as_of_date, max_retries=3, base_sleep=3.0):
     params = {
         "q":        query,
         "lang":     "en",
-        "max":      10,
+        "max":      20,
         "to":       as_of_date.strftime("%Y-%m-%dT23:59:59Z"),
         "from":     (as_of_date - timedelta(days=7)).strftime("%Y-%m-%dT00:00:00Z"),
         "apikey":   GNEWS_KEY,
