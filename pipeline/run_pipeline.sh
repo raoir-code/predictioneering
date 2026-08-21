@@ -18,6 +18,9 @@ LOGFILE="$LOG_DIR/pipeline_$(date +%Y%m%d_%H%M%S).log"
 
 echo "=== Predictioneering pipeline run: $(date) ===" | tee -a "$LOGFILE"
 
+echo "Watchdog check..." | tee -a "$LOGFILE"
+$PYTHON -u -m pipeline.watchdog >> "$LOGFILE" 2>&1 || echo "  [watchdog] check itself failed to run (non-fatal)" | tee -a "$LOGFILE"
+
 echo "[1/6] Scraping Polymarket..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.scrape_live >> "$LOGFILE" 2>&1
 echo "Scrape done." | tee -a "$LOGFILE"
