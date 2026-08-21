@@ -7,6 +7,15 @@ import json
 import time
 from datetime import datetime, timezone
 
+# Reuses the already-proven, already-production-hardened deadline parser
+# from translator.py (question-text-first, end_date as cross-check only —
+# see _get_market_deadline's docstring for its own bug history). This is
+# the same function translator.py's expiry gate and predict.py's Weibull
+# horizon math already rely on; applying it here means the STORED end_date
+# in classified_feed.json (and therefore the frontend display) stays
+# consistent with what the scoring layer actually uses internally.
+from pipeline.translator import _get_market_deadline
+
 GAMMA = "https://gamma-api.polymarket.com"
 CLOB  = "https://clob.polymarket.com"
 
@@ -99,16 +108,34 @@ def scrape_live_feed():
             except Exception:
                 continue
 
+            question_text = m.get("question", "") or m.get("groupItemTitle", "")
+            raw_end_date  = (m.get("endDateIso") or m.get("endDate") or "")[:10]
+
+            # Cross-check Gamma's raw end_date against question-text parsing.
+            # If they disagree and question text parses cleanly, trust the
+            # text (same rule already proven in translator.py/predict.py).
+            # If nothing parses, keep the raw value unchanged -- no
+            # regression for markets we genuinely can't independently verify.
+            _deadline, _source, _mismatch = _get_market_deadline({
+                "question":   question_text,
+                "end_date":   raw_end_date,
+                "scraped_at": scraped_at,
+            })
+            end_date_final = _deadline.isoformat() if _deadline else raw_end_date
+            if _mismatch:
+                print(f"    [SCRAPE_END_DATE_CORRECTED] {m.get('id','')}: "
+                      f"Gamma said {raw_end_date}, question text said {end_date_final} — using question text")
+
             raw_markets.append({
                 "event_title":    event.get("title", ""),
                 "event_slug":     event.get("slug", ""),
-                "question":       m.get("question", "") or m.get("groupItemTitle", ""),
+                "question":       question_text,
                 "market_id":      m.get("id", ""),
                 "description":    m.get("description", "") or "",
                 "resolution_source": m.get("resolutionSource", "") or "",
                 "token_yes":      token_yes,
                 "market_price":   None,
-                "end_date":       (m.get("endDateIso") or m.get("endDate") or "")[:10],
+                "end_date":       end_date_final,
                 "volume":         m.get("volumeNum", 0) or 0,
                 "liquidity":      m.get("liquidityNum", 0) or 0,
                 "scraped_at":     scraped_at,
