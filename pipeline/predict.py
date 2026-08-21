@@ -37,6 +37,7 @@ ALPHA_FILE      = "alpha/conflict_onset.json"
 # All scoring logic lives in backtest.py (the calibrated engine).
 # ─────────────────────────────────────────────────────────────────────
 from pipeline.backtest import (
+    fetch_gnews,
     predict_probability     as _predict_probability,
     score_nodes_call_a,
     score_nodes_call_b,
@@ -265,73 +266,6 @@ def days_until(end_date_str: str) -> int:
 
 
 # ============================================================
-# GNEWS
-# ============================================================
-def fetch_gnews(query: str) -> Tuple[List[Dict], Dict]:
-    api_key = os.environ.get("GNEWS_API_KEY", "")
-    if not api_key:
-        raise RuntimeError("Missing GNEWS_API_KEY")
-
-    now    = datetime.now(timezone.utc)
-    cutoff = now
-    start  = now - timedelta(days=3)
-
-    params = {
-        "q":       query,
-        "from":    start.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "to":      cutoff.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "lang":    "en",
-        "country": "us",
-        "max":     10,
-        "sortby":  "publishedAt",
-        "apikey":  api_key,
-    }
-
-    resp = requests.get(GNEWS_URL, params=params, timeout=60)
-    resp.raise_for_status()
-    articles = resp.json().get("articles", [])
-
-    seen, out = set(), []
-    for a in articles:
-        key = (a.get("title", "").strip().lower(), a.get("publishedAt", ""))
-        if key not in seen:
-            seen.add(key)
-            out.append(a)
-
-    conflict_words = ["strike", "airstrike", "seized", "missile", "blockade", "raid", "coup", "deploy", "troops"]
-    official_hints = ["whitehouse.gov", "state.gov", "defense.gov", "white house", "department of defense"]
-
-    conflict_hits = sum(
-        any(w in (a.get("title", "") + " " + a.get("description", "")).lower() for w in conflict_words)
-        for a in out
-    )
-    official_hits = sum(
-        any(h in ((a.get("source") or {}).get("url", "") + " " + (a.get("source") or {}).get("name", "")).lower()
-            for h in official_hints)
-        for a in out
-    )
-
-    features = {
-        "article_volume": len(out),
-        "conflict_hits":  int(conflict_hits),
-        "official_hits":  int(official_hits),
-    }
-
-    packet = [
-        {
-            "publishedAt": a.get("publishedAt"),
-            "title":       a.get("title"),
-            "description": a.get("description"),
-            "source_name": (a.get("source") or {}).get("name"),
-            "url":         a.get("url"),
-        }
-        for a in out[:8]
-    ]
-
-    return packet, features
-
-
-# ============================================================
 # ANTHROPIC
 # ============================================================
 def _post(payload: Dict, max_retries: int = 5, base_sleep: float = 2.0) -> Dict:
@@ -487,7 +421,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         print(f"  Fetching GNews for: {label}...")
         today = datetime.now(timezone.utc).date()
         try:
-            articles = score_nodes_call_a.__globals__["fetch_gnews"](dyad, today)
+            articles = fetch_gnews(dyad, today)
             print(f"  Articles: {len(articles)}")
         except Exception as ex:
             print(f"  [error] GNews failed: {ex}")
