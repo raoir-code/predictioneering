@@ -202,7 +202,17 @@ def compute_brier_entry(market_id: str, predictions: list,
                          status: dict) -> dict | None:
     """
     Given prediction history and resolution status, compute Brier entry.
-    Uses first prediction with a valid conditional_p as the anchor.
+
+    Dual-anchor scoring:
+      - FIRST prediction with a valid conditional_p = OFFICIAL anchor.
+        brier_conditional / brier_engine / brier_market are unchanged —
+        this is what's published as the track record.
+      - LAST prediction with a valid conditional_p before resolution =
+        INFORMATIONAL-only anchor. brier_last / brier_market_last show
+        what the score would be if judged at resolution instead of at
+        posting. Never used as the official score, never backfilled
+        onto already-scored entries.
+
     Returns None if we can't compute cleanly.
     """
     outcome = status.get("outcome")
@@ -211,25 +221,34 @@ def compute_brier_entry(market_id: str, predictions: list,
               f"(raw='{status.get('raw_resolution')}')")
         return None
 
-    # Find first prediction with conditional_p
-    anchor = None
-    for pred in sorted(predictions, key=lambda x: x.get("timestamp", "")):
-        if pred.get("conditional_p") is not None:
-            anchor = pred
-            break
+    scored = sorted(
+        [p for p in predictions if p.get("conditional_p") is not None],
+        key=lambda x: x.get("timestamp", "")
+    )
 
-    if anchor is None:
+    if not scored:
         print(f"    [resolver] {market_id}: no conditional_p in any prediction — skipping")
         return None
+
+    anchor = scored[0]    # official — behavior unchanged from before this patch
+    last   = scored[-1]   # informational only
 
     conditional_p = anchor["conditional_p"]
     engine_p      = anchor.get("engine_p")
     market_p      = anchor.get("market_p")
 
-    # Brier scores
+    last_p        = last["conditional_p"]
+    market_p_last = last.get("market_p")
+
+    # Official Brier scores (first-anchor — unchanged)
     brier_engine      = round((engine_p - outcome) ** 2, 6) if engine_p is not None else None
     brier_conditional = round((conditional_p - outcome) ** 2, 6)
     brier_market      = round((market_p - outcome) ** 2, 6) if market_p is not None else None
+
+    # Informational last-anchor scores
+    brier_last         = round((last_p - outcome) ** 2, 6)
+    brier_market_last  = round((market_p_last - outcome) ** 2, 6) if market_p_last is not None else None
+    brier_delta         = round(brier_last - brier_conditional, 6)
 
     return {
         "resolved_at":        datetime.now(timezone.utc).isoformat(),
@@ -237,16 +256,25 @@ def compute_brier_entry(market_id: str, predictions: list,
         "market_label":       anchor.get("market_label"),
         "dyad":               anchor.get("dyad"),
         "first_prediction_ts": anchor.get("timestamp"),
+        "last_prediction_ts": last.get("timestamp"),
         "outcome":            outcome,
         "resolution_raw":     status.get("raw_resolution"),
-        # Prediction anchors (from first logged prediction)
+        # Prediction anchors (from first logged prediction — OFFICIAL)
         "conditional_p":      conditional_p,
         "engine_p":           engine_p,
         "market_p_at_first":  market_p,
+        # Prediction anchors (first/last pair — for dual-Brier display)
+        "first_p":            conditional_p,
+        "last_p":             last_p,
+        "delta_p":            round(last_p - conditional_p, 6),
+        "market_p_last":      market_p_last,
         # Brier scores
         "brier_conditional":  brier_conditional,
         "brier_engine":       brier_engine,
         "brier_market":       brier_market,
+        "brier_last":         brier_last,
+        "brier_market_last":  brier_market_last,
+        "brier_delta":        brier_delta,
         # Context
         "contract_type":      anchor.get("contract_type"),
         "relation":           anchor.get("relation_to_engine_event"),
