@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-08-21T15:22:57.795831+00:00",
-  "n_resolved": 29,
-  "brier_conditional_mean": 0.16753,
-  "brier_engine_mean": 0.235879,
-  "brier_market_mean": 0.139593,
-  "edge_vs_market": -0.027937,
+  "last_updated": "2026-08-22T15:12:32.899164+00:00",
+  "n_resolved": 32,
+  "brier_conditional_mean": 0.18699,
+  "brier_engine_mean": 0.269653,
+  "brier_market_mean": 0.162766,
+  "edge_vs_market": -0.024224,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -324,6 +324,39 @@
       "brier_conditional": 0.006872,
       "brier_market": 0.225625,
       "resolved_at": "2026-08-04T13:08:36.888934+00:00"
+    },
+    {
+      "market_id": "3710781",
+      "market_label": "Israel military action against Syria by September 15, 2026?",
+      "dyad": "Israel-Syria",
+      "outcome": 1,
+      "conditional_p": 0.5122,
+      "market_p": 0.43,
+      "brier_conditional": 0.237949,
+      "brier_market": 0.3249,
+      "resolved_at": "2026-08-22T15:12:27.408434+00:00"
+    },
+    {
+      "market_id": "3710780",
+      "market_label": "Israel military action against Syria by August 31, 2026?",
+      "dyad": "Israel-Syria",
+      "outcome": 1,
+      "conditional_p": 0.172,
+      "market_p": 0.27,
+      "brier_conditional": 0.685584,
+      "brier_market": 0.5329,
+      "resolved_at": "2026-08-22T15:12:29.397514+00:00"
+    },
+    {
+      "market_id": "3710782",
+      "market_label": "Israel military action against Syria by September 30, 2026?",
+      "dyad": "Israel-Syria",
+      "outcome": 1,
+      "conditional_p": 0.5508,
+      "market_p": 0.45,
+      "brier_conditional": 0.201781,
+      "brier_market": 0.3025,
+      "resolved_at": "2026-08-22T15:12:30.787288+00:00"
     }
   ]
 }
