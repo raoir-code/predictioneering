@@ -1040,6 +1040,97 @@ def translate_market(market: dict, cache: dict) -> dict:
 # MAIN
 # ─────────────────────────────────────────────────────────────────────
 
+def _run_action_coherence_pass(feed: list, cache: dict):
+    """
+    Runs AFTER every CORE market has been through Clergyman, since it
+    needs to see all of one dyad's active kinetic markets at once --
+    something translate_market()'s single-market loop can't do. Only
+    touches markets whose p_b_given_a actually moves; re-derives
+    conditional_p/blended_p/kelly via the REAL bettor() (not a
+    reimplementation of its formula) so this can never drift from the
+    single-market path. Pulls scholar/clergy/glass straight from cache
+    (the exact objects already used for this market) rather than
+    reconstructing them. Added 2026-08-24, see pipeline/action_coherence.py.
+    """
+    from collections import defaultdict
+    from action_coherence import check_action_coherence
+
+    by_dyad = defaultdict(list)
+    for market in feed:
+        if market.get("translator_verdict") != "TRANSLATED":
+            continue
+        action_type = market.get("action_type")
+        p_b_given_a = market.get("p_b_given_a")
+        if action_type is None or p_b_given_a is None:
+            continue
+        dyad = market.get("dyad") or "unknown"
+        _deadline, _src, _mismatch = _get_market_deadline(market)
+        days_remaining = max(1.0, float((_deadline - date.today()).days)) if _deadline else 365.0
+        by_dyad[dyad].append({
+            "market_id":      _cache_key(market),
+            "action_type":    action_type,
+            "p_b_given_a":    p_b_given_a,
+            "days_remaining": days_remaining,
+            "_market_ref":    market,
+        })
+
+    touched = 0
+    for dyad, markets in by_dyad.items():
+        if len(markets) < 2:
+            continue
+        before = {m["market_id"]: m["p_b_given_a"] for m in markets}
+        check_action_coherence(markets)
+
+        for m in markets:
+            mid = m["market_id"]
+            notes = m.get("coherence_notes", [])
+            if m["p_b_given_a"] == before[mid] and not notes:
+                continue
+
+            market = m["_market_ref"]
+            market["action_coherence_notes"] = notes
+
+            if m["p_b_given_a"] == before[mid]:
+                continue  # ONTOLOGY_OVERLAP flag only -- no re-bet needed
+
+            cached_entry = cache.get(mid)
+            if cached_entry is None or cached_entry.get("clergy") is None:
+                print(f"    [coherence] WARNING {dyad}/{mid}: no cached clergy to "
+                      f"re-bet against -- adjusted p_b_given_a NOT propagated to "
+                      f"conditional_p. Investigate before trusting this market's price.")
+                continue
+
+            engine_p = market.get("our_prediction")
+            if engine_p is None:
+                continue
+
+            new_clergy = dict(cached_entry["clergy"])
+            new_clergy["p_b_given_a"] = m["p_b_given_a"]
+
+            bet = bettor(float(engine_p), float(market.get("market_price") or 0),
+                        _polymarket_volume(market), cached_entry["scholar"],
+                        new_clergy, cached_entry["glass"],
+                        days_remaining=m["days_remaining"])
+
+            market.update({
+                "p_b_given_a":     m["p_b_given_a"],
+                "conditional_p":   bet["conditional_p"],
+                "blended_p":       bet["blended_p"],
+                "blend_weight":    bet["blend_weight"],
+                "kelly_fraction":  bet["kelly_fraction"],
+                "kelly_dollars":   bet["kelly_dollars"],
+                "bet_direction":   bet["bet_direction"],
+                "kelly_clergy_confidence_mult": bet.get("clergy_confidence_mult"),
+            })
+            cached_entry["clergy"] = new_clergy
+            print(f"    [coherence] {dyad}/{mid}: conditional_p -> {bet['conditional_p']} "
+                  f"({'; '.join(notes)})")
+            touched += 1
+
+    if touched:
+        print(f"\n  [coherence] adjusted {touched} market(s) for cross-action consistency")
+
+
 def run_translator():
     assert ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY not set"
 
@@ -1078,6 +1169,9 @@ def run_translator():
             errors += 1
 
         _save_cache(cache)
+
+    _run_action_coherence_pass(feed, cache)
+    _save_cache(cache)
 
     CLASSIFIED_FEED.write_text(json.dumps(feed, indent=2))
 
