@@ -58,6 +58,34 @@ EXPERT_PRIORS = {
     # succeeds ~75% of the time; that implies a large structural deterrent effect.
     # This prior applies to the PatronDeterrence -> w edge only.
     # The moral hazard channel (PatronDeterrence -> HardlineClaims) is estimated from literature.
+    # WarCosts polarity correction (2026-08-24)
+    # Raw derby coefficient was fit against this node's original theoretical
+    # name "Trade" (see LEGACY_NAME_MAP below) -- positive = more bilateral
+    # trade/interdependence, from real trade-interdependence literature
+    # (McDonald 2004, Kleinberg et al. 2012, Lupu & Traag 2012, Maoz 2009).
+    # Every downstream operational surface (predict.py's live scoring
+    # rubric, disciplinarian.py, translator.py, clergyman_ontology.py)
+    # uses the OPPOSITE polarity under the newer name "WarCosts": positive
+    # = ties severed/costly, negative = more interdependence. Nobody
+    # re-derived the coefficient when the operational polarity flipped.
+    # Confirmed empirically 2026-08-24: raw sign gave a HIGHER conflict
+    # probability for MORE interdependence (0.408, real Russia-Ukraine
+    # baseline) than for ties severed (0.394) -- backwards. Flipping the
+    # sign alone corrects the ordering with no other change. Same fix
+    # category as PatronDeterrence_deterrence above: raw coefficient
+    # measures the right thing under the wrong polarity for how the node
+    # is actually used, corrected via override rather than touching the
+    # live LLM-facing rubrics across four separate files.
+    "WarCosts": {
+        "beta": 0.2382,   # sign-flipped from raw derby fit (-0.2382)
+        "se":    0.40,    # PLACEHOLDER -- pull real derby bootstrap SE for
+                          # this node before treating as final
+        "source": "sign_correction_2026_08_24",
+        "note": "Raw fit measures 'Trade' (positive=more interdependence); "
+                "operational WarCosts toggle uses opposite polarity "
+                "(positive=severed/costly). See 2026-08-24 work log."
+    },
+
     "PatronDeterrence_deterrence": {
         "beta": -0.80,
         "se":    0.40,
