@@ -827,15 +827,16 @@ async function loadBrierLog() {
 }
 
 function renderBrierHistory(entries) {
-  const avgOur = (entries.reduce((s,e) => s + (e.brier_conditional ?? e.brier_engine ?? 0), 0) / entries.length).toFixed(4);
-  const avgMkt = (entries.reduce((s,e) => s + (e.brier_market ?? 0), 0) / entries.length).toFixed(4);
+  const trueEntries = entries.filter(e => e.brier_market_true_first != null);
+  const avgOur = (trueEntries.reduce((s,e) => s + (e.brier_conditional ?? e.brier_engine ?? 0), 0) / trueEntries.length).toFixed(4);
+  const avgMkt = (trueEntries.reduce((s,e) => s + (e.brier_market_true_first ?? 0), 0) / trueEntries.length).toFixed(4);
   const edge   = ((parseFloat(avgMkt) - parseFloat(avgOur)) * 100).toFixed(2);
   const edgeCls = parseFloat(edge) > 0 ? 'brier-win' : 'brier-loss';
-  const withLast = entries.filter(e => e.brier_last != null);
+  const withLast = entries.filter(e => e.brier_last != null && e.brier_market_true_last != null);
   let resLine = 'not enough data';
   if (withLast.length) {
     const avgOurRes = (withLast.reduce((s,e)=> s + e.brier_last, 0) / withLast.length);
-    const avgMktRes = (withLast.reduce((s,e)=> s + (e.brier_market_last != null ? e.brier_market_last : (e.brier_market ?? 0)), 0) / withLast.length);
+    const avgMktRes = (withLast.reduce((s,e)=> s + e.brier_market_true_last, 0) / withLast.length);
     const edgeRes = ((avgMktRes - avgOurRes) * 100).toFixed(2);
     const resCls = parseFloat(edgeRes) > 0 ? 'brier-win' : 'brier-loss';
     resLine = withLast.length + ' resolved &nbsp;|&nbsp; Our Brier: <span class="' + resCls + '" style="font-weight:500">' + avgOurRes.toFixed(4) + '</span> &nbsp;|&nbsp;' +
@@ -846,7 +847,8 @@ function renderBrierHistory(entries) {
     entries.length + ' resolved &nbsp;|&nbsp; Our Brier: <span class="' + edgeCls + '" style="font-weight:500">' + avgOur + '</span> &nbsp;|&nbsp;' +
     ' Market Brier: <span style="font-weight:500">' + avgMkt + '</span> &nbsp;|&nbsp;' +
     ' Edge: <span class="' + edgeCls + '">' + (parseFloat(edge)>0?'+':'') + edge + 'pp</span></div>' +
-    '<div style="margin-bottom:16px;font-size:12px;color:var(--text-mid)"><b>At Resolution</b>: ' + resLine + '</div>' +
+    '<div style="margin-bottom:2px;font-size:12px;color:var(--text-mid)"><b>At Resolution</b>: ' + resLine + '</div>' +
+    '<div style="margin-bottom:16px;font-size:10px;color:var(--text-dim)">Market price near settlement -- shown for transparency, not a forecasting comparison: liquid markets converge toward the outcome as it becomes known, almost by construction.</div>' +
     '<table class="brier-table"><thead><tr>' +
     '<th>Market</th><th class="right">Dyad</th>'+
     '<th class="right" title="Our very first logged forecast">First P</th>'+
@@ -861,7 +863,7 @@ function renderBrierHistory(entries) {
   for (const e of entries.slice().reverse()) {
     const outcome  = e.outcome === 1 ? '<span class="outcome-yes">YES</span>' : '<span class="outcome-no">NO</span>';
     const ourBrier = (e.brier_conditional ?? e.brier_engine ?? 0).toFixed(4);
-    const mktBrier = (e.brier_market ?? 0).toFixed(4);
+    const mktBrier = (e.brier_market_true_first ?? e.brier_market ?? 0).toFixed(4);
     const ourCls   = parseFloat(ourBrier) <= parseFloat(mktBrier) ? 'brier-win' : 'brier-loss';
     const date     = (e.resolved_at ?? '').slice(0,10);
     const label    = (e.market_label ?? e.market_id ?? '?');
@@ -876,7 +878,7 @@ function renderBrierHistory(entries) {
       '<td class="right" style="color:var(--text-dim)">' + firstP + '</td>' +
       '<td class="right" style="color:var(--text-dim)">' + lastP + '</td>' +
       '<td class="right" style="color:var(--text-dim);font-size:11px">' + deltaP + '</td>' +
-      '<td class="right">' + (e.market_p_at_first != null ? (e.market_p_at_first*100).toFixed(1)+'%' : '--') + '</td>' +
+      '<td class="right">' + (e.market_p_true_first != null ? (e.market_p_true_first*100).toFixed(1)+'%' : (e.market_p_at_first != null ? (e.market_p_at_first*100).toFixed(1)+'%' : '--')) + '</td>' +
       '<td class="right">' + outcome + '</td>' +
       '<td class="right ' + ourCls + '">' + ourBrier + '</td>' +
       '<td class="right ' + lastCls + '">' + brierLast + '</td>' +
