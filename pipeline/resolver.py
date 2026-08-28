@@ -20,6 +20,7 @@ import urllib.error
 from datetime import datetime, timezone, date
 from pathlib import Path
 from collections import defaultdict
+from pipeline.market_truth import fetch_true_prices, fetch_token_for_market
 
 # ─────────────────────────────────────────────────────────────────────
 # CONFIG
@@ -199,7 +200,7 @@ def sunset_market_in_feed(market_id: str, outcome: int) -> bool:
 # ─────────────────────────────────────────────────────────────────────
 
 def compute_brier_entry(market_id: str, predictions: list,
-                         status: dict) -> dict | None:
+                         status: dict, token_lookup: dict | None = None) -> dict | None:
     """
     Given prediction history and resolution status, compute Brier entry.
 
@@ -250,8 +251,29 @@ def compute_brier_entry(market_id: str, predictions: list,
     brier_market_last  = round((market_p_last - outcome) ** 2, 6) if market_p_last is not None else None
     brier_delta         = round(brier_last - brier_conditional, 6)
 
+    resolved_at_ts = datetime.now(timezone.utc).isoformat()
+
+    # TRUE market price at posting/resolution, pulled directly from
+    # Polymarket's own price-history API -- see market_truth.py docstring
+    # for why market_p / market_p_last above are NOT used for this.
+    market_p_true_first = market_p_true_last = None
+    brier_market_true_first = brier_market_true_last = None
+    token = fetch_token_for_market(market_id, token_lookup)
+    if token:
+        truth = fetch_true_prices(token, anchor.get("timestamp"), resolved_at_ts)
+        market_p_true_first = truth["true_first_p"]
+        market_p_true_last  = truth["true_last_p"]
+        if market_p_true_first is not None:
+            brier_market_true_first = round((market_p_true_first - outcome) ** 2, 6)
+        if market_p_true_last is not None:
+            brier_market_true_last = round((market_p_true_last - outcome) ** 2, 6)
+        if not truth["ok"]:
+            print(f"    [resolver] {market_id}: true-price fetch partial (token={token})")
+    else:
+        print(f"    [resolver] {market_id}: no token_yes found -- true price unavailable")
+
     return {
-        "resolved_at":        datetime.now(timezone.utc).isoformat(),
+        "resolved_at":        resolved_at_ts,
         "market_id":          market_id,
         "market_label":       anchor.get("market_label"),
         "dyad":               anchor.get("dyad"),
@@ -275,6 +297,10 @@ def compute_brier_entry(market_id: str, predictions: list,
         "brier_last":         brier_last,
         "brier_market_last":  brier_market_last,
         "brier_delta":        brier_delta,
+        "market_p_true_first":   market_p_true_first,
+        "market_p_true_last":    market_p_true_last,
+        "brier_market_true_first": brier_market_true_first,
+        "brier_market_true_last":  brier_market_true_last,
         # Context
         "contract_type":      anchor.get("contract_type"),
         "relation":           anchor.get("relation_to_engine_event"),
@@ -351,6 +377,12 @@ def run_resolver():
     predictions = load_predictions()
     already_resolved = load_brier_log()
 
+    token_lookup = {}
+    if CLASSIFIED_FEED.exists():
+        with open(CLASSIFIED_FEED) as f:
+            for m in json.load(f):
+                token_lookup[str(m.get("market_id"))] = m.get("token_yes")
+
     print(f"  Tracked markets: {len(predictions)}")
     print(f"  Already resolved: {len(already_resolved)}")
 
@@ -389,7 +421,7 @@ def run_resolver():
             else:
                 print(f"    → Sunset: market not present in classified_feed.json (already cycled out)")
 
-        entry = compute_brier_entry(market_id, preds, status)
+        entry = compute_brier_entry(market_id, preds, status, token_lookup)
         if entry is None:
             continue
 
