@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-08-28T15:05:09.965043+00:00",
-  "n_resolved": 37,
-  "brier_conditional_mean": 0.161722,
-  "brier_engine_mean": 0.233214,
-  "brier_market_mean": 0.142123,
-  "edge_vs_market": -0.019599,
+  "last_updated": "2026-08-30T15:47:37.955212+00:00",
+  "n_resolved": 38,
+  "brier_conditional_mean": 0.157467,
+  "brier_engine_mean": 0.227077,
+  "brier_market_mean": 0.139056,
+  "edge_vs_market": -0.018411,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -412,6 +412,17 @@
       "brier_conditional": 6e-06,
       "brier_market": 0.009025,
       "resolved_at": "2026-08-28T15:05:02.637795+00:00"
+    },
+    {
+      "market_id": "3253029",
+      "market_label": "Will Iran target a Arab country on August 25, 2026?",
+      "dyad": "Iran-ArabState",
+      "outcome": 0,
+      "conditional_p": 0.0048,
+      "market_p": 0.16,
+      "brier_conditional": 2.3e-05,
+      "brier_market": 0.0256,
+      "resolved_at": "2026-08-30T15:47:22.197020+00:00"
     }
   ]
 }

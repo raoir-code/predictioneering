@@ -5702,5 +5702,602 @@
       "rationale": "While a major Iranian strike on Syria would likely be reported by wire services, the strict attribution requirements (explicit Iranian claim OR confirmed Iranian-territory origin, excluding proxies and multiple weapon types) create significant resolution risk, as Iranian attacks are often ambiguous in origin, claimed indirectly, or conducted through proxies\u2014making adjudication heavily dependent on Polymarket admin discretion over contested evidence."
     },
     "glass_version": "v1"
+  },
+  "3861935": {
+    "contract_hash": "337e2a1a8b29",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (including one-way attack drones) that physically impacts Syrian terrestrial territory by August 31, 2026, with ground incursions, naval gunfire, artillery, cyber operations, and intercepted munitions explicitly excluded.",
+      "legalese_flags": [
+        "Excludes ground incursions \u2014 a major form of kinetic military action not captured by this contract",
+        "Excludes naval gunfire and artillery fire",
+        "Excludes cyber operations",
+        "Excludes munitions intercepted before impact, even if intended to strike",
+        "Excludes Syria's maritime territory and airspace \u2014 only terrestrial impact qualifies",
+        "Specific weapon-type inclusions/exclusions create a narrowly defined qualifying event",
+        "Disputed territory clause: only territory under de facto Syrian control as of market creation qualifies",
+        "3-day adjudication window that can extend past deadline"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract covers only a specific subset of kinetic military actions (airstrikes and surface-to-surface missiles impacting Syrian territory), explicitly excluding ground incursions, artillery, naval fire, and cyber operations, making it narrower than the engine's general conflict-onset probability object.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.5343,
+      "p_b_given_not_a": 0.55,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike/surface-to-surface missile, terrestrial impact only) is Israel's overwhelmingly dominant mode against Syria historically, driving p_b_given_a to 0.82 with a slight discount for excluded modalities (ground incursions, naval gunfire, cyber); p_b_given_not_a is high (~55%/month) because Israel has conducted airstrikes on Syrian territory routinely even absent a defined conflict onset \u2014 this is a near-continuous gray-zone pattern; WinProbability=1.5 (strong Israeli capability edge) and NuclearDeterrence=0.0 support continued willingness to strike, while WarCosts=-0.5 (moderate cost) and PatronDeterrence=0.5 (some Russian/Iranian residual presence but degraded post-Assad collapse) do not significantly suppress the airstrike modality, positioning estimates toward the higher end of the range.",
+      "p_b_given_a_raw": 0.82,
+      "p_b_given_a_llm_clamped": 0.63,
+      "p_b_given_a_deterministic": 0.4933,
+      "anchor_range": [
+        0.225,
+        0.63
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.5,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "Israeli airstrikes on Syrian territory are routinely reported by wire services, but the narrow win condition (terrestrial impact only, excluding artillery/naval/cyber/intercepted munitions, restricted to de facto Syrian-controlled territory) creates substantial adjudication risk around weapon classification, impact location, and territorial control status that Polymarket admins may struggle to resolve unambiguously within the 3-day window."
+    },
+    "glass_version": "v1"
+  },
+  "3861936": {
+    "contract_hash": "4f78aef6acb2",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an air strike or surface-to-surface missile strike (including one-way attack drones) that physically impacts Syrian terrestrial territory by September 15, 2026.",
+      "legalese_flags": [
+        "Excludes ground incursions, naval gunfire, artillery, rocket artillery, and cyber operations \u2014 all of which would qualify as kinetic military action under engine event A",
+        "Excludes munitions intercepted before impact, including debris damage",
+        "Excludes strikes on Syrian airspace or maritime territory",
+        "Short-range loitering munitions and FPV drones explicitly excluded, creating ambiguity around certain drone categories",
+        "Territorial scope limited to de facto Syrian-controlled land as of market creation, excluding contested areas",
+        "3-day grace period for conflicting reports may push resolution past nominal deadline",
+        "Requires physical impact on Syrian terrestrial territory \u2014 announcement or authorization alone insufficient"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of engine event A because it requires a specific delivery method (airstrike or surface-to-surface missile) impacting Syrian territory, while explicitly excluding other forms of kinetic action (ground incursions, artillery, naval gunfire, cyber) that would satisfy the broader conflict-onset probability object.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.5343,
+      "p_b_given_not_a": 0.55,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method-specific burden (airstrike or surface-to-surface missile strike on Syrian territory) drives P(B|A) to ~0.72 because Israel's historical conflict onset with Syria is overwhelmingly air/missile-centric rather than ground or naval, but the contract excludes several qualifying kinetic categories (ground incursion, artillery, naval gunfire) that could otherwise count as onset; P(B|\u00acA) is high at ~0.55/month because Israel has conducted airstrikes on Syrian territory at very high frequency independent of formal 'conflict onset' \u2014 this dyad's base rate of Israeli strikes on Syria absent declared conflict is historically 3-6+ per month; WinProbability=1.5 (strong Israeli capability edge) and NuclearDeterrence=0.0 (no nuclear constraint) support leaning toward the higher end of the range, while WarCosts=-0.5 (moderate peace-inducing cost) and PatronDeterrence=0.5 (some external patron presence, reduced since Assad's fall) exert mild downward pressure but do not dominate given Israel's demonstrated willingness to strike Syria continuously.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.63,
+      "p_b_given_a_deterministic": 0.4933,
+      "anchor_range": [
+        0.225,
+        0.63
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.5,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli strikes on Syria are routinely reported by wire services, the contract's numerous exclusions (drone categories, intercepted munitions, contested territorial boundaries, de facto control definitions) create substantial threshold ambiguity that could cause incorrect resolution even when strikes clearly occur."
+    },
+    "glass_version": "v1"
+  },
+  "3861937": {
+    "contract_hash": "3240d4aae235",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (including one-way attack drones) that physically impacts Syrian terrestrial territory by September 30, 2026, excluding intercepted munitions, ground incursions, naval/artillery fire, cyber ops, and minor short-range strikes.",
+      "legalese_flags": [
+        "Explicit exclusion of ground incursions \u2014 a major form of kinetic conflict onset is excluded",
+        "Explicit exclusion of naval gunfire, artillery, rocket artillery, mortars \u2014 removes significant kinetic action categories",
+        "Explicit exclusion of cyber operations",
+        "Explicit exclusion of munitions intercepted before impact, including debris/fragments",
+        "Exclusion of 'minor surface-to-surface strikes' including short-range loitering munitions, FPV drones, ATGMs \u2014 threshold ambiguity around what counts as 'minor'",
+        "Territorial scope limited to terrestrial Syria under de facto Syrian control \u2014 airspace and maritime territory excluded",
+        "3-day confirmation window with potential extension past deadline",
+        "Attribution must be confirmed by consensus of resolution sources, not single statement",
+        "Disputed territory resolved by de facto control as of market creation date"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of engine event A because it covers only specific Israeli kinetic delivery methods (airstrikes and surface-to-surface missiles) impacting Syrian territory, while explicitly excluding ground incursions, naval/artillery fire, cyber operations, and minor strikes \u2014 all of which would qualify as conflict onset under engine event A.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.5343,
+      "p_b_given_not_a": 0.55,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike/surface-to-surface missile, excluding ground incursions, naval fire, cyber, and 'minor' strikes) drives P(B|A) moderately high since airstrike is Israel's dominant modality against Syria historically, but the minor-strike exclusion and attribution consensus requirement create meaningful non-qualification risk; P(B|\u00acA) is notably high (~55%/month) because Israel has conducted frequent airstrikes against Syrian territory even absent a formal conflict onset (dozens of strikes per year in 2018\u20132024, continuing into post-Assad Syria in 2025), meaning this action regularly occurs independently of engine-defined conflict onset; WinProbability=1.5 (strong Israeli capability advantage) supports plausibility of strike execution, WarCosts=-0.5 (moderate peace-inducing cost) and PatronDeterrence=0.5 (moderate Syrian patron commitment, though weakened post-Assad) provide mild suppression but not enough to significantly lower the historically elevated baseline strike rate, and NuclearDeterrence=0.0 imposes no additional constraint.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.63,
+      "p_b_given_a_deterministic": 0.4933,
+      "anchor_range": [
+        0.225,
+        0.63
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.5,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "Israeli airstrikes on Syria are typically well-reported by wire services, but the contract's layered exclusions\u2014particularly the ambiguous 'minor short-range strikes' threshold, the de facto territorial control requirement, the multi-source attribution consensus rule, and the 3-day confirmation window that may extend past the deadline\u2014create substantial resolver discretion risk even when a qualifying strike clearly occurs."
+    },
+    "glass_version": "v1"
+  },
+  "3840178": {
+    "contract_hash": "3b26bb7de044",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Saudi Arabia must conduct an air strike or surface-to-surface missile strike (including one-way attack drones) that physically impacts Yemeni territory before September 15, 2026 at 11:59 PM AST.",
+      "legalese_flags": [
+        "Explicit exclusion of ground incursions, naval gunfire, artillery, rocket artillery, and small-arms fire narrows qualifying actions to air and missile strikes only",
+        "Exclusion of intercepted/destroyed munitions and debris from qualifying actions",
+        "Requires physical impact on internationally recognized Yemeni territory \u2014 ambiguous strike locations do not qualify",
+        "Short-range loitering munitions and FPV drones explicitly excluded, creating edge cases for certain drone types",
+        "3-day grace period for conflicting attribution reports, potentially extending past the deadline",
+        "Resolution based on consensus of sources, with no single statement governing \u2014 introduces interpretive ambiguity in contested attribution scenarios",
+        "Surface-to-air missile strikes explicitly excluded even if Saudi-initiated"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of conflict onset because it restricts qualifying military actions to air strikes and surface-to-surface missile strikes with confirmed impact, explicitly excluding ground incursions, naval gunfire, artillery, and other kinetic actions that would otherwise constitute military conflict onset.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.4995,
+      "p_b_given_not_a": 0.04,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (air or missile strike only, excluding ground/naval/artillery) keeps P(B|A) high at 0.82 since airstrikes have historically been Saudi Arabia's dominant mode of engagement in Yemen; WinProbability of 2.2 (strong Saudi capability advantage) supports aerial action as the preferred instrument; WarCosts of -1.0 (moderately high war costs) slightly suppresses sustained escalation but single airstrikes are low-cost to execute; AudienceCosts of 2.8 (high domestic lock-in) supports follow-through on any commitment; PatronDeterrence of 0.3 (low Houthi patron commitment) further supports Saudi willingness to strike; P(B|\u00acA) is set at 0.04/month reflecting the ongoing low-intensity conflict pattern where Saudi strikes occasionally occur even outside formally recognized 'conflict onset' thresholds per the engine definition.",
+      "p_b_given_a_raw": 0.82,
+      "p_b_given_a_llm_clamped": 0.56,
+      "p_b_given_a_deterministic": 0.4736,
+      "anchor_range": [
+        0.2,
+        0.56
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -1.0,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While major strikes would likely be reported by wire services, the contract's narrow qualifying criteria (air/missile strikes only, physical impact required, no intercepted munitions, ambiguous drone type exclusions, 3-day attribution grace period potentially extending past deadline, and consensus-based resolution) create substantial risk of mis-resolution even when qualifying events clearly occur."
+    },
+    "glass_version": "v1"
+  },
+  "3903076": {
+    "contract_hash": "1cd8a13738d6",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Iranian military forces must enter Kuwait territory in a ground operation that establishes territorial control over at least a portion of Kuwait for at least 48 hours, confirmed by credible reporting consensus.",
+      "legalese_flags": [
+        "Requires physical ground entry AND territorial control \u2014 airstrikes, missile strikes, drone strikes, or naval action alone do not qualify",
+        "48-hour minimum duration threshold for qualifying presence",
+        "Control must be confirmed by consensus of credible reporting, not a single source",
+        "7-day grace period if entry occurs before deadline but control unconfirmed at deadline",
+        "Grey-zone/unmarked personnel qualify only if confirmed under direct Iranian state control and establishing de facto territorial control",
+        "Excludes: search and rescue, hostage rescue, individual capture operations, evacuation/extraction operations, ISR operations, consent-based operations",
+        "Excludes air, missile, drone, or naval strikes unaccompanied by ground forces",
+        "Named dyad is Iran-Kuwait specifically"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract requires a specific form of conflict onset \u2014 ground invasion with territorial control \u2014 which is a narrower subset of the engine's broader interstate conflict/kinetic action probability object, excluding airstrikes, naval action, and short-duration incursions.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "territorial_control",
+      "action_type": "ground_invasion",
+      "p_b_given_a": 0.1151,
+      "p_b_given_not_a": 0.0,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "The territorial_control burden (ground entry + 48-hour sustained control + credible consensus confirmation) is the most restrictive tier, sharply discounting P(B|A) from a broader conflict onset; structurally, PatronDeterrence=1.8 (strong US/GCC patron commitment to Kuwait) is the dominant suppressing primitive \u2014 it raises the cost of any Iranian ground incursion dramatically \u2014 while WarCosts=-0.8 further reinforces peace-inducing pressure, pushing this estimate firmly toward the low end of the range despite Iran's WinProbability=0.8 capability edge, which would be largely neutralized by patron escalation risk.",
+      "p_b_given_a_raw": 0.25,
+      "p_b_given_a_llm_clamped": 0.168,
+      "p_b_given_a_deterministic": 0.0924,
+      "anchor_range": [
+        0.0168,
+        0.168
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "territorial_war"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A large-scale Iranian ground invasion of Kuwait would be immediately and unambiguously reported by major wire services, but the 48-hour territorial control threshold, grey-zone personnel attribution requirements, and consensus-of-credible-reporting standard introduce meaningful adjudication complexity that elevates resolution risk beyond the trivially low baseline."
+    },
+    "glass_version": "v1"
+  },
+  "3902514": {
+    "contract_hash": "57d64d47481d",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (as specifically defined, excluding many weapon types) that directly impacts the defined Greater Beirut geographic area by September 30.",
+      "legalese_flags": [
+        "Highly specific geographic boundary tied to an external academic map (Faour & Mhawej 2014)",
+        "Explicit exclusion of many weapon types: naval gunfire, artillery, mortars, rocket artillery, small-arms, cyber, ground incursions, short-range loitering munitions, FPV drones, ATGMs",
+        "Intercepted or destroyed munitions explicitly excluded even if debris causes damage",
+        "Named location (Greater Beirut) is a subset of Lebanon as a whole",
+        "Specific deadline: September 30 at 11:59 PM IDT",
+        "3-day dispute resolution window that can extend past the end date",
+        "Requires consensus of credible sources for attribution"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of A because it requires a specific type of kinetic action (airstrikes or surface-to-surface missiles, with many weapon categories excluded) in a specific sub-national location (Greater Beirut, not all of Lebanon), making it narrower than the engine's general conflict-onset probability for the Israel-Lebanon dyad.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.2923,
+      "p_b_given_not_a": 0.12,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Target_specific burden (Greater Beirut geographic subset, excluding many weapon types) suppresses P(B|A) below 1.0 since conflict onset could take many forms outside the defined zone or using excluded weapons; P(B|\u00acA) is non-trivial because Israel has struck Greater Beirut area outside of formal conflict-onset thresholds historically (e.g. targeted assassinations, precision strikes on specific sites); WinProbability=1.2 (Israeli capability advantage) supports leaning mid-range for airstrike specifically, but WarCosts=-0.8 and PatronDeterrence=1.0 (Hezbollah's Iranian patron commitment) push against sustained or escalatory strikes on densely populated Greater Beirut specifically; AudienceCosts=2.0 means Israeli leadership faces domestic pressure to act visibly but also to avoid re-entanglement, creating tension that keeps the estimate mid-range.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2555,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While major Israeli strikes on Beirut would be widely reported, the highly specific weapon-type exclusions, reliance on an obscure academic geographic boundary (Faour & Mhawej 2014), and explicit carve-outs for debris/interception create substantial ambiguity that wire services alone cannot resolve, leaving significant room for admin discretion disputes."
+    },
+    "glass_version": "v1"
+  },
+  "3903085": {
+    "contract_hash": "e5efcba7a9a2",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Iranian military forces must enter Kuwait territory, remain for at least 48 hours, and establish de facto control over at least a portion of Kuwaiti territory as confirmed by a consensus of credible reporting.",
+      "legalese_flags": [
+        "Requires ground force presence specifically \u2014 air, missile, drone, and naval strikes unaccompanied by ground forces explicitly excluded",
+        "48-hour minimum duration threshold for qualifying operation",
+        "Must establish 'control over a portion of Kuwait territory' \u2014 mere presence insufficient",
+        "Consensus of credible reporting standard required, not single-source confirmation",
+        "7-day grace period for confirmation if entry occurs by deadline but control unconfirmed",
+        "Grey-zone/unmarked personnel qualify only if confirmed under direct Iranian state control and establish de facto territorial control",
+        "Excludes search-and-rescue, hostage rescue, individual capture, evacuation, infrastructure destruction, and ISR operations unless they satisfy the control criterion",
+        "Excludes operations conducted with Kuwaiti government consent or invitation"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a narrower subset of conflict onset because it requires a specific modality (ground forces establishing territorial control) and explicitly excludes airstrikes, missile strikes, drone strikes, and naval action unaccompanied by ground troops, all of which would qualify as kinetic military action under the engine's broader conflict-onset definition.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "territorial_control",
+      "action_type": "ground_invasion",
+      "p_b_given_a": 0.1151,
+      "p_b_given_not_a": 0.0,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "The territorial_control burden (48-hour ground presence + de facto control over Kuwaiti territory) is the most restrictive tier and suppresses P(B|A) well below 1.0, since even genuine conflict onset between Iran and Kuwait could manifest as missile strikes, proxy harassment, or naval action rather than a sustained ground invasion; PatronDeterrence=1.8 (strong GCC/US commitment to Kuwait) and WarCosts=-0.8 (high cost of war) both push the estimate toward the low end of the range, while WinProbability=0.8 provides a partial offset but cannot overcome the structural deterrence and cost barriers to a sustained territorial seizure.",
+      "p_b_given_a_raw": 0.18,
+      "p_b_given_a_llm_clamped": 0.168,
+      "p_b_given_a_deterministic": 0.0924,
+      "anchor_range": [
+        0.0168,
+        0.168
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "territorial_war"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "high",
+      "resolution_risk": "medium",
+      "rationale": "A large-scale Iranian ground invasion of Kuwait would be immediately and widely reported by major wire services, but the 'de facto control' and 'consensus of credible reporting' thresholds introduce meaningful ambiguity for gray-zone or partial-incursion scenarios, and the 48-hour duration requirement could create timing edge cases near the December 31 deadline."
+    },
+    "glass_version": "v1"
+  },
+  "3902371": {
+    "contract_hash": "00f5ec8f9c63",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "YES if any European country (from a defined list) conducts an airstrike or surface-to-surface missile strike (including one-way attack drones) that physically impacts Iranian territory by October 31, 2026.",
+      "legalese_flags": [
+        "Highly specific weapon-type inclusions: bombs, air-to-surface missiles, air-launched drones, one-way attack drones, cruise/ballistic missiles only",
+        "Explicit exclusions: ground incursions, naval gunfire, artillery, cyber operations, small-arms fire, SAMs, short-range loitering munitions, FPV drones, ATGMs",
+        "Intercepted/destroyed munitions do not qualify even if debris lands on Iran",
+        "Strike must physically impact internationally recognized Iranian territory \u2014 attribution ambiguity defaults to non-resolution",
+        "Named list of 48 European countries \u2014 excludes Russia and Turkey, includes non-EU states like Ukraine, UK, Belarus, Georgia",
+        "3-day consensus window for disputed events that can extend past deadline",
+        "Deadline: 11:59 PM CEST October 31 (year ambiguous \u2014 likely 2026 based on dyad metadata)"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract captures only a specific kinetic subset of conflict onset \u2014 airstrikes and surface-to-surface missile strikes by European countries on Iranian territory \u2014 explicitly excluding ground incursions, naval action, and many other forms of military action that would count under the engine's broader conflict-onset definition.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.227,
+      "p_b_given_not_a": 0.002,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Target_specific burden (must physically impact Iranian territory via named weapon types) suppresses P(B|A) considerably since European-initiated strikes on Iran are historically unprecedented and would require extraordinary political consensus; WarCosts = -1.0 (high cost of war) and PatronDeterrence = 1.5 (Iran has meaningful patron support from Russia/China raising the cost of striking) push toward the low end of the range, while WinProbability = 0.6 offers modest capability support but cannot overcome the structural cost and deterrence barriers to this historically novel action.",
+      "p_b_given_a_raw": 0.25,
+      "p_b_given_a_llm_clamped": 0.25,
+      "p_b_given_a_deterministic": 0.2172,
+      "anchor_range": [
+        0.08,
+        0.36
+      ],
+      "was_clamped": false,
+      "war_costs_used_for_range": -1.0,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "A strike would likely be reported by major wire services, but the exhaustive weapon-type taxonomy, interception/debris exclusions, attribution-defaults-to-no-resolution clause, and 3-day consensus window extending past the deadline create substantial admin discretion risk even if a qualifying event occurs."
+    },
+    "glass_version": "v1"
+  },
+  "3840179": {
+    "contract_hash": "1f802abca2b0",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Saudi Arabia must conduct an airstrike or surface-to-surface missile strike (including one-way attack drones) that physically impacts Yemeni territory by September 30, 2026.",
+      "legalese_flags": [
+        "Explicitly excludes ground incursions, naval gunfire, artillery, rocket artillery, and small-arms fire \u2014 narrowing well below general 'kinetic military action'",
+        "Excludes munitions intercepted or destroyed before impact, including debris/fragments",
+        "Excludes cyber operations",
+        "Excludes short-range loitering munitions, FPV drones, and ATGM strikes as 'minor' surface-to-surface strikes",
+        "Geographic precision requirement: strike location must be clearly attributable to internationally recognized Yemeni territory",
+        "Attribution must reach consensus among resolution sources; 3-day window for conflicting reports",
+        "Deadline is 11:59 PM Arabia Standard Time on September 30, 2026",
+        "Saudi Arabia is the only qualifying initiator \u2014 Houthi or third-party strikes do not qualify"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract restricts qualifying actions to airstrikes and surface-to-surface missile strikes by Saudi Arabia against Yemen, explicitly excluding many forms of kinetic military action (ground incursions, naval gunfire, artillery, etc.), making it a clearly defined subset of the engine's broader conflict-onset probability object.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.4995,
+      "p_b_given_not_a": 0.35,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike/missile strike physically impacting Yemeni territory) is the dominant narrowing factor \u2014 it excludes intercepted munitions, cyber, ground/naval/artillery actions, and short-range minor drones, but Saudi airstrikes into Yemen have been the modal form of Saudi kinetic engagement throughout the conflict, so P(B|A) remains high at 0.82; P(B|\u00acA) is substantial (~0.35/month) because Saudi Arabia has conducted periodic airstrikes against Houthi positions even during nominal ceasefire periods (post-2022 truce era saw sporadic strikes), reflecting an ongoing low-level campaign rather than a binary on/off conflict; WinProbability=2.2 (strong Saudi capability edge via air power) supports leaning toward the higher end within the range, while WarCosts=-1.0 (moderate peace-inducing cost) and AudienceCosts=2.8 (high domestic lock-in, meaning Saudi leadership faces pressure to respond to Houthi provocations) partially offset each other, with the high AudienceCosts nudging P(B|\u00acA) upward given the political pressure to be seen responding to Houthi attacks on Saudi territory.",
+      "p_b_given_a_raw": 0.82,
+      "p_b_given_a_llm_clamped": 0.56,
+      "p_b_given_a_deterministic": 0.4736,
+      "anchor_range": [
+        0.2,
+        0.56
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -1.0,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While major Saudi airstrikes on Yemen are typically reported by wire services, the contract's narrow technical exclusions (intercepted munitions, short-range drones, artillery, naval gunfire) and strict attribution/consensus requirements create substantial resolution risk, as open-source reporting rarely distinguishes munition types with the precision needed to satisfy these legalese thresholds."
+    },
+    "glass_version": "v1"
+  },
+  "3902319": {
+    "contract_hash": "712c898cb891",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "superset",
+      "win_condition_summary": "Iran must conduct an airstrike or surface-to-surface missile/drone strike directly from Iranian forces (not proxies) against any of 21 named Arab countries by September 15, 2026.",
+      "legalese_flags": [
+        "Dyad is specified as Iran-SaudiArabia, but contract covers 21 Arab countries \u2014 a much broader target set than the dyad",
+        "Excludes proxy forces (Hezbollah, Houthis, etc.) \u2014 only direct Iranian military action counts",
+        "Excludes ground incursions, naval gunfire, cyber, small-arms, MLRS, FPV drones, ATGMs, surface-to-air missiles",
+        "Requires explicit Iranian claim or confirmation of origin from Iranian territory",
+        "Intercepted munitions still qualify if they constitute a qualifying action",
+        "3-day adjudication window for conflicting reports, extendable past deadline",
+        "Arabia Standard Time (AST) governs deadline",
+        "Action must be directed at terrestrial territory or internal waters of a qualifying Arab country"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract covers direct Iranian kinetic strikes against any of 21 Arab nations, making it a superset of the Iran-SaudiArabia dyad \u2014 a YES resolution could occur via Iranian action against a completely different Arab country with no Saudi involvement.",
+      "translator_route": "PASS_TRANSLATION"
+    },
+    "scholar_version": "v3",
+    "clergy": null,
+    "clergy_version": null,
+    "glass": null,
+    "glass_version": null
+  },
+  "3902374": {
+    "contract_hash": "02ffc5a99ac1",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "YES resolves if any listed European sovereign state conducts an air strike or surface-to-surface missile strike (including one-way attack drones) that physically impacts Iranian territory by December 31.",
+      "legalese_flags": [
+        "Highly specific weapon-type inclusions: only airstrikes (bombs, air-to-surface missiles, air-launched drones) and surface-to-surface missiles/one-way attack drones qualify",
+        "Explicit exclusions: cyber ops, naval gunfire, artillery, ground incursions, small-arms fire, short-range loitering munitions, FPV drones, ATGMs, surface-to-air missiles",
+        "Interception/debris rule: intercepted munitions or debris landing on Iran do not qualify",
+        "Geographic precision requirement: strike must be clearly attributable to internationally recognized Iranian territory",
+        "Specific European country list provided \u2014 excludes Russia, Turkey, and other states sometimes considered European",
+        "3-day attribution window with potential deadline extension for conflicting reports",
+        "No-declaration or announcement alone qualifies; executed kinetic action required",
+        "Deadline timezone specified as CEST 11:59 PM, but market horizon stated as 2026-12-31 while title says December 31 without year \u2014 minor ambiguity on year"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of engine event A because it restricts qualifying actions to specific strike modalities (airstrikes and surface-to-surface missiles) by a defined list of European states against Iran, excluding many other forms of kinetic military action (naval gunfire, ground incursions, cyber, etc.) that would count under the broader conflict-onset definition.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3385,
+      "p_b_given_not_a": 0.002,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile only, excluding cyber/naval/ground) drives P(B|A) well below 1.0 since European conflict onset could take many non-qualifying forms; WarCosts=-1.0 (very high cost of war) and PatronDeterrence=1.5 (Iran has meaningful patron backing from Russia/China) both suppress probability toward the low end of the range, while WinProbability=0.6 (modest European capability edge) and AudienceCosts=1.2 provide some upward pressure but are insufficient to overcome the structural cost barriers; no European state has conducted a direct airstrike on Iranian territory in modern history, making P(B|\u00acA) negligible.",
+      "p_b_given_a_raw": 0.25,
+      "p_b_given_a_llm_clamped": 0.25,
+      "p_b_given_a_deterministic": 0.3764,
+      "anchor_range": [
+        0.2,
+        0.56
+      ],
+      "was_clamped": false,
+      "war_costs_used_for_range": -1.0,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While a European airstrike on Iran would be major news reported immediately by wire services, the highly specific weapon-type inclusions/exclusions, interception/debris rules, 3-day attribution window, and year ambiguity create substantial resolution risk that Polymarket admins could plausibly rule incorrectly or dispute even if a qualifying event occurs."
+    },
+    "glass_version": "v1"
+  },
+  "3902320": {
+    "contract_hash": "cb451172f9ce",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Iran must conduct an airstrike or surface-to-surface/one-way-attack-drone strike explicitly claimed by Iran or confirmed to originate from Iranian territory, directed at one of 21 named Arab countries, before September 30, 2026.",
+      "legalese_flags": [
+        "Restricted to airstrikes and surface-to-surface missile/drone strikes only \u2014 excludes ground incursions, naval gunfire, cyber, small arms, artillery, rocket artillery, short-range loitering munitions, FPV drones, ATGMs",
+        "Proxy forces (Hezbollah, Houthis, etc.) explicitly excluded \u2014 must be Iranian forces with Iranian claim or confirmed Iranian-territory origin",
+        "Surface-to-air missile strikes explicitly excluded",
+        "Interception of munitions does not negate qualification, but strike must be a qualifying type",
+        "Action must be directed at terrestrial territory or internal waters of a qualifying Arab country",
+        "Named list of 21 qualifying Arab countries \u2014 excludes non-Arab states",
+        "3-day conflict resolution window for disputed attribution that may extend past deadline",
+        "Arabia Standard Time (AST) governs deadline",
+        "Only actions between market creation and listed date qualify"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract covers a specific subset of conflict onset \u2014 only direct Iranian kinetic strikes (airstrikes or surface-to-surface missiles/drones) explicitly excluding proxies, ground incursions, cyber, and many other forms of military action that would qualify as conflict onset under the engine's broader definition.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3399,
+      "p_b_given_not_a": 0.04,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike or surface-to-surface/drone only, not ground/naval/proxy/cyber) with proxy exclusion significantly reduces P(B|A) from a broad baseline since Iran's most common conflict actions against Arab states historically route through proxies (Houthis, Hezbollah) or gray-zone methods; WarCosts = -0.8 (very high cost of war) and PatronDeterrence = 1.5 (strong external patron coverage for Gulf Arab states, e.g. US umbrella) both suppress the probability of direct Iranian kinetic action against Arab territory, pushing toward the lower end of the range, while WinProbability = 0.3 (modest Iranian capability advantage) and AudienceCosts = 1.5 offer slight upward pressure but are dominated by the structural deterrence signals; P(B|\u00acA) reflects the low but non-zero historical rate of Iran launching direct attributed strikes into Arab-state territory (as distinct from proxy operations), roughly consistent with Iran's April 2024 direct strike precedent but still rare on a monthly basis.",
+      "p_b_given_a_raw": 0.25,
+      "p_b_given_a_llm_clamped": 0.25,
+      "p_b_given_a_deterministic": 0.3785,
+      "anchor_range": [
+        0.21,
+        0.588
+      ],
+      "was_clamped": false,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While a major Iranian strike would be widely reported, the highly specific exclusions (proxy forces, naval gunfire, rocket artillery, cyber, SAMs) create significant threshold ambiguity requiring precise attribution and weapon-type confirmation that open-source reporting may not always provide, and Polymarket admin discretion over disputed cases adds substantial resolution risk."
+    },
+    "glass_version": "v1"
   }
 }
