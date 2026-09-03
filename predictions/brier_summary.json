@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-09-02T16:09:16.018743+00:00",
-  "n_resolved": 49,
-  "brier_conditional_mean": 0.242213,
-  "brier_engine_mean": 0.296864,
-  "brier_market_mean": 0.173165,
-  "edge_vs_market": -0.069048,
+  "last_updated": "2026-09-03T14:30:22.679951+00:00",
+  "n_resolved": 57,
+  "brier_conditional_mean": 0.305573,
+  "brier_engine_mean": 0.353513,
+  "brier_market_mean": 0.177271,
+  "edge_vs_market": -0.128302,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -544,6 +544,94 @@
       "brier_conditional": 1.2e-05,
       "brier_market": 0.0121,
       "resolved_at": "2026-09-02T16:09:07.579833+00:00"
+    },
+    {
+      "market_id": "2995866",
+      "market_label": "Iran invades Kuwait by August 31?",
+      "dyad": "Iran-Kuwait",
+      "outcome": 0,
+      "conditional_p": 0.1586,
+      "market_p": 0.0465,
+      "brier_conditional": 0.025154,
+      "brier_market": 0.002162,
+      "resolved_at": "2026-09-03T14:29:48.883057+00:00"
+    },
+    {
+      "market_id": "3253034",
+      "market_label": "Will Iran target a Arab country on August 30, 2026?",
+      "dyad": "Iran-ArabStates",
+      "outcome": 0,
+      "conditional_p": 0.0026,
+      "market_p": 0.2,
+      "brier_conditional": 7e-06,
+      "brier_market": 0.04,
+      "resolved_at": "2026-09-03T14:29:57.025697+00:00"
+    },
+    {
+      "market_id": "3711100",
+      "market_label": "Will Iran target Bahrain by September 15, 2026?",
+      "dyad": "Iran-Bahrain",
+      "outcome": 1,
+      "conditional_p": 0.0035,
+      "market_p": 0.335,
+      "brier_conditional": 0.993012,
+      "brier_market": 0.442225,
+      "resolved_at": "2026-09-03T14:30:00.978591+00:00"
+    },
+    {
+      "market_id": "3711098",
+      "market_label": "Will Iran target Kuwait by September 30, 2026?",
+      "dyad": "Iran-Kuwait",
+      "outcome": 1,
+      "conditional_p": 0.0016,
+      "market_p": 0.52,
+      "brier_conditional": 0.996803,
+      "brier_market": 0.2304,
+      "resolved_at": "2026-09-03T14:30:03.190113+00:00"
+    },
+    {
+      "market_id": "3711097",
+      "market_label": "Will Iran target Kuwait by September 15, 2026?",
+      "dyad": "Iran-Kuwait",
+      "outcome": 1,
+      "conditional_p": 0.0019,
+      "market_p": 0.46,
+      "brier_conditional": 0.996204,
+      "brier_market": 0.2916,
+      "resolved_at": "2026-09-03T14:30:05.515427+00:00"
+    },
+    {
+      "market_id": "3711101",
+      "market_label": "Will Iran target Bahrain by September 30, 2026?",
+      "dyad": "Iran-Bahrain",
+      "outcome": 1,
+      "conditional_p": 0.0056,
+      "market_p": 0.445,
+      "brier_conditional": 0.988831,
+      "brier_market": 0.308025,
+      "resolved_at": "2026-09-03T14:30:09.482400+00:00"
+    },
+    {
+      "market_id": "3710801",
+      "market_label": "Will Iran target Iraq by September 15, 2026?",
+      "dyad": "Iran-Iraq",
+      "outcome": 1,
+      "conditional_p": 0.1086,
+      "market_p": 0.55,
+      "brier_conditional": 0.794594,
+      "brier_market": 0.2025,
+      "resolved_at": "2026-09-03T14:30:13.300261+00:00"
+    },
+    {
+      "market_id": "3710802",
+      "market_label": "Will Iran target Iraq by September 30, 2026?",
+      "dyad": "Iran-Iraq",
+      "outcome": 1,
+      "conditional_p": 0.1313,
+      "market_p": 0.68,
+      "brier_conditional": 0.75464,
+      "brier_market": 0.1024,
+      "resolved_at": "2026-09-03T14:30:16.086714+00:00"
     }
   ]
 }
