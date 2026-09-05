@@ -34,9 +34,9 @@ ALPHA_FILE      = "alpha/conflict_onset.json"
 
 # ============================================================
 # BACKTEST ENGINE IMPORTS — predict.py is a thin orchestration shell.
-# All scoring logic lives in backtest.py (the calibrated engine).
+# All scoring logic lives in engine.py (the calibrated engine).
 # ─────────────────────────────────────────────────────────────────────
-from pipeline.backtest import (
+from pipeline.engine import (
     fetch_gnews,
     predict_probability     as _predict_probability,
     score_nodes_call_a,
@@ -217,7 +217,7 @@ def load_alpha() -> Dict[str, float]:
 
 
 def _LEGACY_UNUSED_predict_probability(toggles: Dict[str, float], days_remaining: int, alpha: Dict[str, float]) -> Dict[str, float]:
-    """SUPERSEDED — not called. Live path imports predict_probability from backtest.py (see line ~40, aliased _predict_probability). Kept for reference only."""
+    """SUPERSEDED — not called. Live path imports predict_probability from engine.py (see line ~40, aliased _predict_probability). Kept for reference only."""
     # Mach 2 four-tier structured DAG formula
     # Tier 2: war payoff and effective weight
     w     = (alpha.get("WinProbability", 0.0) * toggles.get("WinProbability", 0.0)
@@ -238,10 +238,10 @@ def _LEGACY_UNUSED_predict_probability(toggles: Dict[str, float], days_remaining
     WarPolitics = (alpha.get("PreferenceAlignment", 0.0) * toggles.get("PreferenceAlignment", 0.0)
                  + alpha.get("HardlineClaims", 0.0)      * toggles.get("HardlineClaims", 0.0)
                  + alpha.get("AudienceCosts", 0.0)        * toggles.get("AudienceCosts", 0.0))
-    # HardlineClaims direct channel (matches backtest.py)
+    # HardlineClaims direct channel (matches engine.py)
     HardlineDirect = toggles.get("HardlineClaims", 0.0)
 
-    # SSPE shrinkage — matches backtest.py Mach 3.1
+    # SSPE shrinkage — matches engine.py Mach 3.1
     SSPE_SHRINKAGE  = 0.25
     sspe_deviations = WarPayoff + WarPolitics + HardlineDirect
     log_odds_shift  = SSPE_SHRINKAGE * sspe_deviations
@@ -427,7 +427,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
             print(f"  [error] GNews failed: {ex}")
             articles = []
 
-        # Two-call scoring — matches backtest.py exactly
+        # Two-call scoring — matches engine.py exactly
         print(f"  Scoring nodes via Claude (call A: SSPE + onset)...")
         call_a = score_nodes_call_a(dyad, articles, today)
         trigger_was_violent = call_a.get("TriggerType", 0.0) >= 0.60
@@ -486,7 +486,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
             # Was: market_window = max(days_rem, 1) -- which made horizon_scale
             # ALWAYS equal 1.0 (days_rem / days_rem), a silent no-op that
             # diverged from what Run 21 actually validated. Now imports the
-            # same 90-day reference window backtest.py uses, so a long-dated
+            # same 90-day reference window engine.py uses, so a long-dated
             # contract (500 days out) genuinely gets scaled UP toward the
             # cumulative-hazard estimate, and a same-day contract genuinely
             # gets scaled down near-zero absent strong live evidence -- same
@@ -496,7 +496,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
             # Use backtest's predict_probability with q_logit
             engine_p_raw = _predict_probability(toggles, days_rem, q_logit=q_logit)
 
-            # ICB Weibull transport — matches backtest.py Run 21 exactly
+            # ICB Weibull transport — matches engine.py Run 21 exactly
             _clock = acute_onset if (acute_onset and today >= acute_onset) else today
             _A = max((today - _clock).days, 0)
             _F = _weibull_residual(_A, max(days_rem, 0))
@@ -548,7 +548,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
                 dyad_meta.pop("decision_detected_at", None)
                 config.pop("decision_detected_at", None)
 
-            # Apply boost in log-odds space (matches backtest.py exactly)
+            # Apply boost in log-odds space (matches engine.py exactly)
             import math as _math
             _post_res = bool(event_date and today >= event_date)
             if _post_res:

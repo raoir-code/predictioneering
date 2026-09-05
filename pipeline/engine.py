@@ -1,14 +1,14 @@
 #!/usr/bin/env python3.11
 """
-backtest.py — Mach 2 Calibration Backtest
+engine.py — Mach 2 shared scoring library + offline calibration backtest
 ==========================================
 Pulls historical Polymarket price data + resolutions, runs Mach 2 engine
 at multiple snapshots per market, compares Brier scores vs. market.
 
 Usage:
-    python3.11 pipeline/backtest.py               # full run
-    python3.11 pipeline/backtest.py --dry-run     # first 2 markets only
-    python3.11 pipeline/backtest.py --leakage     # contamination check only
+    python3.11 pipeline/engine.py               # full run
+    python3.11 pipeline/engine.py --dry-run     # first 2 markets only
+    python3.11 pipeline/engine.py --leakage     # contamination check only
 """
 
 import os, sys, json, time, argparse, math, re

@@ -159,7 +159,7 @@ EXPERT_PRIORS = {
         "note": "q-channel costly-signal escalation prior. DV-matched anchor: "
                 "Levin-Banchik 2021 OR=1.621 (beta~0.483). Wide SE reflects "
                 "heterogeneous DVs across the three source studies and small-N "
-                "underlying samples. GNews scoring gate (predict.py/backtest.py) "
+                "underlying samples. GNews scoring gate (predict.py/engine.py) "
                 "must require mobilization-specific language (call-up orders, "
                 "reserve activation, force posture change) -- NOT generic "
                 "troop-presence/show-of-force language, which the literature "

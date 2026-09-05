@@ -62,7 +62,7 @@ HEADLINE_WINDOW_DAYS = 7
 
 
 # ----------------------------------------------------------------------
-# Shared Clade call helper -- mirrors backtest.py's _call_claude_json
+# Shared Clade call helper -- mirrors engine.py's _call_claude_json
 # conventions (raw requests, claude-opus-4-6, temperature 0, retry once)
 # ------------------------------------------------------------------------
 
