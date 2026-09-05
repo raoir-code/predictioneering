@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-09-04T16:51:18.544323+00:00",
-  "n_resolved": 71,
-  "brier_conditional_mean": 0.284412,
-  "brier_engine_mean": 0.309128,
-  "brier_market_mean": 0.167443,
-  "edge_vs_market": -0.116969,
+  "last_updated": "2026-09-05T13:42:43.563488+00:00",
+  "n_resolved": 72,
+  "brier_conditional_mean": 0.280664,
+  "brier_engine_mean": 0.30515,
+  "brier_market_mean": 0.167395,
+  "edge_vs_market": -0.113269,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -786,6 +786,17 @@
       "brier_conditional": 0.000724,
       "brier_market": 0.007744,
       "resolved_at": "2026-09-04T16:51:14.780144+00:00"
+    },
+    {
+      "market_id": "2851406",
+      "market_label": "Israel military action against Greater Beirut by August 31?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 0,
+      "conditional_p": 0.1207,
+      "market_p": 0.405,
+      "brier_conditional": 0.014568,
+      "brier_market": 0.164025,
+      "resolved_at": "2026-09-05T13:42:32.494060+00:00"
     }
   ]
 }
