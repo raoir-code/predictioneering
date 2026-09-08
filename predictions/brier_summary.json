@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-09-06T18:54:06.759987+00:00",
-  "n_resolved": 72,
-  "brier_conditional_mean": 0.280664,
-  "brier_engine_mean": 0.30515,
-  "brier_market_mean": 0.167395,
-  "edge_vs_market": -0.113269,
+  "last_updated": "2026-09-08T16:13:57.708347+00:00",
+  "n_resolved": 73,
+  "brier_conditional_mean": 0.27683,
+  "brier_engine_mean": 0.301018,
+  "brier_market_mean": 0.165299,
+  "edge_vs_market": -0.111531,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -797,6 +797,17 @@
       "brier_conditional": 0.014568,
       "brier_market": 0.164025,
       "resolved_at": "2026-09-05T13:42:32.494060+00:00"
+    },
+    {
+      "market_id": "3422247",
+      "market_label": "Will there be Saudi Arabian military action against Yemen by August 31, 2026?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 0,
+      "conditional_p": 0.0277,
+      "market_p": 0.12,
+      "brier_conditional": 0.000767,
+      "brier_market": 0.0144,
+      "resolved_at": "2026-09-08T16:13:44.616128+00:00"
     }
   ]
 }

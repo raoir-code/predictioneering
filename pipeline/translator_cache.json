@@ -6299,5 +6299,1440 @@
       "rationale": "While a major Iranian strike would be widely reported, the highly specific exclusions (proxy forces, naval gunfire, rocket artillery, cyber, SAMs) create significant threshold ambiguity requiring precise attribution and weapon-type confirmation that open-source reporting may not always provide, and Polymarket admin discretion over disputed cases adds substantial resolution risk."
     },
     "glass_version": "v1"
+  },
+  "4178251": {
+    "contract_hash": "076d515f0e94",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (as narrowly defined) that physically impacts Lebanese terrestrial territory on September 9 IDT.",
+      "legalese_flags": [
+        "Extremely narrow weapon-type definition: excludes artillery, mortars, rocket artillery, naval gunfire, ground incursions, cyber, small arms, and short-range loitering munitions/FPV drones",
+        "Strict territorial scope: terrestrial Lebanon only, airspace and maritime territory excluded",
+        "Single-day resolution window (September 9 IDT) with up to 3-day adjudication extension",
+        "Interception/destruction before impact disqualifies the action entirely, including debris damage",
+        "Disputed territory resolved by de facto Lebanese control as of market creation",
+        "Requires consensus of credible reporting plus official government sources for attribution"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract covers only a specific subset of kinetic military action \u2014 airstrikes and surface-to-surface missiles on a single named date \u2014 excluding many other forms of conflict onset (ground incursions, artillery, cyber, naval), making it a clear subset of the engine's conflict-onset probability object.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.3,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Target_specific burden (Lebanese terrestrial territory, airstrike/SSM only, single day) suppresses P(B|A) because narrow weapon-type definition excludes artillery, drones, and other common Israeli tools, but Israel's WinProbability of 2.2 (strong capability edge) and AudienceCosts of 2.5 (high domestic lock-in) lean toward the higher end within the range; P(B|\u00acA) is set at ~0.30/day reflecting the historically high base rate of Israeli airstrikes into Lebanon even outside formal conflict onset periods (near-daily during active phases, multiple times per week in lower-intensity periods), moderated downward by the strict weapon-type and impact-confirmation requirements that exclude many qualifying incidents.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli strikes on Lebanon are typically reported by major wire services within hours, the extremely narrow weapon-type definition (excluding artillery, drones, mortars, and naval gunfire) combined with interception-disqualification clauses, strict terrestrial-only scope, and dual-source attribution requirements create substantial risk that a real strike occurs but fails to resolve 'Yes' due to definitional gaps or admin discretion."
+    },
+    "glass_version": "v1"
+  },
+  "1184343": {
+    "contract_hash": "e95407140741",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "equivalent",
+      "win_condition_summary": "YES resolves if military forces of at least two NATO member states engage in direct kinetic military action (e.g., missile strikes, gunfire, artillery, ship ramming with significant damage) against each other before December 31, 2026.",
+      "legalese_flags": [
+        "Dyad is intra-NATO (NATO vs NATO), not a typical external-threat dyad \u2014 highly unusual conflict pairing",
+        "Explicit exclusion of warning shots, fire into uninhabited areas, and missiles into territorial waters/airspace as non-qualifying",
+        "Ship ramming threshold: significant damage (hull breach/sinking) qualifies; minor damage (scrapes, dents) does not",
+        "Coast guard forces only count if legally designated as military under national law/command structure",
+        "Resolution based on 'consensus of credible reporting' \u2014 subjective threshold",
+        "Deadline is December 31, 2026 at 11:59 PM ET"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract directly asks whether kinetic military engagement occurs between NATO member states within the horizon, which is equivalent to conflict onset, albeit for a highly atypical intra-alliance dyad; the detailed exclusions and thresholds narrow the definition but do not change the fundamental equivalence to a conflict-onset event.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "broad",
+      "action_type": null,
+      "p_b_given_a": 0.8213,
+      "p_b_given_not_a": 0.0,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "high",
+      "used_structural_context": true,
+      "rationale": "Legal Scholar flagged this as equivalent, so P(B|A)=1.0 and P(B|\u00acA)=0.0 by definition; the intra-NATO dyad is historically unprecedented for direct kinetic conflict, and structural context (WinProbability=0.0, WarCosts=0.0, PatronDeterrence=0.5, NuclearDeterrence=0.0) provides no meaningful deviation signal given the near-zero base rate of any NATO member attacking another \u2014 this remains a purely engine-driven estimate.",
+      "p_b_given_a_raw": 1.0,
+      "p_b_given_a_llm_clamped": 0.95,
+      "p_b_given_a_deterministic": 0.7662,
+      "anchor_range": [
+        0.6,
+        0.95
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": 0.0,
+      "severity_band": "unknown"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "A genuine NATO-on-NATO kinetic incident would be widely reported, but the contract's multiple ambiguous thresholds\u2014'significant damage' on ship ramming, coast guard military status, and especially the subjective 'consensus of credible reporting' standard\u2014create substantial admin discretion risk, particularly for edge cases like Greek-Turkish naval friction or accidental fire incidents that may not cleanly meet the explicit exclusions."
+    },
+    "glass_version": "v1"
+  },
+  "4189936": {
+    "contract_hash": "ea69f02cac99",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Iran must conduct an airstrike or surface-to-surface missile strike (including one-way attack drones) directly against Jordanian territory, explicitly claimed by Iran or confirmed to have originated from Iranian territory, by September 30, 2026.",
+      "legalese_flags": [
+        "Excludes proxy forces (Hezbollah, Houthis, etc.) \u2014 only direct Iranian state action counts",
+        "Excludes ground incursions, naval gunfire, artillery, mortars, rocket artillery, cyber operations, and small-arms fire",
+        "Excludes surface-to-air missiles",
+        "Excludes 'minor' surface-to-surface strikes including short-range loitering munitions, FPV drones, and ATGM strikes \u2014 ambiguity in what constitutes 'minor'",
+        "Intercepted munitions still qualify if they meet the strike-type criteria",
+        "Attribution requirement: must be explicitly claimed by Iran OR confirmed to have originated from Iranian territory",
+        "3-day adjudication window for conflicting reports, which can extend past the deadline",
+        "Restricted to terrestrial territory of Jordan including internal waters \u2014 excludes Jordanian airspace, ships, or forces abroad"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract specifies a narrower subset of conflict onset \u2014 only direct Iranian kinetic strikes (air or surface-to-surface missiles) against Jordan, explicitly excluding proxy actions, ground incursions, and several other forms of military action that would qualify as conflict onset under the engine's broader definition.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.1981,
+      "p_b_given_not_a": 0.002,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Target-specific burden (Jordanian territory, direct Iranian state action, excluding proxies) sharply suppresses P(B|A) since Iran's historical conflict behavior overwhelmingly channels aggression through proxies rather than direct strikes on Jordan; PatronDeterrence=1.5 (US/Israel patron commitment to Jordan) and WarCosts=-0.5 (high cost of war) both lean toward the low end of the range, as a direct overt strike on Jordan would risk immediate US/Israeli escalation and impose severe costs on Iran with minimal strategic upside.",
+      "p_b_given_a_raw": 0.04,
+      "p_b_given_a_llm_clamped": 0.09,
+      "p_b_given_a_deterministic": 0.2444,
+      "anchor_range": [
+        0.09,
+        0.405
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.5,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "A direct Iranian strike on Jordan would be major news instantly covered by wire services, but the layered exclusions (no proxies, no 'minor' munitions, ambiguous size thresholds, strict attribution requiring explicit Iranian claim or confirmed origin) create substantial resolution risk, especially since Iran's April 2024 regional strikes involved drones Jordan actually intercepted, making origin-vs-proxy and 'minor' distinctions contentious under this contract's legalese."
+    },
+    "glass_version": "v1"
+  },
+  "4178250": {
+    "contract_hash": "b46a6ead0d79",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (excluding artillery, naval gunfire, small arms, cyber, and minor loitering munitions) that physically impacts Lebanese terrestrial territory on September 8 IDT.",
+      "legalese_flags": [
+        "Narrow single-day window (September 8 IDT only)",
+        "Specific weapon-type inclusions and exclusions (e.g., FPV drones, ATGM, rocket artillery excluded; air-launched drones included)",
+        "Intercepted/destroyed munitions explicitly excluded even if debris causes damage",
+        "Maritime territory and airspace of Lebanon excluded from qualifying territory",
+        "Ground incursions explicitly excluded",
+        "3-day adjudication window for conflicting reports may extend past end date",
+        "De facto control as of market creation governs disputed borders"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract specifies a narrow subset of conflict onset \u2014 only certain strike types (airstrikes and surface-to-surface missiles) impacting Lebanese terrestrial territory on a single specific date \u2014 excluding many forms of kinetic action (ground incursions, artillery, naval gunfire, cyber) that would otherwise qualify as conflict onset.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.35,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Target_specific burden (Lebanese terrestrial territory, excluding maritime/airspace, with weapon-type constraints) on a single day window \u2014 P(B|A) is moderate since Israel-Lebanon conflict onset historically involves airstrikes as the primary modality but the single-day and weapon-exclusion requirements lower it; P(B|\u00acA) is non-trivial (~35% on any given day) because Israel has conducted airstrikes into Lebanon on a very high-frequency basis throughout 2024-2025 even absent formal 'conflict onset' as defined by the engine, meaning the baseline daily strike probability is substantial; WinProbability=2.2 (strong Israeli capability edge) and AudienceCosts=2.5 (high domestic lock-in) both support continued operational tempo, while WarCosts=-0.8 (moderate cost-of-war pressure) and PatronDeterrence=0.5 (limited Hezbollah patron commitment post-2024 degradation) provide only mild suppression, leaving the estimate toward the higher end of its range.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli strikes on Lebanon are generally reported by wire services, the highly specific weapon-type inclusions/exclusions (e.g., distinguishing air-launched drones from loitering munitions, excluding intercepted debris), the single-day IDT window, and the maritime/airspace carve-outs create substantial ambiguity that open-source reporting rarely resolves with sufficient precision for correct adjudication."
+    },
+    "glass_version": "v1"
+  },
+  "4178268": {
+    "contract_hash": "0835345a119b",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike that physically impacts Lebanese terrestrial territory on September 26 (IDT), excluding artillery, rockets, naval gunfire, small arms, cyber, and ground incursions.",
+      "legalese_flags": [
+        "Highly specific weapon-type definitions: qualifying = airstrikes (bombs, air-to-surface missiles, air-launched drones) or surface-to-surface missiles/one-way attack drones only",
+        "Explicit exclusions: artillery, mortars, MLRS, naval gunfire, small arms, cyber, ground incursions, short-range loitering munitions, FPV drones, ATGMs",
+        "Terrestrial territory only \u2014 maritime territory and airspace excluded",
+        "Single-day resolution window (September 26 IDT) with up to 3-day confirmation buffer",
+        "Intercepted munitions explicitly do not qualify even if debris causes damage",
+        "De facto control as of market creation defines Lebanese territory for disputed areas",
+        "Deadline year is 2026 but title/question says September 26 with no year \u2014 possible annual recurring market or date ambiguity"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract captures only a specific subset of conflict-onset actions (airstrikes and surface-to-surface missiles impacting Lebanese land territory on a single date), explicitly excluding many other forms of kinetic military action that would qualify as conflict onset under engine event A.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.5174,
+      "p_b_given_not_a": 0.55,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method-specific burden (airstrike or surface-to-surface missile, excluding artillery/rockets/ground) on a single calendar day drives P(B|A) to ~0.72 since Israel's dominant strike modality against Lebanon is airstrike but the exclusion of artillery/rockets narrows the qualifying set somewhat; P(B|\u00acA) is high (~0.55/day) because Israel has been conducting near-daily qualifying airstrikes into Lebanon even in non-'conflict onset' periods (low-intensity steady-state operations), reflecting the current operational tempo; WinProbability=2.2 (strong Israeli capability edge) supports higher positioning, WarCosts=-0.8 is mildly peace-inducing but historically has not suppressed routine Israeli strike activity against Lebanon, and AudienceCosts=2.5 locks in continued military pressure, while NuclearDeterrence=0.5 and PatronDeterrence=0.5 are both low and do not materially suppress single-strike operations.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.588,
+      "p_b_given_a_deterministic": 0.4872,
+      "anchor_range": [
+        0.21,
+        0.588
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli airstrikes on Lebanon are typically reported by major wire services, the highly specific weapon-type exclusions (ruling out artillery, rockets, loitering munitions, FPV drones, ATGMs) create substantial resolution risk because open-source reporting rarely distinguishes qualifying munitions (air-launched or surface-to-surface missiles/drones) from excluded ones with sufficient precision, and the year ambiguity plus Polymarket admin discretion over borderline weapon classifications compound the risk of incorrect resolution."
+    },
+    "glass_version": "v1"
+  },
+  "4178256": {
+    "contract_hash": "412762eb3d12",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike that physically impacts Lebanese terrestrial territory specifically on September 14 (IDT), excluding a long list of weapon types and non-impact events.",
+      "legalese_flags": [
+        "Single-day resolution window (September 14 IDT only) \u2014 extremely narrow temporal scope",
+        "Explicit weapon-type exclusions: no ground incursions, artillery, mortars, rocket artillery, naval gunfire, small-arms, cyber, SAMs, short-range loitering munitions, FPV drones, ATGMs",
+        "Territorial exclusion: Lebanon's maritime territory and airspace do not count, only terrestrial territory including internal waters",
+        "Intercepted/destroyed munitions explicitly excluded even if debris causes damage",
+        "3-day adjudication window that can extend past end date",
+        "Attribution must be confirmed as Israeli-initiated",
+        "Disputed territory resolved by de facto Lebanese control as of market creation"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of A because it requires a specific weapon-type delivery (airstrike or surface-to-surface missile) on a single named date, explicitly excluding many other forms of kinetic military action (ground incursions, artillery, naval gunfire, etc.) that would qualify as conflict onset under the engine's broader definition.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.35,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "The target_specific burden (Lebanese terrestrial territory, airstrike/SSM only, single calendar day in IDT) moderates P(B|A) since not every conflict onset manifests as an airstrike on Lebanese soil on that exact date; P(B|\u00acA) is set at ~35% per day reflecting the recent high base rate of Israeli airstrikes into Lebanon even absent formal conflict onset (Israel has been striking Lebanon very frequently in the post-October 7 period); WinProbability=2.2 (strong Israeli capability edge) and AudienceCosts=2.5 (high domestic lock-in) both support maintaining a relatively elevated per-day strike frequency, while WarCosts=-0.8 (moderately costly war) and PatronDeterrence=0.5 (Iran-backed Hezbollah, but deterrence is limited) do not substantially suppress routine airstrike activity at this tier.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While major airstrikes on Lebanese territory are typically reported quickly by wire services, the extremely narrow single-day window (September 14 IDT), extensive weapon-type exclusions (ruling out artillery, mortars, loitering munitions, FPVs, etc.), and the terrestrial-vs-maritime/airspace distinction create substantial threshold ambiguity that could force Polymarket admin discretion even when strikes are clearly reported."
+    },
+    "glass_version": "v1"
+  },
+  "4178272": {
+    "contract_hash": "36cf2232365d",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike that physically impacts Lebanese terrestrial territory on September 29 IDT, excluding a broad list of weapon types and intercepted munitions.",
+      "legalese_flags": [
+        "Specific single-date resolution window (September 29 IDT only)",
+        "Narrow qualifying weapon types: only airstrikes (bombs, air-to-surface missiles, air-launched drones) or surface-to-surface missiles (one-way attack drones, cruise/ballistic missiles)",
+        "Explicit exclusions: ground incursions, naval gunfire, artillery, mortars, rocket artillery, FPV drones, ATGMs, short-range loitering munitions, cyber ops, small-arms fire, SAMs",
+        "Intercepted or destroyed munitions explicitly excluded even if debris causes damage",
+        "Geographic restriction: terrestrial territory only, maritime territory and airspace excluded",
+        "Disputed territory clause: de facto Lebanese control as of market creation governs",
+        "3-calendar-day grace period for conflicting attribution reports, potentially extending past end date",
+        "Resolution based on consensus of sources, no single statement governs"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of the engine event because it restricts qualifying actions to specific weapon delivery types on a single named date, explicitly excluding many forms of kinetic military action (ground incursions, artillery, naval fire, cyber) that would count as conflict onset under the engine's broader definition.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.5174,
+      "p_b_given_not_a": 0.35,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile, excluding artillery/rockets/naval) drives p_b_given_a to ~0.72 since these are Israel's dominant strike modalities against Lebanon but the exclusions remove common lower-end tools; p_b_given_not_a is set at ~0.35 per single day reflecting the historically high baseline rate of Israeli airstrikes on Lebanese territory even absent a formal conflict-onset event (particularly during and after the 2024 campaign, where strikes occurred on many individual days); WinProbability=2.2 (strong Israeli capability edge) supports Israel being able to execute qualifying strikes at will, and AudienceCosts=2.5 reinforces political pressure to maintain visible military posture, both pushing estimates toward the higher end within the range, while WarCosts=-0.8 provides mild downward pressure on the sustained/costly end but does not strongly suppress a single-day airstrike.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.588,
+      "p_b_given_a_deterministic": 0.4872,
+      "anchor_range": [
+        0.21,
+        0.588
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli strikes on Lebanon are typically well-reported by wire services, the narrow qualifying weapon-type exclusions (ruling out artillery, rockets, FPV drones, loitering munitions, etc.) and the single-day IDT window create substantial ambiguity about whether any given reported strike meets the specific technical criteria, and the 3-day attribution grace period may extend resolution beyond the event date with Polymarket admin discretion ultimately determining borderline cases."
+    },
+    "glass_version": "v1"
+  },
+  "4178273": {
+    "contract_hash": "32e91adc8cee",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike that physically impacts Lebanese terrestrial territory on September 30 (IDT), excluding intercepted munitions, artillery, naval gunfire, ground incursions, and minor loitering munitions.",
+      "legalese_flags": [
+        "Highly specific weapon-type inclusions and exclusions (e.g., FPV drones excluded, air-launched drones included)",
+        "Ground incursions explicitly excluded \u2014 a major kinetic action type not captured",
+        "Artillery, naval gunfire, mortars, rocket artillery all excluded",
+        "Restricted to a single calendar date (September 30 IDT), not the full horizon",
+        "Maritime territory and airspace of Lebanon excluded from target geography",
+        "Intercepted munitions explicitly do not qualify even if debris causes damage",
+        "3-day confirmation window can extend resolution past the nominal date",
+        "Disputed territory resolved by de facto Lebanese control as of market creation"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract captures only a specific subset of kinetic military actions (airstrikes and surface-to-surface missiles) on a single named date, while excluding ground incursions, artillery, naval gunfire, and other forms of conflict onset that the engine's event A encompasses.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.3,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Target_specific burden (Lebanese terrestrial territory, airstrike/SSM only, single calendar date) suppresses P(B|A) from ~1.0 since conflict onset on that exact date might manifest via excluded methods (artillery, ground incursion, loitering munitions); P(B|\u00acA) is non-trivially high (~30% on any given day) because Israel-Lebanon has an elevated baseline of Israeli airstrikes on Lebanese territory even absent a formal 'conflict onset' event, reflecting the ongoing low-intensity campaign; WinProbability=2.2 (strong Israeli capability edge) and AudienceCosts=2.5 (high domestic lock-in) both support leaning toward the higher end within the range, while WarCosts=-0.8 (moderately costly war) and PatronDeterrence=0.5 (Hezbollah patron support, modest) partially offset this for the sustained/large-scale end but less so for a single-day airstrike.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli strikes on Lebanon are broadly reported by wire services, the highly specific weapon-type taxonomy (air-launched vs. FPV drones, exclusion of artillery/naval/rocket fire) means open-source reporting rarely disambiguates munition types with the precision required, creating substantial admin discretion risk on a single-day resolution window."
+    },
+    "glass_version": "v1"
+  },
+  "4178254": {
+    "contract_hash": "5dcd0ddbe08c",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (as specifically defined, excluding artillery, naval gunfire, ground incursions, cyber, and several other munition types) that physically impacts Lebanese terrestrial territory on September 12 IDT.",
+      "legalese_flags": [
+        "Highly specific qualifying action definition: only airstrikes (bombs, air-to-surface missiles, air-launched drones) or surface-to-surface missile strikes (one-way attack drones, cruise/ballistic missiles)",
+        "Explicit exclusions: artillery, mortars, rocket artillery, naval gunfire, small-arms fire, ground incursions, cyber operations, surface-to-air missiles, short-range loitering munitions, FPV drones, ATGMs",
+        "Impact must be on Lebanese terrestrial territory only \u2014 maritime territory and airspace excluded",
+        "Intercepted or destroyed munitions do not qualify even if debris causes damage",
+        "Single calendar-day window (September 12 IDT) \u2014 very narrow temporal scope",
+        "3-day adjudication window for conflicting reports, which can extend past end date",
+        "De facto control as of market creation defines Lebanese territory for disputed borders",
+        "Consensus-of-sources resolution standard rather than any single official statement"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract covers only a specific subset of kinetic military actions (airstrikes and defined missile types, explicitly excluding many other forms of force) within a single named day, making it a narrower condition than general conflict onset between the Israel-Lebanon dyad.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.35,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "The target_specific burden (Lebanese terrestrial territory, airstrike/SSM only, single calendar day) drives p_b_given_a to ~0.55 \u2014 Israel frequently uses airstrikes against Lebanon but the exclusion of artillery, rockets, and other common munitions plus the narrow one-day window meaningfully reduces the conditional probability; p_b_given_not_a is estimated at ~0.35 per day because Israel has been conducting near-daily airstrikes into Lebanese territory during the post-October 7 period even outside formal conflict onset, making this a high-frequency background action; WinProbability=2.2 (strong Israeli capability edge) supports higher positioning, but WarCosts=-0.8 (high cost of war) and PatronDeterrence=0.5 provide modest suppression on escalatory forms, while AudienceCosts=2.5 reinforces Israeli domestic political pressure to continue striking, keeping p_b_given_not_a elevated.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli strikes on Lebanon are routinely covered by wire services, the highly specific munition-type exclusions (artillery, rockets, FPV drones, loitering munitions all excluded) mean open-source reporting rarely distinguishes qualifying from non-qualifying weapon systems with sufficient precision, and the single-calendar-day IDT window combined with the consensus-of-sources standard creates substantial admin discretion risk."
+    },
+    "glass_version": "v1"
+  },
+  "4178261": {
+    "contract_hash": "cf9f6911d6c5",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (excluding artillery, naval gunfire, small arms, ground incursions, and several other weapon types) that physically impacts Lebanese terrestrial territory on September 19 IDT.",
+      "legalese_flags": [
+        "Highly specific weapon-type inclusions: only airstrikes (bombs, air-to-surface missiles, air-launched drones) and surface-to-surface missiles (one-way attack drones, cruise/ballistic missiles) qualify",
+        "Explicit exclusions: artillery, mortars, rocket artillery, MLRS, naval gunfire, small-arms fire, ground incursions, cyber operations, surface-to-air missiles, short-range loitering munitions, FPV drones, ATGM strikes",
+        "Geographic restriction: terrestrial territory only, maritime territory and airspace excluded",
+        "Intercepted/destroyed munitions explicitly excluded even if debris causes damage",
+        "Single-date window (September 19 IDT) makes this extremely time-restricted",
+        "3-day adjudication window for conflicting reports may extend resolution past end date",
+        "Attributed to Israel specifically; Lebanese or Hezbollah actions not qualifying"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a narrower subset of A because it restricts qualifying actions to specific weapon delivery methods (airstrikes and surface-to-surface missiles) while explicitly excluding many other forms of kinetic military action (ground incursions, artillery, naval fire, etc.), and limits to a single calendar date.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.45,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "The target_specific burden (Lebanese terrestrial territory, qualifying weapon types only, single-day window) drives the conditional estimates: given conflict onset P(B|A)=0.55 because airstrikes and surface-to-surface missiles are Israel's dominant tools against Lebanon but the single-date restriction and weapon-type exclusions (artillery, rockets, loitering munitions) trim this; P(B|\u00acA)=0.45 per day because even absent formal conflict onset the Israel-Lebanon dyad has seen near-daily qualifying strikes during the 2024 campaign, making this a high base-rate event on any given day; WinProbability=2.2 (strong Israeli capability edge) supports a higher within-range estimate, while WarCosts=-0.8 is peace-inducing but has not historically suppressed frequent low-level Israeli airstrikes against Lebanon, and AudienceCosts=2.5 reinforces Israeli leaders' political incentive to maintain visible military pressure.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli strikes on Lebanon are typically reported by wire services, the highly specific weapon-type inclusions and exclusions (e.g., distinguishing airstrikes from artillery or rocket artillery, or qualifying drones from excluded FPV/loitering munitions) require granular technical detail that open-source reporting rarely provides with sufficient precision to definitively satisfy the legalese, creating substantial resolution risk even when strikes are publicly confirmed."
+    },
+    "glass_version": "v1"
+  },
+  "4189935": {
+    "contract_hash": "be0bd22c53d1",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Iran must directly conduct an airstrike or surface-to-surface missile/drone strike on Jordanian terrestrial territory, explicitly claimed by Iran or confirmed from Iranian territory, excluding proxy attacks and several other weapon categories.",
+      "legalese_flags": [
+        "Excludes proxy forces (Hezbollah, Houthis, etc.) \u2014 only direct Iranian action counts",
+        "Excludes ground incursions, cyber operations, naval gunfire, artillery, mortars, rocket artillery, small-arms fire",
+        "Excludes surface-to-air missile strikes",
+        "Excludes 'minor' surface-to-surface strikes including short-range loitering munitions, FPV drones, ATGM strikes \u2014 ambiguity in what constitutes 'minor'",
+        "Requires explicit Iranian claim or confirmation of origin from Iranian territory",
+        "Intercepted munitions still qualify if they meet other criteria",
+        "Scope limited to Iranian territorial origin or explicit Iranian claim \u2014 excludes Iranian-directed but Iranian-proxy-executed strikes",
+        "3-day adjudication window for conflicting reports, with potential extension past deadline"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of engine event A because it requires a specific weapon-type delivery (airstrike or surface-to-surface missile/drone) directly by Iranian forces against Jordan, excluding proxy actions and numerous other forms of conflict onset that would otherwise qualify under A.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.1981,
+      "p_b_given_not_a": 0.002,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Target-specific requirement (Jordan specifically, direct Iranian strike only, no proxies) sharply suppresses P(B|A) since Iran-Jordan is a highly atypical dyad for direct Iranian kinetic action \u2014 Jordan is not a primary Iranian adversary and direct strikes would be extraordinarily escalatory; PatronDeterrence=1.5 (US/Israel patron commitment to Jordan is strong, Jordan participated in April 2024 air defense against Iranian strikes) further suppresses the probability, while WarCosts=-0.5 and NuclearDeterrence=0.3 provide modest additional peace-inducing pressure, leaving P(B|\u00acA) near zero as a direct Iranian strike on Jordan absent broader conflict onset is essentially unprecedented.",
+      "p_b_given_a_raw": 0.04,
+      "p_b_given_a_llm_clamped": 0.09,
+      "p_b_given_a_deterministic": 0.2444,
+      "anchor_range": [
+        0.09,
+        0.405
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.5,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "A direct Iranian airstrike on Jordan would be major news covered immediately by wire services, but the strict legalese\u2014requiring explicit Iranian claim or confirmed Iranian territorial origin, excluding proxies, excluding 'minor' munitions with undefined thresholds, and a 3-day adjudication window that could extend past the deadline\u2014creates substantial resolution risk even if a qualifying strike occurs."
+    },
+    "glass_version": "v1"
+  },
+  "4178270": {
+    "contract_hash": "35a71c6dc0b0",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (as narrowly defined) that physically impacts Lebanese terrestrial territory on September 28 IDT.",
+      "legalese_flags": [
+        "Highly specific weapon-type inclusions: only airstrikes (bombs, air-to-surface missiles, air-launched drones) or surface-to-surface missiles/one-way attack drones qualify",
+        "Explicit exclusions: ground incursions, naval gunfire, artillery, mortars, rocket artillery, small-arms fire, cyber ops, surface-to-air missiles, short-range loitering munitions, FPV drones, ATGMs all excluded",
+        "Terrestrial territory only \u2014 maritime territory and airspace of Lebanon excluded",
+        "Intercepted or destroyed munitions and their debris do not qualify",
+        "Single-day resolution window (September 28 IDT) with 3-day conflict-resolution extension",
+        "Attribution and timing must reach consensus among resolution sources",
+        "Disputed territories resolved by de facto Lebanese control as of market creation"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a narrower subset of conflict onset because it excludes entire categories of kinetic military action (ground incursions, artillery, naval fire, cyber) that would qualify as conflict onset under the engine's definition A.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.5174,
+      "p_b_given_not_a": 0.38,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrikes/SSMs only, excluding artillery, naval, ground) modestly reduces P(B|A) from ~0.85 for any strike to ~0.72 given Israel's strong historical preference for airstrikes in Lebanon; P(B|\u00acA) is set at 0.38/day reflecting the active post-ceasefire/post-war operational tempo in the Israel-Lebanon dyad where Israeli airstrikes into Lebanese territory have occurred frequently even outside formal conflict-onset episodes; WinProbability=2.2 (strong Israeli capability edge) supports a higher conditional on the named method being used when conflict occurs, while WarCosts=-0.8 (moderately costly war) and PatronDeterrence=0.5 (some Hezbollah patron support but limited) do not strongly suppress single-day airstrike probability, and AudienceCosts=2.5 locks Israeli leadership into visible responses, keeping P(B|\u00acA) elevated.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.588,
+      "p_b_given_a_deterministic": 0.4872,
+      "anchor_range": [
+        0.21,
+        0.588
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli strikes on Lebanon are routinely covered by wire services, the hyper-specific weapon-type exclusions (ruling out artillery, mortars, FPV drones, naval gunfire, and intercepted munitions) mean that open-source reporting will rarely specify whether a confirmed strike used a qualifying munition type versus an excluded one, creating substantial threshold ambiguity and heavy reliance on Polymarket admin discretion."
+    },
+    "glass_version": "v1"
+  },
+  "4178252": {
+    "contract_hash": "71ec6c43dc77",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (excluding artillery, naval gunfire, small arms, ground incursions, and other specified exclusions) that physically impacts Lebanese terrestrial territory on September 10 IDT.",
+      "legalese_flags": [
+        "Highly specific single-date resolution window (September 10 IDT only)",
+        "Narrow weapon-type definition excludes artillery, mortars, rocket artillery, naval gunfire, small arms, ground incursions, and cyber operations",
+        "Intercepted munitions explicitly excluded even if debris causes damage",
+        "Maritime territory and airspace of Lebanon excluded from qualifying territory",
+        "3-day confirmation window can extend market past end date",
+        "Consensus-of-sources adjudication standard rather than single authoritative source"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of conflict onset because it restricts qualifying actions to specific weapon delivery methods (airstrikes and surface-to-surface missiles) on a single named date, excluding many forms of kinetic military action that would count as conflict onset under the engine's broader definition.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.35,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Target_specific burden (Lebanese terrestrial territory, specific date, specific weapon types) lowers P(B|A) from ~0.7 for a broad Lebanon-strike contract to ~0.55 accounting for the single-day window and weapon-type exclusions; P(B|\u00acA) is substantial at ~0.35/day because Israel-Lebanon airstrike exchanges have been frequent at sub-conflict-onset frequency in recent years; WinProbability=2.2 (strong Israeli capability edge) and AudienceCosts=2.5 (high domestic lock-in) support the higher end within range, while WarCosts=-0.8 provides mild peace-inducing pressure that slightly suppresses sustained escalation but not single-date strikes.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli strikes on Lebanon are generally reported by major wire services, the highly specific single-date window, narrow weapon-type exclusions (ruling out artillery and rocket artillery), exclusion of maritime/airspace territory, and consensus-of-sources adjudication create substantial ambiguity about whether any given reported incident meets the precise resolution criteria."
+    },
+    "glass_version": "v1"
+  },
+  "4178269": {
+    "contract_hash": "7024a9222f8e",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (per detailed qualifying criteria) that directly impacts Lebanese terrestrial territory specifically on September 27 (IDT).",
+      "legalese_flags": [
+        "Highly specific weapon-type inclusions and exclusions (e.g., artillery, naval gunfire, FPV drones, ATGM explicitly excluded; air-to-surface missiles and ballistic missiles included)",
+        "Strict single-day resolution window (September 27 IDT only)",
+        "Geographic restriction to terrestrial Lebanon only \u2014 maritime territory and airspace excluded",
+        "Intercepted munitions explicitly excluded even if debris causes damage",
+        "3-day confirmation window for conflicting reports may extend past end date",
+        "Attribution must be confirmed as Israeli-initiated",
+        "Ground incursions explicitly excluded from qualifying actions"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of conflict onset because it restricts qualifying actions to specific weapon delivery types (excluding artillery, naval gunfire, ground incursions, etc.), limits geography to terrestrial Lebanon only, and confines the resolution window to a single calendar day, making it narrower than the general conflict-onset probability object.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.5174,
+      "p_b_given_not_a": 0.55,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike/surface-to-surface missile, excludes artillery/naval/drones) narrows P(B|A) somewhat from broad, but Israel's dominant strike mode against Lebanon is precisely airstrikes so the method exclusions don't suppress much; P(B|\u00acA) is high (~55% on any single day) because Israel has been conducting frequent airstrikes on Lebanese territory even absent a formal 'conflict onset' declaration \u2014 the single-day window is the binding constraint; WinProbability=2.2 (strong Israeli capability advantage) and AudienceCosts=2.5 (high domestic lock-in) both lean toward sustained operations, keeping P(B|A) elevated, while WarCosts=-0.8 (costly war) moderately suppresses the upper tail but doesn't dominate given the ongoing operational tempo.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.588,
+      "p_b_given_a_deterministic": 0.4872,
+      "anchor_range": [
+        0.21,
+        0.588
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli airstrikes on Lebanon are typically reported quickly by wire services, the highly specific weapon-type inclusions/exclusions (ruling out artillery, naval gunfire, FPV drones, ATGMs), the strict single-day IDT window, the interception/debris carve-out, and the maritime exclusion create substantial ambiguity requiring Polymarket admin discretion to adjudicate edge cases that open-source reporting will not resolve with sufficient granularity."
+    },
+    "glass_version": "v1"
+  },
+  "4178255": {
+    "contract_hash": "2195af7648b5",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike that physically impacts Lebanese terrestrial territory on September 13 IDT, excluding intercepted munitions, artillery, small arms, ground incursions, and cyber operations.",
+      "legalese_flags": [
+        "Highly specific weapon-type inclusions and exclusions (e.g., FPV drones excluded, air-launched drones included)",
+        "Terrestrial territory only \u2014 maritime territory and airspace explicitly excluded",
+        "Single-day resolution window (September 13 IDT) with up to 3-day confirmation grace period",
+        "Intercepted munitions and debris explicitly do not qualify even if damage occurs",
+        "Ground incursions explicitly excluded from qualifying actions",
+        "Naval gunfire, artillery, mortars, and rocket artillery explicitly excluded",
+        "Minor surface-to-surface strikes (short-range loitering munitions, ATGMs) excluded",
+        "Disputed territory resolved by de facto Lebanese control as of market creation"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract covers only specific kinetic strike types (airstrikes and certain missile/drone categories) by Israel against Lebanese terrestrial territory on a single day, making it a narrower subset of the broader interstate conflict onset probability object.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.5174,
+      "p_b_given_not_a": 0.38,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile, excluding artillery/naval gunfire/intercepted munitions) on a single calendar day: given Israel's extremely high operational tempo of airstrikes into Lebanon during the post-October-7 period (near-daily strikes at peak), P(B|\u00acA) on any given day is substantial (~38%), and P(B|A) is high since airstrike is the dominant Israeli kinetic method against Lebanon; WinProbability=2.2 (strong Israeli capability advantage) supports the airstrike modality being very likely if conflict occurs, AudienceCosts=2.5 (high domestic lock-in) reinforces continued strike activity, WarCosts=-0.8 (moderately costly) slightly suppresses but does not override given the established operational pattern, and PatronDeterrence=0.5 (low Hezbollah patron commitment post-Syria) does not meaningfully suppress Israeli action.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.588,
+      "p_b_given_a_deterministic": 0.4872,
+      "anchor_range": [
+        0.21,
+        0.588
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While major Israeli strikes on Lebanon are typically reported quickly by wire services, the highly specific weapon-type inclusions/exclusions (e.g., air-launched vs. FPV drones, artillery vs. surface-to-surface missiles) and terrestrial-only scope create substantial classification ambiguity that open-source reporting rarely resolves with sufficient precision for clean contract resolution."
+    },
+    "glass_version": "v1"
+  },
+  "4189925": {
+    "contract_hash": "712c898cb891",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "superset",
+      "win_condition_summary": "Iran must conduct an airstrike or surface-to-surface missile/drone strike directly from Iranian forces (not proxies) against any one of 21 listed Arab countries by September 15, 2026.",
+      "legalese_flags": [
+        "Dyad specified as Iran-SaudiArabia, but contract covers 21 Arab countries \u2014 Yemen, Iraq, Syria, Lebanon, Jordan, etc. are all in scope, vastly expanding the target set beyond the dyad",
+        "Proxy attacks explicitly excluded (Hezbollah, Houthis do not count)",
+        "Only actions explicitly claimed by Iran or confirmed to originate from Iranian territory qualify",
+        "Intercepted munitions still qualify if they constitute a qualifying military action",
+        "Specific exclusions: surface-to-air missiles, small arms, ground incursions, cyber, naval gunfire, artillery, mortars, MLRS, short-range loitering munitions, FPV drones, ATGMs",
+        "3-day attribution window with adjudication process if sources conflict",
+        "Arabia Standard Time (AST) governs deadlines",
+        "Internal waters of qualifying countries included in terrestrial territory definition"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a superset of the Iran-SaudiArabia dyad because YES resolves on Iranian kinetic action against any of 21 Arab countries, not specifically Saudi Arabia, making it a broader event than the engine's dyad-specific conflict onset probability.",
+      "translator_route": "PASS_TRANSLATION"
+    },
+    "scholar_version": "v3",
+    "clergy": null,
+    "clergy_version": null,
+    "glass": null,
+    "glass_version": null
+  },
+  "4178258": {
+    "contract_hash": "f76be462a7b8",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike that physically impacts Lebanese terrestrial territory on September 16 (IDT), excluding intercepted munitions, artillery, rocket artillery, ground incursions, naval gunfire, cyber operations, and minor short-range strikes.",
+      "legalese_flags": [
+        "Restricted to a single calendar date (September 16 IDT), making this a point-in-time snapshot rather than a horizon probability",
+        "Excludes ground incursions, which are a recognized form of kinetic military action",
+        "Excludes naval gunfire, artillery, mortars, and rocket artillery (MLRS), narrowing qualifying actions significantly",
+        "Excludes minor surface-to-surface strikes including loitering munitions, FPV drones, and ATGMs",
+        "Terrestrial territory only \u2014 maritime territory and airspace explicitly excluded from 'Lebanon'",
+        "Intercepted munitions explicitly do not qualify even if debris causes damage",
+        "3-day confirmation window for disputed attribution could extend resolution past the nominal deadline",
+        "Disputed border areas resolved by de facto control as of market creation"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a narrower subset of conflict onset because it restricts qualifying actions to specific strike types (airstrikes and surface-to-surface missiles) on a single named date, while explicitly excluding several other forms of kinetic military action (ground incursions, artillery, naval gunfire, minor drone strikes) that would constitute conflict onset under the engine's definition.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.506,
+      "p_b_given_not_a": 0.35,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile strike hitting Lebanese territory) on a single calendar day drives the point-in-time snapshot logic; Israel's WinProbability of 2.2 (strong capability edge) and AudienceCosts of 2.5 (high domestic lock-in) support a relatively elevated daily P(B|\u00acA) given Israel's demonstrated pattern of frequent cross-border strikes against Lebanon even during non-escalation periods, while WarCosts of -0.8 (moderate peace-inducing cost) and the narrow exclusions (no artillery, no drones/loitering munitions) modestly suppress both terms \u2014 P(B|A) is held below 1.0 because conflict onset could take a form that doesn't qualify (ground incursion, naval, etc.), and P(B|\u00acA) is meaningfully non-zero because Israel routinely conducts qualifying strikes against Lebanon on discrete days without a formal conflict onset being registered by the engine.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.55,
+      "p_b_given_a_deterministic": 0.4872,
+      "anchor_range": [
+        0.21,
+        0.588
+      ],
+      "was_clamped": false,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While major Israeli airstrikes on Lebanon are reliably reported by wire services, the narrow win condition excluding artillery, rockets, loitering munitions, and naval gunfire\u2014combined with a single-day IDT window and a 3-day attribution confirmation period\u2014creates substantial threshold ambiguity that puts resolution heavily at admin discretion."
+    },
+    "glass_version": "v1"
+  },
+  "4178253": {
+    "contract_hash": "035465390308",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (as specifically defined) that physically impacts Lebanese terrestrial territory on September 11 IDT.",
+      "legalese_flags": [
+        "Highly specific weapon-type inclusions: airstrikes (bombs, air-to-surface missiles, air-launched drones), surface-to-surface missiles (cruise, ballistic), one-way attack drones only",
+        "Explicit exclusions: ground incursions, naval gunfire, artillery, mortars, MLRS, small-arms fire, cyber operations, surface-to-air missiles, short-range loitering munitions, FPV drones, ATGM strikes",
+        "Geographic restriction: Lebanese terrestrial territory only \u2014 maritime territory and airspace excluded",
+        "Single-day deadline (September 11 IDT) makes this extremely time-constrained",
+        "Intercepted or destroyed munitions (including debris) do not qualify regardless of damage",
+        "3-day adjudication window for conflicting reports may extend resolution past the nominal end date",
+        "Disputed territory clause: only territory claimed by and under de facto Lebanese control as of market creation qualifies"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract requires a specific subset of kinetic military actions (airstrikes or surface-to-surface missiles only) on a single named date, explicitly excluding many forms of conflict onset (ground incursions, artillery, naval fire, cyber), making it a narrower condition than general interstate conflict onset for the Israel-Lebanon dyad.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.55,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "This is a single-day, target-specific kinetic contract (Lebanese terrestrial territory hit by airstrike or surface-to-surface missile on exactly September 11 IDT); because Israel has been conducting near-daily strikes on Lebanon under the ongoing conflict, P(B|\u00acA) is high relative to the engine's narrow 'conflict onset' definition \u2014 qualifying strikes occur almost every day regardless of fresh 'onset,' so the base rate for a single day is roughly 50-60%; WinProbability=2.2 (strong Israeli capability edge) and AudienceCosts=2.5 (high domestic lock-in) support leaning toward the higher end within the range, while WarCosts=-0.8 (moderately war-costly environment) and PatronDeterrence=0.5 (some Hezbollah patron constraint) provide mild suppression, leaving both P(B|A) and P(B|\u00acA) near 0.55 for this single day.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli strikes on Lebanon are typically reported quickly by wire services, the highly specific weapon-type inclusions and exclusions (e.g., ruling out artillery, mortars, FPV drones, and intercepted munitions) create significant threshold ambiguity that open-source reporting rarely resolves with sufficient technical precision, making correct adjudication heavily dependent on Polymarket admin discretion under contested or incomplete evidence."
+    },
+    "glass_version": "v1"
+  },
+  "4178262": {
+    "contract_hash": "d8653a7e554d",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (excluding artillery, rockets, naval gunfire, small arms, ground incursions, and cyber) that physically impacts Lebanese terrestrial territory on September 20 IDT.",
+      "legalese_flags": [
+        "Highly specific single-date resolution window (September 20 IDT only)",
+        "Explicit exclusions: artillery, rocket artillery (MLRS), naval gunfire, mortars, howitzers, small arms, ground incursions, cyber operations, surface-to-air missiles, short-range loitering munitions, FPV drones, ATGM strikes",
+        "Intercepted/destroyed munitions explicitly excluded even if debris causes damage",
+        "Geographic scope limited to terrestrial territory only \u2014 maritime territory and airspace excluded",
+        "Attribution and timing must reach consensus across resolution sources; 3-day adjudication window if sources conflict",
+        "Disputed territory resolved by de facto Lebanese control as of market creation date",
+        "Named weapon categories create edge-case ambiguity (e.g., classification of novel or hybrid munitions)"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of conflict onset because it requires a specific weapon-delivery method (airstrike or surface-to-surface missile) on a specific single date, explicitly excluding many other forms of kinetic military action (artillery, naval gunfire, ground incursions, etc.) that would otherwise qualify as interstate conflict onset.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.35,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Target_specific burden (Lebanese terrestrial territory, airstrike/SSM only, single calendar date IDT) drives P(B|A) to ~0.55 \u2014 airstrike is Israel's dominant modality against Lebanon so method restriction is not very binding, but single-date window cuts sharply against the broader conflict-onset concept; P(B|\u00acA) is set at ~0.35/day because even absent a formal conflict onset, Israel conducts routine interdiction airstrikes into Lebanese territory at high frequency under the current operational tempo (post-October 2023 pattern), making the no-conflict baseline non-trivial on any given day; WinProbability=2.2 (strong Israeli capability edge) supports the method being feasible and likely if conflict is ongoing, while WarCosts=-0.8 (moderately high war cost) slightly suppresses escalatory onset but does not suppress routine strikes already embedded in the operational pattern; AudienceCosts=2.5 reinforces that Israeli leaders face domestic pressure to act visibly, supporting continued strike activity.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli airstrikes on Lebanon are typically reported rapidly by wire services, the hyper-specific weapon-type exclusions (e.g., distinguishing loitering munitions from cruise missiles, or rocket artillery from ballistic missiles) and the single-date IDT window create substantial adjudication risk, as open-source reporting rarely provides the munition classification granularity required to satisfy or rule out the explicit exclusion list."
+    },
+    "glass_version": "v1"
+  },
+  "4189926": {
+    "contract_hash": "cb451172f9ce",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "superset",
+      "win_condition_summary": "Iran must conduct an airstrike or surface-to-surface/drone missile strike directly from Iranian forces (not proxies) against any of 21 listed Arab countries by September 30, 2026.",
+      "legalese_flags": [
+        "Dyad specified as Iran-SaudiArabia, but contract covers 21 Arab countries \u2014 not limited to Saudi Arabia",
+        "Proxy attacks (Hezbollah, Houthis, etc.) explicitly excluded",
+        "Only actions explicitly claimed by Iran or confirmed originating from Iranian territory count",
+        "Specific weapon exclusions: surface-to-air missiles, small arms, ground incursions, cyber, naval gunfire, artillery, mortars, short-range loitering munitions, FPV drones, ATGMs",
+        "Intercepted munitions still qualify if they constitute a qualifying military action",
+        "3-day adjudication window for conflicting reports, potentially extending past deadline",
+        "Action must be directed at terrestrial territory including internal waters only (not high seas or airspace ambiguity)",
+        "Arabia Standard Time (AST) governs deadline"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a superset of the Iran-SaudiArabia dyad because it resolves YES if Iran conducts qualifying kinetic action against any of 21 Arab countries, not just Saudi Arabia, making it broader than the engine's specified dyad conflict onset event.",
+      "translator_route": "PASS_TRANSLATION"
+    },
+    "scholar_version": "v3",
+    "clergy": null,
+    "clergy_version": null,
+    "glass": null,
+    "glass_version": null
+  },
+  "4178259": {
+    "contract_hash": "e4bb92eb02a6",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (excluding artillery, naval gunfire, ground incursions, cyber, and minor munitions) that physically impacts Lebanese terrestrial territory specifically on September 17 (IDT).",
+      "legalese_flags": [
+        "Narrow date restriction: action must occur on September 17 IDT only",
+        "Excludes ground incursions, naval gunfire, artillery, rockets, mortars, MLRS, cyber operations, small-arms fire",
+        "Excludes 'minor surface-to-surface strikes' including short-range loitering munitions, FPV drones, ATGMs \u2014 ambiguity in what counts as 'minor'",
+        "Excludes maritime territory and airspace \u2014 only terrestrial impact qualifies",
+        "Intercepted munitions explicitly excluded even if debris causes damage",
+        "3-day confirmation window may extend past deadline",
+        "Attribution must be confirmed via consensus of resolution sources"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of conflict onset because it restricts qualifying actions to specific strike types (airstrikes and surface-to-surface missiles) on a single named date, explicitly excluding numerous other forms of kinetic military action (ground incursions, artillery, naval fire, cyber) that would constitute conflict onset under the engine's definition.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.55,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "The target_specific burden (Lebanese terrestrial territory, specific method class of airstrike/SSM, single calendar day) is the key restriction driving P(B|A) below 1.0 \u2014 conflict onset need not manifest as an airstrike on precisely September 17 IDT \u2014 but the Israel-Lebanon dyad has shown extremely high operational tempo in 2024-2025 (near-daily strikes), making the per-day base rate of qualifying action very high even absent formal 'conflict onset' as the engine defines it; WinProbability of 2.2 (strong Israeli capability advantage) and AudienceCosts of 2.5 (high domestic lock-in) support a high strike frequency, while WarCosts of -0.8 and PatronDeterrence of 0.5 (moderate Hezbollah/Iran patron) provide modest restraint but have not historically suppressed day-to-day Israeli strike operations against Lebanon.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While major Israeli airstrikes on Lebanon are typically reported quickly by wire services, the highly specific exclusions (artillery, loitering munitions, 'minor' strikes) and the single-day IDT window create substantial ambiguity about whether any reported strike qualifies under the precise criteria, and the 3-day confirmation window plus multi-source consensus requirement introduces further resolution uncertainty."
+    },
+    "glass_version": "v1"
+  },
+  "4119722": {
+    "contract_hash": "22204db2bfad",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (excluding many weapon types) that directly impacts the specifically defined Greater Beirut geographic area by October 31.",
+      "legalese_flags": [
+        "Narrowly defined geographic boundary referencing a specific academic map (Faour & Mhawej 2014) \u2014 strikes near but outside this zone do not qualify",
+        "Extensive exclusion list: ground incursions, naval gunfire, artillery, mortars, rocket artillery, small loitering munitions, FPV drones, ATGM strikes, and cyber operations all excluded",
+        "Intercepted munitions explicitly excluded even if debris causes damage",
+        "3-day confirmation window that can extend past the stated deadline",
+        "Requires positive attribution to Israel specifically",
+        "Only air strikes and surface-to-surface missiles (including one-way attack drones) qualify \u2014 excludes many kinetic action types",
+        "Deadline timezone specified as IDT 11:59 PM"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a strict subset of conflict onset: it requires a specific weapon-delivery modality (airstrike or surface-to-surface missile) hitting a narrowly bounded geographic zone (Greater Beirut per a specific map), excluding numerous other forms of kinetic military action that would otherwise count as conflict onset.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.08,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Target_specific burden (strikes must hit the narrowly defined Greater Beirut polygon per Faour & Mhawej 2014, with extensive method exclusions reducing qualifying events) drives P(B|A) well below 1.0 \u2014 Greater Beirut is a plausible but not guaranteed locus of conflict onset, and many kinetic forms are excluded; P(B|\u00acA) is non-trivial (~8%/month) because Israel has periodically struck Beirut-area targets even absent full conflict onset (e.g. targeted assassinations, Hezbollah weapons depot strikes); WinProbability=2.2 (strong Israeli capability edge) supports leaning higher within the range, while WarCosts=-0.8 (high war cost, peace-inducing) and moderate PatronDeterrence=0.5 slightly suppress sustained escalation, but AudienceCosts=2.5 (high domestic lock-in) supports Israel following through on strikes if provoked, netting a moderate estimate.",
+      "p_b_given_a_raw": 0.45,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli airstrikes on Beirut are widely reported by major wire services, the hyper-specific geographic boundary tied to an academic map, the extensive weapon-type exclusion list, the interception/debris carve-out, and the extendable 3-day confirmation window create substantial resolution risk that the contract may fail to resolve correctly even when strikes clearly occur near the defined zone."
+    },
+    "glass_version": "v1"
+  },
+  "4178257": {
+    "contract_hash": "c59d5f17534e",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (excluding artillery, naval gunfire, ground incursions, cyber, and minor munitions) that physically impacts Lebanese terrestrial territory specifically on September 15 (IDT).",
+      "legalese_flags": [
+        "Single-day resolution window (September 15 IDT only) \u2014 extremely narrow temporal scope",
+        "Explicit exclusions: artillery, rocket artillery, naval gunfire, ground incursions, cyber operations, surface-to-air missiles, small-arms fire, short-range loitering munitions, FPV drones, ATGMs",
+        "Munitions intercepted before impact do not qualify, nor does debris from intercepted munitions",
+        "Geographic limitation: terrestrial territory only, maritime territory and airspace excluded",
+        "De facto control clause for disputed borders as of market creation",
+        "3-day confirmation window for conflicting reports, which may extend past end date",
+        "Attribution must be confirmed to Israel specifically",
+        "Narrow weapon-type definition excludes many common conflict-onset indicators"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of conflict onset because it restricts qualifying actions to specific strike modalities (airstrikes and surface-to-surface missiles only) on a single calendar day, excluding numerous other forms of kinetic military action that would constitute conflict onset under the engine's definition.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3147,
+      "p_b_given_not_a": 0.18,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Target_specific burden (Lebanese terrestrial territory, qualifying weapon types only, single calendar day IDT) sharply compresses P(B|A) from the broad base rate of Israel-Lebanon airstrikes to roughly 35% \u2014 conflict onset on that exact day with a qualifying method hitting terrestrial territory is plausible but not certain; P(B|\u00acA) is set at ~18% per day reflecting Israel's high operational tempo of qualifying strikes into Lebanon even absent a formal conflict-onset event (historical 2024 pattern saw near-daily qualifying airstrikes); WinProbability=2.2 (strong Israeli capability edge) and AudienceCosts=2.5 (high domestic lock-in) both support a higher-than-baseline strike frequency, while WarCosts=-0.8 (moderate cost of war) and PatronDeterrence=0.5 (modest Hezbollah patron constraint) apply mild downward pressure but do not dominate given the method-specific exclusions reduce this to a narrow daily window.",
+      "p_b_given_a_raw": 0.35,
+      "p_b_given_a_llm_clamped": 0.35,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": false,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli airstrikes on Lebanon are typically reported by wire services within hours, the extremely narrow single-day window (IDT), extensive weapon-type exclusions (artillery, drones, loitering munitions, ATGMs), the interception-nullification clause, and a 3-day confirmation window that outlasts the resolution date combine to create serious admin-discretion risk where a qualifying strike may occur but be misclassified or disputed under the fine-grained legalese."
+    },
+    "glass_version": "v1"
+  },
+  "4178260": {
+    "contract_hash": "65b7566f0593",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike that physically impacts Lebanese terrestrial territory specifically on September 18 (IDT), excluding a range of enumerated lesser munitions and non-kinetic actions.",
+      "legalese_flags": [
+        "Extremely narrow single-day window (September 18 IDT only)",
+        "Explicit exclusion of ground incursions, naval gunfire, artillery, mortars, rocket artillery, MLRS, small-arms fire, cyber operations",
+        "Exclusion of short-range loitering munitions, FPV drones, ATGMs \u2014 narrowing what counts as qualifying",
+        "Intercepted munitions explicitly excluded even if debris causes damage",
+        "Terrestrial territory only \u2014 Lebanon's maritime territory and airspace excluded",
+        "3-day confirmation window could extend resolution past the nominal end date",
+        "Attribution must be confirmed via consensus of resolution sources"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of A because it requires a specific, enumerated category of kinetic Israeli action (airstrike or surface-to-surface missile) against Lebanon on a single named date, explicitly excluding many other forms of military action that would qualify as conflict onset under the engine's broader definition.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.35,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Target_specific burden (Lebanese terrestrial territory, airstrike/SSM only, single-day window) lowers P(B|A) from ~0.8 base because artillery/drones/naval fire are excluded and the action must fall on exactly Sept 18 IDT; P(B|\u00acA) is non-trivial (~0.35/day) because Israel\u2013Lebanon low-level airstrike exchanges are historically very frequent even absent formal 'conflict onset' (IDF strikes Lebanon multiple times per month in the current operational tempo); WinProbability=2.2 and AudienceCosts=2.5 support leaning toward higher within range, while WarCosts=-0.8 and PatronDeterrence=0.5 provide mild suppression but not dominantly so given the ongoing strike cadence.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli airstrikes on Lebanon are broadly reported by wire services, the extremely narrow single-day IDT window, explicit exclusion of artillery/rockets/loitering munitions/FPV drones, terrestrial-only requirement, and multi-source attribution consensus create substantial resolution risk that a qualifying strike occurs but is disputed or miscategorized by Polymarket admins."
+    },
+    "glass_version": "v1"
+  },
+  "4178263": {
+    "contract_hash": "e03aafbe874e",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (excluding artillery, naval gunfire, ground incursions, cyber, and minor munitions) that physically impacts Lebanese terrestrial territory on September 21 IDT.",
+      "legalese_flags": [
+        "Narrowly defined qualifying actions: only airstrikes and surface-to-surface missiles qualify; ground incursions, artillery, naval gunfire, cyber, and minor loitering munitions explicitly excluded",
+        "Strict date-specificity: must occur on September 21 IDT only",
+        "Munitions intercepted before impact do not qualify, even if debris lands in Lebanon",
+        "Territorial scope limited to terrestrial Lebanon only \u2014 maritime territory and airspace excluded",
+        "3-day confirmation window for conflicting reports may extend market past end date",
+        "Attribution must be confirmed as Israeli-initiated"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of conflict onset because it restricts qualifying actions to specific weapon delivery methods (airstrikes and surface-to-surface missiles) on a single named date, explicitly excluding ground incursions, artillery, naval fire, cyber operations, and minor munitions that would otherwise constitute kinetic military action.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.18,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Target-specific burden (Lebanese terrestrial territory, specific date, specific munition types) modestly reduces P(B|A) below 1.0 since conflict onset could take excluded forms (artillery, ground incursion) or occur on adjacent dates; P(B|\u00acA) is elevated above near-zero because Israel-Lebanon has been in a persistent low-intensity exchange pattern with frequent airstrikes even outside recognized 'conflict onset' windows \u2014 historically Israel strikes Lebanese territory multiple times per week during active periods; WinProbability=2.2 (strong Israeli capability advantage) supports leaning higher for airstrike specifically as Israel's preferred method, AudienceCosts=2.5 supports continued operational pressure, WarCosts=-0.8 is mildly peace-inducing but has not historically suppressed individual airstrike sorties against Lebanon, and PatronDeterrence=0.5 (limited Hezbollah patron commitment post-2024 degradation) does not strongly suppress the action.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While major Israeli airstrikes are typically reported promptly by wire services, the narrow win condition (excluding artillery, naval gunfire, loitering munitions, and requiring confirmed terrestrial impact on a single calendar day IDT) creates substantial resolution risk from munition-type ambiguity, interception/debris edge cases, and the 3-day conflicting-reports window that complicates clean resolution."
+    },
+    "glass_version": "v1"
+  },
+  "4178264": {
+    "contract_hash": "f8f371dbac00",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike that physically impacts Lebanese terrestrial territory on September 22 (IDT), excluding intercepted munitions, artillery, naval gunfire, ground incursions, and several other weapon categories.",
+      "legalese_flags": [
+        "Highly specific weapon-type inclusions: only airstrikes (bombs, air-to-surface missiles, air-launched drones) and surface-to-surface missiles (one-way attack drones, cruise/ballistic missiles) qualify",
+        "Explicit exclusions: artillery, mortars, rocket artillery, MLRS, naval gunfire, small-arms fire, ground incursions, cyber operations, surface-to-air missiles, short-range loitering munitions, FPV drones, ATGMs",
+        "Intercepted or destroyed munitions explicitly excluded even if debris causes damage",
+        "Geographic restriction: terrestrial territory only \u2014 maritime territory and airspace excluded",
+        "Single-date resolution window: September 22 IDT only",
+        "3-day adjudication window for conflicting reports may extend past end date",
+        "Disputed territory resolved by de facto Lebanese control as of market creation"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of conflict onset because it restricts qualifying actions to specific weapon delivery types (airstrikes and surface-to-surface missiles) while explicitly excluding ground incursions, artillery, naval gunfire, and other forms of kinetic military action that would count under the engine's broader conflict-onset definition.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.5174,
+      "p_b_given_not_a": 0.55,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike/SSM only, excluding artillery/rockets/naval) is the binding constraint on P(B|A) since Israel's conflict toolkit against Lebanon heavily favors airstrikes but excludes many common low-level options; P(B|\u00acA) is high at ~0.55/day because Israel has been conducting near-daily airstrikes on Lebanese territory during the ongoing post-October-7 operation tempo, meaning qualifying strikes occur frequently even absent a formally defined 'conflict onset'; WinProbability=2.2 (strong Israeli capability edge) supports higher airstrike frequency within range, while WarCosts=-0.8 is somewhat peace-inducing but has not suppressed the existing operational tempo, and AudienceCosts=2.5 (high domestic lock-in) reinforces continued strike activity.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.588,
+      "p_b_given_a_deterministic": 0.4872,
+      "anchor_range": [
+        0.21,
+        0.588
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli strikes on Lebanon are widely reported by wire services, the highly specific weapon-type taxonomy (excluding artillery, rockets, MLRS, and short-range loitering munitions while including only airstrikes and surface-to-surface missiles) means resolvers must classify munition types that open-source reporting rarely specifies with sufficient precision, creating substantial resolution ambiguity even when strikes are confirmed."
+    },
+    "glass_version": "v1"
+  },
+  "4178265": {
+    "contract_hash": "ad4882928517",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike that physically impacts Lebanese terrestrial territory on September 23 (IDT), excluding artillery, mortars, rocket artillery, small arms, ground incursions, cyber, naval gunfire, and intercepted munitions.",
+      "legalese_flags": [
+        "Highly specific weapon-type inclusions and exclusions (e.g., FPV drones and short-range loitering munitions excluded, but longer-range one-way attack drones included)",
+        "Strict single-date resolution window (September 23 IDT only)",
+        "Terrestrial territory only \u2014 maritime territory and airspace excluded",
+        "Intercepted munitions and debris explicitly excluded regardless of damage",
+        "3-day adjudication window for conflicting reports may extend resolution past end date",
+        "Ground incursions explicitly excluded from qualifying actions",
+        "Artillery, mortars, MLRS, howitzers, naval gunfire all excluded",
+        "De facto control boundary definition for disputed territories"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of conflict onset because it requires a specific weapon-type (airstrike or surface-to-surface missile) from a specific actor (Israel) against a specific target (Lebanese terrestrial territory) on a single named date, while explicitly excluding multiple forms of kinetic military action that would otherwise qualify as conflict onset.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.72,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "The target_specific burden (Lebanese terrestrial territory, airstrike/SSM only, excluding artillery/mortars/naval/ground incursion) on a single calendar day drives p_b_given_a to ~0.55 since conflict onset on this dyad frequently involves the excluded methods too; p_b_given_not_a is high (~0.72/day) because Israel has conducted near-daily airstrikes on Lebanese territory throughout the 2024-2025 low-intensity campaign even absent formal conflict onset, making the single-day base rate for this specific action type substantial; WinProbability=2.2 (strong Israeli capability edge) and AudienceCosts=2.5 (high domestic lock-in) support leaning toward the higher end of the kinetic base rate, while WarCosts=-0.8 moderately suppresses escalation to full conflict onset but does not suppress the ongoing strike tempo.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli strikes on Lebanon are typically reported promptly by wire services, the highly specific weapon-type taxonomy (distinguishing loitering munitions by range, excluding artillery/mortars/naval gunfire, terrestrial-only impacts) creates serious resolution ambiguity since open-source reporting rarely categorizes munition types with the precision required, and the single-day IDT window combined with a 3-day adjudication period and Polymarket admin discretion over contested classifications elevates resolution failure risk substantially."
+    },
+    "glass_version": "v1"
+  },
+  "4178266": {
+    "contract_hash": "be61e0216079",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike (as specifically defined) that physically impacts Lebanese terrestrial territory on September 24 IDT.",
+      "legalese_flags": [
+        "Narrowly defined qualifying actions: only airstrikes or surface-to-surface missile strikes; excludes ground incursions, artillery, naval gunfire, cyber, small arms, and minor loitering munitions",
+        "Geographic restriction: Lebanese terrestrial territory only, explicitly excluding maritime territory and airspace",
+        "Temporal restriction: single specific date (September 24 IDT), not a horizon window",
+        "Interception exclusion: munitions destroyed before impact do not qualify, even if debris lands in Lebanon",
+        "Attribution and timing must be confirmed by consensus of sources within 3 calendar days",
+        "Disputed territory resolved by de facto Lebanese control as of market creation"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract covers only a specific subset of conflict onset actions (airstrikes and surface-to-surface missiles, excluding many kinetic forms) on a single named date, making it narrower than the engine's general conflict onset probability object.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.55,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Target-specific (Lebanese terrestrial territory on a single date) with method restriction (airstrike or surface-to-surface only, excluding artillery/naval/cyber) constrains P(B|A) modestly below 1.0 since conflict onset could manifest via excluded methods; P(B|\u00acA) is elevated because Israel-Lebanon has seen near-daily cross-border strikes even absent formal 'conflict onset' per the engine definition, making a qualifying strike on any given day a frequent baseline event; WinProbability=2.2 (strong Israeli capability advantage) and AudienceCosts=2.5 (high domestic lock-in) both push toward higher frequency of kinetic action, while WarCosts=-0.8 is mildly peace-inducing but historically has not prevented routine Israeli airstrikes in Lebanon, and PatronDeterrence=0.5 and NuclearDeterrence=0.5 are both low and do not materially suppress this tier of action.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While Israeli airstrikes on Lebanon are typically reported quickly by wire services, the highly specific exclusions (artillery, loitering munitions, interceptions, maritime territory) and the 3-day consensus confirmation window create significant resolution risk that a qualifying strike may occur yet fail resolution due to definitional ambiguity or sourcing disputes."
+    },
+    "glass_version": "v1"
+  },
+  "4178267": {
+    "contract_hash": "bce199642173",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "subset",
+      "win_condition_summary": "Israel must conduct an airstrike or surface-to-surface missile strike that physically impacts Lebanese terrestrial territory on September 25 IDT.",
+      "legalese_flags": [
+        "Restricted to a single calendar date (September 25 IDT), not a horizon window",
+        "Excludes ground incursions, naval gunfire, artillery, rocket artillery, mortars, and small-arms fire from qualifying actions",
+        "Excludes minor surface-to-surface strikes including short-range loitering munitions, FPV drones, and ATGM strikes",
+        "Excludes maritime territory and airspace of Lebanon \u2014 terrestrial impact required",
+        "Intercepted munitions and their debris explicitly excluded",
+        "Disputed territory scoped to de facto Lebanese control as of market creation",
+        "3-day adjudication window for conflicting reports, potentially extending resolution past end date"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract is a subset of engine event A because it requires a specific weapon-delivery modality (airstrike or surface-to-surface missile) on a single named date, excluding many kinetic actions (ground incursions, artillery, naval gunfire) that would otherwise constitute conflict onset between Israel and Lebanon.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v3",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "airstrike",
+      "p_b_given_a": 0.3231,
+      "p_b_given_not_a": 0.35,
+      "p_b_given_not_a_reference_days": 1,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "The target_specific burden (terrestrial Lebanese territory, specific qualifying munition types, single calendar date) modestly suppresses P(B|A) below 1.0 since conflict onset might not manifest precisely on Sept 25 or might use excluded methods; P(B|\u00acA) is meaningfully non-zero (~0.35/day) because Israel has conducted frequent airstrikes on Lebanese territory even absent a formal 'conflict onset' event as defined by the engine \u2014 this is a near-daily operational pattern during heightened periods; WinProbability=2.2 (strong Israeli capability advantage) and AudienceCosts=2.5 (high domestic lock-in) push toward the higher end of the range, while WarCosts=-0.8 (moderately costly war) provides a mild peace-inducing signal that partially offsets; PatronDeterrence=0.5 and NuclearDeterrence=0.5 are low and do not materially suppress the specific airstrike action type.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.378,
+      "p_b_given_a_deterministic": 0.2996,
+      "anchor_range": [
+        0.084,
+        0.378
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic"
+    },
+    "clergy_version": "v5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "Israeli strikes on Lebanon are typically reported rapidly by wire services, but the highly specific exclusions (artillery, drones, loitering munitions, maritime territory, intercepted munitions) combined with the single-date IDT window and 3-day adjudication clause create substantial resolution risk if only borderline qualifying strikes occur."
+    },
+    "glass_version": "v1"
   }
 }
