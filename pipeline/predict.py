@@ -126,6 +126,27 @@ def load_dyad_configs():
             return json.load(f)
     return {}
 
+NODE_MEMORY_STATE_PATH = os.path.join(os.path.dirname(__file__), "node_memory_state.json")
+
+def load_node_memory_state():
+    """Cross-day node memory, keyed by canonical dyad -> {"as_of": iso-date, "nodes": {node: value}}.
+    Added 2026-09-10 (Phase 0b) -- predict.py previously rebuilt node_memory
+    from scratch every run ('no decay on daily pipeline'), so yesterday's
+    strike/ultimatum/mobilization silently vanished unless today's news
+    re-mentioned it. See Sept 5 forensics work log."""
+    if os.path.exists(NODE_MEMORY_STATE_PATH):
+        with open(NODE_MEMORY_STATE_PATH) as f:
+            return json.load(f)
+    return {}
+
+def save_node_memory_state(state):
+    # Atomic write -- this file is read-then-written on every dyad, every
+    # day, indefinitely. A crash mid-write must not corrupt it.
+    tmp = NODE_MEMORY_STATE_PATH + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(state, f, indent=2)
+    os.replace(tmp, NODE_MEMORY_STATE_PATH)
+
 # ============================================================
 # NODE SYSTEM PROMPT + RUBRICS
 # ============================================================
@@ -393,6 +414,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         print(f"[predict.py] DRY RUN — capped at 3 markets.")
 
     _known_keys = set(load_dyad_configs().keys())
+    _node_memory_state = load_node_memory_state()
     dyad_groups: Dict[str, List] = {}
     for m in core:
         raw_dyad = m.get("dyad") or "Unknown"
@@ -447,17 +469,36 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         baseline_with_suppressors = {**baseline, **suppressor_static}
         toggles = _apply_deltas(baseline_with_suppressors, call_a)
 
-        # Build q_logit from node memory (no decay for daily pipeline — use today's values)
+        # Build q_logit from node memory, with real cross-day decay (Phase 0b,
+        # 2026-09-10). Ported directly from engine.py's backtest loop: same
+        # per-day DECAY_FACTOR (0.5**(1/half_life)), same max(today_val, decayed)
+        # combination rule. Cold-start (no persisted entry yet) falls back to
+        # today's value only, same as the old behavior.
         q_static = config.get("q_static", {})
         q_components = build_q_components(toggles, call_a, call_b, q_static)
+
+        _persisted = _node_memory_state.get(dyad, {})
+        _persisted_nodes = _persisted.get("nodes", {})
+        _persisted_as_of = _persisted.get("as_of")
+        _days_elapsed = (today - date.fromisoformat(_persisted_as_of)).days if _persisted_as_of else None
+
         node_memory = {}
         for node, val in q_components.items():
             hl = HALF_LIFE_DAYS.get(node)
-            if hl is None:
+            if hl is None or _days_elapsed is None:
                 node_memory[node] = val
             else:
-                node_memory[node] = val  # no decay on daily pipeline
+                prior = _persisted_nodes.get(node, 0.0)
+                decayed = prior * (DECAY_FACTOR.get(node, 1.0) ** max(_days_elapsed, 0))
+                node_memory[node] = max(val, decayed)
         q_logit = sum(v * Q_SHRINKAGE.get(k, 0.50) for k, v in node_memory.items())
+
+        _node_memory_state[dyad] = {"as_of": today.isoformat(), "nodes": node_memory}
+        if not dry_run:
+            try:
+                save_node_memory_state(_node_memory_state)
+            except Exception as ex:
+                print(f"  [warn] failed to persist node_memory_state (non-fatal, will retry tomorrow): {ex}")
 
         print(f"  q_logit={q_logit:.3f} | TriggerType={call_a.get('TriggerType',0):.2f} | OP={call_b.get('OperationalPreparation',0):.2f} | LVO={call_b.get('LiveViolenceObserved',0):.2f}")
         print(f"  Toggles: {json.dumps({k: round(v,3) for k,v in toggles.items() if k in baseline})}") 
@@ -475,6 +516,37 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         acute_onset  = _parse_date_str(dyad_meta.get("acute_phase_onset_date"))
         event_date   = _parse_date_str(dyad_meta.get("event_date"))
         z_t          = DYAD_REGIME.get(dyad, 0)
+
+        # Phase 0c (2026-09-10): auto-stamp acute_phase_onset_date the first
+        # day this dyad shows real acute signal. Without this, acute_onset
+        # stays None forever, _clock falls back to `today` every single run,
+        # and _A is pinned at 0 indefinitely -- which (Weibull shape=0.65,
+        # a decreasing-hazard curve) evaluates every dyad at the MAXIMUM-
+        # hazard point of the curve regardless of how long the real crisis
+        # has actually been running. Uses the exact same _acute_core sum
+        # already used to gate the boost below -- no new threshold invented.
+        # Known limitation, not solved here: never auto-clears, so a dyad
+        # that goes quiet for months and re-flares inherits a stale date.
+        if acute_onset is None:
+            _today_acute_core = (
+                q_components.get("OperationalPreparation", 0)
+                + q_components.get("LiveViolenceObserved", 0)
+                + q_components.get("LiveUltimatumDeadline", 0)
+                + q_components.get("MobilizationSignal", 0)
+            )
+            if _today_acute_core > 0 and not dry_run:
+                try:
+                    _all_configs = load_dyad_configs()
+                    if dyad not in _all_configs:
+                        raise KeyError(f"'{dyad}' has no dyad_configs.json entry (fallback-baseline dyad) -- skipping onset stamp")
+                    _all_configs[dyad]["acute_phase_onset_date"] = today.isoformat()
+                    with open(DYAD_CONFIGS_PATH, "w") as f:
+                        json.dump(_all_configs, f, indent=2, ensure_ascii=False)
+                        f.write("\n")
+                    acute_onset = today
+                    print(f"  [info] acute_phase_onset_date set for '{dyad}' -> {today.isoformat()}")
+                except Exception as ex:
+                    print(f"  [warn] failed to persist acute_phase_onset_date (non-fatal): {ex}")
 
         for m in dyad_markets:
             # Was: days_rem = days_until(m.get("end_date", "")) -- read the

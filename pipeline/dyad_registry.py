@@ -35,7 +35,13 @@ ALIASES = {
     # "Iran-ArabState" (singular) and "Iran-ArabStates" (plural) were true
     # duplicates of the same Gulf/GCC aggregate concept. ArabStates kept as
     # canonical (54 vs 45 log rows, more complete crisis_context/query).
-    "Iran-ArabStates": ["Iran-ArabState"],
+    # "Iran-Gulf States" found 2026-09-10 during acute_phase_onset_date
+    # backfill work -- a THIRD duplicate missed by the Sept 5 forensics
+    # (which only flagged the 4 spelling variants above). 0 live markets
+    # tagged with it, but 84 real historical log.jsonl rows, first-acute-
+    # signal July 25 (a full month before ArabStates' Aug 20-21) -- an
+    # older, pre-suppressor-cluster-era entry, not dead cruft.
+    "Iran-ArabStates": ["Iran-ArabState", "Iran-Gulf States"],
     "Israel-Pakistan": ["Pakistan-Israel"],
     "US-Colombia": ["USA-Colombia"],
     "US-Denmark": ["USA-Denmark"],
