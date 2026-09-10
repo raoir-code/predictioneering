@@ -21871,7 +21871,7 @@
     "scraped_at": "2026-09-07T13:36:42.648690+00:00",
     "bucket": "CORE",
     "bucket_reason": "This question is directly about whether Iran will initiate interstate conflict against an Arab state, which is a conflict onset question involving a specific initiating state actor against a class of potential targets.",
-    "dyad": "Iran-SaudiArabia",
+    "dyad": "Iran-ArabStates",
     "relevant_nodes": [
       "WinProbability",
       "WarCosts",
@@ -26353,7 +26353,7 @@
     "scraped_at": "2026-09-07T13:36:42.648690+00:00",
     "bucket": "CORE",
     "bucket_reason": "This question directly asks about interstate conflict onset between Iran and Arab states, which is a core conflict initiation question even though the specific Arab country target is unspecified.",
-    "dyad": "Iran-SaudiArabia",
+    "dyad": "Iran-ArabStates",
     "relevant_nodes": [
       "WinProbability",
       "WarCosts",

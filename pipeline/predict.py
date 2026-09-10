@@ -57,6 +57,7 @@ from pipeline.engine import (
     HORIZON_REFERENCE_DAYS,
 )
 from pipeline.translator import _get_market_deadline
+from pipeline.dyad_registry import canonicalize, UnknownDyadError
 
 # ENGINE CONFIG
 # ============================================================
@@ -391,9 +392,16 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         core = core[:3]
         print(f"[predict.py] DRY RUN — capped at 3 markets.")
 
+    _known_keys = set(load_dyad_configs().keys())
     dyad_groups: Dict[str, List] = {}
     for m in core:
-        dyad = m.get("dyad") or "Unknown"
+        raw_dyad = m.get("dyad") or "Unknown"
+        try:
+            dyad, _ = canonicalize(raw_dyad, known_bilateral_keys=_known_keys)
+        except UnknownDyadError:
+            print(f"  [warn] '{raw_dyad}' not in dyad_registry.py -- "
+                  f"add an alias if this is a known dyad under a new spelling.")
+            dyad = raw_dyad
         dyad_groups.setdefault(dyad, []).append(m)
 
     for dyad, dyad_markets in dyad_groups.items():

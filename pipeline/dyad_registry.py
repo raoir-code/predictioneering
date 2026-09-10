@@ -27,6 +27,15 @@ ALIASES = {
     "Bangladesh-Israel": ["Israel-Bangladesh"],
     "Turkey-Greece": ["Greece-Turkey"],
     "Israel-Saudi Arabia": ["Saudi Arabia-Israel", "Israel-SaudiArabia"],
+    # Added 2026-09-10 after Sept 5 forensics on the Aug 30-31 Iran-attack miss.
+    # Both spellings had independent, actively-maintained config entries and
+    # roughly-even live log history (52 vs 49 rows) -- a real production
+    # split-brain, not stale cruft. See work log 2026-09-10.
+    "Iran-Saudi Arabia": ["Iran-SaudiArabia"],
+    # "Iran-ArabState" (singular) and "Iran-ArabStates" (plural) were true
+    # duplicates of the same Gulf/GCC aggregate concept. ArabStates kept as
+    # canonical (54 vs 45 log rows, more complete crisis_context/query).
+    "Iran-ArabStates": ["Iran-ArabState"],
     "Israel-Pakistan": ["Pakistan-Israel"],
     "US-Colombia": ["USA-Colombia"],
     "US-Denmark": ["USA-Denmark"],
