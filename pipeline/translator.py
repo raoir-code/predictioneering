@@ -264,6 +264,21 @@ def _contract_hash(market: dict) -> str:
     return hashlib.md5(text.encode()).hexdigest()[:12]
 
 
+def _toggles_hash(market: dict) -> str:
+    """Phase 3a (2026-09-10): Clergyman's cache hit previously depended only
+    on contract text + prompt version, but Clergyman reads live structural
+    _toggles (WarCosts, WinProbability, PatronDeterrence, NuclearDeterrence)
+    when estimating p_b_given_a -- so changing live conditions didn't force
+    a re-estimate. Sept 5 forensics found identical p_b_given_a values
+    persisting across days despite changing live conditions. Hashing the
+    exact toggles dict Clergyman actually consumes (market.get("_toggles"))
+    and folding it into the cache key closes this without needing to
+    enumerate which specific toggles matter -- any change invalidates."""
+    toggles = market.get("_toggles", {})
+    text = json.dumps(toggles, sort_keys=True)
+    return hashlib.md5(text.encode()).hexdigest()[:12]
+
+
 def _cache_key(market: dict) -> str:
     mid = market.get("market_id") or ""
     if mid:
@@ -890,6 +905,7 @@ def translate_market(market: dict, cache: dict) -> dict:
     market_p  = market.get("market_price")
     volume    = _polymarket_volume(market)
     chash     = _contract_hash(market)
+    thash     = _toggles_hash(market)
 
     label = (market.get("label") or market.get("question") or "")[:60]
     print(f"\n  [{dyad}] {label}")
@@ -900,14 +916,19 @@ def translate_market(market: dict, cache: dict) -> dict:
         print(f"    [filter] {reason} — skipping")
         return _pass_fields(market, None, reason)
 
-    # ── Cache check for static agent outputs ──────────────────────────
+    # ── Cache check for static agent outputs ────────────────────────
     # Per-agent: text match AND prompt-version match, independently.
     # A Clergyman-only prompt bump re-scores Clergyman without wasting
     # a Scholar/Spyglass call that's still valid under its own version.
+    # Clergyman additionally requires a toggles-hash match (Phase 3a,
+    # 2026-09-10) -- contract text staying identical doesn't mean the
+    # live structural conditions Clergyman actually reasons over haven't
+    # moved since the cached estimate.
     cached      = cache.get(market_id, {})
     text_match  = cached.get("contract_hash") == chash
     scholar_hit = text_match and cached.get("scholar_version") == LEGAL_SCHOLAR_PROMPT_VERSION
-    clergy_hit  = text_match and cached.get("clergy_version")  == CLERGYMAN_PROMPT_VERSION
+    clergy_hit  = (text_match and cached.get("clergy_version") == CLERGYMAN_PROMPT_VERSION
+                   and cached.get("toggles_hash") == thash)
     glass_hit   = text_match and cached.get("glass_version")   == SPYGLASS_PROMPT_VERSION
     scholar   = cached.get("scholar") if scholar_hit else None
     clergy    = cached.get("clergy")  if clergy_hit  else None
@@ -973,6 +994,7 @@ def translate_market(market: dict, cache: dict) -> dict:
     cache[market_id] = {"contract_hash": chash,
                         "scholar": scholar, "scholar_version": LEGAL_SCHOLAR_PROMPT_VERSION,
                         "clergy": clergy, "clergy_version": CLERGYMAN_PROMPT_VERSION,
+                        "toggles_hash": thash,
                         "glass": glass, "glass_version": SPYGLASS_PROMPT_VERSION}
 
     # ── Bettor ────────────────────────────────────────────────────────

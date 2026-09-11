@@ -21,12 +21,14 @@ from datetime import datetime, timezone, date
 from pathlib import Path
 from collections import defaultdict
 from pipeline.market_truth import fetch_true_prices, fetch_token_for_market
+from pipeline.dyad_registry import ALIASES
 
 # ─────────────────────────────────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────────────────────────────────
 
 PREDICTIONS_LOG  = Path("predictions/log.jsonl")
+NODE_HISTORY_LOG = Path("pipeline/node_score_history.jsonl")
 BRIER_LOG        = Path("predictions/brier_log.jsonl")
 BRIER_SUMMARY    = Path("predictions/brier_summary.json")
 CLASSIFIED_FEED  = Path("pipeline/classified_feed.json")
@@ -199,6 +201,41 @@ def sunset_market_in_feed(market_id: str, outcome: int) -> bool:
 # BRIER COMPUTATION
 # ─────────────────────────────────────────────────────────────────────
 
+_SEVERE_OBSERVABLE_THRESHOLD = 0.9  # same "confirmed severe event" ceiling
+                                     # used in context_keeper.py's Phase 1c
+                                     # override -- kept consistent rather
+                                     # than inventing a new threshold here.
+
+def _first_severe_observable_date(dyad: str) -> date | None:
+    """Phase 3b (2026-09-10): the earliest date node_score_history.jsonl
+    shows a confirmed severe reading (LiveViolenceObserved or TriggerType
+    >= _SEVERE_OBSERVABLE_THRESHOLD) for `dyad`, used as a proxy for "the
+    qualifying event became publicly observable." Checks the dyad's known
+    aliases too (node_score_history.jsonl predates today's canonicalization
+    fix and still has historical rows under old spellings for dates before
+    it). Returns None if no such reading exists in the log at all -- caller
+    falls back to the pre-existing behavior in that case, not to a broken
+    or missing last_p."""
+    if not NODE_HISTORY_LOG.exists():
+        return None
+    names = {dyad} | set(ALIASES.get(dyad, []))
+    earliest = None
+    with open(NODE_HISTORY_LOG) as f:
+        for line in f:
+            try:
+                r = json.loads(line)
+            except Exception:
+                continue
+            if r.get("dyad") not in names:
+                continue
+            if (r.get("LiveViolenceObserved", 0) >= _SEVERE_OBSERVABLE_THRESHOLD
+                    or r.get("TriggerType", 0) >= _SEVERE_OBSERVABLE_THRESHOLD):
+                d = r.get("date")
+                if d and (earliest is None or d < earliest):
+                    earliest = d
+    return date.fromisoformat(earliest) if earliest else None
+
+
 def compute_brier_entry(market_id: str, predictions: list,
                          status: dict, token_lookup: dict | None = None) -> dict | None:
     """
@@ -232,7 +269,21 @@ def compute_brier_entry(market_id: str, predictions: list,
         return None
 
     anchor = scored[0]    # official — behavior unchanged from before this patch
-    last   = scored[-1]   # informational only
+
+    # Phase 3b (2026-09-10): last_p is informational-only (never the
+    # official score), but was contaminated by predictions made after the
+    # real-world event became publicly known, as long as Polymarket hadn't
+    # yet formally resolved (Sept 5 forensics finding). Filter to
+    # predictions made strictly before the event became observable; if
+    # that leaves nothing, or we can't determine an observable date at
+    # all, fall back to the original behavior (last prediction before
+    # official resolution) rather than reporting no informational metric.
+    dyad = anchor.get("dyad")
+    observable_date = _first_severe_observable_date(dyad) if dyad else None
+    pre_event = [p for p in scored
+                 if observable_date is None
+                 or p.get("timestamp", "")[:10] < observable_date.isoformat()]
+    last = pre_event[-1] if pre_event else scored[-1]
 
     conditional_p = anchor["conditional_p"]
     engine_p      = anchor.get("engine_p")
