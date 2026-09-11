@@ -1063,6 +1063,15 @@ def run_backtest(dry_run=False):
         # 2. Run snapshots
         market_window = min(HORIZON_REFERENCE_DAYS, len(sm['history']))  # actual days in this market
         node_memory = {}  # decay memory — reset per dyad
+        # Phase 0c-backtest (2026-09-10): in-memory-only onset tracking for
+        # this replay. NEVER written to dyad_configs.json -- that file is
+        # live's shared source of truth, and this loop replays alternate
+        # historical snapshots that must not be able to overwrite it.
+        # Falls back to the real dyad_configs.json value if one is already
+        # set (e.g. US-Iran, US-Venezuela's hand-verified dates); otherwise
+        # tracks the first local snapshot where acute_core fires, same rule
+        # as the live version.
+        _local_onset = _parse_date_str(_dyad_meta.get('acute_phase_onset_date')) if _dyad_meta else None
         for offset in SNAPSHOT_OFFSETS:
             snapshot_date = end_date - timedelta(days=offset)
 
@@ -1117,12 +1126,6 @@ def run_backtest(dry_run=False):
             # Discrimination comes from suppressor cluster (structural) +
             # acute q node scores from LLM (semantic). If OP≈0 (Taiwan
             # chronic exercises), _acute_core≈0 → boost≈0 naturally.
-            _acute_onset  = _parse_date_str(_dyad_meta.get('acute_phase_onset_date') if _dyad_meta else None)
-            _event_date   = _parse_date_str(_dyad_meta.get('event_date') if _dyad_meta else None)
-            _icb_boost = 0.0
-            _clock = _acute_onset if (_acute_onset and snapshot_date >= _acute_onset) else snapshot_date
-            _A = max((snapshot_date - _clock).days, 0)
-            _F = _weibull_residual(_A, max(days_remaining, 0))
             _qc = q_components
             _acute_core = (
                 _qc.get('OperationalPreparation', 0)
@@ -1130,6 +1133,18 @@ def run_backtest(dry_run=False):
               + _qc.get('LiveUltimatumDeadline',  0)
               + _qc.get('MobilizationSignal',     0)
             )
+            # Phase 0c-backtest (2026-09-10): auto-stamp the LOCAL (in-memory
+            # only) onset tracker the first snapshot where real acute signal
+            # fires within THIS replay -- same rule as live's predict.py fix,
+            # but scoped to this market's loop and never written to disk.
+            if _local_onset is None and _acute_core > 0:
+                _local_onset = snapshot_date
+            _acute_onset  = _local_onset
+            _event_date   = _parse_date_str(_dyad_meta.get('event_date') if _dyad_meta else None)
+            _icb_boost = 0.0
+            _clock = _acute_onset if (_acute_onset and snapshot_date >= _acute_onset) else snapshot_date
+            _A = max((snapshot_date - _clock).days, 0)
+            _F = _weibull_residual(_A, max(days_remaining, 0))
             _abatement  = abs(_qc.get('LiveAbatementSignal', 0))
             _live_boost = _F * max(0.0, _acute_core - _abatement)
             _icb_boost  = ICB_TRANSPORT_RHO * _live_boost
