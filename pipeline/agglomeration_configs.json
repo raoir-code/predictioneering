@@ -1,0 +1,12 @@
+{
+  "Iran-ArabStates": {
+    "_source": "Real Polymarket contract text, provided verbatim 2026-09-10. Qualifying Arab countries per the actual resolution criteria -- not inferred, not guessed.",
+    "qualifying_countries": [
+      "Algeria", "Bahrain", "Comoros", "Djibouti", "Egypt", "Iraq", "Jordan",
+      "Kuwait", "Lebanon", "Libya", "Mauritania", "Morocco", "Oman", "Qatar",
+      "Saudi Arabia", "Somalia", "Sudan", "Syria", "UAE", "Tunisia", "Yemen"
+    ],
+    "initiator": "Iran",
+    "_note": "21 countries per contract. 10 are tracked as individual dyads (Bahrain, Egypt, Iraq, Jordan, Kuwait, Oman, Qatar, Saudi Arabia, Syria, UAE); 11 have zero dyad tracking (Algeria, Comoros, Djibouti, Lebanon, Libya, Mauritania, Morocco, Somalia, Sudan, Tunisia, Yemen) -- the Aug 21 untracked-tail shortcut (base rate ~3%, horizon-scaled, heavy market-blend) handles those 11, not this file."
+  }
+}

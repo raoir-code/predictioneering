@@ -59,6 +59,7 @@ from pipeline.engine import (
 from pipeline.translator import _get_market_deadline
 from pipeline.dyad_registry import canonicalize, UnknownDyadError
 from pipeline import theater_registry
+from pipeline import agglomeration
 
 # ENGINE CONFIG
 # ============================================================
@@ -431,8 +432,9 @@ def run(dry_run: bool = False, filter_dyad: str = None):
 
     _theater_role_cache = {d: theater_registry.resolve_dyad_role(d, registry=_host_registry)
                             for d in dyad_groups}
+    _role_rank = {"trigger": 0, "target": 0, "aggregate": 2}
     _ordered_dyads = sorted(dyad_groups.items(),
-                             key=lambda kv: 0 if _theater_role_cache[kv[0]]["role"] else 1)
+                             key=lambda kv: _role_rank.get(_theater_role_cache[kv[0]]["role"], 1))
 
     for dyad, dyad_markets in _ordered_dyads:
         print(f"\n{'='*60}")
@@ -695,6 +697,17 @@ def run(dry_run: bool = False, filter_dyad: str = None):
             m["_icb_boost"]      = round(_icb_boost, 4)
             m["_acute_core"]     = round(_acute_core, 4)
             m["_z_t"]            = z_t
+
+            if _role["role"] == "aggregate" and _deadline is not None:
+                _agg_p, _agg_diag = agglomeration.compute_any_of_probability(
+                    dyad, _deadline, days_rem, core, _known_keys, registry=_host_registry)
+                if _agg_p is not None:
+                    _fallback_n = len(_agg_diag["tracked_missing"]) + len(_agg_diag["genuinely_untracked"])
+                    print(f"  [agglomeration] {dyad} by {_deadline}: "
+                          f"tracked={len(_agg_diag['tracked_found'])} fallback={_fallback_n} "
+                          f"-> derived P(any)={_agg_p:.4f} (independently-scored was {engine_p_final:.4f})")
+                    engine_p_final = _agg_p
+                    m["our_prediction"] = engine_p_final
 
             edge = round((engine_p_final - (m.get("market_price") or 0)) * 100, 1)
             print(f"  ✓ {m['question'][:70]}")
