@@ -56,6 +56,19 @@ ANTHROPIC_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 
 COOLDOWN_HOURS  = 60     # 48-72h range per design discussion, midpoint
 ACUTE_THRESHOLD = 0.5    # fixed-threshold fallback trigger (OP or LVO >= this)
+# Phase 1c (2026-09-10): a confirmed SEVERE event (0.90 = the rubric's own
+# "serious clash/strike/raid/attack" ceiling, same value used throughout
+# engine.py's LiveViolenceObserved scoring) bypasses the cooldown entirely.
+# crisis_context feeds directly into the live scoring prompt (engine.py
+# RUBRIC_LIVE_TEMPLATE) -- during a fast-moving cascade (4 confirmed Iran
+# strikes on Jordan in under 2 weeks, Aug 28-Sep 10 2026), a 60h-stale
+# narrative could anchor the LLM's reading of fresh headlines to an
+# outdated framing of the crisis, not just look stale on a dashboard.
+# The ordinary cooldown still applies below this threshold -- this is an
+# override for confirmed severe events specifically, not a general
+# shortening of the window (that's a separate, still-open design question:
+# whether 60h itself is the right general cadence).
+SEVERE_OVERRIDE_THRESHOLD = 0.9
 MIN_CONTEXT_LEN = 80
 MAX_CONTEXT_LEN = 3000
 HEADLINE_WINDOW_DAYS = 7
@@ -161,7 +174,11 @@ def _mark_refreshed(dyad):
 
 def check_event_trigger(dyad, call_a, call_b):
     """
-    TODAY: fixed-threshold-plus-cooldown.
+    TODAY: fixed-threshold-plus-cooldown, with a severe-event override
+    (Phase 1c, 2026-09-10) that bypasses the cooldown for a confirmed
+    severe event (OP or LVO >= SEVERE_OVERRIDE_THRESHOLD) -- see the
+    constant's comment above for why this matters beyond dashboard
+    cosmetics.
     UPGRADE PATH (once node_score_history.jsonl has >=7 days for this dyad):
     replace the threshold check below with
         recent = [e for e in history if e["dyad"]==dyad][-7:]
@@ -177,6 +194,8 @@ def check_event_trigger(dyad, call_a, call_b):
     lvo = call_b.get("LiveViolenceObserved", 0.0)
     if max(op, lvo) < ACUTE_THRESHOLD:
         return False
+    if max(op, lvo) >= SEVERE_OVERRIDE_THRESHOLD:
+        return True
     if _cooldown_active(dyad):
         return False
     return True

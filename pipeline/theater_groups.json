@@ -1,0 +1,21 @@
+{
+  "Iran": {
+    "members": [
+      "US-Iran",
+      "Israel-Iran",
+      "Iran-Bahrain",
+      "Iran-Egypt",
+      "Iran-Iraq",
+      "Iran-Jordan",
+      "Iran-Kuwait",
+      "Iran-Oman",
+      "Iran-Qatar",
+      "Iran-Saudi Arabia",
+      "Iran-Syria",
+      "Iran-UAE",
+      "Iran-ArabStates"
+    ],
+    "_note": "2026-09-10, Phase 1a/1b/1d. Symmetric group -- every member both contributes to and reads from the shared hazard (revised from an earlier trigger/target split: the real Aug 31-Sep 2 pattern was a cascade, Jordan/UAE hit raised risk for Bahrain/Iraq/Kuwait too, not just US-Iran tension alone). Safe against feedback loops because the combination rule is max(), not additive -- a member re-contributing a signal that originated elsewhere is a no-op, not compounding. Members = tracked dyads on Polymarket's 21-country Iran-vs-Arab-states qualifying list (confirmed against actual contract text) plus the two direct-combatant dyads. 11 qualifying countries (Algeria, Comoros, Djibouti, Lebanon, Libya, Mauritania, Morocco, Somalia, Sudan, Tunisia, Yemen) have NO dyad tracking at all -- a real, documented coverage gap, not silently ignored, just not built today. Iran-ArabStates is both a member (contributes/receives the shared hazard) and the news-inheritance aggregate (pulls GNews from all other members in this list, minus US-Iran/Israel-Iran which aren't Arab states).",
+    "aggregate": "Iran-ArabStates"
+  }
+}
