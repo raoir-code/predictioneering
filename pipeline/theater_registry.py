@@ -1,30 +1,34 @@
 """
 theater_registry.py — shared actor/theater-level escalation state
 ====================================================================
-Added 2026-09-10 (Phase 1a/1b), following the Sept 5 forensics on the
-Aug 30-31 Iran-Jordan/UAE miss. Root cause: the engine was too dyad-local
--- "Iran-Jordan waits for Jordan-specific evidence" instead of "US hits
-Iran -> Iran's retaliation hazard rises -> propagates to plausible
-regional targets before any target-specific headline exists."
+Rewritten 2026-09-11 (agglomeration session) to replace 2026-09-10's
+hand-picked Iran-only `theater_groups.json`. That version worked for
+Iran this week and would have done nothing for any other conflict --
+overfit to the one crisis in front of us. This version derives
+membership from a general fact about the world (who hosts whose
+military assets) instead of a hand-picked list, so the SAME logic
+covers China/Taiwan, Russia/NATO, etc. without new code -- only a new
+row in host_registry.json.
 
-Symmetric group design: every member dyad both CONTRIBUTES to and READS
-FROM the shared hazard for its initiator. This matches the real observed
-cascade (Jordan/UAE hit Aug 31 raised risk for Bahrain/Iraq/Kuwait too,
-not just an abstract US-Iran tension reading) better than an earlier
-one-way trigger->target split would have. Safe against feedback loops
-because the combination rule is max(), not additive -- a member
-re-contributing a signal that originated elsewhere is a no-op.
-
-This module is deliberately lightweight (no heavy engine.py import,
-same pattern as dyad_registry.py) so it can be imported without
-requiring ANTHROPIC_API_KEY/GNEWS_API_KEY to be set.
+Core idea: a strike doesn't propagate because "Iran and Jordan are
+linked" -- it propagates because Jordan hosts assets belonging to
+whichever patron (the US) Iran is actually escalating with. The
+causal object is a hosting relation between (initiator, patron), not
+a hand-picked dyad group.
 
 Two files:
-  - theater_groups.json  (hand-maintained, read-only from here): which
-    dyads belong to each initiator's shared theater group.
-  - theater_state.json    (read-write, this module owns it): persisted,
-    decaying hazard level per initiator, same half-life/decay pattern
-    as predict.py's node_memory_state.json (Phase 0b).
+  - host_registry.json (hand-maintained, read-only from here): real-
+    world basing data, patron -> {host_country: weight}. Conflict-
+    agnostic -- doesn't change when Iran calms down or China flares up.
+  - theater_state.json  (read-write, owned by this module): persisted,
+    decaying hazard per (initiator, patron) pair. Same half-life/decay
+    pattern as predict.py's node_memory_state.json (Phase 0b, 2026-09-10).
+
+One small piece of hand-maintained config survives: AGGREGATE_LABELS,
+declaring which dyad strings are synthetic aggregates (e.g.
+"Iran-ArabStates" isn't a real country, so it can't be resolved from
+the registry). Everything else -- membership, weights, propagation --
+is derived, not hand-picked.
 """
 
 import json
@@ -32,20 +36,20 @@ import os
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-THEATER_GROUPS_PATH = os.path.join(os.path.dirname(__file__), "theater_groups.json")
-THEATER_STATE_PATH  = os.path.join(os.path.dirname(__file__), "theater_state.json")
+HOST_REGISTRY_PATH = os.path.join(os.path.dirname(__file__), "host_registry.json")
+THEATER_STATE_PATH = os.path.join(os.path.dirname(__file__), "theater_state.json")
 
-# Half-life for the shared theater hazard itself, in days. Matches
-# LiveViolenceObserved's half-life (engine.py HALF_LIFE_DAYS) since a real
-# strike is the dominant driver of this signal and should linger
-# comparably to how a strike's own LiveViolenceObserved score lingers.
 THEATER_HAZARD_HALF_LIFE_DAYS = 10
 THEATER_DECAY_FACTOR = 0.5 ** (1.0 / THEATER_HAZARD_HALF_LIFE_DAYS)
 
+AGGREGATE_LABELS = {
+    "Iran-ArabStates": {"initiator": "Iran", "patron": "US"},
+}
 
-def load_theater_groups():
-    if os.path.exists(THEATER_GROUPS_PATH):
-        with open(THEATER_GROUPS_PATH) as f:
+
+def load_host_registry():
+    if os.path.exists(HOST_REGISTRY_PATH):
+        with open(HOST_REGISTRY_PATH) as f:
             return json.load(f)
     return {}
 
@@ -58,66 +62,95 @@ def load_theater_state():
 
 
 def save_theater_state(state):
-    # Atomic write -- same reasoning as predict.py's node_memory_state.json:
-    # read-then-written on every member dyad, every day, indefinitely.
     tmp = THEATER_STATE_PATH + ".tmp"
     with open(tmp, "w") as f:
         json.dump(state, f, indent=2)
     os.replace(tmp, THEATER_STATE_PATH)
 
 
-def get_initiator_for_member(dyad, groups=None):
-    """If `dyad` belongs to some initiator's theater group, return that
-    initiator's name. Otherwise None."""
-    groups = groups if groups is not None else load_theater_groups()
-    for initiator, cfg in groups.items():
-        if dyad in cfg.get("members", []):
-            return initiator
-    return None
+def _split_dyad(dyad):
+    if not dyad or "-" not in dyad:
+        return None
+    a, b = dyad.split("-", 1)
+    return a, b
 
 
-def get_group_members(dyad, groups=None):
-    """If `dyad` is a member of some group, return the OTHER members of
-    that group. Otherwise []."""
-    groups = groups if groups is not None else load_theater_groups()
-    for initiator, cfg in groups.items():
-        members = cfg.get("members", [])
-        if dyad in members:
-            return [m for m in members if m != dyad]
-    return []
+def _state_key(initiator, patron):
+    return f"{initiator}|{patron}"
 
 
-def get_news_inheritance_sources(dyad, groups=None):
-    """Phase 1d: if `dyad` is the designated news-inheritance AGGREGATE for
-    its group (e.g. Iran-ArabStates), return the other group members whose
-    GNews articles should be merged into its own daily fetch -- explicitly
-    excluding the initiator's own direct-combatant dyads (e.g. US-Iran,
-    Israel-Iran aren't Arab states; their headlines wouldn't be appropriate
-    evidence for an "Iran attacks any Arab country" market). Returns []
-    for any dyad that isn't a designated aggregate, including ordinary
-    bilateral members -- Jordan should NOT inherit UAE's articles into its
-    own local scoring, that would blur local specificity for no reason.
-    The theater hazard mechanism (update_hazard/decayed_hazard) is the
-    correct channel for cross-dyad signal; this is only for the aggregate's
-    own news blindness (Sept 5 forensics finding #18)."""
-    groups = groups if groups is not None else load_theater_groups()
-    for initiator, cfg in groups.items():
-        if cfg.get("aggregate") == dyad:
-            # Simplest correct rule for this codebase's naming convention:
-            # Arab-state bilateral dyads are named "Initiator-Country"
-            # (Iran-Jordan, Iran-UAE, ...). US-Iran/Israel-Iran don't match
-            # that prefix and are correctly excluded -- their headlines
-            # wouldn't be appropriate evidence for an Arab-states market.
-            siblings = [m for m in cfg.get("members", []) if m != dyad]
-            return [m for m in siblings if m.startswith(f"{initiator}-")]
-    return []
+def resolve_dyad_role(dyad, registry=None):
+    """
+    Parses `dyad` against the host registry with zero Iran-specific
+    logic -- only the registry's data determines the answer.
+
+    Returns a dict:
+      {"role": "trigger", "initiator": ..., "patron": ...}
+      {"role": "target",  "initiator": ..., "patron": ..., "weight": ...}
+      {"role": None}   -- not part of any registered theater
+    """
+    registry = registry if registry is not None else load_host_registry()
+
+    if dyad in AGGREGATE_LABELS:
+        agg = AGGREGATE_LABELS[dyad]
+        return {"role": "aggregate", "initiator": agg["initiator"], "patron": agg["patron"]}
+
+    parts = _split_dyad(dyad)
+    if not parts:
+        return {"role": None}
+    a, b = parts
+
+    for patron, cfg in registry.items():
+        hosts = cfg.get("hosts", {})
+        if a == patron and b not in hosts:
+            return {"role": "trigger", "initiator": b, "patron": patron}
+        if b == patron and a not in hosts:
+            return {"role": "trigger", "initiator": a, "patron": patron}
+        if b in hosts:
+            return {"role": "target", "initiator": a, "patron": patron, "weight": hosts[b]}
+        if a in hosts:
+            return {"role": "target", "initiator": b, "patron": patron, "weight": hosts[a]}
+
+    return {"role": None}
 
 
-def decayed_hazard(initiator, today, state=None):
-    """Return today's decayed hazard level for `initiator`, given the
-    persisted state. Does not mutate state or touch disk."""
+def aggregate_weight(initiator, patron, known_dyad_keys, registry=None):
+    """For a synthetic aggregate, its own weight = the max hosting weight
+    among the initiator's ACTUALLY-TRACKED host-country dyads (the
+    aggregate's risk is driven by whichever single constituent is most
+    exposed, not diluted by averaging in low-weight ones)."""
+    registry = registry if registry is not None else load_host_registry()
+    hosts = registry.get(patron, {}).get("hosts", {})
+    weights = []
+    for country, w in hosts.items():
+        candidate = f"{initiator}-{country}"
+        if candidate in known_dyad_keys:
+            weights.append(w)
+    return max(weights) if weights else 0.0
+
+
+def get_news_inheritance_sources(dyad, known_dyad_keys, registry=None):
+    """Phase 1d equivalent: if `dyad` is a synthetic aggregate, return the
+    initiator's other ACTUALLY-TRACKED host-country dyads whose GNews
+    should be merged into its own fetch. General version of yesterday's
+    hand-picked sibling list."""
+    registry = registry if registry is not None else load_host_registry()
+    role = resolve_dyad_role(dyad, registry=registry)
+    if role["role"] != "aggregate":
+        return []
+    initiator, patron = role["initiator"], role["patron"]
+    hosts = registry.get(patron, {}).get("hosts", {})
+    sources = []
+    for country in hosts:
+        candidate = f"{initiator}-{country}"
+        if candidate in known_dyad_keys and candidate != dyad:
+            sources.append(candidate)
+    return sources
+
+
+def decayed_hazard(initiator, patron, today, state=None):
     state = state if state is not None else load_theater_state()
-    entry = state.get(initiator)
+    entry = state.get(_state_key(initiator, patron))
     if not entry:
         return 0.0
     as_of = entry.get("as_of")
@@ -128,15 +161,62 @@ def decayed_hazard(initiator, today, state=None):
     return hazard * (THEATER_DECAY_FACTOR ** days_elapsed)
 
 
-def update_hazard(initiator, today, today_local_acute_core, state=None):
-    """Called when processing ANY member dyad. Combines today's local
-    acute signal for that dyad with the decayed prior hazard via max()
-    (same combination rule as engine.py's node_memory decay: max(today_val,
-    decayed)), then returns the updated state dict (caller persists it).
-    Does not write to disk itself -- caller decides when (and whether,
-    e.g. respecting --dry-run)."""
+def update_hazard(initiator, patron, today, today_local_acute_core, state=None):
+    """Contribution side is UNWEIGHTED -- any member's confirmed local
+    evidence is real evidence about the initiator's overall posture
+    toward this patron, regardless of that specific member's own
+    hosting weight. Weighting only applies on the READ side
+    (weighted_hazard below) -- how relevant the shared posture is to
+    a SPECIFIC target, not how much a target's own evidence counts
+    toward the shared estimate."""
     state = state if state is not None else load_theater_state()
-    prior_decayed = decayed_hazard(initiator, today, state=state)
+    prior_decayed = decayed_hazard(initiator, patron, today, state=state)
     new_hazard = max(today_local_acute_core, prior_decayed)
-    state[initiator] = {"hazard": new_hazard, "as_of": today.isoformat()}
+    state[_state_key(initiator, patron)] = {"hazard": new_hazard, "as_of": today.isoformat()}
     return state
+
+
+def weighted_hazard(initiator, patron, weight, today, state=None):
+    """The READ side: a target's own hosting weight scales how much of
+    the shared hazard actually applies to it. A country with no US
+    assets to speak of shouldn't inherit the same alarm as Qatar does."""
+    return weight * decayed_hazard(initiator, patron, today, state=state)
+
+
+def dependence_multiplier(weight_i, weight_j):
+    """Derives the July 3 design's hand-set lambda_ij from real hosting
+    weights instead of picking one of four buckets (0.75/1.00/1.25/1.50)
+    by eyeball. lambda = 1.0 + 0.5*min(w_i, w_j): floors at 1.0 (no
+    shared driver -> back to independence) and caps at 1.5 (both
+    maximally exposed to the same patron -- the July 3 "same deployment/
+    ultimatum/campaign logic" bucket's own top value). Uses min(), not
+    average or max, deliberately: two dyads' shared-driver correlation
+    should be bounded by whichever of the two is LESS tied to that
+    driver -- Jordan (0.4) paired with Qatar (1.0) shouldn't leap to the
+    full 1.5 just because Qatar is highly exposed; Jordan's own risk
+    has other drivers too.
+    Does NOT model the July 3 design's negative/substitution side
+    (lambda=0.75, capacity-constraint) -- hosting weight only speaks to
+    the positive shared-disposition force. That fallback stays hand-set
+    until a substitution signal exists to derive it from too."""
+    return 1.0 + 0.5 * min(weight_i, weight_j)
+
+
+def combine_any_of(probs_and_weights):
+    """First-order (pairwise) inclusion-exclusion per the July 3 design:
+    P(any) ~= sum(p_i) - sum_{i<j} lambda_ij * p_i * p_j
+    `probs_and_weights`: list of (p_i, weight_i) tuples for TRACKED
+    dyads only -- the untracked-country tail is a separate, already-
+    designed shortcut (Aug 21: base-rate default + heavy market-blend),
+    not this function's job. Clamped to [0, 1] since pairwise truncation
+    can overshoot for a large N with high individual probabilities --
+    a known limitation of the near-term approximation, not a bug."""
+    total = sum(p for p, _ in probs_and_weights)
+    n = len(probs_and_weights)
+    correction = 0.0
+    for i in range(n):
+        p_i, w_i = probs_and_weights[i]
+        for j in range(i + 1, n):
+            p_j, w_j = probs_and_weights[j]
+            correction += dependence_multiplier(w_i, w_j) * p_i * p_j
+    return max(0.0, min(1.0, total - correction))

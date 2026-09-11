@@ -1,0 +1,29 @@
+{
+  "US": {
+    "_sources": "Web search 2026-09-11 (NewsNation, Wikipedia, Business Standard, Al Jazeera, Modern Diplomacy). Weights are Claude's own judgment translating reported troop counts/base function into a 0-1 scale -- not an official metric, no such thing exists publicly. Adjust freely.",
+    "hosts": {
+      "Qatar":         1.0,
+      "Kuwait":        1.0,
+      "Bahrain":       0.9,
+      "Iraq":          0.6,
+      "UAE":           0.7,
+      "Saudi Arabia":  0.5,
+      "Jordan":        0.4,
+      "Oman":          0.3,
+      "Egypt":         0.2,
+      "Syria":         0.15
+    },
+    "_notes": {
+      "Qatar":        "Al Udeid AB, ~10,000 troops, forward HQ for USAFCENT/CENTCOM air ops -- largest single US installation in the region",
+      "Kuwait":       "Ali Al-Salem AB + Camps Arifjan/Buehring, ~13,500 troops -- largest US troop count in the region, main logistics/command hub",
+      "Bahrain":      "Naval Support Activity Bahrain, ~8,300-9,000 personnel, 5th Fleet HQ -- reported rendered inoperable by Iranian strikes during the 2026 war",
+      "Iraq":         "Ain Al Asad AB, Erbil AB -- significant but politically sensitive/less 'permanent' given Iraqi sovereignty constraints",
+      "UAE":          "Al Dhafra AB (USAF/drone ops hub), Jebel Ali Port (US Navy's largest regional port of call)",
+      "Saudi Arabia": "Prince Sultan AB, ~2,300 personnel, Patriot air-defense focus -- smaller footprint than Qatar/Kuwait/Bahrain",
+      "Jordan":       "Part of the network per CFR/Al Jazeera's 8-permanent-presence list; less base-specific public detail than the top 3, but real strategic relevance (Iran has targeted it repeatedly in 2026)",
+      "Oman":         "Airfield access under defense arrangements for logistics/contingency support -- access, not a major standing base",
+      "Egypt":        "On the 8-permanent-presence list; minimal combat/basing detail publicly reported -- mostly logistics/access",
+      "Syria":        "Explicitly reported as uncertain/reduced as of early 2026 -- treat as time-sensitive, re-check before trusting this weight"
+    }
+  }
+}

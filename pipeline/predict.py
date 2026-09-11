@@ -58,6 +58,7 @@ from pipeline.engine import (
 )
 from pipeline.translator import _get_market_deadline
 from pipeline.dyad_registry import canonicalize, UnknownDyadError
+from pipeline import theater_registry
 
 # ENGINE CONFIG
 # ============================================================
@@ -415,6 +416,8 @@ def run(dry_run: bool = False, filter_dyad: str = None):
 
     _known_keys = set(load_dyad_configs().keys())
     _node_memory_state = load_node_memory_state()
+    _host_registry = theater_registry.load_host_registry()
+    _theater_state = theater_registry.load_theater_state()
     dyad_groups: Dict[str, List] = {}
     for m in core:
         raw_dyad = m.get("dyad") or "Unknown"
@@ -426,7 +429,12 @@ def run(dry_run: bool = False, filter_dyad: str = None):
             dyad = raw_dyad
         dyad_groups.setdefault(dyad, []).append(m)
 
-    for dyad, dyad_markets in dyad_groups.items():
+    _theater_role_cache = {d: theater_registry.resolve_dyad_role(d, registry=_host_registry)
+                            for d in dyad_groups}
+    _ordered_dyads = sorted(dyad_groups.items(),
+                             key=lambda kv: 0 if _theater_role_cache[kv[0]]["role"] else 1)
+
+    for dyad, dyad_markets in _ordered_dyads:
         print(f"\n{'='*60}")
         print(f"DYAD: {dyad} ({len(dyad_markets)} markets)")
         print(f"{'='*60}")
@@ -456,6 +464,24 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         except Exception as ex:
             print(f"  [error] GNews failed: {ex}")
             articles = []
+
+        _inherit_from = theater_registry.get_news_inheritance_sources(dyad, _known_keys, registry=_host_registry)
+        if _inherit_from:
+            _seen_titles = {a.get("title") for a in articles if isinstance(a, dict)}
+            _inherited_count = 0
+            for _sibling in _inherit_from:
+                try:
+                    _sibling_articles = fetch_gnews(_sibling, today)
+                except Exception:
+                    continue
+                for _a in _sibling_articles:
+                    _t = _a.get("title") if isinstance(_a, dict) else None
+                    if _t and _t not in _seen_titles:
+                        articles.append(_a)
+                        _seen_titles.add(_t)
+                        _inherited_count += 1
+            if _inherited_count:
+                print(f"  Inherited {_inherited_count} articles from {len(_inherit_from)} constituent dyads (total now {len(articles)})")
 
         # Two-call scoring — matches engine.py exactly
         print(f"  Scoring nodes via Claude (call A: SSPE + onset)...")
@@ -517,36 +543,52 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         event_date   = _parse_date_str(dyad_meta.get("event_date"))
         z_t          = DYAD_REGIME.get(dyad, 0)
 
-        # Phase 0c (2026-09-10): auto-stamp acute_phase_onset_date the first
-        # day this dyad shows real acute signal. Without this, acute_onset
-        # stays None forever, _clock falls back to `today` every single run,
-        # and _A is pinned at 0 indefinitely -- which (Weibull shape=0.65,
-        # a decreasing-hazard curve) evaluates every dyad at the MAXIMUM-
-        # hazard point of the curve regardless of how long the real crisis
-        # has actually been running. Uses the exact same _acute_core sum
-        # already used to gate the boost below -- no new threshold invented.
-        # Known limitation, not solved here: never auto-clears, so a dyad
-        # that goes quiet for months and re-flares inherits a stale date.
-        if acute_onset is None:
-            _today_acute_core = (
-                q_components.get("OperationalPreparation", 0)
-                + q_components.get("LiveViolenceObserved", 0)
-                + q_components.get("LiveUltimatumDeadline", 0)
-                + q_components.get("MobilizationSignal", 0)
-            )
-            if _today_acute_core > 0 and not dry_run:
+        _today_acute_core = (
+            q_components.get("OperationalPreparation", 0)
+            + q_components.get("LiveViolenceObserved", 0)
+            + q_components.get("LiveUltimatumDeadline", 0)
+            + q_components.get("MobilizationSignal", 0)
+        )
+
+        if acute_onset is None and _today_acute_core > 0 and not dry_run:
+            try:
+                _all_configs = load_dyad_configs()
+                if dyad not in _all_configs:
+                    raise KeyError(f"'{dyad}' has no dyad_configs.json entry (fallback-baseline dyad) -- skipping onset stamp")
+                _all_configs[dyad]["acute_phase_onset_date"] = today.isoformat()
+                with open(DYAD_CONFIGS_PATH, "w") as f:
+                    json.dump(_all_configs, f, indent=2, ensure_ascii=False)
+                    f.write("\n")
+                acute_onset = today
+                print(f"  [info] acute_phase_onset_date set for '{dyad}' -> {today.isoformat()}")
+            except Exception as ex:
+                print(f"  [warn] failed to persist acute_phase_onset_date (non-fatal): {ex}")
+
+        _role = _theater_role_cache[dyad]
+        if _role["role"] is None:
+            _effective_acute_core = _today_acute_core
+        else:
+            _theater_state = theater_registry.update_hazard(
+                _role["initiator"], _role["patron"], today, _today_acute_core, state=_theater_state)
+            if not dry_run:
                 try:
-                    _all_configs = load_dyad_configs()
-                    if dyad not in _all_configs:
-                        raise KeyError(f"'{dyad}' has no dyad_configs.json entry (fallback-baseline dyad) -- skipping onset stamp")
-                    _all_configs[dyad]["acute_phase_onset_date"] = today.isoformat()
-                    with open(DYAD_CONFIGS_PATH, "w") as f:
-                        json.dump(_all_configs, f, indent=2, ensure_ascii=False)
-                        f.write("\n")
-                    acute_onset = today
-                    print(f"  [info] acute_phase_onset_date set for '{dyad}' -> {today.isoformat()}")
+                    theater_registry.save_theater_state(_theater_state)
                 except Exception as ex:
-                    print(f"  [warn] failed to persist acute_phase_onset_date (non-fatal): {ex}")
+                    print(f"  [warn] failed to persist theater_state (non-fatal, will retry tomorrow): {ex}")
+            if _role["role"] == "trigger":
+                _effective_acute_core = _today_acute_core
+            else:
+                _weight = _role.get("weight")
+                if _weight is None:
+                    _weight = theater_registry.aggregate_weight(
+                        _role["initiator"], _role["patron"], _known_keys, registry=_host_registry)
+                _theater_hazard = theater_registry.weighted_hazard(
+                    _role["initiator"], _role["patron"], _weight, today, state=_theater_state)
+                _effective_acute_core = max(_today_acute_core, _theater_hazard)
+                if _theater_hazard > _today_acute_core:
+                    print(f"  [info] theater hazard for '{_role['initiator']}|{_role['patron']}' "
+                          f"(weight={_weight:.2f}, hazard={_theater_hazard:.3f}) exceeds "
+                          f"'{dyad}' local acute_core ({_today_acute_core:.3f}) -- using theater value")
 
         for m in dyad_markets:
             # Was: days_rem = days_until(m.get("end_date", "")) -- read the
@@ -580,12 +622,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
             _clock = acute_onset if (acute_onset and today >= acute_onset) else today
             _A = max((today - _clock).days, 0)
             _F = _weibull_residual(_A, max(days_rem, 0))
-            _acute_core = (
-                q_components.get("OperationalPreparation", 0)
-                + q_components.get("LiveViolenceObserved", 0)
-                + q_components.get("LiveUltimatumDeadline", 0)
-                + q_components.get("MobilizationSignal", 0)
-            )
+            _acute_core = _effective_acute_core
             _abatement  = abs(q_components.get("LiveAbatementSignal", 0))
             _live_boost = _F * max(0.0, _acute_core - _abatement)
             _icb_boost  = 3.0 * _live_boost  # ICB_TRANSPORT_RHO = 3.0
