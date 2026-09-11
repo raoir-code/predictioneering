@@ -628,20 +628,28 @@ def run(dry_run: bool = False, filter_dyad: str = None):
                 dyad_meta.pop("decision_detected_at", None)
                 config.pop("decision_detected_at", None)
 
-            # Apply boost in log-odds space (matches engine.py exactly)
+            # Horizon scaling FIRST (matches engine.py Run 21 order -- Sept 10
+            # fix: this previously ran AFTER the ICB boost was applied, which
+            # meant a short remaining horizon compressed the boost itself on
+            # top of the operational-lag discount already applied above --
+            # a real double-crushing effect, up to ~2x in the high-boost/
+            # moderate-prior regime tested. engine.py has always scaled the
+            # raw (pre-boost) probability first, then added the boost
+            # unscaled afterward -- restored to match.
+            horizon_scale = max(days_rem, 1) / market_window
+            engine_p_scaled = 1 - (1 - engine_p_raw) ** horizon_scale
+            engine_p_base = round(
+                1 - engine_p_scaled if z_t == 2 else engine_p_scaled, 4
+            )
+
+            # Apply ICB boost in log-odds space, AFTER horizon scaling
+            # (matches engine.py exactly)
             import math as _math
             _post_res = bool(event_date and today >= event_date)
             if _post_res:
                 _icb_boost = 0.0
-            _bl = _math.log(max(engine_p_raw, 1e-6) / max(1 - engine_p_raw, 1e-6))
-            engine_p_boosted = round(1 / (1 + _math.exp(-(_bl + _icb_boost))), 4)
-
-            # Horizon scaling
-            horizon_scale = max(days_rem, 1) / market_window
-            engine_p_scaled = 1 - (1 - engine_p_boosted) ** horizon_scale
-            engine_p_final = round(
-                1 - engine_p_scaled if z_t == 2 else engine_p_scaled, 4
-            )
+            _bl = _math.log(max(engine_p_base, 1e-6) / max(1 - engine_p_base, 1e-6))
+            engine_p_final = round(1 / (1 + _math.exp(-(_bl + _icb_boost))), 4)
 
             m["our_prediction"]  = engine_p_final
             m["prediction_at"]   = now_utc
