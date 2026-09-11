@@ -54,13 +54,15 @@ NON_BILATERAL = {
     "Russia-Unknown",
     "US-Unknown",  # "any country expels a US ambassador" -- undefined counterparty,
                    # same pattern as Russia-Unknown. Added 2026-07-24.
-    "US-Unknown",  # "any country expels a US ambassador" -- undefined counterparty,
-                   # same pattern as Russia-Unknown. Added 2026-07-24.
     "US-LatinAmerica",
     "Israel-Multiple",
     "Europe(France/UK/Germany)-Iran",
     "France/UK/Germany-Iran",
     "Germany-Iran",
+    "Iran-ArabStates",  # enumerable regional aggregate (21-country Polymarket
+                        # contract, confirmed) -- same category as US-LatinAmerica/
+                        # Israel-Multiple. Was missing; added 2026-09-11 during
+                        # agglomeration work.
 }
 
 _ALIAS_TO_CANONICAL = {}

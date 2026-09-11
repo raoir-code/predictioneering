@@ -55,8 +55,8 @@ def compute_any_of_probability(aggregate_dyad, aggregate_deadline, days_remainin
     agg_configs = agg_configs if agg_configs is not None else load_agglomeration_configs()
 
     cfg = agg_configs.get(aggregate_dyad)
-    if not cfg:
-        return None, {"error": f"no agglomeration config for '{aggregate_dyad}'"}
+    if not cfg or cfg.get("is_enumerable") is False:
+        return None, {"error": f"no usable agglomeration config for '{aggregate_dyad}'"}
 
     initiator = cfg["initiator"]
     countries = cfg["qualifying_countries"]

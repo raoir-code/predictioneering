@@ -17,6 +17,7 @@ import sys
 import hashlib
 import time
 from datetime import datetime, timezone, date
+from pipeline.dyad_registry import NON_BILATERAL
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(__file__))
@@ -410,6 +411,72 @@ Deadline: {deadline}"""
         print(f"    [scholar] {relation} | {route} | {confidence} | "
               f"{result.get('win_condition_summary','')[:60]}")
     return result
+
+
+# ─────────────────────────────────────────────────────────────────────
+# QUALIFYING-ENTITY EXTRACTION (agglomeration, 2026-09-11)
+# ─────────────────────────────────────────────────────────────────────
+# Runs ONCE per non-bilateral dyad label (Iran-ArabStates, US-LatinAmerica,
+# etc.), not once per market and not once per day -- the qualifying
+# country list is a property of the CONTRACT TEMPLATE, identical across
+# every deadline instance of it. Persists into agglomeration_configs.json,
+# including a cached negative result for genuinely-undefined labels
+# (US-Unknown, Russia-Unknown) so those aren't re-attempted every run.
+# Today's Iran-ArabStates entry was hand-entered from the real contract
+# text; this is what keeps future aggregate markets from reverting to
+# the pre-fix behavior (silently scored as an ordinary bilateral dyad)
+# the moment a NEW one spawns with no existing config entry.
+
+QUALIFYING_ENTITY_SYSTEM = """You are analyzing a prediction market contract for a geopolitical forecasting system that tracks specific country-pair (dyad) conflict probabilities.
+
+This contract's assigned dyad label is NOT a simple bilateral country pair -- it represents some kind of regional/group aggregate. Determine whether the resolution criteria describe an ENUMERABLE disjunctive union (a specific, named list of countries/entities, any one of which satisfies the condition) or a genuinely UNDEFINED/unbounded condition (no enumerated list at all -- "any country" with no list given).
+
+If ENUMERABLE, extract:
+- initiator: the acting state, exactly as it should appear in a dyad string (e.g. "Iran")
+- qualifying_entities: the exact list of country names, in standard form matching how they'd appear in a dyad string (e.g. "Saudi Arabia", "UAE" -- not "the United Arab Emirates" or "Kingdom of Saudi Arabia")
+
+Return ONLY valid JSON, no preamble:
+{"is_enumerable": true, "initiator": "...", "qualifying_entities": ["...", "..."]}
+or
+{"is_enumerable": false}
+"""
+
+
+def extract_qualifying_entities(market: dict, dyad: str) -> dict | None:
+    question    = market.get("question") or ""
+    description = market.get("description") or ""
+    user_content = f"""Assigned dyad label: {dyad}
+Question: {question}
+Resolution criteria: {description[:4000]}"""
+    return _claude_call(QUALIFYING_ENTITY_SYSTEM, user_content)
+
+
+def ensure_agglomeration_config(market: dict, dyad: str) -> None:
+    """Idempotent: no-op if `dyad` already has an entry (positive or
+    cached-negative). Only calls the LLM and writes to disk on a
+    genuine first sighting of a new non-bilateral label."""
+    from pipeline import agglomeration as _agg
+    configs = _agg.load_agglomeration_configs()
+    if dyad in configs:
+        return
+
+    result = extract_qualifying_entities(market, dyad)
+    if not result or not result.get("is_enumerable"):
+        configs[dyad] = {"is_enumerable": False}
+        print(f"    [agglomeration-extract] '{dyad}': not enumerable, cached negative result")
+    else:
+        configs[dyad] = {
+            "initiator": result["initiator"],
+            "qualifying_countries": result["qualifying_entities"],
+            "_source": f"Auto-extracted by Claude from contract text, market_id={market.get('market_id')}, {datetime.now(timezone.utc).date().isoformat()} -- not hand-verified, spot-check before trusting fully.",
+        }
+        print(f"    [agglomeration-extract] '{dyad}': extracted {len(result['qualifying_entities'])} "
+              f"qualifying entities for initiator '{result['initiator']}'")
+
+    tmp = _agg.AGG_CONFIG_PATH + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(configs, f, indent=2)
+    os.replace(tmp, _agg.AGG_CONFIG_PATH)
 
 
 # ─────────────────────────────────────────────────────────────────────
@@ -905,6 +972,9 @@ def translate_market(market: dict, cache: dict) -> dict:
     market_p  = market.get("market_price")
     volume    = _polymarket_volume(market)
     chash     = _contract_hash(market)
+
+    if dyad in NON_BILATERAL:
+        ensure_agglomeration_config(market, dyad)
     thash     = _toggles_hash(market)
 
     label = (market.get("label") or market.get("question") or "")[:60]
