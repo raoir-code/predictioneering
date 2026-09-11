@@ -463,6 +463,10 @@ Q_PARENTS_ONSET_LLM = ["TriggerType", "ValueThreatGravity", "ThirdPartyMilitaryI
 Q_PARENTS_LIVE = ["RoutineMilitaryPressure", "OperationalPreparation", "LiveViolenceObserved",
                   "LiveUltimatumDeadline", "LiveMediationAccepted", "LiveAbatementSignal"]
 
+# Call B also emits routing metadata. This is deliberately NOT a q-parent
+# and never enters build_q_components()/q_logit.
+CALL_B_FIELDS = Q_PARENTS_LIVE + ["SharedPatronTargeting"]
+
 # Static dyad metadata, set once in dyad_configs.json under "q_static", never scored from news.
 Q_PARENTS_STATIC = ["ProtractedConflict", "GeographicProximity"]
 
@@ -701,7 +705,7 @@ Return ONLY valid JSON with no preamble, explanation, or markdown. Example: {{"W
 
     return _call_claude_json(prompt, expected, max_tokens=700, dyad=dyad, as_of_date=as_of_date)
 
-def score_nodes_call_b(dyad, articles, as_of_date, trigger_was_violent):
+def score_nodes_call_b(dyad, articles, as_of_date, trigger_was_violent, shared_patron=None):
     """Call B: 5 live-dynamic q-parents, separate call to protect field quality.
 
     trigger_was_violent: bool, from Call A's TriggerType this same snapshot.
@@ -711,7 +715,7 @@ def score_nodes_call_b(dyad, articles, as_of_date, trigger_was_violent):
     double-counted for the rest of its 7-day rolling window.
     """
     _crisis_ctx = _load_dyad_crisis_context(dyad)  # was dead code, always ""
-    expected = Q_PARENTS_LIVE
+    expected = CALL_B_FIELDS
     if not articles:
         return {n: 0.0 for n in expected}
 
@@ -735,6 +739,32 @@ def score_nodes_call_b(dyad, articles, as_of_date, trigger_was_violent):
         "No violent triggering event has been scored for this crisis yet -- score any "
         "violence observed in the headlines normally."
     )
+
+    patron_context = (
+        f"""
+SHARED THEATER ROUTING — ROUTING FIELD ONLY, NOT A FORECAST NODE:
+The shared patron for this dyad is {shared_patron}.
+
+Also return SharedPatronTargeting as exactly 0 or 1:
+- 1 ONLY if the acute military evidence is explicitly directed at, retaliatory toward,
+  or operationally aimed at {shared_patron}'s forces, bases, personnel, military assets,
+  or an ongoing military campaign against {shared_patron}.
+- 0 if the event is directed at the host country itself for its own bilateral reasons,
+  if the patron connection is merely inferred from geography/alliance membership,
+  or if the headlines do not clearly establish the patron-directed link.
+- Datelines, article locations, generic references to allies, and merely occurring on
+  territory that hosts {shared_patron} forces are NOT enough.
+- If uncertain, return 0.
+
+SharedPatronTargeting controls whether this dyad may UPDATE shared theater state.
+It does NOT change this dyad's own local conflict score.
+"""
+        if shared_patron else
+        """
+SHARED THEATER ROUTING:
+Return SharedPatronTargeting = 0. No shared patron was supplied for this scoring call.
+"""
+    )
     prompt = f"""Dyad: {dyad}
 Date: {as_of_date}
 Headlines:
@@ -756,6 +786,8 @@ Perform this relevance check SILENTLY, internally, in your own reasoning only.
 Do NOT write out a relevance analysis, do NOT list or discuss headlines one
 by one, do NOT explain which headlines you excluded or why. Output ONLY the
 final JSON object as instructed below -- zero preceding text of any kind.
+
+{patron_context}
 
 {RUBRIC_LIVE_TEMPLATE.format(trigger_context=trigger_context, crisis_context=_crisis_ctx)}
 

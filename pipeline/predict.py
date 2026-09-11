@@ -432,9 +432,147 @@ def run(dry_run: bool = False, filter_dyad: str = None):
 
     _theater_role_cache = {d: theater_registry.resolve_dyad_role(d, registry=_host_registry)
                             for d in dyad_groups}
-    _role_rank = {"trigger": 0, "target": 0, "aggregate": 2}
+    _role_rank = {"trigger": 0, "target": 1, "aggregate": 2}
     _ordered_dyads = sorted(dyad_groups.items(),
                              key=lambda kv: _role_rank.get(_theater_role_cache[kv[0]]["role"], 1))
+
+    # ------------------------------------------------------------------
+    # Phase 4: two-pass theater propagation.
+    #
+    # PASS 1:
+    #   Score every dyad first and collect legitimate same-day shared-
+    #   theater contributions. A trigger dyad contributes directly.
+    #   A host/target dyad contributes ONLY when Call B explicitly says
+    #   the acute evidence targets the shared patron.
+    #   Aggregate/synthetic dyads NEVER write theater state.
+    #
+    # Then finalize theater state ONCE before any market probability is
+    # calculated. This makes forecasts invariant to arbitrary dyad order.
+    # ------------------------------------------------------------------
+    today = datetime.now(timezone.utc).date()
+    _pre_scores = {}
+    _today_theater_contrib = {}
+
+    print("\n[predict.py] PASS 1 — scoring all dyads before theater propagation...")
+
+    for _dyad, _dyad_markets in _ordered_dyads:
+        _role = _theater_role_cache[_dyad]
+
+        try:
+            _articles = fetch_gnews(_dyad, today)
+        except Exception as ex:
+            print(f"  [error] GNews failed for {_dyad}: {ex}")
+            _articles = []
+
+        # Aggregate markets inherit constituent news exactly as before.
+        _inherit_from = theater_registry.get_news_inheritance_sources(
+            _dyad, _known_keys, registry=_host_registry
+        )
+        if _inherit_from:
+            _seen_titles = {
+                a.get("title") for a in _articles if isinstance(a, dict)
+            }
+            for _sibling in _inherit_from:
+                try:
+                    _sibling_articles = fetch_gnews(_sibling, today)
+                except Exception:
+                    continue
+                for _a in _sibling_articles:
+                    _t = _a.get("title") if isinstance(_a, dict) else None
+                    if _t and _t not in _seen_titles:
+                        _articles.append(_a)
+                        _seen_titles.add(_t)
+
+        print(f"  {_dyad}: scoring {len(_articles)} articles")
+
+        _call_a = score_nodes_call_a(_dyad, _articles, today)
+        _trigger_was_violent = _call_a.get("TriggerType", 0.0) >= 0.60
+
+        # Only real host/target dyads need the routing judgment.
+        # Trigger dyads contribute directly; aggregate dyads never write.
+        _shared_patron = (
+            _role.get("patron")
+            if _role.get("role") == "target"
+            else None
+        )
+
+        _call_b = score_nodes_call_b(
+            _dyad,
+            _articles,
+            today,
+            _trigger_was_violent,
+            shared_patron=_shared_patron,
+        )
+
+        _pre_scores[_dyad] = {
+            "articles": _articles,
+            "call_a": _call_a,
+            "call_b": _call_b,
+        }
+
+        _local_acute = (
+            _call_b.get("OperationalPreparation", 0.0)
+            + _call_b.get("LiveViolenceObserved", 0.0)
+            + _call_b.get("LiveUltimatumDeadline", 0.0)
+            + _call_b.get("MobilizationSignal", 0.0)
+        )
+
+        _eligible = 0.0
+
+        if _role.get("role") == "trigger":
+            # Direct initiator-patron crisis evidence always establishes
+            # the shared theater posture.
+            _eligible = _local_acute
+
+        elif (
+            _role.get("role") == "target"
+            and _call_b.get("SharedPatronTargeting", 0.0) >= 0.5
+        ):
+            # Host-country evidence only propagates when explicitly linked
+            # to the shared patron's forces/assets/campaign.
+            _eligible = _local_acute
+
+        if _eligible > 0:
+            _key = (_role["initiator"], _role["patron"])
+            _today_theater_contrib[_key] = max(
+                _today_theater_contrib.get(_key, 0.0),
+                _eligible,
+            )
+
+            print(
+                f"    [theater contribution] {_dyad}: "
+                f"{_key[0]}|{_key[1]} acute={_eligible:.3f}"
+            )
+
+    # Finalize every theater exactly once using the strongest legitimate
+    # same-day contribution. Previous cross-day state still decays normally.
+    for (_initiator, _patron), _contribution in _today_theater_contrib.items():
+        _theater_state = theater_registry.update_hazard(
+            _initiator,
+            _patron,
+            today,
+            _contribution,
+            state=_theater_state,
+        )
+        print(
+            f"  [theater finalized] {_initiator}|{_patron} "
+            f"today={_contribution:.3f}"
+        )
+
+    if not dry_run:
+        try:
+            theater_registry.save_theater_state(_theater_state)
+        except Exception as ex:
+            print(
+                f"  [warn] failed to persist theater_state "
+                f"(non-fatal, will retry tomorrow): {ex}"
+            )
+
+    # ------------------------------------------------------------------
+    # PASS 2:
+    # Use the scores above and the already-finalized theater state.
+    # ------------------------------------------------------------------
+    print("\n[predict.py] PASS 2 — calculating market probabilities...")
 
     for dyad, dyad_markets in _ordered_dyads:
         print(f"\n{'='*60}")
@@ -458,39 +596,13 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         baseline = config["baseline"].copy()
         query    = config["query"]
 
-        print(f"  Fetching GNews for: {label}...")
-        today = datetime.now(timezone.utc).date()
-        try:
-            articles = fetch_gnews(dyad, today)
-            print(f"  Articles: {len(articles)}")
-        except Exception as ex:
-            print(f"  [error] GNews failed: {ex}")
-            articles = []
+        # Reuse PASS 1 results — no second GNews fetch or Claude call.
+        _cached_score = _pre_scores[dyad]
+        articles = _cached_score["articles"]
+        call_a = _cached_score["call_a"]
+        call_b = _cached_score["call_b"]
 
-        _inherit_from = theater_registry.get_news_inheritance_sources(dyad, _known_keys, registry=_host_registry)
-        if _inherit_from:
-            _seen_titles = {a.get("title") for a in articles if isinstance(a, dict)}
-            _inherited_count = 0
-            for _sibling in _inherit_from:
-                try:
-                    _sibling_articles = fetch_gnews(_sibling, today)
-                except Exception:
-                    continue
-                for _a in _sibling_articles:
-                    _t = _a.get("title") if isinstance(_a, dict) else None
-                    if _t and _t not in _seen_titles:
-                        articles.append(_a)
-                        _seen_titles.add(_t)
-                        _inherited_count += 1
-            if _inherited_count:
-                print(f"  Inherited {_inherited_count} articles from {len(_inherit_from)} constituent dyads (total now {len(articles)})")
-
-        # Two-call scoring — matches engine.py exactly
-        print(f"  Scoring nodes via Claude (call A: SSPE + onset)...")
-        call_a = score_nodes_call_a(dyad, articles, today)
-        trigger_was_violent = call_a.get("TriggerType", 0.0) >= 0.60
-        print(f"  Scoring nodes via Claude (call B: live acute)...")
-        call_b = score_nodes_call_b(dyad, articles, today, trigger_was_violent)
+        print(f"  Articles: {len(articles)} [pre-scored in PASS 1]")
 
         # Apply SSPE deltas to baseline (call_a contains SSPE node deltas)
         suppressor_static = config.get("suppressor_static", {})
@@ -567,30 +679,42 @@ def run(dry_run: bool = False, filter_dyad: str = None):
                 print(f"  [warn] failed to persist acute_phase_onset_date (non-fatal): {ex}")
 
         _role = _theater_role_cache[dyad]
-        if _role["role"] is None:
+
+        # Theater state was finalized before PASS 2 began.
+        # Nothing below is allowed to mutate it.
+        if _role["role"] is None or _role["role"] == "trigger":
             _effective_acute_core = _today_acute_core
         else:
-            _theater_state = theater_registry.update_hazard(
-                _role["initiator"], _role["patron"], today, _today_acute_core, state=_theater_state)
-            if not dry_run:
-                try:
-                    theater_registry.save_theater_state(_theater_state)
-                except Exception as ex:
-                    print(f"  [warn] failed to persist theater_state (non-fatal, will retry tomorrow): {ex}")
-            if _role["role"] == "trigger":
-                _effective_acute_core = _today_acute_core
-            else:
-                _weight = _role.get("weight")
-                if _weight is None:
-                    _weight = theater_registry.aggregate_weight(
-                        _role["initiator"], _role["patron"], _known_keys, registry=_host_registry)
-                _theater_hazard = theater_registry.weighted_hazard(
-                    _role["initiator"], _role["patron"], _weight, today, state=_theater_state)
-                _effective_acute_core = max(_today_acute_core, _theater_hazard)
-                if _theater_hazard > _today_acute_core:
-                    print(f"  [info] theater hazard for '{_role['initiator']}|{_role['patron']}' "
-                          f"(weight={_weight:.2f}, hazard={_theater_hazard:.3f}) exceeds "
-                          f"'{dyad}' local acute_core ({_today_acute_core:.3f}) -- using theater value")
+            _weight = _role.get("weight")
+            if _weight is None:
+                _weight = theater_registry.aggregate_weight(
+                    _role["initiator"],
+                    _role["patron"],
+                    _known_keys,
+                    registry=_host_registry,
+                )
+
+            _theater_hazard = theater_registry.weighted_hazard(
+                _role["initiator"],
+                _role["patron"],
+                _weight,
+                today,
+                state=_theater_state,
+            )
+
+            _effective_acute_core = max(
+                _today_acute_core,
+                _theater_hazard,
+            )
+
+            if _theater_hazard > _today_acute_core:
+                print(
+                    f"  [info] theater hazard for "
+                    f"'{_role['initiator']}|{_role['patron']}' "
+                    f"(weight={_weight:.2f}, hazard={_theater_hazard:.3f}) "
+                    f"exceeds '{dyad}' local acute_core "
+                    f"({_today_acute_core:.3f}) -- using theater value"
+                )
 
         for m in dyad_markets:
             # Was: days_rem = days_until(m.get("end_date", "")) -- read the
