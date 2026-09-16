@@ -81,3 +81,12 @@ assert (
 
 print("PARENT EVENT SEMANTICS: PASS")
 print(f"{len(CASES)} deterministic relation cases passed")
+
+
+# Prompt-level regression: physical overlap must not be blanket-zeroed.
+assert "A physical action does NOT automatically imply A" in CLERGYMAN_SYSTEM
+assert (
+    "Discrete or limited actions can occur below the serious-conflict threshold"
+    in CLERGYMAN_SYSTEM
+)
+assert "kinetic_or_coercive_action subsets: P(B|¬A) ≈ 0" not in CLERGYMAN_SYSTEM

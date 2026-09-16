@@ -44,7 +44,7 @@ import calendar as _calendar
 # applying whatever fix is live right now.
 # ─────────────────────────────────────────────────────────────────────
 LEGAL_SCHOLAR_PROMPT_VERSION = "v4"
-CLERGYMAN_PROMPT_VERSION     = "v7"  # v5 = blend LLM guess with a deterministic position-within-range formula for kinetic contracts (LLM's raw number wasn't tracking WarCosts/WinProbability/PatronDeterrence/NuclearDeterrence despite correct rationale text -- was mostly narration, not real sensitivity) (Jul 27)
+CLERGYMAN_PROMPT_VERSION     = "v8"  # v5 = blend LLM guess with a deterministic position-within-range formula for kinetic contracts (LLM's raw number wasn't tracking WarCosts/WinProbability/PatronDeterrence/NuclearDeterrence despite correct rationale text -- was mostly narration, not real sensitivity) (Jul 27)
 SPYGLASS_PROMPT_VERSION      = "v1"
 
 # ─────────────────────────────────────────────────────────────────────
@@ -628,36 +628,51 @@ Do NOT infer direction merely from canonical dyad ordering.
 
 PART 2 -- ESTIMATE, using historical knowledge of this dyad\'s conflict patterns:
 
-P(B|A)   = probability that, given conflict onset occurs, it takes the specific
-           form in the contract. Reason using conjunctive logic: each additional
-           requirement (method, target, duration, territorial control) can only
-           hold this probability flat or lower it relative to a broader
-           contract on the same dyad -- never raise it. A blockade is MORE
-           dramatic than a single airstrike but requires persistence and
-           geographic coverage, which makes it LESS likely given conflict
-           occurs, not more -- severity and conditional probability are
-           different axes, do not conflate them.
-P(B|¬A)  = probability that, given NO conflict onset, the contract still resolves YES
+P(B|A) = probability that, GIVEN parent event A occurs, contract event B
+also occurs.
 
-For strict subsets, P(B|¬A) depends on manifestation_family -- do NOT apply a
-single blanket rule:
-  - kinetic_or_coercive_action subsets: P(B|¬A) ≈ 0. A specific physical
-    action (a strike, a blockade actually being enforced) cannot occur
-    without some form of conflict onset already having happened.
-  - political_act subsets, formal_official: P(B|¬A) is NOT ≈0. A formal
-    government announcement/authorization can happen through brinkmanship,
-    deterrent posturing, or contingency planning even when no conflict onset
-    occurs -- it is a real, non-trivial event on its own base rate. Estimate
-    P(B|¬A) from how often this dyad's government has issued this specific
-    TYPE of formal statement absent an actual onset. Do not default to 0.
-  - political_act subsets, informal_rhetorical: closer to the old assumption
-    of low, but still estimate a real (not automatically zero) base rate --
-    rhetoric of this kind still has a frequency, it is just cheaper and less
-    predictive than a formal statement.
-For overlap/deal markets: both terms may be non-zero
-For equivalent markets: P(B|A)=1.0, P(B|¬A)=0.0
+Reason using conjunctive logic: additional requirements such as method,
+specific target, persistence, or territorial control can only hold or reduce
+P(B|A) relative to an otherwise broader contract. Severity and conditional
+probability are different axes: a blockade can be more severe than one
+airstrike while still having lower P(B|A) because it requires persistence,
+coverage, and sustained commitment.
 
-The full formula is: P(B) = P(B|A)×P(A) + P(B|¬A)×(1−P(A))
+P(B|¬A) = probability that contract event B resolves YES GIVEN that parent
+event A -- the serious-clash/full-scale-war threshold -- does NOT occur.
+
+CRITICAL DISTINCTION:
+A physical action does NOT automatically imply A.
+
+Discrete or limited actions can occur below the serious-conflict threshold,
+including:
+  - a single missile or drone strike
+  - a single airstrike
+  - a limited raid
+  - a boarding or seizure
+  - an air-to-air or SAM engagement
+  - a brief artillery or border firefight
+  - limited gray-zone coercion
+
+For these overlap events, estimate a genuine non-zero P(B|¬A) whenever the
+event has a plausible background rate absent serious clashes. Do NOT default
+to zero simply because the event is physical.
+
+Sustained serious campaigns, enforced blockades, and territorial war are
+conflict-bound. Deterministic post-processing will force P(B|¬A)=0 for those
+cases.
+
+Political acts can also occur absent A:
+  - formal_official: estimate a real non-zero background rate
+  - informal_rhetorical: estimate a real background rate; do not
+    automatically set it to zero
+
+Equivalent markets satisfy:
+  P(B|A)=1.0
+  P(B|¬A)=0.0
+
+The full formula is:
+P(B) = P(B|A)×P(A) + P(B|¬A)×(1−P(A))
 
 Be honest. Return null for both if too uncertain to estimate reliably.
 
