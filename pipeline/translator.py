@@ -21,7 +21,7 @@ from pipeline.dyad_registry import NON_BILATERAL
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(__file__))
-from clergyman_ontology import get_anchor_range, clamp_to_range, derive_severity_band, deterministic_position_within_range
+from clergyman_ontology import (get_anchor_range, clamp_to_range, derive_severity_band, deterministic_position_within_range, derive_parent_event_relation)
 import urllib.request
 import re as _re
 import calendar as _calendar
@@ -43,8 +43,8 @@ import calendar as _calendar
 # the current prompt for everything already cached, retroactively
 # applying whatever fix is live right now.
 # ─────────────────────────────────────────────────────────────────────
-LEGAL_SCHOLAR_PROMPT_VERSION = "v3"
-CLERGYMAN_PROMPT_VERSION     = "v6"  # v5 = blend LLM guess with a deterministic position-within-range formula for kinetic contracts (LLM's raw number wasn't tracking WarCosts/WinProbability/PatronDeterrence/NuclearDeterrence despite correct rationale text -- was mostly narration, not real sensitivity) (Jul 27)
+LEGAL_SCHOLAR_PROMPT_VERSION = "v4"
+CLERGYMAN_PROMPT_VERSION     = "v7"  # v5 = blend LLM guess with a deterministic position-within-range formula for kinetic contracts (LLM's raw number wasn't tracking WarCosts/WinProbability/PatronDeterrence/NuclearDeterrence despite correct rationale text -- was mostly narration, not real sensitivity) (Jul 27)
 SPYGLASS_PROMPT_VERSION      = "v1"
 
 # ─────────────────────────────────────────────────────────────────────
@@ -317,17 +317,36 @@ def _liquidity_weight(volume_usd: float, max_volume: float = 50_000_000) -> floa
 # DETERMINISTIC ROUTING
 # ─────────────────────────────────────────────────────────────────────
 
-def _derive_route(relation: str, confidence: str) -> str:
+def _derive_route(
+    relation: str,
+    confidence: str,
+    contract_polarity: str | None = None,
+    contract_type: str | None = None,
+) -> str:
     """
-    Ignore Claude's suggested translator_route.
-    Derive deterministically from relation + confidence.
+    Deterministic routing.
+
+    A high-confidence conflict-polarity overlap is translatable when it is a
+    physical/onset/threshold event. This is necessary because a limited strike
+    or engagement may occur below parent event A while still being exactly the
+    kind of physical event the Translator can price through P(B|A), P(B|¬A).
+
+    Bargaining/deal/peace overlaps remain PASS_TRANSLATION.
     """
-    if relation == "equivalent" and confidence == "high":
+    if relation in {"equivalent", "subset"} and confidence == "high":
         return "TRANSLATE"
-    if relation == "subset" and confidence == "high":
+
+    if (
+        relation == "overlap"
+        and confidence == "high"
+        and contract_polarity == "conflict"
+        and contract_type in {"binary_onset", "binary_threshold"}
+    ):
         return "TRANSLATE"
+
     if relation == "unsupported":
         return "UNSUPPORTED"
+
     return "PASS_TRANSLATION"
 
 
@@ -335,22 +354,45 @@ def _derive_route(relation: str, confidence: str) -> str:
 # LEGAL SCHOLAR
 # ─────────────────────────────────────────────────────────────────────
 
+# Canonical parent event used by Legal Scholar, Clergyman, and Bettor.
+#
+# Empirical anchor:
+#   ICB q-layer: VIOL >= 3 ("serious clashes" or "full-scale war").
+#
+# The SSPE literature component is transported toward this common event
+# definition; its 28-study DV audit remains a separate methodology task.
+ENGINE_EVENT_A_DEFINITION = (
+    "A = a serious interstate violent episode involving the specified dyad "
+    "within the relevant horizon: onset of, or escalation into, serious "
+    "clashes or full-scale war (operationally anchored approximately to "
+    "ICB VIOL>=3). A single limited physical incident can occur while A is "
+    "false if that incident does not itself cross the serious-episode threshold."
+)
+
+
 LEGAL_SCHOLAR_SYSTEM = """You are the Legal Scholar module in a geopolitical prediction-market translator.
 
 The engine estimates event A:
-A = probability of interstate conflict onset, kinetic military action, or violent escalation involving the specified dyad within the relevant horizon.
+__ENGINE_EVENT_A__
 
 Your job is NOT to estimate probabilities. Your job is to read the market contract and decide whether the contract's YES condition is the same probability object as A, a subset of A, the complement of A, an overlapping event, a termination/de-escalation event, unrelated, or unsupported.
 
 Be conservative. If the market asks about peace, ceasefire, war ending, negotiations succeeding, territorial control, leader identity, sanctions only, elections, regime collapse, or vague political outcomes, do not treat it as a normal conflict-onset market.
 
-IMPORTANT — what does NOT qualify as "equivalent":
-- Boots on the ground specifically (that is subset)
-- Airstrike on a named facility (that is subset)
-- Naval blockade specifically (that is subset)
-- Formal declaration of war (that is subset — declarations often lag or never accompany actual conflict)
-- Conflict involving a DIFFERENT actor pair than the dyad specified (that is superset or overlap)
-- "Regime survives" or "regime falls" questions (that is overlap or unrelated — regime change is not conflict onset)
+IMPORTANT — what does NOT automatically qualify as "equivalent":
+- A single airstrike, missile strike, raid, shootdown, boarding, firefight, or
+  other discrete physical incident. Such an event may occur without crossing
+  A's serious-clash threshold, so it is generally OVERLAP, not automatically
+  equivalent or subset.
+- "Boots on the ground" without a sustained/territorial requirement may likewise
+  be only a limited raid/incursion and can be overlap.
+- A sustained enforced naval blockade or territorial invasion ordinarily
+  entails A and is therefore a SUBSET rather than equivalent.
+- A formal declaration of war is generally OVERLAP: it may occur without A,
+  and A may occur without a declaration.
+- Conflict involving a DIFFERENT actor pair than the dyad specified is
+  superset or overlap.
+- "Regime survives" or "regime falls" questions are overlap or unrelated.
 
 Return ONLY valid JSON with these exact keys:
 {
@@ -376,16 +418,24 @@ medium: you can rule out most relation types but there's a plausible alternative
 low: you genuinely cannot tell which relation type applies
 
 Relation definitions:
-- equivalent: contract YES condition is essentially conflict onset or kinetic military action by the dyad
-- subset: YES is a narrower form of conflict onset (specific strike type, target, weapon, location, actor)
-- superset: YES includes conflict onset but also includes other outcomes outside A
-- complement: YES means no conflict/no strike/no invasion by the deadline
-- overlap: contract concerns a bargaining outcome related to conflict risk but is not itself conflict onset (deals, concessions, negotiations)
-- termination: contract asks whether an ongoing war ends, pauses, reaches ceasefire/peace deal, or de-escalates
-- unrelated: engine has no direct probability-object traction
-- unsupported: cannot be classified safely from the text
+- equivalent: YES is essentially the same serious interstate violent episode
+  represented by A.
+- subset: YES necessarily entails A but adds further requirements. Examples:
+  sustained blockade, territorial invasion/occupation, or another narrower
+  serious-conflict form.
+- superset: YES includes A but also includes outcomes outside A.
+- complement: YES is the logical complement of A.
+- overlap: B and A can occur separately but are probabilistically related.
+  This includes discrete physical incidents below the serious-clash threshold,
+  formal declarations, and bargaining/deal outcomes related to conflict risk.
+- termination: contract asks whether an ongoing war ends, pauses, reaches
+  ceasefire/peace deal, or de-escalates.
+- unrelated: engine has no direct probability-object traction.
+- unsupported: cannot be classified safely from the text.
 
-Note: "deal/no-deal" markets (Greenland, Panama, etc.) are overlap — the engine's conflict probability partially informs them but they are not onset markets."""
+Note: "deal/no-deal" markets (Greenland, Panama, etc.) are overlap — the engine's conflict probability partially informs them but they are not onset markets.""".replace(
+    "__ENGINE_EVENT_A__", ENGINE_EVENT_A_DEFINITION
+)
 
 
 def legal_scholar(market: dict, dyad: str) -> dict | None:
@@ -406,7 +456,12 @@ Deadline: {deadline}"""
     if result:
         relation   = result.get("relation_to_engine_event", "unsupported")
         confidence = result.get("relation_confidence", "low")
-        route      = _derive_route(relation, confidence)
+        route      = _derive_route(
+            relation,
+            confidence,
+            result.get("contract_polarity"),
+            result.get("contract_type"),
+        )
         result["translator_route"] = route  # overwrite Claude's suggestion
         print(f"    [scholar] {relation} | {route} | {confidence} | "
               f"{result.get('win_condition_summary','')[:60]}")
@@ -485,7 +540,8 @@ def ensure_agglomeration_config(market: dict, dyad: str) -> None:
 
 CLERGYMAN_SYSTEM = """You are the Clergyman module in a geopolitical prediction-market translator.
 
-The engine estimates P(A) = probability of conflict onset between the specified dyad.
+The engine estimates event A:
+__ENGINE_EVENT_A__
 The Legal Scholar has determined the relation between contract event B and engine event A.
 
 Your job has two parts:
@@ -669,7 +725,7 @@ Return ONLY valid JSON:
   "confidence": "high|medium|low",
   "used_structural_context": true,
   "rationale": "one sentence -- must name which requirement_burden modifiers drove your estimate, AND which structural primitive(s) if a STRUCTURAL CONTEXT block was provided"
-}"""
+}""".replace("__ENGINE_EVENT_A__", ENGINE_EVENT_A_DEFINITION)
 
 
 def _format_structural_context(toggles: dict) -> str:
@@ -820,8 +876,40 @@ Legalese flags: {'; '.join(flags) if flags else 'none'}"""
         result["anchor_range"]         = list(anchor_range) if anchor_range else None
         result["was_clamped"]          = was_clamped
         result["war_costs_used_for_range"] = war_costs_for_range
-        result["severity_band"]        = derive_severity_band(result.get("action_type"))
+        severity_band = derive_severity_band(result.get("action_type"))
+        result["severity_band"] = severity_band
 
+        # Keep the Scholar's set-theoretic classification separate from the
+        # deterministic physical relationship to the canonical parent event A.
+        # A is approximately ICB VIOL>=3: serious clashes/full-scale war.
+        parent_event_relation = derive_parent_event_relation(
+            manifestation_family=manifestation_family,
+            requirement_burden=requirement_burden,
+            severity_band=severity_band,
+            scholar_relation=relation,
+        )
+        result["parent_event_relation"] = parent_event_relation
+
+        # Preserve Claude's unconstrained estimate for audit/drift diagnostics
+        # before applying logical invariants.
+        result["p_b_given_not_a_raw_llm"] = result.get("p_b_given_not_a")
+
+        if parent_event_relation == "equivalent":
+            # Logical identity B == A.
+            result["p_b_given_a"] = 1.0
+            result["p_b_given_a_llm_clamped"] = 1.0
+            result["p_b_given_a_deterministic"] = 1.0
+            result["anchor_range"] = [1.0, 1.0]
+            result["was_clamped"] = False
+            result["p_b_given_not_a"] = 0.0
+            result["p_b_given_not_a_reference_days"] = 365.0
+
+        elif parent_event_relation == "conflict_bound":
+            # B entails crossing A's serious-conflict threshold.
+            result["p_b_given_not_a"] = 0.0
+            result["p_b_given_not_a_reference_days"] = 365.0
+
+        # overlap deliberately retains Clergyman's estimated background rate.
         pba  = result.get("p_b_given_a")
         pbna = result.get("p_b_given_not_a")
         formality = result.get("political_act_formality")
@@ -831,8 +919,12 @@ Legalese flags: {'; '.join(flags) if flags else 'none'}"""
         blend_note = (f" [llm={result.get('p_b_given_a_llm_clamped')} "
                       f"det={result.get('p_b_given_a_deterministic')} -> blended]"
                       if deterministic_pba is not None else "")
-        print(f"    [clergy] {manifestation_family}{formality_note}/{requirement_burden}{range_note} "
-              f"P(B|A)={pba}{clamp_note}{blend_note} P(B|¬A)={pbna} conf={result.get('confidence')}")
+        print(
+            f"    [clergy] {manifestation_family}{formality_note}/"
+            f"{requirement_burden}/{parent_event_relation}{range_note} "
+            f"P(B|A)={pba}{clamp_note}{blend_note} "
+            f"P(B|¬A)={pbna} conf={result.get('confidence')}"
+        )
     return result
 
 
@@ -900,10 +992,18 @@ def bettor(engine_p: float, market_p: float, volume_usd: float,
         else:
             p_b_given_not_a = 0.0
 
-    # Flag if p_b_given_not_a_raw is suspiciously high (CGPT flag)
-    if p_b_given_not_a_raw is not None and p_b_given_not_a_raw > 0.05:
-        print(f"    [bettor] ⚠️  p_b_given_not_a_raw={p_b_given_not_a_raw} > 0.05 "
-              f"(ref={ref_days}d → scaled={p_b_given_not_a})")
+    # Non-zero P(B|¬A) is expected for overlap events. Only an
+    # equivalent/conflict-bound contract with a non-zero value is logically
+    # inconsistent (and Clergyman postprocessing should already have zeroed it).
+    parent_event_relation = clergy.get("parent_event_relation")
+    if (
+        parent_event_relation in {"equivalent", "conflict_bound"}
+        and p_b_given_not_a_raw not in (None, 0.0)
+    ):
+        print(
+            f"    [bettor] ⚠️ logical inconsistency: "
+            f"{parent_event_relation} but P(B|¬A)={p_b_given_not_a_raw}"
+        )
     observability   = glass.get("outcome_observability", "medium")
     resolution_risk = glass.get("resolution_risk", "medium")
 
@@ -1011,6 +1111,9 @@ def _pass_fields(market: dict, scholar: dict | None, reason: str) -> dict:
         "p_b_given_a":                None,
         "p_b_given_a_raw":            None,
         "p_b_given_not_a":            None,
+        "p_b_given_not_a_reference_days": None,
+        "p_b_given_not_a_raw_llm":    None,
+        "parent_event_relation":      None,
         "manifestation_family":       None,
         "political_act_formality":    None,
         "used_structural_context":    None,
@@ -1176,6 +1279,9 @@ def translate_market(market: dict, cache: dict) -> dict:
         "p_b_given_a":                clergy.get("p_b_given_a"),
         "p_b_given_a_raw":            clergy.get("p_b_given_a_raw"),
         "p_b_given_not_a":            clergy.get("p_b_given_not_a"),
+        "p_b_given_not_a_reference_days": clergy.get("p_b_given_not_a_reference_days"),
+        "p_b_given_not_a_raw_llm":    clergy.get("p_b_given_not_a_raw_llm"),
+        "parent_event_relation":      clergy.get("parent_event_relation"),
         "manifestation_family":       clergy.get("manifestation_family"),
         "political_act_formality":    clergy.get("political_act_formality"),
         "used_structural_context":    clergy.get("used_structural_context"),
@@ -1398,6 +1504,9 @@ def _append_log(feed: list):
                 "p_b_given_a":              market.get("p_b_given_a"),
                 "p_b_given_a_raw":          market.get("p_b_given_a_raw"),
                 "p_b_given_not_a":          market.get("p_b_given_not_a"),
+                "p_b_given_not_a_reference_days": market.get("p_b_given_not_a_reference_days"),
+                "p_b_given_not_a_raw_llm":  market.get("p_b_given_not_a_raw_llm"),
+                "parent_event_relation":    market.get("parent_event_relation"),
                 "manifestation_family":     market.get("manifestation_family"),
                 "political_act_formality":  market.get("political_act_formality"),
                 "used_structural_context":  market.get("used_structural_context"),

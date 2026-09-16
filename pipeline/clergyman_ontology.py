@@ -184,6 +184,70 @@ def deterministic_position_within_range(toggles: dict, range_tuple: tuple,
 
 
 
+PARENT_EVENT_RELATIONS = {
+    "equivalent",
+    "conflict_bound",
+    "overlap",
+}
+
+
+def derive_parent_event_relation(
+    manifestation_family: str,
+    requirement_burden: str,
+    severity_band: str,
+    scholar_relation: str | None = None,
+) -> str:
+    """
+    Deterministically classify how contract event B relates to parent event A.
+
+    Canonical A is the engine's serious interstate violent-episode threshold,
+    approximately anchored to ICB VIOL>=3 (serious clashes/full-scale war).
+
+    Key distinction:
+      - a discrete/limited physical incident can occur without A;
+      - a sustained serious campaign or territorial war essentially entails A.
+
+    This is intentionally NOT inferred from action_type alone.  The same action
+    family may be below-A as a one-off event and conflict-bound when sustained.
+
+    Examples:
+      one missile strike                       -> overlap
+      one air-to-air shootdown                 -> overlap
+      one raid                                 -> overlap
+      repeated/sustained kinetic campaign      -> conflict_bound
+      enforced naval blockade                  -> conflict_bound
+      territorial invasion/occupation          -> conflict_bound
+      persistent limited gray-zone harassment  -> overlap
+
+    scholar_relation='equivalent' overrides everything: B == A exactly.
+    """
+    if scholar_relation == "equivalent":
+        return "equivalent"
+
+    if manifestation_family == "political_act":
+        return "overlap"
+
+    if manifestation_family != "kinetic_or_coercive_action":
+        return "overlap"
+
+    if requirement_burden == "territorial_control":
+        return "conflict_bound"
+
+    if severity_band in {"persistent_campaign", "territorial_war"}:
+        return "conflict_bound"
+
+    # Persistence plus actual kinetic violence is enough to cross the
+    # serious-episode threshold. Persistence of merely limited gray-zone
+    # coercion is not automatically serious interstate violence.
+    if (
+        requirement_burden == "persistent"
+        and severity_band == "discrete_kinetic"
+    ):
+        return "conflict_bound"
+
+    return "overlap"
+
+
 def get_anchor_range(manifestation_family: str, requirement_burden: str,
                       war_costs=None) -> tuple:
     """
