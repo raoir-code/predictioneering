@@ -69,7 +69,7 @@ if [ -f "predictions/log.jsonl" ]; then cp predictions/log.jsonl docs/prediction
 if [ -f "predictions/brier_log.jsonl" ]; then cp predictions/brier_log.jsonl docs/brier_log.jsonl; fi
 
 echo "Pushing to GitHub..." | tee -a "$LOGFILE"
-for f in pipeline/classified_feed.json predictions/log.jsonl pipeline/translator_cache.json predictions/brier_log.jsonl predictions/brier_summary.json pipeline/dyad_configs.json pipeline/context_changelog.jsonl pipeline/node_score_history.jsonl pipeline/.context_cooldown_state.json docs/classified_feed.json docs/predictions_log.jsonl docs/brier_log.jsonl docs/index.html; do
+for f in pipeline/classified_feed.json predictions/log.jsonl pipeline/translator_cache.json predictions/brier_log.jsonl predictions/brier_summary.json pipeline/dyad_configs.json pipeline/context_changelog.jsonl pipeline/node_score_history.jsonl pipeline/.context_cooldown_state.json pipeline/node_memory_state.json pipeline/theater_state.json docs/classified_feed.json docs/predictions_log.jsonl docs/brier_log.jsonl docs/index.html; do
     if [ -f "$f" ]; then
         $GIT add "$f"
     else
