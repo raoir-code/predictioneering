@@ -67,6 +67,7 @@ ACTION_TYPE_TO_SEVERITY_BAND = {
     "raid":               "discrete_kinetic",
     "missile_strike":     "discrete_kinetic",
     "airstrike":          "discrete_kinetic",
+    "direct_engagement":  "discrete_kinetic",
     "naval_blockade":     "persistent_campaign",
     "ground_invasion":    "territorial_war",
 }

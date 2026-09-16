@@ -151,9 +151,9 @@ fields, not be collapsed into one:
   that would blunt a coordinated response.
 
 Also set action_type: the FASTEST physically plausible military action this dyad's
-likely initiator could realistically execute, from this exact 7-value set:
+likely initiator could realistically execute, from this exact 8-value set:
 gray_zone_incident, missile_strike, raid, seizure_boarding, airstrike,
-naval_blockade, ground_invasion.
+naval_blockade, ground_invasion, direct_engagement.
 This is a minimum-feasibility floor used to gate implausibly-fast market
 resolutions -- it is NOT a prediction of what will happen or what is most
 likely, only the fastest thing that is physically possible given real
@@ -162,6 +162,14 @@ constraints. Reason like a military planner, not a pundit:
   co-located in contested space and an incident needs no new deployment --
   coast guard ramming, water cannon use, cable-cutting, drone harassment.
   E.g. China-Philippines (vessels already present in disputed shoals).
+- direct_engagement: near-zero lead time, same tier as gray_zone_incident --
+  but reserved for cases where forces already in contact would engage in
+  deliberate LETHAL combat (not harassment/coercion) if a decision to fight
+  were made, e.g. artillery units or aircraft already postured across an
+  active front or DMZ. Use gray_zone_incident for non-lethal coercive
+  friction (ramming, water cannon, dangerous intercepts); use
+  direct_engagement only where the co-located forces' realistic next step
+  if action occurs is actual combat, not coercion.
 - seizure_boarding: ~1 day lag. Intercepting/boarding a vessel or aircraft --
   faster than a raid on land territory, but needs a dispatched
   interceptor/boarding team, so not zero-lag like gray_zone_incident.
@@ -236,7 +244,7 @@ Respond ONLY with valid JSON in this exact format:
     "EconomicExposureInternalization": 0.0,
     "ThirdPartySanctionsRisk": 0.0
   },
-  "action_type": "one of: gray_zone_incident, missile_strike, raid, seizure_boarding, airstrike, naval_blockade, ground_invasion",
+  "action_type": "one of: gray_zone_incident, missile_strike, raid, seizure_boarding, airstrike, naval_blockade, ground_invasion, direct_engagement",
   "action_type_reasoning": "one sentence -- geography/basing/doctrine reasoning for the fastest plausible action",
   "query": "boolean GNews search query string",
   "crisis_context": "1-3 sentence summary of this dyad's current structural situation (recent history, active disputes, anything a news-reading model would need to know to avoid misreading routine events as novel ones), followed by explicit guidance on how to score specific named nodes given this situation. If there is genuinely nothing notable about this dyad's current state, write a brief sentence saying so rather than inventing detail -- a short honest 'no notable active crisis dynamics for this dyad' is correct and useful, a fabricated specific event is not.",

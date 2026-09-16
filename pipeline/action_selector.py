@@ -51,6 +51,7 @@ ACTION_TYPES = (
     "airstrike",
     "naval_blockade",
     "ground_invasion",
+    "direct_engagement",
 )
 
 ROOT = Path(__file__).resolve().parent

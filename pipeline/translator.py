@@ -535,9 +535,16 @@ the true probability, never raise it):
 
 Also record action_type (reuse this dyad\'s known action_type categories:
 gray_zone_incident, missile_strike, raid, seizure_boarding, airstrike,
-naval_blockade, ground_invasion) if the contract\'s method is physical and
-identifiable -- null if manifestation_family is political_act or the method
-is unspecified.
+naval_blockade, ground_invasion, direct_engagement) if the contract\'s method
+is physical and identifiable -- null if manifestation_family is political_act
+or the method is unspecified.
+  - direct_engagement: deliberate overt kinetic combat between already-
+    deployed opposing forces, where the primary operation is not itself a
+    raid, strike, blockade, seizure, or invasion. Distinguish by OBJECTIVE,
+    not by which weapon fired first: a strike package's escort getting into
+    an air-to-air engagement while executing a strike mission is still
+    airstrike (the objective is the strike); a standalone intercept/
+    engagement with no strike objective behind it is direct_engagement.
 
 Also classify the DIRECTION of a physical contract:
 
@@ -653,7 +660,7 @@ Return ONLY valid JSON:
   "manifestation_family": "political_act|kinetic_or_coercive_action",
   "political_act_formality": "formal_official|informal_rhetorical (omit or use JSON null if manifestation_family is kinetic_or_coercive_action)",
   "requirement_burden": "broad|method_specific|target_specific|persistent|territorial_control",
-  "action_type": "one of the 7 categories, or null",
+  "action_type": "one of the 8 categories, or null",
   "contract_initiator": "exact dyad actor name, or null",
   "contract_target": "exact dyad actor name, or null",
   "p_b_given_a": 0.75,

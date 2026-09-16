@@ -28,8 +28,8 @@ CONFIG_PATH = os.path.join(os.path.dirname(__file__), "dyad_configs.json")
 SYSTEM_PROMPT = """You are a military-geography analyst. Given a named dyad
 (pair of states), classify the FASTEST physically plausible military action
 this dyad's likely initiator could realistically execute, from this exact
-7-value set: gray_zone_incident, missile_strike, raid, seizure_boarding,
-airstrike, naval_blockade, ground_invasion.
+8-value set: gray_zone_incident, missile_strike, raid, seizure_boarding,
+airstrike, naval_blockade, ground_invasion, direct_engagement.
 
 This is a minimum-feasibility floor used to gate implausibly-fast market
 resolutions -- it is NOT a prediction of what will happen or what is most
@@ -39,6 +39,11 @@ constraints. Reason like a military planner, not a pundit:
   co-located in contested space and an incident needs no new deployment --
   coast guard ramming, water cannon use, cable-cutting, drone harassment.
   E.g. China-Philippines (vessels already present in disputed shoals).
+- direct_engagement: near-zero lead time, same tier as gray_zone_incident --
+  reserved for forces already in contact whose realistic next step is
+  deliberate LETHAL combat, not coercion (e.g. postured artillery/aircraft
+  across an active front or DMZ). Use gray_zone_incident for non-lethal
+  coercive friction instead.
 - seizure_boarding: ~1 day lag. Intercepting/boarding a vessel or aircraft --
   faster than a raid on land territory, but needs a dispatched
   interceptor/boarding team, so not zero-lag like gray_zone_incident.
@@ -80,7 +85,7 @@ defenses firing in response to an incoming strike). Classify only the
 fastest INITIATED physical action.
 
 Respond ONLY with valid JSON:
-{"action_type": "one of the 7 values", "action_type_reasoning": "one sentence"}
+{"action_type": "one of the 8 values", "action_type_reasoning": "one sentence"}
 """
 
 
@@ -149,7 +154,7 @@ def main():
             action_type = result.get("action_type")
             reasoning = result.get("action_type_reasoning", "")
             valid = {"gray_zone_incident", "missile_strike", "raid", "seizure_boarding",
-                     "airstrike", "naval_blockade", "ground_invasion"}
+                     "airstrike", "naval_blockade", "ground_invasion", "direct_engagement"}
             if action_type not in valid:
                 errors.append(f"{dyad}: invalid action_type returned: {action_type!r}")
                 print(f"  {i+1:2}/{len(targets)}. ⚠️  {dyad}: INVALID VALUE '{action_type}' -- skipped")

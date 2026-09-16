@@ -1,8 +1,9 @@
 """
 ACTION-TYPE PAIR RELATIONS AND CROSS-MARKET COHERENCE CHECK
 
-Static, hand-authored relation table over the 7 action_type categories,
-21 unordered pairs. Built 2026-08-24, cross-validated with ChatGPT. NOT
+Static, hand-authored relation table over the 8 action_type categories,
+28 unordered pairs. Built 2026-08-24, extended 2026-09-16 for
+direct_engagement. NOT
 derived from data -- declared priors, same honesty-note category as
 clergyman_ontology.py's war_costs_range_multiplier bend points. Revisit
 once enough resolved same-dyad multi-market cases exist.
@@ -38,10 +39,12 @@ COMPONENT_FRACTIONS = {
     ("airstrike", "ground_invasion"):       0.65,
     ("missile_strike", "ground_invasion"):  0.50,
     ("seizure_boarding", "naval_blockade"): 0.40,
+    ("direct_engagement", "ground_invasion"): 0.55,
 }
 CONDITIONAL_COMPONENT_FRACTIONS = {
     ("missile_strike", "naval_blockade"): 0.25,
     ("airstrike", "naval_blockade"):      0.25,
+    ("direct_engagement", "naval_blockade"): 0.20,
 }
 
 ACTION_PAIR_RELATIONS = {
@@ -66,20 +69,28 @@ ACTION_PAIR_RELATIONS = {
     frozenset({"airstrike", "naval_blockade"}):               "CONDITIONAL_COMPONENT",
     frozenset({"airstrike", "ground_invasion"}):              "COMPONENT",
     frozenset({"naval_blockade", "ground_invasion"}):        "EXCLUSIVE",
+    frozenset({"gray_zone_incident", "direct_engagement"}):  "EXCLUSIVE",
+    frozenset({"seizure_boarding", "direct_engagement"}):    "EXCLUSIVE",
+    frozenset({"raid", "direct_engagement"}):                "EXCLUSIVE",
+    frozenset({"missile_strike", "direct_engagement"}):      "EXCLUSIVE",
+    frozenset({"airstrike", "direct_engagement"}):           "EXCLUSIVE",
+    frozenset({"naval_blockade", "direct_engagement"}):      "CONDITIONAL_COMPONENT",
+    frozenset({"ground_invasion", "direct_engagement"}):     "COMPONENT",
 }
 
 HORIZON_DEPENDENT_PAIRS = {
     frozenset({"raid", "ground_invasion"}):            60,
     frozenset({"naval_blockade", "ground_invasion"}):  60,
+    frozenset({"gray_zone_incident", "direct_engagement"}): 60,
 }
 
 _TYPES = ["gray_zone_incident", "seizure_boarding", "raid", "missile_strike",
-          "airstrike", "naval_blockade", "ground_invasion"]
+          "airstrike", "naval_blockade", "ground_invasion", "direct_engagement"]
 _ALL_PAIRS = {frozenset({a, b}) for i, a in enumerate(_TYPES) for b in _TYPES[i+1:]}
 assert _ALL_PAIRS == set(ACTION_PAIR_RELATIONS.keys()), \
     f"action_coherence.py: pair table incomplete or has stray keys: " \
     f"{_ALL_PAIRS ^ set(ACTION_PAIR_RELATIONS.keys())}"
-assert len(ACTION_PAIR_RELATIONS) == 21
+assert len(ACTION_PAIR_RELATIONS) == 28
 
 
 def check_action_coherence(dyad_markets: list) -> list:

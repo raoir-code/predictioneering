@@ -760,6 +760,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
             # reset when signal abates) so repeat headlines don't roll the clock.
             _OP_LAG_DAYS = {
                 "gray_zone_incident": 0,
+                "direct_engagement":  0,
                 "missile_strike":     1,
                 "raid":               1,
                 "seizure_boarding":   1,
