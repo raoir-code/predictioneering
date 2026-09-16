@@ -44,7 +44,7 @@ import calendar as _calendar
 # applying whatever fix is live right now.
 # ─────────────────────────────────────────────────────────────────────
 LEGAL_SCHOLAR_PROMPT_VERSION = "v3"
-CLERGYMAN_PROMPT_VERSION     = "v5"  # v5 = blend LLM guess with a deterministic position-within-range formula for kinetic contracts (LLM's raw number wasn't tracking WarCosts/WinProbability/PatronDeterrence/NuclearDeterrence despite correct rationale text -- was mostly narration, not real sensitivity) (Jul 27)
+CLERGYMAN_PROMPT_VERSION     = "v6"  # v5 = blend LLM guess with a deterministic position-within-range formula for kinetic contracts (LLM's raw number wasn't tracking WarCosts/WinProbability/PatronDeterrence/NuclearDeterrence despite correct rationale text -- was mostly narration, not real sensitivity) (Jul 27)
 SPYGLASS_PROMPT_VERSION      = "v1"
 
 # ─────────────────────────────────────────────────────────────────────
@@ -539,6 +539,30 @@ naval_blockade, ground_invasion) if the contract\'s method is physical and
 identifiable -- null if manifestation_family is political_act or the method
 is unspecified.
 
+Also classify the DIRECTION of a physical contract:
+
+contract_initiator:
+  - the dyad actor whose initiated physical action would satisfy YES.
+
+contract_target:
+  - the other dyad actor against whom that action is directed.
+
+Use the EXACT actor names from the supplied dyad string.
+
+Examples:
+- Dyad US-Iran, "Will the U.S. invade Iran?" ->
+  contract_initiator="US", contract_target="Iran"
+- Dyad US-Iran, "Will Iran strike U.S. forces?" ->
+  contract_initiator="Iran", contract_target="US"
+
+Return null for BOTH fields when:
+- manifestation_family is political_act;
+- the contract is genuinely nondirectional;
+- no initiated physical action against the other dyad actor is specified;
+- direction cannot be established confidently from the contract.
+
+Do NOT infer direction merely from canonical dyad ordering.
+
 PART 2 -- ESTIMATE, using historical knowledge of this dyad\'s conflict patterns:
 
 P(B|A)   = probability that, given conflict onset occurs, it takes the specific
@@ -630,6 +654,8 @@ Return ONLY valid JSON:
   "political_act_formality": "formal_official|informal_rhetorical (omit or use JSON null if manifestation_family is kinetic_or_coercive_action)",
   "requirement_burden": "broad|method_specific|target_specific|persistent|territorial_control",
   "action_type": "one of the 7 categories, or null",
+  "contract_initiator": "exact dyad actor name, or null",
+  "contract_target": "exact dyad actor name, or null",
   "p_b_given_a": 0.75,
   "p_b_given_not_a": 0.05,
   "p_b_given_not_a_reference_days": 30,
@@ -700,7 +726,44 @@ Legalese flags: {'; '.join(flags) if flags else 'none'}"""
         if result.get("political_act_formality") in ("null", "None", ""):
             result["political_act_formality"] = None
 
-        manifestation_family = result.get("manifestation_family", "kinetic_or_coercive_action")
+        for _k in ("contract_initiator", "contract_target"):
+            if result.get(_k) in ("null", "None", ""):
+                result[_k] = None
+
+        # Direction is routing metadata, not something Claude may rename.
+        # Validate by reconstructing the canonical dyad rather than splitting
+        # on "-", so actor names containing hyphens remain safe.
+        _ci = result.get("contract_initiator")
+        _ct = result.get("contract_target")
+        if _ci is not None or _ct is not None:
+            _valid_pair = (
+                isinstance(_ci, str)
+                and isinstance(_ct, str)
+                and _ci != _ct
+                and (
+                    f"{_ci}-{_ct}" == dyad
+                    or f"{_ct}-{_ci}" == dyad
+                )
+            )
+            if not _valid_pair:
+                print(
+                    f"    [clergy] direction rejected: "
+                    f"{_ci!r}->{_ct!r} not exact mapping of {dyad}"
+                )
+                result["contract_initiator"] = None
+                result["contract_target"] = None
+
+        manifestation_family = result.get(
+            "manifestation_family",
+            "kinetic_or_coercive_action",
+        )
+
+        # Political/speech contracts do not belong in the physical-action
+        # selector even when one state is grammatically doing something.
+        if manifestation_family != "kinetic_or_coercive_action":
+            result["contract_initiator"] = None
+            result["contract_target"] = None
+            result["action_type"] = None
         requirement_burden   = result.get("requirement_burden", "broad")
         raw_pba               = result.get("p_b_given_a")
         toggles_for_position  = market.get("_toggles", {})
@@ -945,6 +1008,9 @@ def _pass_fields(market: dict, scholar: dict | None, reason: str) -> dict:
         "political_act_formality":    None,
         "used_structural_context":    None,
         "requirement_burden":         None,
+        "action_type":                None,
+        "contract_initiator":         None,
+        "contract_target":            None,
         "severity_band":              None,
         "anchor_range":               None,
         "was_clamped":                None,
@@ -1107,6 +1173,9 @@ def translate_market(market: dict, cache: dict) -> dict:
         "political_act_formality":    clergy.get("political_act_formality"),
         "used_structural_context":    clergy.get("used_structural_context"),
         "requirement_burden":         clergy.get("requirement_burden"),
+        "action_type":                clergy.get("action_type"),
+        "contract_initiator":         clergy.get("contract_initiator"),
+        "contract_target":            clergy.get("contract_target"),
         "severity_band":              clergy.get("severity_band"),
         "anchor_range":               clergy.get("anchor_range"),
         "was_clamped":                clergy.get("was_clamped"),
@@ -1153,12 +1222,25 @@ def _run_action_coherence_pass(feed: list, cache: dict):
             continue
         action_type = market.get("action_type")
         p_b_given_a = market.get("p_b_given_a")
-        if action_type is None or p_b_given_a is None:
+        initiator = market.get("contract_initiator")
+        target = market.get("contract_target")
+
+        # Action coherence is directional. Never compare US->Iran contracts
+        # against Iran->US contracts merely because both use dyad=US-Iran.
+        if (
+            action_type is None
+            or p_b_given_a is None
+            or initiator is None
+            or target is None
+        ):
             continue
+
         dyad = market.get("dyad") or "unknown"
+        direction_key = (dyad, initiator, target)
+
         _deadline, _src, _mismatch = _get_market_deadline(market)
         days_remaining = max(1.0, float((_deadline - date.today()).days)) if _deadline else 365.0
-        by_dyad[dyad].append({
+        by_dyad[direction_key].append({
             "market_id":      _cache_key(market),
             "action_type":    action_type,
             "p_b_given_a":    p_b_given_a,
@@ -1167,7 +1249,7 @@ def _run_action_coherence_pass(feed: list, cache: dict):
         })
 
     touched = 0
-    for dyad, markets in by_dyad.items():
+    for (dyad, initiator, target), markets in by_dyad.items():
         if len(markets) < 2:
             continue
         before = {m["market_id"]: m["p_b_given_a"] for m in markets}
