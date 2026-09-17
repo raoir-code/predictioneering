@@ -67,6 +67,13 @@ BLEND_WEIGHT_CAP  = 0.50
 BANKROLL          = 500.0
 KELLY_FRACTION    = 0.25
 
+# Live action-selector bridge is production-active by default.
+# Emergency rollback:
+#   ACTION_BRIDGE_PRODUCTION=0 python3.11 -m pipeline.translator
+ACTION_BRIDGE_PRODUCTION_ENABLED = (
+    os.environ.get("ACTION_BRIDGE_PRODUCTION", "1") != "0"
+)
+
 # Dyads that are not scoreable — skip entirely
 UNSCORABLE_DYADS  = {
     None, "", "None", "unknown", "Unknown",
@@ -1951,6 +1958,266 @@ def _run_action_bridge_candidate_pass(feed: list, cache: dict):
             print(f"    {status}: {n}")
 
 
+
+def _run_action_bridge_activation_pass(feed: list, cache: dict):
+    """
+    Promote already-audited action-bridge candidate probabilities into
+    production fields.
+
+    IMPORTANT:
+    - Runs only after the candidate pass.
+    - Fail-closed: only candidate_ready statuses activate.
+    - Re-runs the REAL bettor() from candidate Clergyman conditionals.
+    - Does NOT write live-adjusted Clergyman values into translator_cache.
+      The cache remains the structural baseline, preventing compounding
+      today's action-readiness evidence into tomorrow's prior.
+    """
+
+    if not ACTION_BRIDGE_PRODUCTION_ENABLED:
+        print(
+            "\n  [action bridge production] DISABLED "
+            "(ACTION_BRIDGE_PRODUCTION=0)"
+        )
+        return
+
+    eligible_statuses = {
+        "candidate_ready",
+        "candidate_ready_overlap_approximation",
+    }
+
+    activated = 0
+    overlap_activated = 0
+    failed = 0
+
+    for market in feed:
+        candidate_status = market.get(
+            "action_bridge_candidate_status"
+        )
+
+        if candidate_status not in eligible_statuses:
+            continue
+
+        # Explicit default until all guards below pass.
+        market["action_bridge_activation_status"] = (
+            "activation_failed_closed"
+        )
+
+        candidate_pba = market.get(
+            "action_bridge_candidate_p_b_given_a"
+        )
+        candidate_pbna = market.get(
+            "action_bridge_candidate_p_b_given_not_a"
+        )
+        candidate_conditional = market.get(
+            "action_bridge_candidate_conditional_p"
+        )
+        candidate_blended = market.get(
+            "action_bridge_candidate_blended_p"
+        )
+
+        if (
+            candidate_pba is None
+            or candidate_pbna is None
+            or candidate_conditional is None
+        ):
+            failed += 1
+            continue
+
+        mid = _cache_key(market)
+        cached_entry = cache.get(mid)
+
+        if (
+            not isinstance(cached_entry, dict)
+            or not isinstance(
+                cached_entry.get("scholar"), dict
+            )
+            or not isinstance(
+                cached_entry.get("clergy"), dict
+            )
+            or not isinstance(
+                cached_entry.get("glass"), dict
+            )
+        ):
+            failed += 1
+            continue
+
+        engine_p = market.get("our_prediction")
+        if engine_p is None:
+            failed += 1
+            continue
+
+        deadline, _src, _mismatch = (
+            _get_market_deadline(market)
+        )
+
+        days_remaining = (
+            max(
+                1.0,
+                float((deadline - date.today()).days),
+            )
+            if deadline
+            else 365.0
+        )
+
+        # Preserve the structural/coherence-adjusted production state
+        # immediately before live action evidence is applied.
+        pre = {
+            "p_b_given_a": market.get("p_b_given_a"),
+            "p_b_given_not_a": market.get(
+                "p_b_given_not_a"
+            ),
+            "conditional_p": market.get("conditional_p"),
+            "blended_p": market.get("blended_p"),
+            "blend_weight": market.get("blend_weight"),
+            "kelly_fraction": market.get(
+                "kelly_fraction"
+            ),
+            "kelly_dollars": market.get(
+                "kelly_dollars"
+            ),
+            "bet_direction": market.get(
+                "bet_direction"
+            ),
+        }
+
+        # COPY ONLY. Never mutate cached_entry["clergy"].
+        live_clergy = dict(cached_entry["clergy"])
+        live_clergy["p_b_given_a"] = float(
+            candidate_pba
+        )
+        live_clergy["p_b_given_not_a"] = float(
+            candidate_pbna
+        )
+
+        bet = bettor(
+            float(engine_p),
+            float(market.get("market_price") or 0),
+            _polymarket_volume(market),
+            cached_entry["scholar"],
+            live_clergy,
+            cached_entry["glass"],
+            days_remaining=days_remaining,
+        )
+
+        # Candidate pass and activation pass must produce the
+        # same probability from the same inputs. Otherwise fail closed.
+        if bet.get("conditional_p") is None:
+            failed += 1
+            continue
+
+        if (
+            abs(
+                float(bet["conditional_p"])
+                - float(candidate_conditional)
+            )
+            > 1e-9
+        ):
+            market["action_bridge_activation_status"] = (
+                "candidate_rebet_mismatch"
+            )
+            failed += 1
+            continue
+
+        if (
+            candidate_blended is not None
+            and bet.get("blended_p") is not None
+            and abs(
+                float(bet["blended_p"])
+                - float(candidate_blended)
+            )
+            > 1e-9
+        ):
+            market["action_bridge_activation_status"] = (
+                "candidate_rebet_mismatch"
+            )
+            failed += 1
+            continue
+
+        # Audit trail: preserve exact pre-bridge state.
+        market[
+            "action_bridge_pre_activation_p_b_given_a"
+        ] = pre["p_b_given_a"]
+
+        market[
+            "action_bridge_pre_activation_p_b_given_not_a"
+        ] = pre["p_b_given_not_a"]
+
+        market[
+            "action_bridge_pre_activation_conditional_p"
+        ] = pre["conditional_p"]
+
+        market[
+            "action_bridge_pre_activation_blended_p"
+        ] = pre["blended_p"]
+
+        market[
+            "action_bridge_pre_activation_bet_direction"
+        ] = pre["bet_direction"]
+
+        # Production promotion.
+        market["p_b_given_a"] = float(candidate_pba)
+        market["p_b_given_not_a"] = float(
+            candidate_pbna
+        )
+
+        market["conditional_p"] = bet["conditional_p"]
+        market["blended_p"] = bet["blended_p"]
+        market["blend_weight"] = bet["blend_weight"]
+        market["kelly_fraction"] = bet[
+            "kelly_fraction"
+        ]
+        market["kelly_dollars"] = bet[
+            "kelly_dollars"
+        ]
+        market["bet_direction"] = bet[
+            "bet_direction"
+        ]
+
+        market[
+            "kelly_clergy_confidence_mult"
+        ] = bet.get(
+            "clergy_confidence_mult"
+        )
+
+        market[
+            "action_bridge_production_delta_pp"
+        ] = round(
+            100.0
+            * (
+                float(bet["conditional_p"])
+                - float(pre["conditional_p"])
+            ),
+            4,
+        )
+
+        market[
+            "action_bridge_activation_cache_policy"
+        ] = "structural_cache_no_live_writeback_v1"
+
+        if (
+            candidate_status
+            == "candidate_ready_overlap_approximation"
+        ):
+            market["action_bridge_activation_status"] = (
+                "activated_overlap_approximation"
+            )
+            overlap_activated += 1
+        else:
+            market["action_bridge_activation_status"] = (
+                "activated"
+            )
+
+        activated += 1
+
+    print("\n  [action bridge production]")
+    print(f"    activated: {activated}")
+    print(
+        "    overlap approximation: "
+        f"{overlap_activated}"
+    )
+    print(f"    failed closed: {failed}")
+
+
 def run_translator():
     assert ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY not set"
 
@@ -1995,6 +2262,7 @@ def run_translator():
     # Candidate-only action-selector bridge. Must not mutate any
     # production probability or betting field.
     _run_action_bridge_candidate_pass(feed, cache)
+    _run_action_bridge_activation_pass(feed, cache)
     _save_cache(cache)
 
     CLASSIFIED_FEED.write_text(json.dumps(feed, indent=2))
@@ -2071,6 +2339,13 @@ def _append_log(feed: list):
                 "action_bridge_candidate_qualifying_action_types": market.get("action_bridge_candidate_qualifying_action_types"),
                 "action_bridge_candidate_structural_mass": market.get("action_bridge_candidate_structural_mass"),
                 "action_bridge_candidate_live_mass": market.get("action_bridge_candidate_live_mass"),
+                "action_bridge_activation_status": market.get("action_bridge_activation_status"),
+                "action_bridge_activation_cache_policy": market.get("action_bridge_activation_cache_policy"),
+                "action_bridge_pre_activation_p_b_given_a": market.get("action_bridge_pre_activation_p_b_given_a"),
+                "action_bridge_pre_activation_p_b_given_not_a": market.get("action_bridge_pre_activation_p_b_given_not_a"),
+                "action_bridge_pre_activation_conditional_p": market.get("action_bridge_pre_activation_conditional_p"),
+                "action_bridge_pre_activation_blended_p": market.get("action_bridge_pre_activation_blended_p"),
+                "action_bridge_production_delta_pp": market.get("action_bridge_production_delta_pp"),
                 "action_bridge_candidate_p_b_given_a": market.get("action_bridge_candidate_p_b_given_a"),
                 "action_bridge_candidate_p_b_given_not_a": market.get("action_bridge_candidate_p_b_given_not_a"),
                 "action_bridge_candidate_conditional_p": market.get("action_bridge_candidate_conditional_p"),
