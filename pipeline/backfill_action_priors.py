@@ -49,6 +49,9 @@ from pipeline.action_selector import (
     load_action_priors,
     normalize_distribution,
     save_action_priors,
+    apply_feasibility_guards,
+    normalize_feasibility_profile,
+    apply_structural_prerequisites,
 )
 
 
@@ -80,7 +83,7 @@ characterizes the operational objective of the NEXT escalation episode.
 
 This is not necessarily the first weapon fired.
 
-Use exactly these seven categories:
+Use exactly these eight categories:
 
 1. gray_zone_incident
    Limited physical coercion short of a larger discrete operation:
@@ -123,6 +126,13 @@ Use exactly these seven categories:
    objective is territorial control, classify the PRIMARY episode as
    ground_invasion.
 
+8. direct_engagement
+   Deliberate overt kinetic combat between already-deployed opposing forces
+   when the primary operation is not itself a raid, strike, blockade, seizure,
+   or territorial invasion. Examples include standalone air-to-air combat,
+   SAM engagements, ship-to-ship gunfire, cross-border artillery/direct fire,
+   and border/DMZ firefights.
+
 MUTUAL-EXCLUSIVITY DISCIPLINE
 
 Real operations are multimodal. You must still distribute probability over
@@ -137,6 +147,57 @@ Examples:
 - limited special-forces border incursion -> raid
 - dangerous coast-guard encounter without broader operation ->
   gray_zone_incident
+
+DIRECTIONAL ATTRIBUTION DISCIPLINE
+
+You are classifying the INITIATOR'S own primary action against TARGET.
+
+Do NOT assign probability to direct_engagement merely because TARGET would
+defend itself, intercept incoming weapons, fire back, or otherwise respond.
+
+Examples:
+- Iran fires missiles at Jordan and Jordan shoots them down:
+  Iran's action = missile_strike, NOT direct_engagement.
+- China conducts an airstrike and defending fighters intercept the package:
+  China's primary action remains airstrike.
+- A standalone Chinese fighter deliberately attacks a Philippine fighter:
+  China's action = direct_engagement.
+
+Do NOT use attacks by proxies, militias, or partners as evidence for the
+initiator's direct action unless the contract explicitly attributes those
+actors' actions to INITIATOR. This structural prior is directional and literal.
+
+DIRECT_ENGAGEMENT CONTACT TEST
+
+Before assigning probability OR feasibility to direct_engagement, ask:
+
+"Does INITIATOR have an ordinary pathway to deliberately fire on TARGET's
+already-deployed forces as the primary action, without first performing some
+other action family?"
+
+Typical pathways include:
+- opposing forces sharing a land frontier or DMZ;
+- recurring close naval/coast-guard interaction;
+- recurring military air contact/intercepts;
+- both states having deployed military forces in the same operating theater.
+
+If the only reason the forces would make contact is that TARGET intercepts
+INITIATOR's missiles, drones, aircraft, or raid, that is NOT evidence for
+direct_engagement. Classify the INITIATOR by the action it initiated.
+
+Examples:
+- Iran launches missiles at Jordan; Jordan fires SAMs:
+  Iran -> Jordan = missile_strike.
+- Israel intercepts a missile launched from Yemen:
+  this provides NO evidence for Israel -> Yemen direct_engagement.
+- Turkish fighter deliberately fires on a Greek fighter during an Aegean
+  encounter:
+  Turkey -> Greece = direct_engagement.
+- North Korean troops deliberately fire across the DMZ:
+  North Korea -> South Korea = direct_engagement.
+
+If there is no ordinary force-contact pathway, direct_engagement should
+normally be severely_constrained or unavailable rather than feasible/natural.
 
 STRUCTURAL INFORMATION YOU MAY USE
 
@@ -185,6 +246,61 @@ Probability mass should be concentrated when military geography clearly
 favors a few modes, but retain reasonable uncertainty when several genuine
 options exist.
 
+DIRECT-ENGAGEMENT STRUCTURAL FLAG
+
+Also return:
+
+"direct_engagement_contact_pathway": true|false
+
+Set TRUE only when INITIATOR's own deployed forces have an ordinary structural
+pathway to encounter TARGET's own deployed forces directly, such as:
+
+- shared land frontier or DMZ;
+- recurring fighter/interceptor contact;
+- recurring naval/coast-guard contact;
+- both actors maintaining forces in the same operating theater.
+
+Set FALSE when direct contact would exist only because:
+- TARGET intercepts INITIATOR's missiles, drones, aircraft, or raids;
+- proxies or militias operate near TARGET;
+- INITIATOR would require a major new deployment merely to create contact.
+
+Examples:
+Iran -> Jordan: false
+Israel -> Yemen: false
+Iran -> Bahrain: true
+Turkey -> Greece: true
+China -> Taiwan: true
+North Korea -> South Korea: true
+
+STRUCTURAL FEASIBILITY PROFILE
+
+Separately classify every action family from stable structural facts only.
+Do NOT use current headlines, today's crisis intensity, or market prices.
+
+Use exactly one feasibility tier per action:
+
+- unavailable:
+  No ordinary operational pathway exists under the enduring geography,
+  capability, access, or force relationship. It would require a fundamentally
+  different force posture, theater, or major new capability.
+
+- severely_constrained:
+  Physically possible, but requires exceptional access, logistics, deployment,
+  sea/air control, or political-military commitment not normally available.
+
+- feasible:
+  A credible operational option if action occurs, but not especially favored
+  by the enduring structural relationship.
+
+- natural:
+  Particularly well matched to enduring geography, force posture, doctrine,
+  recurring interaction, or demonstrated capability.
+
+Feasibility is NOT probability.
+Several action families can simultaneously be feasible or natural.
+Do not downgrade one merely because another is more likely.
+
 Return ONLY JSON:
 
 {
@@ -192,14 +308,25 @@ Return ONLY JSON:
   "missile_strike": 0.30,
   "raid": 0.10,
   "seizure_boarding": 0.05,
-  "airstrike": 0.25,
+  "airstrike": 0.23,
   "naval_blockade": 0.10,
-  "ground_invasion": 0.10,
-  "reasoning": "One concise sentence.",
+  "ground_invasion": 0.08,
+  "direct_engagement": 0.04,
+  "feasibility": {
+    "gray_zone_incident": "feasible",
+    "missile_strike": "natural",
+    "raid": "feasible",
+    "seizure_boarding": "severely_constrained",
+    "airstrike": "natural",
+    "naval_blockade": "severely_constrained",
+    "ground_invasion": "unavailable",
+    "direct_engagement": "feasible"
+  },
+  "reasoning": "One concise sentence explaining the enduring structural pattern.",
   "confidence": "high|medium|low"
 }
 
-The seven probabilities should sum approximately to 1.
+The eight probabilities should sum approximately to 1.
 """
 
 
@@ -247,20 +374,19 @@ def extract_json(text: str) -> dict:
 def classify_direction(
     initiator: str,
     target: str,
-) -> tuple[dict, str, str]:
-
+) -> tuple[dict, dict, dict, dict, str, str]:
     prompt = f"""
 INITIATOR: {initiator}
 TARGET: {target}
 
 Conditional on {initiator} undertaking a qualifying physical coercive or
-military action against {target}, estimate the seven-way structural
+military action against {target}, estimate the eight-way structural
 distribution over the PRIMARY action family of the next escalation episode.
 """
 
     body = {
         "model": MODEL,
-        "max_tokens": 700,
+        "max_tokens": 1000,
         "temperature": 0,
         "system": SYSTEM_PROMPT,
         "messages": [{"role": "user", "content": prompt}],
@@ -292,15 +418,52 @@ distribution over the PRIMARY action family of the next escalation episode.
         for action in ACTION_TYPES
     }
 
-    probs = normalize_distribution(raw)
+    raw_probs = normalize_distribution(raw)
+
+    feasibility = normalize_feasibility_profile(
+        parsed.get("feasibility", {})
+    )
+
+    contact_pathway = parsed.get(
+        "direct_engagement_contact_pathway"
+    )
+
+    if not isinstance(contact_pathway, bool):
+        raise ValueError(
+            "direct_engagement_contact_pathway must be true or false"
+        )
+
+    structural_flags = {
+        "direct_engagement_contact_pathway": contact_pathway,
+    }
+
+    guarded_probs = apply_feasibility_guards(
+        raw_probs,
+        feasibility,
+    )
+
+    guarded_probs = apply_structural_prerequisites(
+        guarded_probs,
+        structural_flags,
+    )
 
     reasoning = str(parsed.get("reasoning", "")).strip()
-    confidence = str(parsed.get("confidence", "medium")).strip().lower()
+
+    confidence = str(
+        parsed.get("confidence", "medium")
+    ).strip().lower()
 
     if confidence not in {"high", "medium", "low"}:
         confidence = "medium"
 
-    return probs, reasoning, confidence
+    return (
+        guarded_probs,
+        raw_probs,
+        feasibility,
+        structural_flags,
+        reasoning,
+        confidence,
+    )
 
 
 def discover_directions() -> list[tuple[str, str]]:
@@ -436,7 +599,14 @@ def main():
         key = direction_key(initiator, target)
 
         try:
-            probs, reasoning, confidence = classify_direction(
+            (
+                probs,
+                raw_probs,
+                feasibility,
+                structural_flags,
+                reasoning,
+                confidence,
+            ) = classify_direction(
                 initiator,
                 target,
             )
@@ -447,7 +617,23 @@ def main():
             print(
                 f"    mode: {mode} ({probs[mode]:.3f})"
             )
-            print(f"    {format_distribution(probs)}")
+            print(
+                f"    raw:     {format_distribution(raw_probs)}"
+            )
+            print(
+                f"    guarded: {format_distribution(probs)}"
+            )
+            print(
+                "    feasibility: "
+                + ", ".join(
+                    f"{action}={feasibility[action]}"
+                    for action in ACTION_TYPES
+                )
+            )
+            print(
+                "    contact_pathway: "
+                f"{structural_flags['direct_engagement_contact_pathway']}"
+            )
             print(
                 f"    confidence={confidence} | {reasoning}"
             )
@@ -460,16 +646,24 @@ def main():
                         action: round(probs[action], 6)
                         for action in ACTION_TYPES
                     },
+                    "raw_probabilities": {
+                        action: round(raw_probs[action], 6)
+                        for action in ACTION_TYPES
+                    },
+                    "feasibility": {
+                        action: feasibility[action]
+                        for action in ACTION_TYPES
+                    },
+                    "structural_flags": structural_flags,
                     "reasoning": reasoning,
                     "confidence": confidence,
-                    "version": 2,
+                    "version": 3,
                     "estimand": (
                         "primary_next_action_given_action_occurs"
                     ),
                 }
 
             successes += 1
-
         except Exception as exc:
             errors.append((key, str(exc)))
             print(
