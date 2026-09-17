@@ -193,87 +193,197 @@ def normalize_feasibility_profile(raw: dict) -> dict:
     return out
 
 
-def apply_feasibility_guards(
-    raw_distribution: dict,
-    feasibility: dict,
+
+def _capped_simplex_projection(
+    distribution: dict,
+    caps: dict,
 ) -> dict:
     """
-    Project a probability distribution onto structural feasibility ceilings.
-
-    This is a capped-simplex projection that preserves the raw relative odds
-    as much as possible:
+    Simultaneously enforce per-action hard ceilings:
 
         q_k = min(cap_k, lambda * p_k)
 
-    with lambda chosen so sum(q)=1.
+    with lambda chosen so the resulting distribution sums to one.
 
-    The guard therefore does NOT manufacture rankings among actions that are
-    feasible. It only prevents structurally unavailable or severely
-    constrained modes from carrying implausibly large probability mass.
+    Hard constraints must be applied jointly. Sequential cap-and-renormalize
+    operations can cause a later renormalization to violate an earlier cap.
     """
-    p = normalize_distribution(raw_distribution)
-    tiers = normalize_feasibility_profile(feasibility)
+    p = normalize_distribution(distribution)
 
-    caps = {
-        action: FEASIBILITY_CAPS[tiers[action]]
-        for action in ACTION_TYPES
-    }
-
-    if sum(caps.values()) < 1.0 - 1e-12:
+    if set(caps) != set(ACTION_TYPES):
         raise ValueError(
-            "Feasibility ceilings leave less than 1.0 total probability capacity"
+            "caps must contain exactly all ACTION_TYPES"
         )
 
-    def total(scale):
+    clean_caps = {}
+
+    for action in ACTION_TYPES:
+        cap = float(caps[action])
+
+        if not math.isfinite(cap):
+            raise ValueError(
+                f"Non-finite cap for {action}: {cap}"
+            )
+
+        if not 0.0 <= cap <= 1.0:
+            raise ValueError(
+                f"Cap outside [0,1] for {action}: {cap}"
+            )
+
+        clean_caps[action] = cap
+
+    if sum(clean_caps.values()) < 1.0 - 1e-12:
+        raise ValueError(
+            "Hard caps are jointly infeasible."
+        )
+
+    if all(
+        p[a] <= clean_caps[a] + 1e-12
+        for a in ACTION_TYPES
+    ):
+        return p
+
+    def mass(lam):
         return sum(
-            min(caps[a], scale * p[a])
+            min(clean_caps[a], lam * p[a])
             for a in ACTION_TYPES
         )
 
-    # Find an upper bound for the water-filling scale.
     lo = 0.0
     hi = 1.0
-    while total(hi) < 1.0:
-        hi *= 2.0
-        if hi > 1e12:
-            raise ValueError("Could not satisfy feasibility ceilings")
 
-    # Binary search lambda.
-    for _ in range(100):
+    while mass(hi) < 1.0:
+        hi *= 2.0
+        if hi > 1e15:
+            raise RuntimeError(
+                "Could not bracket capped-simplex solution"
+            )
+
+    for _ in range(200):
         mid = (lo + hi) / 2.0
-        if total(mid) < 1.0:
+
+        if mass(mid) < 1.0:
             lo = mid
         else:
             hi = mid
 
-    scale = hi
-
-    guarded = {
-        a: min(caps[a], scale * p[a])
+    out = {
+        a: min(clean_caps[a], hi * p[a])
         for a in ACTION_TYPES
     }
 
-    # Numerical cleanup only.
-    z = sum(guarded.values())
-    if z <= 0:
-        raise ValueError("Guarded action distribution has zero mass")
+    # Remove tiny floating-point excess without breaking caps.
+    excess = sum(out.values()) - 1.0
 
-    guarded = {
-        a: guarded[a] / z
-        for a in ACTION_TYPES
-    }
+    if excess > 0:
+        for action in sorted(
+            ACTION_TYPES,
+            key=lambda a: out[a],
+            reverse=True,
+        ):
+            delta = min(out[action], excess)
+            out[action] -= delta
+            excess -= delta
 
-    # Floating-point normalization must not defeat a hard ceiling.
-    for a in ACTION_TYPES:
-        if guarded[a] > caps[a] + 1e-9:
+            if excess <= 1e-14:
+                break
+
+    deficit = 1.0 - sum(out.values())
+
+    if deficit > 0:
+        for action in sorted(
+            ACTION_TYPES,
+            key=lambda a: clean_caps[a] - out[a],
+            reverse=True,
+        ):
+            if p[action] <= 0:
+                continue
+
+            slack = clean_caps[action] - out[action]
+
+            if slack <= 0:
+                continue
+
+            delta = min(slack, deficit)
+            out[action] += delta
+            deficit -= delta
+
+            if deficit <= 1e-14:
+                break
+
+    if abs(sum(out.values()) - 1.0) > 1e-10:
+        raise AssertionError(
+            "Joint cap projection does not sum to one"
+        )
+
+    for action in ACTION_TYPES:
+        if out[action] > clean_caps[action] + 1e-10:
             raise AssertionError(
-                f"Feasibility cap violated for {a}: "
-                f"{guarded[a]} > {caps[a]}"
+                f"Cap violation for {action}: "
+                f"{out[action]} > {clean_caps[action]}"
             )
 
-    return guarded
+    return out
 
 
+def apply_feasibility_guards(
+    distribution: dict,
+    feasibility: dict,
+) -> dict:
+    """
+    Backward-compatible feasibility-only projection.
+    """
+    profile = normalize_feasibility_profile(feasibility)
+
+    caps = {
+        action: FEASIBILITY_CAPS[profile[action]]
+        for action in ACTION_TYPES
+    }
+
+    return _capped_simplex_projection(
+        distribution,
+        caps,
+    )
+
+
+def apply_structural_constraints(
+    distribution: dict,
+    feasibility: dict | None = None,
+    structural_flags: dict | None = None,
+) -> dict:
+    """
+    Jointly apply every currently binding hard structural constraint.
+    """
+    caps = {
+        action: 1.0
+        for action in ACTION_TYPES
+    }
+
+    if feasibility is not None:
+        profile = normalize_feasibility_profile(feasibility)
+
+        for action in ACTION_TYPES:
+            caps[action] = min(
+                caps[action],
+                FEASIBILITY_CAPS[profile[action]],
+            )
+
+    if structural_flags:
+        if (
+            structural_flags.get(
+                "direct_engagement_contact_pathway"
+            )
+            is False
+        ):
+            caps["direct_engagement"] = min(
+                caps["direct_engagement"],
+                DIRECT_ENGAGEMENT_NO_CONTACT_CAP,
+            )
+
+    return _capped_simplex_projection(
+        distribution,
+        caps,
+    )
 
 
 def apply_structural_prerequisites(
@@ -449,20 +559,13 @@ def select_distribution(
         for action in ACTION_TYPES
     }
 
-    # Hard structural constraints remain binding after live evidence.
-    # A news headline cannot make an operationally unavailable mode suddenly
-    # acquire large probability without first changing the structural profile.
-    if feasibility is not None:
-        distribution = apply_feasibility_guards(
-            distribution,
-            feasibility,
-        )
-
-    distribution = apply_structural_prerequisites(
+    # Apply all hard ceilings in ONE projection. A later guard must
+    # never renormalize probability back through an earlier ceiling.
+    distribution = apply_structural_constraints(
         distribution,
-        structural_flags,
+        feasibility=feasibility,
+        structural_flags=structural_flags,
     )
-
     return distribution
 
 

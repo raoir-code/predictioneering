@@ -96,3 +96,56 @@ with_contact = apply_structural_prerequisites(
 assert with_contact["direct_engagement"] > 0.20
 
 print("direct_engagement contact prerequisite: PASS")
+
+# ------------------------------------------------------------
+# JOINT CONSTRAINT REGRESSION
+# ------------------------------------------------------------
+
+from pipeline.action_selector import apply_structural_constraints
+
+raw_joint = {
+    "gray_zone_incident": 0.03,
+    "missile_strike": 0.75,
+    "raid": 0.02,
+    "seizure_boarding": 0.01,
+    "airstrike": 0.04,
+    "naval_blockade": 0.01,
+    "ground_invasion": 0.01,
+    "direct_engagement": 0.13,
+}
+
+verified_profile = {
+    "gray_zone_incident": "severely_constrained",
+    "missile_strike": "natural",
+    "raid": "severely_constrained",
+    "seizure_boarding": "unavailable",
+    "airstrike": "severely_constrained",
+    "naval_blockade": "unavailable",
+    "ground_invasion": "unavailable",
+    "direct_engagement": "severely_constrained",
+}
+
+joint = apply_structural_constraints(
+    raw_joint,
+    feasibility=verified_profile,
+    structural_flags={
+        "direct_engagement_contact_pathway": False,
+    },
+)
+
+assert abs(sum(joint.values()) - 1.0) < 1e-9
+
+for action in (
+    "seizure_boarding",
+    "naval_blockade",
+    "ground_invasion",
+):
+    assert joint[action] <= (
+        FEASIBILITY_CAPS["unavailable"] + 1e-9
+    )
+
+assert joint["direct_engagement"] <= (
+    DIRECT_ENGAGEMENT_NO_CONTACT_CAP + 1e-9
+)
+
+print("joint structural caps: PASS")

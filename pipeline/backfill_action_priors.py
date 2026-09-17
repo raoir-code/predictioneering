@@ -52,6 +52,7 @@ from pipeline.action_selector import (
     apply_feasibility_guards,
     normalize_feasibility_profile,
     apply_structural_prerequisites,
+    apply_structural_constraints,
 )
 
 
@@ -330,6 +331,10 @@ Return ONLY JSON:
     "ground_invasion": "unavailable",
     "direct_engagement": "feasible"
   },
+                    "reported_feasibility": {
+                        action: reported_feasibility[action]
+                        for action in ACTION_TYPES
+                    },
   "reasoning": "One concise sentence explaining the enduring structural pattern.",
   "confidence": "high|medium|low"
 }
@@ -446,6 +451,20 @@ distribution over the PRIMARY action family of the next escalation episode.
         parsed.get("feasibility", {})
     )
 
+    # Claude's feasibility tier is an epistemic judgment, not a
+    # deterministic impossibility proof. Preserve it for audit,
+    # but do not allow an LLM-only 'unavailable' label to create
+    # a hard probability ceiling.
+    reported_feasibility = dict(feasibility)
+    feasibility = {
+        action: (
+            "severely_constrained"
+            if reported_feasibility[action] == "unavailable"
+            else reported_feasibility[action]
+        )
+        for action in ACTION_TYPES
+    }
+
     contact_pathway = parsed.get(
         "direct_engagement_contact_pathway"
     )
@@ -459,14 +478,10 @@ distribution over the PRIMARY action family of the next escalation episode.
         "direct_engagement_contact_pathway": contact_pathway,
     }
 
-    guarded_probs = apply_feasibility_guards(
+    guarded_probs = apply_structural_constraints(
         raw_probs,
-        feasibility,
-    )
-
-    guarded_probs = apply_structural_prerequisites(
-        guarded_probs,
-        structural_flags,
+        feasibility=feasibility,
+        structural_flags=structural_flags,
     )
 
     reasoning = str(parsed.get("reasoning", "")).strip()
@@ -482,6 +497,7 @@ distribution over the PRIMARY action family of the next escalation episode.
         guarded_probs,
         raw_probs,
         feasibility,
+        reported_feasibility,
         structural_flags,
         reasoning,
         confidence,
@@ -746,7 +762,7 @@ def main():
                     "structural_flags": structural_flags,
                     "reasoning": reasoning,
                     "confidence": confidence,
-                    "version": 4,
+                    "version": 5,
                     "estimand": (
                         "primary_next_action_given_action_occurs"
                     ),
