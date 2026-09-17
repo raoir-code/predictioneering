@@ -1,0 +1,1844 @@
+{
+  "China->Taiwan|scope=89c2652018b045b5": {
+    "probabilities": {
+      "gray_zone_incident": 0.292,
+      "missile_strike": 0.204,
+      "raid": 0.074,
+      "seizure_boarding": 0.05,
+      "airstrike": 0.122,
+      "naval_blockade": 0.12,
+      "ground_invasion": 0.056,
+      "direct_engagement": 0.082
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.292,
+      "missile_strike": 0.204,
+      "raid": 0.074,
+      "seizure_boarding": 0.05,
+      "airstrike": 0.122,
+      "naval_blockade": 0.12,
+      "ground_invasion": 0.056,
+      "direct_engagement": 0.082
+    },
+    "feasibility": {
+      "gray_zone_incident": "natural",
+      "missile_strike": "natural",
+      "raid": "feasible",
+      "seizure_boarding": "feasible",
+      "airstrike": "natural",
+      "naval_blockade": "feasible",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "natural"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "natural",
+      "missile_strike": "natural",
+      "raid": "feasible",
+      "seizure_boarding": "feasible",
+      "airstrike": "natural",
+      "naval_blockade": "feasible",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "natural"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "natural": 5
+      },
+      "missile_strike": {
+        "natural": 5
+      },
+      "raid": {
+        "feasible": 5
+      },
+      "seizure_boarding": {
+        "feasible": 5
+      },
+      "airstrike": {
+        "natural": 5
+      },
+      "naval_blockade": {
+        "feasible": 3,
+        "natural": 2
+      },
+      "ground_invasion": {
+        "severely_constrained": 5
+      },
+      "direct_engagement": {
+        "natural": 3,
+        "feasible": 2
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": true
+    },
+    "contact_pathway_status": "verified_true",
+    "contact_pathway_votes": {
+      "true": 5,
+      "false": 0
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.010954,
+      "missile_strike": 0.016733,
+      "raid": 0.008944,
+      "seizure_boarding": 0.007071,
+      "airstrike": 0.017889,
+      "naval_blockade": 0.02,
+      "ground_invasion": 0.008944,
+      "direct_engagement": 0.008367
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.02,
+      "missile_strike": 0.04,
+      "raid": 0.02,
+      "seizure_boarding": 0.02,
+      "airstrike": 0.05,
+      "naval_blockade": 0.04,
+      "ground_invasion": 0.02,
+      "direct_engagement": 0.02
+    },
+    "replicates": 5,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "89c2652018b045b5",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "India->Pakistan|scope=a30564ef2baf3535": {
+    "probabilities": {
+      "gray_zone_incident": 0.096667,
+      "missile_strike": 0.137333,
+      "raid": 0.189333,
+      "seizure_boarding": 0.020667,
+      "airstrike": 0.236,
+      "naval_blockade": 0.032,
+      "ground_invasion": 0.074,
+      "direct_engagement": 0.214
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.096667,
+      "missile_strike": 0.137333,
+      "raid": 0.189333,
+      "seizure_boarding": 0.020667,
+      "airstrike": 0.236,
+      "naval_blockade": 0.032,
+      "ground_invasion": 0.074,
+      "direct_engagement": 0.214
+    },
+    "feasibility": {
+      "gray_zone_incident": "natural",
+      "missile_strike": "natural",
+      "raid": "natural",
+      "seizure_boarding": "feasible",
+      "airstrike": "natural",
+      "naval_blockade": "feasible",
+      "ground_invasion": "feasible",
+      "direct_engagement": "natural"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "natural",
+      "missile_strike": "natural",
+      "raid": "natural",
+      "seizure_boarding": "feasible",
+      "airstrike": "natural",
+      "naval_blockade": "feasible",
+      "ground_invasion": "feasible",
+      "direct_engagement": "natural"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "natural": 11,
+        "feasible": 4
+      },
+      "missile_strike": {
+        "natural": 12,
+        "feasible": 3
+      },
+      "raid": {
+        "natural": 15
+      },
+      "seizure_boarding": {
+        "feasible": 11,
+        "severely_constrained": 4
+      },
+      "airstrike": {
+        "natural": 15
+      },
+      "naval_blockade": {
+        "feasible": 14,
+        "severely_constrained": 1
+      },
+      "ground_invasion": {
+        "severely_constrained": 6,
+        "feasible": 9
+      },
+      "direct_engagement": {
+        "natural": 15
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": true
+    },
+    "contact_pathway_status": "verified_true",
+    "contact_pathway_votes": {
+      "true": 15,
+      "false": 0
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.038297,
+      "missile_strike": 0.029873,
+      "raid": 0.03595,
+      "seizure_boarding": 0.002582,
+      "airstrike": 0.019567,
+      "naval_blockade": 0.00414,
+      "ground_invasion": 0.017238,
+      "direct_engagement": 0.036994
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.1,
+      "missile_strike": 0.08,
+      "raid": 0.13,
+      "seizure_boarding": 0.01,
+      "airstrike": 0.07,
+      "naval_blockade": 0.01,
+      "ground_invasion": 0.05,
+      "direct_engagement": 0.12
+    },
+    "replicates": 15,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "a30564ef2baf3535",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "Iran->Egypt|scope=e2a2a92a52e81076": {
+    "probabilities": {
+      "gray_zone_incident": 0.093417,
+      "missile_strike": 0.618952,
+      "raid": 0.078682,
+      "seizure_boarding": 0.088371,
+      "airstrike": 0.048854,
+      "naval_blockade": 0.044626,
+      "ground_invasion": 0.017098,
+      "direct_engagement": 0.01
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.079275,
+      "missile_strike": 0.525253,
+      "raid": 0.066771,
+      "seizure_boarding": 0.074993,
+      "airstrike": 0.041458,
+      "naval_blockade": 0.03787,
+      "ground_invasion": 0.01451,
+      "direct_engagement": 0.15987
+    },
+    "feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "severely_constrained",
+      "seizure_boarding": "severely_constrained",
+      "airstrike": "severely_constrained",
+      "naval_blockade": "severely_constrained",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "severely_constrained"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "severely_constrained",
+      "seizure_boarding": "severely_constrained",
+      "airstrike": "severely_constrained",
+      "naval_blockade": "severely_constrained",
+      "ground_invasion": "unavailable",
+      "direct_engagement": "severely_constrained"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "severely_constrained": 6,
+        "feasible": 9
+      },
+      "missile_strike": {
+        "natural": 10,
+        "feasible": 4,
+        "severely_constrained": 1
+      },
+      "raid": {
+        "severely_constrained": 15
+      },
+      "seizure_boarding": {
+        "severely_constrained": 9,
+        "feasible": 6
+      },
+      "airstrike": {
+        "severely_constrained": 14,
+        "unavailable": 1
+      },
+      "naval_blockade": {
+        "severely_constrained": 12,
+        "unavailable": 3
+      },
+      "ground_invasion": {
+        "unavailable": 15
+      },
+      "direct_engagement": {
+        "severely_constrained": 14,
+        "feasible": 1
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": false
+    },
+    "contact_pathway_status": "verified_false",
+    "contact_pathway_votes": {
+      "true": 0,
+      "false": 15
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.040534,
+      "missile_strike": 0.09129,
+      "raid": 0.029417,
+      "seizure_boarding": 0.033492,
+      "airstrike": 0.007556,
+      "naval_blockade": 0.025183,
+      "ground_invasion": 0.005212,
+      "direct_engagement": 0.07202
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.142927,
+      "missile_strike": 0.320732,
+      "raid": 0.11,
+      "seizure_boarding": 0.106341,
+      "airstrike": 0.02,
+      "naval_blockade": 0.1,
+      "ground_invasion": 0.013256,
+      "direct_engagement": 0.215116
+    },
+    "replicates": 15,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "e2a2a92a52e81076",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "Iran->Kuwait|scope=de62f68eefe35248": {
+    "probabilities": {
+      "gray_zone_incident": 0.114,
+      "missile_strike": 0.395333,
+      "raid": 0.062667,
+      "seizure_boarding": 0.096667,
+      "airstrike": 0.096667,
+      "naval_blockade": 0.078667,
+      "ground_invasion": 0.030667,
+      "direct_engagement": 0.125333
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.114,
+      "missile_strike": 0.395333,
+      "raid": 0.062667,
+      "seizure_boarding": 0.096667,
+      "airstrike": 0.096667,
+      "naval_blockade": 0.078667,
+      "ground_invasion": 0.030667,
+      "direct_engagement": 0.125333
+    },
+    "feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "feasible",
+      "seizure_boarding": "feasible",
+      "airstrike": "feasible",
+      "naval_blockade": "severely_constrained",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "feasible"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "feasible",
+      "seizure_boarding": "feasible",
+      "airstrike": "feasible",
+      "naval_blockade": "severely_constrained",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "feasible"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "feasible": 12,
+        "natural": 3
+      },
+      "missile_strike": {
+        "natural": 15
+      },
+      "raid": {
+        "severely_constrained": 6,
+        "feasible": 9
+      },
+      "seizure_boarding": {
+        "feasible": 15
+      },
+      "airstrike": {
+        "feasible": 12,
+        "severely_constrained": 3
+      },
+      "naval_blockade": {
+        "severely_constrained": 9,
+        "feasible": 6
+      },
+      "ground_invasion": {
+        "severely_constrained": 14,
+        "unavailable": 1
+      },
+      "direct_engagement": {
+        "feasible": 11,
+        "severely_constrained": 4
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": null
+    },
+    "contact_pathway_status": "unknown",
+    "contact_pathway_votes": {
+      "true": 4,
+      "false": 11
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.033338,
+      "missile_strike": 0.028752,
+      "raid": 0.010328,
+      "seizure_boarding": 0.019518,
+      "airstrike": 0.033523,
+      "naval_blockade": 0.02774,
+      "ground_invasion": 0.004577,
+      "direct_engagement": 0.021668
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.1,
+      "missile_strike": 0.1,
+      "raid": 0.03,
+      "seizure_boarding": 0.07,
+      "airstrike": 0.11,
+      "naval_blockade": 0.08,
+      "ground_invasion": 0.02,
+      "direct_engagement": 0.07
+    },
+    "replicates": 15,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "de62f68eefe35248",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "Iran->Oman|scope=403fa402b0cdbbf3": {
+    "probabilities": {
+      "gray_zone_incident": 0.282,
+      "missile_strike": 0.168,
+      "raid": 0.07,
+      "seizure_boarding": 0.2,
+      "airstrike": 0.074,
+      "naval_blockade": 0.098,
+      "ground_invasion": 0.026,
+      "direct_engagement": 0.082
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.282,
+      "missile_strike": 0.168,
+      "raid": 0.07,
+      "seizure_boarding": 0.2,
+      "airstrike": 0.074,
+      "naval_blockade": 0.098,
+      "ground_invasion": 0.026,
+      "direct_engagement": 0.082
+    },
+    "feasibility": {
+      "gray_zone_incident": "natural",
+      "missile_strike": "natural",
+      "raid": "feasible",
+      "seizure_boarding": "natural",
+      "airstrike": "feasible",
+      "naval_blockade": "feasible",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "feasible"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "natural",
+      "missile_strike": "natural",
+      "raid": "feasible",
+      "seizure_boarding": "natural",
+      "airstrike": "feasible",
+      "naval_blockade": "feasible",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "feasible"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "natural": 5
+      },
+      "missile_strike": {
+        "natural": 5
+      },
+      "raid": {
+        "feasible": 5
+      },
+      "seizure_boarding": {
+        "natural": 5
+      },
+      "airstrike": {
+        "feasible": 5
+      },
+      "naval_blockade": {
+        "feasible": 5
+      },
+      "ground_invasion": {
+        "severely_constrained": 5
+      },
+      "direct_engagement": {
+        "natural": 1,
+        "feasible": 4
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": true
+    },
+    "contact_pathway_status": "verified_true",
+    "contact_pathway_votes": {
+      "true": 5,
+      "false": 0
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.020494,
+      "missile_strike": 0.016432,
+      "raid": 0.012247,
+      "seizure_boarding": 0.014142,
+      "airstrike": 0.019494,
+      "naval_blockade": 0.017889,
+      "ground_invasion": 0.005477,
+      "direct_engagement": 0.021679
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.05,
+      "missile_strike": 0.03,
+      "raid": 0.03,
+      "seizure_boarding": 0.04,
+      "airstrike": 0.05,
+      "naval_blockade": 0.05,
+      "ground_invasion": 0.01,
+      "direct_engagement": 0.05
+    },
+    "replicates": 5,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "403fa402b0cdbbf3",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "Iran->Qatar|scope=1e987db0725ff628": {
+    "probabilities": {
+      "gray_zone_incident": 0.108727,
+      "missile_strike": 0.392091,
+      "raid": 0.06797,
+      "seizure_boarding": 0.094545,
+      "airstrike": 0.093121,
+      "naval_blockade": 0.096909,
+      "ground_invasion": 0.027606,
+      "direct_engagement": 0.11903
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.108727,
+      "missile_strike": 0.392091,
+      "raid": 0.06797,
+      "seizure_boarding": 0.094545,
+      "airstrike": 0.093121,
+      "naval_blockade": 0.096909,
+      "ground_invasion": 0.027606,
+      "direct_engagement": 0.11903
+    },
+    "feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "feasible",
+      "seizure_boarding": "feasible",
+      "airstrike": "feasible",
+      "naval_blockade": "severely_constrained",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "feasible"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "feasible",
+      "seizure_boarding": "feasible",
+      "airstrike": "feasible",
+      "naval_blockade": "severely_constrained",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "feasible"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "feasible": 11,
+        "natural": 4
+      },
+      "missile_strike": {
+        "natural": 15
+      },
+      "raid": {
+        "feasible": 11,
+        "severely_constrained": 4
+      },
+      "seizure_boarding": {
+        "feasible": 14,
+        "natural": 1
+      },
+      "airstrike": {
+        "feasible": 10,
+        "severely_constrained": 5
+      },
+      "naval_blockade": {
+        "severely_constrained": 9,
+        "feasible": 6
+      },
+      "ground_invasion": {
+        "severely_constrained": 12,
+        "unavailable": 3
+      },
+      "direct_engagement": {
+        "feasible": 13,
+        "severely_constrained": 2
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": null
+    },
+    "contact_pathway_status": "unknown",
+    "contact_pathway_votes": {
+      "true": 9,
+      "false": 6
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.031781,
+      "missile_strike": 0.043395,
+      "raid": 0.010788,
+      "seizure_boarding": 0.019759,
+      "airstrike": 0.037374,
+      "naval_blockade": 0.031671,
+      "ground_invasion": 0.004861,
+      "direct_engagement": 0.031331
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.09,
+      "missile_strike": 0.161364,
+      "raid": 0.03,
+      "seizure_boarding": 0.07,
+      "airstrike": 0.11,
+      "naval_blockade": 0.1,
+      "ground_invasion": 0.014091,
+      "direct_engagement": 0.124545
+    },
+    "replicates": 15,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "1e987db0725ff628",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "Iran->Saudi Arabia|scope=8a876ad706db2c5c": {
+    "probabilities": {
+      "gray_zone_incident": 0.130863,
+      "missile_strike": 0.438549,
+      "raid": 0.049882,
+      "seizure_boarding": 0.091373,
+      "airstrike": 0.037294,
+      "naval_blockade": 0.075137,
+      "ground_invasion": 0.013804,
+      "direct_engagement": 0.163098
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.130863,
+      "missile_strike": 0.438549,
+      "raid": 0.049882,
+      "seizure_boarding": 0.091373,
+      "airstrike": 0.037294,
+      "naval_blockade": 0.075137,
+      "ground_invasion": 0.013804,
+      "direct_engagement": 0.163098
+    },
+    "feasibility": {
+      "gray_zone_incident": "natural",
+      "missile_strike": "natural",
+      "raid": "severely_constrained",
+      "seizure_boarding": "feasible",
+      "airstrike": "severely_constrained",
+      "naval_blockade": "feasible",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "feasible"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "natural",
+      "missile_strike": "natural",
+      "raid": "severely_constrained",
+      "seizure_boarding": "feasible",
+      "airstrike": "severely_constrained",
+      "naval_blockade": "feasible",
+      "ground_invasion": "unavailable",
+      "direct_engagement": "feasible"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "feasible": 3,
+        "natural": 12
+      },
+      "missile_strike": {
+        "natural": 15
+      },
+      "raid": {
+        "feasible": 3,
+        "severely_constrained": 12
+      },
+      "seizure_boarding": {
+        "feasible": 10,
+        "natural": 5
+      },
+      "airstrike": {
+        "severely_constrained": 15
+      },
+      "naval_blockade": {
+        "severely_constrained": 6,
+        "feasible": 9
+      },
+      "ground_invasion": {
+        "unavailable": 15
+      },
+      "direct_engagement": {
+        "feasible": 13,
+        "severely_constrained": 1,
+        "natural": 1
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": null
+    },
+    "contact_pathway_status": "unknown",
+    "contact_pathway_votes": {
+      "true": 12,
+      "false": 3
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.02543,
+      "missile_strike": 0.058884,
+      "raid": 0.010621,
+      "seizure_boarding": 0.020812,
+      "airstrike": 0.009215,
+      "naval_blockade": 0.025289,
+      "ground_invasion": 0.005156,
+      "direct_engagement": 0.059883
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.1,
+      "missile_strike": 0.184706,
+      "raid": 0.040588,
+      "seizure_boarding": 0.06,
+      "airstrike": 0.028824,
+      "naval_blockade": 0.08,
+      "ground_invasion": 0.013529,
+      "direct_engagement": 0.204706
+    },
+    "replicates": 15,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "8a876ad706db2c5c",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "Iran->Syria|scope=b454ebd03bc5c52b": {
+    "probabilities": {
+      "gray_zone_incident": 0.091333,
+      "missile_strike": 0.405333,
+      "raid": 0.212667,
+      "seizure_boarding": 0.012667,
+      "airstrike": 0.069333,
+      "naval_blockade": 0.01,
+      "ground_invasion": 0.056,
+      "direct_engagement": 0.142667
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.091333,
+      "missile_strike": 0.405333,
+      "raid": 0.212667,
+      "seizure_boarding": 0.012667,
+      "airstrike": 0.069333,
+      "naval_blockade": 0.01,
+      "ground_invasion": 0.056,
+      "direct_engagement": 0.142667
+    },
+    "feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "feasible",
+      "seizure_boarding": "severely_constrained",
+      "airstrike": "severely_constrained",
+      "naval_blockade": "severely_constrained",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "feasible"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "feasible",
+      "seizure_boarding": "unavailable",
+      "airstrike": "severely_constrained",
+      "naval_blockade": "unavailable",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "feasible"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "feasible": 11,
+        "severely_constrained": 4
+      },
+      "missile_strike": {
+        "natural": 15
+      },
+      "raid": {
+        "natural": 6,
+        "feasible": 9
+      },
+      "seizure_boarding": {
+        "unavailable": 13,
+        "severely_constrained": 2
+      },
+      "airstrike": {
+        "severely_constrained": 14,
+        "feasible": 1
+      },
+      "naval_blockade": {
+        "unavailable": 15
+      },
+      "ground_invasion": {
+        "severely_constrained": 15
+      },
+      "direct_engagement": {
+        "feasible": 11,
+        "severely_constrained": 4
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": null
+    },
+    "contact_pathway_status": "unknown",
+    "contact_pathway_votes": {
+      "true": 3,
+      "false": 12
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.036423,
+      "missile_strike": 0.043567,
+      "raid": 0.024339,
+      "seizure_boarding": 0.004577,
+      "airstrike": 0.024044,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.022615,
+      "direct_engagement": 0.042337
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.11,
+      "missile_strike": 0.15,
+      "raid": 0.07,
+      "seizure_boarding": 0.01,
+      "airstrike": 0.07,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.08,
+      "direct_engagement": 0.19
+    },
+    "replicates": 15,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "b454ebd03bc5c52b",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "Iran->Ukraine|scope=798dbb69729b5f04": {
+    "probabilities": {
+      "gray_zone_incident": 0.047868,
+      "missile_strike": 0.824637,
+      "raid": 0.039165,
+      "seizure_boarding": 0.013055,
+      "airstrike": 0.043516,
+      "naval_blockade": 0.010879,
+      "ground_invasion": 0.010879,
+      "direct_engagement": 0.01
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.044,
+      "missile_strike": 0.758,
+      "raid": 0.036,
+      "seizure_boarding": 0.012,
+      "airstrike": 0.04,
+      "naval_blockade": 0.01,
+      "ground_invasion": 0.01,
+      "direct_engagement": 0.09
+    },
+    "feasibility": {
+      "gray_zone_incident": "severely_constrained",
+      "missile_strike": "natural",
+      "raid": "severely_constrained",
+      "seizure_boarding": "severely_constrained",
+      "airstrike": "severely_constrained",
+      "naval_blockade": "severely_constrained",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "severely_constrained"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "severely_constrained",
+      "missile_strike": "natural",
+      "raid": "severely_constrained",
+      "seizure_boarding": "unavailable",
+      "airstrike": "severely_constrained",
+      "naval_blockade": "unavailable",
+      "ground_invasion": "unavailable",
+      "direct_engagement": "severely_constrained"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "severely_constrained": 4,
+        "feasible": 1
+      },
+      "missile_strike": {
+        "feasible": 1,
+        "natural": 4
+      },
+      "raid": {
+        "severely_constrained": 5
+      },
+      "seizure_boarding": {
+        "unavailable": 4,
+        "severely_constrained": 1
+      },
+      "airstrike": {
+        "severely_constrained": 4,
+        "unavailable": 1
+      },
+      "naval_blockade": {
+        "unavailable": 5
+      },
+      "ground_invasion": {
+        "unavailable": 5
+      },
+      "direct_engagement": {
+        "severely_constrained": 4,
+        "unavailable": 1
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": false
+    },
+    "contact_pathway_status": "verified_false",
+    "contact_pathway_votes": {
+      "true": 0,
+      "false": 5
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.042778,
+      "missile_strike": 0.071554,
+      "raid": 0.016733,
+      "seizure_boarding": 0.004472,
+      "airstrike": 0.023452,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.051478
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.1,
+      "missile_strike": 0.17,
+      "raid": 0.04,
+      "seizure_boarding": 0.01,
+      "airstrike": 0.06,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.13
+    },
+    "replicates": 5,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "798dbb69729b5f04",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "Israel->Lebanon|scope=6dedb0e0026885b7": {
+    "probabilities": {
+      "gray_zone_incident": 0.054,
+      "missile_strike": 0.184,
+      "raid": 0.084,
+      "seizure_boarding": 0.02,
+      "airstrike": 0.346,
+      "naval_blockade": 0.04,
+      "ground_invasion": 0.166,
+      "direct_engagement": 0.106
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.054,
+      "missile_strike": 0.184,
+      "raid": 0.084,
+      "seizure_boarding": 0.02,
+      "airstrike": 0.346,
+      "naval_blockade": 0.04,
+      "ground_invasion": 0.166,
+      "direct_engagement": 0.106
+    },
+    "feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "natural",
+      "seizure_boarding": "feasible",
+      "airstrike": "natural",
+      "naval_blockade": "feasible",
+      "ground_invasion": "natural",
+      "direct_engagement": "natural"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "natural",
+      "seizure_boarding": "feasible",
+      "airstrike": "natural",
+      "naval_blockade": "feasible",
+      "ground_invasion": "natural",
+      "direct_engagement": "natural"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "feasible": 3,
+        "natural": 2
+      },
+      "missile_strike": {
+        "natural": 5
+      },
+      "raid": {
+        "natural": 4,
+        "feasible": 1
+      },
+      "seizure_boarding": {
+        "feasible": 5
+      },
+      "airstrike": {
+        "natural": 5
+      },
+      "naval_blockade": {
+        "feasible": 5
+      },
+      "ground_invasion": {
+        "natural": 4,
+        "feasible": 1
+      },
+      "direct_engagement": {
+        "natural": 5
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": true
+    },
+    "contact_pathway_status": "verified_true",
+    "contact_pathway_votes": {
+      "true": 5,
+      "false": 0
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.008944,
+      "missile_strike": 0.040988,
+      "raid": 0.008944,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.023022,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.030496,
+      "direct_engagement": 0.011402
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.02,
+      "missile_strike": 0.1,
+      "raid": 0.02,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.06,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.07,
+      "direct_engagement": 0.03
+    },
+    "replicates": 5,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "6dedb0e0026885b7",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "Israel->Lebanon|scope=847e3c442b8a2413": {
+    "probabilities": {
+      "gray_zone_incident": 0.021449,
+      "missile_strike": 0.26861,
+      "raid": 0.08313,
+      "seizure_boarding": 0.017449,
+      "airstrike": 0.447276,
+      "naval_blockade": 0.051014,
+      "ground_invasion": 0.047623,
+      "direct_engagement": 0.063449
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.021449,
+      "missile_strike": 0.268609,
+      "raid": 0.08313,
+      "seizure_boarding": 0.017449,
+      "airstrike": 0.447275,
+      "naval_blockade": 0.051014,
+      "ground_invasion": 0.047623,
+      "direct_engagement": 0.063449
+    },
+    "feasibility": {
+      "gray_zone_incident": "severely_constrained",
+      "missile_strike": "natural",
+      "raid": "feasible",
+      "seizure_boarding": "severely_constrained",
+      "airstrike": "natural",
+      "naval_blockade": "feasible",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "severely_constrained"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "severely_constrained",
+      "missile_strike": "natural",
+      "raid": "feasible",
+      "seizure_boarding": "severely_constrained",
+      "airstrike": "natural",
+      "naval_blockade": "feasible",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "severely_constrained"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "severely_constrained": 15
+      },
+      "missile_strike": {
+        "natural": 15
+      },
+      "raid": {
+        "feasible": 15
+      },
+      "seizure_boarding": {
+        "severely_constrained": 10,
+        "feasible": 5
+      },
+      "airstrike": {
+        "natural": 15
+      },
+      "naval_blockade": {
+        "feasible": 15
+      },
+      "ground_invasion": {
+        "severely_constrained": 15
+      },
+      "direct_engagement": {
+        "severely_constrained": 8,
+        "feasible": 7
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": null
+    },
+    "contact_pathway_status": "unknown",
+    "contact_pathway_votes": {
+      "true": 5,
+      "false": 10
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.0035,
+      "missile_strike": 0.023336,
+      "raid": 0.012252,
+      "seizure_boarding": 0.004671,
+      "airstrike": 0.034867,
+      "naval_blockade": 0.01139,
+      "ground_invasion": 0.012912,
+      "direct_engagement": 0.024764
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.01,
+      "missile_strike": 0.06087,
+      "raid": 0.04,
+      "seizure_boarding": 0.011739,
+      "airstrike": 0.1,
+      "naval_blockade": 0.04,
+      "ground_invasion": 0.05,
+      "direct_engagement": 0.078261
+    },
+    "replicates": 15,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "847e3c442b8a2413",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "Israel->Syria|scope=3d08ac7faf122bf2": {
+    "probabilities": {
+      "gray_zone_incident": 0.038,
+      "missile_strike": 0.168,
+      "raid": 0.096,
+      "seizure_boarding": 0.01,
+      "airstrike": 0.508,
+      "naval_blockade": 0.01,
+      "ground_invasion": 0.094,
+      "direct_engagement": 0.076
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.038,
+      "missile_strike": 0.168,
+      "raid": 0.096,
+      "seizure_boarding": 0.01,
+      "airstrike": 0.508,
+      "naval_blockade": 0.01,
+      "ground_invasion": 0.094,
+      "direct_engagement": 0.076
+    },
+    "feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "natural",
+      "seizure_boarding": "severely_constrained",
+      "airstrike": "natural",
+      "naval_blockade": "severely_constrained",
+      "ground_invasion": "feasible",
+      "direct_engagement": "feasible"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "natural",
+      "seizure_boarding": "severely_constrained",
+      "airstrike": "natural",
+      "naval_blockade": "severely_constrained",
+      "ground_invasion": "feasible",
+      "direct_engagement": "feasible"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "feasible": 5
+      },
+      "missile_strike": {
+        "natural": 5
+      },
+      "raid": {
+        "natural": 4,
+        "feasible": 1
+      },
+      "seizure_boarding": {
+        "severely_constrained": 3,
+        "unavailable": 2
+      },
+      "airstrike": {
+        "natural": 5
+      },
+      "naval_blockade": {
+        "unavailable": 2,
+        "severely_constrained": 3
+      },
+      "ground_invasion": {
+        "feasible": 4,
+        "severely_constrained": 1
+      },
+      "direct_engagement": {
+        "feasible": 5
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": true
+    },
+    "contact_pathway_status": "verified_true",
+    "contact_pathway_votes": {
+      "true": 5,
+      "false": 0
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.008367,
+      "missile_strike": 0.016432,
+      "raid": 0.008944,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.043818,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.035777,
+      "direct_engagement": 0.018166
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.02,
+      "missile_strike": 0.03,
+      "raid": 0.02,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.1,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.07,
+      "direct_engagement": 0.05
+    },
+    "replicates": 5,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "3d08ac7faf122bf2",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "Israel->Yemen|scope=3313b216c5980757": {
+    "probabilities": {
+      "gray_zone_incident": 0.012349,
+      "missile_strike": 0.335489,
+      "raid": 0.028815,
+      "seizure_boarding": 0.010291,
+      "airstrike": 0.576299,
+      "naval_blockade": 0.016466,
+      "ground_invasion": 0.010291,
+      "direct_engagement": 0.01
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.012,
+      "missile_strike": 0.326,
+      "raid": 0.028,
+      "seizure_boarding": 0.01,
+      "airstrike": 0.56,
+      "naval_blockade": 0.016,
+      "ground_invasion": 0.01,
+      "direct_engagement": 0.038
+    },
+    "feasibility": {
+      "gray_zone_incident": "severely_constrained",
+      "missile_strike": "natural",
+      "raid": "severely_constrained",
+      "seizure_boarding": "severely_constrained",
+      "airstrike": "natural",
+      "naval_blockade": "severely_constrained",
+      "ground_invasion": "severely_constrained",
+      "direct_engagement": "severely_constrained"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "severely_constrained",
+      "missile_strike": "natural",
+      "raid": "severely_constrained",
+      "seizure_boarding": "severely_constrained",
+      "airstrike": "natural",
+      "naval_blockade": "severely_constrained",
+      "ground_invasion": "unavailable",
+      "direct_engagement": "severely_constrained"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "severely_constrained": 5
+      },
+      "missile_strike": {
+        "natural": 5
+      },
+      "raid": {
+        "severely_constrained": 5
+      },
+      "seizure_boarding": {
+        "severely_constrained": 5
+      },
+      "airstrike": {
+        "natural": 5
+      },
+      "naval_blockade": {
+        "severely_constrained": 4,
+        "unavailable": 1
+      },
+      "ground_invasion": {
+        "unavailable": 5
+      },
+      "direct_engagement": {
+        "severely_constrained": 5
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": false
+    },
+    "contact_pathway_status": "verified_false",
+    "contact_pathway_votes": {
+      "true": 0,
+      "false": 5
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.004472,
+      "missile_strike": 0.037148,
+      "raid": 0.008367,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.037417,
+      "naval_blockade": 0.005477,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.008367
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.01,
+      "missile_strike": 0.08,
+      "raid": 0.02,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.08,
+      "naval_blockade": 0.01,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.02
+    },
+    "replicates": 5,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "3313b216c5980757",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "US->Colombia|scope=b740eb0102226e48": {
+    "probabilities": {
+      "gray_zone_incident": 0.099207,
+      "missile_strike": 0.126075,
+      "raid": 0.233549,
+      "seizure_boarding": 0.119875,
+      "airstrike": 0.144676,
+      "naval_blockade": 0.157077,
+      "ground_invasion": 0.109541,
+      "direct_engagement": 0.01
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.096,
+      "missile_strike": 0.122,
+      "raid": 0.226,
+      "seizure_boarding": 0.116,
+      "airstrike": 0.14,
+      "naval_blockade": 0.152,
+      "ground_invasion": 0.106,
+      "direct_engagement": 0.042
+    },
+    "feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "natural",
+      "seizure_boarding": "natural",
+      "airstrike": "natural",
+      "naval_blockade": "natural",
+      "ground_invasion": "feasible",
+      "direct_engagement": "severely_constrained"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "natural",
+      "seizure_boarding": "natural",
+      "airstrike": "natural",
+      "naval_blockade": "natural",
+      "ground_invasion": "feasible",
+      "direct_engagement": "severely_constrained"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "natural": 1,
+        "feasible": 4
+      },
+      "missile_strike": {
+        "feasible": 1,
+        "natural": 4
+      },
+      "raid": {
+        "natural": 5
+      },
+      "seizure_boarding": {
+        "natural": 3,
+        "feasible": 2
+      },
+      "airstrike": {
+        "feasible": 1,
+        "natural": 4
+      },
+      "naval_blockade": {
+        "feasible": 2,
+        "natural": 3
+      },
+      "ground_invasion": {
+        "severely_constrained": 2,
+        "feasible": 3
+      },
+      "direct_engagement": {
+        "severely_constrained": 5
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": false
+    },
+    "contact_pathway_status": "verified_false",
+    "contact_pathway_votes": {
+      "true": 0,
+      "false": 5
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.055045,
+      "missile_strike": 0.043818,
+      "raid": 0.039749,
+      "seizure_boarding": 0.047749,
+      "airstrike": 0.038079,
+      "naval_blockade": 0.038987,
+      "ground_invasion": 0.033615,
+      "direct_engagement": 0.010954
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.13,
+      "missile_strike": 0.1,
+      "raid": 0.1,
+      "seizure_boarding": 0.12,
+      "airstrike": 0.08,
+      "naval_blockade": 0.08,
+      "ground_invasion": 0.07,
+      "direct_engagement": 0.03
+    },
+    "replicates": 5,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "b740eb0102226e48",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "US->Denmark|scope=697bd06ee0c162ce": {
+    "probabilities": {
+      "gray_zone_incident": 0.252667,
+      "missile_strike": 0.016,
+      "raid": 0.238667,
+      "seizure_boarding": 0.054667,
+      "airstrike": 0.016,
+      "naval_blockade": 0.081333,
+      "ground_invasion": 0.294667,
+      "direct_engagement": 0.046
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.252667,
+      "missile_strike": 0.016,
+      "raid": 0.238667,
+      "seizure_boarding": 0.054667,
+      "airstrike": 0.016,
+      "naval_blockade": 0.081333,
+      "ground_invasion": 0.294667,
+      "direct_engagement": 0.046
+    },
+    "feasibility": {
+      "gray_zone_incident": "natural",
+      "missile_strike": "severely_constrained",
+      "raid": "natural",
+      "seizure_boarding": "feasible",
+      "airstrike": "severely_constrained",
+      "naval_blockade": "feasible",
+      "ground_invasion": "natural",
+      "direct_engagement": "severely_constrained"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "natural",
+      "missile_strike": "severely_constrained",
+      "raid": "natural",
+      "seizure_boarding": "feasible",
+      "airstrike": "severely_constrained",
+      "naval_blockade": "feasible",
+      "ground_invasion": "natural",
+      "direct_engagement": "severely_constrained"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "natural": 14,
+        "feasible": 1
+      },
+      "missile_strike": {
+        "feasible": 6,
+        "severely_constrained": 9
+      },
+      "raid": {
+        "natural": 15
+      },
+      "seizure_boarding": {
+        "feasible": 15
+      },
+      "airstrike": {
+        "feasible": 6,
+        "severely_constrained": 9
+      },
+      "naval_blockade": {
+        "feasible": 13,
+        "natural": 2
+      },
+      "ground_invasion": {
+        "natural": 13,
+        "feasible": 2
+      },
+      "direct_engagement": {
+        "severely_constrained": 14,
+        "feasible": 1
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": null
+    },
+    "contact_pathway_status": "unknown",
+    "contact_pathway_votes": {
+      "true": 2,
+      "false": 13
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.079773,
+      "missile_strike": 0.005071,
+      "raid": 0.050972,
+      "seizure_boarding": 0.011872,
+      "airstrike": 0.005071,
+      "naval_blockade": 0.024162,
+      "ground_invasion": 0.059984,
+      "direct_engagement": 0.012421
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.3,
+      "missile_strike": 0.01,
+      "raid": 0.15,
+      "seizure_boarding": 0.04,
+      "airstrike": 0.01,
+      "naval_blockade": 0.08,
+      "ground_invasion": 0.2,
+      "direct_engagement": 0.04
+    },
+    "replicates": 15,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "697bd06ee0c162ce",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "US->Mexico|scope=c5638782809cb249": {
+    "probabilities": {
+      "gray_zone_incident": 0.153333,
+      "missile_strike": 0.111333,
+      "raid": 0.290667,
+      "seizure_boarding": 0.032,
+      "airstrike": 0.199333,
+      "naval_blockade": 0.038,
+      "ground_invasion": 0.122,
+      "direct_engagement": 0.053333
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.153333,
+      "missile_strike": 0.111333,
+      "raid": 0.290667,
+      "seizure_boarding": 0.032,
+      "airstrike": 0.199333,
+      "naval_blockade": 0.038,
+      "ground_invasion": 0.122,
+      "direct_engagement": 0.053333
+    },
+    "feasibility": {
+      "gray_zone_incident": "natural",
+      "missile_strike": "natural",
+      "raid": "natural",
+      "seizure_boarding": "feasible",
+      "airstrike": "natural",
+      "naval_blockade": "feasible",
+      "ground_invasion": "feasible",
+      "direct_engagement": "feasible"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "natural",
+      "missile_strike": "natural",
+      "raid": "natural",
+      "seizure_boarding": "feasible",
+      "airstrike": "natural",
+      "naval_blockade": "feasible",
+      "ground_invasion": "feasible",
+      "direct_engagement": "feasible"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "natural": 15
+      },
+      "missile_strike": {
+        "natural": 14,
+        "feasible": 1
+      },
+      "raid": {
+        "natural": 15
+      },
+      "seizure_boarding": {
+        "feasible": 15
+      },
+      "airstrike": {
+        "natural": 15
+      },
+      "naval_blockade": {
+        "feasible": 15
+      },
+      "ground_invasion": {
+        "feasible": 13,
+        "natural": 2
+      },
+      "direct_engagement": {
+        "feasible": 9,
+        "severely_constrained": 5,
+        "natural": 1
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": null
+    },
+    "contact_pathway_status": "unknown",
+    "contact_pathway_votes": {
+      "true": 9,
+      "false": 6
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.032878,
+      "missile_strike": 0.033138,
+      "raid": 0.017915,
+      "seizure_boarding": 0.00414,
+      "airstrike": 0.028652,
+      "naval_blockade": 0.007746,
+      "ground_invasion": 0.016987,
+      "direct_engagement": 0.015887
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.1,
+      "missile_strike": 0.1,
+      "raid": 0.05,
+      "seizure_boarding": 0.01,
+      "airstrike": 0.1,
+      "naval_blockade": 0.02,
+      "ground_invasion": 0.06,
+      "direct_engagement": 0.05
+    },
+    "replicates": 15,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "c5638782809cb249",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  },
+  "US->Venezuela|scope=b0b8c95a7be52845": {
+    "probabilities": {
+      "gray_zone_incident": 0.054923,
+      "missile_strike": 0.191546,
+      "raid": 0.144862,
+      "seizure_boarding": 0.089251,
+      "airstrike": 0.201158,
+      "naval_blockade": 0.186054,
+      "ground_invasion": 0.122206,
+      "direct_engagement": 0.01
+    },
+    "raw_probabilities": {
+      "gray_zone_incident": 0.053333,
+      "missile_strike": 0.186,
+      "raid": 0.140667,
+      "seizure_boarding": 0.086667,
+      "airstrike": 0.195333,
+      "naval_blockade": 0.180667,
+      "ground_invasion": 0.118667,
+      "direct_engagement": 0.038667
+    },
+    "feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "natural",
+      "seizure_boarding": "feasible",
+      "airstrike": "natural",
+      "naval_blockade": "natural",
+      "ground_invasion": "feasible",
+      "direct_engagement": "severely_constrained"
+    },
+    "reported_feasibility": {
+      "gray_zone_incident": "feasible",
+      "missile_strike": "natural",
+      "raid": "natural",
+      "seizure_boarding": "feasible",
+      "airstrike": "natural",
+      "naval_blockade": "natural",
+      "ground_invasion": "feasible",
+      "direct_engagement": "severely_constrained"
+    },
+    "reported_feasibility_votes": {
+      "gray_zone_incident": {
+        "feasible": 14,
+        "natural": 1
+      },
+      "missile_strike": {
+        "natural": 15
+      },
+      "raid": {
+        "natural": 12,
+        "feasible": 3
+      },
+      "seizure_boarding": {
+        "feasible": 12,
+        "natural": 3
+      },
+      "airstrike": {
+        "natural": 15
+      },
+      "naval_blockade": {
+        "natural": 15
+      },
+      "ground_invasion": {
+        "feasible": 12,
+        "severely_constrained": 3
+      },
+      "direct_engagement": {
+        "severely_constrained": 15
+      }
+    },
+    "structural_flags": {
+      "direct_engagement_contact_pathway": false
+    },
+    "contact_pathway_status": "verified_false",
+    "contact_pathway_votes": {
+      "true": 0,
+      "false": 15
+    },
+    "elicitation_sd": {
+      "gray_zone_incident": 0.020587,
+      "missile_strike": 0.031803,
+      "raid": 0.033051,
+      "seizure_boarding": 0.017995,
+      "airstrike": 0.020656,
+      "naval_blockade": 0.033051,
+      "ground_invasion": 0.021336,
+      "direct_engagement": 0.009904
+    },
+    "elicitation_range": {
+      "gray_zone_incident": 0.08,
+      "missile_strike": 0.13,
+      "raid": 0.12,
+      "seizure_boarding": 0.06,
+      "airstrike": 0.07,
+      "naval_blockade": 0.1,
+      "ground_invasion": 0.08,
+      "direct_engagement": 0.04
+    },
+    "replicates": 15,
+    "temperature": 0.2,
+    "action_prior_fingerprint": "b0b8c95a7be52845",
+    "method": "replicated_raw_ensemble_v1",
+    "constraint_projection": "joint_capped_simplex_v1",
+    "hard_cap_policy": "unanimous_contact_false_only_v1",
+    "version": 7,
+    "estimand": "primary_next_action_given_action_occurs"
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "China->Taiwan|scope=89c2652018b045b5": {
+    "action_prior_fingerprint": "89c2652018b045b5",
+    "direct_engagement_contact": {
+      "status": "verified_true",
+      "binding_value": true,
+      "true_votes": 5,
+      "false_votes": 0,
+      "replicates": 5,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "India->Pakistan|scope=a30564ef2baf3535": {
+    "action_prior_fingerprint": "a30564ef2baf3535",
+    "direct_engagement_contact": {
+      "status": "verified_true",
+      "binding_value": true,
+      "true_votes": 15,
+      "false_votes": 0,
+      "replicates": 15,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "Iran->Egypt|scope=e2a2a92a52e81076": {
+    "action_prior_fingerprint": "e2a2a92a52e81076",
+    "direct_engagement_contact": {
+      "status": "verified_false",
+      "binding_value": false,
+      "true_votes": 0,
+      "false_votes": 15,
+      "replicates": 15,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "Iran->Kuwait|scope=de62f68eefe35248": {
+    "action_prior_fingerprint": "de62f68eefe35248",
+    "direct_engagement_contact": {
+      "status": "unknown",
+      "binding_value": null,
+      "true_votes": 4,
+      "false_votes": 11,
+      "replicates": 15,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "Iran->Oman|scope=403fa402b0cdbbf3": {
+    "action_prior_fingerprint": "403fa402b0cdbbf3",
+    "direct_engagement_contact": {
+      "status": "verified_true",
+      "binding_value": true,
+      "true_votes": 5,
+      "false_votes": 0,
+      "replicates": 5,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "Iran->Qatar|scope=1e987db0725ff628": {
+    "action_prior_fingerprint": "1e987db0725ff628",
+    "direct_engagement_contact": {
+      "status": "unknown",
+      "binding_value": null,
+      "true_votes": 9,
+      "false_votes": 6,
+      "replicates": 15,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "Iran->Saudi Arabia|scope=8a876ad706db2c5c": {
+    "action_prior_fingerprint": "8a876ad706db2c5c",
+    "direct_engagement_contact": {
+      "status": "unknown",
+      "binding_value": null,
+      "true_votes": 12,
+      "false_votes": 3,
+      "replicates": 15,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "Iran->Syria|scope=b454ebd03bc5c52b": {
+    "action_prior_fingerprint": "b454ebd03bc5c52b",
+    "direct_engagement_contact": {
+      "status": "unknown",
+      "binding_value": null,
+      "true_votes": 3,
+      "false_votes": 12,
+      "replicates": 15,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "Iran->Ukraine|scope=798dbb69729b5f04": {
+    "action_prior_fingerprint": "798dbb69729b5f04",
+    "direct_engagement_contact": {
+      "status": "verified_false",
+      "binding_value": false,
+      "true_votes": 0,
+      "false_votes": 5,
+      "replicates": 5,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "Israel->Lebanon|scope=6dedb0e0026885b7": {
+    "action_prior_fingerprint": "6dedb0e0026885b7",
+    "direct_engagement_contact": {
+      "status": "verified_true",
+      "binding_value": true,
+      "true_votes": 5,
+      "false_votes": 0,
+      "replicates": 5,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "Israel->Lebanon|scope=847e3c442b8a2413": {
+    "action_prior_fingerprint": "847e3c442b8a2413",
+    "direct_engagement_contact": {
+      "status": "unknown",
+      "binding_value": null,
+      "true_votes": 5,
+      "false_votes": 10,
+      "replicates": 15,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "Israel->Syria|scope=3d08ac7faf122bf2": {
+    "action_prior_fingerprint": "3d08ac7faf122bf2",
+    "direct_engagement_contact": {
+      "status": "verified_true",
+      "binding_value": true,
+      "true_votes": 5,
+      "false_votes": 0,
+      "replicates": 5,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "Israel->Yemen|scope=3313b216c5980757": {
+    "action_prior_fingerprint": "3313b216c5980757",
+    "direct_engagement_contact": {
+      "status": "verified_false",
+      "binding_value": false,
+      "true_votes": 0,
+      "false_votes": 5,
+      "replicates": 5,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "US->Colombia|scope=b740eb0102226e48": {
+    "action_prior_fingerprint": "b740eb0102226e48",
+    "direct_engagement_contact": {
+      "status": "verified_false",
+      "binding_value": false,
+      "true_votes": 0,
+      "false_votes": 5,
+      "replicates": 5,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "US->Denmark|scope=697bd06ee0c162ce": {
+    "action_prior_fingerprint": "697bd06ee0c162ce",
+    "direct_engagement_contact": {
+      "status": "unknown",
+      "binding_value": null,
+      "true_votes": 2,
+      "false_votes": 13,
+      "replicates": 15,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "US->Mexico|scope=c5638782809cb249": {
+    "action_prior_fingerprint": "c5638782809cb249",
+    "direct_engagement_contact": {
+      "status": "unknown",
+      "binding_value": null,
+      "true_votes": 9,
+      "false_votes": 6,
+      "replicates": 15,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  },
+  "US->Venezuela|scope=b0b8c95a7be52845": {
+    "action_prior_fingerprint": "b0b8c95a7be52845",
+    "direct_engagement_contact": {
+      "status": "verified_false",
+      "binding_value": false,
+      "true_votes": 0,
+      "false_votes": 15,
+      "replicates": 15,
+      "rule": "unanimous replicated elicitation required; mixed votes resolve to unknown/nonbinding"
+    },
+    "version": 1
+  }
+}
