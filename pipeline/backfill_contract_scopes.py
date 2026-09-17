@@ -19,7 +19,10 @@ import json
 from datetime import date, datetime
 from pathlib import Path
 
-from pipeline.contract_scope import resolve_contract_scope
+from pipeline.contract_scope import (
+    resolve_contract_scope,
+    action_prior_fingerprint,
+)
 
 
 ROOT = Path(__file__).resolve().parent
@@ -267,6 +270,10 @@ def main():
                 target=market["target"],
                 question=market["question"],
                 description=market["description"],
+            )
+
+            scope["action_prior_fingerprint"] = (
+                action_prior_fingerprint(scope)
             )
 
             route = route_scope(scope)

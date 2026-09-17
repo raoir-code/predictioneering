@@ -73,6 +73,11 @@ GEOGRAPHY_MODES = {
     "unspecified",
 }
 
+GEOGRAPHY_PRIOR_RELEVANCE = {
+    "structural_theater",
+    "resolution_only",
+}
+
 
 SYSTEM_PROMPT = """
 You resolve the semantic SCOPE of prediction-market contracts.
@@ -126,6 +131,29 @@ mixed
 unknown
 
 GEOGRAPHY MODES
+
+Also classify geography.prior_relevance:
+
+structural_theater
+    The named location defines a genuinely different operational theater or
+    geographic target and could change the relative feasibility of MULTIPLE
+    action families. Examples: Greenland rather than Denmark proper; Greater
+    Beirut rather than Lebanon generally; Ukraine as a third-party combat
+    theater.
+
+resolution_only
+    The geographic detail exists only because of the legal definition of the
+    PARTICULAR action/event being asked about. It must NOT condition the
+    structural action-family prior. Examples: a blockade contract naming
+    ports/airports; an invasion definition specifying that inhabited but not
+    uninhabited islands count; a strike definition requiring impact inside
+    recognized borders.
+
+CRITICAL ANTI-CIRCULARITY RULE:
+Do not let details intrinsic to the contract's requested action leak into the
+structural action prior. If the geographic restriction would largely disappear
+or change if the same actors were asked about a different action family, mark
+it resolution_only.
 
 target_wide
     Ordinary action against the target's generally recognized territory or
@@ -184,7 +212,8 @@ Return ONLY JSON:
   },
   "geography": {
     "mode": "target_wide|subterritory|third_party_theater|multiple|unspecified",
-    "places": []
+    "places": [],
+    "prior_relevance": "structural_theater|resolution_only"
   },
   "direction_compatible": true,
   "confidence": "high|medium|low",
@@ -314,6 +343,16 @@ def normalize_scope(raw: dict) -> dict:
         if str(x).strip()
     })
 
+    prior_relevance = str(
+        geography.get("prior_relevance", "")
+    ).strip()
+
+    if prior_relevance not in GEOGRAPHY_PRIOR_RELEVANCE:
+        raise ValueError(
+            "geography.prior_relevance must be "
+            "structural_theater or resolution_only"
+        )
+
     # target_wide/unspecified already encode their geography completely.
     # Repeating the target name in places is semantically redundant and
     # would make equivalent scopes hash differently.
@@ -339,6 +378,7 @@ def normalize_scope(raw: dict) -> dict:
         "geography": {
             "mode": geo_mode,
             "places": places,
+            "prior_relevance": prior_relevance,
         },
         "direction_compatible": compatible,
         "confidence": confidence,
@@ -406,6 +446,61 @@ def scope_fingerprint(scope: dict) -> str:
     return hashlib.sha256(
         canonical.encode("utf-8")
     ).hexdigest()[:16]
+
+
+
+def action_prior_scope_core(scope: dict) -> dict:
+    """
+    Projection of contract scope that is safe to condition the structural
+    action-family prior on.
+
+    Resolution-only geography is deliberately erased to prevent the action
+    requested by the market from leaking back into its own prior.
+    """
+    s = normalize_scope(scope)
+
+    geography = s["geography"]
+
+    if geography["prior_relevance"] == "structural_theater":
+        prior_geo = {
+            "mode": geography["mode"],
+            "places": geography["places"],
+        }
+    else:
+        prior_geo = {
+            "mode": "target_wide",
+            "places": [],
+        }
+
+    return {
+        "initiator_scope": s["initiator_scope"],
+        "target_scope": s["target_scope"],
+        "geography": prior_geo,
+        "direction_compatible": s["direction_compatible"],
+    }
+
+
+def action_prior_fingerprint(scope: dict) -> str:
+    canonical = json.dumps(
+        action_prior_scope_core(scope),
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    )
+
+    return hashlib.sha256(
+        canonical.encode("utf-8")
+    ).hexdigest()[:16]
+
+
+def action_prior_structural_context(scope: dict) -> str:
+    return json.dumps(
+        action_prior_scope_core(scope),
+        indent=2,
+        ensure_ascii=False,
+        sort_keys=True,
+    )
+
 
 
 def structural_context(scope: dict) -> str:

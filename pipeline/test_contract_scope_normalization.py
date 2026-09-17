@@ -25,6 +25,7 @@ def base_scope():
         "geography": {
             "mode": "target_wide",
             "places": ["Pakistan"],
+            "prior_relevance": "resolution_only",
         },
         "direction_compatible": True,
         "confidence": "high",
@@ -80,6 +81,7 @@ u1 = {
     "geography": {
         "mode": "target_wide",
         "places": [],
+        "prior_relevance": "resolution_only",
     },
     "direction_compatible": True,
 }
@@ -102,6 +104,7 @@ u2 = {
     "geography": {
         "mode": "target_wide",
         "places": ["Iran"],
+        "prior_relevance": "resolution_only",
     },
     "direction_compatible": True,
 }
@@ -126,6 +129,7 @@ greenland["target_scope"]["canonical_actor"] = "Denmark"
 greenland["geography"] = {
     "mode": "subterritory",
     "places": ["Greenland"],
+    "prior_relevance": "structural_theater",
 }
 
 denmark_wide = base_scope()
@@ -133,6 +137,7 @@ denmark_wide["target_scope"]["canonical_actor"] = "Denmark"
 denmark_wide["geography"] = {
     "mode": "target_wide",
     "places": ["Denmark"],
+    "prior_relevance": "resolution_only",
 }
 
 greenland = apply_direction_authority(
