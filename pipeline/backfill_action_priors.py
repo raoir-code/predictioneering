@@ -453,10 +453,11 @@ def extract_json(text: str) -> dict:
         raise
 
 
-def classify_direction(
+def _classify_direction_once(
     initiator: str,
     target: str,
     scope: dict | None = None,
+    temperature: float = 0.0,
 ) -> tuple[dict, dict, dict, dict, str, str]:
     scope_block = (
         action_prior_structural_context(scope)
@@ -482,8 +483,8 @@ distribution over the PRIMARY action family of the next escalation episode.
 
     body = {
         "model": MODEL,
-        "max_tokens": 1000,
-        "temperature": 0,
+        "max_tokens": 1600,
+        "temperature": temperature,
         "system": SYSTEM_PROMPT,
         "messages": [{"role": "user", "content": prompt}],
     }
@@ -573,6 +574,57 @@ distribution over the PRIMARY action family of the next escalation episode.
     )
 
 
+
+
+def classify_direction(
+    initiator: str,
+    target: str,
+    scope: dict | None = None,
+    temperature: float = 0.0,
+    retries: int = 3,
+):
+    """
+    Robust public wrapper around one Claude structural-prior call.
+
+    Retries malformed JSON, malformed model fields, and transient network
+    failures. Deterministic code errors outside these classes still surface.
+    """
+    last_exc = None
+
+    retryable = (
+        json.JSONDecodeError,
+        requests.RequestException,
+        KeyError,
+        TypeError,
+        ValueError,
+    )
+
+    for attempt in range(retries + 1):
+        try:
+            return _classify_direction_once(
+                initiator,
+                target,
+                scope=scope,
+                temperature=temperature,
+            )
+
+        except retryable as exc:
+            last_exc = exc
+
+            if attempt >= retries:
+                raise
+
+            delay = min(2 ** attempt, 4)
+
+            print(
+                f"[action-prior retry {attempt + 1}/{retries}] "
+                f"{initiator}->{target}: "
+                f"{type(exc).__name__}: {exc}"
+            )
+
+            time.sleep(delay)
+
+    raise last_exc
 
 def build_scoped_jobs(scope_data: dict) -> list[dict]:
     """
