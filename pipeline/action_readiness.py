@@ -330,6 +330,34 @@ EVIDENCE PACKET:
 
 Identify only NEW action-specific readiness signals for:
 {initiator} -> {target}
+
+TARGET-NEXUS GUARD — MANDATORY:
+A readiness signal is valid only when the evidence supports an action by
+INITIATOR that is specifically directed against TARGET.
+
+Concrete target nexus includes TARGET's territory, forces, military assets,
+government vessels, ports, airspace, infrastructure, or another object that
+the evidence explicitly identifies as belonging to or being defended by
+TARGET.
+
+Do NOT infer target nexus merely because:
+- INITIATOR acts somewhere in the same region or theater;
+- TARGET might be indirectly affected;
+- TARGET is an ally, neighbor, host state, or coalition member;
+- INITIATOR announces a general regional posture, maritime exclusion zone,
+  Strait closure, patrol, mobilization, or warning;
+- an action is directed against a third party;
+- a proxy associated with INITIATOR acts against TARGET.
+
+A general maritime exclusion zone or chokepoint restriction is NOT evidence
+of naval_blockade readiness against this TARGET unless the evidence
+specifically indicates that TARGET's ports, coast, shipping, vessels, or
+access are objects of the restriction.
+
+Proxy activity does not count as INITIATOR's own action merely because the
+proxy is supported by INITIATOR.
+
+If the TARGET nexus is ambiguous, emit NO signal.
 """
 
     payload = {

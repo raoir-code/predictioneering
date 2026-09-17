@@ -218,4 +218,25 @@ r = run(
 assert all_zero(r)
 
 
+
+# ============================================================
+# 9. REGIONAL POSTURE MUST NOT BECOME TARGET-SPECIFIC READINESS
+# ============================================================
+
+r = run(
+    "REGIONAL EXCLUSION NOT TARGETED",
+    "Iran",
+    "Saudi Arabia",
+    [
+        article(
+            "Iran threatens maritime exclusion zone in Persian Gulf",
+            "Iranian officials warned that foreign military traffic across "
+            "parts of the Persian Gulf could be restricted. The statement "
+            "did not identify Saudi Arabia, Saudi ports, Saudi vessels, or "
+            "Saudi territory as objects of the restriction."
+        )
+    ],
+)
+assert all_zero(r)
+
 print("\nACTION READINESS ADVERSARIAL: PASS")
