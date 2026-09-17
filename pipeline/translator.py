@@ -808,6 +808,7 @@ def _normalize_qualifying_action_types(
     raw,
     action_type,
     manifestation_family,
+    requirement_burden=None,
 ):
     """
     Validate Clergyman's contract-resolution action-family set.
@@ -839,6 +840,17 @@ def _normalize_qualifying_action_types(
 
     if not out:
         return None
+
+    # HARD SEMANTIC INVARIANT:
+    # A territorial-control contract requires invasion/occupation.
+    # A raid, strike, boarding, engagement, etc. may accompany an
+    # invasion but cannot independently satisfy the contract.
+    if requirement_burden == "territorial_control":
+        if action_type != "ground_invasion":
+            return None
+        if "ground_invasion" not in out:
+            return None
+        return ["ground_invasion"]
 
     # Legacy primary family must belong to the satisfying set.
     if (
@@ -930,6 +942,7 @@ Legalese flags: {'; '.join(flags) if flags else 'none'}"""
                 result.get("qualifying_action_types"),
                 action_type,
                 manifestation_family,
+                result.get("requirement_burden", "broad"),
             )
         )
 
@@ -1682,6 +1695,7 @@ def _run_action_bridge_candidate_pass(feed: list, cache: dict):
                     raw_qualifying,
                     action_type,
                     market.get("manifestation_family"),
+                    market.get("requirement_burden"),
                 )
             )
 
