@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-09-14T05:30:20.071745+00:00",
-  "n_resolved": 81,
-  "brier_conditional_mean": 0.301138,
-  "brier_engine_mean": 0.358443,
-  "brier_market_mean": 0.157612,
-  "edge_vs_market": -0.143526,
+  "last_updated": "2026-09-17T19:55:34.728117+00:00",
+  "n_resolved": 86,
+  "brier_conditional_mean": 0.311952,
+  "brier_engine_mean": 0.372097,
+  "brier_market_mean": 0.162885,
+  "edge_vs_market": -0.149067,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -896,6 +896,61 @@
       "brier_conditional": 0.206661,
       "brier_market": 0.030625,
       "resolved_at": "2026-09-14T05:05:49.549556+00:00"
+    },
+    {
+      "market_id": "3861936",
+      "market_label": "Israel military action against Syria by September 15, 2026?",
+      "dyad": "Israel-Syria",
+      "outcome": 0,
+      "conditional_p": 0.3601,
+      "market_p": 0.235,
+      "brier_conditional": 0.129672,
+      "brier_market": 0.055225,
+      "resolved_at": "2026-09-17T19:55:09.362682+00:00"
+    },
+    {
+      "market_id": "3840178",
+      "market_label": "Will there be Saudi Arabian military action against Yemen by September 15, 2026?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.0725,
+      "market_p": 0.3,
+      "brier_conditional": 0.860256,
+      "brier_market": 0.49,
+      "resolved_at": "2026-09-17T19:55:11.900399+00:00"
+    },
+    {
+      "market_id": "3840179",
+      "market_label": "Will there be Saudi Arabian military action against Yemen by September 30, 2026?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.3895,
+      "market_p": 0.345,
+      "brier_conditional": 0.37271,
+      "brier_market": 0.429025,
+      "resolved_at": "2026-09-17T19:55:15.450702+00:00"
+    },
+    {
+      "market_id": "4178256",
+      "market_label": "Israel military action against Lebanon on September 14?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.3477,
+      "market_p": 0.835,
+      "brier_conditional": 0.425495,
+      "brier_market": 0.027225,
+      "resolved_at": "2026-09-17T19:55:18.641521+00:00"
+    },
+    {
+      "market_id": "4178257",
+      "market_label": "Israel military action against Lebanon on September 15?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.1953,
+      "market_p": 0.51,
+      "brier_conditional": 0.647542,
+      "brier_market": 0.2401,
+      "resolved_at": "2026-09-17T19:55:24.830658+00:00"
     }
   ]
 }
