@@ -1523,6 +1523,19 @@ def _append_log(feed: list):
                 "p_b_given_not_a_raw_llm":  market.get("p_b_given_not_a_raw_llm"),
                 "parent_event_relation":    market.get("parent_event_relation"),
                 "manifestation_family":     market.get("manifestation_family"),
+                "action_type":                market.get("action_type"),
+                "contract_initiator":         market.get("contract_initiator"),
+                "contract_target":            market.get("contract_target"),
+                "parent_event_relation":      market.get("parent_event_relation"),
+                "action_coherence_notes":     market.get("action_coherence_notes"),
+
+                # Shadow-selector fields. These may be null until Step 10
+                # populates them, but logging supports them now.
+                "action_prior_fingerprint":   market.get("action_prior_fingerprint"),
+                "action_prior_method":        market.get("action_prior_method"),
+                "action_selector_shadow_status": market.get("action_selector_shadow_status"),
+                "action_selector_shadow_distribution": market.get("action_selector_shadow_distribution"),
+                "action_selector_shadow_contract_p": market.get("action_selector_shadow_contract_p"),
                 "political_act_formality":  market.get("political_act_formality"),
                 "used_structural_context":  market.get("used_structural_context"),
                 "requirement_burden":       market.get("requirement_burden"),
