@@ -142,6 +142,75 @@ Use exactly these eight categories:
    SAM engagements, ship-to-ship gunfire, cross-border artillery/direct fire,
    and border/DMZ firefights.
 
+TARGET-STATE COHERENCE
+
+Every probability is for an action undertaken BY INITIATOR AGAINST TARGET.
+
+Do not count an operation merely because it occurs in TARGET's territory,
+waters, region, or broader theater.
+
+In particular:
+- operations against criminal organizations, smugglers, insurgents, proxies,
+  terrorists, or unrelated nonstate actors are NOT actions against TARGET
+  unless TARGET itself is the object of coercion;
+- operations against third-country forces or vessels are not actions against
+  TARGET;
+- generic patrols, basing, transit, exercises, or law-enforcement activity
+  near TARGET are not precedents for coercive action against TARGET;
+- historical examples are relevant only insofar as the TARGET actor itself,
+  its forces, assets, territory, or state authority was the object.
+
+MOTIVE / OBJECTIVE DISCIPLINE
+
+You are NOT told why INITIATOR acts.
+
+Do not infer a particular political objective merely because a contemporary
+dispute, prediction market, or famous scenario suggests one.
+
+Estimate the action-family distribution conditional only on a generic
+qualifying physical coercive/military action occurring, using stable
+structural facts such as geography, access, force posture, military
+capabilities, doctrine, and genuine dyadic interaction patterns.
+
+Do not silently condition on transient rhetoric, a particular market's
+requested outcome, or an assumed political objective that is absent from the
+supplied structural scope.
+
+NO ESCALATION-LADDER HEURISTIC
+
+Do NOT assume actors naturally choose the "lowest rung," a "graduated"
+response, an "initial step," or a sequential escalation ladder.
+
+The estimand is NOT:
+    "what would INITIATOR probably try first in a crisis?"
+
+It is:
+    P(PRIMARY ACTION FAMILY = k |
+      a qualifying physical coercive/military action occurs)
+
+Rank action families from structural access, force geometry, capabilities,
+doctrine, logistics, and genuine dyadic patterns. Do not add an assumed
+sequence of escalation.
+
+REASONING DISCIPLINE
+
+In your reasoning, do not invent an unstated political objective such as:
+- territorial acquisition,
+- punishment,
+- deterrence,
+- regime change,
+- administrative control,
+- signaling,
+- alliance reassurance,
+- resource seizure.
+
+An action family's intrinsic operational definition may involve an objective
+(e.g. ground_invasion involves territorial entry/control), but do not assume
+that INITIATOR currently seeks that objective.
+
+Explain weights operationally rather than narrating a hypothetical policy
+strategy.
+
 MUTUAL-EXCLUSIVITY DISCIPLINE
 
 Real operations are multimodal. You must still distribute probability over
@@ -188,7 +257,7 @@ Typical pathways include:
 - opposing forces sharing a land frontier or DMZ;
 - recurring close naval/coast-guard interaction;
 - recurring military air contact/intercepts;
-- both states having deployed military forces in the same operating theater.
+- both states having their own deployed military forces in a bounded operating area where they have an ordinary pathway to encounter one another as opposing forces. Mere presence somewhere in the same broad region or theater is NOT sufficient.
 
 If the only reason the forces would make contact is that TARGET intercepts
 INITIATOR's missiles, drones, aircraft, or raid, that is NOT evidence for
@@ -762,7 +831,7 @@ def main():
                     "structural_flags": structural_flags,
                     "reasoning": reasoning,
                     "confidence": confidence,
-                    "version": 5,
+                    "version": 6,
                     "estimand": (
                         "primary_next_action_given_action_occurs"
                     ),
