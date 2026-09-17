@@ -102,6 +102,30 @@ def direction_key(initiator: str, target: str) -> str:
     return f"{initiator}->{target}"
 
 
+
+def scoped_direction_key(
+    initiator: str,
+    target: str,
+    scope_fingerprint: str,
+) -> str:
+    """
+    Canonical key for a structural action prior.
+
+    Direction alone is insufficient because identical actors can appear in
+    contracts with materially different operational geography.
+    """
+    fp = str(scope_fingerprint).strip()
+
+    if not fp:
+        raise ValueError("scope_fingerprint must be non-empty")
+
+    return (
+        f"{direction_key(initiator, target)}"
+        f"|scope={fp}"
+    )
+
+
+
 def normalize_distribution(raw: dict) -> dict:
     """
     Validate and normalize a complete eight-action distribution.

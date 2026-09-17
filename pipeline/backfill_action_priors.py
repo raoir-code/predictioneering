@@ -55,8 +55,16 @@ from pipeline.action_selector import (
 )
 
 
+from pipeline.action_selector import scoped_direction_key
+from pipeline.contract_scope import (
+    action_prior_fingerprint,
+    action_prior_structural_context,
+)
+
 ROOT = Path(__file__).resolve().parent
 CLASSIFIED_FEED_PATH = ROOT / "classified_feed.json"
+TRANSLATOR_CACHE_PATH = ROOT / "translator_cache.json"
+CONTRACT_SCOPES_PATH = ROOT / "contract_scopes.json"
 
 ANTHROPIC_API = "https://api.anthropic.com/v1/messages"
 MODEL = "claude-opus-4-6"
@@ -374,10 +382,24 @@ def extract_json(text: str) -> dict:
 def classify_direction(
     initiator: str,
     target: str,
+    scope: dict | None = None,
 ) -> tuple[dict, dict, dict, dict, str, str]:
+    scope_block = (
+        action_prior_structural_context(scope)
+        if scope is not None
+        else "No scoped structural context supplied."
+    )
+
     prompt = f"""
 INITIATOR: {initiator}
 TARGET: {target}
+
+ACTION-PRIOR STRUCTURAL SCOPE:
+{scope_block}
+
+The scope above has already removed resolution-only details.
+Do NOT infer or condition on the action family asked about by any
+prediction-market contract.
 
 Conditional on {initiator} undertaking a qualifying physical coercive or
 military action against {target}, estimate the eight-way structural
@@ -466,43 +488,88 @@ distribution over the PRIMARY action family of the next escalation episode.
     )
 
 
-def discover_directions() -> list[tuple[str, str]]:
+
+def build_scoped_jobs(scope_data: dict) -> list[dict]:
     """
-    Discover only directions that the translator has explicitly identified
-    on current physical contracts.
+    Collapse active contract instances into unique bilateral ACTION-PRIOR
+    structural objects.
 
-    This deliberately does not infer direction from canonical dyad ordering.
+    Uses action_prior_fingerprint, not the full legal-scope fingerprint.
+    Aggregate/union contracts stay out of this bilateral generator.
     """
-    if not CLASSIFIED_FEED_PATH.exists():
-        return []
+    if not isinstance(scope_data, dict):
+        raise ValueError("contract_scopes.json must contain an object")
 
-    data = json.loads(CLASSIFIED_FEED_PATH.read_text())
-    rows = data if isinstance(data, list) else data.get(
-        "markets",
-        data.get("data", []),
-    )
+    jobs = {}
 
-    found = set()
-
-    for market in rows:
-        if not isinstance(market, dict):
+    for market_id, entry in scope_data.items():
+        if not isinstance(entry, dict):
             continue
 
+        if entry.get("route") != "scoped_bilateral":
+            continue
+
+        initiator = entry.get("initiator")
+        target = entry.get("target")
+        scope = entry.get("scope")
+
         if (
-            market.get("manifestation_family")
-            != "kinetic_or_coercive_action"
+            not initiator
+            or not target
+            or not isinstance(scope, dict)
         ):
             continue
 
-        initiator = market.get("contract_initiator")
-        target = market.get("contract_target")
+        # Recompute deterministically rather than trusting cached metadata.
+        fp = action_prior_fingerprint(scope)
 
-        if not initiator or not target or initiator == target:
-            continue
+        cached_fp = scope.get("action_prior_fingerprint")
+        if cached_fp is not None and cached_fp != fp:
+            raise ValueError(
+                f"market {market_id}: stale action-prior fingerprint "
+                f"{cached_fp!r} != recomputed {fp!r}"
+            )
 
-        found.add((str(initiator), str(target)))
+        key = scoped_direction_key(
+            initiator,
+            target,
+            fp,
+        )
 
-    return sorted(found)
+        job = jobs.setdefault(
+            key,
+            {
+                "key": key,
+                "initiator": str(initiator),
+                "target": str(target),
+                "action_prior_fingerprint": fp,
+                "scope": scope,
+                "market_ids": [],
+                "questions": [],
+            },
+        )
+
+        job["market_ids"].append(str(market_id))
+
+        question = entry.get("question")
+        if question and question not in job["questions"]:
+            job["questions"].append(question)
+
+    return [
+        jobs[key]
+        for key in sorted(jobs)
+    ]
+
+
+def discover_scoped_jobs() -> list[dict]:
+    if not CONTRACT_SCOPES_PATH.exists():
+        return []
+
+    data = json.loads(
+        CONTRACT_SCOPES_PATH.read_text()
+    )
+
+    return build_scoped_jobs(data)
 
 
 def format_distribution(probs: dict) -> str:
@@ -518,22 +585,16 @@ def format_distribution(probs: dict) -> str:
     )
 
 
+
 def main():
     parser = argparse.ArgumentParser()
-
-    parser.add_argument(
-        "--direction",
-        action="append",
-        default=[],
-        help="Explicit direction, e.g. 'Iran->US'. May repeat.",
-    )
 
     parser.add_argument(
         "--discover",
         action="store_true",
         help=(
-            "Also use explicit contract directions already present in "
-            "classified_feed.json."
+            "Generate canonical scoped bilateral priors from "
+            "contract_scopes.json."
         ),
     )
 
@@ -543,111 +604,139 @@ def main():
     parser.add_argument(
         "--force",
         action="store_true",
-        help="Regenerate directions that already have priors.",
+        help="Regenerate scoped priors already present.",
     )
 
     args = parser.parse_args()
 
-    directions = []
-
-    for raw in args.direction:
-        directions.append(parse_direction(raw))
-
-    if args.discover:
-        directions.extend(discover_directions())
-
-    directions = sorted(set(directions))
-
-    if not directions:
+    if not args.discover:
         raise SystemExit(
-            "No directions selected. Use --direction and/or --discover."
+            "Use --discover. Persistent action priors require "
+            "canonical contract scope."
+        )
+
+    jobs = discover_scoped_jobs()
+
+    if args.limit is not None:
+        jobs = jobs[:args.limit]
+
+    if not jobs:
+        raise SystemExit(
+            "No scoped bilateral jobs found. Run "
+            "pipeline.backfill_contract_scopes first."
         )
 
     priors = load_action_priors()
 
-    if not args.force:
-        directions = [
-            pair
-            for pair in directions
-            if direction_key(*pair) not in priors
-        ]
-
-    if args.limit is not None:
-        directions = directions[:args.limit]
+    selected = [
+        job for job in jobs
+        if args.force or job["key"] not in priors
+    ]
 
     print(
-        f"{len(directions)} directional action prior(s) selected."
+        f"{len(jobs)} unique scoped bilateral "
+        f"action-prior object(s) discovered."
     )
+    print(f"{len(selected)} selected for generation.")
 
     if args.dry_run:
         print("[DRY RUN] No action_priors.json write.\n")
-    else:
-        if ACTION_PRIORS_PATH.exists():
-            stamp = datetime.now(timezone.utc).strftime(
-                "%Y%m%dT%H%M%S"
-            )
-            backup = ACTION_PRIORS_PATH.with_name(
-                ACTION_PRIORS_PATH.name + f".bak.{stamp}"
-            )
-            shutil.copy2(ACTION_PRIORS_PATH, backup)
-            print(f"Backup -> {backup}\n")
+    elif selected and ACTION_PRIORS_PATH.exists():
+        stamp = datetime.now(timezone.utc).strftime(
+            "%Y%m%dT%H%M%S"
+        )
+        backup = ACTION_PRIORS_PATH.with_name(
+            ACTION_PRIORS_PATH.name + f".bak.{stamp}"
+        )
+        shutil.copy2(ACTION_PRIORS_PATH, backup)
+        print(f"Backup -> {backup}\n")
 
     successes = 0
     errors = []
 
-    for i, (initiator, target) in enumerate(directions, 1):
-        key = direction_key(initiator, target)
+    for i, job in enumerate(selected, 1):
+        key = job["key"]
 
         try:
             (
-                probs,
+                guarded_probs,
                 raw_probs,
                 feasibility,
                 structural_flags,
                 reasoning,
                 confidence,
             ) = classify_direction(
-                initiator,
-                target,
+                job["initiator"],
+                job["target"],
+                scope=job["scope"],
             )
 
-            mode = max(probs, key=probs.get)
+            mode = max(
+                guarded_probs,
+                key=guarded_probs.get,
+            )
 
-            print(f"{i:3}/{len(directions)} {key}")
+            print(f"{i:3}/{len(selected)} {key}")
             print(
-                f"    mode: {mode} ({probs[mode]:.3f})"
+                f"    mode: {mode} "
+                f"({guarded_probs[mode]:.3f})"
             )
             print(
-                f"    raw:     {format_distribution(raw_probs)}"
+                "    raw:     "
+                + format_distribution(raw_probs)
             )
             print(
-                f"    guarded: {format_distribution(probs)}"
+                "    guarded: "
+                + format_distribution(guarded_probs)
             )
             print(
                 "    feasibility: "
                 + ", ".join(
-                    f"{action}={feasibility[action]}"
-                    for action in ACTION_TYPES
+                    f"{a}={feasibility[a]}"
+                    for a in ACTION_TYPES
                 )
             )
             print(
                 "    contact_pathway: "
-                f"{structural_flags['direct_engagement_contact_pathway']}"
+                + str(
+                    structural_flags[
+                        "direct_engagement_contact_pathway"
+                    ]
+                )
             )
             print(
-                f"    confidence={confidence} | {reasoning}"
+                f"    markets={len(job['market_ids'])} "
+                f"| prior_fp="
+                f"{job['action_prior_fingerprint']}"
+            )
+            print(
+                f"    confidence={confidence} | "
+                f"{reasoning}"
             )
 
             if not args.dry_run:
                 priors[key] = {
-                    "initiator": initiator,
-                    "target": target,
+                    "initiator": job["initiator"],
+                    "target": job["target"],
+                    "action_prior_fingerprint": (
+                        job["action_prior_fingerprint"]
+                    ),
+                    "scope": job["scope"],
+                    "market_ids_at_creation": (
+                        job["market_ids"]
+                    ),
                     "probabilities": {
-                        action: round(probs[action], 6)
+                        action: round(
+                            guarded_probs[action],
+                            6,
+                        )
                         for action in ACTION_TYPES
                     },
                     "raw_probabilities": {
-                        action: round(raw_probs[action], 6)
+                        action: round(
+                            raw_probs[action],
+                            6,
+                        )
                         for action in ACTION_TYPES
                     },
                     "feasibility": {
@@ -657,33 +746,31 @@ def main():
                     "structural_flags": structural_flags,
                     "reasoning": reasoning,
                     "confidence": confidence,
-                    "version": 3,
+                    "version": 4,
                     "estimand": (
                         "primary_next_action_given_action_occurs"
                     ),
                 }
 
+                save_action_priors(priors)
+
             successes += 1
+
         except Exception as exc:
             errors.append((key, str(exc)))
             print(
-                f"{i:3}/{len(directions)} {key}: "
-                f"ERROR — {exc}"
+                f"{i:3}/{len(selected)} "
+                f"{key}: ERROR — {exc}"
             )
 
-        time.sleep(0.25)
-
-    if not args.dry_run:
-        save_action_priors(priors)
-        print(
-            f"\nWrote {successes} directional structural prior(s) "
-            f"to {ACTION_PRIORS_PATH}"
-        )
+    print("\nSUMMARY")
+    print(" successes:", successes)
+    print(" failures: ", len(errors))
 
     if errors:
-        print(f"\n{len(errors)} error(s):")
         for key, error in errors:
-            print(f"  {key}: {error}")
+            print(f"  - {key}: {error}")
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":
