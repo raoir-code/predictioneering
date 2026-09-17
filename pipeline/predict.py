@@ -60,6 +60,9 @@ from pipeline.translator import _get_market_deadline
 from pipeline.dyad_registry import canonicalize, UnknownDyadError
 from pipeline import theater_registry
 from pipeline import agglomeration
+from pipeline.action_selector import load_action_priors, select_distribution
+from pipeline.action_readiness import score_action_readiness, zero_live_scores
+from pipeline.contract_scope import action_prior_fingerprint
 
 # ENGINE CONFIG
 # ============================================================
@@ -106,6 +109,7 @@ MAX_WEEKLY_DELTA = {n: 0.5 for n in NODES}
 # DYAD CONFIGS — loaded from pipeline/dyad_configs.json
 # ============================================================
 DYAD_CONFIGS_PATH = os.path.join(os.path.dirname(__file__), "dyad_configs.json")
+CONTRACT_SCOPES_PATH = os.path.join(os.path.dirname(__file__), "contract_scopes.json")
 
 FALLBACK_BASELINE = {
     "WinProbability":      0.0,
@@ -120,6 +124,222 @@ FALLBACK_BASELINE = {
     "AudienceCosts":       0.5,
     "MobilizationSignal":  0.0,
 }
+
+
+
+def _load_action_scope_index(path=CONTRACT_SCOPES_PATH):
+    """
+    Index cached contract scopes by market_id.
+
+    contract_scopes.json is structural/runtime metadata generated downstream
+    from Clergyman. Missing entries fail closed in shadow mode.
+    """
+    if not os.path.exists(path):
+        return {}
+
+    try:
+        with open(path) as f:
+            data = json.load(f)
+    except Exception as ex:
+        print(
+            f"  [action-shadow warn] could not load "
+            f"contract scopes: {ex}"
+        )
+        return {}
+
+    if isinstance(data, dict):
+        rows = data.values()
+    elif isinstance(data, list):
+        rows = data
+    else:
+        return {}
+
+    out = {}
+
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+
+        market_id = row.get("market_id")
+
+        if market_id is None:
+            continue
+
+        out[str(market_id)] = row
+
+    return out
+
+
+def _attach_action_selector_shadow(
+    market,
+    articles,
+    scope_index,
+    priors,
+    readiness_cache,
+):
+    """
+    Attach action-selector diagnostics ONLY.
+
+    Scientific invariant:
+        this function must never alter our_prediction or any production
+        translator probability.
+
+    The selector estimates:
+        P(action family=k | qualifying physical action occurs)
+
+    It does NOT yet estimate a Polymarket contract probability.
+    """
+    engine_before = market.get("our_prediction")
+
+    # Initialize explicit fail-closed diagnostics.
+    market["action_selector_shadow_status"] = "not_available"
+    market["action_selector_shadow_distribution"] = None
+    market["action_selector_shadow_action_family_p"] = None
+    market["action_selector_shadow_contract_p"] = None
+    market["action_selector_shadow_live_scores"] = None
+    market["action_selector_shadow_readiness_summary"] = None
+    market["action_selector_shadow_action_type"] = None
+    market["action_prior_fingerprint"] = None
+    market["action_prior_method"] = None
+
+    try:
+        market_id = market.get("market_id")
+
+        if market_id is None:
+            market["action_selector_shadow_status"] = "missing_market_id"
+            return market
+
+        scope_entry = scope_index.get(str(market_id))
+
+        if not isinstance(scope_entry, dict):
+            market["action_selector_shadow_status"] = "missing_scope"
+            return market
+
+        route = scope_entry.get("route")
+
+        if route != "scoped_bilateral":
+            market["action_selector_shadow_status"] = (
+                f"unsupported_route:{route or 'unknown'}"
+            )
+            return market
+
+        initiator = scope_entry.get("initiator")
+        target = scope_entry.get("target")
+        action_type = scope_entry.get("action_type")
+        scope = scope_entry.get("scope")
+
+        if (
+            not initiator
+            or not target
+            or not isinstance(scope, dict)
+        ):
+            market["action_selector_shadow_status"] = (
+                "incomplete_scope"
+            )
+            return market
+
+        fp = (
+            scope.get("action_prior_fingerprint")
+            or action_prior_fingerprint(scope)
+        )
+
+        prior_key = f"{initiator}->{target}|scope={fp}"
+        prior = priors.get(prior_key)
+
+        market["action_prior_fingerprint"] = fp
+        market["action_selector_shadow_action_type"] = action_type
+
+        if not isinstance(prior, dict):
+            market["action_selector_shadow_status"] = (
+                "missing_prior"
+            )
+            return market
+
+        structural_prior = prior.get("probabilities")
+
+        if not isinstance(structural_prior, dict):
+            market["action_selector_shadow_status"] = (
+                "invalid_prior"
+            )
+            return market
+
+        # One readiness call per directional actor pair per prediction run.
+        # Multiple contracts/scopes can share the same live evidence.
+        readiness_key = (str(initiator), str(target))
+
+        if readiness_key not in readiness_cache:
+            if articles:
+                readiness = score_action_readiness(
+                    str(initiator),
+                    str(target),
+                    articles,
+                )
+            else:
+                readiness = {
+                    "live_scores": zero_live_scores(),
+                    "signals": [],
+                    "summary": "No live articles available.",
+                }
+
+            readiness_cache[readiness_key] = readiness
+
+        readiness = readiness_cache[readiness_key]
+
+        live_scores = (
+            readiness.get("live_scores")
+            if isinstance(readiness, dict)
+            else None
+        ) or zero_live_scores()
+
+        distribution = select_distribution(
+            structural_prior,
+            live_scores=live_scores,
+            temperature=1.0,
+            feasibility=prior.get("feasibility"),
+            structural_flags=prior.get("structural_flags"),
+        )
+
+        market["action_selector_shadow_status"] = "shadow_ready"
+        market["action_selector_shadow_distribution"] = {
+            k: round(float(v), 6)
+            for k, v in distribution.items()
+        }
+        market["action_selector_shadow_live_scores"] = {
+            k: round(float(v), 6)
+            for k, v in live_scores.items()
+        }
+        market["action_selector_shadow_readiness_summary"] = (
+            readiness.get("summary")
+            if isinstance(readiness, dict)
+            else None
+        )
+        market["action_prior_method"] = prior.get("method")
+
+        if (
+            action_type is not None
+            and action_type in distribution
+        ):
+            market["action_selector_shadow_action_family_p"] = (
+                round(float(distribution[action_type]), 6)
+            )
+
+        # Intentionally remains null. We have NOT modeled:
+        # P(qualifying physical action occurs).
+        market["action_selector_shadow_contract_p"] = None
+
+    except Exception as ex:
+        market["action_selector_shadow_status"] = (
+            f"error:{type(ex).__name__}"
+        )
+        market["action_selector_shadow_error"] = str(ex)[:400]
+
+    finally:
+        if market.get("our_prediction") != engine_before:
+            raise AssertionError(
+                "Action-selector shadow mutated our_prediction"
+            )
+
+    return market
 
 
 def load_dyad_configs():
@@ -417,6 +637,18 @@ def run(dry_run: bool = False, filter_dyad: str = None):
 
     _known_keys = set(load_dyad_configs().keys())
     _node_memory_state = load_node_memory_state()
+    _action_scope_index = _load_action_scope_index()
+    try:
+        _action_priors = load_action_priors()
+    except Exception as ex:
+        print(f"  [action-shadow warn] could not load priors: {ex}")
+        _action_priors = {}
+    _action_readiness_cache = {}
+    print(
+        f"[predict.py] action shadow: "
+        f"{len(_action_scope_index)} scoped markets, "
+        f"{sum(1 for k in _action_priors if '|scope=' in k)} priors"
+    )
     _host_registry = theater_registry.load_host_registry()
     _theater_state = theater_registry.load_theater_state()
     dyad_groups: Dict[str, List] = {}
@@ -833,6 +1065,18 @@ def run(dry_run: bool = False, filter_dyad: str = None):
                           f"-> derived P(any)={_agg_p:.4f} (independently-scored was {engine_p_final:.4f})")
                     engine_p_final = _agg_p
                     m["our_prediction"] = engine_p_final
+
+
+            # Action selector SHADOW ONLY.
+            # Reuses this dyad's exact PASS-1 evidence packet and must
+            # never alter engine_p_final / our_prediction.
+            _attach_action_selector_shadow(
+                m,
+                articles,
+                _action_scope_index,
+                _action_priors,
+                _action_readiness_cache,
+            )
 
             edge = round((engine_p_final - (m.get("market_price") or 0)) * 100, 1)
             print(f"  ✓ {m['question'][:70]}")
