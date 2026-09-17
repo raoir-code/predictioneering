@@ -195,6 +195,8 @@ def _attach_action_selector_shadow(
     market["action_selector_shadow_status"] = "not_available"
     market["action_selector_shadow_distribution"] = None
     market["action_selector_shadow_action_family_p"] = None
+    market["action_selector_shadow_structural_distribution"] = None
+    market["action_selector_shadow_structural_action_family_p"] = None
     market["action_selector_shadow_contract_p"] = None
     market["action_selector_shadow_live_scores"] = None
     market["action_selector_shadow_readiness_summary"] = None
@@ -291,6 +293,14 @@ def _attach_action_selector_shadow(
             else None
         ) or zero_live_scores()
 
+        baseline_distribution = select_distribution(
+            structural_prior,
+            live_scores=zero_live_scores(),
+            temperature=1.0,
+            feasibility=prior.get("feasibility"),
+            structural_flags=prior.get("structural_flags"),
+        )
+
         distribution = select_distribution(
             structural_prior,
             live_scores=live_scores,
@@ -300,6 +310,10 @@ def _attach_action_selector_shadow(
         )
 
         market["action_selector_shadow_status"] = "shadow_ready"
+        market["action_selector_shadow_structural_distribution"] = {
+            k: round(float(v), 6)
+            for k, v in baseline_distribution.items()
+        }
         market["action_selector_shadow_distribution"] = {
             k: round(float(v), 6)
             for k, v in distribution.items()
@@ -318,7 +332,14 @@ def _attach_action_selector_shadow(
         if (
             action_type is not None
             and action_type in distribution
+            and action_type in baseline_distribution
         ):
+            market[
+                "action_selector_shadow_structural_action_family_p"
+            ] = round(
+                float(baseline_distribution[action_type]),
+                6,
+            )
             market["action_selector_shadow_action_family_p"] = (
                 round(float(distribution[action_type]), 6)
             )
@@ -1057,7 +1078,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
 
             if _role["role"] == "aggregate" and _deadline is not None:
                 _agg_p, _agg_diag = agglomeration.compute_any_of_probability(
-                    dyad, _deadline, days_rem, core, _known_keys, registry=_host_registry)
+                    dyad, _deadline, days_rem, core, _known_keys, host_registry=_host_registry)
                 if _agg_p is not None:
                     _fallback_n = len(_agg_diag["tracked_missing"]) + len(_agg_diag["genuinely_untracked"])
                     print(f"  [agglomeration] {dyad} by {_deadline}: "

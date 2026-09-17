@@ -22,6 +22,7 @@ from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(__file__))
 from clergyman_ontology import (get_anchor_range, clamp_to_range, derive_severity_band, deterministic_position_within_range, derive_parent_event_relation)
+from pipeline.action_selector import ACTION_TYPES
 import urllib.request
 import re as _re
 import calendar as _calendar
@@ -44,7 +45,7 @@ import calendar as _calendar
 # applying whatever fix is live right now.
 # ─────────────────────────────────────────────────────────────────────
 LEGAL_SCHOLAR_PROMPT_VERSION = "v4"
-CLERGYMAN_PROMPT_VERSION     = "v8"  # v5 = blend LLM guess with a deterministic position-within-range formula for kinetic contracts (LLM's raw number wasn't tracking WarCosts/WinProbability/PatronDeterrence/NuclearDeterrence despite correct rationale text -- was mostly narration, not real sensitivity) (Jul 27)
+CLERGYMAN_PROMPT_VERSION     = "v9"  # v5 = blend LLM guess with a deterministic position-within-range formula for kinetic contracts (LLM's raw number wasn't tracking WarCosts/WinProbability/PatronDeterrence/NuclearDeterrence despite correct rationale text -- was mostly narration, not real sensitivity) (Jul 27)
 SPYGLASS_PROMPT_VERSION      = "v1"
 
 # ─────────────────────────────────────────────────────────────────────
@@ -594,6 +595,33 @@ gray_zone_incident, missile_strike, raid, seizure_boarding, airstrike,
 naval_blockade, ground_invasion, direct_engagement) if the contract\'s method
 is physical and identifiable -- null if manifestation_family is political_act
 or the method is unspecified.
+
+Also record qualifying_action_types: the COMPLETE SET of selector PRIMARY
+action families whose occurrence, by itself as the primary operational family,
+would satisfy this contract's physical-method requirement.
+
+Use ONLY the same eight categories above.
+
+Examples:
+- "ground invasion" -> ["ground_invasion"]
+- "naval blockade" -> ["naval_blockade"]
+- "board or seize a vessel" -> ["seizure_boarding"]
+- "airstrike" -> ["airstrike"]
+- "airstrike OR surface-to-surface missile/drone strike" ->
+  ["airstrike", "missile_strike"]
+
+IMPORTANT:
+- This is about which PRIMARY action families satisfy the resolution rule,
+  not every component weapon that might be used during an operation.
+- An invasion may involve preparatory airstrikes, but an invasion contract is
+  still ["ground_invasion"] unless standalone strikes also satisfy YES.
+- Do not add families merely because they commonly accompany another family.
+- For a broad or method-unspecified contract such as "any military action",
+  "any military clash", or another condition that cannot be mapped cleanly
+  onto a bounded explicit subset of these categories, return JSON null.
+- If manifestation_family is political_act, return JSON null.
+- If uncertain whether a family independently satisfies the contract, omit it.
+- Never return an empty list; use JSON null instead.
   - direct_engagement: deliberate overt kinetic combat between already-
     deployed opposing forces, where the primary operation is not itself a
     raid, strike, blockade, seizure, or invasion. Distinguish by OBJECTIVE,
@@ -732,6 +760,7 @@ Return ONLY valid JSON:
   "political_act_formality": "formal_official|informal_rhetorical (omit or use JSON null if manifestation_family is kinetic_or_coercive_action)",
   "requirement_burden": "broad|method_specific|target_specific|persistent|territorial_control",
   "action_type": "one of the 8 categories, or null",
+  "qualifying_action_types": ["one or more of the 8 categories"] or null,
   "contract_initiator": "exact dyad actor name, or null",
   "contract_target": "exact dyad actor name, or null",
   "p_b_given_a": 0.75,
@@ -772,6 +801,53 @@ def _format_structural_context(toggles: dict) -> str:
     for k, v in present.items():
         lines.append(f"  {k} = {v}  ({legend[k]})")
     return "\n".join(lines)
+
+
+
+def _normalize_qualifying_action_types(
+    raw,
+    action_type,
+    manifestation_family,
+):
+    """
+    Validate Clergyman's contract-resolution action-family set.
+
+    Returns a canonical ACTION_TYPES-ordered list, or None.
+    Fails closed rather than inventing contract semantics.
+    """
+    if manifestation_family != "kinetic_or_coercive_action":
+        return None
+
+    if raw is None:
+        return None
+
+    if not isinstance(raw, list) or not raw:
+        return None
+
+    if any(
+        not isinstance(x, str) or x not in ACTION_TYPES
+        for x in raw
+    ):
+        return None
+
+    raw_set = set(raw)
+
+    out = [
+        k for k in ACTION_TYPES
+        if k in raw_set
+    ]
+
+    if not out:
+        return None
+
+    # Legacy primary family must belong to the satisfying set.
+    if (
+        action_type is not None
+        and action_type not in out
+    ):
+        return None
+
+    return out
 
 
 def clergyman(market: dict, dyad: str, scholar_output: dict) -> dict | None:
@@ -842,6 +918,21 @@ Legalese flags: {'; '.join(flags) if flags else 'none'}"""
             result["contract_initiator"] = None
             result["contract_target"] = None
             result["action_type"] = None
+
+        action_type = result.get("action_type")
+
+        if action_type not in ACTION_TYPES:
+            action_type = None
+            result["action_type"] = None
+
+        result["qualifying_action_types"] = (
+            _normalize_qualifying_action_types(
+                result.get("qualifying_action_types"),
+                action_type,
+                manifestation_family,
+            )
+        )
+
         requirement_burden   = result.get("requirement_burden", "broad")
         raw_pba               = result.get("p_b_given_a")
         toggles_for_position  = market.get("_toggles", {})
@@ -1433,6 +1524,419 @@ def _run_action_coherence_pass(feed: list, cache: dict):
         print(f"\n  [coherence] adjusted {touched} market(s) for cross-action consistency")
 
 
+
+# ─────────────────────────────────────────────────────────────────────
+# ACTION SELECTOR → TRANSLATOR BRIDGE CANDIDATE
+#
+# Candidate-only diagnostic. Nothing here is allowed to alter production
+# P(A), P(B|A), P(B|¬A), conditional_p, Kelly, or bet direction.
+# ─────────────────────────────────────────────────────────────────────
+
+def _odds_scale_probability(p, likelihood_ratio):
+    """
+    Multiply probability odds by a positive likelihood ratio.
+
+        odds(p*) = odds(p) * LR
+
+    Exact logical boundaries remain exact:
+      p=0 -> 0
+      p=1 -> 1
+    """
+    import math
+
+    p = float(p)
+    lr = float(likelihood_ratio)
+
+    if not math.isfinite(p) or not 0.0 <= p <= 1.0:
+        raise ValueError(f"Invalid probability: {p}")
+
+    if not math.isfinite(lr) or lr < 0.0:
+        raise ValueError(f"Invalid likelihood ratio: {lr}")
+
+    if p <= 0.0:
+        return 0.0
+
+    if p >= 1.0:
+        return 1.0
+
+    if lr == 0.0:
+        return 0.0
+
+    odds = p / (1.0 - p)
+    scaled = odds * lr
+
+    if math.isinf(scaled):
+        return 1.0
+
+    return scaled / (1.0 + scaled)
+
+
+def _run_action_bridge_candidate_pass(feed: list, cache: dict):
+    """
+    Experimental, NON-PRODUCTION bridge.
+
+    Selector supplies relative live evidence:
+
+        pi_k = structural P(K=k | qualifying action occurs)
+        q_k  = live       P(K=k | qualifying action occurs)
+
+        LR_k = q_k / pi_k
+
+    We inspect what would happen if that LR multiplicatively updated the
+    odds of Clergyman's existing contract conditionals.
+
+    Branch policy v1:
+      equivalent     -> preserve deterministic relationship exactly
+      conflict_bound -> update P(B|A); keep P(B|¬A)=0 exactly
+      overlap        -> candidate-update both branches, explicitly treated
+                        as an experimental approximation
+
+    Critically, this function DOES NOT write candidate values back into
+    production probability fields.
+    """
+    from collections import Counter
+    import math
+
+    counts = Counter()
+
+    protected_fields = (
+        "our_prediction",
+        "p_b_given_a",
+        "p_b_given_not_a",
+        "conditional_p",
+        "blended_p",
+        "blend_weight",
+        "kelly_fraction",
+        "kelly_dollars",
+        "bet_direction",
+    )
+
+    for market in feed:
+        if market.get("translator_verdict") != "TRANSLATED":
+            continue
+
+        before = {
+            field: market.get(field)
+            for field in protected_fields
+        }
+
+        market["action_bridge_candidate_status"] = "not_eligible"
+        market["action_bridge_candidate_method"] = (
+            "action_family_set_odds_lr_v2"
+        )
+        market["action_bridge_candidate_lr"] = None
+        market["action_bridge_candidate_qualifying_action_types"] = None
+        market["action_bridge_candidate_structural_mass"] = None
+        market["action_bridge_candidate_live_mass"] = None
+        market["action_bridge_candidate_p_b_given_a"] = None
+        market["action_bridge_candidate_p_b_given_not_a"] = None
+        market["action_bridge_candidate_conditional_p"] = None
+        market["action_bridge_candidate_blended_p"] = None
+        market["action_bridge_candidate_delta_pp"] = None
+
+        try:
+            if (
+                market.get("manifestation_family")
+                != "kinetic_or_coercive_action"
+            ):
+                market["action_bridge_candidate_status"] = (
+                    "nonphysical_contract"
+                )
+                counts["nonphysical_contract"] += 1
+                continue
+
+            action_type = market.get("action_type")
+
+            if (
+                market.get("action_selector_shadow_status")
+                != "shadow_ready"
+            ):
+                market["action_bridge_candidate_status"] = (
+                    "selector_not_ready"
+                )
+                counts["selector_not_ready"] += 1
+                continue
+
+            # Fresh v9 Clergyman result should normally be written
+            # directly onto the market. Cache fallback is defensive.
+            raw_qualifying = market.get(
+                "qualifying_action_types"
+            )
+
+            if raw_qualifying is None:
+                candidate_cache = cache.get(
+                    _cache_key(market)
+                )
+
+                if isinstance(candidate_cache, dict):
+                    candidate_clergy = (
+                        candidate_cache.get("clergy")
+                        or {}
+                    )
+                    raw_qualifying = candidate_clergy.get(
+                        "qualifying_action_types"
+                    )
+
+            qualifying_action_types = (
+                _normalize_qualifying_action_types(
+                    raw_qualifying,
+                    action_type,
+                    market.get("manifestation_family"),
+                )
+            )
+
+            if not qualifying_action_types:
+                market["action_bridge_candidate_status"] = (
+                    "qualifying_action_set_undefined"
+                )
+                counts[
+                    "qualifying_action_set_undefined"
+                ] += 1
+                continue
+
+            structural_distribution = (
+                market.get(
+                    "action_selector_shadow_structural_distribution"
+                )
+                or {}
+            )
+
+            live_distribution = (
+                market.get(
+                    "action_selector_shadow_distribution"
+                )
+                or {}
+            )
+
+            if (
+                not structural_distribution
+                or not live_distribution
+            ):
+                market["action_bridge_candidate_status"] = (
+                    "missing_selector_distribution"
+                )
+                counts["missing_selector_distribution"] += 1
+                continue
+
+            try:
+                structural_mass = sum(
+                    float(structural_distribution[k])
+                    for k in qualifying_action_types
+                )
+
+                live_mass = sum(
+                    float(live_distribution[k])
+                    for k in qualifying_action_types
+                )
+
+            except (KeyError, TypeError, ValueError):
+                market["action_bridge_candidate_status"] = (
+                    "invalid_selector_distribution"
+                )
+                counts[
+                    "invalid_selector_distribution"
+                ] += 1
+                continue
+
+            if (
+                not math.isfinite(structural_mass)
+                or not math.isfinite(live_mass)
+                or structural_mass <= 0.0
+                or live_mass < 0.0
+            ):
+                market["action_bridge_candidate_status"] = (
+                    "invalid_selector_mass"
+                )
+                counts["invalid_selector_mass"] += 1
+                continue
+
+            lr = live_mass / structural_mass
+
+            market[
+                "action_bridge_candidate_qualifying_action_types"
+            ] = qualifying_action_types
+
+            market[
+                "action_bridge_candidate_structural_mass"
+            ] = round(structural_mass, 6)
+
+            market[
+                "action_bridge_candidate_live_mass"
+            ] = round(live_mass, 6)
+
+            market["action_bridge_candidate_lr"] = round(
+                lr,
+                6,
+            )
+
+            relation = market.get("parent_event_relation")
+
+            pba = market.get("p_b_given_a")
+            pbna = market.get("p_b_given_not_a")
+
+            if pba is None or pbna is None:
+                market["action_bridge_candidate_status"] = (
+                    "missing_clergyman_probability"
+                )
+                counts["missing_clergyman_probability"] += 1
+                continue
+
+            pba = float(pba)
+            pbna = float(pbna)
+
+            if relation == "equivalent":
+                candidate_pba = pba
+                candidate_pbna = pbna
+                status = "equivalent_preserved"
+
+            elif relation == "conflict_bound":
+                candidate_pba = _odds_scale_probability(
+                    pba,
+                    lr,
+                )
+                # Logical invariant.
+                candidate_pbna = 0.0
+                status = "candidate_ready"
+
+            elif relation == "overlap":
+                candidate_pba = _odds_scale_probability(
+                    pba,
+                    lr,
+                )
+                candidate_pbna = _odds_scale_probability(
+                    pbna,
+                    lr,
+                )
+                status = "candidate_ready_overlap_approximation"
+
+            else:
+                market["action_bridge_candidate_status"] = (
+                    f"unsupported_parent_relation:{relation}"
+                )
+                counts["unsupported_parent_relation"] += 1
+                continue
+
+            mid = _cache_key(market)
+            cached_entry = cache.get(mid)
+
+            if (
+                not isinstance(cached_entry, dict)
+                or cached_entry.get("scholar") is None
+                or cached_entry.get("clergy") is None
+                or cached_entry.get("glass") is None
+            ):
+                market["action_bridge_candidate_status"] = (
+                    "missing_translator_cache"
+                )
+                counts["missing_translator_cache"] += 1
+                continue
+
+            engine_p = market.get("our_prediction")
+
+            if engine_p is None:
+                market["action_bridge_candidate_status"] = (
+                    "missing_engine_probability"
+                )
+                counts["missing_engine_probability"] += 1
+                continue
+
+            deadline, _src, _mismatch = _get_market_deadline(
+                market
+            )
+
+            days_remaining = (
+                max(
+                    1.0,
+                    float((deadline - date.today()).days),
+                )
+                if deadline
+                else 365.0
+            )
+
+            candidate_clergy = dict(
+                cached_entry["clergy"]
+            )
+
+            candidate_clergy["p_b_given_a"] = (
+                candidate_pba
+            )
+            candidate_clergy["p_b_given_not_a"] = (
+                candidate_pbna
+            )
+
+            candidate_bet = bettor(
+                float(engine_p),
+                float(market.get("market_price") or 0),
+                _polymarket_volume(market),
+                cached_entry["scholar"],
+                candidate_clergy,
+                cached_entry["glass"],
+                days_remaining=days_remaining,
+            )
+
+            market["action_bridge_candidate_status"] = status
+            market[
+                "action_bridge_candidate_p_b_given_a"
+            ] = round(candidate_pba, 6)
+            market[
+                "action_bridge_candidate_p_b_given_not_a"
+            ] = round(candidate_pbna, 6)
+            market[
+                "action_bridge_candidate_conditional_p"
+            ] = candidate_bet["conditional_p"]
+            market[
+                "action_bridge_candidate_blended_p"
+            ] = candidate_bet["blended_p"]
+
+            current_conditional = market.get("conditional_p")
+            candidate_conditional = candidate_bet.get(
+                "conditional_p"
+            )
+
+            if (
+                current_conditional is not None
+                and candidate_conditional is not None
+            ):
+                market[
+                    "action_bridge_candidate_delta_pp"
+                ] = round(
+                    100.0
+                    * (
+                        float(candidate_conditional)
+                        - float(current_conditional)
+                    ),
+                    4,
+                )
+
+            counts[status] += 1
+
+        except Exception as ex:
+            market["action_bridge_candidate_status"] = (
+                f"error:{type(ex).__name__}"
+            )
+            market["action_bridge_candidate_error"] = (
+                str(ex)[:400]
+            )
+            counts["error"] += 1
+
+        finally:
+            after = {
+                field: market.get(field)
+                for field in protected_fields
+            }
+
+            if after != before:
+                raise AssertionError(
+                    "Action bridge candidate mutated production "
+                    f"fields for {_cache_key(market)}"
+                )
+
+    if counts:
+        print("\n  [action bridge candidate]")
+        for status, n in sorted(counts.items()):
+            print(f"    {status}: {n}")
+
+
 def run_translator():
     assert ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY not set"
 
@@ -1473,6 +1977,10 @@ def run_translator():
         _save_cache(cache)
 
     _run_action_coherence_pass(feed, cache)
+
+    # Candidate-only action-selector bridge. Must not mutate any
+    # production probability or betting field.
+    _run_action_bridge_candidate_pass(feed, cache)
     _save_cache(cache)
 
     CLASSIFIED_FEED.write_text(json.dumps(feed, indent=2))
@@ -1540,6 +2048,20 @@ def _append_log(feed: list):
                 "action_selector_shadow_action_type": market.get("action_selector_shadow_action_type"),
                 "action_selector_shadow_live_scores": market.get("action_selector_shadow_live_scores"),
                 "action_selector_shadow_readiness_summary": market.get("action_selector_shadow_readiness_summary"),
+                "action_selector_shadow_structural_distribution": market.get("action_selector_shadow_structural_distribution"),
+                "action_selector_shadow_structural_action_family_p": market.get("action_selector_shadow_structural_action_family_p"),
+                "action_bridge_candidate_status": market.get("action_bridge_candidate_status"),
+                "action_bridge_candidate_method": market.get("action_bridge_candidate_method"),
+                "action_bridge_candidate_lr": market.get("action_bridge_candidate_lr"),
+                "qualifying_action_types": market.get("qualifying_action_types"),
+                "action_bridge_candidate_qualifying_action_types": market.get("action_bridge_candidate_qualifying_action_types"),
+                "action_bridge_candidate_structural_mass": market.get("action_bridge_candidate_structural_mass"),
+                "action_bridge_candidate_live_mass": market.get("action_bridge_candidate_live_mass"),
+                "action_bridge_candidate_p_b_given_a": market.get("action_bridge_candidate_p_b_given_a"),
+                "action_bridge_candidate_p_b_given_not_a": market.get("action_bridge_candidate_p_b_given_not_a"),
+                "action_bridge_candidate_conditional_p": market.get("action_bridge_candidate_conditional_p"),
+                "action_bridge_candidate_blended_p": market.get("action_bridge_candidate_blended_p"),
+                "action_bridge_candidate_delta_pp": market.get("action_bridge_candidate_delta_pp"),
                 "political_act_formality":  market.get("political_act_formality"),
                 "used_structural_context":  market.get("used_structural_context"),
                 "requirement_burden":       market.get("requirement_burden"),
