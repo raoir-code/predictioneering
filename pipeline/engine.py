@@ -308,7 +308,7 @@ def _load_dyad_crisis_context(dyad):
     return ""
 
 
-def fetch_gnews(dyad, as_of_date, max_retries=3, base_sleep=3.0):
+def fetch_gnews(dyad, as_of_date, max_retries=3, base_sleep=3.0, write_cache=True):
     """Fetch GNews headlines for a dyad, date-locked to as_of_date. Cached.
 
     Retries transient network failures (SSL errors, timeouts, connection
@@ -355,7 +355,8 @@ def fetch_gnews(dyad, as_of_date, max_retries=3, base_sleep=3.0):
                     print(f"    [fetch_gnews] {dyad}: API error detail: {body['errors']}")
             result = [{"title": a["title"], "description": a.get("description", ""),
                        "publishedAt": a["publishedAt"]} for a in articles]
-            cache_file.write_text(json.dumps(result))
+            if write_cache:
+                cache_file.write_text(json.dumps(result))
             time.sleep(0.5)
             return result
         except Exception as ex:
@@ -562,7 +563,7 @@ def _log_node_scoring_failure(dyad, as_of_date, reason, raw_excerpt=None):
 
 
 def _call_claude_json(prompt, expected_fields, max_tokens, retries=3,
-                       dyad=None, as_of_date=None):
+                       dyad=None, as_of_date=None, persist_failures=True):
     """Shared Claude call + JSON parse, used by both Call A and Call B.
 
     The network call is wrapped separately from the JSON-parsing step below --
@@ -612,20 +613,30 @@ def _call_claude_json(prompt, expected_fields, max_tokens, retries=3,
                 continue
             print(f"    [warn] \u26a0\ufe0f\u26a0\ufe0f  API request failed ({type(e).__name__}) "
                   f"after {retries} retries -- returning zeros. THIS RUN IS DEGRADED.")
-            _log_node_scoring_failure(dyad, as_of_date,
-                                       f"request_exception:{type(e).__name__}: {e}")
+            if persist_failures:
+                _log_node_scoring_failure(
+                    dyad,
+                    as_of_date,
+                    f"request_exception:{type(e).__name__}: {e}",
+                )
             return {n: 0.0 for n in expected_fields}
         except ValueError:
             print(f"    [warn] \u26a0\ufe0f\u26a0\ufe0f  API returned non-JSON response -- "
                   f"returning zeros. THIS RUN IS DEGRADED.")
-            _log_node_scoring_failure(dyad, as_of_date, "non_json_http_response")
+            if persist_failures:
+                _log_node_scoring_failure(
+                    dyad, as_of_date, "non_json_http_response"
+                )
             return {n: 0.0 for n in expected_fields}
 
     if "content" not in resp:
         err_msg = resp.get('error', {}).get('message', 'unknown')
         print(f"    [warn] \u26a0\ufe0f\u26a0\ufe0f  Claude API error: {err_msg} -- "
               f"returning zeros. THIS RUN IS DEGRADED.")
-        _log_node_scoring_failure(dyad, as_of_date, f"api_error: {err_msg}")
+        if persist_failures:
+            _log_node_scoring_failure(
+                dyad, as_of_date, f"api_error: {err_msg}"
+            )
         return {n: 0.0 for n in expected_fields}
     text = resp["content"][0]["text"].strip()
 
@@ -658,10 +669,16 @@ def _call_claude_json(prompt, expected_fields, max_tokens, retries=3,
     print(f"    [warn] \u26a0\ufe0f\u26a0\ufe0f  Node scoring parse error (all 3 tiers) -- "
           f"returning zeros. THIS RUN IS DEGRADED.")
     print(f"    [warn] raw response (first 300 chars): {text[:300]!r}")
-    _log_node_scoring_failure(dyad, as_of_date, "parse_error_all_3_tiers", raw_excerpt=text[:300])
+    if persist_failures:
+        _log_node_scoring_failure(
+            dyad,
+            as_of_date,
+            "parse_error_all_3_tiers",
+            raw_excerpt=text[:300],
+        )
     return {n: 0.0 for n in expected_fields}
 
-def score_nodes_call_a(dyad, articles, as_of_date):
+def score_nodes_call_a(dyad, articles, as_of_date, persist_failures=True):
     """Call A: existing 11 primitives + 3 new onset-context q-parents, one call."""
     expected = NODES + Q_PARENTS_ONSET_LLM
     if not articles:
@@ -703,9 +720,16 @@ final JSON object as instructed below -- zero preceding text of any kind.
 
 Return ONLY valid JSON with no preamble, explanation, or markdown. Example: {{"WinProbability": 0, "WarCosts": 0}}"""
 
-    return _call_claude_json(prompt, expected, max_tokens=700, dyad=dyad, as_of_date=as_of_date)
+    return _call_claude_json(
+        prompt,
+        expected,
+        max_tokens=700,
+        dyad=dyad,
+        as_of_date=as_of_date,
+        persist_failures=persist_failures,
+    )
 
-def score_nodes_call_b(dyad, articles, as_of_date, trigger_was_violent, shared_patron=None):
+def score_nodes_call_b(dyad, articles, as_of_date, trigger_was_violent, shared_patron=None, persist_failures=True):
     """Call B: 5 live-dynamic q-parents, separate call to protect field quality.
 
     trigger_was_violent: bool, from Call A's TriggerType this same snapshot.
@@ -793,7 +817,14 @@ final JSON object as instructed below -- zero preceding text of any kind.
 
 Return ONLY valid JSON with no preamble, explanation, or markdown. Example: {{"LiveNonviolentMilitaryPressure": 0, "LiveViolenceObserved": 0, "LiveUltimatumDeadline": 0, "LiveMediationAccepted": 0, "LiveAbatementSignal": 0}}"""
 
-    return _call_claude_json(prompt, expected, max_tokens=600, dyad=dyad, as_of_date=as_of_date)
+    return _call_claude_json(
+        prompt,
+        expected,
+        max_tokens=600,
+        dyad=dyad,
+        as_of_date=as_of_date,
+        persist_failures=persist_failures,
+    )
 
 # ── Q-SUBMODEL DECOMPOSITION ────────────────────────────────────────────
 # Pure arithmetic, additive in logit space -- free post-hoc attribution

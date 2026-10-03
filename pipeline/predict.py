@@ -712,7 +712,9 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         _role = _theater_role_cache[_dyad]
 
         try:
-            _articles = fetch_gnews(_dyad, today)
+            _articles = fetch_gnews(
+                _dyad, today, write_cache=not dry_run
+            )
         except Exception as ex:
             print(f"  [error] GNews failed for {_dyad}: {ex}")
             _articles = []
@@ -727,7 +729,9 @@ def run(dry_run: bool = False, filter_dyad: str = None):
             }
             for _sibling in _inherit_from:
                 try:
-                    _sibling_articles = fetch_gnews(_sibling, today)
+                    _sibling_articles = fetch_gnews(
+                        _sibling, today, write_cache=not dry_run
+                    )
                 except Exception:
                     continue
                 for _a in _sibling_articles:
@@ -738,7 +742,12 @@ def run(dry_run: bool = False, filter_dyad: str = None):
 
         print(f"  {_dyad}: scoring {len(_articles)} articles")
 
-        _call_a = score_nodes_call_a(_dyad, _articles, today)
+        _call_a = score_nodes_call_a(
+            _dyad,
+            _articles,
+            today,
+            persist_failures=not dry_run,
+        )
         _trigger_was_violent = _call_a.get("TriggerType", 0.0) >= 0.60
 
         # Only real host/target dyads need the routing judgment.
@@ -755,6 +764,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
             today,
             _trigger_was_violent,
             shared_patron=_shared_patron,
+            persist_failures=not dry_run,
         )
 
         _pre_scores[_dyad] = {
@@ -896,11 +906,17 @@ def run(dry_run: bool = False, filter_dyad: str = None):
         print(f"  q_logit={q_logit:.3f} | TriggerType={call_a.get('TriggerType',0):.2f} | OP={call_b.get('OperationalPreparation',0):.2f} | LVO={call_b.get('LiveViolenceObserved',0):.2f}")
         print(f"  Toggles: {json.dumps({k: round(v,3) for k,v in toggles.items() if k in baseline})}") 
 
-        try:
-            from pipeline import context_keeper
-            context_keeper.maybe_refresh_event_triggered(dyad, call_a, call_b, today)
-        except Exception as ex:
-            print(f"  [warn] context_keeper failed (non-fatal, predictions unaffected): {ex}")
+        if not dry_run:
+            try:
+                from pipeline import context_keeper
+                context_keeper.maybe_refresh_event_triggered(
+                    dyad, call_a, call_b, today
+                )
+            except Exception as ex:
+                print(
+                    f"  [warn] context_keeper failed "
+                    f"(non-fatal, predictions unaffected): {ex}"
+                )
 
         now_utc = datetime.now(timezone.utc).isoformat()
 
