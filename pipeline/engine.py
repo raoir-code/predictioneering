@@ -1026,7 +1026,9 @@ def run_leakage_check():
     return max_delta >= 0.3
 
 # ─────────────────────────────────────────────────────────────────────
-# MAIN BACKTEST LOOP
+# LEGACY CALIBRATION / HISTORICAL BACKTEST HARNESS
+# Not the production forecast path. Shared production scoring functions
+# above remain authoritative and are imported by predict.py.
 # ─────────────────────────────────────────────────────────────────────
 
 
@@ -1088,6 +1090,15 @@ def _parse_date_str(s):
 # ── end ICB transport helpers ─────────────────────────────────────────────────
 
 def run_backtest(dry_run=False):
+    """
+    Legacy historical calibration/evaluation harness.
+
+    This is NOT a second production forecasting engine.
+    Live forecasting is orchestrated by predict.py, which imports the
+    authoritative shared scoring functions from this module.
+
+    Retained for reproducibility of historical calibration work only.
+    """
     slate = SLATE[:2] if dry_run else SLATE
     rows  = []
 

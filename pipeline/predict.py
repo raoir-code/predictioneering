@@ -33,8 +33,8 @@ CLASSIFIED_FEED = "pipeline/classified_feed.json"
 ALPHA_FILE      = "alpha/conflict_onset.json"
 
 # ============================================================
-# BACKTEST ENGINE IMPORTS — predict.py is a thin orchestration shell.
-# All scoring logic lives in engine.py (the calibrated engine).
+# CANONICAL FORECAST ENGINE IMPORTS — predict.py is the live orchestration shell.
+# Shared scientific scoring logic lives in engine.py.
 # ─────────────────────────────────────────────────────────────────────
 from pipeline.engine import (
     fetch_gnews,
@@ -479,46 +479,6 @@ def load_alpha() -> Dict[str, float]:
     # Override with theoretically grounded prior for the w-channel only.
     alpha["PatronDeterrence_w"] = -0.80
     return alpha
-
-
-def _LEGACY_UNUSED_predict_probability(toggles: Dict[str, float], days_remaining: int, alpha: Dict[str, float]) -> Dict[str, float]:
-    """SUPERSEDED — not called. Live path imports predict_probability from engine.py (see line ~40, aliased _predict_probability). Kept for reference only."""
-    # Mach 2 four-tier structured DAG formula
-    # Tier 2: war payoff and effective weight
-    w     = (alpha.get("WinProbability", 0.0) * toggles.get("WinProbability", 0.0)
-           + alpha.get("WarCosts", 0.0)       * toggles.get("WarCosts", 0.0)
-           + alpha.get("PatronDeterrence_w", alpha.get("PatronDeterrence", 0.0)) * toggles.get("PatronDeterrence", 0.0)
-           + alpha.get("NuclearDeterrence", 0.0) * toggles.get("NuclearDeterrence", 0.0)
-           + alpha.get("OperationalFeasibility_w", -1.50) * (1.0 - toggles.get("OperationalFeasibility", 0.5))
-           + alpha.get("InitiatorSurvivalRisk_w",  -1.20) * toggles.get("InitiatorSurvivalRisk", 0.5)
-           + alpha.get("PatronMoralHazard_w",       +0.60) * toggles.get("PatronMoralHazard", 0.0)
-           + alpha.get("SubstitutionPath_w",        -1.10) * toggles.get("SubstitutionPath", 0.5))
-    Omega = (alpha.get("CommitmentProblem", 0.0) * toggles.get("CommitmentProblem", 0.0)
-           + alpha.get("Patience", 0.0)          * toggles.get("Patience", 0.0)
-           + alpha.get("MobilizationSignal", 0.0) * toggles.get("MobilizationSignal", 0.0))
-    # Tier 3: credibility-adjusted war value
-    w_over_pi = w + alpha.get("DemocraticPeace", 0.0) * toggles.get("DemocraticPeace", 0.0)
-    # Tier 4: WarPayoff and WarPolitics
-    WarPayoff   = Omega + w_over_pi
-    WarPolitics = (alpha.get("PreferenceAlignment", 0.0) * toggles.get("PreferenceAlignment", 0.0)
-                 + alpha.get("HardlineClaims", 0.0)      * toggles.get("HardlineClaims", 0.0)
-                 + alpha.get("AudienceCosts", 0.0)        * toggles.get("AudienceCosts", 0.0))
-    # HardlineClaims direct channel (matches engine.py)
-    HardlineDirect = toggles.get("HardlineClaims", 0.0)
-
-    # SSPE shrinkage — matches engine.py Mach 3.1
-    SSPE_SHRINKAGE  = 0.25
-    sspe_deviations = WarPayoff + WarPolitics + HardlineDirect
-    log_odds_shift  = SSPE_SHRINKAGE * sspe_deviations
-    base_log_odds   = math.log(BASE_RATE_ANNUAL / (1 - BASE_RATE_ANNUAL))
-    p_annual        = 1 / (1 + math.exp(-(base_log_odds + log_odds_shift)))
-    lam            = -math.log(max(1e-12, 1 - p_annual))
-    p_window       = 1 - math.exp(-lam * (max(1, days_remaining) / 365.0))
-    return {
-        "p_annual":        round(p_annual, 4),
-        "p_window":        round(p_window, 4),
-        "log_odds_shift":  round(log_odds_shift, 4),
-    }
 
 
 def days_until(end_date_str: str) -> int:
