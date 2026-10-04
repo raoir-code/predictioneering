@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-09-29T14:03:03.938301+00:00",
-  "n_resolved": 104,
-  "brier_conditional_mean": 0.296308,
-  "brier_engine_mean": 0.358905,
-  "brier_market_mean": 0.161585,
-  "edge_vs_market": -0.134723,
+  "last_updated": "2026-10-04T19:50:27.238834+00:00",
+  "n_resolved": 127,
+  "brier_conditional_mean": 0.257311,
+  "brier_engine_mean": 0.310043,
+  "brier_market_mean": 0.142221,
+  "edge_vs_market": -0.11509,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -1149,6 +1149,259 @@
       "brier_conditional": 0.301181,
       "brier_market": 0.1444,
       "resolved_at": "2026-09-28T16:04:13.668433+00:00"
+    },
+    {
+      "market_id": "1633606",
+      "market_label": "Will China invade Taiwan by September 30, 2026?",
+      "dyad": "China-Taiwan",
+      "outcome": 0,
+      "conditional_p": 0.0011,
+      "market_p": 0.031,
+      "brier_conditional": 1e-06,
+      "brier_market": 0.000961,
+      "resolved_at": "2026-10-04T19:48:55.905669+00:00"
+    },
+    {
+      "market_id": "3145330",
+      "market_label": "Will Iran target Ukraine by September 30, 2026?",
+      "dyad": "Iran-Ukraine",
+      "outcome": 0,
+      "conditional_p": 0.132,
+      "market_p": 0.025,
+      "brier_conditional": 0.017424,
+      "brier_market": 0.000625,
+      "resolved_at": "2026-10-04T19:49:06.788553+00:00"
+    },
+    {
+      "market_id": "3711107",
+      "market_label": "Will Iran target Qatar by September 30, 2026?",
+      "dyad": "Iran-Qatar",
+      "outcome": 0,
+      "conditional_p": 0.016,
+      "market_p": 0.245,
+      "brier_conditional": 0.000256,
+      "brier_market": 0.060025,
+      "resolved_at": "2026-10-04T19:49:10.705737+00:00"
+    },
+    {
+      "market_id": "3711104",
+      "market_label": "Will Iran target Oman by September 30, 2026?",
+      "dyad": "Iran-Oman",
+      "outcome": 0,
+      "conditional_p": 0.0014,
+      "market_p": 0.085,
+      "brier_conditional": 2e-06,
+      "brier_market": 0.007225,
+      "resolved_at": "2026-10-04T19:49:12.775495+00:00"
+    },
+    {
+      "market_id": "3710811",
+      "market_label": "Will Iran target Syria by September 30, 2026?",
+      "dyad": "Iran-Syria",
+      "outcome": 0,
+      "conditional_p": 0.067,
+      "market_p": 0.245,
+      "brier_conditional": 0.004489,
+      "brier_market": 0.060025,
+      "resolved_at": "2026-10-04T19:49:14.749560+00:00"
+    },
+    {
+      "market_id": "3710805",
+      "market_label": "Will Iran target Egypt by September 30, 2026?",
+      "dyad": "Iran-Egypt",
+      "outcome": 0,
+      "conditional_p": 0.0027,
+      "market_p": 0.065,
+      "brier_conditional": 7e-06,
+      "brier_market": 0.004225,
+      "resolved_at": "2026-10-04T19:49:16.975542+00:00"
+    },
+    {
+      "market_id": "3710796",
+      "market_label": "Will Iran target Saudi Arabia by September 30, 2026?",
+      "dyad": "Iran-Saudi Arabia",
+      "outcome": 0,
+      "conditional_p": 0.024,
+      "market_p": 0.265,
+      "brier_conditional": 0.000576,
+      "brier_market": 0.070225,
+      "resolved_at": "2026-10-04T19:49:19.202846+00:00"
+    },
+    {
+      "market_id": "3701663",
+      "market_label": "Israel military action against Yemen by September 30?",
+      "dyad": "Israel-Yemen",
+      "outcome": 0,
+      "conditional_p": 0.1837,
+      "market_p": 0.24,
+      "brier_conditional": 0.033746,
+      "brier_market": 0.0576,
+      "resolved_at": "2026-10-04T19:49:21.319923+00:00"
+    },
+    {
+      "market_id": "3861937",
+      "market_label": "Israel military action against Syria by September 30, 2026?",
+      "dyad": "Israel-Syria",
+      "outcome": 0,
+      "conditional_p": 0.5471,
+      "market_p": 0.31,
+      "brier_conditional": 0.299318,
+      "brier_market": 0.0961,
+      "resolved_at": "2026-10-04T19:49:23.518631+00:00"
+    },
+    {
+      "market_id": "3902514",
+      "market_label": "Israel military action against Greater Beirut by September 30?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 0,
+      "conditional_p": 0.1832,
+      "market_p": 0.165,
+      "brier_conditional": 0.033562,
+      "brier_market": 0.027225,
+      "resolved_at": "2026-10-04T19:49:25.893822+00:00"
+    },
+    {
+      "market_id": "4178272",
+      "market_label": "Israel military action against Lebanon on September 29?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.4412,
+      "market_p": 0.515,
+      "brier_conditional": 0.312257,
+      "brier_market": 0.235225,
+      "resolved_at": "2026-10-04T19:49:30.075577+00:00"
+    },
+    {
+      "market_id": "4178273",
+      "market_label": "Israel military action against Lebanon on September 30?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.3132,
+      "market_p": 0.51,
+      "brier_conditional": 0.471694,
+      "brier_market": 0.2401,
+      "resolved_at": "2026-10-04T19:49:32.405111+00:00"
+    },
+    {
+      "market_id": "4376148",
+      "market_label": "Will Iran target the United Arab Emirates by September 30, 2026?",
+      "dyad": "Iran-UAE",
+      "outcome": 0,
+      "conditional_p": 0.0177,
+      "market_p": 0.245,
+      "brier_conditional": 0.000313,
+      "brier_market": 0.060025,
+      "resolved_at": "2026-10-04T19:49:37.264741+00:00"
+    },
+    {
+      "market_id": "4424731",
+      "market_label": "Pakistan military action against Yemen by September 30, 2026?",
+      "dyad": "Pakistan-Yemen",
+      "outcome": 0,
+      "conditional_p": 0.0037,
+      "market_p": 0.023,
+      "brier_conditional": 1.4e-05,
+      "brier_market": 0.000529,
+      "resolved_at": "2026-10-04T19:49:39.523344+00:00"
+    },
+    {
+      "market_id": "4424724",
+      "market_label": "Will Iran target Jordan by September 30, 2026?",
+      "dyad": "Iran-Jordan",
+      "outcome": 0,
+      "conditional_p": 0.0977,
+      "market_p": 0.435,
+      "brier_conditional": 0.009545,
+      "brier_market": 0.189225,
+      "resolved_at": "2026-10-04T19:49:41.812614+00:00"
+    },
+    {
+      "market_id": "4377174",
+      "market_label": "Will Iran target Bahrain by September 30, 2026?",
+      "dyad": "Iran-Bahrain",
+      "outcome": 0,
+      "conditional_p": 0.0632,
+      "market_p": 0.3,
+      "brier_conditional": 0.003994,
+      "brier_market": 0.09,
+      "resolved_at": "2026-10-04T19:49:45.644229+00:00"
+    },
+    {
+      "market_id": "4603350",
+      "market_label": "France, UK, or Germany military action against Yemen by September 30, 2026?",
+      "dyad": "UK-Yemen",
+      "outcome": 0,
+      "conditional_p": 0.0576,
+      "market_p": 0.0305,
+      "brier_conditional": 0.003318,
+      "brier_market": 0.00093,
+      "resolved_at": "2026-10-04T19:49:47.696937+00:00"
+    },
+    {
+      "market_id": "4376937",
+      "market_label": "Will Iran target Kuwait by September 30, 2026?",
+      "dyad": "Iran-Kuwait",
+      "outcome": 0,
+      "conditional_p": 0.0068,
+      "market_p": 0.225,
+      "brier_conditional": 4.6e-05,
+      "brier_market": 0.050625,
+      "resolved_at": "2026-10-04T19:49:49.993514+00:00"
+    },
+    {
+      "market_id": "4713961",
+      "market_label": "Russia military action against an EU country by September 30, 2026?",
+      "dyad": "Russia-EU",
+      "outcome": 0,
+      "conditional_p": 0.0012,
+      "market_p": 0.0135,
+      "brier_conditional": 1e-06,
+      "brier_market": 0.000182,
+      "resolved_at": "2026-10-04T19:49:54.074193+00:00"
+    },
+    {
+      "market_id": "4713849",
+      "market_label": "Will Russia invade a NATO country by September 30, 2026?",
+      "dyad": "NATO-Russia",
+      "outcome": 0,
+      "conditional_p": 0.0002,
+      "market_p": 0.002,
+      "brier_conditional": 0.0,
+      "brier_market": 4e-06,
+      "resolved_at": "2026-10-04T19:49:56.664456+00:00"
+    },
+    {
+      "market_id": "4853051",
+      "market_label": "Israel military action against Iraq by September 30, 2026?",
+      "dyad": "Israel-Iraq",
+      "outcome": 0,
+      "conditional_p": 0.0146,
+      "market_p": 0.06,
+      "brier_conditional": 0.000213,
+      "brier_market": 0.0036,
+      "resolved_at": "2026-10-04T19:49:59.001470+00:00"
+    },
+    {
+      "market_id": "4639440",
+      "market_label": "Saudi Arabia military action against Iran by September 30, 2026?",
+      "dyad": "Saudi Arabia-Iran",
+      "outcome": 0,
+      "conditional_p": 0.002,
+      "market_p": 0.034,
+      "brier_conditional": 4e-06,
+      "brier_market": 0.001156,
+      "resolved_at": "2026-10-04T19:50:01.279176+00:00"
+    },
+    {
+      "market_id": "5183404",
+      "market_label": "Israel military action against Lebanon on October 3?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.1804,
+      "market_p": 0.963,
+      "brier_conditional": 0.671744,
+      "brier_market": 0.001369,
+      "resolved_at": "2026-10-04T19:50:09.983657+00:00"
     }
   ]
 }
