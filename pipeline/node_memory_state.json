@@ -1,33 +1,15 @@
 {
   "Iran-Saudi Arabia": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.5086799049142152,
+      "CommitmentProblem": 0.4970616398291098,
       "TriggerType": 2.208,
-      "ValueThreatGravity": 2.7423705687249837,
+      "ValueThreatGravity": 2.67973473837031,
       "ThirdPartyMilitaryInvolvement": 1.1133000000000002,
       "ProtractedConflict": 0.42800000000000005,
       "GeographicProximity": 0.78375,
       "OperationalPreparation": 0.6,
-      "RoutineMilitaryPressure": 0.6,
-      "LiveViolenceObserved": 0.9,
-      "LiveUltimatumDeadline": 0.2121320343559643,
-      "LiveMediationAccepted": -0.0,
-      "LiveAbatementSignal": -0.0
-    }
-  },
-  "US-Iran": {
-    "as_of": "2026-10-05",
-    "nodes": {
-      "base": -3.407,
-      "CommitmentProblem": 0.21635864527306328,
-      "TriggerType": 2.208,
-      "ValueThreatGravity": 2.279562341990855,
-      "ThirdPartyMilitaryInvolvement": 1.1133000000000002,
-      "ProtractedConflict": 0.1605,
-      "GeographicProximity": 0.0,
-      "OperationalPreparation": 0.25,
       "RoutineMilitaryPressure": 0.6,
       "LiveViolenceObserved": 0.9,
       "LiveUltimatumDeadline": 0.2,
@@ -35,36 +17,54 @@
       "LiveAbatementSignal": -0.0
     }
   },
-  "China-Taiwan": {
-    "as_of": "2026-10-05",
+  "US-Iran": {
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.2660672438972486,
+      "CommitmentProblem": 0.31312921155797985,
+      "TriggerType": 2.208,
+      "ValueThreatGravity": 2.2274970661436795,
+      "ThirdPartyMilitaryInvolvement": 1.1133000000000002,
+      "ProtractedConflict": 0.1605,
+      "GeographicProximity": 0.0,
+      "OperationalPreparation": 0.6,
+      "RoutineMilitaryPressure": 0.6,
+      "LiveViolenceObserved": 0.9,
+      "LiveUltimatumDeadline": 0.6,
+      "LiveMediationAccepted": -0.0,
+      "LiveAbatementSignal": -0.0
+    }
+  },
+  "China-Taiwan": {
+    "as_of": "2026-10-06",
+    "nodes": {
+      "base": -3.407,
+      "CommitmentProblem": 0.25999025964802225,
       "TriggerType": 0.0,
       "ValueThreatGravity": 0.9185,
       "ThirdPartyMilitaryInvolvement": 0.4948000000000001,
       "ProtractedConflict": 0.1605,
       "GeographicProximity": 0.36574999999999996,
       "OperationalPreparation": 0.0,
-      "RoutineMilitaryPressure": 0.4282628188547788,
+      "RoutineMilitaryPressure": 0.40757564891875797,
       "LiveViolenceObserved": 0.0,
-      "LiveUltimatumDeadline": 0.14142135623730953,
+      "LiveUltimatumDeadline": 0.10000000000000002,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "US-Cuba": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.11058258802482941,
+      "CommitmentProblem": 0.10805687822371952,
       "TriggerType": 2.208,
       "ValueThreatGravity": 2.2043999999999997,
       "ThirdPartyMilitaryInvolvement": 0.4948000000000001,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
       "OperationalPreparation": 0.25,
-      "RoutineMilitaryPressure": 0.5171836927481865,
+      "RoutineMilitaryPressure": 0.49220121360458263,
       "LiveViolenceObserved": 0.0,
       "LiveUltimatumDeadline": 0.2,
       "LiveMediationAccepted": -0.0,
@@ -72,71 +72,71 @@
     }
   },
   "NATO-Russia": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.544572541839965,
-      "TriggerType": 2.1363101669807527,
+      "TriggerType": 2.0669479753375595,
       "ValueThreatGravity": 2.9392,
-      "ThirdPartyMilitaryInvolvement": 0.9691839421175751,
+      "ThirdPartyMilitaryInvolvement": 0.9470477502865877,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
       "OperationalPreparation": 0.25,
       "RoutineMilitaryPressure": 0.6,
-      "LiveViolenceObserved": 0.23325824788420182,
-      "LiveUltimatumDeadline": 0.6,
+      "LiveViolenceObserved": 0.217637640824031,
+      "LiveUltimatumDeadline": 0.4242640687119285,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "US-Denmark": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.09192043781978382,
+      "CommitmentProblem": 0.08982097211844202,
       "TriggerType": 0.0,
       "ValueThreatGravity": 0.9185,
-      "ThirdPartyMilitaryInvolvement": 0.33407657668201,
+      "ThirdPartyMilitaryInvolvement": 0.32644625712521386,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
       "OperationalPreparation": 0.0,
       "RoutineMilitaryPressure": 0.25,
       "LiveViolenceObserved": 0.0,
-      "LiveUltimatumDeadline": 0.0005524271728019912,
+      "LiveUltimatumDeadline": 0.0003906250000000007,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "China-Japan": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.2722862709199825,
+      "CommitmentProblem": 0.2660672438972486,
       "TriggerType": 0.0,
-      "ValueThreatGravity": 1.2660953268777304,
-      "ThirdPartyMilitaryInvolvement": 0.46166472421241234,
+      "ValueThreatGravity": 1.2371776696465893,
+      "ThirdPartyMilitaryInvolvement": 0.4511202873386057,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
       "OperationalPreparation": 0.0,
       "RoutineMilitaryPressure": 0.25,
       "LiveViolenceObserved": 0.0,
-      "LiveUltimatumDeadline": 0.025000000000000012,
+      "LiveUltimatumDeadline": 0.0176776695296637,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "US-Colombia": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.0,
       "TriggerType": 0.0,
-      "ValueThreatGravity": 0.9185,
-      "ThirdPartyMilitaryInvolvement": 0.3264462571252139,
+      "ValueThreatGravity": 0.8975214310068549,
+      "ThirdPartyMilitaryInvolvement": 0.31899021430795177,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
       "OperationalPreparation": 0.0,
-      "RoutineMilitaryPressure": 0.11321545803298823,
+      "RoutineMilitaryPressure": 0.10774660265587212,
       "LiveViolenceObserved": 0.0,
       "LiveUltimatumDeadline": 0.0,
       "LiveMediationAccepted": -0.0,
@@ -144,25 +144,25 @@
     }
   },
   "US-Russia": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.3555584497907876,
-      "TriggerType": 1.6405376952071906,
-      "ValueThreatGravity": 1.7096717564931412,
-      "ThirdPartyMilitaryInvolvement": 0.4948000000000001,
+      "CommitmentProblem": 0.34743748357409543,
+      "TriggerType": 1.5872723539792992,
+      "ValueThreatGravity": 1.6706227996077596,
+      "ThirdPartyMilitaryInvolvement": 0.48349875238126494,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
-      "OperationalPreparation": 0.03809417669388989,
-      "RoutineMilitaryPressure": 0.38426600692928164,
+      "OperationalPreparation": 0.03450279730230667,
+      "RoutineMilitaryPressure": 0.3657040962613425,
       "LiveViolenceObserved": 0.0,
-      "LiveUltimatumDeadline": 0.008838834764831853,
-      "LiveMediationAccepted": -7.324218750000015e-05,
+      "LiveUltimatumDeadline": 0.006250000000000006,
+      "LiveMediationAccepted": -5.1790047450186694e-05,
       "LiveAbatementSignal": -0.0
     }
   },
   "US-Mexico": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.2722862709199825,
@@ -173,7 +173,7 @@
       "GeographicProximity": 0.0,
       "OperationalPreparation": 0.25,
       "RoutineMilitaryPressure": 0.6,
-      "LiveViolenceObserved": 0.9,
+      "LiveViolenceObserved": 0.8397296923831267,
       "LiveUltimatumDeadline": 0.2,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
@@ -198,71 +198,71 @@
     }
   },
   "North Korea-South Korea": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.5321344877944972,
+      "CommitmentProblem": 0.5199805192960445,
       "TriggerType": 2.208,
-      "ValueThreatGravity": 2.3873722433702462,
-      "ThirdPartyMilitaryInvolvement": 0.7345040785317313,
+      "ValueThreatGravity": 2.3328445859724645,
+      "ThirdPartyMilitaryInvolvement": 0.7177279821928914,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
       "OperationalPreparation": 0.0,
       "RoutineMilitaryPressure": 0.6,
-      "LiveViolenceObserved": 0.32987697769322355,
-      "LiveUltimatumDeadline": 0.2,
+      "LiveViolenceObserved": 0.3077861033362291,
+      "LiveUltimatumDeadline": 0.6,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "Israel-Turkey": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.2660672438972486,
-      "TriggerType": 2.208,
+      "CommitmentProblem": 0.25999025964802225,
+      "TriggerType": 2.1363101669807527,
       "ValueThreatGravity": 0.9185,
-      "ThirdPartyMilitaryInvolvement": 0.48349875238126494,
+      "ThirdPartyMilitaryInvolvement": 0.47245562561487414,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
       "OperationalPreparation": 0.0,
-      "RoutineMilitaryPressure": 0.25,
-      "LiveViolenceObserved": 0.5,
-      "LiveUltimatumDeadline": 0.017677669529663702,
+      "RoutineMilitaryPressure": 0.2379237882526549,
+      "LiveViolenceObserved": 0.4665164957684037,
+      "LiveUltimatumDeadline": 0.012500000000000011,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "China-Philippines": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.2722862709199825,
       "TriggerType": 2.208,
       "ValueThreatGravity": 0.9185,
-      "ThirdPartyMilitaryInvolvement": 0.48349875238126494,
+      "ThirdPartyMilitaryInvolvement": 0.47245562561487414,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
       "OperationalPreparation": 0.25,
       "RoutineMilitaryPressure": 0.6,
-      "LiveViolenceObserved": 0.48229805814133186,
+      "LiveViolenceObserved": 0.44999999999999996,
       "LiveUltimatumDeadline": 0.2,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "India-Pakistan": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.2722862709199825,
       "TriggerType": 2.208,
       "ValueThreatGravity": 0.9185,
-      "ThirdPartyMilitaryInvolvement": 0.3664235344356958,
+      "ThirdPartyMilitaryInvolvement": 0.35805440934274935,
       "ProtractedConflict": 0.1605,
       "GeographicProximity": 0.36574999999999996,
       "OperationalPreparation": 0.0,
-      "RoutineMilitaryPressure": 0.3152269915959657,
+      "RoutineMilitaryPressure": 0.2999999999999998,
       "LiveViolenceObserved": 0.5,
       "LiveUltimatumDeadline": 0.2,
       "LiveMediationAccepted": -0.0,
@@ -270,7 +270,7 @@
     }
   },
   "US-LatinAmerica": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.21782901673598598,
@@ -288,37 +288,37 @@
     }
   },
   "US-Venezuela": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.2540520739108728,
+      "CommitmentProblem": 0.24824951652340319,
       "TriggerType": 2.208,
-      "ValueThreatGravity": 2.7423705687249837,
+      "ValueThreatGravity": 2.67973473837031,
       "ThirdPartyMilitaryInvolvement": 1.1133000000000002,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.15674999999999997,
       "OperationalPreparation": 0.0,
       "RoutineMilitaryPressure": 0.25,
       "LiveViolenceObserved": 0.0,
-      "LiveUltimatumDeadline": 0.003125000000000003,
+      "LiveUltimatumDeadline": 0.0022097086912079636,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "China-India": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.20164126469041108,
-      "TriggerType": 0.5990125552628865,
+      "CommitmentProblem": 0.19703577183992352,
+      "TriggerType": 0.5795636829516415,
       "ValueThreatGravity": 0.9185,
-      "ThirdPartyMilitaryInvolvement": 0.34188524650402763,
+      "ThirdPartyMilitaryInvolvement": 0.33407657668201,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
       "OperationalPreparation": 0.0,
-      "RoutineMilitaryPressure": 0.25,
+      "RoutineMilitaryPressure": 0.2379237882526549,
       "LiveViolenceObserved": 0.0,
-      "LiveUltimatumDeadline": 0.0002762135864009956,
+      "LiveUltimatumDeadline": 0.00019531250000000036,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
@@ -342,13 +342,13 @@
     }
   },
   "US-China": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.4084294063799737,
+      "CommitmentProblem": 0.3991008658458729,
       "TriggerType": 0.0,
       "ValueThreatGravity": 0.9185,
-      "ThirdPartyMilitaryInvolvement": 0.3264462571252139,
+      "ThirdPartyMilitaryInvolvement": 0.31899021430795177,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
       "OperationalPreparation": 0.0,
@@ -360,17 +360,17 @@
     }
   },
   "US-Panama": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.0,
-      "TriggerType": 0.49139117777462477,
+      "TriggerType": 0.4754365801832325,
       "ValueThreatGravity": 0.9185,
-      "ThirdPartyMilitaryInvolvement": 0.31899021430795177,
+      "ThirdPartyMilitaryInvolvement": 0.31170446774399146,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
       "OperationalPreparation": 0.0,
-      "RoutineMilitaryPressure": 0.09758864776946367,
+      "RoutineMilitaryPressure": 0.09287464307105919,
       "LiveViolenceObserved": 0.0,
       "LiveUltimatumDeadline": 0.0,
       "LiveMediationAccepted": -0.0,
@@ -396,25 +396,25 @@
     }
   },
   "Israel-Lebanon": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.4864124770037337,
-      "TriggerType": 1.9998378506947057,
-      "ValueThreatGravity": 2.7423705687249837,
-      "ThirdPartyMilitaryInvolvement": 0.46166472421241234,
+      "CommitmentProblem": 0.47530280067499175,
+      "TriggerType": 2.208,
+      "ValueThreatGravity": 2.9392,
+      "ThirdPartyMilitaryInvolvement": 0.4948000000000001,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
-      "OperationalPreparation": 0.30000000000000004,
+      "OperationalPreparation": 0.27171709927917204,
       "RoutineMilitaryPressure": 0.6,
-      "LiveViolenceObserved": 0.7310271567206119,
-      "LiveUltimatumDeadline": 0.2,
+      "LiveViolenceObserved": 0.682072454929679,
+      "LiveUltimatumDeadline": 0.14142135623730953,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "Turkey-Greece": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.2722862709199825,
@@ -432,17 +432,17 @@
     }
   },
   "NATO-NATO": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.12574936096581882,
+      "CommitmentProblem": 0.12287724159198611,
       "TriggerType": 0.0,
       "ValueThreatGravity": 0.9185,
       "ThirdPartyMilitaryInvolvement": 0.0,
       "ProtractedConflict": 0.18725,
       "GeographicProximity": 0.67925,
       "OperationalPreparation": 0.0,
-      "RoutineMilitaryPressure": 0.2379237882526549,
+      "RoutineMilitaryPressure": 0.22643091606597665,
       "LiveViolenceObserved": 0.0,
       "LiveUltimatumDeadline": 0.0,
       "LiveMediationAccepted": -0.0,
@@ -450,43 +450,43 @@
     }
   },
   "Israel-Iran": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.5321344877944972,
+      "CommitmentProblem": 0.544572541839965,
       "TriggerType": 2.208,
-      "ValueThreatGravity": 2.872068579221936,
+      "ValueThreatGravity": 2.9392,
       "ThirdPartyMilitaryInvolvement": 1.1133000000000002,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
       "OperationalPreparation": 0.6,
       "RoutineMilitaryPressure": 0.6,
       "LiveViolenceObserved": 0.9,
-      "LiveUltimatumDeadline": 0.6,
+      "LiveUltimatumDeadline": 0.4242640687119285,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "Iran-Oman": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.16167774981319563,
-      "TriggerType": 2.208,
+      "CommitmentProblem": 0.15798502490398214,
+      "TriggerType": 2.1363101669807527,
       "ValueThreatGravity": 0.9185,
       "ThirdPartyMilitaryInvolvement": 1.1133000000000002,
       "ProtractedConflict": 0.026750000000000003,
       "GeographicProximity": 0.9405,
       "OperationalPreparation": 0.0,
-      "RoutineMilitaryPressure": 0.08005541811026695,
+      "RoutineMilitaryPressure": 0.07618835338777963,
       "LiveViolenceObserved": 0.0,
-      "LiveUltimatumDeadline": 4.88281250000001e-05,
+      "LiveUltimatumDeadline": 3.4526698300124465e-05,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "Iran-Qatar": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.2722862709199825,
@@ -498,67 +498,67 @@
       "OperationalPreparation": 0.6,
       "RoutineMilitaryPressure": 0.6,
       "LiveViolenceObserved": 0.0,
-      "LiveUltimatumDeadline": 0.025000000000000012,
-      "LiveMediationAccepted": -7.324218750000015e-05,
+      "LiveUltimatumDeadline": 0.0176776695296637,
+      "LiveMediationAccepted": -5.1790047450186694e-05,
       "LiveAbatementSignal": -0.0
     }
   },
   "Iran-Syria": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.38120077928797547,
-      "TriggerType": 0.5468458984023971,
-      "ValueThreatGravity": 0.7460538260532021,
-      "ThirdPartyMilitaryInvolvement": 0.9042805928633968,
+      "TriggerType": 0.7360000000000001,
+      "ValueThreatGravity": 0.9185,
+      "ThirdPartyMilitaryInvolvement": 1.1133000000000002,
       "ProtractedConflict": 0.13375,
       "GeographicProximity": 0.6269999999999999,
       "OperationalPreparation": 0.0,
-      "RoutineMilitaryPressure": 0.08005541811026695,
+      "RoutineMilitaryPressure": 0.07618835338777963,
       "LiveViolenceObserved": 0.0,
-      "LiveUltimatumDeadline": 6.905339660024893e-05,
+      "LiveUltimatumDeadline": 4.882812500000011e-05,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "Iran-Egypt": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.2995148980119807,
       "TriggerType": 2.208,
-      "ValueThreatGravity": 1.7096717564931412,
+      "ValueThreatGravity": 1.6706227996077596,
       "ThirdPartyMilitaryInvolvement": 1.1133000000000002,
       "ProtractedConflict": 0.13375,
       "GeographicProximity": 0.26125,
       "OperationalPreparation": 0.0,
       "RoutineMilitaryPressure": 0.25,
       "LiveViolenceObserved": 0.0,
-      "LiveUltimatumDeadline": 0.002209708691207964,
+      "LiveUltimatumDeadline": 0.0015625000000000023,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "Israel-Syria": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.2660672438972486,
+      "CommitmentProblem": 0.25999025964802225,
       "TriggerType": 2.208,
-      "ValueThreatGravity": 2.5587222156399676,
-      "ThirdPartyMilitaryInvolvement": 0.7345040785317313,
+      "ValueThreatGravity": 2.5002809194667543,
+      "ThirdPartyMilitaryInvolvement": 0.7177279821928914,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
-      "OperationalPreparation": 0.0,
-      "RoutineMilitaryPressure": 0.44579828674108435,
+      "OperationalPreparation": 0.25,
+      "RoutineMilitaryPressure": 0.42426406871192834,
       "LiveViolenceObserved": 0.0,
-      "LiveUltimatumDeadline": 0.07500000000000004,
+      "LiveUltimatumDeadline": 0.0530330085889911,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "Iran-Kuwait": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.19060038964398773,
@@ -576,10 +576,10 @@
     }
   },
   "Saudi Arabia-Yemen": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.5587412121842221,
+      "CommitmentProblem": 0.5459795452608468,
       "TriggerType": 2.208,
       "ValueThreatGravity": 2.9392,
       "ThirdPartyMilitaryInvolvement": 1.1133000000000002,
@@ -594,70 +594,70 @@
     }
   },
   "Europe-Iran": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.5209616382869637,
+      "CommitmentProblem": 0.5173439147479667,
       "TriggerType": 2.208,
       "ValueThreatGravity": 2.2043999999999997,
       "ThirdPartyMilitaryInvolvement": 1.1133000000000002,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
-      "OperationalPreparation": 0.22643091606597668,
-      "RoutineMilitaryPressure": 0.5710170918063717,
-      "LiveViolenceObserved": 0.40612619817811774,
-      "LiveUltimatumDeadline": 0.4242640687119285,
+      "OperationalPreparation": 0.2050838390019095,
+      "RoutineMilitaryPressure": 0.543434198558344,
+      "LiveViolenceObserved": 0.3789291416275995,
+      "LiveUltimatumDeadline": 0.30000000000000004,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "Israel-Yemen": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.33174776407448825,
-      "TriggerType": 1.6405376952071906,
-      "ValueThreatGravity": 2.176620962840334,
-      "ThirdPartyMilitaryInvolvement": 0.9042805928633968,
+      "CommitmentProblem": 0.3241706346711586,
+      "TriggerType": 2.208,
+      "ValueThreatGravity": 2.2043999999999997,
+      "ThirdPartyMilitaryInvolvement": 1.1133000000000002,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
-      "OperationalPreparation": 0.10254191950095479,
-      "RoutineMilitaryPressure": 0.38426600692928164,
-      "LiveViolenceObserved": 0.48229805814133186,
-      "LiveUltimatumDeadline": 0.026516504294495553,
+      "OperationalPreparation": 0.25,
+      "RoutineMilitaryPressure": 0.6,
+      "LiveViolenceObserved": 0.9,
+      "LiveUltimatumDeadline": 0.2,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "Pakistan-Yemen": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.2722862709199825,
+      "CommitmentProblem": 0.2660672438972486,
       "TriggerType": 2.208,
-      "ValueThreatGravity": 2.154051434416451,
+      "ValueThreatGravity": 2.1048528316601214,
       "ThirdPartyMilitaryInvolvement": 1.1133000000000002,
       "ProtractedConflict": 0.026750000000000003,
       "GeographicProximity": 0.209,
       "OperationalPreparation": 0.6,
       "RoutineMilitaryPressure": 0.6,
       "LiveViolenceObserved": 0.0,
-      "LiveUltimatumDeadline": 0.6,
+      "LiveUltimatumDeadline": 0.4242640687119285,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "Iran-UAE": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.4084294063799737,
+      "CommitmentProblem": 0.3991008658458729,
       "TriggerType": 2.208,
-      "ValueThreatGravity": 1.4543616192538826,
+      "ValueThreatGravity": 1.4211439539621027,
       "ThirdPartyMilitaryInvolvement": 1.1133000000000002,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
-      "OperationalPreparation": 0.25,
+      "OperationalPreparation": 0.22643091606597668,
       "RoutineMilitaryPressure": 0.25,
       "LiveViolenceObserved": 0.0,
       "LiveUltimatumDeadline": 0.0,
@@ -666,43 +666,43 @@
     }
   },
   "Iran-Jordan": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.32335549962639126,
-      "TriggerType": 1.8113004660648642,
-      "ValueThreatGravity": 2.3873722433702462,
-      "ThirdPartyMilitaryInvolvement": 0.9691839421175751,
+      "CommitmentProblem": 0.3159700498079643,
+      "TriggerType": 1.7524907613728917,
+      "ValueThreatGravity": 2.3328445859724645,
+      "ThirdPartyMilitaryInvolvement": 0.9470477502865877,
       "ProtractedConflict": 0.13375,
       "GeographicProximity": 0.47025,
-      "OperationalPreparation": 0.3312268541021438,
-      "RoutineMilitaryPressure": 0.44579828674108435,
-      "LiveViolenceObserved": 0.5937785598478024,
-      "LiveUltimatumDeadline": 0.025000000000000012,
+      "OperationalPreparation": 0.3000000000000001,
+      "RoutineMilitaryPressure": 0.42426406871192834,
+      "LiveViolenceObserved": 0.5540149860052123,
+      "LiveUltimatumDeadline": 0.0176776695296637,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "Iran-Iraq": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.5990297960239614,
-      "TriggerType": 2.1363101669807527,
-      "ValueThreatGravity": 2.5587222156399676,
-      "ThirdPartyMilitaryInvolvement": 1.087872192857846,
+      "TriggerType": 2.0669479753375595,
+      "ValueThreatGravity": 2.5002809194667543,
+      "ThirdPartyMilitaryInvolvement": 1.0630251576334668,
       "ProtractedConflict": 0.48150000000000004,
       "GeographicProximity": 0.9927499999999999,
-      "OperationalPreparation": 0.22643091606597668,
-      "RoutineMilitaryPressure": 0.6,
-      "LiveViolenceObserved": 0.29688927992390113,
-      "LiveUltimatumDeadline": 0.14142135623730953,
+      "OperationalPreparation": 0.2050838390019095,
+      "RoutineMilitaryPressure": 0.5710170918063717,
+      "LiveViolenceObserved": 0.2770074930026061,
+      "LiveUltimatumDeadline": 0.10000000000000002,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
   },
   "UK-Yemen": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.32674352510397897,
@@ -720,19 +720,19 @@
     }
   },
   "Iran-Bahrain": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.3759807992844201,
-      "TriggerType": 1.6405376952071906,
-      "ValueThreatGravity": 1.7905291825276848,
-      "ThirdPartyMilitaryInvolvement": 0.9042805928633968,
+      "CommitmentProblem": 0.36739338596064647,
+      "TriggerType": 1.5872723539792992,
+      "ValueThreatGravity": 1.7496334394793487,
+      "ThirdPartyMilitaryInvolvement": 0.883626795578098,
       "ProtractedConflict": 0.29425000000000007,
       "GeographicProximity": 0.8150999999999999,
-      "OperationalPreparation": 0.24610060680229143,
-      "RoutineMilitaryPressure": 0.38426600692928164,
-      "LiveViolenceObserved": 0.48229805814133186,
-      "LiveUltimatumDeadline": 0.008838834764831853,
+      "OperationalPreparation": 0.2228991433705423,
+      "RoutineMilitaryPressure": 0.3657040962613425,
+      "LiveViolenceObserved": 0.44999999999999996,
+      "LiveUltimatumDeadline": 0.006250000000000006,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
@@ -756,19 +756,19 @@
     }
   },
   "Russia-Unknown": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
-      "CommitmentProblem": 0.3555584497907876,
-      "TriggerType": 1.9998378506947057,
-      "ValueThreatGravity": 2.7423705687249837,
-      "ThirdPartyMilitaryInvolvement": 0.843723626748013,
+      "CommitmentProblem": 0.34743748357409543,
+      "TriggerType": 1.9349066724420454,
+      "ValueThreatGravity": 2.67973473837031,
+      "ThirdPartyMilitaryInvolvement": 0.8244529524803159,
       "ProtractedConflict": 0.0,
       "GeographicProximity": 0.0,
-      "OperationalPreparation": 0.18574928614211858,
-      "RoutineMilitaryPressure": 0.5171836927481865,
+      "OperationalPreparation": 0.16823752407904455,
+      "RoutineMilitaryPressure": 0.49220121360458263,
       "LiveViolenceObserved": 0.0,
-      "LiveUltimatumDeadline": 0.2121320343559643,
+      "LiveUltimatumDeadline": 0.15000000000000005,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
@@ -792,7 +792,7 @@
     }
   },
   "Russia-EU": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.43565803347197196,
@@ -810,7 +810,7 @@
     }
   },
   "Israel-Iraq": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.21782901673598598,
@@ -828,7 +828,7 @@
     }
   },
   "Saudi Arabia-Iran": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.13614313545999124,
@@ -846,11 +846,11 @@
     }
   },
   "Eritrea-Ethiopia": {
-    "as_of": "2026-10-05",
+    "as_of": "2026-10-06",
     "nodes": {
       "base": -3.407,
       "CommitmentProblem": 0.9802305753119369,
-      "TriggerType": 2.1363101669807527,
+      "TriggerType": 2.208,
       "ValueThreatGravity": 2.9392,
       "ThirdPartyMilitaryInvolvement": 0.0,
       "ProtractedConflict": 0.4922,
@@ -858,7 +858,7 @@
       "OperationalPreparation": 0.6,
       "RoutineMilitaryPressure": 0.6,
       "LiveViolenceObserved": 0.9,
-      "LiveUltimatumDeadline": 0.2,
+      "LiveUltimatumDeadline": 0.6,
       "LiveMediationAccepted": -0.0,
       "LiveAbatementSignal": -0.0
     }
