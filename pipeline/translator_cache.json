@@ -33,7 +33,7 @@
       "p_b_given_not_a_reference_days": 365.0,
       "confidence": "high",
       "used_structural_context": true,
-      "rationale": "The territorial_control burden is maximally restrictive \u2014 airstrikes, raids, and naval actions all fail to resolve YES \u2014 and while WinProbability is strongly negative (-1.0, disadvantage for the US against Iran's depth and size) and PatronDeterrence is moderate (0.5, Iran has some external patron backing), WarCosts are paradoxically low (1.0), meaning structural cost-of-war suppression is reduced; nonetheless, a full ground invasion intended to hold Iranian territory within the 2026 window is historically unprecedented and operationally implausible, so P(B|A) is capped well below 1.0 because even a serious clash episode (A) would most plausibly manifest as airstrikes or raids rather than territorial seizure, and P(B|\u00acA) is structurally forced to 0 as territorial control cannot occur below the serious-episode threshold.",
+      "rationale": "The territorial_control burden is maximally restrictive (airstrikes and raids explicitly excluded), requiring a ground offensive with control intent; WinProbability=-1.0 (US at capability disadvantage in an Iranian land war) and PatronDeterrence=0.5 (Iranian proxies/Russia/China provide meaningful deterrent backstop) both push P(B|A) below 0.5 and P(B|\u00acA) to near-zero, while WarCosts=1.0 (low perceived war cost) provides slight upward pressure but cannot overcome the severe operational and strategic obstacles to territorial seizure of Iranian soil.",
       "p_b_given_a_raw": 0.55,
       "p_b_given_a_llm_clamped": 0.23,
       "p_b_given_a_deterministic": 0.0941,
@@ -45,10 +45,10 @@
       "war_costs_used_for_range": 1.0,
       "severity_band": "territorial_war",
       "parent_event_relation": "conflict_bound",
-      "p_b_given_not_a_raw_llm": 0.0
+      "p_b_given_not_a_raw_llm": 0.002
     },
     "clergy_version": "v9",
-    "toggles_hash": "3bcb74bb8c63",
+    "toggles_hash": "e31093b90ab7",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -85,27 +85,27 @@
       ],
       "contract_initiator": "China",
       "contract_target": "Taiwan",
-      "p_b_given_a": 0.1013,
+      "p_b_given_a": 0.0909,
       "p_b_given_not_a": 0.0,
       "p_b_given_not_a_reference_days": 365.0,
       "confidence": "high",
       "used_structural_context": true,
-      "rationale": "Territorial_control burden requires sustained offensive intent to seize inhabited ROC-administered territory \u2014 ruling out blockade, bombardment, or limited strike \u2014 which structurally suppresses P(B|A) to ~0.65 (A could occur via serious clashes short of a full invasion); WarCosts=-1.0 (very high war cost) and PatronDerrence=2.5 (strong US patron commitment to Taiwan) both push heavily toward the low end of the range, NuclearDeterrence=0.6 adds modest additional suppression, and WinProbability=0.5 (no decisive PLA capability edge within the 2026 horizon) further constrains feasibility of a successful territorial-control operation, yielding a very low within-range positioning.",
-      "p_b_given_a_raw": 0.65,
-      "p_b_given_a_llm_clamped": 0.16,
-      "p_b_given_a_deterministic": 0.0761,
+      "rationale": "The territorial_control burden (offensive intent to establish control over inhabited ROC-administered territory) is the most restrictive tier and strongly suppresses probability; WarCosts at -1.5 (very high cost of war) pushes toward the low end of the range, PatronDeterrence at 2.0 (strong US patron commitment) further suppresses the named action, NuclearDeterrence at 0.6 provides modest additional constraint, and WinProbability at 0.5 (no decisive capability edge) prevents offsetting these suppressants \u2014 together these primitives anchor both conditionals near the floor, with P(B|\u00acA) forced to zero by deterministic post-processing given territorial_control tier.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.14,
+      "p_b_given_a_deterministic": 0.0698,
       "anchor_range": [
-        0.016,
-        0.16
+        0.014,
+        0.14
       ],
       "was_clamped": true,
-      "war_costs_used_for_range": -1.0,
+      "war_costs_used_for_range": -1.5,
       "severity_band": "territorial_war",
       "parent_event_relation": "conflict_bound",
       "p_b_given_not_a_raw_llm": 0.0
     },
     "clergy_version": "v9",
-    "toggles_hash": "fb60fdbe6a04",
+    "toggles_hash": "ca7eb8749cf7",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -312,7 +312,7 @@
     "clergy": {
       "manifestation_family": "kinetic_or_coercive_action",
       "political_act_formality": null,
-      "requirement_burden": "broad",
+      "requirement_burden": "method_specific",
       "action_type": "direct_engagement",
       "qualifying_action_types": [
         "missile_strike",
@@ -324,27 +324,27 @@
       ],
       "contract_initiator": null,
       "contract_target": null,
-      "p_b_given_a": 0.6458,
-      "p_b_given_not_a": 0.04,
+      "p_b_given_a": 0.3671,
+      "p_b_given_not_a": 0.03,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Broad burden (any qualifying direct use of force between PRC and ROC military forces) means P(B|A) is high but not 1.0 because A can be driven by incidents involving CCG-gray-zone dynamics that the contract partially excludes (warning shots, minor contact, uninhabited-area fires), while P(B|\u00acA) reflects a genuine but low background rate of standalone limited engagements below the serious-episode threshold; WarCosts=-1.0 and PatronDeterrence=2.5 (strong US commitment to Taiwan) are the dominant suppressors pushing P(B|\u00acA) toward the low end of the range, as both structural cost of war and patron deterrence strongly reduce the likelihood of even limited kinetic incidents, while NuclearDeterrence=0.6 is modest and AudienceCosts=1.5 provides some lock-in pressure on Beijing without crossing into deterministic escalation.",
-      "p_b_given_a_raw": 0.85,
-      "p_b_given_a_llm_clamped": 0.76,
-      "p_b_given_a_deterministic": 0.5969,
+      "rationale": "The method_specific burden (direct gunfire/missiles/serious ramming between PRC and ROC military forces) covers a wide qualifying set below the ICB VIOL>=3 threshold, so P(B|A) is high but not 1.0 given the legal exclusions (warning shots, uninhabited-area fire, territorial-water missiles); P(B|\u00acA) is a low but non-zero monthly rate reflecting that isolated gray-zone incidents could escalate to qualifying contact \u2014 suppressed by WarCosts=-1.5 (very high structural cost of war), PatronDeterrence=2.0 (strong US patron commitment to Taiwan raises PRC escalation costs), and NuclearDeterrence=0.6 (mild but real deterrence constraint), all of which lean toward the low end of the background rate.",
+      "p_b_given_a_raw": 0.82,
+      "p_b_given_a_llm_clamped": 0.49,
+      "p_b_given_a_deterministic": 0.3144,
       "anchor_range": [
-        0.48,
-        0.76
+        0.175,
+        0.49
       ],
       "was_clamped": true,
-      "war_costs_used_for_range": -1.0,
+      "war_costs_used_for_range": -1.5,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.04
+      "p_b_given_not_a_raw_llm": 0.03
     },
     "clergy_version": "v9",
-    "toggles_hash": "fb60fdbe6a04",
+    "toggles_hash": "ca7eb8749cf7",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -526,27 +526,27 @@
       ],
       "contract_initiator": "China",
       "contract_target": "Taiwan",
-      "p_b_given_a": 0.1013,
+      "p_b_given_a": 0.0909,
       "p_b_given_not_a": 0.0,
       "p_b_given_not_a_reference_days": 365.0,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The territorial_control burden (must seize inhabited ROC territory) is the most restrictive tier and suppresses P(B|A) below 1.0 because a serious conflict could begin as coercive blockade or punitive strikes without a territorial seizure objective; WarCosts at -1.0 (very high cost of war) and PatronDeterrence at 2.5 (strong US patron commitment to Taiwan) both push toward the low end of the range, while WinProbability at 0.5 (modest Chinese capability edge) and AudienceCosts at 1.5 provide partial upward pressure but are insufficient to overcome the structural suppression from war costs and patron deterrence.",
+      "rationale": "The territorial_control burden requires not merely kinetic action but an offensive with the intent to seize and hold inhabited ROC territory, which forces p_b_given_not_a to zero by deterministic rule; p_b_given_a is set at 0.72 (below the midpoint of the territorial_control tier's range) because WarCosts at -1.5 (very high cost of war) and PatronDeterrence at 2.0 (strong US patron commitment) both structurally suppress the likelihood that a serious Chinese military episode would take the full invasion-with-territorial-seizure form rather than a blockade, punitive strike, or coercive demonstration, while WinProbability at 0.5 (rough parity) does not provide a decisive capability edge that would push toward a swift, confident land-seizure operation.",
       "p_b_given_a_raw": 0.72,
-      "p_b_given_a_llm_clamped": 0.16,
-      "p_b_given_a_deterministic": 0.0761,
+      "p_b_given_a_llm_clamped": 0.14,
+      "p_b_given_a_deterministic": 0.0698,
       "anchor_range": [
-        0.016,
-        0.16
+        0.014,
+        0.14
       ],
       "was_clamped": true,
-      "war_costs_used_for_range": -1.0,
+      "war_costs_used_for_range": -1.5,
       "severity_band": "territorial_war",
       "parent_event_relation": "conflict_bound",
       "p_b_given_not_a_raw_llm": 0.0
     },
     "clergy_version": "v9",
-    "toggles_hash": "fb60fdbe6a04",
+    "toggles_hash": "ca7eb8749cf7",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -728,27 +728,27 @@
       ],
       "contract_initiator": null,
       "contract_target": null,
-      "p_b_given_a": 0.5647,
-      "p_b_given_not_a": 0.04,
+      "p_b_given_a": 0.6453,
+      "p_b_given_not_a": 0.03,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Broad requirement_burden means any qualifying use of force satisfies YES; P(B|A) is below 1.0 because serious clashes between US and Russia could still be proxy/indirect and not meet the direct-engagement definition, but most direct serious clashes would satisfy B; P(B|\u00acA) reflects a non-trivial but low background rate of accidental or limited direct engagements below the serious-clash threshold (e.g., aerial intercept gone wrong, proxy forces under direct command), suppressed heavily by NuclearDeterrence=1.8 (the strongest single primitive discouraging any direct kinetic contact) and WarCosts=-1.5 (very high cost of war, structural peace-inducing), with WinProbability=0.0 indicating no decisive capability edge that would embolden either side to initiate.",
-      "p_b_given_a_raw": 0.85,
-      "p_b_given_a_llm_clamped": 0.665,
-      "p_b_given_a_deterministic": 0.5217,
+      "rationale": "Broad requirement burden means almost any direct kinetic exchange satisfies YES (including sub-ICB incidents), driving p_b_given_a high; NuclearDeterrence=1.8 and WarCosts=-1.0 strongly suppress escalation to serious clashes and push both parties toward avoiding even limited direct fire, keeping p_b_given_not_a low but non-zero given the active Ukraine theater proximity and accidental-engagement risk, while WinProbability=0.0 (parity/uncertainty) and PatronDeterrence=0.5 add modest mutual caution without dominant deterrence.",
+      "p_b_given_a_raw": 0.82,
+      "p_b_given_a_llm_clamped": 0.76,
+      "p_b_given_a_deterministic": 0.5962,
       "anchor_range": [
-        0.42,
-        0.665
+        0.48,
+        0.76
       ],
       "was_clamped": true,
-      "war_costs_used_for_range": -1.5,
+      "war_costs_used_for_range": -1.0,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.04
+      "p_b_given_not_a_raw_llm": 0.03
     },
     "clergy_version": "v9",
-    "toggles_hash": "37034aaed915",
+    "toggles_hash": "09d8cab91f2b",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -848,11 +848,11 @@
       "contract_initiator": "US",
       "contract_target": "Mexico",
       "p_b_given_a": 0.4662,
-      "p_b_given_not_a": 0.03,
+      "p_b_given_not_a": 0.04,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (aerial/missile/drone only \u2014 excludes ground incursion, naval, artillery) moderately suppresses P(B|A) since serious conflict could escalate via non-qualifying methods; P(B|\u00acA) is non-trivial given Trump administration's stated willingness to strike cartel targets and low WarCosts (1.5, cheap-war environment), but WinProbability of -2.0 (US capability disadvantage relative to operational clarity/target set in Mexico) and PatronDeterrence of 0.5 impose modest friction, while the single-strike-qualifies clause and Trump-claim-sufficiency rule keep the below-threshold background rate meaningfully above zero.",
+      "rationale": "Method_specific burden (airstrike/missile/drone only) moderately restricts P(B|A) since a serious US-Mexico clash could take other forms (ground, special ops, naval); P(B|\u00acA) is non-trivial given Trump administration rhetoric on cartel strikes and the low WarCosts (+1.5) making limited discrete strikes structurally cheap, but WinProbability (-2.0) signals Mexico's defensive depth/political resistance, and PatronDeterrence (0.5) adds modest constraint, keeping the background rate of a below-threshold unilateral strike at a low but genuine level.",
       "p_b_given_a_raw": 0.55,
       "p_b_given_a_llm_clamped": 0.55,
       "p_b_given_a_deterministic": 0.4303,
@@ -864,10 +864,10 @@
       "war_costs_used_for_range": 1.5,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.03
+      "p_b_given_not_a_raw_llm": 0.04
     },
     "clergy_version": "v9",
-    "toggles_hash": "a068c55acd1b",
+    "toggles_hash": "e481379f9659",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -896,18 +896,18 @@
     "clergy": {
       "manifestation_family": "political_act",
       "political_act_formality": "formal_official",
-      "requirement_burden": "target_specific",
+      "requirement_burden": "method_specific",
       "action_type": null,
       "qualifying_action_types": null,
       "contract_initiator": null,
       "contract_target": null,
       "p_b_given_a": 0.3,
-      "p_b_given_not_a": 0.005,
-      "p_b_given_not_a_reference_days": 30,
+      "p_b_given_not_a": 0.01,
+      "p_b_given_not_a_reference_days": 365,
       "confidence": "high",
       "used_structural_context": true,
-      "rationale": "The target_specific + formal_official burden requires a constitutionally rare congressional declaration of war (last used 1941), which is nearly never used even during serious conflict (A=true); WinProbability=-1.0 (US capability disadvantage against Iran) and PatronDeterrence=0.5 further suppress this costly escalatory step, while WarCosts=1.0 (low cost of war) provides slight upward pressure but cannot overcome the institutional and procedural rarity of a formal declaration.",
-      "p_b_given_a_raw": 0.04,
+      "rationale": "The formal_official requirement_burden (constitutional Article I declaration, not AUMF or executive action) is historically nearly unique to WWII-era politics; even amid serious clashes P(B|A) is very low (~0.07) because the US has fought major wars without formal declarations for 80 years; WinProbability=-1.0 (US at capability disadvantage) suppresses escalatory commitment, and AudienceCosts=0.5 (moderate, not locking in Congress) further reduces the formal procedural trigger, keeping P(B|\u00acA) near 0.01 annually.",
+      "p_b_given_a_raw": 0.07,
       "p_b_given_a_llm_clamped": 0.3,
       "p_b_given_a_deterministic": null,
       "anchor_range": [
@@ -918,10 +918,10 @@
       "war_costs_used_for_range": 1.0,
       "severity_band": "unknown",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.005
+      "p_b_given_not_a_raw_llm": 0.01
     },
     "clergy_version": "v9",
-    "toggles_hash": "3bcb74bb8c63",
+    "toggles_hash": "e31093b90ab7",
     "glass": {
       "outcome_observability": "high",
       "resolution_risk": "medium",
@@ -964,15 +964,15 @@
       ],
       "contract_initiator": null,
       "contract_target": null,
-      "p_b_given_a": 0.635,
-      "p_b_given_not_a": 0.04,
+      "p_b_given_a": 0.6416,
+      "p_b_given_not_a": 0.06,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Broad requirement burden (any qualifying use-of-force incident between NATO and Russian forces suffices) keeps P(B|A) near 1.0 since a serious clash would almost certainly involve a qualifying incident, while P(B|\u00acA) reflects a real but modest monthly background rate of inadvertent or limited engagements (shootdowns near NATO-Russia contact zones, stray munitions with contested attribution) below the serious-clash threshold; NuclearDeterrence=3.0 and WarCosts=-1.0 strongly suppress escalation into serious clashes but do not eliminate sub-threshold incident risk, PatronDeterrence=2.0 reflects NATO's own collective-defense commitment acting as mutual deterrence, and the dyad's broad collective (any NATO member) slightly elevates the per-incident surface area.",
-      "p_b_given_a_raw": 0.97,
+      "rationale": "The broad requirement_burden (any use-of-force incident between NATO and Russian forces, including single shootdowns or gunfire exchanges well below ICB VIOL>=3) makes P(B|A)=1.0 by definition and generates meaningful P(B|\u00acA) from gray-zone spillover events (e.g., accidental engagement near Baltic, shootdown incident); NuclearDeterrence=2.0 and WarCosts=-1.0 strongly suppress escalation to serious-clash territory but do not eliminate the non-trivial monthly background rate of a discrete limited incident below threshold, while PatronDeterrence=2.0 (NATO as effective mutual patron) further suppresses any deliberate escalatory action, keeping P(B|\u00acA) moderate but real at ~6% per month across the ~12-month window.",
+      "p_b_given_a_raw": 1.0,
       "p_b_given_a_llm_clamped": 0.76,
-      "p_b_given_a_deterministic": 0.5815,
+      "p_b_given_a_deterministic": 0.5908,
       "anchor_range": [
         0.48,
         0.76
@@ -981,10 +981,10 @@
       "war_costs_used_for_range": -1.0,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.04
+      "p_b_given_not_a_raw_llm": 0.06
     },
     "clergy_version": "v9",
-    "toggles_hash": "a6f9bd82c092",
+    "toggles_hash": "f7ee40c157f7",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -1022,15 +1022,15 @@
       ],
       "contract_initiator": "India",
       "contract_target": "Pakistan",
-      "p_b_given_a": 0.4771,
+      "p_b_given_a": 0.4724,
       "p_b_given_not_a": 0.18,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (aerial/drone/missile only, excludes ground/artillery/naval) sets P(B|A) slightly below 1.0 since serious clashes could escalate via ground; P(B|\u00acA) is elevated because India has demonstrated willingness to conduct limited strikes on Pakistani territory below full-war threshold (Balakot 2019 precedent), and the current structural context \u2014 NuclearDeterrence=2.3 (strongly suppresses full-scale war but not limited signaling strikes), PatronDeterrence=0.5 (moderate Chinese patron commitment somewhat raises costs), and AudienceCosts=1.0 (moderate domestic lock-in) \u2014 supports a non-trivial background rate of limited strikes without crossing the serious-episode threshold, while WarCosts=-0.5 moderately suppresses escalation.",
-      "p_b_given_a_raw": 0.82,
+      "rationale": "Method-specific burden (aerial/drone/missile strike) is broad enough to cover India's primary strike modalities, driving p_b_given_a to ~0.80 (India's preferred opening move in escalation is airpower, as in Balakot 2019); p_b_given_not_a is elevated well above historical baseline (~2-3%/month pre-2019) because the current post-Operation Sindoor environment shows India has already demonstrated willingness to conduct such strikes below full-war threshold \u2014 NuclearDeterrence at 2.8 suppresses territorial_control/persistent escalation but does not preclude a single discrete strike, PatronDeterrence at 0.5 (China/US involvement) moderately suppresses but doesn't eliminate India's strike option, and AudienceCosts at 1.0 with WinProbability near-balanced suggests domestic political pressure supports demonstrated resolve without requiring full war.",
+      "p_b_given_a_raw": 0.8,
       "p_b_given_a_llm_clamped": 0.63,
-      "p_b_given_a_deterministic": 0.4116,
+      "p_b_given_a_deterministic": 0.4049,
       "anchor_range": [
         0.225,
         0.63
@@ -1042,7 +1042,7 @@
       "p_b_given_not_a_raw_llm": 0.18
     },
     "clergy_version": "v9",
-    "toggles_hash": "ea2980b75932",
+    "toggles_hash": "03fc0480fc6c",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -1083,7 +1083,7 @@
       "p_b_given_not_a_reference_days": 365.0,
       "confidence": "high",
       "used_structural_context": true,
-      "rationale": "The territorial_control burden requires a full offensive with intent to hold ground \u2014 not merely raids or provocations \u2014 which structurally suppresses probability; PatronDeterrence=1.5 (strong US commitment to South Korea) and NuclearDeterrence=2.0 (strong mutual nuclear constraint) both lean heavily toward the low end of any range, while WinProbability=-0.5 (North Korea at a capability disadvantage) and WarCosts=-0.5 (high cost of war) further suppress the already-extreme rarity of a deliberate peninsular invasion, yielding a near-zero background rate outside serious conflict and a conditional rate below 1.0 given A because A could plausibly be triggered by more limited serious clashes.",
+      "rationale": "The territorial_control burden (full offensive with intent to seize territory) is the most restrictive tier and already suppresses probability dramatically; WinProbability=-0.5 (DPRK capability disadvantage against combined ROK/US forces), PatronDeterrence=1.5 (strong US patron commitment to South Korea), and NuclearDeterrence=2.0 (mutual deterrence strongly constraining large-scale escalation) all push toward the very low end of the range, while WarCosts=-0.5 reinforces that this is an extremely costly option for North Korea to initiate.",
       "p_b_given_a_raw": 0.7,
       "p_b_given_a_llm_clamped": 0.18,
       "p_b_given_a_deterministic": 0.0659,
@@ -1095,10 +1095,10 @@
       "war_costs_used_for_range": -0.5,
       "severity_band": "territorial_war",
       "parent_event_relation": "conflict_bound",
-      "p_b_given_not_a_raw_llm": 0.0002
+      "p_b_given_not_a_raw_llm": 0.0008
     },
     "clergy_version": "v9",
-    "toggles_hash": "c171f652216b",
+    "toggles_hash": "b47c18e1a19c",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -1135,27 +1135,27 @@
       ],
       "contract_initiator": "China",
       "contract_target": "Taiwan",
-      "p_b_given_a": 0.1013,
+      "p_b_given_a": 0.0909,
       "p_b_given_not_a": 0.0,
       "p_b_given_not_a_reference_days": 365.0,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Territorial_control burden requires a sustained offensive aimed at establishing administrative control \u2014 the most restrictive tier \u2014 which structurally suppresses P(B|A) below 1.0 because serious clashes could also be triggered by a blockade or limited strike that does not constitute an invasion; WarCosts at -1.0 (very high cost of war) and PatronDeterrence at 2.5 (strong US/allied commitment to Taiwan) jointly push estimates toward the low end of the range, while WinProbability at 0.5 (rough parity) and NuclearDeterrence at only 0.6 provide modest offsetting upward pressure, and AudienceCosts at 1.5 add some lock-in risk but insufficient to overcome the dominant cost-and-deterrence suppression within the ~2-year horizon.",
-      "p_b_given_a_raw": 0.75,
-      "p_b_given_a_llm_clamped": 0.16,
-      "p_b_given_a_deterministic": 0.0761,
+      "rationale": "The territorial_control burden (offensive intended to establish control over inhabited ROC territory) is the most restrictive tier, excluding blockades/strikes/raids; WarCosts=-1.5 (very high cost of war) and PatronDeterrence=2.0 (strong US patron commitment) both press hard toward the low end of the range, partially offset by WinProbability=0.5 (no decisive Chinese disadvantage) and AudienceCosts=1.0 (moderate CCP lock-in), while NuclearDeterrence=0.6 is relatively low and does not strongly suppress; P(B|\u00acA)=0 because sustained territorial-control operations cannot occur absent the serious-clash threshold by definition.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.14,
+      "p_b_given_a_deterministic": 0.0698,
       "anchor_range": [
-        0.016,
-        0.16
+        0.014,
+        0.14
       ],
       "was_clamped": true,
-      "war_costs_used_for_range": -1.0,
+      "war_costs_used_for_range": -1.5,
       "severity_band": "territorial_war",
       "parent_event_relation": "conflict_bound",
-      "p_b_given_not_a_raw_llm": 0.002
+      "p_b_given_not_a_raw_llm": 0.0
     },
     "clergy_version": "v9",
-    "toggles_hash": "fb60fdbe6a04",
+    "toggles_hash": "ca7eb8749cf7",
     "glass": {
       "outcome_observability": "medium",
       "rationale": "A full-scale amphibious invasion would be immediately reported by major wire services, but the legalese flags around 'offensive intent to seize inhabited territory' create meaningful ambiguity \u2014 gray-zone operations, blockades, or strikes on outlying inhabited islands could trigger genuine dispute over whether the win condition is met, pushing observability and resolution risk upward."
@@ -1197,14 +1197,14 @@
       ],
       "contract_initiator": null,
       "contract_target": null,
-      "p_b_given_a": 0.6927,
+      "p_b_given_a": 0.6477,
       "p_b_given_not_a": 0.03,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The broad requirement burden means almost any direct kinetic exchange satisfies YES, but with explicit exclusions (warning shots, minor scrapes) slightly trimming coverage; WinProbability=0.0 (rough parity) and WarCosts=-0.5 (moderate peace-inducing costs) suppress serious-clash probability, while PatronDeterrence=0.5 (Turkey's NATO membership provides modest patron backstop against Israel) and AudienceCosts=1.0 (elevated domestic lock-in on both sides amid Gaza tensions) slightly elevate the risk of an inadvertent or politically-driven incident, keeping P(B|\u00acA) at a genuine non-zero background rate reflecting the possibility of a below-threshold direct engagement (e.g., in Syria airspace or at sea near Gaza) without triggering full ICB VIOL>=3 escalation.",
-      "p_b_given_a_raw": 0.7,
-      "p_b_given_a_llm_clamped": 0.7,
+      "rationale": "Broad requirement_burden means any qualifying direct use of force resolves YES, but the Legal Scholar's explicit exclusions (warning shots, minor ramming) narrow the effective qualifying set somewhat; structurally, WarCosts=-0.5 (high cost, peace-inducing) suppresses escalation to a level meeting the WIN condition, PatronDeterrence=0.5 (Turkey has NATO patron backing, Israel has US backing) adds mutual deterrence against initiating force, and WinProbability=0.0 (rough parity with no decisive edge for either) removes any swift-victory incentive, so P(B|\u00acA) is set low (~3%/month reflecting the ongoing indirect tensions via Syria/Gaza theater but no direct engagement history) and P(B|A)=0.55 reflects that a serious-clash scenario would likely involve, but not definitively guarantee, the specific qualifying direct-force threshold given the exclusions.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.55,
       "p_b_given_a_deterministic": 0.6896,
       "anchor_range": [
         0.54,
@@ -1217,7 +1217,7 @@
       "p_b_given_not_a_raw_llm": 0.03
     },
     "clergy_version": "v9",
-    "toggles_hash": "1ada42edb8cf",
+    "toggles_hash": "9dc584058f7b",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -1259,8 +1259,8 @@
       "p_b_given_not_a_reference_days": 365.0,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Territorial_control burden is the most restrictive tier, requiring a military offensive with intent to hold Mexican land; WinProbability is deeply negative (-2.0) suggesting a US capability disadvantage in sustained occupation, which suppresses P(B|A) slightly below 1.0 (a serious clash could involve raids or strikes rather than a territorial offensive), while WarCosts being positive (+1.5, cheap war) and AudienceCosts moderate (+1.0) leave open a non-trivial but still very low background rate for a unilateral territorial invasion absent full-scale war, given the unprecedented and politically extreme nature of such an action against a treaty partner.",
-      "p_b_given_a_raw": 0.8,
+      "rationale": "The territorial_control burden (offensive + intent to hold land) is the most restrictive tier and sharply suppresses P(B|A); WinProbability=-2.0 (US capability disadvantage in sustained land control against a large neighbor) and WarCosts=+1.5 (structurally cheap war score cuts against peace-inducing suppression but the intent-to-hold requirement still demands sustained commitment) push P(B|A) modestly lower within range, while AudienceCosts=1.0 and PatronDeterrence=0.5 are mild, leaving P(B|\u00acA) as a very small but nonzero background rate given current political rhetoric about cartel operations.",
+      "p_b_given_a_raw": 0.75,
       "p_b_given_a_llm_clamped": 0.245,
       "p_b_given_a_deterministic": 0.0741,
       "anchor_range": [
@@ -1271,10 +1271,10 @@
       "war_costs_used_for_range": 1.5,
       "severity_band": "territorial_war",
       "parent_event_relation": "conflict_bound",
-      "p_b_given_not_a_raw_llm": 0.004
+      "p_b_given_not_a_raw_llm": 0.003
     },
     "clergy_version": "v9",
-    "toggles_hash": "a068c55acd1b",
+    "toggles_hash": "e481379f9659",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -1339,33 +1339,33 @@
       "qualifying_action_types": [
         "gray_zone_incident",
         "missile_strike",
-        "raid",
         "airstrike",
+        "ground_invasion",
         "direct_engagement"
       ],
       "contract_initiator": null,
       "contract_target": null,
-      "p_b_given_a": 0.8067,
-      "p_b_given_not_a": 0.06,
+      "p_b_given_a": 0.7515,
+      "p_b_given_not_a": 0.07,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Broad requirement burden (any use-of-force encounter, explicitly including Galwan-style melee, which sits below ICB VIOL>=3) means P(B|A) is high but not 1.0 since A implies a serious episode that could theoretically begin without the dyad's forces directly engaging (e.g. naval blockade-style opening); P(B|\u00acA) is modestly elevated at ~6%/month given China-India's recent pattern of LAC friction and the explicit inclusion of sub-threshold melee-style incidents \u2014 structurally, WinProbability=0.5 (rough parity) and WarCosts=0.0 (neither side facing acute cost pressure) suggest no strong suppression of gray-zone border clashes, while NuclearDeterrence=0.0 and PatronDeterrence=0.5 do not heavily constrain sub-threshold incidents, leaving the background rate of limited border contact plausible across the ~23-month window.",
+      "rationale": "The broad requirement burden (any use-of-force encounter including Galwan-style melee) means many sub-threshold events qualify for B without triggering A, supporting a genuine non-zero P(B|\u00acA); the moderately high AudienceCosts (1.0) and balanced WinProbability (0.5) suggest neither side is decisively deterred from limited friction, while WarCosts (-0.5) suppresses escalation to full serious episodes, keeping P(B|A) below 1.0 because a serious clash might take forms (naval, aerial) the contract partially excludes via the Coast Guard asymmetry and damage-severity thresholds.",
       "p_b_given_a_raw": 0.85,
       "p_b_given_a_llm_clamped": 0.85,
-      "p_b_given_a_deterministic": 0.7881,
+      "p_b_given_a_deterministic": 0.7093,
       "anchor_range": [
-        0.6,
-        0.95
+        0.54,
+        0.855
       ],
       "was_clamped": false,
-      "war_costs_used_for_range": 0.0,
+      "war_costs_used_for_range": -0.5,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.06
+      "p_b_given_not_a_raw_llm": 0.07
     },
     "clergy_version": "v9",
-    "toggles_hash": "6e3e208bd201",
+    "toggles_hash": "bdb49b6bafd1",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -1526,14 +1526,14 @@
       ],
       "contract_initiator": null,
       "contract_target": null,
-      "p_b_given_a": 0.6063,
+      "p_b_given_a": 0.6363,
       "p_b_given_not_a": 0.06,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The broad requirement burden means nearly any kinetic or coercive physical encounter qualifies, including sub-serious-threshold incidents (coast guard ramming, limited naval clashes in South/East China Sea), giving a genuine non-zero P(B|\u00acA) of ~6% per month reflecting ongoing gray-zone friction; P(B|A) is dampened below 1.0 because ICB VIOL>=3 could be triggered by scenarios (e.g. Taiwan strait missile exchange) where the US-China direct physical encounter is indirect or ambiguous; structurally, WarCosts=-1.0 (very high war cost) suppresses escalation to serious thresholds and keeps the encounter below A, while WinProbability=0.5 and NuclearDeterrence=0.0 (surprisingly low mutual nuclear constraint signal) and PatronDeterrence=0.5 are modest factors that do not strongly shift the estimate within range.",
-      "p_b_given_a_raw": 0.55,
-      "p_b_given_a_llm_clamped": 0.55,
+      "rationale": "Broad requirement burden means any qualifying kinetic contact (including significant ramming, seizures, or direct fire) resolves YES, but the contract threshold sits below ICB VIOL>=3 so P(B|A) is not 1.0 \u2014 a serious clash could theoretically occur outside this definition's explicit inclusions, and ambiguous incidents near the threshold reduce certainty; WarCosts=-1.0 suppresses escalation toward full-scale war but does NOT suppress the sub-threshold gray-zone incidents that primarily drive P(B|\u00acA), while WinProbability=0.5 (near parity) and AudienceCosts=1.0 (elevated domestic lock-in) modestly raise the background rate of coercive encounters in the South/East China Sea, yielding a genuine ~6%/month background rate absent serious conflict.",
+      "p_b_given_a_raw": 0.65,
+      "p_b_given_a_llm_clamped": 0.65,
       "p_b_given_a_deterministic": 0.6305,
       "anchor_range": [
         0.48,
@@ -1546,7 +1546,7 @@
       "p_b_given_not_a_raw_llm": 0.06
     },
     "clergy_version": "v9",
-    "toggles_hash": "50f9037afa0f",
+    "toggles_hash": "451889f3baf3",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -1691,14 +1691,14 @@
       "qualifying_action_types": null,
       "contract_initiator": null,
       "contract_target": null,
-      "p_b_given_a": 0.45,
-      "p_b_given_not_a": 0.015,
+      "p_b_given_a": 0.55,
+      "p_b_given_not_a": 0.02,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The method_specific burden (formal Article 5 invocation by consensus of NATO members) is a high institutional threshold rarely met even during serious conflict \u2014 historical NATO-Russia crises have never triggered it \u2014 while NuclearDeterrence=3.0 and WarCosts=-1.0 strongly suppress escalation to the level where invocation becomes politically viable, PatronDeterrence=2.0 adds further caution, and even in a serious-clash scenario (A) NATO consensus on formal invocation is far from automatic, keeping P(B|A) well below 1.0; background rate P(B|\u00acA) is very low but non-zero given Article 5 could theoretically be invoked as a deterrent signal before full-scale conflict.",
-      "p_b_given_a_raw": 0.45,
-      "p_b_given_a_llm_clamped": 0.45,
+      "rationale": "The method_specific burden (formal Article 5 invocation) is a costly, institutionally demanding political act that historically has never been invoked against Russia; NuclearDeterrence=2.0 and WarCosts=-1.0 strongly suppress escalation to the level that would typically trigger invocation, pushing P(B|A) below 1.0 since serious clashes could occur without crossing the NATO collective-defense threshold, and P(B|\u00acA) remains very low given the extraordinarily high bar for a formal multilateral NATO declaration outside active serious conflict.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.55,
       "p_b_given_a_deterministic": null,
       "anchor_range": [
         0.3,
@@ -1708,10 +1708,10 @@
       "war_costs_used_for_range": -1.0,
       "severity_band": "unknown",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.015
+      "p_b_given_not_a_raw_llm": 0.02
     },
     "clergy_version": "v9",
-    "toggles_hash": "a6f9bd82c092",
+    "toggles_hash": "f7ee40c157f7",
     "glass": {
       "outcome_observability": "high",
       "resolution_risk": "high",
@@ -1841,27 +1841,27 @@
       ],
       "contract_initiator": "China",
       "contract_target": "Taiwan",
-      "p_b_given_a": 0.1919,
+      "p_b_given_a": 0.1712,
       "p_b_given_not_a": 0.0,
       "p_b_given_not_a_reference_days": 365.0,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The persistent-tier requirement (24-hour enforced denial of commercial access) substantially suppresses P(B|A) because serious conflict could involve airstrikes or ground invasion scenarios that don't include an enforced blockade; WarCosts=-1.0 (very high war cost) pushes toward the low end for this costly sustained option, PatronDeterrence=2.5 (strong US commitment to Taiwan) further depresses the probability by raising the cost of initiating and sustaining a blockade under credible patron intervention risk, and NuclearDeterrence=0.6 provides modest additional suppression on large-scale sustained operations, together justifying a low P(B|\u00acA) and a moderate-but-not-high P(B|A).",
+      "rationale": "The persistent-tier burden (24-hour enforced denial of commercial access) substantially suppresses P(B|A) below 1.0 since serious conflict could manifest as missile strikes, raids, or direct engagements without a formal blockade; WarCosts=-1.5 (very high war costs) and PatronDeterrence=2.0 (strong US patron commitment to Taiwan) both lean toward the low end of any persistent/costly-tier kinetic range, while WinProbability=0.5 (parity) and NuclearDeterrence=0.6 (moderate constraint) further suppress the likelihood of China choosing and sustaining the specific costly blockade instrument over 2026's horizon.",
       "p_b_given_a_raw": 0.55,
-      "p_b_given_a_llm_clamped": 0.28,
-      "p_b_given_a_deterministic": 0.1542,
+      "p_b_given_a_llm_clamped": 0.245,
+      "p_b_given_a_deterministic": 0.1396,
       "anchor_range": [
-        0.064,
-        0.28
+        0.056,
+        0.245
       ],
       "was_clamped": true,
-      "war_costs_used_for_range": -1.0,
+      "war_costs_used_for_range": -1.5,
       "severity_band": "persistent_campaign",
       "parent_event_relation": "conflict_bound",
       "p_b_given_not_a_raw_llm": 0.01
     },
     "clergy_version": "v9",
-    "toggles_hash": "fb60fdbe6a04",
+    "toggles_hash": "ca7eb8749cf7",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -2048,27 +2048,27 @@
       ],
       "contract_initiator": "US",
       "contract_target": "Venezuela",
-      "p_b_given_a": 0.1268,
+      "p_b_given_a": 0.1103,
       "p_b_given_not_a": 0.0,
       "p_b_given_not_a_reference_days": 365.0,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The territorial_control burden is the most restrictive tier, requiring a purposive offensive aimed at holding Venezuelan territory \u2014 not merely raids or punitive strikes; WinProbability of -1.5 (US at a capability disadvantage relative to the operational/logistical challenge) and PatronDeterrence of 0.5 (Russia/China backing Venezuela) both suppress the probability, while WarCosts of +1.0 (low cost signal) slightly counteracts the suppression, keeping P(B|\u00acA) very low given no plausible path to territorial invasion absent serious escalation.",
+      "rationale": "Territorial_control burden is the most restrictive tier (requires purposive offensive to establish control, not merely raids or punitive strikes); WinProbability of -1.5 signals a US capability disadvantage relative to a sustained Venezuela operation, PatronDeterrence of 0.5 reflects modest but real Russian/Cuban patron commitment raising costs, pushing P(B|A) modestly below 1.0 and keeping P(B|\u00acA) near zero given the near-impossibility of territorial control absent a serious clash crossing the ICB threshold.",
       "p_b_given_a_raw": 0.55,
-      "p_b_given_a_llm_clamped": 0.23,
-      "p_b_given_a_deterministic": 0.0825,
+      "p_b_given_a_llm_clamped": 0.2,
+      "p_b_given_a_deterministic": 0.0718,
       "anchor_range": [
-        0.023,
-        0.23
+        0.02,
+        0.2
       ],
       "was_clamped": true,
-      "war_costs_used_for_range": 1.0,
+      "war_costs_used_for_range": 0.0,
       "severity_band": "territorial_war",
       "parent_event_relation": "conflict_bound",
-      "p_b_given_not_a_raw_llm": 0.004
+      "p_b_given_not_a_raw_llm": 0.005
     },
     "clergy_version": "v9",
-    "toggles_hash": "b36a766c305f",
+    "toggles_hash": "cca07d9f25da",
     "glass": {
       "outcome_observability": "high",
       "resolution_risk": "medium",
@@ -2211,15 +2211,15 @@
       ],
       "contract_initiator": "Russia",
       "contract_target": "NATO",
-      "p_b_given_a": 0.0957,
+      "p_b_given_a": 0.0991,
       "p_b_given_not_a": 0.0,
       "p_b_given_not_a_reference_days": 365.0,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The territorial_control burden (offensive with intent to seize/hold NATO territory) is the most restrictive tier, suppressed further by NuclearDeterrence=3.0 (maximum mutual deterrence making large-scale territorial aggression against a nuclear-backed alliance existentially costly), PatronDeterrence=2.0 (strong collective Article 5 commitment raises cost of action against any NATO member), and WarCosts=-1.0 (high structural cost of war); P(B|A) is moderately high because if A occurs at all against NATO, territorial seizure intent is the most natural operationalization of that threshold, but not certain given ambiguous escalation paths; P(B|\u00acA) is very low given the structural deterrents make even a limited below-threshold incursion into NATO territory extraordinarily rare in any given month.",
-      "p_b_given_a_raw": 0.72,
+      "rationale": "The territorial_control burden (offensive aimed at seizing/holding NATO territory) is the most restrictive tier, substantially suppressing P(B|A) below 1.0 since serious clashes could occur through other mechanisms (e.g., border incidents, airspace violations, naval clashes) that fall short of a territorial offensive; structural context amplifies suppression: WarCosts=-1.0 (very high war cost) and NuclearDeterrence=2.0 (strong mutual deterrence) heavily depress the likelihood of this costliest possible action, while PatronDeterrence=2.0 (NATO collective defense commitment, Article 5) further constrains Russia from initiating territorial seizure, yielding a very low P(B|\u00acA) background rate and a moderate P(B|A) reflecting that even if serious clashes erupt they are more likely to be non-territorial in nature.",
+      "p_b_given_a_raw": 0.8,
       "p_b_given_a_llm_clamped": 0.16,
-      "p_b_given_a_deterministic": 0.0682,
+      "p_b_given_a_deterministic": 0.073,
       "anchor_range": [
         0.016,
         0.16
@@ -2231,7 +2231,7 @@
       "p_b_given_not_a_raw_llm": 0.003
     },
     "clergy_version": "v9",
-    "toggles_hash": "a6f9bd82c092",
+    "toggles_hash": "f7ee40c157f7",
     "glass": {
       "outcome_observability": "high",
       "resolution_risk": "high",
@@ -2323,15 +2323,15 @@
       ],
       "contract_initiator": "NATO",
       "contract_target": "Russia",
-      "p_b_given_a": 0.235,
+      "p_b_given_a": 0.2416,
       "p_b_given_not_a": 0.04,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The target_specific burden (acknowledged NATO/EU personnel in combat in Ukraine) is partially offset by a low scale threshold (single soldier suffices), but NuclearDeterrence=3.0 and WarCosts=-1.0 strongly suppress escalation to overt acknowledged NATO combat engagement, while PatronDeterrence=2.0 further raises the cost of direct confrontation with Russia, pushing p_b_given_not_a to a low but non-zero background rate reflecting the real possibility of a limited acknowledged incident (e.g., air-defense crew in combat) short of the full A threshold.",
+      "rationale": "The target_specific burden (Ukraine as theater, officially acknowledged combat role) allows a wide qualifying set of action types but adds the public-acknowledgment filter which suppresses P(B|\u00acA) significantly; NuclearDeterrence=2.0 and WarCosts=-1.0 both push strongly against overt NATO direct engagement absent full-scale serious clashes, keeping P(B|\u00acA) low (~4%/month), while if A does occur (serious NATO-Russia episode) formal acknowledgment of NATO combat presence becomes near-certain (0.85), slightly discounted because even in serious escalation NATO might prefer to keep some ambiguity.",
       "p_b_given_a_raw": 0.85,
       "p_b_given_a_llm_clamped": 0.36,
-      "p_b_given_a_deterministic": 0.1815,
+      "p_b_given_a_deterministic": 0.1908,
       "anchor_range": [
         0.08,
         0.36
@@ -2343,7 +2343,7 @@
       "p_b_given_not_a_raw_llm": 0.04
     },
     "clergy_version": "v9",
-    "toggles_hash": "a6f9bd82c092",
+    "toggles_hash": "f7ee40c157f7",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -2538,14 +2538,14 @@
       ],
       "contract_initiator": null,
       "contract_target": null,
-      "p_b_given_a": 0.7342,
+      "p_b_given_a": 0.7432,
       "p_b_given_not_a": 0.04,
-      "p_b_given_not_a_reference_days": 30,
+      "p_b_given_not_a_reference_days": 365,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Broad requirement burden means nearly any direct kinetic exchange satisfies YES, and the contract's explicit inclusion of single discrete incidents well below ICB VIOL>=3 makes P(B|\u00acA) genuinely non-zero given the historical Turkey-Greece pattern of Aegean dogfights, ship jostling, and airspace violations; P(B|A) is discounted slightly below 1.0 because A requires serious clashes that Greece-Turkey could in principle reach via a path not involving direct force (e.g., a coercive naval standoff); WinProbability=0.0 (symmetric capability) and WarCosts=-0.5 (high war cost) push both actors toward restraint and suppress escalation, leaning P(B|\u00acA) toward the lower end of its plausible range, while AudienceCosts=1.0 provides modest upward pressure on nationalist signaling but not enough to overcome the structural peace-inducing cost signal.",
-      "p_b_given_a_raw": 0.82,
-      "p_b_given_a_llm_clamped": 0.82,
+      "rationale": "Broad requirement burden means nearly any qualifying direct-force incident resolves YES, but the contract explicitly excludes warning shots, minor collisions, and intercepted missiles, meaning a genuine exchange of fire or significant ramming is required \u2014 ruling out the most common Aegean friction events; WarCosts moderately negative and WinProbability at zero (rough parity, no decisive edge) both suppress escalation toward serious engagement, pushing P(B|\u00acA) down within the broad-tier range, while the contract's explicit exclusions further reduce the background rate of sub-threshold qualifying events relative to raw gray-zone frequency.",
+      "p_b_given_a_raw": 0.85,
+      "p_b_given_a_llm_clamped": 0.85,
       "p_b_given_a_deterministic": 0.6975,
       "anchor_range": [
         0.54,
@@ -2558,7 +2558,7 @@
       "p_b_given_not_a_raw_llm": 0.04
     },
     "clergy_version": "v9",
-    "toggles_hash": "fa957cee8166",
+    "toggles_hash": "759e174ba8d7",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -2682,34 +2682,35 @@
     "clergy": {
       "manifestation_family": "kinetic_or_coercive_action",
       "political_act_formality": null,
-      "requirement_burden": "territorial_control",
+      "requirement_burden": "target_specific",
       "action_type": "ground_invasion",
       "qualifying_action_types": [
+        "raid",
         "ground_invasion"
       ],
       "contract_initiator": "Israel",
       "contract_target": "Iran",
-      "p_b_given_a": 0.1472,
+      "p_b_given_a": 0.2396,
       "p_b_given_not_a": 0.0,
       "p_b_given_not_a_reference_days": 365.0,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The territorial_control-tier requirement (ground forces physically inside Iran) and the explicit exclusion of airstrikes, cyberattacks, and proxies make this extremely restrictive; NuclearDeterrence=1.8 and PatronDeterrence=1.0 both push toward the low end of the range for any sustained or territorial Israeli operation deep inside Iranian territory, while WinProbability=1.5 and WarCosts=0.5 provide modest upward pressure but insufficient to overcome the structural deterrence and logistical implausibility of Israeli ground forces operating on Iranian soil \u2014 a limited commando raid (which could technically qualify per legalese) slightly elevates P(B|\u00acA) above zero but remains rare absent major escalation.",
-      "p_b_given_a_raw": 0.18,
-      "p_b_given_a_llm_clamped": 0.18,
-      "p_b_given_a_deterministic": 0.1332,
+      "rationale": "The target_specific burden (Iranian terrestrial territory) is met by ground_invasion or commando raid; P(B|A) is suppressed well below 1.0 because even a serious Israeli-Iran escalation episode is far more likely to manifest as airstrikes or missile exchanges than a ground operation on Iranian soil given the ~1,800 km distance, PatronDeterrence=1.5 (Russian/Chinese patron backing for Iran raises cost of physical incursion), WarCosts=-0.5 (high cost of war further discourages sustained ground commitment), and NuclearDeterrence=0.8 (escalation ceiling suppresses large-scale kinetic options); P(B|\u00acA) is a small but non-zero background rate reflecting the possibility of a limited covert commando raid that does not itself cross ICB VIOL>=3, which is plausible in principle but remains rare given geographic and logistical constraints.",
+      "p_b_given_a_raw": 0.25,
+      "p_b_given_a_llm_clamped": 0.25,
+      "p_b_given_a_deterministic": 0.2352,
       "anchor_range": [
-        0.0215,
-        0.215
+        0.09,
+        0.405
       ],
       "was_clamped": false,
-      "war_costs_used_for_range": 0.5,
+      "war_costs_used_for_range": -0.5,
       "severity_band": "territorial_war",
       "parent_event_relation": "conflict_bound",
-      "p_b_given_not_a_raw_llm": 0.03
+      "p_b_given_not_a_raw_llm": 0.02
     },
     "clergy_version": "v9",
-    "toggles_hash": "164ed03fd532",
+    "toggles_hash": "4309b10dac95",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -3354,21 +3355,22 @@
       "qualifying_action_types": [
         "missile_strike",
         "raid",
+        "seizure_boarding",
         "airstrike",
         "naval_blockade",
         "direct_engagement"
       ],
       "contract_initiator": null,
       "contract_target": null,
-      "p_b_given_a": 0.7405,
+      "p_b_given_a": 0.701,
       "p_b_given_not_a": 0.12,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Broad requirement burden means almost any qualifying physical incident satisfies YES (melee, gunfire, missiles, significant ramming), raising P(B|A) high but not to 1.0 since ICB VIOL>=3 could theoretically manifest as a large-scale campaign rather than discrete force-on-force contact; P(B|\u00acA) is set meaningfully above zero given the well-documented pattern of monthly friction at Second Thomas Shoal and Scarborough Shoal where a water-cannon/ramming escalation to gunfire is plausible without crossing serious-clash threshold, but PatronDeterrence=1.5 (US treaty commitment suppresses Chinese willingness to escalate to qualifying force levels), WarCosts=-0.5 (moderately high costs restrain full escalation), and WinProbability=0.5 (balanced capability creates caution on both sides), collectively pulling P(B|\u00acA) modestly downward within the background-rate band.",
-      "p_b_given_a_raw": 0.85,
-      "p_b_given_a_llm_clamped": 0.85,
-      "p_b_given_a_deterministic": 0.6936,
+      "rationale": "Requirement burden is broad (any qualifying direct use of force satisfies YES), so P(B|A) is moderate-high at 0.70 \u2014 discounted from 1.0 because the contract's exclusions (warning shots, minor rammings without hull breach) mean some serious-episode-level events could still fail to resolve YES under the strict legal thresholds; P(B|\u00acA) is elevated at ~12%/month reflecting the frequent sub-threshold CCG-AFP friction in the South China Sea where a single melee or gunfire incident below ICB VIOL>=3 could independently resolve YES; PatronDeterrence=1.0 (US treaty ally backing Philippines) suppresses Chinese escalation toward full-scale war but does not strongly suppress the single-incident threshold; WarCosts=-0.5 (moderately high) and AudienceCosts=1.5 (domestic lock-in on both sides) create a tense but partially restrained environment where tactical-level incidents remain plausible without crossing into serious-episode territory.",
+      "p_b_given_a_raw": 0.7,
+      "p_b_given_a_llm_clamped": 0.7,
+      "p_b_given_a_deterministic": 0.7014,
       "anchor_range": [
         0.54,
         0.855
@@ -3380,7 +3382,7 @@
       "p_b_given_not_a_raw_llm": 0.12
     },
     "clergy_version": "v9",
-    "toggles_hash": "2cc3ac38452f",
+    "toggles_hash": "23fbcf8b522f",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -3483,15 +3485,15 @@
       ],
       "contract_initiator": null,
       "contract_target": null,
-      "p_b_given_a": 0.635,
+      "p_b_given_a": 0.6416,
       "p_b_given_not_a": 0.04,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Broad requirement burden means any single qualifying incident (UAV shootdown, gunfire, missile contact) resolves YES, so P(B|A)=1.0; P(B|\u00acA) is a genuine non-zero background rate reflecting that isolated below-threshold incidents (e.g. a UAV shootdown) can occur without triggering ICB VIOL>=3, but NuclearDeterrence=3.0 and WarCosts=-1.0 strongly suppress escalation to even accidental direct engagement, PatronDeterrence=2.0 for Russia-as-target-of-NATO further complicates attribution, yielding a modest ~4%/month background rate for a qualifying sub-threshold incident.",
-      "p_b_given_a_raw": 1.0,
+      "rationale": "Broad requirement burden (any single qualifying incident between any NATO member and Russia suffices) keeps P(B|A) near 1.0, while the explicit inclusion of UAV shootdowns and the wide NATO-collective dyad raises the background P(B|\u00acA) above near-zero; however, NuclearDeterrence=2.0 and WarCosts=-1.0 strongly suppress escalation to or beyond VIOL>=3, meaning A itself is very unlikely, and PatronDeterrence=2.0 reinforces mutual caution, though WinProbability=0.5 and AudienceCosts=0.5 do not materially push the background kinetic rate upward.",
+      "p_b_given_a_raw": 0.92,
       "p_b_given_a_llm_clamped": 0.76,
-      "p_b_given_a_deterministic": 0.5815,
+      "p_b_given_a_deterministic": 0.5908,
       "anchor_range": [
         0.48,
         0.76
@@ -3503,7 +3505,7 @@
       "p_b_given_not_a_raw_llm": 0.04
     },
     "clergy_version": "v9",
-    "toggles_hash": "a6f9bd82c092",
+    "toggles_hash": "f7ee40c157f7",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -6527,27 +6529,27 @@
       ],
       "contract_initiator": "Europe",
       "contract_target": "Iran",
-      "p_b_given_a": 0.2361,
+      "p_b_given_a": 0.3373,
       "p_b_given_not_a": 0.004,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The target_specific burden (confirmed impact on Iranian territory) and method-specific weapon inclusion list (airstrike or surface-to-surface/cruise/ballistic missile) constrain P(B|A) below 1.0 since a serious episode could involve naval, cyber, or other non-qualifying methods; WarCosts very negative (-1.5) and PatronDeterrence moderate (0.5, Iran's Russia/China alignment) suppress the background rate further, while WinProbability (0.6 favoring Europe) and AudienceCosts (1.2) provide modest upward offset, leaving P(B|\u00acA) extremely low given no European state has struck Iran in modern history outside of a full escalation context.",
+      "rationale": "Target_specific burden (confirmed impact on Iranian territory by a European state) substantially limits P(B|A) since Europe-led serious clashes with Iran could involve naval or other non-qualifying methods, and European states lack the autonomous strike packages of US/Israel; P(B|\u00acA) is near-zero given no European country has ever struck Iran and the political threshold is extraordinarily high; PatronDeterrence=0.5 and NuclearDeterrence=0.3 are mild suppressants, while AudienceCosts=1.7 suggests some domestic lock-in but no current public European commitment to strike Iran exists, and WinProbability=0.6 and WarCosts=0.0 do not strongly suppress the option but cannot overcome the structural implausibility of a unilateral European strike absent a major catalyst.",
       "p_b_given_a_raw": 0.55,
-      "p_b_given_a_llm_clamped": 0.315,
-      "p_b_given_a_deterministic": 0.2023,
+      "p_b_given_a_llm_clamped": 0.45,
+      "p_b_given_a_deterministic": 0.289,
       "anchor_range": [
-        0.07,
-        0.315
+        0.1,
+        0.45
       ],
       "was_clamped": true,
-      "war_costs_used_for_range": -1.5,
+      "war_costs_used_for_range": 0.0,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
       "p_b_given_not_a_raw_llm": 0.004
     },
     "clergy_version": "v9",
-    "toggles_hash": "e57bf7c59492",
+    "toggles_hash": "7b04290f3a4c",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -6670,27 +6672,27 @@
       ],
       "contract_initiator": "Europe",
       "contract_target": "Iran",
-      "p_b_given_a": 0.2361,
-      "p_b_given_not_a": 0.004,
+      "p_b_given_a": 0.3373,
+      "p_b_given_not_a": 0.003,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The target_specific burden (Iranian territory) and method-specific restriction (airstrike/missile only) reduce P(B|A) substantially since A could involve European-Iranian clashes in non-Iranian territory or via other means; WarCosts very negative (-1.5) and PatronDeterrence moderate (0.5, Russia/China backing Iran) push toward low end, while WinProbability (0.6) and AudienceCosts (1.2) provide modest upward pressure, but no European country has the political will or operational posture to strike Iran unilaterally in the near term, keeping P(B|\u00acA) near zero as a background rate.",
-      "p_b_given_a_raw": 0.35,
-      "p_b_given_a_llm_clamped": 0.315,
-      "p_b_given_a_deterministic": 0.2023,
+      "rationale": "The target_specific burden (strike must clearly hit Iranian territory and be attributed to a listed European sovereign state) suppresses P(B|A) well below 1.0 since serious interstate clashes between Europe and Iran could involve naval, cyber, or proxy engagements that don't satisfy the airstrike/missile-strike-on-Iranian-territory criterion; PatronDeterrence=0.5 and NuclearDeterrence=0.3 provide modest but real suppression on sustained kinetic escalation, while WinProbability=0.6 (Europe has a capability edge) and AudienceCosts=1.7 (high domestic lock-in, suggesting leaders face real pressure if they formally commit) slightly elevate plausibility; P(B|\u00acA) is near-zero because a unilateral European airstrike on Iranian territory absent a serious conflict episode has essentially no historical precedent.",
+      "p_b_given_a_raw": 0.45,
+      "p_b_given_a_llm_clamped": 0.45,
+      "p_b_given_a_deterministic": 0.289,
       "anchor_range": [
-        0.07,
-        0.315
+        0.1,
+        0.45
       ],
-      "was_clamped": true,
-      "war_costs_used_for_range": -1.5,
+      "was_clamped": false,
+      "war_costs_used_for_range": 0.0,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.004
+      "p_b_given_not_a_raw_llm": 0.003
     },
     "clergy_version": "v9",
-    "toggles_hash": "e57bf7c59492",
+    "toggles_hash": "7b04290f3a4c",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -8474,27 +8476,27 @@
       ],
       "contract_initiator": "Pakistan",
       "contract_target": "Yemen",
-      "p_b_given_a": 0.5938,
+      "p_b_given_a": 0.4846,
       "p_b_given_not_a": 0.003,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The method_specific burden (airstrike or surface-to-surface missile only) moderately constrains P(B|A), since a serious Pakistan-Yemen episode could theoretically manifest differently; P(B|\u00acA) is near-zero given Pakistan has no historical precedent of striking Yemen, no current conflict context, and the dyad is geographically and politically disconnected \u2014 structural primitives show near-zero WarCosts (0.2) and low NuclearDeterrence (0.2) which don't suppress action on cost grounds, but WinProbability (2.3) and PatronDeterrence (0.3) reflect Pakistan's capability advantage with minimal Houthi patron deterrence, still insufficient to generate plausible motive for unilateral Pakistani strikes on Yemeni territory absent a serious escalatory trigger.",
-      "p_b_given_a_raw": 0.55,
-      "p_b_given_a_llm_clamped": 0.55,
-      "p_b_given_a_deterministic": 0.6125,
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile only) already narrows the qualifying set, and the Pakistan-Yemen dyad has no current conflict relationship or operational posture making strikes plausible; WarCosts moderately negative and WinProbability marginally positive offer no structural incentive for Pakistan to initiate such action, while PatronDeterrence and NuclearDeterrence are low enough not to independently suppress or elevate probability, leaving the base rate driven almost entirely by the near-zero historical frequency of any Pakistan-Yemen kinetic exchange.",
+      "p_b_given_a_raw": 0.45,
+      "p_b_given_a_llm_clamped": 0.45,
+      "p_b_given_a_deterministic": 0.4995,
       "anchor_range": [
-        0.2575,
-        0.721
+        0.21,
+        0.588
       ],
       "was_clamped": false,
-      "war_costs_used_for_range": 0.2,
+      "war_costs_used_for_range": -0.8,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
       "p_b_given_not_a_raw_llm": 0.003
     },
     "clergy_version": "v9",
-    "toggles_hash": "d6daba19e8e3",
+    "toggles_hash": "e353df759e78",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -8775,27 +8777,27 @@
       ],
       "contract_initiator": "Pakistan",
       "contract_target": "Yemen",
-      "p_b_given_a": 0.6238,
-      "p_b_given_not_a": 0.004,
+      "p_b_given_a": 0.526,
+      "p_b_given_not_a": 0.003,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike or surface-to-surface missile only) moderately suppresses P(B|A) since a serious interstate clash could also manifest as other action types; P(B|\u00acA) is extremely low given Pakistan has no historical pattern of striking Yemeni territory and no current conflict context, though WinProbability=2.3 (moderate capability edge) and WarCosts=0.2 (low war cost) provide slight upward pressure while PatronDeterrence=0.3 and NuclearDeterrence=0.2 are minimal constraints \u2014 the dominant suppressive factor is simply the absence of any political-military motivation for Pakistan to initiate strikes on Yemen.",
-      "p_b_given_a_raw": 0.65,
-      "p_b_given_a_llm_clamped": 0.65,
-      "p_b_given_a_deterministic": 0.6125,
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile) slightly reduces P(B|A) from unity since serious conflict could also manifest as other action types; P(B|\u00acA) is near-zero because Pakistan has no historical pattern of striking Yemeni territory, no active dispute, and no operational basing to do so \u2014 the WinProbability of 2.3 (mild capability advantage) is moot given the total absence of political motivation or geographic access, while WarCosts of -0.8 (high cost of war) and PatronDeterrence of 0.3 further suppress any standalone strike below the serious-conflict threshold.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.588,
+      "p_b_given_a_deterministic": 0.4995,
       "anchor_range": [
-        0.2575,
-        0.721
+        0.21,
+        0.588
       ],
-      "was_clamped": false,
-      "war_costs_used_for_range": 0.2,
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.004
+      "p_b_given_not_a_raw_llm": 0.003
     },
     "clergy_version": "v9",
-    "toggles_hash": "d6daba19e8e3",
+    "toggles_hash": "e353df759e78",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -9135,15 +9137,15 @@
       ],
       "contract_initiator": "Iran",
       "contract_target": "Jordan",
-      "p_b_given_a": 0.4898,
+      "p_b_given_a": 0.4314,
       "p_b_given_not_a": 0.04,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike/missile only, no proxies, explicit Iranian attribution) and the high PatronDeterrence=2.0 reflecting Jordan's US/Western patron commitment suppress the probability; WinProbability=1.6 gives Iran modest strike capability but WarCosts=-0.5 and the direct-attribution requirement (no proxy laundering) further dampen the below-threshold background rate, which remains non-zero given the April 2024 precedent of Iranian missiles transiting Jordanian airspace during the Israel strike package.",
-      "p_b_given_a_raw": 0.55,
-      "p_b_given_a_llm_clamped": 0.55,
-      "p_b_given_a_deterministic": 0.464,
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile only, direct Iranian state action required) modestly suppresses P(B|A) since a serious Iran-Jordan episode could involve other modalities or proxy routes; PatronDeterrence=1.5 (Jordan's US patron commitment is strong, including Jordan's active role intercepting Iranian missiles in April 2024) and WarCosts=-0.5 (high cost of war) push P(B|\u00acA) low, as Iran has little incentive to directly strike Jordanian territory absent broader escalation, though the April 2024 precedent establishes a real non-zero background rate of Iranian missiles transiting Jordanian airspace.",
+      "p_b_given_a_raw": 0.45,
+      "p_b_given_a_llm_clamped": 0.45,
+      "p_b_given_a_deterministic": 0.4234,
       "anchor_range": [
         0.225,
         0.63
@@ -9155,7 +9157,7 @@
       "p_b_given_not_a_raw_llm": 0.04
     },
     "clergy_version": "v9",
-    "toggles_hash": "507cfc5684c0",
+    "toggles_hash": "609cb54abfa6",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "medium",
@@ -9195,27 +9197,27 @@
       ],
       "contract_initiator": "Iran",
       "contract_target": "Saudi Arabia",
-      "p_b_given_a": 0.3939,
+      "p_b_given_a": 0.4888,
       "p_b_given_not_a": 0.04,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike or surface-to-surface missile/drone, direct Iranian state action only, no proxies) moderately restricts P(B|A) since serious conflict might involve other modalities or proxy escalation rather than direct Iranian strikes; high WarCosts (-1.3) and strong PatronDeterrence (1.2, reflecting US-Saudi commitment) suppress both the base rate and conditional probability, while the low-level background P(B|\u00acA) reflects that Iran has historically conducted limited direct strikes (e.g. September 2019 Aramco, April 2025 context) without crossing the full serious-conflict threshold, though explicit attribution requirements further reduce the qualifying rate.",
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile/drone, direct Iranian state action only, no proxies) limits P(B|A) below 1 since serious clashes could manifest via other means; P(B|\u00acA) reflects Iran's historical direct strikes on Saudi territory being rare but precedented (e.g. 2019 Aramco), though the proxy-exclusion and attribution requirements are restrictive; high PatronDeterrence (1.7, US-Saudi security ties) pushes both estimates lower, while moderate WarCosts (0.20, not strongly peace-inducing) and high AudienceCosts (2.8) allow some upward pressure on discrete signaling strikes but the strong patron commitment dominates for sustained escalation.",
       "p_b_given_a_raw": 0.55,
-      "p_b_given_a_llm_clamped": 0.518,
-      "p_b_given_a_deterministic": 0.3407,
+      "p_b_given_a_llm_clamped": 0.55,
+      "p_b_given_a_deterministic": 0.4626,
       "anchor_range": [
-        0.185,
-        0.518
+        0.2575,
+        0.721
       ],
-      "was_clamped": true,
-      "war_costs_used_for_range": -1.3,
+      "was_clamped": false,
+      "war_costs_used_for_range": 0.19999999999999996,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
       "p_b_given_not_a_raw_llm": 0.04
     },
     "clergy_version": "v9",
-    "toggles_hash": "73c02b87676a",
+    "toggles_hash": "e1c50978ae19",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -9256,12 +9258,12 @@
       "contract_initiator": "Israel",
       "contract_target": "Yemen",
       "p_b_given_a": 0.4989,
-      "p_b_given_not_a": 0.55,
+      "p_b_given_not_a": 0.45,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike or missile strike only, single event sufficient) sets a relatively low threshold; Israel has already conducted multiple documented airstrikes on Houthi/Yemen targets since late 2023 at a background rate exceeding once per month absent serious-war conditions, so P(B|\u00acA) is high; WinProbability=0.5 (neutral capability edge) and NuclearDeterrence=0.0 (no nuclear constraint) do not suppress the action, while PatronDeterrence=0.5 (moderate Iranian patron) is a mild drag but historically has not deterred Israeli strikes; AudienceCosts=1.0 and WarCosts=-0.5 (high war costs) together suggest Israel prefers discrete strikes over sustained campaigns but retains strong domestic pressure to respond to Houthi attacks, keeping single-strike P(B|\u00acA) elevated.",
-      "p_b_given_a_raw": 0.82,
+      "rationale": "Method_specific burden (airstrike or missile_strike only, single discrete event suffices) yields moderately high P(B|A) since Israel's preferred tool against Yemen IS airstrikes/missiles; P(B|\u00acA) is substantial because Israel has repeatedly struck Yemen below the serious-clash threshold historically; WinProbability=0.5 (no decisive disadvantage) supports feasibility, WarCosts=-0.5 modestly suppresses escalation but does not deter single discrete strikes, PatronDeterrence=0.5 (Iranian/Houthi patron) provides mild deterrence, NuclearDeterrence=0.0 imposes no nuclear suppression on either tier.",
+      "p_b_given_a_raw": 0.72,
       "p_b_given_a_llm_clamped": 0.63,
       "p_b_given_a_deterministic": 0.4427,
       "anchor_range": [
@@ -9272,10 +9274,10 @@
       "war_costs_used_for_range": -0.5,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.55
+      "p_b_given_not_a_raw_llm": 0.45
     },
     "clergy_version": "v9",
-    "toggles_hash": "0dfdc1785ab6",
+    "toggles_hash": "f36213c2f781",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -9316,12 +9318,12 @@
       "contract_initiator": "Israel",
       "contract_target": "Yemen",
       "p_b_given_a": 0.4989,
-      "p_b_given_not_a": 0.45,
+      "p_b_given_not_a": 0.4,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike or missile strike on Yemeni territory) sets a low threshold \u2014 a single qualifying strike resolves YES well below ICB VIOL>=3 \u2014 yielding a high P(B|\u00acA) background rate given Israel's demonstrated 2024\u20132025 strike pattern against Houthi targets; WinProbability=0.5 (capability advantage) supports feasibility, AudienceCosts=1.0 elevates follow-through pressure, PatronDeterrence=0.5 (Iranian patron moderately committed) slightly suppresses escalation but not discrete strikes, WarCosts=-0.5 moderately peace-inducing but not decisive for a limited method_specific action; P(B|A) is held below 1.0 because a serious episode could instead manifest as naval action, cyber, or ground escalation that excludes qualifying action types.",
-      "p_b_given_a_raw": 0.7,
+      "rationale": "Method_specific burden (airstrike or missile strike on Yemeni territory) is well below ICB VIOL>=3, so P(B|\u00acA) is genuinely high \u2014 Israel has conducted repeated standalone strikes on Houthi infrastructure that did not escalate to serious interstate episodes; WinProbability=0.5 (moderate Israeli capability advantage) supports feasibility of strikes, while WarCosts=-0.5 (moderately high war cost) and PatronDeterrence=0.5 (Iranian patron) modestly suppress escalation to full serious-episode threshold but do not suppress limited strikes, keeping P(B|\u00acA) elevated and P(B|A) somewhat below 1 because full-scale war might shift Israel toward different operational methods or theaters.",
+      "p_b_given_a_raw": 0.65,
       "p_b_given_a_llm_clamped": 0.63,
       "p_b_given_a_deterministic": 0.4427,
       "anchor_range": [
@@ -9332,10 +9334,10 @@
       "war_costs_used_for_range": -0.5,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.45
+      "p_b_given_not_a_raw_llm": 0.4
     },
     "clergy_version": "v9",
-    "toggles_hash": "0dfdc1785ab6",
+    "toggles_hash": "f36213c2f781",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -9886,27 +9888,27 @@
       ],
       "contract_initiator": "Iran",
       "contract_target": "Egypt",
-      "p_b_given_a": 0.4515,
+      "p_b_given_a": 0.4157,
       "p_b_given_not_a": 0.003,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method-specific burden (airstrike or missile strike from Iranian state forces against Egyptian territory) suppresses P(B|A) significantly because Iran-Egypt serious conflict would most likely involve proxies, border friction, or mutual posturing rather than direct Iranian air/missile strikes on Egyptian soil; P(B|\u00acA) is near-zero given no historical precedent of Iran targeting Egypt directly, but the method_specific tier allows it to remain a tiny non-zero background rate; WinProbability=0.3 (marginal capability edge) and WarCosts=0.2 (low cost) modestly support feasibility, but PatronDeterrence=0.30 (Egypt's US alignment) and the near-total absence of any Iran-Egypt conflict history push the estimate to the low end of plausible ranges.",
-      "p_b_given_a_raw": 0.35,
-      "p_b_given_a_llm_clamped": 0.35,
-      "p_b_given_a_deterministic": 0.495,
+      "rationale": "Method_specific burden (airstrike or missile strike only, no proxies, must be confirmed Iranian state origin) suppresses P(B|A) substantially since Iran-Egypt serious conflict would more likely involve indirect/proxy action than direct Iranian strikes on Egyptian territory; PatronDeterrence=0.8 (Egypt's US/regional patron backing) and the geographic implausibility of a direct Iranian strike on Egypt \u2014 a non-contiguous, historically non-adversarial Sunni state \u2014 keeps P(B|\u00acA) near-zero, while WinProbability=0.3 and WarCosts=0.2 (low war cost) provide only modest upward pressure insufficient to overcome the strategic absurdity of this specific dyad conflict.",
+      "p_b_given_a_raw": 0.25,
+      "p_b_given_a_llm_clamped": 0.2575,
+      "p_b_given_a_deterministic": 0.4835,
       "anchor_range": [
         0.2575,
         0.721
       ],
-      "was_clamped": false,
+      "was_clamped": true,
       "war_costs_used_for_range": 0.2,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
       "p_b_given_not_a_raw_llm": 0.003
     },
     "clergy_version": "v9",
-    "toggles_hash": "cd014259671c",
+    "toggles_hash": "5b821220c391",
     "glass": {
       "outcome_observability": "high",
       "resolution_risk": "medium",
@@ -10247,12 +10249,12 @@
       "contract_initiator": "Israel",
       "contract_target": "Syria",
       "p_b_given_a": 0.5166,
-      "p_b_given_not_a": 0.92,
+      "p_b_given_not_a": 0.97,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "high",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike or missile strike on Syrian terrestrial territory) is easily satisfied given Israel's well-documented pattern of near-monthly strikes inside Syria even absent serious-episode thresholds; WinProbability=1.0 (decisive Israeli air superiority) and NuclearDeterrence=0.0 both support a high background rate, while WarCosts=-0.5 is offset by the fact that these strikes are precisely calibrated to stay below the serious-conflict threshold, and PatronDeterrence=0.5 (residual Russian/Iranian presence) remains too weak to deter Israel's established interdiction campaign.",
-      "p_b_given_a_raw": 0.95,
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile strike on Syrian terrestrial territory) is easily met given Israel's sustained operational pattern of striking Syria multiple times per month even absent serious escalation; WinProbability=1.0 (overwhelming Israeli air superiority) and NuclearDeterrence=0.0 (no nuclear constraint) push P(B|\u00acA) very high, while WarCosts=-0.5 and PatronDeterrence=0.5 (moderate Syrian patron commitment, i.e. weakened Iranian/Russian backing post-Assad) modestly reduce but do not suppress the extremely high background strike rate that has characterized this dyad for years.",
+      "p_b_given_a_raw": 0.92,
       "p_b_given_a_llm_clamped": 0.63,
       "p_b_given_a_deterministic": 0.468,
       "anchor_range": [
@@ -10263,10 +10265,10 @@
       "war_costs_used_for_range": -0.5,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.92
+      "p_b_given_not_a_raw_llm": 0.97
     },
     "clergy_version": "v9",
-    "toggles_hash": "0da10f2f9267",
+    "toggles_hash": "0defa7f3d0aa",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -10417,7 +10419,7 @@
     "clergy": {
       "manifestation_family": "kinetic_or_coercive_action",
       "political_act_formality": null,
-      "requirement_burden": "method_specific",
+      "requirement_burden": "target_specific",
       "action_type": "airstrike",
       "qualifying_action_types": [
         "missile_strike",
@@ -10425,27 +10427,27 @@
       ],
       "contract_initiator": "Iran",
       "contract_target": "Qatar",
-      "p_b_given_a": 0.4279,
+      "p_b_given_a": 0.2001,
       "p_b_given_not_a": 0.003,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike or surface-to-surface missile/drone, direct Iranian attribution required, excluding proxies) substantially narrows the qualifying set relative to any serious Iran-Qatar clash \u2014 Qatar hosts major US military assets (Al Udeid) making it a deeply unlikely standalone Iranian target and raising effective PatronDeterrence well above the raw 0.5 score, while WinProbability 0.8 provides capability but WarCosts ~0 does not structurally suppress kinetic options, yet the extreme diplomatic implausibility of Iran directly striking a Gulf Arab state hosting US forces keeps P(B|\u00acA) very low and P(B|A) well below 1.",
+      "rationale": "The target_specific burden (Qatar's terrestrial territory, Iranian-origin only, proxies excluded) sharply narrows P(B|A) because a serious Iran-Qatar episode is far more likely to involve Gulf-wide escalation, US force posture pressure, or Iran-Saudi/UAE dynamics than a direct strike on Qatar specifically; WarCosts=-2.0 (very high cost of war) and PatronDeterrence=0.5 (US bases in Qatar represent a meaningful patron commitment) both suppress even limited unilateral action toward the low end, while WinProbability=0.8 provides capability but does not overcome the structural cost and deterrence signals.",
       "p_b_given_a_raw": 0.25,
       "p_b_given_a_llm_clamped": 0.25,
-      "p_b_given_a_deterministic": 0.5042,
+      "p_b_given_a_deterministic": 0.1787,
       "anchor_range": [
-        0.25,
-        0.7
+        0.06,
+        0.27
       ],
       "was_clamped": false,
-      "war_costs_used_for_range": 0.0,
+      "war_costs_used_for_range": -2.0,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
       "p_b_given_not_a_raw_llm": 0.003
     },
     "clergy_version": "v9",
-    "toggles_hash": "e348ab59e458",
+    "toggles_hash": "7ccef63c5602",
     "glass": {
       "outcome_observability": "high",
       "resolution_risk": "medium",
@@ -10673,8 +10675,8 @@
       "p_b_given_not_a_reference_days": 365.0,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The territorial_control burden (48+ hours of sustained control, not mere incursion) substantially suppresses P(B|A) since even a serious Eritrea-Ethiopia clash could involve cross-border fire, raids, or limited engagements that don't meet sustained-control threshold; WarCosts=-1.0 (very high cost of war) pushes toward the low end of the range for this costly sustained option, WinProbability=0.4 (modest capability disadvantage) further reduces plausibility of Eritrea holding Ethiopian territory, and PatronDeterrence=0.3 offers modest but non-trivial external constraint on Eritrea; P(B|\u00acA) is near-zero given territorial_control tier requires at minimum a serious military operation, though a background ~0.3% monthly rate is retained for the small chance of a covert or limited ground incursion achieving de facto control without crossing the full serious-clash threshold.",
-      "p_b_given_a_raw": 0.55,
+      "rationale": "The territorial_control requirement (48+ hour sustained ground presence) is the most restrictive burden tier, substantially suppressing P(B|A) since serious Eritrea-Ethiopia clashes could involve cross-border shelling, airstrikes, or limited raids without meeting the sustained control threshold; WarCosts at -1.0 (very high cost of war) pushes firmly toward the low end of the range for this costly territorial-control tier, WinProbability at 0.4 (slight disadvantage for Eritrea) further suppresses the invasion option, PatronDeterrence at 0.3 offers minimal external deterrence on Ethiopia's side, and AudienceCosts at 2.5 slightly elevates domestic lock-in but does not override the structural cost signal for a full ground invasion.",
+      "p_b_given_a_raw": 0.45,
       "p_b_given_a_llm_clamped": 0.16,
       "p_b_given_a_deterministic": 0.093,
       "anchor_range": [
@@ -10685,10 +10687,10 @@
       "war_costs_used_for_range": -1.0,
       "severity_band": "territorial_war",
       "parent_event_relation": "conflict_bound",
-      "p_b_given_not_a_raw_llm": 0.003
+      "p_b_given_not_a_raw_llm": 0.005
     },
     "clergy_version": "v9",
-    "toggles_hash": "70212eeb436b",
+    "toggles_hash": "c42e8a1fe0d9",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -10795,7 +10797,7 @@
       "p_b_given_not_a_reference_days": 365.0,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The territorial_control burden (48-hour sustained control, not mere incursion) is the binding constraint suppressing P(B|A) below 1.0, since serious Eritrea-Ethiopia clashes could involve cross-border raids or artillery exchanges without establishing territorial control; WarCosts=-1.0 (very high war cost) and WinProbability=0.4 (modest Eritrean capability disadvantage against a larger Ethiopia) both push toward the low end of the territorial_control range, while PatronDeterrence=0.3 adds modest further suppression, and NuclearDeterrence=0.0 provides no escalation brake but does not offset the structural cost signal.",
+      "rationale": "The territorial_control burden (ground forces + 48-hour sustained control) is the most restrictive tier, suppressing P(B|A) below 1.0 since a serious episode could involve exchanges short of sustained territorial seizure; WarCosts=-1.0 (very high cost of war) pushes strongly toward the low end of the range for this costly sustained option, WinProbability=0.4 (moderate capability disadvantage against a much larger Ethiopia) further suppresses plausibility of successful territorial control, and PatronDeterrence=0.3 adds marginal additional deterrence, though NuclearDeterrence=0.0 provides no offsetting constraint; background rate is near-zero absent A given no current offensive posture.",
       "p_b_given_a_raw": 0.55,
       "p_b_given_a_llm_clamped": 0.16,
       "p_b_given_a_deterministic": 0.093,
@@ -10807,10 +10809,10 @@
       "war_costs_used_for_range": -1.0,
       "severity_band": "territorial_war",
       "parent_event_relation": "conflict_bound",
-      "p_b_given_not_a_raw_llm": 0.003
+      "p_b_given_not_a_raw_llm": 0.004
     },
     "clergy_version": "v9",
-    "toggles_hash": "70212eeb436b",
+    "toggles_hash": "c42e8a1fe0d9",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -10974,7 +10976,7 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike or surface-to-surface missile strike impacting Lebanese terrestrial territory on a single day) drives a high P(B|\u00acA) because Israel has been conducting near-daily airstrikes on Lebanon during this period even absent a serious-clash threshold crossing; WinProbability=1.2 (capability advantage) supports Israel's operational willingness and capacity to strike, while WarCosts=-0.8 would normally suppress sustained operations but does not significantly suppress discrete single-day strikes, and AudienceCosts=1.5 reinforces continued operational pressure.",
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile strike impacting Lebanese territory on a single calendar day) yields high P(B|A) since airstrikes and missile strikes are Israel's primary operational family against Lebanon; P(B|\u00acA) is high on a per-day basis because Israel was conducting near-daily strikes on Lebanese territory during the active 2024 campaign even well below the serious-clash threshold, and WinProbability=1.2 (Israeli capability advantage) and AudienceCosts=1.5 (domestic lock-in) both support continued strike activity, while WarCosts=-0.8 and PatronDeterrence=0.5 provide modest suppression but not enough to override the high observed operational tempo.",
       "p_b_given_a_raw": 0.92,
       "p_b_given_a_llm_clamped": 0.588,
       "p_b_given_a_deterministic": 0.44,
@@ -10989,7 +10991,7 @@
       "p_b_given_not_a_raw_llm": 0.72
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -11215,8 +11217,8 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Target_specific burden (Lebanese terrestrial territory, specific munition types, single calendar day) reduces P(B|A) below 1.0 since a serious episode could involve modalities excluded here (ground incursion, artillery, naval); P(B|\u00acA) is substantial because Israel-Lebanon airstrike/missile exchanges were occurring at high daily frequency even below the serious-episode threshold during the 2024 conflict period, and WinProbability=1.2 (Israeli capability advantage) supports continued strike activity while AudienceCosts=1.5 (high domestic lock-in) reinforces Israeli willingness to strike; WarCosts=-0.8 somewhat suppresses but does not eliminate sub-threshold strike activity given the operational tempo observed.",
-      "p_b_given_a_raw": 0.75,
+      "rationale": "The target_specific burden (Lebanese terrestrial territory on a single calendar day) is partially offset by the broad qualifying method set (airstrike or missile strike), meaning almost any Israeli strike on land in Lebanon satisfies the contract; P(B|A) is high (~0.85) because a serious episode almost certainly involves Israeli airstrikes or missile strikes on Lebanese territory; P(B|\u00acA) is substantial (~0.55 per day) reflecting Israel's active operational tempo against Lebanon even below the serious-clash threshold during this period, with WinProbability=1.2 (strong Israeli capability advantage) and AudienceCosts=1.5 (high domestic lock-in supporting continued strikes) both pushing upward, while WarCosts=-0.8 (high cost of full war) mainly suppresses escalation to A rather than suppressing individual strikes.",
+      "p_b_given_a_raw": 0.85,
       "p_b_given_a_llm_clamped": 0.378,
       "p_b_given_a_deterministic": 0.2629,
       "anchor_range": [
@@ -11230,7 +11232,7 @@
       "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -11453,11 +11455,11 @@
       "contract_initiator": "Israel",
       "contract_target": "Lebanon",
       "p_b_given_a": 0.2974,
-      "p_b_given_not_a": 0.55,
+      "p_b_given_not_a": 0.72,
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The target_specific burden (Lebanese terrestrial territory, airstrike or surface-to-surface missile only, single calendar day) is easily satisfied if Israel is actively operating against Lebanon at all; P(B|A) is near-certain given airstrikes are Israel's primary kinetic modality against Lebanon; P(B|\u00acA) is genuinely high because discrete Israeli airstrikes on Lebanese territory have occurred at very high daily frequency during active campaign periods even absent a serious-episode crossing, with WinProbability=1.2 (strong Israeli capability advantage, raising operational tempo) and AudienceCosts=1.5 (domestic lock-in sustaining operations), partially offset by WarCosts=-0.8 which slightly suppresses the most intensive sustained options but not single-day strikes.",
+      "rationale": "The target_specific burden (Lebanese terrestrial territory, single calendar day) is easily met by Israel's demonstrated pattern of daily airstrikes/missile strikes into Lebanon during active campaigns; WinProbability=1.2 (strong Israeli capability edge) and AudienceCosts=1.5 (domestic lock-in) push p_b_given_not_a high because Israel was conducting strikes at very high daily frequency even below the serious-episode threshold, while WarCosts=-0.8 (high cost of full war) and PatronDeterrence=0.5 (moderate Hezbollah patron support) are peace-inducing at the upper end but do not suppress single-day limited strikes.",
       "p_b_given_a_raw": 0.92,
       "p_b_given_a_llm_clamped": 0.378,
       "p_b_given_a_deterministic": 0.2629,
@@ -11469,10 +11471,10 @@
       "war_costs_used_for_range": -0.8,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.55
+      "p_b_given_not_a_raw_llm": 0.72
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -11943,7 +11945,7 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The target_specific burden (Lebanese terrestrial territory on a single named date) is met by airstrike or missile_strike families, which have historically occurred at high background frequency during active Israeli-Lebanon tension periods; WinProbability=1.2 (strong Israeli capability edge) supports a high P(B|A), while WarCosts=-0.8 (high structural cost of sustained war) is less suppressive here given these are discrete strikes rather than persistent/territorial actions, and PatronDeterrence=0.5 (moderate Hezbollah patron support) does not strongly deter single-day strikes; the single-day resolution window and munition-type exclusions (no artillery, naval, ground) modestly reduce both conditionals from their unconstrained values.",
+      "rationale": "The target_specific burden (Lebanese terrestrial territory on a single date, excluding artillery/naval/cyber) reduces P(B|A) slightly from 1.0 because some serious-clash scenarios could involve excluded munition types or maritime action; P(B|\u00acA) is set as a daily rate reflecting that Israel has historically conducted airstrikes or missile strikes into Lebanon on a substantial fraction of individual days during active operational periods (especially post-2024 escalation), and the WinProbability=1.2 (strong capability edge) and AudienceCosts=1.5 (domestic lock-in) support a higher daily strike rate, while WarCosts=-0.8 (high structural cost of war) and PatronDeterrence=0.5 (modest Hezbollah patron commitment) modestly offset each other, leaving a meaningful but sub-majority daily background rate.",
       "p_b_given_a_raw": 0.82,
       "p_b_given_a_llm_clamped": 0.378,
       "p_b_given_a_deterministic": 0.2629,
@@ -11958,7 +11960,7 @@
       "p_b_given_not_a_raw_llm": 0.35
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -12244,8 +12246,8 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The target_specific burden (Lebanese terrestrial territory on a single precise date) is easily satisfied by even a single airstrike or missile strike, which Israel conducts at very high frequency against Lebanon during active periods; WinProbability=1.2 (strong Israeli capability advantage) and AudienceCosts=1.5 support elevated likelihood of strike activity on any given day, while WarCosts=-0.8 slightly suppresses but does not dominate given Israel's demonstrated willingness to conduct discrete strikes well below the serious-episode threshold, yielding a substantial P(B|\u00acA) reflecting the high daily base rate of Israeli strikes on Lebanese territory observed in recent conflict tempo.",
-      "p_b_given_a_raw": 0.82,
+      "rationale": "The target_specific + single-day restriction is the primary burden modifier \u2014 a qualifying strike on Lebanese terrestrial territory on exactly October 24 must occur, but a single discrete strike on one day is sufficient and well within Israel's demonstrated operational tempo against Lebanon; WinProbability=1.2 (strong capability advantage) and AudienceCosts=1.5 (high domestic lock-in) both push p_b_given_not_a upward since Israel has been conducting near-daily strikes on Lebanese territory during this period even absent a full serious-episode escalation, while WarCosts=-0.8 and PatronDeterrence=0.5 provide mild suppression but do not override the high baseline strike frequency on a given day.",
+      "p_b_given_a_raw": 0.85,
       "p_b_given_a_llm_clamped": 0.378,
       "p_b_given_a_deterministic": 0.2629,
       "anchor_range": [
@@ -12259,7 +12261,7 @@
       "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -12425,7 +12427,7 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The target_specific + single-day window burden means B can resolve YES from even one discrete airstrike or missile strike well below the serious-episode threshold (A); Israel's strong WinProbability (1.2) and high AudienceCosts (1.5) both push the per-day strike rate upward, while PatronDeterrence (0.5, moderate Hezbollah/Iran patron) provides mild suppression \u2014 net effect is a meaningfully elevated P(B|\u00acA) reflecting Israel's historically high tempo of strikes into Lebanese territory across recent conflict cycles.",
+      "rationale": "target_specific burden (Lebanese terrestrial territory on a single calendar day) is easily met by any qualifying strike; P(B|A) is high but not 1.0 because serious-episode A could manifest primarily as ground engagement or naval action without qualifying air/missile strikes on that exact date; P(B|\u00acA) reflects Israel's historically very high operational tempo of airstrikes into Lebanon in active-friction periods \u2014 well above 50% on any given day during elevated-tension phases \u2014 and WinProbability=1.2 (strong Israeli capability edge) combined with AudienceCosts=1.5 (domestic pressure to act) both push toward frequent strike activity, while WarCosts=-0.8 and PatronDeterrence=0.5 (moderate Hezbollah/Iran patron commitment) only modestly suppress single discrete strikes that fall well below the full-war threshold.",
       "p_b_given_a_raw": 0.85,
       "p_b_given_a_llm_clamped": 0.378,
       "p_b_given_a_deterministic": 0.2629,
@@ -12440,7 +12442,7 @@
       "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -12482,11 +12484,11 @@
       "contract_initiator": "Israel",
       "contract_target": "Syria",
       "p_b_given_a": 0.5166,
-      "p_b_given_not_a": 0.8,
+      "p_b_given_not_a": 0.82,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "high",
       "used_structural_context": true,
-      "rationale": "Method-specific burden (airstrike or surface-to-surface missile only) is the key modifier \u2014 Israel has conducted hundreds of such strikes on Syrian territory over the past decade at a very high background rate even absent serious-episode escalation; WinProbability=1.0 (decisive Israeli air superiority) and NuclearDeterrence=0.0 (no nuclear constraint) support a high within-range estimate, while WarCosts=-0.5 and PatronDeterrence=0.5 (moderate Russian/Iranian patron presence, now diminished post-Assad collapse) modestly suppress the upper bound, yielding a high but not near-certain P(B|\u00acA) reflecting Israel's sustained campaign pattern against Syria independently of any serious interstate episode.",
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile only) is easily satisfied given Israel's overwhelming historical pattern of precisely these munition types against Syria \u2014 Israel has conducted hundreds of such strikes since 2013, often monthly, well below the ICB VIOL>=3 threshold; WinProbability=1.0 (decisive Israeli capability advantage) reinforces that Israel can execute these strikes freely, PatronDeterrence=0.5 (low Syrian patron commitment post-Assad collapse) offers minimal deterrent, NuclearDeterrence=0.0 removes the main suppressor of kinetic action, and WarCosts=-0.5 (moderate peace-inducing cost) does not significantly deter single limited strikes that are far below full-war threshold \u2014 leaving P(B|\u00acA) very high as these strikes routinely occur absent serious interstate episodes.",
       "p_b_given_a_raw": 0.85,
       "p_b_given_a_llm_clamped": 0.63,
       "p_b_given_a_deterministic": 0.468,
@@ -12498,10 +12500,10 @@
       "war_costs_used_for_range": -0.5,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.8
+      "p_b_given_not_a_raw_llm": 0.82
     },
     "clergy_version": "v9",
-    "toggles_hash": "0da10f2f9267",
+    "toggles_hash": "0defa7f3d0aa",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -12546,7 +12548,7 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike or surface-to-surface missile, excluding artillery/ground/naval) is easily satisfied by Israel's dominant air power (WinProbability=1.2 supports high operational tempo), and the single-day window with low threshold means even routine interdiction or counter-Hezbollah strikes on Lebanese territory qualify; P(B|\u00acA) is high (~72% per day) reflecting the post-October-7 baseline of near-daily Israeli strikes on Lebanon even absent serious-clash escalation, while WinProbability and AudienceCosts=1.5 sustain operational pressure; WarCosts=-0.8 suppresses escalation to full war (keeping A less likely) but does not inhibit discrete daily strikes.",
+      "rationale": "The method_specific burden (airstrike or surface-to-surface missile, excluding artillery/naval/ground) maps tightly to Israel's dominant operational mode against Lebanon, so P(B|A) is very high; P(B|\u00acA) is also high on a single-day window because Israel has conducted qualifying strikes against Lebanese territory at extremely high daily frequency during active operations and even at elevated but sub-serious tempo during lulls \u2014 WinProbability=1.2 (strong Israeli capability advantage) and AudienceCosts=1.5 (domestic political lock-in) both push upward within the range, while WarCosts=-0.8 (high cost of full war) slightly suppresses the serious-escalation scenario but does not suppress discrete strikes below the serious-clash threshold.",
       "p_b_given_a_raw": 0.92,
       "p_b_given_a_llm_clamped": 0.588,
       "p_b_given_a_deterministic": 0.44,
@@ -12561,7 +12563,7 @@
       "p_b_given_not_a_raw_llm": 0.72
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -12728,7 +12730,7 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Target_specific burden (Lebanese terrestrial territory on a single named date) is satisfied by either airstrike or missile_strike, both of which Israel routinely conducted against Lebanon in active operational periods; WinProbability=1.2 (clear Israeli capability advantage) supports a high strike likelihood, but WarCosts=-0.8 (high war cost, likely reflecting ceasefire/post-conflict context) modestly suppresses the background daily rate, yielding a meaningful but sub-certain P(B|\u00acA) for a single calendar day.",
+      "rationale": "The target_specific burden (Lebanese terrestrial territory on a single calendar date) and the method restriction (airstrike or surface-to-surface missile only, excluding artillery, drones, naval) modestly suppress P(B|A) from 1.0; P(B|\u00acA) is meaningfully high because Israel has been conducting near-daily airstrikes on Lebanese territory during the active campaign period \u2014 this is a below-serious-threshold discrete single-day action that occurs frequently even absent a full serious episode \u2014 while WinProbability=1.2 (Israeli capability advantage) supports continued strike activity and AudienceCosts=1.5 creates domestic lock-in, though WarCosts=-0.8 (high cost of escalation) and PatronDeterrence=0.5 (Hezbollah patron support) modestly temper the rate, placing P(B|\u00acA) well above zero for a single day.",
       "p_b_given_a_raw": 0.82,
       "p_b_given_a_llm_clamped": 0.378,
       "p_b_given_a_deterministic": 0.2629,
@@ -12743,7 +12745,7 @@
       "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -12783,12 +12785,12 @@
       "contract_initiator": "Israel",
       "contract_target": "Lebanon",
       "p_b_given_a": 0.4844,
-      "p_b_given_not_a": 0.72,
+      "p_b_given_not_a": 0.55,
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The method_specific burden (airstrike or surface-to-surface missile only, single day) allows resolution well below the serious-episode threshold \u2014 Israel conducted airstrikes on Lebanese territory on the vast majority of days during the Oct 2024 escalation period; WinProbability=1.2 (strong Israeli capability advantage) supports high operational willingness, WarCosts=-0.8 is somewhat peace-inducing but historically has not suppressed discrete daily strikes below full-war threshold, and AudienceCosts=1.5 creates domestic pressure to sustain visible military pressure, all pushing p_b_given_not_a toward the high end for a single-day strike window.",
-      "p_b_given_a_raw": 0.85,
+      "rationale": "Method_specific burden (airstrike or missile strike only, single day) drives a high P(B|\u00acA) because Israel has been conducting near-daily airstrikes on Lebanese territory during the 2024 conflict period even absent a full serious-episode escalation; WinProbability=1.2 (clear Israeli capability edge) and AudienceCosts=1.5 (domestic lock-in) both push toward higher strike frequency, while WarCosts=-0.8 and PatronDeterrence=0.5 modestly suppress escalation but do not significantly constrain single-day discrete strikes.",
+      "p_b_given_a_raw": 0.82,
       "p_b_given_a_llm_clamped": 0.588,
       "p_b_given_a_deterministic": 0.44,
       "anchor_range": [
@@ -12799,10 +12801,10 @@
       "war_costs_used_for_range": -0.8,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.72
+      "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -12847,7 +12849,7 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike or surface-to-surface missile only, excluding artillery/naval/ground) means some serious-episode scenarios (e.g., ground-only escalation) wouldn't satisfy YES, holding P(B|A) below 1.0; P(B|\u00acA) is meaningfully high on a single-day basis because Israel conducted near-daily airstrikes into Lebanese territory during the 2024 campaign and the background rate of qualifying strikes on any given day absent serious-episode threshold being crossed is substantial; WinProbability=1.2 (Israeli capability advantage) supports continued willingness to strike, WarCosts=-0.8 (high war cost) slightly moderates sustained escalation but not discrete strikes, AudienceCosts=1.5 creates domestic pressure to maintain visible military pressure, and PatronDeterrence=0.5 (moderate Hezbollah/Iranian patron) does not strongly suppress Israeli airstrike activity.",
+      "rationale": "The method_specific burden (airstrikes or surface-to-surface missiles only, single day) produces a high but not certain P(B|A) since serious escalation with Lebanon almost always involves Israeli airstrikes on terrestrial targets; P(B|\u00acA) is substantially non-zero because Israel has maintained a very high operational tempo of qualifying strikes against Lebanese territory (Hezbollah targets) even on days below the serious-episode threshold, and WinProbability=1.2 (strong Israeli capability advantage) and AudienceCosts=1.5 (domestic lock-in) both support continued strike activity, while WarCosts=-0.8 moderately suppresses escalation to full-scale war without suppressing discrete strikes.",
       "p_b_given_a_raw": 0.85,
       "p_b_given_a_llm_clamped": 0.588,
       "p_b_given_a_deterministic": 0.44,
@@ -12862,7 +12864,7 @@
       "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -13023,27 +13025,27 @@
       ],
       "contract_initiator": "Iran",
       "contract_target": "Saudi Arabia",
-      "p_b_given_a": 0.3939,
+      "p_b_given_a": 0.4888,
       "p_b_given_not_a": 0.04,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike or surface-to-surface/air-launched missile/drone, directly from Iran, explicitly claimed) suppresses P(B|A) below 1.0 since serious conflict could involve ground, proxy, or naval escalation without meeting the narrow attribution+munition type requirement; WarCosts very negative (-1.3) and PatronDeterrence high (1.2, reflecting US-Saudi security commitments) both push toward the low end within range, while WinProbability modest (0.3) and high AudienceCosts (2.3) provide slight upward offset as Iranian leaders face domestic pressure to respond to crises; background P(B|\u00acA) is non-zero given the 2019 Aramco precedent of direct Iranian strikes below full-war threshold, but the exclusion of proxy attacks and strict attribution requirement keeps it low.",
+      "rationale": "Method-specific burden (airstrike or surface-to-surface/air-launched missile/drone, directly from Iran, explicit claim or confirmed origin, proxy strikes excluded) reduces P(B|A) below 1.0 since a serious episode could manifest via other means; PatronDeterrence=1.7 (strong US/Western commitment to Saudi Arabia) and moderate WarCosts=0.20 together suppress P(B|\u00acA) \u2014 Iran has historically used proxy strikes rather than direct claimed strikes on Saudi territory, keeping the background rate low but non-zero given the 2019 Aramco precedent.",
       "p_b_given_a_raw": 0.55,
-      "p_b_given_a_llm_clamped": 0.518,
-      "p_b_given_a_deterministic": 0.3407,
+      "p_b_given_a_llm_clamped": 0.55,
+      "p_b_given_a_deterministic": 0.4626,
       "anchor_range": [
-        0.185,
-        0.518
+        0.2575,
+        0.721
       ],
-      "was_clamped": true,
-      "war_costs_used_for_range": -1.3,
+      "was_clamped": false,
+      "war_costs_used_for_range": 0.19999999999999996,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
       "p_b_given_not_a_raw_llm": 0.04
     },
     "clergy_version": "v9",
-    "toggles_hash": "73c02b87676a",
+    "toggles_hash": "e1c50978ae19",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -13082,27 +13084,27 @@
       ],
       "contract_initiator": "Iran",
       "contract_target": "Bahrain",
-      "p_b_given_a": 0.4222,
-      "p_b_given_not_a": 0.008,
+      "p_b_given_a": 0.4609,
+      "p_b_given_not_a": 0.004,
       "p_b_given_not_a_reference_days": 30,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike or surface-to-surface missile/drone strike only, proxy and naval excluded) with proxy exclusion significantly narrows qualifying events; PatronDeterrence=2.2 (very strong US/GCC commitment to Bahrain, home of US Fifth Fleet) strongly suppresses direct Iranian strikes on Bahraini territory, while WarCosts=-0.8 (high cost of war) and NuclearDeterrence=0.3 further disfavor escalation; background rate set very low given no historical precedent of Iran directly striking Bahrain, though WinProbability=1.2 and AudienceCosts=1.5 provide slight upward pressure that keeps estimates non-negligible.",
-      "p_b_given_a_raw": 0.45,
-      "p_b_given_a_llm_clamped": 0.45,
-      "p_b_given_a_deterministic": 0.4103,
+      "rationale": "Method_specific burden (airstrike or missile strike only, proxy exclusion, state attribution required) limits qualifying events significantly; PatronDeterrence=2.7 reflects strong US commitment to Bahrain (Fifth Fleet HQ), suppressing Iranian willingness to strike directly; WarCosts=-1.3 indicates moderately high war costs for Iran; WinProbability=3.2 slightly favors Iranian capability but is offset by the extreme political cost of overt action against a US-patron host; background rate is very low given no precedent of Iran directly striking Bahrain, yielding a near-zero P(B|\u00acA) and a moderate P(B|A) conditional on serious escalation reaching the Bahrain dyad specifically.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.518,
+      "p_b_given_a_deterministic": 0.4364,
       "anchor_range": [
-        0.21,
-        0.588
+        0.185,
+        0.518
       ],
-      "was_clamped": false,
-      "war_costs_used_for_range": -0.8,
+      "was_clamped": true,
+      "war_costs_used_for_range": -1.3,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.008
+      "p_b_given_not_a_raw_llm": 0.004
     },
     "clergy_version": "v9",
-    "toggles_hash": "87ff2cbc7d0e",
+    "toggles_hash": "42428503550e",
     "glass": {
       "outcome_observability": "high",
       "resolution_risk": "medium",
@@ -13146,9 +13148,9 @@
       "p_b_given_a": 0.4844,
       "p_b_given_not_a": 0.55,
       "p_b_given_not_a_reference_days": 1,
-      "confidence": "high",
+      "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike or surface-to-surface missile only, single day) is highly permissive given Israel's operational tempo against Lebanon; WinProbability=1.2 (strong Israeli capability advantage) and AudienceCosts=1.5 (high domestic lock-in) both push toward the high end, while WarCosts=-0.8 is partially offset by the fact that single-day airstrikes are low-cost relative to sustained operations; P(B|\u00acA) is substantial (~55%/day) because during the 2024 Lebanon campaign Israel conducted qualifying airstrikes on virtually every calendar day even absent full-scale war threshold crossings.",
+      "rationale": "Method-specific burden (airstrike or surface-to-surface missile only, single day) drives P(B|A) slightly below 1.0 because serious clashes could theoretically manifest as a ground incursion without a qualifying air/missile strike, though Israeli doctrine heavily favors airpower; P(B|\u00acA) is substantial because Israel has been conducting near-daily qualifying strikes on Lebanese territory during this period below the full-war threshold \u2014 WinProbability=1.2 (strong Israeli air capability advantage) and AudienceCosts=1.5 (domestic lock-in) both support a high background rate of strikes even absent escalation to ICB VIOL\u22653, while WarCosts=-0.8 and PatronDeterrence=0.5 (Hezbollah's Iranian patron) provide modest suppression but do not meaningfully constrain single-day strike operations Israel has already normalized.",
       "p_b_given_a_raw": 0.92,
       "p_b_given_a_llm_clamped": 0.588,
       "p_b_given_a_deterministic": 0.44,
@@ -13163,7 +13165,7 @@
       "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "high",
       "resolution_risk": "medium",
@@ -13207,7 +13209,7 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method-specific burden (airstrike or missile strike only, single day) yields high P(B|A) since these are Israel's dominant instruments against Lebanon; P(B|\u00acA) is substantial because Israel conducted daily airstrikes and missile strikes against Lebanon below the serious-clash threshold throughout October 2024; WinProbability=1.2 (strong Israeli capability edge) and AudienceCosts=1.5 (domestic lock-in) support elevated rates, while WarCosts=-0.8 and PatronDeterrence=0.5 do not meaningfully suppress single-day limited strikes.",
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile strike only, excluding artillery/naval/ground) modestly reduces P(B|A) from 1.0 since serious episodes could be initiated primarily via ground incursion; P(B|\u00acA) is high because Israel has been conducting near-daily airstrikes on Lebanese territory below the serious-clash threshold throughout the active campaign period, making a single qualifying strike on any given day highly probable even absent escalation to ICB VIOL\u22653; WinProbability=1.2 (strong Israeli capability advantage) and AudienceCosts=1.5 (domestic lock-in) support continued strike operations, while WarCosts=-0.8 and PatronDeterrence=0.5 provide mild suppression but do not materially reduce the daily strike background rate given operational momentum.",
       "p_b_given_a_raw": 0.92,
       "p_b_given_a_llm_clamped": 0.588,
       "p_b_given_a_deterministic": 0.44,
@@ -13222,7 +13224,7 @@
       "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -13386,7 +13388,7 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The target_specific burden (Lebanese terrestrial territory only, one-day window, airstrike/missile methods only) and the high base rate of Israeli strikes on Lebanon during the 2023-2024 active campaign period drive a meaningful P(B|\u00acA) even absent serious clashes; WinProbability=1.2 (clear Israeli capability advantage) and AudienceCosts=1.5 support leaning higher within the range, while WarCosts=-0.8 and PatronDeterrence=0.5 (Hezbollah/Iran patron) apply modest downward pressure on the most escalatory tier but not on single discrete strikes.",
+      "rationale": "The target_specific burden (Lebanese terrestrial territory, qualifying munition types only, single-day window) drives meaningful reduction from a broad baseline; WinProbability=1.2 (strong Israeli capability advantage) and AudienceCosts=1.5 (high domestic lock-in) support a high within-range estimate for both conditionals, while WarCosts=-0.8 (high cost of sustained war) has limited effect here since the contract requires only a single-day discrete strike rather than persistent action; P(B|\u00acA) is meaningfully high because Israel\u2013Lebanon saw near-daily airstrikes across southern Lebanon during the active campaign period, so a qualifying strike on any given day is quite plausible even absent a full serious-episode threshold crossing.",
       "p_b_given_a_raw": 0.82,
       "p_b_given_a_llm_clamped": 0.378,
       "p_b_given_a_deterministic": 0.2629,
@@ -13401,7 +13403,7 @@
       "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -13809,8 +13811,8 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike or surface-to-surface missile only, single day) yields high P(B|A) since Israeli serious episodes against Lebanon overwhelmingly involve airstrikes; P(B|\u00acA) is substantial because Israel has historically conducted frequent limited airstrikes into Lebanon well below the serious-episode threshold, and WinProbability=1.2 (strong Israeli capability advantage) and AudienceCosts=1.5 (domestic lock-in) both support a high background rate of limited strikes, partially offset by WarCosts=-0.8 which suppresses escalation but not discrete limited actions.",
-      "p_b_given_a_raw": 0.85,
+      "rationale": "The method_specific burden (airstrike or surface-to-surface missile strike only, single day) drives a high P(B|\u00acA) because Israel has conducted near-daily airstrikes or missile strikes into Lebanese territory during active campaign periods well below the ICB serious-episode threshold; WinProbability=1.2 (decisive Israeli air capability advantage) supports a high likelihood of this specific method being used on any given operational day, while WarCosts=-0.8 and PatronDeterrence=0.5 exert modest downward pressure on sustained escalation but do not suppress single-day discrete strikes, and AudienceCosts=1.5 reinforces Israeli leadership's domestic lock-in to continue operations.",
+      "p_b_given_a_raw": 0.82,
       "p_b_given_a_llm_clamped": 0.588,
       "p_b_given_a_deterministic": 0.44,
       "anchor_range": [
@@ -13824,7 +13826,7 @@
       "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -13988,7 +13990,7 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The target_specific + single-date constraint drives P(B|A) below 1.0 (serious escalation need not concentrate strikes on exactly Oct 29 in terrestrial Lebanon), while P(B|\u00acA) is high (~55% on any given day) because Israel was conducting near-daily airstrikes into Lebanese terrestrial territory during the active 2024 campaign even below full-war threshold; WinProbability=1.2 (strong Israeli capability advantage) supports continued strike operations, WarCosts=-0.8 would suppress escalation but not discrete limited strikes already underway, and AudienceCosts=1.5 reinforces domestic pressure to maintain visible military pressure, all keeping P(B|\u00acA) elevated for a single-day window.",
+      "rationale": "The target_specific burden (Lebanese terrestrial territory, single calendar day) modestly restricts from the broadest case, but the qualifying action set is wide (airstrike OR missile_strike); WinProbability=1.2 (strong Israeli capability advantage) and AudienceCosts=1.5 (high domestic lock-in during active campaign) support a high per-day strike probability, while WarCosts=-0.8 (high war costs) and PatronDeterrence=0.5 (modest Hezbollah patron) are noted but do not strongly suppress discrete daily strikes below serious-conflict threshold given the ongoing operational tempo context.",
       "p_b_given_a_raw": 0.82,
       "p_b_given_a_llm_clamped": 0.378,
       "p_b_given_a_deterministic": 0.2629,
@@ -14003,7 +14005,7 @@
       "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -14043,11 +14045,11 @@
       "contract_initiator": "Israel",
       "contract_target": "Lebanon",
       "p_b_given_a": 0.4844,
-      "p_b_given_not_a": 0.35,
+      "p_b_given_not_a": 0.55,
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method_specific burden (airstrike or surface-to-surface missile excluding artillery/naval/small-arms) constrained to a single calendar day; given Israel's well-established operational pattern of daily or near-daily airstrikes into Lebanese territory during active engagement periods, P(B|\u00acA) is substantial (~35% per day) even absent a serious-episode threshold crossing; WinProbability=1.2 (strong Israeli capability advantage) and AudienceCosts=1.5 (domestic political lock-in) support a higher within-range estimate, while WarCosts=-0.8 (high structural cost of escalation) and PatronDeterrence=0.5 (Hezbollah's Iranian patron) modestly suppress the full-scale A scenario without materially reducing the sub-threshold strike rate.",
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile, excluding artillery/ground/naval) is the primary driver \u2014 this captures the dominant Israeli offensive tool against Lebanon but excludes some qualifying acts below the serious-episode threshold; the extremely narrow single-day window compresses the reference period to 1 day; WinProbability=1.2 (strong Israeli capability advantage) supports a high base operational tempo and willingness to strike, while WarCosts=-0.8 (high war cost) and PatronDeterrence=0.5 (moderate Hezbollah patron commitment) modestly suppress escalation but do not suppress routine below-threshold strikes, leaving P(B|\u00acA) elevated given Israel's historically very high strike frequency against Lebanese territory even during non-serious-episode periods.",
       "p_b_given_a_raw": 0.82,
       "p_b_given_a_llm_clamped": 0.588,
       "p_b_given_a_deterministic": 0.44,
@@ -14059,10 +14061,10 @@
       "war_costs_used_for_range": -0.8,
       "severity_band": "discrete_kinetic",
       "parent_event_relation": "overlap",
-      "p_b_given_not_a_raw_llm": 0.35
+      "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -14107,7 +14109,7 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The target_specific (Lebanese terrestrial territory) and narrow single-day window requirements are the primary burden modifiers \u2014 Israel has conducted airstrikes into Lebanon at very high frequency during active operational periods (often daily or near-daily), so P(B|\u00acA) is substantial even absent a serious-episode threshold crossing; WinProbability=1.2 (strong Israeli capability advantage) supports a high baseline strike rate, while WarCosts=-0.8 (high cost of full war) and NuclearDeterrence=0.5 modestly suppress escalation to A but do not suppress limited strikes, keeping P(B|\u00acA) elevated; AudienceCosts=1.5 supports continued operational signaling, and PatronDeterrence=0.5 (moderate Hezbollah/Iran patron commitment) does not materially deter single-day strikes.",
+      "rationale": "The target_specific burden (Lebanese terrestrial territory on a single calendar day) is partially offset by Israel's strong WinProbability (1.2) and high AudienceCosts (1.5) signaling operational tempo; however, WarCosts (-0.8) and the very narrow single-day window suppress p_b_given_a below 1.0, while p_b_given_not_a remains substantial because Israel has historically conducted airstrikes or missile strikes into Lebanon at very high frequency (near-daily during active campaigns) well below the serious-episode threshold.",
       "p_b_given_a_raw": 0.82,
       "p_b_given_a_llm_clamped": 0.378,
       "p_b_given_a_deterministic": 0.2629,
@@ -14122,7 +14124,7 @@
       "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -14167,7 +14169,7 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method-specific burden (airstrike or surface-to-surface missile strike on Lebanese terrestrial territory on a single calendar day) drives a high P(B|\u00acA) because Israel has been conducting near-daily airstrikes and missile strikes on Lebanon during the 2024 campaign, making a qualifying strike on any given day plausible even absent a full serious-episode threshold crossing; WinProbability=1.2 (strong Israeli capability advantage) supports continued strike activity, while WarCosts=-0.8 (high war cost) and the single-day window limit the probability of A, but P(B|\u00acA) remains elevated given the historical daily strike tempo; AudienceCosts=1.5 adds domestic lock-in supporting continued operations.",
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile/drone strike, explicitly excluding artillery/ground/naval) means a serious episode would almost certainly involve qualifying strikes (high P(B|A)\u22480.82), while P(B|\u00acA) is high on a single-day basis given Israel's demonstrated near-daily strike tempo against Lebanon in late 2024; WinProbability=1.2 (Israel's clear capability edge) and AudienceCosts=1.5 (domestic lock-in) both push toward the higher end, while WarCosts=-0.8 (high structural war cost) and PatronDeterrence=0.5 (moderate Hezbollah/Iran patron commitment) provide mild offsetting pressure.",
       "p_b_given_a_raw": 0.82,
       "p_b_given_a_llm_clamped": 0.588,
       "p_b_given_a_deterministic": 0.44,
@@ -14182,7 +14184,7 @@
       "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -14284,9 +14286,9 @@
       "p_b_given_a": 0.4844,
       "p_b_given_not_a": 0.72,
       "p_b_given_not_a_reference_days": 1,
-      "confidence": "high",
+      "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "Method-specific burden (airstrike or surface-to-surface missile only, excludes ground/artillery/drones) is the key restriction; given the October 2024 operational tempo of near-daily Israeli airstrikes on Lebanese territory even below the serious-episode threshold, P(B|\u00acA) is high on any given day; WinProbability=1.2 (strong Israeli capability advantage) supports frequent strike operations, AudienceCosts=1.5 sustains domestic pressure to continue action, WarCosts=-0.8 moderately suppresses escalation to full war but does not suppress limited daily strikes, and PatronDeterrence=0.5 (Hezbollah/Iran backing) is insufficient to deter the specific airstrike method Israel has been employing continuously.",
+      "rationale": "Method-specific burden (airstrike or surface-to-surface missile strike) is satisfied by Israel's most-used operational tools against Lebanon and represents the dominant modality in this dyad's historical pattern; WinProbability strongly favorable (1.2) and AudienceCosts elevated (1.5) support a high daily background rate for Israeli strikes on Lebanese territory even absent a serious-episode threshold crossing, while WarCosts moderately negative (-0.8) and PatronDeterrence moderate (0.5) create some suppression on large-scale escalation but not on routine strike activity that has been near-daily during active campaign periods.",
       "p_b_given_a_raw": 0.92,
       "p_b_given_a_llm_clamped": 0.588,
       "p_b_given_a_deterministic": 0.44,
@@ -14301,7 +14303,7 @@
       "p_b_given_not_a_raw_llm": 0.72
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -14406,7 +14408,7 @@
       "p_b_given_not_a_reference_days": 1,
       "confidence": "medium",
       "used_structural_context": true,
-      "rationale": "The target_specific + single-day temporal constraint drives the core structure: airstrike/missile_strike against Lebanese terrestrial territory on a specific date; Israel's WinProbability of 1.2 (strong capability advantage) and AudienceCosts of 1.5 support a high background rate of qualifying strikes even absent serious-episode threshold crossing, while WarCosts of -0.8 moderately suppresses full escalation (keeping P(B|\u00acA) genuinely high as Israel has been conducting near-daily strikes on Lebanon in the relevant conflict period), and PatronDeterrence of 0.5 is low enough not to meaningfully suppress individual strike actions.",
+      "rationale": "The target_specific + single-day temporal constraint narrows P(B|A) moderately (serious escalation might involve methods other than qualifying air/missile strikes on that exact date, e.g. ground operations dominating), set at 0.82; P(B|\u00acA) is high at 0.55/day because Israel-Lebanon air/missile strikes have been extremely frequent during the 2024 campaign even below the ICB VIOL>=3 serious-episode threshold, and WinProbability=1.2 (Israel capability advantage) supports continued routine strike activity while WarCosts=-0.8 and PatronDeterrence=0.5 (moderate Hezbollah/Iran patron) modestly suppress but do not eliminate sub-threshold strikes on any given day.",
       "p_b_given_a_raw": 0.82,
       "p_b_given_a_llm_clamped": 0.378,
       "p_b_given_a_deterministic": 0.2629,
@@ -14421,7 +14423,7 @@
       "p_b_given_not_a_raw_llm": 0.55
     },
     "clergy_version": "v9",
-    "toggles_hash": "9e3a9b5ce766",
+    "toggles_hash": "d656990df41a",
     "glass": {
       "outcome_observability": "medium",
       "resolution_risk": "high",
@@ -14607,6 +14609,551 @@
       "outcome_observability": "medium",
       "resolution_risk": "high",
       "rationale": "A major Iranian strike on UAE would be widely reported, but resolution risk is high due to layered ambiguities: the exclusion of proxy forces requires confirmed Iranian-territory origin within a 3-day attribution window, munition typology restrictions (excluding rocket artillery, short-range loitering munitions, FPV drones) could disqualify real-world attacks, and geographic limits excluding ships/aircraft create edge cases that hinge on Polymarket admin discretion rather than clear open-source reporting."
+    },
+    "glass_version": "v1"
+  },
+  "5419823": {
+    "contract_hash": "7f2319ac9ee4",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "overlap",
+      "win_condition_summary": "Iran conducts an airstrike or surface-to-surface missile/drone strike directly against any of 21 specified Arab countries (explicitly claimed by Iran or confirmed from Iranian territory) before October 15, 2026.",
+      "legalese_flags": [
+        "Dyad specified as Iran-Saudi Arabia but market covers 21 Arab countries \u2014 mismatch between dyad and market scope",
+        "Qualifying action limited to airstrikes and surface-to-surface missile/drone strikes; excludes ground incursions, naval gunfire, cyber, small arms, and rocket artillery",
+        "Proxy forces (Hezbollah, Houthis, etc.) explicitly excluded \u2014 only direct Iranian state action counts",
+        "Intercepted munitions still qualify if they constitute a qualifying military action",
+        "Attribution requirement: must be explicitly claimed by Iran or confirmed to originate from Iranian territory",
+        "3-day adjudication window for disputed incidents potentially extending past deadline",
+        "Threshold is a single qualifying strike \u2014 does not require sustained or serious conflict episode"
+      ],
+      "relation_confidence": "high",
+      "rationale": "A single qualifying airstrike or missile strike can resolve this market YES without crossing the serious-clash threshold required for engine event A, and A could occur via ground incursion or naval means that are explicitly excluded here, so the events overlap but are neither equivalent nor subset/superset.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v4",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "qualifying_action_types": [
+        "missile_strike",
+        "airstrike"
+      ],
+      "contract_initiator": "Iran",
+      "contract_target": "Saudi Arabia",
+      "p_b_given_a": 0.5398,
+      "p_b_given_not_a": 0.06,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method-specific burden (airstrike/missile only, no proxies, direct attribution required) moderately lowers P(B|A) from 1.0 since a serious Iran-Saudi episode could involve other methods or proxy escalation not qualifying; P(B|\u00acA) reflects Iran's demonstrated willingness to conduct direct missile/drone strikes (April 2024 Israel precedent, historical Aramco precedent via proxies) even below full-war threshold, but PatronDeterrence=1.7 (strong US/Western patron commitment to Saudi and Arab partners) and the strict direct-attribution requirement suppress the background rate, while AudienceCosts=2.8 and low NuclearDeterrence=0.3 modestly support Iran's willingness to signal via strikes, leaving a genuine but suppressed monthly background probability.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.72,
+      "p_b_given_a_deterministic": 0.4626,
+      "anchor_range": [
+        0.2575,
+        0.721
+      ],
+      "was_clamped": false,
+      "war_costs_used_for_range": 0.19999999999999996,
+      "severity_band": "discrete_kinetic",
+      "parent_event_relation": "overlap",
+      "p_b_given_not_a_raw_llm": 0.06
+    },
+    "clergy_version": "v9",
+    "toggles_hash": "e1c50978ae19",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While major strikes would be reported by wire services, the strict attribution requirement (explicit Iranian claim or confirmed origin from Iranian territory), exclusion of proxy forces, and ambiguity around weapon-type classification (e.g., rocket artillery vs. surface-to-surface missiles) create substantial resolution risk, compounded by the dyad-scope mismatch and 3-day adjudication window that could extend past the deadline."
+    },
+    "glass_version": "v1"
+  },
+  "5475271": {
+    "contract_hash": "1fa8028542c5",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "overlap",
+      "win_condition_summary": "YES if official Turkish regular military personnel physically operate within any part of Yemen (even temporarily) before October 31, 2026 11:59 PM ET, excluding bombardment, naval presence offshore, emissaries, or non-regular-forces personnel.",
+      "legalese_flags": [
+        "Requires 'official' Turkish regular armed forces personnel only \u2014 contractors, mercenaries, foreign fighters, and coalition partners explicitly excluded",
+        "Physical entry required \u2014 bombardment, sabotage, naval offshore presence, and temporary disruption explicitly excluded",
+        "Emissary/diplomatic/commercial visits explicitly excluded",
+        "Entry must be 'deliberate' and not as prisoners of war",
+        "3-day grace period if occurrence/timing cannot be determined by deadline",
+        "Primary resolution source is official Turkish government/MoD; credible reporting consensus as secondary",
+        "Turkey-Yemen is a non-traditional dyad with no active interstate conflict \u2014 'entry' could range from a minor insertion to a full invasion, making threshold ambiguous relative to engine event A",
+        "Single limited troop entry (raid, liaison, training mission) would resolve YES but may not cross ICB VIOL>=3 threshold"
+      ],
+      "relation_confidence": "high",
+      "rationale": "Turkish troop entry into Yemen resolves YES on even a single limited physical incursion (e.g., a raid or training deployment), which may or may not cross the serious interstate violent episode threshold required by A, making this overlap rather than equivalent or subset.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v4",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "raid",
+      "qualifying_action_types": [
+        "raid",
+        "ground_invasion",
+        "direct_engagement"
+      ],
+      "contract_initiator": "Turkey",
+      "contract_target": "Yemen",
+      "p_b_given_a": 0.3309,
+      "p_b_given_not_a": 0.04,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "low",
+      "used_structural_context": true,
+      "rationale": "Target_specific burden (Yemen as location) keeps P(B|A) below 1.0 because a serious Turkey-Yemen episode could manifest as airstrikes, naval action, or proxy involvement without ground entry; P(B|\u00acA) is a small but non-zero monthly rate reflecting that a limited insertion (training mission, liaison, SOF raid) could resolve YES below the ICB VIOL>=3 threshold; WinProbability=0.8 (Turkey has capability edge) supports a non-trivial P(B|A), but WarCosts=-0.3 (moderately high cost of war) and the sheer logistical implausibility of Turkey projecting ground forces into Yemen absent a compelling strategic trigger suppress both estimates, while AudienceCosts=0.8 adds modest upward pressure on formal commitment if Turkey were to announce such a deployment.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.423,
+      "p_b_given_a_deterministic": 0.2914,
+      "anchor_range": [
+        0.094,
+        0.423
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.3,
+      "severity_band": "discrete_kinetic",
+      "parent_event_relation": "overlap",
+      "p_b_given_not_a_raw_llm": 0.04
+    },
+    "clergy_version": "v9",
+    "toggles_hash": "e158894d6ee5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "Distinguishing 'official Turkish regular military personnel' physically in Yemen from contractors, advisors, or special operations acting covertly is inherently difficult to verify through open-source reporting, and the explicit exclusions (naval presence, bombardment, emissaries) combined with reliance on Turkish MoD statements create significant admin discretion risk for ambiguous small-scale insertions."
+    },
+    "glass_version": "v1"
+  },
+  "5419929": {
+    "contract_hash": "a81329ac4c6a",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "overlap",
+      "win_condition_summary": "Iran must conduct at least one airstrike or surface-to-surface missile/drone strike explicitly claimed by or confirmed to originate from Iranian territory, directed at Iraqi terrestrial territory, before October 15, 2026.",
+      "legalese_flags": [
+        "Qualifying action limited to airstrikes and surface-to-surface missile/drone strikes; ground incursions, artillery, and most other kinetic means are excluded",
+        "Proxy forces (Hezbollah, Houthis, Iraqi militias) explicitly excluded \u2014 must be Iranian state action",
+        "Intercepted munitions still qualify if they constitute a qualifying action",
+        "3-day adjudication window for disputed attribution, potentially extending past deadline",
+        "Single incident sufficient for YES \u2014 no sustained-operation or casualty/damage threshold required",
+        "Dyad is Iran-Iraq, a pairing with recent historical precedent (January 2024 Iranian strikes on Iraqi Kurdistan)"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract resolves YES on a single qualifying strike \u2014 a discrete physical incident that may or may not cross the serious-clash threshold (ICB VIOL\u22653), so it is overlap rather than equivalent: Iran could fire missiles at Iraq without triggering a serious interstate violent episode, and a serious episode could arise through excluded means (ground incursion, proxy escalation, etc.).",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v4",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "qualifying_action_types": [
+        "missile_strike",
+        "airstrike"
+      ],
+      "contract_initiator": "Iran",
+      "contract_target": "Iraq",
+      "p_b_given_a": 0.4696,
+      "p_b_given_not_a": 0.08,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike/missile only, no proxies, must be Iranian state action) moderately constrains P(B|A) since a serious Iran-Iraq clash could involve other means; P(B|\u00acA) is non-trivial given historical precedent (January 2024 IRGC strikes on Iraqi Kurdistan as punitive limited strikes below the serious-conflict threshold); PatronDeterrence=1.5 (Iraq has US patronage) and WarCosts=-0.8 (high war cost) lean toward suppressing escalatory scenarios but do not suppress limited punitive strikes, while WinProbability=1.1 (Iranian capability advantage) and AudienceCosts=1.2 (domestic pressure on Iranian leadership) support continued willingness to conduct limited demonstrative strikes independently of full conflict onset.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.588,
+      "p_b_given_a_deterministic": 0.4188,
+      "anchor_range": [
+        0.21,
+        0.588
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic",
+      "parent_event_relation": "overlap",
+      "p_b_given_not_a_raw_llm": 0.08
+    },
+    "clergy_version": "v9",
+    "toggles_hash": "45ff4914fec5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "medium",
+      "rationale": "Direct Iranian strikes on Iraq would likely be reported by major wire services (as January 2024 strikes were), but the strict exclusion of proxy forces and the 3-day attribution window create meaningful resolution risk, since Iranian involvement may be disputed or confirmed only after the deadline, and distinguishing IRGC-direct from Iranian-proxy action can be ambiguous in real-time reporting."
+    },
+    "glass_version": "v1"
+  },
+  "5401165": {
+    "contract_hash": "8d7ea243f7b2",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "overlap",
+      "win_condition_summary": "Pakistan's armed forces conduct at least one airstrike or surface-to-surface missile/drone strike that physically impacts Afghan territory before November 15, 2026.",
+      "legalese_flags": [
+        "Qualifying action is limited to airstrikes and surface-to-surface missile/drone strikes \u2014 excludes ground incursions, artillery, naval gunfire, small arms, and cyber operations",
+        "Single discrete strike suffices for YES, regardless of whether it crosses the serious-clash threshold",
+        "Intercepted or destroyed munitions explicitly excluded even if debris causes damage",
+        "Private military contractors, mercenaries, and proxy forces excluded \u2014 must be Pakistani armed forces directly",
+        "Coalition/multinational operations qualify only if Pakistan directly conducted the strike",
+        "Afghanistan's airspace explicitly excluded from territorial definition",
+        "Disputed territory resolved by de facto control as of market creation",
+        "3-day adjudication window for conflicting attribution reports, potentially extending past deadline"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract resolves YES on a single qualifying strike (airstrike or missile) regardless of scale or escalation level, meaning it can resolve YES on an incident well below the serious-clash threshold of A, making it overlap rather than equivalent or subset.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v4",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "qualifying_action_types": [
+        "missile_strike",
+        "airstrike"
+      ],
+      "contract_initiator": "Pakistan",
+      "contract_target": "Afghanistan",
+      "p_b_given_a": 0.467,
+      "p_b_given_not_a": 0.18,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike or missile/drone strike) is satisfied by a single discrete strike \u2014 a relatively low bar \u2014 and Pakistan has a documented recent history of cross-border strikes into Afghan territory targeting TTP positions (2022\u20132024); WinProbability of +1.3 (Pakistani capability advantage) and AudienceCosts of +2.0 (domestic pressure to respond to TTP attacks) push P(B|\u00acA) meaningfully above zero, while WarCosts of -1.0 and modest PatronDeterrence of 0.3 (Taliban Afghanistan lacks a committed great-power patron) modestly support action below the serious-clash threshold; NuclearDeterrence at 0.5 is low and not a meaningful constraint here given Afghanistan's non-nuclear status.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.56,
+      "p_b_given_a_deterministic": 0.4271,
+      "anchor_range": [
+        0.2,
+        0.56
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -1.0,
+      "severity_band": "discrete_kinetic",
+      "parent_event_relation": "overlap",
+      "p_b_given_not_a_raw_llm": 0.18
+    },
+    "clergy_version": "v9",
+    "toggles_hash": "7a05656460a7",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "medium",
+      "rationale": "Pakistani strikes on Afghan territory have historical precedent and are typically reported by wire services, but attribution disputes (Pakistan often denies, Taliban reframes incidents), the explicit exclusion of artillery and debris, and the 3-day adjudication window near the deadline create meaningful verification and resolution ambiguity."
+    },
+    "glass_version": "v1"
+  },
+  "5419824": {
+    "contract_hash": "33c9392a9083",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "overlap",
+      "win_condition_summary": "Iran must conduct an airstrike or surface-to-surface/cruise/ballistic missile/one-way attack drone strike explicitly claimed by Iran or confirmed from Iranian territory against any of 21 named Arab countries (excluding proxy attacks, ground incursions, cyber, naval gunfire, small arms, and certain minor munitions) before October 31, 2026.",
+      "legalese_flags": [
+        "Dyad specified as Iran-Saudi Arabia but market covers 21 Arab countries \u2014 mismatch between engine dyad and contract scope",
+        "Requires explicit Iranian claim or confirmation of origin from Iranian territory \u2014 excludes proxy forces entirely",
+        "Intercepted munitions still qualify if they constitute a qualifying military action",
+        "Specific exclusions: surface-to-air missiles, small arms, ground incursions, cyber, naval gunfire, artillery, mortars, rocket artillery, short-range loitering munitions, FPV drones, ATGM strikes",
+        "3-day adjudication window that can extend past deadline",
+        "Single discrete strike qualifies \u2014 no sustained-engagement or serious-clash threshold required",
+        "AST timezone governs resolution",
+        "No damage or successful impact required for resolution"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract resolves YES on a single qualifying Iranian strike against any of 21 Arab nations \u2014 a discrete physical incident that need not cross A's serious-interstate-clash threshold \u2014 making it overlap rather than equivalent or subset, and the engine dyad (Iran-Saudi Arabia) is narrower than the market's multi-country scope.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v4",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "missile_strike",
+      "qualifying_action_types": [
+        "missile_strike",
+        "airstrike"
+      ],
+      "contract_initiator": "Iran",
+      "contract_target": "Saudi Arabia",
+      "p_b_given_a": 0.5398,
+      "p_b_given_not_a": 0.12,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike or ballistic/cruise/drone strike explicitly from Iranian territory, no proxies) means many escalation pathways don't satisfy the contract, pulling P(B|A) below 1; P(B|\u00acA) is non-trivial given Iran's demonstrated willingness to conduct standalone direct strikes on Arab targets (e.g., April 2024 Israel strike pattern, Aramco 2019 attribution debate) well below a serious-clash threshold, but PatronDeterrence=1.7 (Saudi Arabia's US patron commitment) and WarCosts=+0.20 (relatively low cost, slightly escalation-permissive) roughly offset \u2014 PatronDeterrence suppresses the frequency of direct Iranian strikes against Saudi-allied states, moderating both estimates.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.72,
+      "p_b_given_a_deterministic": 0.4626,
+      "anchor_range": [
+        0.2575,
+        0.721
+      ],
+      "was_clamped": false,
+      "war_costs_used_for_range": 0.19999999999999996,
+      "severity_band": "discrete_kinetic",
+      "parent_event_relation": "overlap",
+      "p_b_given_not_a_raw_llm": 0.12
+    },
+    "clergy_version": "v9",
+    "toggles_hash": "e1c50978ae19",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While major strikes from Iranian territory would be widely reported, the strict requirement for explicit Iranian claim or confirmed Iranian-territory origin (excluding proxies entirely) creates significant adjudication ambiguity, and the complex exclusion list for munition types means borderline events\u2014especially intercepted drones or mixed-origin attacks\u2014will require subjective Polymarket admin judgment that may not align with open-source reporting."
+    },
+    "glass_version": "v1"
+  },
+  "5419930": {
+    "contract_hash": "ea508fcda05c",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "overlap",
+      "win_condition_summary": "Iran must conduct an airstrike or surface-to-surface missile/drone strike explicitly claimed by or confirmed from Iranian territory against Iraqi terrestrial territory before October 31, 2026.",
+      "legalese_flags": [
+        "Explicitly excludes ground incursions, small-arms fire, rocket artillery, short-range loitering munitions, FPV drones, naval gunfire, cyber operations, and surface-to-air missiles",
+        "Proxy forces (Hezbollah, Houthis, Iraqi militias) explicitly excluded \u2014 only direct Iranian state action counts",
+        "Intercepted munitions still qualify if they constitute a qualifying action",
+        "Attribution requires either Iranian claim or confirmation of origin from Iranian territory",
+        "3-day adjudication window for conflicting reports, potentially extending past deadline",
+        "Single discrete strike (even one missile) would resolve YES regardless of scale or escalation level",
+        "No damage or impact required for resolution",
+        "Market creation date not specified, creating ambiguity about start of qualifying window"
+      ],
+      "relation_confidence": "high",
+      "rationale": "The contract resolves YES on a single qualifying strike (airstrike or missile) from Iran against Iraq \u2014 a discrete physical incident that could occur well below the serious-clash threshold (ICB VIOL\u22653) required by engine event A, making this an overlap rather than equivalent or subset relationship.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v4",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "qualifying_action_types": [
+        "missile_strike",
+        "airstrike"
+      ],
+      "contract_initiator": "Iran",
+      "contract_target": "Iraq",
+      "p_b_given_a": 0.4696,
+      "p_b_given_not_a": 0.06,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike or surface-to-surface missile/drone strike from Iranian territory, direct state action only) drives a moderate P(B|A) since Iran has a non-trivial historical pattern of striking Iraqi Kurdish or IRGC-rival targets with ballistic missiles and drones below the full-war threshold; P(B|\u00acA) is elevated above zero because Iran has conducted exactly this type of discrete direct strike on Iraqi territory (e.g., January 2024 Erbil strikes) without triggering serious interstate conflict; PatronDeterrence=1.5 (US patron commitment to Iraq) slightly suppresses escalation but has not historically prevented Iranian unilateral strikes, WinProbability=1.1 (Iranian capability advantage) supports plausibility, WarCosts=-0.8 suppresses sustained campaigns but not single discrete strikes, and AudienceCosts=1.2 modestly raises the credibility of Iranian signaling through direct action.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.588,
+      "p_b_given_a_deterministic": 0.4188,
+      "anchor_range": [
+        0.21,
+        0.588
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.8,
+      "severity_band": "discrete_kinetic",
+      "parent_event_relation": "overlap",
+      "p_b_given_not_a_raw_llm": 0.06
+    },
+    "clergy_version": "v9",
+    "toggles_hash": "45ff4914fec5",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While major strikes would be reported by wire services, the resolution criteria create substantial risk: distinguishing direct Iranian state action from proxy forces in the Iraq theater is notoriously difficult, attribution (Iranian claim vs. confirmed origin) may be contested or ambiguous, the exclusion of numerous munition types requires technical judgment that open-source reporting rarely provides with sufficient precision, and the 3-day adjudication window introduces admin discretion that could interact problematically with the October 31 deadline."
+    },
+    "glass_version": "v1"
+  },
+  "5475272": {
+    "contract_hash": "08adb47b919e",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "overlap",
+      "win_condition_summary": "YES if official Turkish regular armed forces personnel physically and deliberately operate within any part of Yemen (excluding offshore presence, bombardment, or diplomatic missions) by December 31, 2026.",
+      "legalese_flags": [
+        "Strictly limits qualifying personnel to official Turkish regular armed forces, excluding contractors, mercenaries, foreign fighters, or coalition partners",
+        "Explicitly excludes bombardment, sabotage, naval offshore presence, and temporary disruption from qualifying",
+        "Excludes diplomatic/emissary entry",
+        "Requires physical entry to be 'established' by resolution sources, not merely announced or claimed",
+        "3-day grace period for unresolved timing uncertainty",
+        "No minimum duration or scale of troop presence required \u2014 even a brief deliberate entry qualifies",
+        "No threshold of violence or combat required \u2014 purely a presence criterion",
+        "Dyad is Turkey-Yemen, but Yemen has multiple governing factions; no specification of which Yemeni territory or authority"
+      ],
+      "relation_confidence": "high",
+      "rationale": "Turkish troop entry into Yemen could range from a small raid or advisory mission (below A's serious-clash threshold) to a full-scale military intervention (meeting or exceeding A), so the win condition overlaps with but is neither equivalent to nor a subset of a serious interstate violent episode.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v4",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "target_specific",
+      "action_type": "ground_invasion",
+      "qualifying_action_types": [
+        "raid",
+        "ground_invasion"
+      ],
+      "contract_initiator": "Turkey",
+      "contract_target": "Yemen",
+      "p_b_given_a": 0.3309,
+      "p_b_given_not_a": 0.0,
+      "p_b_given_not_a_reference_days": 365.0,
+      "confidence": "low",
+      "used_structural_context": true,
+      "rationale": "Target_specific burden (Yemen as the named location) and no minimum scale or duration requirement lowers threshold somewhat, but Turkey has no meaningful strategic interest, logistics chain, or political alignment driving troop deployment to Yemen; WinProbability=0.8 suggests a capability edge but WarCosts=-0.3 reflects meaningful cost-of-war suppression, and the near-zero PatronDeterrence and NuclearDeterrence do not compensate for the absence of a credible political motive or existing operational footprint, leaving P(B|\u00acA) at a low background rate reflecting the remote possibility of a small advisory or anti-Houthi coalition role emerging.",
+      "p_b_given_a_raw": 0.55,
+      "p_b_given_a_llm_clamped": 0.423,
+      "p_b_given_a_deterministic": 0.2914,
+      "anchor_range": [
+        0.094,
+        0.423
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -0.3,
+      "severity_band": "territorial_war",
+      "parent_event_relation": "conflict_bound",
+      "p_b_given_not_a_raw_llm": 0.04
+    },
+    "clergy_version": "v9",
+    "toggles_hash": "e158894d6ee5",
+    "glass": {
+      "outcome_observability": "low",
+      "resolution_risk": "high",
+      "rationale": "Covert or small-scale troop deployments in a fragmented conflict zone like Yemen are rarely confirmed by open-source reporting with the specificity required (official Turkish regulars vs. contractors/proxies, physical presence vs. offshore), and the multi-faction territorial ambiguity combined with the 'established by resolution sources' standard creates high admin discretion risk."
+    },
+    "glass_version": "v1"
+  },
+  "5401163": {
+    "contract_hash": "312738b4fc0d",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "overlap",
+      "win_condition_summary": "Pakistan's armed forces conduct at least one airstrike or surface-to-surface/air-launched missile/drone strike that physically impacts Afghan territory before October 15, 2026.",
+      "legalese_flags": [
+        "Explicitly excludes ground incursions, artillery, mortars, rocket artillery, small-arms fire, and naval gunfire \u2014 these could constitute serious clashes under A without triggering YES",
+        "Explicitly excludes munitions intercepted before impact, even if a strike was attempted",
+        "A single qualifying strike resolves YES regardless of scale or whether it crosses ICB VIOL>=3 threshold",
+        "Requires direct attribution to Pakistani armed forces, excluding proxies and contractors",
+        "Airspace impacts excluded; only terrestrial/internal-waters impacts qualify",
+        "3-day adjudication window for conflicting reports, extendable past end date",
+        "De facto territorial control as of market creation governs border disputes"
+      ],
+      "relation_confidence": "high",
+      "rationale": "A single airstrike or missile strike can resolve YES without constituting a serious interstate violent episode (A), and conversely a serious clash involving ground combat, artillery, or other excluded means could satisfy A without resolving YES, making this an overlap rather than equivalent or subset relationship.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v4",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "qualifying_action_types": [
+        "missile_strike",
+        "airstrike"
+      ],
+      "contract_initiator": "Pakistan",
+      "contract_target": "Afghanistan",
+      "p_b_given_a": 0.467,
+      "p_b_given_not_a": 0.18,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike/missile strike only, excluding artillery/ground) moderately suppresses P(B|A) since serious Pakistan-Afghanistan clashes historically involve mixed-method exchanges including excluded munitions; high AudienceCosts (2.0) and WinProbability advantage (1.3) push P(B|\u00acA) upward as Pakistan has conducted repeated sub-threshold airstrikes and drone strikes into Afghan territory (e.g. 2022\u20132025 TTP-related strikes) at meaningful background rates, while WarCosts (-1.0) and low NuclearDeterrence (0.5, Afghanistan is non-nuclear) and modest PatronDeterrence (0.3) do not strongly suppress limited unilateral air action.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.56,
+      "p_b_given_a_deterministic": 0.4271,
+      "anchor_range": [
+        0.2,
+        0.56
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -1.0,
+      "severity_band": "discrete_kinetic",
+      "parent_event_relation": "overlap",
+      "p_b_given_not_a_raw_llm": 0.18
+    },
+    "clergy_version": "v9",
+    "toggles_hash": "7a05656460a7",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "Pakistan has conducted airstrikes in Afghanistan before and wire services would likely report them, but the strict exclusions (artillery, interception, proxies, airspace-only impacts) combined with frequent conflicting attributions in the Pakistan-Afghanistan conflict zone and the extendable adjudication window create substantial resolution ambiguity that Polymarket admins would need to adjudicate under contested real-world conditions."
+    },
+    "glass_version": "v1"
+  },
+  "5401164": {
+    "contract_hash": "56fd47bd6a28",
+    "scholar": {
+      "contract_type": "binary_onset",
+      "contract_polarity": "conflict",
+      "relation_to_engine_event": "overlap",
+      "win_condition_summary": "Pakistan's armed forces conduct at least one airstrike or surface-to-surface/air-launched missile strike that physically impacts Afghan territory before October 31, 2026.",
+      "legalese_flags": [
+        "Qualifying actions limited to airstrikes and surface-to-surface/air-launched missile strikes \u2014 explicitly excludes ground incursions, artillery, mortar, rocket artillery, small-arms fire, naval gunfire, and short-range loitering munitions/FPV drones",
+        "A single qualifying strike suffices for YES \u2014 no sustained-campaign or escalation threshold required",
+        "Intercepted munitions explicitly excluded even if debris causes damage",
+        "Afghan airspace impacts excluded \u2014 must impact terrestrial territory or internal waters",
+        "Proxy, PMC, or coalition strikes not attributed directly to Pakistani armed forces excluded",
+        "3-day adjudication window with potential deadline extension creates resolution timing ambiguity",
+        "Market creation date serves as start of qualifying window (not a fixed known date in the text)"
+      ],
+      "relation_confidence": "high",
+      "rationale": "A single qualifying airstrike or missile strike by Pakistan can resolve YES without crossing A's serious-interstate-violent-episode threshold (ICB VIOL\u22653), and conversely A could be reached via ground combat or sustained exchanges that do not include the specified strike types, making this an overlap rather than equivalent or subset.",
+      "translator_route": "TRANSLATE"
+    },
+    "scholar_version": "v4",
+    "clergy": {
+      "manifestation_family": "kinetic_or_coercive_action",
+      "political_act_formality": null,
+      "requirement_burden": "method_specific",
+      "action_type": "airstrike",
+      "qualifying_action_types": [
+        "missile_strike",
+        "airstrike"
+      ],
+      "contract_initiator": "Pakistan",
+      "contract_target": "Afghanistan",
+      "p_b_given_a": 0.467,
+      "p_b_given_not_a": 0.18,
+      "p_b_given_not_a_reference_days": 30,
+      "confidence": "medium",
+      "used_structural_context": true,
+      "rationale": "Method_specific burden (airstrike/missile strike only, excluding artillery/ground/drones) applied to a dyad where Pakistan has conducted precisely these qualifying action types against TTP/Afghan targets multiple times in 2022-2025 below the serious-conflict threshold (supporting meaningful P(B|\u00acA)); WinProbability=1.3 (Pakistan capability advantage) and AudienceCosts=2.0 (domestic pressure after TTP attacks) push estimates upward within range, while WarCosts=-1.0 (high war costs) and PatronDeterrence=0.3 (modest Chinese/regional deterrence on Afghanistan) are modest suppressors that prevent landing at the high end.",
+      "p_b_given_a_raw": 0.72,
+      "p_b_given_a_llm_clamped": 0.56,
+      "p_b_given_a_deterministic": 0.4271,
+      "anchor_range": [
+        0.2,
+        0.56
+      ],
+      "was_clamped": true,
+      "war_costs_used_for_range": -1.0,
+      "severity_band": "discrete_kinetic",
+      "parent_event_relation": "overlap",
+      "p_b_given_not_a_raw_llm": 0.18
+    },
+    "clergy_version": "v9",
+    "toggles_hash": "7a05656460a7",
+    "glass": {
+      "outcome_observability": "medium",
+      "resolution_risk": "high",
+      "rationale": "While major Pakistani airstrikes on Afghan territory would likely be reported by wire services, the highly specific exclusion criteria (ruling out artillery, rockets, drones, loitering munitions) create substantial resolution risk, as open-source reporting rarely distinguishes weapon delivery modalities with the precision required, and the 3-day adjudication window plus admin discretion over categorical edge cases (e.g., precision rockets vs. surface-to-surface missiles) introduces meaningful misresolution probability."
     },
     "glass_version": "v1"
   }
