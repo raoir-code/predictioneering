@@ -21,6 +21,9 @@ echo "=== Predictioneering pipeline run: $(date) ===" | tee -a "$LOGFILE"
 echo "Watchdog check..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.watchdog >> "$LOGFILE" 2>&1 || echo "  [watchdog] check itself failed to run (non-fatal)" | tee -a "$LOGFILE"
 
+echo "[pilot] News collector, Israel->Lebanon (non-fatal, forward-only data)..." | tee -a "$LOGFILE"
+$PYTHON -u pilot/strike_collector.py >> "$LOGFILE" 2>&1 || echo "  [pilot] collector failed (non-fatal)" | tee -a "$LOGFILE"
+
 echo "[1/6] Scraping Polymarket..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.scrape_live >> "$LOGFILE" 2>&1
 echo "Scrape done." | tee -a "$LOGFILE"
@@ -76,6 +79,7 @@ for f in pipeline/classified_feed.json predictions/log.jsonl pipeline/translator
         echo "  [skip] $f does not exist yet" | tee -a "$LOGFILE"
     fi
 done
+$GIT add -f cache/gnews_pilot >> "$LOGFILE" 2>&1 || echo "  [pilot] could not stage pilot news cache (non-fatal)" | tee -a "$LOGFILE"
 $GIT commit -m "Daily predictions: $(date +%Y-%m-%d)" >> "$LOGFILE" 2>&1 || echo "Nothing to commit." | tee -a "$LOGFILE"
 $GIT push >> "$LOGFILE" 2>&1
 
