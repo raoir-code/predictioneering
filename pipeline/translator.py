@@ -56,6 +56,23 @@ CLASSIFIED_FEED  = Path("pipeline/classified_feed.json")
 TRANSLATOR_CACHE = Path("pipeline/translator_cache.json")
 PREDICTIONS_LOG  = Path("predictions/log.jsonl")
 
+def _code_version() -> str:
+    """Last commit touching Python code, "+dirty" if uncommitted .py edits.
+    Logging only (2026-10-16): lets Brier be reported by model version. Never raises."""
+    import subprocess
+    try:
+        root = Path(__file__).resolve().parent.parent
+        h = subprocess.run(["git", "log", "-1", "--format=%h", "--", "*.py"], cwd=root,
+                           capture_output=True, text=True, timeout=10).stdout.strip()
+        dirty = subprocess.run(["git", "diff", "--quiet", "--", "*.py"], cwd=root,
+                               capture_output=True, timeout=10).returncode != 0
+        return (h or "unknown") + ("+dirty" if dirty else "")
+    except Exception:
+        return "unknown"
+
+MODEL_VERSION = _code_version()
+
+
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 CLAUDE_MODEL      = "claude-sonnet-4-6"  # unified model string across pipeline
 MAX_TOKENS        = 900
@@ -1215,6 +1232,9 @@ def bettor(engine_p: float, market_p: float, volume_usd: float,
         "resolution_risk": resolution_risk,
         "clergy_confidence_mult": clergy_conf_mult,
         "clergy_was_clamped":     was_clamped,
+        "p_b_given_not_a_scaled": p_b_given_not_a,  # value used in conditional_p (logging only, 2026-10-16)
+        "p_b_given_not_a_ref_days_used": ref_days,
+        "days_remaining": days_remaining,
     }
 
 
@@ -1432,6 +1452,9 @@ def translate_market(market: dict, cache: dict) -> dict:
         "kelly_dollars":              bet["kelly_dollars"],
         "bet_direction":              bet["bet_direction"],
         "kelly_clergy_confidence_mult": bet.get("clergy_confidence_mult"),
+        "p_b_given_not_a_scaled": bet.get("p_b_given_not_a_scaled"),
+        "p_b_given_not_a_ref_days_used": bet.get("p_b_given_not_a_ref_days_used"),
+        "days_remaining": bet.get("days_remaining"),
     })
     return market
 
@@ -1534,6 +1557,9 @@ def _run_action_coherence_pass(feed: list, cache: dict):
                 "kelly_dollars":   bet["kelly_dollars"],
                 "bet_direction":   bet["bet_direction"],
                 "kelly_clergy_confidence_mult": bet.get("clergy_confidence_mult"),
+                "p_b_given_not_a_scaled": bet.get("p_b_given_not_a_scaled"),
+                "p_b_given_not_a_ref_days_used": bet.get("p_b_given_not_a_ref_days_used"),
+                "days_remaining": bet.get("days_remaining"),
             })
             cached_entry["clergy"] = new_clergy
             print(f"    [coherence] {dyad}/{mid}: conditional_p -> {bet['conditional_p']} "
@@ -2178,6 +2204,9 @@ def _run_action_bridge_activation_pass(feed: list, cache: dict):
         ] = bet.get(
             "clergy_confidence_mult"
         )
+        market["p_b_given_not_a_scaled"] = bet.get("p_b_given_not_a_scaled")
+        market["p_b_given_not_a_ref_days_used"] = bet.get("p_b_given_not_a_ref_days_used")
+        market["days_remaining"] = bet.get("days_remaining")
 
         market[
             "action_bridge_production_delta_pp"
@@ -2311,6 +2340,10 @@ def _append_log(feed: list):
                 "p_b_given_not_a":          market.get("p_b_given_not_a"),
                 "p_b_given_not_a_reference_days": market.get("p_b_given_not_a_reference_days"),
                 "p_b_given_not_a_raw_llm":  market.get("p_b_given_not_a_raw_llm"),
+                "p_b_given_not_a_scaled":   market.get("p_b_given_not_a_scaled"),
+                "p_b_given_not_a_ref_days_used": market.get("p_b_given_not_a_ref_days_used"),
+                "days_remaining":           market.get("days_remaining"),
+                "model_version":            MODEL_VERSION,
                 "parent_event_relation":    market.get("parent_event_relation"),
                 "manifestation_family":     market.get("manifestation_family"),
                 "action_type":                market.get("action_type"),
