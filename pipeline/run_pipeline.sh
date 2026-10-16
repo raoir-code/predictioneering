@@ -52,6 +52,9 @@ echo "[5/6] Resolver..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.resolver >> "$LOGFILE" 2>&1
 echo "Resolver done." | tee -a "$LOGFILE"
 
+echo "[pilot] Shadow pricer, Israel->Lebanon (logs only, non-fatal)..." | tee -a "$LOGFILE"
+$PYTHON -u pilot/shadow_pricer.py >> "$LOGFILE" 2>&1 || echo "  [pilot] shadow pricer failed (non-fatal)" | tee -a "$LOGFILE"
+
 if [ "$WEEKLY_AGE" -gt 168 ]; then
     echo "[6/6] Context keeper weekly sweep (weekly marker is ${WEEKLY_AGE}h old)..." | tee -a "$LOGFILE"
     $PYTHON -u -m pipeline.context_keeper --sweep >> "$LOGFILE" 2>&1
@@ -79,6 +82,7 @@ for f in pipeline/classified_feed.json predictions/log.jsonl pipeline/translator
         echo "  [skip] $f does not exist yet" | tee -a "$LOGFILE"
     fi
 done
+$GIT add pilot/shadow_log.jsonl >> "$LOGFILE" 2>&1 || echo "  [pilot] could not stage shadow log (non-fatal)" | tee -a "$LOGFILE"
 $GIT add -f cache/gnews_pilot >> "$LOGFILE" 2>&1 || echo "  [pilot] could not stage pilot news cache (non-fatal)" | tee -a "$LOGFILE"
 $GIT commit -m "Daily predictions: $(date +%Y-%m-%d)" >> "$LOGFILE" 2>&1 || echo "Nothing to commit." | tee -a "$LOGFILE"
 $GIT push >> "$LOGFILE" 2>&1
