@@ -1,0 +1,625 @@
+[
+  {
+    "initiator": "China",
+    "target": "Taiwan",
+    "date": "20260704",
+    "role": "positiveish",
+    "note": "Chinese coast-guard patrol east of Taiwan",
+    "cache_files": [
+      "China_Taiwan_20260704.json"
+    ],
+    "n_articles": 10,
+    "prior_key": "China->Taiwan|scope=89c2652018b045b5",
+    "structural_prior": {
+      "gray_zone_incident": 0.292,
+      "missile_strike": 0.204,
+      "raid": 0.074,
+      "seizure_boarding": 0.05,
+      "airstrike": 0.122,
+      "naval_blockade": 0.12,
+      "ground_invasion": 0.056,
+      "direct_engagement": 0.082
+    },
+    "signals": [
+      {
+        "action_type": "gray_zone_incident",
+        "direction": "up",
+        "strength": "moderate",
+        "evidence": "China's Coast Guard launched a new 'law enforcement patrol' east of Taiwan, deploying a fleet to conduct patrols in waters China claims as its own jurisdiction, with Taiwan tracking and countering Chinese ships and vowing to expel them."
+      }
+    ],
+    "live_scores": {
+      "gray_zone_incident": 0.6931471805599453,
+      "missile_strike": 0.0,
+      "raid": 0.0,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.0,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.0
+    },
+    "readiness_summary": "China has deployed coast guard vessels east of Taiwan for active 'law enforcement patrols,' representing a concrete gray-zone readiness escalation in a new geographic area.",
+    "shadow_distribution": {
+      "gray_zone_incident": 0.45201238390092874,
+      "missile_strike": 0.15789473684210525,
+      "raid": 0.05727554179566562,
+      "seizure_boarding": 0.03869969040247679,
+      "airstrike": 0.09442724458204335,
+      "naval_blockade": 0.09287925696594429,
+      "ground_invasion": 0.04334365325077401,
+      "direct_engagement": 0.06346749226006193
+    },
+    "delta_from_prior": {
+      "gray_zone_incident": 0.16001238390092876,
+      "missile_strike": -0.04610526315789473,
+      "raid": -0.016724458204334373,
+      "seizure_boarding": -0.011300309597523213,
+      "airstrike": -0.027572755417956646,
+      "naval_blockade": -0.027120743034055705,
+      "ground_invasion": -0.012656346749225993,
+      "direct_engagement": -0.018532507739938073
+    }
+  },
+  {
+    "initiator": "US",
+    "target": "Venezuela",
+    "date": "20251221",
+    "role": "positiveish",
+    "note": "US Coast Guard pursuing tanker near Venezuela",
+    "cache_files": [
+      "US_Venezuela_20251221.json"
+    ],
+    "n_articles": 9,
+    "prior_key": "US->Venezuela|scope=b0b8c95a7be52845",
+    "structural_prior": {
+      "gray_zone_incident": 0.054923,
+      "missile_strike": 0.191546,
+      "raid": 0.144862,
+      "seizure_boarding": 0.089251,
+      "airstrike": 0.201158,
+      "naval_blockade": 0.186054,
+      "ground_invasion": 0.122206,
+      "direct_engagement": 0.01
+    },
+    "signals": [
+      {
+        "action_type": "seizure_boarding",
+        "direction": "up",
+        "strength": "strong",
+        "evidence": "US Coast Guard vessels are in active pursuit of a third oil tanker in international waters near Venezuela within less than two weeks, with a second seizure completed the prior day, indicating sustained and ongoing boarding/interdiction operations."
+      }
+    ],
+    "live_scores": {
+      "gray_zone_incident": 0.0,
+      "missile_strike": 0.0,
+      "raid": 0.0,
+      "seizure_boarding": 1.3862943611198906,
+      "airstrike": 0.0,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.0
+    },
+    "readiness_summary": "US Coast Guard is actively pursuing a third oil tanker near Venezuela for seizure, continuing a pattern of at least three interdiction operations in under two weeks.",
+    "shadow_distribution": {
+      "gray_zone_incident": 0.04332310789246801,
+      "missile_strike": 0.15109094594925035,
+      "raid": 0.1142667380791053,
+      "seizure_boarding": 0.2816037508883828,
+      "airstrike": 0.158672864509096,
+      "naval_blockade": 0.1467588717991596,
+      "ground_invasion": 0.09639574901420073,
+      "direct_engagement": 0.007887971868337135
+    },
+    "delta_from_prior": {
+      "gray_zone_incident": -0.01159989210753199,
+      "missile_strike": -0.040455054050749645,
+      "raid": -0.030595261920894692,
+      "seizure_boarding": 0.1923527508883828,
+      "airstrike": -0.04248513549090399,
+      "naval_blockade": -0.039295128200840385,
+      "ground_invasion": -0.02581025098579927,
+      "direct_engagement": -0.002112028131662865
+    }
+  },
+  {
+    "initiator": "US",
+    "target": "Venezuela",
+    "date": "20251225",
+    "role": "positiveish",
+    "note": "ongoing US blockade language",
+    "cache_files": [
+      "US_Venezuela_20251225.json"
+    ],
+    "n_articles": 10,
+    "prior_key": "US->Venezuela|scope=b0b8c95a7be52845",
+    "structural_prior": {
+      "gray_zone_incident": 0.054923,
+      "missile_strike": 0.191546,
+      "raid": 0.144862,
+      "seizure_boarding": 0.089251,
+      "airstrike": 0.201158,
+      "naval_blockade": 0.186054,
+      "ground_invasion": 0.122206,
+      "direct_engagement": 0.01
+    },
+    "signals": [
+      {
+        "action_type": "naval_blockade",
+        "direction": "up",
+        "strength": "moderate",
+        "evidence": "Multiple independent sources report the US is actively blockading Venezuela in the Caribbean Sea, with Russia, China, and Venezuela raising the matter at an emergency UN Security Council meeting and the US defending its blockade at the UN."
+      }
+    ],
+    "live_scores": {
+      "gray_zone_incident": 0.0,
+      "missile_strike": 0.0,
+      "raid": 0.0,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.0,
+      "naval_blockade": 0.6931471805599453,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.0
+    },
+    "readiness_summary": "Multiple sources confirm a US naval blockade of Venezuela is underway, with the US defending it at the UN Security Council.",
+    "shadow_distribution": {
+      "gray_zone_incident": 0.04630733507917852,
+      "missile_strike": 0.1614985489699457,
+      "raid": 0.12213777787520635,
+      "seizure_boarding": 0.07525036802708814,
+      "airstrike": 0.16960273309646948,
+      "naval_blockade": 0.3137361368032147,
+      "ground_invasion": 0.10303578083291318,
+      "direct_engagement": 0.008431319315983931
+    },
+    "delta_from_prior": {
+      "gray_zone_incident": -0.008615664920821477,
+      "missile_strike": -0.030047451030054295,
+      "raid": -0.022724222124793636,
+      "seizure_boarding": -0.014000631972911862,
+      "airstrike": -0.03155526690353053,
+      "naval_blockade": 0.12768213680321472,
+      "ground_invasion": -0.01917021916708682,
+      "direct_engagement": -0.0015686806840160689
+    }
+  },
+  {
+    "initiator": "India",
+    "target": "Pakistan",
+    "date": "20251224",
+    "role": "negative_control",
+    "note": "missile test/capability discussion, not necessarily attack prep",
+    "cache_files": [
+      "India_Pakistan_20251224.json"
+    ],
+    "n_articles": 9,
+    "prior_key": "India->Pakistan|scope=a30564ef2baf3535",
+    "structural_prior": {
+      "gray_zone_incident": 0.096667,
+      "missile_strike": 0.137333,
+      "raid": 0.189333,
+      "seizure_boarding": 0.020667,
+      "airstrike": 0.236,
+      "naval_blockade": 0.032,
+      "ground_invasion": 0.074,
+      "direct_engagement": 0.214
+    },
+    "signals": [],
+    "live_scores": {
+      "gray_zone_incident": 0.0,
+      "missile_strike": 0.0,
+      "raid": 0.0,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.0,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.0
+    },
+    "readiness_summary": "No action-specific readiness evidence.",
+    "shadow_distribution": {
+      "gray_zone_incident": 0.09666700000000002,
+      "missile_strike": 0.13733300000000004,
+      "raid": 0.18933300000000006,
+      "seizure_boarding": 0.020666999999999998,
+      "airstrike": 0.236,
+      "naval_blockade": 0.03200000000000001,
+      "ground_invasion": 0.07400000000000001,
+      "direct_engagement": 0.21400000000000002
+    },
+    "delta_from_prior": {
+      "gray_zone_incident": 1.3877787807814457e-17,
+      "missile_strike": 2.7755575615628914e-17,
+      "raid": 5.551115123125783e-17,
+      "seizure_boarding": -3.469446951953614e-18,
+      "airstrike": 0.0,
+      "naval_blockade": 6.938893903907228e-18,
+      "ground_invasion": 1.3877787807814457e-17,
+      "direct_engagement": 2.7755575615628914e-17
+    }
+  },
+  {
+    "initiator": "Iran",
+    "target": "Egypt",
+    "date": "20260910",
+    "role": "negative_control",
+    "note": "wrong-target Jordan/Yemen contamination",
+    "cache_files": [
+      "Iran_Egypt_20260910.json"
+    ],
+    "n_articles": 13,
+    "prior_key": "Iran->Egypt|scope=e2a2a92a52e81076",
+    "structural_prior": {
+      "gray_zone_incident": 0.093417,
+      "missile_strike": 0.618952,
+      "raid": 0.078682,
+      "seizure_boarding": 0.088371,
+      "airstrike": 0.048854,
+      "naval_blockade": 0.044626,
+      "ground_invasion": 0.017098,
+      "direct_engagement": 0.01
+    },
+    "signals": [],
+    "live_scores": {
+      "gray_zone_incident": 0.0,
+      "missile_strike": 0.0,
+      "raid": 0.0,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.0,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.0
+    },
+    "readiness_summary": "No action-specific readiness evidence for Iran against Egypt found in the packet.",
+    "shadow_distribution": {
+      "gray_zone_incident": 0.09341700000000003,
+      "missile_strike": 0.618952,
+      "raid": 0.07868200000000003,
+      "seizure_boarding": 0.088371,
+      "airstrike": 0.048854000000000015,
+      "naval_blockade": 0.044625999999999985,
+      "ground_invasion": 0.017097999999999995,
+      "direct_engagement": 0.010000000000000002
+    },
+    "delta_from_prior": {
+      "gray_zone_incident": 2.7755575615628914e-17,
+      "missile_strike": 0.0,
+      "raid": 2.7755575615628914e-17,
+      "seizure_boarding": 0.0,
+      "airstrike": 1.3877787807814457e-17,
+      "naval_blockade": -1.3877787807814457e-17,
+      "ground_invasion": -3.469446951953614e-18,
+      "direct_engagement": 1.734723475976807e-18
+    }
+  },
+  {
+    "initiator": "Iran",
+    "target": "Saudi Arabia",
+    "date": "20260908",
+    "role": "negative_control",
+    "note": "Houthi/proxy activity must not become Iranian action",
+    "cache_files": [
+      "Iran_SaudiArabia_20260908.json",
+      "Iran_Saudi_Arabia_20260908.json"
+    ],
+    "n_articles": 32,
+    "prior_key": "Iran->Saudi Arabia|scope=8a876ad706db2c5c",
+    "structural_prior": {
+      "gray_zone_incident": 0.130863,
+      "missile_strike": 0.438549,
+      "raid": 0.049882,
+      "seizure_boarding": 0.091373,
+      "airstrike": 0.037294,
+      "naval_blockade": 0.075137,
+      "ground_invasion": 0.013804,
+      "direct_engagement": 0.163098
+    },
+    "signals": [
+      {
+        "action_type": "naval_blockade",
+        "direction": "up",
+        "strength": "weak",
+        "evidence": "Iran threatened a new maritime exclusion zone in the Persian Gulf as tensions over the Strait of Hormuz continue."
+      }
+    ],
+    "live_scores": {
+      "gray_zone_incident": 0.0,
+      "missile_strike": 0.0,
+      "raid": 0.0,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.0,
+      "naval_blockade": 0.22314355131420976,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.0
+    },
+    "readiness_summary": "All Houthi missile/drone strikes on Saudi cities and oil facilities are proxy actions, not Iran's own forces; the only Iran-direct signal is a threatened maritime exclusion zone in the Persian Gulf.",
+    "shadow_distribution": {
+      "gray_zone_incident": 0.12845016008050775,
+      "missile_strike": 0.43046307400217465,
+      "raid": 0.048962280286527785,
+      "seizure_boarding": 0.0896882730568322,
+      "airstrike": 0.03660637666905432,
+      "naval_blockade": 0.09218953865845493,
+      "ground_invasion": 0.013549483121671736,
+      "direct_engagement": 0.16009081412477666
+    },
+    "delta_from_prior": {
+      "gray_zone_incident": -0.00241283991949226,
+      "missile_strike": -0.008085925997825372,
+      "raid": -0.0009197197134722182,
+      "seizure_boarding": -0.0016847269431677914,
+      "airstrike": -0.0006876233309456789,
+      "naval_blockade": 0.017052538658454935,
+      "ground_invasion": -0.00025451687832826406,
+      "direct_engagement": -0.003007185875223334
+    }
+  },
+  {
+    "initiator": "Iran",
+    "target": "Oman",
+    "date": "20260831",
+    "role": "negative_control",
+    "note": "Hormuz diplomacy/reopening, not Iran attacking Oman",
+    "cache_files": [
+      "Iran_Oman_20260831.json"
+    ],
+    "n_articles": 19,
+    "prior_key": "Iran->Oman|scope=403fa402b0cdbbf3",
+    "structural_prior": {
+      "gray_zone_incident": 0.282,
+      "missile_strike": 0.168,
+      "raid": 0.07,
+      "seizure_boarding": 0.2,
+      "airstrike": 0.074,
+      "naval_blockade": 0.098,
+      "ground_invasion": 0.026,
+      "direct_engagement": 0.082
+    },
+    "signals": [],
+    "live_scores": {
+      "gray_zone_incident": 0.0,
+      "missile_strike": 0.0,
+      "raid": 0.0,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.0,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.0
+    },
+    "readiness_summary": "No action-specific readiness evidence.",
+    "shadow_distribution": {
+      "gray_zone_incident": 0.28200000000000003,
+      "missile_strike": 0.16800000000000007,
+      "raid": 0.07,
+      "seizure_boarding": 0.2,
+      "airstrike": 0.07400000000000002,
+      "naval_blockade": 0.09800000000000002,
+      "ground_invasion": 0.025999999999999995,
+      "direct_engagement": 0.082
+    },
+    "delta_from_prior": {
+      "gray_zone_incident": 5.551115123125783e-17,
+      "missile_strike": 5.551115123125783e-17,
+      "raid": 0.0,
+      "seizure_boarding": 0.0,
+      "airstrike": 2.7755575615628914e-17,
+      "naval_blockade": 1.3877787807814457e-17,
+      "ground_invasion": -3.469446951953614e-18,
+      "direct_engagement": 0.0
+    }
+  },
+  {
+    "initiator": "Iran",
+    "target": "Qatar",
+    "date": "20260905",
+    "role": "negative_control",
+    "note": "retrospective/other-event reporting",
+    "cache_files": [
+      "Iran_Qatar_20260905.json"
+    ],
+    "n_articles": 6,
+    "prior_key": "Iran->Qatar|scope=1e987db0725ff628",
+    "structural_prior": {
+      "gray_zone_incident": 0.108727,
+      "missile_strike": 0.392091,
+      "raid": 0.06797,
+      "seizure_boarding": 0.094545,
+      "airstrike": 0.093121,
+      "naval_blockade": 0.096909,
+      "ground_invasion": 0.027606,
+      "direct_engagement": 0.11903
+    },
+    "signals": [],
+    "live_scores": {
+      "gray_zone_incident": 0.0,
+      "missile_strike": 0.0,
+      "raid": 0.0,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.0,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.0
+    },
+    "readiness_summary": "No action-specific readiness evidence.",
+    "shadow_distribution": {
+      "gray_zone_incident": 0.10872710872710874,
+      "missile_strike": 0.39209139209139215,
+      "raid": 0.06797006797006798,
+      "seizure_boarding": 0.09454509454509458,
+      "airstrike": 0.09312109312109312,
+      "naval_blockade": 0.09690909690909694,
+      "ground_invasion": 0.02760602760602759,
+      "direct_engagement": 0.11903011903011904
+    },
+    "delta_from_prior": {
+      "gray_zone_incident": 1.0872710873299773e-07,
+      "missile_strike": 3.920913921318103e-07,
+      "raid": 6.797006797676364e-08,
+      "seizure_boarding": 9.454509457273996e-08,
+      "airstrike": 9.312109312820116e-08,
+      "naval_blockade": 9.690909694159977e-08,
+      "ground_invasion": 2.7606027592358418e-08,
+      "direct_engagement": 1.1903011903902083e-07
+    }
+  },
+  {
+    "initiator": "Iran",
+    "target": "Ukraine",
+    "date": "20260820",
+    "role": "negative_control",
+    "note": "dispute plus unrelated war material",
+    "cache_files": [
+      "Iran_Ukraine_20260820.json"
+    ],
+    "n_articles": 6,
+    "prior_key": "Iran->Ukraine|scope=798dbb69729b5f04",
+    "structural_prior": {
+      "gray_zone_incident": 0.047868,
+      "missile_strike": 0.824637,
+      "raid": 0.039165,
+      "seizure_boarding": 0.013055,
+      "airstrike": 0.043516,
+      "naval_blockade": 0.010879,
+      "ground_invasion": 0.010879,
+      "direct_engagement": 0.01
+    },
+    "signals": [],
+    "live_scores": {
+      "gray_zone_incident": 0.0,
+      "missile_strike": 0.0,
+      "raid": 0.0,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.0,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.0
+    },
+    "readiness_summary": "No action-specific readiness evidence for Iran against Ukraine in this packet.",
+    "shadow_distribution": {
+      "gray_zone_incident": 0.047868048351564,
+      "missile_strike": 0.8246378329675081,
+      "raid": 0.039165039560646014,
+      "seizure_boarding": 0.013055013186882014,
+      "airstrike": 0.04351604395559996,
+      "naval_blockade": 0.010879010988899993,
+      "ground_invasion": 0.010879010988899993,
+      "direct_engagement": 0.01
+    },
+    "delta_from_prior": {
+      "gray_zone_incident": 4.8351564002624414e-08,
+      "missile_strike": 8.329675081908405e-07,
+      "raid": 3.95606460160125e-08,
+      "seizure_boarding": 1.3186882013432877e-08,
+      "airstrike": 4.3955599958456215e-08,
+      "naval_blockade": 1.09888999930835e-08,
+      "ground_invasion": 1.09888999930835e-08,
+      "direct_engagement": 0.0
+    }
+  },
+  {
+    "initiator": "US",
+    "target": "Colombia",
+    "date": "20260906",
+    "role": "negative_control",
+    "note": "Colombian domestic guerrilla attack",
+    "cache_files": [
+      "US_Colombia_20260906.json"
+    ],
+    "n_articles": 9,
+    "prior_key": "US->Colombia|scope=b740eb0102226e48",
+    "structural_prior": {
+      "gray_zone_incident": 0.099207,
+      "missile_strike": 0.126075,
+      "raid": 0.233549,
+      "seizure_boarding": 0.119875,
+      "airstrike": 0.144676,
+      "naval_blockade": 0.157077,
+      "ground_invasion": 0.109541,
+      "direct_engagement": 0.01
+    },
+    "signals": [],
+    "live_scores": {
+      "gray_zone_incident": 0.0,
+      "missile_strike": 0.0,
+      "raid": 0.0,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.0,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.0
+    },
+    "readiness_summary": "No action-specific readiness evidence.",
+    "shadow_distribution": {
+      "gray_zone_incident": 0.099207,
+      "missile_strike": 0.12607500000000002,
+      "raid": 0.233549,
+      "seizure_boarding": 0.11987499999999998,
+      "airstrike": 0.144676,
+      "naval_blockade": 0.157077,
+      "ground_invasion": 0.10954099999999999,
+      "direct_engagement": 0.010000000000000007
+    },
+    "delta_from_prior": {
+      "gray_zone_incident": 0.0,
+      "missile_strike": 2.7755575615628914e-17,
+      "raid": 0.0,
+      "seizure_boarding": -1.3877787807814457e-17,
+      "airstrike": 0.0,
+      "naval_blockade": 0.0,
+      "ground_invasion": -1.3877787807814457e-17,
+      "direct_engagement": 6.938893903907228e-18
+    }
+  },
+  {
+    "initiator": "US",
+    "target": "Denmark",
+    "date": "20260811",
+    "role": "negative_control",
+    "note": "Greenland invasion rhetoric/speculation, no operational prep",
+    "cache_files": [
+      "US_Denmark_20260811.json"
+    ],
+    "n_articles": 10,
+    "prior_key": "US->Denmark|scope=697bd06ee0c162ce",
+    "structural_prior": {
+      "gray_zone_incident": 0.252667,
+      "missile_strike": 0.016,
+      "raid": 0.238667,
+      "seizure_boarding": 0.054667,
+      "airstrike": 0.016,
+      "naval_blockade": 0.081333,
+      "ground_invasion": 0.294667,
+      "direct_engagement": 0.046
+    },
+    "signals": [],
+    "live_scores": {
+      "gray_zone_incident": 0.0,
+      "missile_strike": 0.0,
+      "raid": 0.0,
+      "seizure_boarding": 0.0,
+      "airstrike": 0.0,
+      "naval_blockade": 0.0,
+      "ground_invasion": 0.0,
+      "direct_engagement": 0.0
+    },
+    "readiness_summary": "No action-specific readiness evidence.",
+    "shadow_distribution": {
+      "gray_zone_incident": 0.2526667473332526,
+      "missile_strike": 0.015999984000016,
+      "raid": 0.2386667613332386,
+      "seizure_boarding": 0.05466694533305465,
+      "airstrike": 0.015999984000016,
+      "naval_blockade": 0.08133291866708134,
+      "ground_invasion": 0.2946667053332947,
+      "direct_engagement": 0.04599995400004601
+    },
+    "delta_from_prior": {
+      "gray_zone_incident": -2.526667473579103e-07,
+      "missile_strike": -1.5999984000897305e-08,
+      "raid": -2.3866676138184495e-07,
+      "seizure_boarding": -5.4666945352443985e-08,
+      "airstrike": -1.5999984000897305e-08,
+      "naval_blockade": -8.133291866385672e-08,
+      "ground_invasion": -2.9466670531386185e-07,
+      "direct_engagement": -4.599995399173773e-08
+    }
+  }
+]
