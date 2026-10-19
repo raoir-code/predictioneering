@@ -214,15 +214,22 @@ def replay():
         v1b = mean([B(v1, r["outcome"]) for r, st, a, pr, v1 in rows])
         v2b = mean([B(pr["primary"], r["outcome"]) for r, st, a, pr, v1 in rows])
         mk = [B(r["mkt_first"], r["outcome"]) for r, *_ in rows if r["mkt_first"] is not None]
-        print(f"  Brier  v1 {v1b:.4f} | v2a {v2b:.4f} | market {mean(mk):.4f} (n={len(mk)})")
+        print(f"  Brier  v1 {v1b:.4f} | {VERSION} {v2b:.4f} | market {mean(mk):.4f} (n={len(mk)})")
         for v in rows[0][3]:
-            print(f"    v2a[{v}] {mean([B(pr[v], r['outcome']) for r, st, a, pr, v1 in rows]):.4f}")
+            print(f"    {VERSION}[{v}] {mean([B(pr[v], r['outcome']) for r, st, a, pr, v1 in rows]):.4f}")
         for day in sorted({x[1]["as_of_day"] for x in rows}):
             sub = [x for x in rows if x[1]["as_of_day"] == day]
             print(f"  batch {day} (n={len(sub)}, evidence days {sub[0][1]['n_evidence_days']}): "
                   f"v1 {mean([B(x[4], x[0]['outcome']) for x in sub]):.4f}  "
                   f"v2a {mean([B(x[3]['primary'], x[0]['outcome']) for x in sub]):.4f}")
-        print(f"  CHECK harness: v1 = {v1b:.4f} vs Oct 16 replay 0.163 -> {'PASS' if abs(v1b - 0.163) <= 0.002 else 'FAIL: investigate before reading anything else'}")
+        fq = []
+        for r in res:
+            if r["first_ts"] is None: continue
+            kn = [x for x in res if x is not r and x["known"] < r["first_ts"]]
+            fq.append((((1 + sum(x["outcome"] for x in kn)) / (2 + len(kn))) - r["outcome"]) ** 2)
+        print(f"  CHECK harness: flat-q (Oct 16 definition) = {mean(fq):.4f}, n={len(fq)} -> "
+              f"{'PASS' if len(fq) != 36 or abs(mean(fq) - 0.1625) <= 0.002 else 'FAIL: harness drifted, investigate'}"
+              f"{' (n changed since Oct 16: new resolutions, target no longer applies)' if len(fq) != 36 else ''}")
         print(f"  CHECK rule: v2a - v1 = {v2b - v1b:+.4f} -> {'PASS' if v2b - v1b <= 0.005 else 'FAIL: see per-batch split (cold start vs evidence batches)'}")
 
 if __name__ == "__main__":
