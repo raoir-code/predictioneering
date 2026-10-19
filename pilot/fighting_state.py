@@ -34,7 +34,7 @@ CONFIG = ROOT / "pilot" / "during_war_config.json"
 FEED = ROOT / "pipeline" / "classified_feed.json"
 BRIER = ROOT / "predictions" / "brier_log.jsonl"
 OUT = ROOT / "pilot" / "shadow_log_v2.jsonl"
-VERSION = "during-war-v2d"
+VERSION = "during-war-v2e"
 LN2 = math.log(2)
 MON = "january february march april may june july august september october november december".split()
 _M = "January|February|March|April|May|June|July|August|September|October|November|December"
@@ -97,6 +97,7 @@ def variants(D):
     V = {"primary": base, "kappa_0.5": {**base, "kappa": 0.5}}
     V["news_off"] = {**base, "announcement_lr": 1.0}   # reproduces v2a exactly
     V["lr_4"] = {**base, "announcement_lr": 4.0}
+    V["lr_2"] = {**base, "announcement_lr": 2.0}
     V["pool_off"] = {**base, "pool": False}         # = v2b
     V["pool_w8"] = {**base, "pool": True, "prior_w": 8.0}
     V["pool_on"] = {**base, "pool": True}
