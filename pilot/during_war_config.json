@@ -4,7 +4,7 @@
     "middle_east_war": {
       "mu_half_life_days": 180,
       "h_half_life_days": 30,
-      "q0": 0.10,
+      "q0": 0.1,
       "announcement_lr": 2.0,
       "_notes": "mu = cessation of fighting (accepted offer). h = re-entry; theory: SSPE onset hazard, engine value is a lower bound (engine prices interstate war A); Phase 5 wires it. announcement_lr is used from v2b on: weak because a non-self-enforcing deal is announced without cessation (commitment problem, Powell 2006)."
     }
@@ -14,12 +14,20 @@
       "theater": "middle_east_war",
       "initiator": "Israel",
       "territory": "Lebanon",
-      "combatants": ["Hezbollah", "other armed groups in Lebanon", "Lebanese state forces"],
+      "combatants": [
+        "Hezbollah",
+        "other armed groups in Lebanon",
+        "Lebanese state forces"
+      ],
       "seed_date": "2026-03-02",
       "_seed_source": "Israeli strike campaign in Lebanon from Mar 2, 2026. With primary rates the seed is forgotten long before the first resolution (Sep).",
       "day_tz": "Asia/Jerusalem",
       "label_regex": "Israel military action against Lebanon on (\\w+) (\\d+)(?:, (\\d{4}))?\\?",
-      "news_glob": "cache/gnews_pilot/*.json"
+      "news_globs": [
+        "cache/gnews/Israel_Lebanon_*.json",
+        "cache/gnews_pilot/lebanon_*.json",
+        "cache/gnews_pilot/hezbollah_*.json"
+      ]
     }
   }
 }
