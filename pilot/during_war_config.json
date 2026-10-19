@@ -22,7 +22,6 @@
       "seed_date": "2026-03-02",
       "_seed_source": "Israeli strike campaign in Lebanon from Mar 2, 2026. With primary rates the seed is forgotten long before the first resolution (Sep).",
       "day_tz": "Asia/Jerusalem",
-      "label_regex": "Israel military action against Lebanon on (\\w+) (\\d+)(?:, (\\d{4}))?\\?",
       "news_globs": [
         "cache/gnews/Israel_Lebanon_*.json",
         "cache/gnews_pilot/lebanon_*.json",

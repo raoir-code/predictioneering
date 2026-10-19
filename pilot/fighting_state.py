@@ -35,13 +35,41 @@ OUT = ROOT / "pilot" / "shadow_log_v2.jsonl"
 VERSION = "shadow-v2b"
 LN2 = math.log(2)
 MON = "january february march april may june july august september october november december".split()
+_M = "January|February|March|April|May|June|July|August|September|October|November|December"
+DAY = re.compile(r"\bon (" + _M + r") (\d{1,2})(?:, (\d{4}))?\?\s*$", re.I)
+TEMPLATE = re.compile(r"^(?:Will there be )?(.+?) military action against (.+?) on (?:" + _M + r")\b", re.I)
+TC_PATH = ROOT / "pipeline" / "translator_cache.json"
+_TC = None
+DISAGREE = []
+
+def _norm(x):
+    return re.sub(r"[^a-z]", "", (x or "").lower())
+
+def belongs(mid, text, pair):
+    """Generic membership for single-day contracts. Clergyman initiator/target when present, else the standard
+    Polymarket template '<A> military action against <B> on <date>?'. If both exist they must agree."""
+    global _TC
+    if _TC is None:
+        try:
+            _TC = json.loads(TC_PATH.read_text())
+        except Exception:
+            _TC = {}
+    if not DAY.search(text or ""):
+        return False
+    c = _TC.get(str(mid)); c = c.get("clergy") if isinstance(c, dict) else None
+    gc = (_norm(c.get("contract_initiator")), _norm(c.get("contract_target"))) if isinstance(c, dict) and c.get("contract_initiator") and c.get("contract_target") else None
+    m = TEMPLATE.match(text or "")
+    gt = (_norm(m.group(1)), _norm(m.group(2))) if m else None
+    if gc and gt and gc != gt:
+        DISAGREE.append((str(mid), gc, gt)); return False
+    return (gc or gt) == (_norm(pair["initiator"]), _norm(pair["territory"]))
 
 def T(s):
     x = dt.datetime.fromisoformat(str(s).replace("Z", "+00:00"))
     return x if x.tzinfo else x.replace(tzinfo=dt.timezone.utc)
 
 def parse_day(text, pat, ref):
-    m = pat.match(text or "")
+    m = DAY.search(text or "")   # generic single-day form; pat unused, kept for call compatibility
     if not m:
         return None
     y = int(m.group(3)) if m.group(3) else ref.year
@@ -58,7 +86,7 @@ def load_config():
     out = {}
     for name, p in c["pairs"].items():
         D = {**c["theater_defaults"][p["theater"]], **p.get("overrides", {})}
-        out[name] = {**p, "name": name, "D": D, "pat": re.compile(p["label_regex"])}
+        out[name] = {**p, "name": name, "D": D, "pat": None}
     return out
 
 def variants(D):
@@ -83,7 +111,7 @@ def load_resolved(pair):
     tz = ZoneInfo(pair["day_tz"]); res = []
     for mid, rs in rows.items():
         label = rs[-1].get("market_label") or ""
-        if not pair["pat"].match(label):
+        if not belongs(mid, label, pair):
             continue
         ts = [T(x["resolved_at"]) for x in rs if x.get("resolved_at")]
         if not ts:
@@ -166,7 +194,7 @@ def live(dry):
             text = m.get("label") or m.get("question") or ""
             d = parse_day(text, pair["pat"], st["as_of_day"])
             mid = str(m.get("market_id"))
-            if d is None or mid in seen or m.get("resolved"):
+            if d is None or mid in seen or m.get("resolved") or not belongs(mid, text, pair):
                 continue
             ahead = (d - st["as_of_day"]).days
             if ahead < 0:
