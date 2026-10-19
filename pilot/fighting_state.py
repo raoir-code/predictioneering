@@ -34,7 +34,7 @@ CONFIG = ROOT / "pilot" / "during_war_config.json"
 FEED = ROOT / "pipeline" / "classified_feed.json"
 BRIER = ROOT / "predictions" / "brier_log.jsonl"
 OUT = ROOT / "pilot" / "shadow_log_v2.jsonl"
-VERSION = "shadow-v2c"
+VERSION = "during-war-v2d"
 LN2 = math.log(2)
 MON = "january february march april may june july august september october november december".split()
 _M = "January|February|March|April|May|June|July|August|September|October|November|December"
@@ -93,12 +93,13 @@ def load_config():
 
 def variants(D):
     base = {"mu": LN2 / D["mu_half_life_days"], "h": LN2 / D["h_half_life_days"],
-            "q0": D["q0"], "kappa": 1.0, "pi_seed": 1.0, "announcement_lr": D["announcement_lr"], "pool": True, "prior_w": D.get("prior_weight", 2.0)}
+            "q0": D["q0"], "kappa": 1.0, "pi_seed": 1.0, "announcement_lr": D["announcement_lr"], "pool": D.get("pool", True), "prior_w": D.get("prior_weight", 2.0)}
     V = {"primary": base, "kappa_0.5": {**base, "kappa": 0.5}}
     V["news_off"] = {**base, "announcement_lr": 1.0}   # reproduces v2a exactly
     V["lr_4"] = {**base, "announcement_lr": 4.0}
     V["pool_off"] = {**base, "pool": False}         # = v2b
-    V["pool_w8"] = {**base, "prior_w": 8.0}
+    V["pool_w8"] = {**base, "pool": True, "prior_w": 8.0}
+    V["pool_on"] = {**base, "pool": True}
     for hl in (90, 365):
         V[f"mu_hl_{hl}"] = {**base, "mu": LN2 / hl}
     for hl in (14, 90, 365):

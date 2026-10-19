@@ -6,9 +6,10 @@
       "h_half_life_days": 30,
       "q0": 0.1,
       "announcement_lr": 2.0,
-      "_notes": "mu = cessation of fighting (accepted offer). h = re-entry; theory: SSPE onset hazard, engine value is a lower bound (engine prices interstate war A); Phase 5 wires it. announcement_lr is used from v2b on: weak because a non-self-enforcing deal is announced without cessation (commitment problem, Powell 2006).",
+      "_notes": "mu = cessation of fighting (accepted offer). h = re-entry; theory: SSPE onset hazard, engine value is a lower bound (engine prices interstate war A); Phase 5 wires it. announcement_lr is used from v2b on: weak because a non-self-enforcing deal is announced without cessation (commitment problem, Powell 2006). announcement_lr: direction from theory (non-self-enforcing deals are announced without cessation, Powell 2006); MAGNITUDE 2 IS ASSUMED, not derived (ChatGPT review Oct 19).",
       "prior_weight": 2.0,
-      "_pooling_note": "Oct 19 (Adi approved): q prior keeps Beta(1,1)'s weight 2 but centers on the theater's walk-forward rate from other pairs. Weight not estimable with 2 pairs; 8 logged as sensitivity."
+      "_pooling_note": "Oct 19 evening: pooling OFF (Adi). With two pairs the 'theater center' is just Lebanon's rate, a shortcut, not a mechanism. Revisit with >=3 pairs or an external reference class (UCDP GED). pool_on / pool_w8 logged.",
+      "pool": false
     }
   },
   "pairs": {
