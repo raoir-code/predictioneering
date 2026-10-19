@@ -1,0 +1,471 @@
+{
+  "_doc": "Two-state (N/F) Markov-modulated model fitted to ACLED daily series, one initiator->territory pair at a time.",
+  "data": "ACLED 2015-2025 (data/external/acled/MANIFEST.json)",
+  "pairs": {
+    "Israel->Lebanon": {
+      "primary": {
+        "active_days": 748,
+        "observed_days": 4016,
+        "loglik": -298.5135714521855,
+        "h_per_day": 0.0012765754408954498,
+        "mu_per_day": 0.006002343976470527,
+        "onset_median_wait_days": 542.9739272390666,
+        "episode_half_life_days": 115.47941658743902,
+        "p_recorded_day_F": 0.9638200715535927,
+        "p_recorded_day_N": 0.006277170273383481,
+        "stationary_pF": 0.17537980127239877,
+        "sd_log": {
+          "h": 0.508032684075988,
+          "mu": 0.4863291328950478,
+          "rhoN": 0.2306760742448902,
+          "d": 0.05710904606587979
+        },
+        "validation_2023_25": {
+          "n_days": 1096,
+          "logscore_model": -0.5568726842491112,
+          "logscore_constant": -3.007360117574191,
+          "brier_model": 0.19701715011600823,
+          "brier_constant": 0.6426566323567361,
+          "model_better": true
+        }
+      },
+      "air_only": {
+        "active_days": 658,
+        "observed_days": 4015,
+        "loglik": -369.7484477128571,
+        "h_per_day": 0.0009764826612584994,
+        "mu_per_day": 0.004859128177369159,
+        "onset_median_wait_days": 709.8407458322006,
+        "episode_half_life_days": 142.64846599194482,
+        "p_recorded_day_F": 0.88752775890144,
+        "p_recorded_day_N": 0.00316176640355037,
+        "stationary_pF": 0.16733169641725726
+      }
+    },
+    "Israel->Syria": {
+      "primary": {
+        "active_days": 460,
+        "observed_days": 4018,
+        "loglik": -1277.8296456814257,
+        "h_per_day": 0.007527840232599766,
+        "mu_per_day": 0.04926671094172528,
+        "onset_median_wait_days": 92.07782832029692,
+        "episode_half_life_days": 14.069280601658768,
+        "p_recorded_day_F": 0.45962421989638536,
+        "p_recorded_day_N": 0.06099290730390894,
+        "stationary_pF": 0.13254511351791182,
+        "sd_log": {
+          "h": 0.33369264254170067,
+          "mu": 0.30561092587312033,
+          "rhoN": 0.09072248030020136,
+          "d": 0.11388522517357542
+        },
+        "validation_2023_25": {
+          "n_days": 1096,
+          "logscore_model": -0.6330830890084101,
+          "logscore_constant": -0.6829490492518402,
+          "brier_model": 0.20024617329568267,
+          "brier_constant": 0.20753565019339293,
+          "model_better": true
+        }
+      },
+      "air_only": {
+        "active_days": 379,
+        "observed_days": 4018,
+        "loglik": -1145.7384068114281,
+        "h_per_day": 0.011888363646548392,
+        "mu_per_day": 0.12326739559413767,
+        "onset_median_wait_days": 58.30467515697084,
+        "episode_half_life_days": 5.623118564475535,
+        "p_recorded_day_F": 0.5124458653112194,
+        "p_recorded_day_N": 0.05328469352145848,
+        "stationary_pF": 0.08796046660044678
+      }
+    },
+    "Israel->Yemen": {
+      "primary": {
+        "active_days": 20,
+        "observed_days": 4018,
+        "loglik": -92.65570759159432,
+        "h_per_day": 0.0006870415849862667,
+        "mu_per_day": 0.011740962040113866,
+        "onset_median_wait_days": 1008.8867918727229,
+        "episode_half_life_days": 59.03665970401374,
+        "p_recorded_day_F": 0.08024344381946302,
+        "p_recorded_day_N": 0.00041141318778992186,
+        "stationary_pF": 0.05528173355201537,
+        "sd_log": {
+          "h": 0.753835006912209,
+          "mu": 0.768250021939681,
+          "rhoN": 1.0048301588135198,
+          "d": 0.3774844036110398
+        },
+        "validation_2023_25": "too few active days before 2023"
+      },
+      "air_only": {
+        "active_days": 18,
+        "observed_days": 4018,
+        "loglik": -84.41457172691331,
+        "h_per_day": 0.0002679768596656903,
+        "mu_per_day": 0.001624240746843793,
+        "onset_median_wait_days": 2586.5934149115283,
+        "episode_half_life_days": 426.7515033758766,
+        "p_recorded_day_F": 0.035247669008718896,
+        "p_recorded_day_N": 0.0,
+        "stationary_pF": 0.14162052965991534
+      }
+    },
+    "Israel->Iran": {
+      "primary": {
+        "active_days": 15,
+        "observed_days": 4018,
+        "loglik": -37.237193755678554,
+        "h_per_day": 0.00026283575020676016,
+        "mu_per_day": 0.09561085549718672,
+        "onset_median_wait_days": 2637.187597252961,
+        "episode_half_life_days": 7.249670311550979,
+        "p_recorded_day_F": 0.9999999999994955,
+        "p_recorded_day_N": 0.0007363228009225065,
+        "stationary_pF": 0.00274147940678049,
+        "sd_log": "hessian not invertible",
+        "validation_2023_25": "too few active days before 2023"
+      },
+      "air_only": {
+        "active_days": 15,
+        "observed_days": 4018,
+        "loglik": -37.23719375568167,
+        "h_per_day": 0.000262863466636381,
+        "mu_per_day": 0.0956107523980197,
+        "onset_median_wait_days": 2636.9095311322803,
+        "episode_half_life_days": 7.249678129029156,
+        "p_recorded_day_F": 0.9999999999992204,
+        "p_recorded_day_N": 0.0007363094113735924,
+        "stationary_pF": 0.0027417706557293408
+      }
+    },
+    "SaudiCoalition->Yemen": {
+      "primary": {
+        "active_days": 2841,
+        "observed_days": 4013,
+        "loglik": -916.7579843962785,
+        "h_per_day": 0.006683339776344998,
+        "mu_per_day": 0.0036813183384560777,
+        "onset_median_wait_days": 103.7126951128939,
+        "episode_half_life_days": 188.28775912127364,
+        "p_recorded_day_F": 0.977383005188014,
+        "p_recorded_day_N": 0.14140308277071278,
+        "stationary_pF": 0.6448200898012224,
+        "sd_log": {
+          "h": 0.3825840458661591,
+          "mu": 0.3516368380243338,
+          "rhoN": 0.09333205626504763,
+          "d": 0.041857475258031504
+        },
+        "validation_2023_25": {
+          "n_days": 1095,
+          "logscore_model": -0.4972463711182761,
+          "logscore_constant": -1.5842931127970448,
+          "brier_model": 0.14905313415394075,
+          "brier_constant": 0.5734804450491077,
+          "model_better": true
+        }
+      },
+      "air_only": {
+        "active_days": 2535,
+        "observed_days": 4018,
+        "loglik": -570.6763821117307,
+        "h_per_day": 0.0022387767585847077,
+        "mu_per_day": 0.0017802593270800262,
+        "onset_median_wait_days": 309.6097803865597,
+        "episode_half_life_days": 389.35180398512074,
+        "p_recorded_day_F": 0.9802424959499495,
+        "p_recorded_day_N": 0.045040663391583635,
+        "stationary_pF": 0.5570432090844046
+      }
+    },
+    "US->Yemen": {
+      "primary": {
+        "active_days": 400,
+        "observed_days": 4015,
+        "loglik": -1138.4104315890818,
+        "h_per_day": 0.003644877070481917,
+        "mu_per_day": 0.005864902646636338,
+        "onset_median_wait_days": 190.17024913498634,
+        "episode_half_life_days": 118.1856242673494,
+        "p_recorded_day_F": 0.21692865086422197,
+        "p_recorded_day_N": 0.021404250484538312,
+        "stationary_pF": 0.38327670870450226,
+        "sd_log": {
+          "h": 0.5467169879062703,
+          "mu": 0.5860699580484531,
+          "rhoN": 0.15832525258734276,
+          "d": 0.08667255013796574
+        },
+        "validation_2023_25": {
+          "n_days": 1096,
+          "logscore_model": -0.37170818967923874,
+          "logscore_constant": -0.4528628844723256,
+          "brier_model": 0.11907166235644907,
+          "brier_constant": 0.13356189616494965,
+          "model_better": true
+        }
+      },
+      "air_only": {
+        "active_days": 398,
+        "observed_days": 4015,
+        "loglik": -1135.8144267388175,
+        "h_per_day": 0.003508794467458953,
+        "mu_per_day": 0.005597336507922517,
+        "onset_median_wait_days": 197.54567757909118,
+        "episode_half_life_days": 123.83518117570007,
+        "p_recorded_day_F": 0.21449062995205448,
+        "p_recorded_day_N": 0.02134954832735514,
+        "stationary_pF": 0.38532220511049303
+      }
+    },
+    "US->Iraq": {
+      "primary": {
+        "active_days": 13,
+        "observed_days": 4018,
+        "loglik": -73.85104298471725,
+        "h_per_day": 0.0038578898801064927,
+        "mu_per_day": 0.3229759256070124,
+        "onset_median_wait_days": 179.6700274246324,
+        "episode_half_life_days": 2.146126462079859,
+        "p_recorded_day_F": 0.2535405541637824,
+        "p_recorded_day_N": 0.00019942733169509008,
+        "stationary_pF": 0.011803827196878712,
+        "sd_log": {
+          "h": 1.2001435507709823,
+          "mu": 0.5884099523589319,
+          "rhoN": 6.747076255041159,
+          "d": 0.7238830063296527
+        },
+        "validation_2023_25": {
+          "n_days": 1096,
+          "logscore_model": -0.01443760472647244,
+          "logscore_constant": -0.014133741406247098,
+          "brier_model": 0.001960594245368063,
+          "brier_constant": 0.001826682082400426,
+          "model_better": false
+        }
+      },
+      "air_only": {
+        "active_days": 10,
+        "observed_days": 4018,
+        "loglik": -56.496228599550115,
+        "h_per_day": 0.0030700501720304922,
+        "mu_per_day": 0.43454501832682463,
+        "onset_median_wait_days": 225.77715076933305,
+        "episode_half_life_days": 1.595110175762328,
+        "p_recorded_day_F": 0.3451491245069881,
+        "p_recorded_day_N": 2.455715630844679e-10,
+        "stationary_pF": 0.007015412386419057
+      }
+    },
+    "Iran->Iraq": {
+      "primary": {
+        "active_days": 63,
+        "observed_days": 4017,
+        "loglik": -220.70716352125785,
+        "h_per_day": 0.002509940746339805,
+        "mu_per_day": 0.17682180826600177,
+        "onset_median_wait_days": 276.16077454049366,
+        "episode_half_life_days": 3.9200321914885623,
+        "p_recorded_day_F": 0.7483793024141587,
+        "p_recorded_day_N": 0.004868403137631927,
+        "stationary_pF": 0.013996075765519197,
+        "sd_log": {
+          "h": 0.41992564215106354,
+          "mu": 0.42376331100372994,
+          "rhoN": 0.2515555122494927,
+          "d": 0.26240415914349074
+        },
+        "validation_2023_25": {
+          "n_days": 1096,
+          "logscore_model": -0.039164172929596584,
+          "logscore_constant": -0.06900119404228078,
+          "brier_model": 0.007600493248499692,
+          "brier_constant": 0.012629320781222938,
+          "model_better": true
+        }
+      },
+      "air_only": {
+        "active_days": 27,
+        "observed_days": 4018,
+        "loglik": -111.68495368184941,
+        "h_per_day": 0.0016522630317361555,
+        "mu_per_day": 0.15815745649052665,
+        "onset_median_wait_days": 419.51382270630603,
+        "episode_half_life_days": 4.382639907979701,
+        "p_recorded_day_F": 0.49773389663713297,
+        "p_recorded_day_N": 0.001487418273674268,
+        "stationary_pF": 0.010338939563096986
+      }
+    },
+    "Iran->Syria": {
+      "primary": {
+        "active_days": 20,
+        "observed_days": 4018,
+        "loglik": -117.74629598358577,
+        "h_per_day": 0.004254955900869443,
+        "mu_per_day": 5.860738358305105,
+        "onset_median_wait_days": 162.9034934106626,
+        "episode_half_life_days": 0.11826959986666251,
+        "p_recorded_day_F": 1.0,
+        "p_recorded_day_N": 0.0,
+        "stationary_pF": 0.0007254835040584348,
+        "sd_log": "hessian not invertible",
+        "validation_2023_25": {
+          "n_days": 1096,
+          "logscore_model": -0.036759853004480224,
+          "logscore_constant": -0.03888518808903184,
+          "brier_model": 0.006208524177839674,
+          "brier_constant": 0.006348625796413159,
+          "model_better": true
+        }
+      }
+    },
+    "Iran->Israel": {
+      "primary": {
+        "active_days": 14,
+        "observed_days": 4018,
+        "loglik": -29.852361776494092,
+        "h_per_day": 0.00026107234899024593,
+        "mu_per_day": 0.09560772825686172,
+        "onset_median_wait_days": 2655.000360018373,
+        "episode_half_life_days": 7.249907441558716,
+        "p_recorded_day_F": 1.0,
+        "p_recorded_day_N": 0.0004874371432135316,
+        "stationary_pF": 0.0027232253594534875,
+        "sd_log": {
+          "h": 1.0054055774803785,
+          "mu": 0.9973551030697279,
+          "rhoN": 0.7256531857813305,
+          "d": 8432.952770200101
+        },
+        "validation_2023_25": "too few active days before 2023"
+      }
+    },
+    "Pakistan->Afghanistan": {
+      "primary": {
+        "active_days": 97,
+        "observed_days": 4000,
+        "loglik": -407.5352165520263,
+        "h_per_day": 0.004375457399192897,
+        "mu_per_day": 0.08185816462690455,
+        "onset_median_wait_days": 158.41707902076803,
+        "episode_half_life_days": 8.467660907365698,
+        "p_recorded_day_F": 0.26950732200310745,
+        "p_recorded_day_N": 0.011198004976199383,
+        "stationary_pF": 0.05073957577554521,
+        "sd_log": {
+          "h": 0.4599779254896351,
+          "mu": 0.4112371537756583,
+          "rhoN": 0.21465264935320935,
+          "d": 0.29666489326088347
+        },
+        "validation_2023_25": {
+          "n_days": 1093,
+          "logscore_model": -0.13322247319436617,
+          "logscore_constant": -0.13311856041052011,
+          "brier_model": 0.028132760960877932,
+          "brier_constant": 0.028463478179783307,
+          "model_better": false
+        }
+      },
+      "air_only": {
+        "active_days": 22,
+        "observed_days": 4017,
+        "loglik": -119.44822832582743,
+        "h_per_day": 0.0017634615827259686,
+        "mu_per_day": 0.011131311071232636,
+        "onset_median_wait_days": 393.0605505386029,
+        "episode_half_life_days": 62.270039541998806,
+        "p_recorded_day_F": 0.03674199663605737,
+        "p_recorded_day_N": 0.0004421377065471077,
+        "stationary_pF": 0.13675786538079043
+      }
+    },
+    "Turkey->Iraq": {
+      "primary": {
+        "active_days": 2425,
+        "observed_days": 3951,
+        "loglik": -1752.2538300698907,
+        "h_per_day": 0.01695288579449158,
+        "mu_per_day": 0.016008937100835185,
+        "onset_median_wait_days": 40.886677876704994,
+        "episode_half_life_days": 43.29751414438276,
+        "p_recorded_day_F": 0.9385093338149768,
+        "p_recorded_day_N": 0.25580470647918185,
+        "stationary_pF": 0.5143188181165524,
+        "sd_log": {
+          "h": 0.28450884206623217,
+          "mu": 0.2634407112938535,
+          "rhoN": 0.07079203765213918,
+          "d": 0.04647728031892844
+        },
+        "validation_2023_25": {
+          "n_days": 1087,
+          "logscore_model": -0.2590472177811668,
+          "logscore_constant": -0.648800709169059,
+          "brier_model": 0.06308293144070645,
+          "brier_constant": 0.22786673530105164,
+          "model_better": true
+        }
+      },
+      "air_only": {
+        "active_days": 2260,
+        "observed_days": 3946,
+        "loglik": -1907.8817740247991,
+        "h_per_day": 0.014967917765982695,
+        "mu_per_day": 0.015302746449720466,
+        "onset_median_wait_days": 46.30885814560312,
+        "episode_half_life_days": 45.29560643492247,
+        "p_recorded_day_F": 0.9009649474649978,
+        "p_recorded_day_N": 0.24099155842588205,
+        "stationary_pF": 0.4944694196111482
+      }
+    },
+    "Turkey->Syria": {
+      "primary": {
+        "active_days": 1648,
+        "observed_days": 4015,
+        "loglik": -1893.1946203389493,
+        "h_per_day": 0.00938709787783406,
+        "mu_per_day": 0.008051318719675004,
+        "onset_median_wait_days": 73.84041261535022,
+        "episode_half_life_days": 86.0911367061028,
+        "p_recorded_day_F": 0.6937201379375206,
+        "p_recorded_day_N": 0.05770565614884393,
+        "stationary_pF": 0.5382998981211936,
+        "sd_log": {
+          "h": 0.32916515158003823,
+          "mu": 0.3236460783298095,
+          "rhoN": 0.12768096463507703,
+          "d": 0.03451106333315969
+        },
+        "validation_2023_25": {
+          "n_days": 1096,
+          "logscore_model": -0.5125788728955415,
+          "logscore_constant": -0.7413610811562007,
+          "brier_model": 0.16941698730942903,
+          "brier_constant": 0.2733324025387146,
+          "model_better": true
+        }
+      },
+      "air_only": {
+        "active_days": 539,
+        "observed_days": 4015,
+        "loglik": -1193.1515908106273,
+        "h_per_day": 0.010477965038187535,
+        "mu_per_day": 0.03253475067842839,
+        "onset_median_wait_days": 66.15284342271913,
+        "episode_half_life_days": 21.30482533617584,
+        "p_recorded_day_F": 0.46819395105856076,
+        "p_recorded_day_N": 0.024841396744630262,
+        "stationary_pF": 0.24360156906204994
+      }
+    }
+  }
+}
