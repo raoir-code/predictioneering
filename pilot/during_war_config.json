@@ -27,6 +27,23 @@
         "cache/gnews_pilot/lebanon_*.json",
         "cache/gnews_pilot/hezbollah_*.json"
       ]
+    },
+    "Saudi Arabia->Yemen": {
+      "theater": "middle_east_war",
+      "initiator": "Saudi Arabia",
+      "territory": "Yemen",
+      "combatants": [
+        "Houthis (Ansar Allah)",
+        "other armed groups in Yemen"
+      ],
+      "_combatants_note": "Default unless Adi objects (Oct 19). Only feeds the ceasefire classifier; qualifying strikes are any on Yemeni land territory.",
+      "seed_date": "2026-07-20",
+      "_seed_source": "Saudi air campaign after the Houthi maritime embargo (Jul 20). dyad_configs onset 2026-07-25 is the data-start date, not the onset.",
+      "day_tz": "Asia/Aden",
+      "_day_tz_note": "Rules text: 'on the specified date, Yemen Standard Time' (UTC+3).",
+      "news_globs": [
+        "cache/gnews/*Saudi*Yemen*.json"
+      ]
     }
   }
 }
