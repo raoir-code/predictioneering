@@ -278,6 +278,36 @@ def replay():
               f"{' (n changed since Oct 16: new resolutions, target no longer applies)' if len(fq) != 36 else ''}")
         print(f"  CHECK rule: v2a - v1 = {v2b - v1b:+.4f} -> {'PASS' if v2b - v1b <= 0.005 else 'FAIL: see per-batch split (cold start vs evidence batches)'}")
 
+_PROD = {"cfg": None, "st": {}}
+
+def price_for_market(market_id, text, now=None):
+    """PRODUCTION entry point (Oct 19: Adi decided to patch production directly).
+    Returns the v2c price for a single-day contract on a configured pair with publish=true, else None.
+    Contract days already over but unresolved are priced as day 0. Any error -> None + a loud print,
+    so the caller falls back to the engine visibly, never silently."""
+    try:
+        now = now or dt.datetime.now(dt.timezone.utc)
+        if _PROD["cfg"] is None:
+            _PROD["cfg"] = load_config()
+        cfg = _PROD["cfg"]
+        for name, pair in cfg.items():
+            if not pair.get("publish", False) or not belongs(market_id, text, pair):
+                continue
+            if name not in _PROD["st"]:
+                res, _ = load_resolved(pair)
+                _PROD["st"][name] = state_asof(res, now, pair, theater_others(cfg, name))
+            st = _PROD["st"][name]
+            d = parse_day(text, None, st["as_of_day"])
+            ahead = max(0, (d - st["as_of_day"]).days)
+            pr = price(st, ahead)
+            return {"p": pr["primary"], "model_version": VERSION, "pair": name, "days_ahead": ahead,
+                    "pi_now": round(st["pi"]["primary"][0], 4), "q": round(st["q"], 4), "q_n": st["n"],
+                    "news_status": st["news_status"], "variants": pr}
+        return None
+    except Exception as ex:
+        print(f"  [during-war] ERROR pricing {market_id}: {ex!r} -- falling back to engine")
+        return None
+
 if __name__ == "__main__":
     if "--replay" in sys.argv:
         replay()

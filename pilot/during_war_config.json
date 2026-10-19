@@ -28,7 +28,8 @@
         "cache/gnews/Israel_Lebanon_*.json",
         "cache/gnews_pilot/lebanon_*.json",
         "cache/gnews_pilot/hezbollah_*.json"
-      ]
+      ],
+      "publish": true
     },
     "Saudi Arabia->Yemen": {
       "theater": "middle_east_war",
@@ -45,7 +46,9 @@
       "_day_tz_note": "Rules text: 'on the specified date, Yemen Standard Time' (UTC+3).",
       "news_globs": [
         "cache/gnews/*Saudi*Yemen*.json"
-      ]
+      ],
+      "publish": true
     }
-  }
+  },
+  "_publish_note": "Oct 19: publish=true means v2c sets the published price for this pair's single-day contracts. Set false to fall back to the engine."
 }
