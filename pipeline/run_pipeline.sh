@@ -3,6 +3,8 @@
 # Usage: ./pipeline/run_pipeline.sh
 
 set -e
+# Keep the Mac awake for the whole run (the Oct 18 run slept ~25h mid-run). -w $$ ends it when this script exits.
+/usr/bin/caffeinate -is -w $$ &
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_DIR"
