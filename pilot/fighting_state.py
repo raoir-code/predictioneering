@@ -10,7 +10,9 @@ Two-state chain per pair, daily steps (F fighting, N not fighting):
   evidence  each resolved daily = one battle-round outcome, used only if resolved before the forecast time.
             YES: L_F = q, L_N = q0.  NO: L_F = 1-q, L_N = 1-q0.  Likelihoods ** kappa (primary 1.0).
   price     P(YES on day d) = pi_d * q + (1 - pi_d) * q0; pi_d = today's filtered pi carried forward by the drift.
-  q         walk-forward Beta(1,1) over the pair's resolved dailies, exactly as v1 (one change at a time).
+  q         v2c: q = (k + w*m) / (n + w), w = prior_weight (2, unchanged from Beta(1,1)); m = theater center
+            (other pairs' (YES+1)/(resolved+2), walk-forward); m = 0.5 when they have no data, i.e. v1's Beta(1,1).
+            Variants: pool_off (center 0.5 = v2b), pool_w8 (w = 8). v1_equivalent always uses the unpooled q.
 v2b: + ceasefire-announcement evidence (pilot/ceasefire_news.py); each NEW_AGREEMENT event multiplies the odds
           of fighting by 1/announcement_lr on the day our system first held it. Variant news_off = v2a exactly.
 Known limit, stated before the replay: with no resolutions yet (cold start) pi is only the chain's drift
@@ -32,7 +34,7 @@ CONFIG = ROOT / "pilot" / "during_war_config.json"
 FEED = ROOT / "pipeline" / "classified_feed.json"
 BRIER = ROOT / "predictions" / "brier_log.jsonl"
 OUT = ROOT / "pilot" / "shadow_log_v2.jsonl"
-VERSION = "shadow-v2b"
+VERSION = "shadow-v2c"
 LN2 = math.log(2)
 MON = "january february march april may june july august september october november december".split()
 _M = "January|February|March|April|May|June|July|August|September|October|November|December"
@@ -91,10 +93,12 @@ def load_config():
 
 def variants(D):
     base = {"mu": LN2 / D["mu_half_life_days"], "h": LN2 / D["h_half_life_days"],
-            "q0": D["q0"], "kappa": 1.0, "pi_seed": 1.0, "announcement_lr": D["announcement_lr"]}
+            "q0": D["q0"], "kappa": 1.0, "pi_seed": 1.0, "announcement_lr": D["announcement_lr"], "pool": True, "prior_w": D.get("prior_weight", 2.0)}
     V = {"primary": base, "kappa_0.5": {**base, "kappa": 0.5}}
     V["news_off"] = {**base, "announcement_lr": 1.0}   # reproduces v2a exactly
     V["lr_4"] = {**base, "announcement_lr": 4.0}
+    V["pool_off"] = {**base, "pool": False}         # = v2b
+    V["pool_w8"] = {**base, "prior_w": 8.0}
     for hl in (90, 365):
         V[f"mu_hl_{hl}"] = {**base, "mu": LN2 / hl}
     for hl in (14, 90, 365):
@@ -129,11 +133,21 @@ def load_resolved(pair):
                     "prod_first": last.get("first_p")})
     return res, set(rows)
 
-def state_asof(res, as_of, pair):
+def theater_others(cfg, name):
+    th = cfg[name]["theater"]
+    return [load_resolved(p)[0] for n2, p in cfg.items() if n2 != name and p["theater"] == th]
+
+def state_asof(res, as_of, pair, others=()):
     as_of_day = as_of.astimezone(ZoneInfo(pair["day_tz"])).date()
     known = [r for r in res if r["known"] < as_of]
     n, k = len(known), sum(r["outcome"] for r in known)
-    q = (1 + k) / (2 + n)
+    q = (1 + k) / (2 + n)   # unpooled Beta(1,1): v1 and pool_off
+    ko = no = 0
+    for o in others:
+        for r in o:
+            if r["known"] < as_of:
+                no += 1; ko += r["outcome"]
+    m = (ko + 1) / (no + 2)
     ev, dup = {}, 0
     for r in sorted(known, key=lambda r: r["known"]):
         if r["day"] is None or r["day"] > as_of_day:
@@ -152,30 +166,31 @@ def state_asof(res, as_of, pair):
     for name, P in variants(pair["D"]).items():
         sF, sN = math.exp(-P["mu"]), 1 - math.exp(-P["h"])
         pi, t = P["pi_seed"], seed
+        qv = (k + P["prior_w"] * (m if P["pool"] else 0.5)) / (n + P["prior_w"])
         while t < as_of_day:
             t += dt.timedelta(days=1)
             pi = pi * sF + (1 - pi) * sN
             if t in ev:
                 y = ev[t]
-                lF = (q if y else 1 - q) ** P["kappa"]
+                lF = (qv if y else 1 - qv) ** P["kappa"]
                 lN = (P["q0"] if y else 1 - P["q0"]) ** P["kappa"]
                 pi = pi * lF / (pi * lF + (1 - pi) * lN)
             if t in ann_set and P["announcement_lr"] != 1.0:
                 fac = (1.0 / P["announcement_lr"]) ** P["kappa"]
                 pi = pi * fac / (pi * fac + (1 - pi))
-        pis[name] = (pi, P)
-    return {"as_of_day": as_of_day, "q": q, "n": n, "k": k,
+        pis[name] = (pi, P, qv)
+    return {"as_of_day": as_of_day, "q": pis["primary"][2], "q_v1": q, "theater_m": m, "theater_n": no, "n": n, "k": k,
             "n_evidence_days": len(ev), "dup_days": dup, "pi": pis,
             "announcements": [d.isoformat() for d in ann], "news_status": news_status}
 
 def price(st, ahead):
     out = {}
-    for name, (pi, P) in st["pi"].items():
+    for name, (pi, P, qv) in st["pi"].items():
         sF, sN = math.exp(-P["mu"]), 1 - math.exp(-P["h"])
         pd = pi
         for _ in range(max(0, ahead)):
             pd = pd * sF + (1 - pd) * sN
-        out[name] = round(pd * st["q"] + (1 - pd) * P["q0"], 4)
+        out[name] = round(pd * qv + (1 - pd) * P["q0"], 4)
     return out
 
 def v1_price(q, ahead):
@@ -186,9 +201,10 @@ def live(dry):
     now = dt.datetime.now(dt.timezone.utc)
     feed = json.loads(FEED.read_text())
     feed = feed if isinstance(feed, list) else feed.get("markets", feed.get("data", []))
-    for name, pair in load_config().items():
+    cfg = load_config()
+    for name, pair in cfg.items():
         res, seen = load_resolved(pair)
-        st = state_asof(res, now, pair)
+        st = state_asof(res, now, pair, theater_others(cfg, name))
         lines = []
         for m in feed:
             text = m.get("label") or m.get("question") or ""
@@ -203,15 +219,15 @@ def live(dry):
             lines.append(json.dumps({
                 "logged_at": now.isoformat(), "version": VERSION, "pair": name,
                 "market_id": mid, "market_label": text, "contract_day": d.isoformat(), "days_ahead": ahead,
-                "q": round(st["q"], 4), "q_n": st["n"], "q_yes": st["k"],
+                "q": round(st["q"], 4), "q_unpooled": round(st["q_v1"], 4), "theater_m": round(st["theater_m"], 4), "theater_n": st["theater_n"], "q_n": st["n"], "q_yes": st["k"],
                 "n_evidence_days": st["n_evidence_days"], "dup_days": st["dup_days"],
                 "announcement_days": st["announcements"], "news_status": st["news_status"],
                 "pi_now": round(st["pi"]["primary"][0], 4),
                 "pi_now_variants": {k: round(v[0], 4) for k, v in st["pi"].items()},
-                "shadow_p": pr["primary"], "shadow_variants": pr, "v1_equivalent": v1_price(st["q"], ahead),
+                "shadow_p": pr["primary"], "shadow_variants": pr, "v1_equivalent": v1_price(st["q_v1"], ahead),
                 "production_p": m.get("conditional_p"), "market_p": m.get("market_price"),
                 "spec": "during-war v0.4; v2b fighting-state filter: resolutions + ceasefire announcements"}))
-            print(f"  {name} {d} (+{ahead}d)  v2a {pr['primary']:.3f}  v1 {v1_price(st['q'], ahead):.3f}  "
+            print(f"  {name} {d} (+{ahead}d)  v2a {pr['primary']:.3f}  v1 {v1_price(st['q_v1'], ahead):.3f}  "
                   f"prod {m.get('conditional_p')}  mkt {m.get('market_price')}")
         if lines and not dry:
             with open(OUT, "a") as f:
@@ -222,17 +238,19 @@ def live(dry):
 def replay():
     B = lambda p, y: (p - y) ** 2
     mean = lambda xs: sum(xs) / len(xs) if xs else float("nan")
-    for name, pair in load_config().items():
+    cfg = load_config()
+    for name, pair in cfg.items():
         res, _ = load_resolved(pair)
+        others = theater_others(cfg, name)
         rows = []
         for r in sorted(res, key=lambda r: (r["first_ts"] or r["known"], r["day"] or dt.date.min)):
             if r["first_ts"] is None or r["day"] is None:
                 continue
-            st = state_asof(res, r["first_ts"], pair)
+            st = state_asof(res, r["first_ts"], pair, others)
             ahead = (r["day"] - st["as_of_day"]).days
             if ahead < 0:
                 continue
-            rows.append((r, st, ahead, price(st, ahead), v1_price(st["q"], ahead)))
+            rows.append((r, st, ahead, price(st, ahead), v1_price(st["q_v1"], ahead)))
         print(f"=== replay {name}: {len(rows)} markets (of {len(res)} resolved), forecast days "
               f"{sorted({str(x[1]['as_of_day']) for x in rows})}")
         print("  day        ahead y  q_n  ev  pi_v2a   v1     v2a    mkt")
