@@ -2247,6 +2247,33 @@ def _run_action_bridge_activation_pass(feed: list, cache: dict):
     print(f"    failed closed: {failed}")
 
 
+def _apply_during_war_pricing(feed: list):
+    """Oct 19 (Adi: patch production directly). The during-war component (pilot/fighting_state.py, v2c)
+    sets the published price for single-day contracts on configured pairs (pilot/during_war_config.json,
+    publish=true). Engine value kept in engine_conditional_p. Bettor fields on these markets still
+    reflect the engine value. Fallback to the engine is printed, never silent."""
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pilot"))
+        import fighting_state as _fs
+    except Exception as ex:
+        print(f"[during-war] import failed ({ex!r}); engine prices kept for ALL markets")
+        return 0
+    n = 0
+    for market in feed:
+        if not isinstance(market, dict) or market.get("resolved"):
+            continue
+        r = _fs.price_for_market(market.get("market_id"), market.get("question") or market.get("label") or "")
+        if not r:
+            continue
+        market["engine_conditional_p"] = market.get("conditional_p")
+        market["conditional_p"] = r["p"]
+        market["pricing_component"] = r["model_version"]
+        market["during_war"] = {k: r[k] for k in ("pair", "days_ahead", "pi_now", "q", "q_n", "news_status")}
+        n += 1
+    print(f"[during-war] {n} markets priced by the during-war component")
+    return n
+
+
 def run_translator():
     assert ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY not set"
 
@@ -2294,6 +2321,7 @@ def run_translator():
     _run_action_bridge_activation_pass(feed, cache)
     _save_cache(cache)
 
+    _apply_during_war_pricing(feed)
     CLASSIFIED_FEED.write_text(json.dumps(feed, indent=2))
 
     print(f"\n{'='*60}")
@@ -2344,6 +2372,9 @@ def _append_log(feed: list):
                 "p_b_given_not_a_ref_days_used": market.get("p_b_given_not_a_ref_days_used"),
                 "days_remaining":           market.get("days_remaining"),
                 "model_version":            MODEL_VERSION,
+                "pricing_component":        market.get("pricing_component", "engine"),
+                "engine_conditional_p":     market.get("engine_conditional_p"),
+                "during_war":               market.get("during_war"),
                 "parent_event_relation":    market.get("parent_event_relation"),
                 "manifestation_family":     market.get("manifestation_family"),
                 "action_type":                market.get("action_type"),
