@@ -87,6 +87,11 @@ done
 $GIT add pilot/shadow_log.jsonl >> "$LOGFILE" 2>&1 || echo "  [pilot] could not stage shadow log (non-fatal)" | tee -a "$LOGFILE"
 $GIT add -f cache/gnews_pilot >> "$LOGFILE" 2>&1 || echo "  [pilot] could not stage pilot news cache (non-fatal)" | tee -a "$LOGFILE"
 $GIT commit -m "Daily predictions: $(date +%Y-%m-%d)" >> "$LOGFILE" 2>&1 || echo "Nothing to commit." | tee -a "$LOGFILE"
-$GIT push >> "$LOGFILE" 2>&1
+# Retry: after sleep/wake the network may not be back yet (Oct 19: "Could not resolve host").
+for i in 1 2 3 4 5; do
+    if $GIT push >> "$LOGFILE" 2>&1; then break; fi
+    if [ "$i" -eq 5 ]; then echo "  [push] failed 5 times; commit stays local, next run pushes it" | tee -a "$LOGFILE"; exit 1; fi
+    echo "  [push] attempt $i failed; retrying in 60s" | tee -a "$LOGFILE"; sleep 60
+done
 
 echo "=== Pipeline complete: $(date) ===" | tee -a "$LOGFILE"
