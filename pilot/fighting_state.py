@@ -11,7 +11,8 @@ Two-state chain per pair, daily steps (F fighting, N not fighting):
             YES: L_F = q, L_N = q0.  NO: L_F = 1-q, L_N = 1-q0.  Likelihoods ** kappa (primary 1.0).
   price     P(YES on day d) = pi_d * q + (1 - pi_d) * q0; pi_d = today's filtered pi carried forward by the drift.
   q         walk-forward Beta(1,1) over the pair's resolved dailies, exactly as v1 (one change at a time).
-v2a = resolutions only; v2b adds ceasefire-announcement evidence from the news collector.
+v2b: + ceasefire-announcement evidence (pilot/ceasefire_news.py); each NEW_AGREEMENT event multiplies the odds
+          of fighting by 1/announcement_lr on the day our system first held it. Variant news_off = v2a exactly.
 Known limit, stated before the replay: with no resolutions yet (cold start) pi is only the chain's drift
 from the seed, so v2a holds less information than v1's hard-coded pi = 1.
 
@@ -23,13 +24,15 @@ import json, math, re, sys, datetime as dt
 from collections import defaultdict
 from pathlib import Path
 from zoneinfo import ZoneInfo
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import ceasefire_news as cn
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG = ROOT / "pilot" / "during_war_config.json"
 FEED = ROOT / "pipeline" / "classified_feed.json"
 BRIER = ROOT / "predictions" / "brier_log.jsonl"
 OUT = ROOT / "pilot" / "shadow_log_v2.jsonl"
-VERSION = "shadow-v2a"
+VERSION = "shadow-v2b"
 LN2 = math.log(2)
 MON = "january february march april may june july august september october november december".split()
 
@@ -55,13 +58,15 @@ def load_config():
     out = {}
     for name, p in c["pairs"].items():
         D = {**c["theater_defaults"][p["theater"]], **p.get("overrides", {})}
-        out[name] = {**p, "D": D, "pat": re.compile(p["label_regex"])}
+        out[name] = {**p, "name": name, "D": D, "pat": re.compile(p["label_regex"])}
     return out
 
 def variants(D):
     base = {"mu": LN2 / D["mu_half_life_days"], "h": LN2 / D["h_half_life_days"],
-            "q0": D["q0"], "kappa": 1.0, "pi_seed": 1.0}
+            "q0": D["q0"], "kappa": 1.0, "pi_seed": 1.0, "announcement_lr": D["announcement_lr"]}
     V = {"primary": base, "kappa_0.5": {**base, "kappa": 0.5}}
+    V["news_off"] = {**base, "announcement_lr": 1.0}   # reproduces v2a exactly
+    V["lr_4"] = {**base, "announcement_lr": 4.0}
     for hl in (90, 365):
         V[f"mu_hl_{hl}"] = {**base, "mu": LN2 / hl}
     for hl in (14, 90, 365):
@@ -108,6 +113,12 @@ def state_asof(res, as_of, pair):
         if r["day"] in ev:
             dup += 1; continue
         ev[r["day"]] = r["outcome"]
+    try:
+        ann = sorted({e["first"].astimezone(ZoneInfo(pair["day_tz"])).date() for e in cn.events(pair["name"], pair, as_of)})
+        news_status = "ok"
+    except Exception as ex:
+        ann, news_status = [], f"error: {ex!r}"[:200]
+    ann_set = set(ann)
     seed = dt.date.fromisoformat(pair["seed_date"])
     pis = {}
     for name, P in variants(pair["D"]).items():
@@ -121,9 +132,13 @@ def state_asof(res, as_of, pair):
                 lF = (q if y else 1 - q) ** P["kappa"]
                 lN = (P["q0"] if y else 1 - P["q0"]) ** P["kappa"]
                 pi = pi * lF / (pi * lF + (1 - pi) * lN)
+            if t in ann_set and P["announcement_lr"] != 1.0:
+                fac = (1.0 / P["announcement_lr"]) ** P["kappa"]
+                pi = pi * fac / (pi * fac + (1 - pi))
         pis[name] = (pi, P)
     return {"as_of_day": as_of_day, "q": q, "n": n, "k": k,
-            "n_evidence_days": len(ev), "dup_days": dup, "pi": pis}
+            "n_evidence_days": len(ev), "dup_days": dup, "pi": pis,
+            "announcements": [d.isoformat() for d in ann], "news_status": news_status}
 
 def price(st, ahead):
     out = {}
@@ -162,18 +177,19 @@ def live(dry):
                 "market_id": mid, "market_label": text, "contract_day": d.isoformat(), "days_ahead": ahead,
                 "q": round(st["q"], 4), "q_n": st["n"], "q_yes": st["k"],
                 "n_evidence_days": st["n_evidence_days"], "dup_days": st["dup_days"],
+                "announcement_days": st["announcements"], "news_status": st["news_status"],
                 "pi_now": round(st["pi"]["primary"][0], 4),
                 "pi_now_variants": {k: round(v[0], 4) for k, v in st["pi"].items()},
                 "shadow_p": pr["primary"], "shadow_variants": pr, "v1_equivalent": v1_price(st["q"], ahead),
                 "production_p": m.get("conditional_p"), "market_p": m.get("market_price"),
-                "spec": "during-war v0.4; v2a fighting-state filter, resolutions only"}))
+                "spec": "during-war v0.4; v2b fighting-state filter: resolutions + ceasefire announcements"}))
             print(f"  {name} {d} (+{ahead}d)  v2a {pr['primary']:.3f}  v1 {v1_price(st['q'], ahead):.3f}  "
                   f"prod {m.get('conditional_p')}  mkt {m.get('market_price')}")
         if lines and not dry:
             with open(OUT, "a") as f:
                 f.write("\n".join(lines) + "\n")
         print(f"[{VERSION}] {name}: pi_now {st['pi']['primary'][0]:.4f}, q {st['q']:.3f} ({st['k']}/{st['n']}), "
-              f"{st['n_evidence_days']} evidence days, {len(lines)} open markets {'(dry, not written)' if dry else 'logged'}")
+              f"{st['n_evidence_days']} evidence days, {len(st['announcements'])} announcements (news {st['news_status']}), {len(lines)} open markets {'(dry, not written)' if dry else 'logged'}")
 
 def replay():
     B = lambda p, y: (p - y) ** 2
