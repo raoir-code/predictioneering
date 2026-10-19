@@ -283,7 +283,7 @@ _PROD = {"cfg": None, "st": {}}
 def price_for_market(market_id, text, now=None):
     """PRODUCTION entry point (Oct 19: Adi decided to patch production directly).
     Returns the v2c price for a single-day contract on a configured pair with publish=true, else None.
-    Contract days already over but unresolved are priced as day 0. Any error -> None + a loud print,
+    Contract days already over return None (no post-event prices). Any error -> None + a loud print,
     so the caller falls back to the engine visibly, never silently."""
     try:
         now = now or dt.datetime.now(dt.timezone.utc)
@@ -298,7 +298,9 @@ def price_for_market(market_id, text, now=None):
                 _PROD["st"][name] = state_asof(res, now, pair, theater_others(cfg, name))
             st = _PROD["st"][name]
             d = parse_day(text, None, st["as_of_day"])
-            ahead = max(0, (d - st["as_of_day"]).days)
+            ahead = (d - st["as_of_day"]).days
+            if ahead < 0:
+                return None   # contract day over: a price now would be post-event, leave as is
             pr = price(st, ahead)
             return {"p": pr["primary"], "model_version": VERSION, "pair": name, "days_ahead": ahead,
                     "pi_now": round(st["pi"]["primary"][0], 4), "q": round(st["q"], 4), "q_n": st["n"],
