@@ -1,0 +1,1699 @@
+{
+  "_doc": "ACLED Explosions/Remote violence, pulled for offline priors only. Data through 2025-12-31. JSONL gitignored; sha256 + query recorded.",
+  "files": {
+    "Lebanon_2015.jsonl": {
+      "query": {
+        "country": "Lebanon",
+        "year": 2015,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Lebanon_2016.jsonl": {
+      "query": {
+        "country": "Lebanon",
+        "year": 2016,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 140,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "94ffe0cf24b0ffd52ed57d8e04a67fe98a3383f895b6977fac67da4f226eb5bd"
+    },
+    "Lebanon_2017.jsonl": {
+      "query": {
+        "country": "Lebanon",
+        "year": 2017,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 70,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "c63a9c364f23f1a4deb791e970107957d5e8d4cdccca95401c42526ecaadefb4"
+    },
+    "Lebanon_2018.jsonl": {
+      "query": {
+        "country": "Lebanon",
+        "year": 2018,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 15,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "053cd87381bc5ebe74e52a1ee9c275f9c1859c1df0b7e18cbef7a22ca71d1591"
+    },
+    "Lebanon_2019.jsonl": {
+      "query": {
+        "country": "Lebanon",
+        "year": 2019,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 17,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "88afb09fb0974df26c6e45016042dc043aa2fe0f69c612a5cf075ede8dabb26c"
+    },
+    "Lebanon_2020.jsonl": {
+      "query": {
+        "country": "Lebanon",
+        "year": 2020,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 22,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "c95090196bb3238eb7eabe4fe6094b58b28427167992ce9585670e744cb2c073"
+    },
+    "Lebanon_2021.jsonl": {
+      "query": {
+        "country": "Lebanon",
+        "year": 2021,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 31,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "6673c6685a70553c792a4de6eac5b6b2de5f4498623e7402b157d392dbb54cb2"
+    },
+    "Lebanon_2022.jsonl": {
+      "query": {
+        "country": "Lebanon",
+        "year": 2022,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 13,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "a50320aab2ae38f0a7451b4fa2b878ea5d53058b2d6033083ca1cda519e57608"
+    },
+    "Lebanon_2023.jsonl": {
+      "query": {
+        "country": "Lebanon",
+        "year": 2023,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 1874,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "d2ecb001ccccd72093c27922b07e894cf326f0ca95e1cb79ffacb6c4c8ad946b"
+    },
+    "Lebanon_2024.jsonl": {
+      "query": {
+        "country": "Lebanon",
+        "year": 2024,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 13279,
+      "pages": 3,
+      "pulled": "2026-10-19",
+      "sha256": "376db94973f2a48007503df13076364c0032d31b1579e80540fe91033691061d"
+    },
+    "Lebanon_2025.jsonl": {
+      "query": {
+        "country": "Lebanon",
+        "year": 2025,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 1350,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "cee731ec18bef87a203d3efa2bae7f66ddc04a2b489d44fa3803de2eb044c22a"
+    },
+    "Syria_2015.jsonl": {
+      "query": {
+        "country": "Syria",
+        "year": 2015,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Syria_2016.jsonl": {
+      "query": {
+        "country": "Syria",
+        "year": 2016,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Syria_2017.jsonl": {
+      "query": {
+        "country": "Syria",
+        "year": 2017,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 20654,
+      "pages": 5,
+      "pulled": "2026-10-19",
+      "sha256": "78e06dfe508a64041b00cb5a91ad1604c98689db216f1c67787a4f817894da96"
+    },
+    "Syria_2018.jsonl": {
+      "query": {
+        "country": "Syria",
+        "year": 2018,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 12944,
+      "pages": 3,
+      "pulled": "2026-10-19",
+      "sha256": "b6b601cb6e60c2b5bb927bf099efdb7d25c17db71a0639097996f809c9b9dd3d"
+    },
+    "Syria_2019.jsonl": {
+      "query": {
+        "country": "Syria",
+        "year": 2019,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 14092,
+      "pages": 3,
+      "pulled": "2026-10-19",
+      "sha256": "ca101b180c87dae9f82cc536a7163d20c0cc963fadf9e3d4f5014dcfbfee59ec"
+    },
+    "Syria_2020.jsonl": {
+      "query": {
+        "country": "Syria",
+        "year": 2020,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 6308,
+      "pages": 2,
+      "pulled": "2026-10-19",
+      "sha256": "b6fd6ce9738ba62baaff9bc181ab241383095a64f4587d90efa284b55b2e20e2"
+    },
+    "Syria_2021.jsonl": {
+      "query": {
+        "country": "Syria",
+        "year": 2021,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 5636,
+      "pages": 2,
+      "pulled": "2026-10-19",
+      "sha256": "392bc6c53595d42b0b63529e71800887d76117d87392b6ffd4db3ca46ce87030"
+    },
+    "Syria_2022.jsonl": {
+      "query": {
+        "country": "Syria",
+        "year": 2022,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 7050,
+      "pages": 2,
+      "pulled": "2026-10-19",
+      "sha256": "8f7fb0c61ff49a3cd4411eb83f038b25a04abe406ab43678a1db1f48a06271f9"
+    },
+    "Syria_2023.jsonl": {
+      "query": {
+        "country": "Syria",
+        "year": 2023,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 5668,
+      "pages": 2,
+      "pulled": "2026-10-19",
+      "sha256": "278d4e777c0508f0bcf90c5c8016a1c1e98b4b484c2e563439e926961f327e3d"
+    },
+    "Syria_2024.jsonl": {
+      "query": {
+        "country": "Syria",
+        "year": 2024,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 7274,
+      "pages": 2,
+      "pulled": "2026-10-19",
+      "sha256": "0b11d590110183c1d25262c1563b82827baa792ee847484b9f9da9de7d956c46"
+    },
+    "Syria_2025.jsonl": {
+      "query": {
+        "country": "Syria",
+        "year": 2025,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 2097,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "37a54d4e7abfec38ebc6289319d591cff919f068b497c195b4d721c758c03d37"
+    },
+    "Yemen_2015.jsonl": {
+      "query": {
+        "country": "Yemen",
+        "year": 2015,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 5276,
+      "pages": 2,
+      "pulled": "2026-10-19",
+      "sha256": "b92f6e89237358251de806101ca09c81f4c26ab2ad544378816ecdd25ecd1d80"
+    },
+    "Yemen_2016.jsonl": {
+      "query": {
+        "country": "Yemen",
+        "year": 2016,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 6626,
+      "pages": 2,
+      "pulled": "2026-10-19",
+      "sha256": "00d95d4b13f6dca4be233bb3d0813934c1ad72a556bd27bc0a1025d2cbf7bd7c"
+    },
+    "Yemen_2017.jsonl": {
+      "query": {
+        "country": "Yemen",
+        "year": 2017,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 6034,
+      "pages": 2,
+      "pulled": "2026-10-19",
+      "sha256": "d831ade45ef846b00db744324985c58da292d785d9e269dc7214f4cc0d94ab2b"
+    },
+    "Yemen_2018.jsonl": {
+      "query": {
+        "country": "Yemen",
+        "year": 2018,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 6659,
+      "pages": 2,
+      "pulled": "2026-10-19",
+      "sha256": "a832510dfb5fd5a066c6e5bdabc25a7738daee387aacd0ac26c21d81fbed4da3"
+    },
+    "Yemen_2019.jsonl": {
+      "query": {
+        "country": "Yemen",
+        "year": 2019,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 6352,
+      "pages": 2,
+      "pulled": "2026-10-19",
+      "sha256": "2b3181e9dfaa1036f2f7abd8604eb85c4d1c5ff3fe8c6aa29ddb0028b370f38e"
+    },
+    "Yemen_2020.jsonl": {
+      "query": {
+        "country": "Yemen",
+        "year": 2020,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 5318,
+      "pages": 2,
+      "pulled": "2026-10-19",
+      "sha256": "862f7dd8aa7ff509eba2d4dfd8f7bee4e8c2e8b826f3856c34357a21d82d7b51"
+    },
+    "Yemen_2021.jsonl": {
+      "query": {
+        "country": "Yemen",
+        "year": 2021,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 4058,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "d2bd024f71135ab37a25c7309ceae82a6f31a7de21c83934ddc49a4983d5fa9b"
+    },
+    "Yemen_2022.jsonl": {
+      "query": {
+        "country": "Yemen",
+        "year": 2022,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 4569,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "6a24c79f6f8878f083c2e83e5d46bfe4fe6b7e6b06143bf59093a2868e4e6182"
+    },
+    "Yemen_2023.jsonl": {
+      "query": {
+        "country": "Yemen",
+        "year": 2023,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 1557,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "c6d1268616eeac325c228059f44190c1c295d7cdc2d3f6df4ca3f0d79e5770b1"
+    },
+    "Yemen_2024.jsonl": {
+      "query": {
+        "country": "Yemen",
+        "year": 2024,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 797,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "80bc4e056cdacb5e774aaf800075588bc1d1a4eca1339b8e6d59d496c91a8e7a"
+    },
+    "Yemen_2025.jsonl": {
+      "query": {
+        "country": "Yemen",
+        "year": 2025,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 886,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "d888470d9217a33201c06f65b4d55a1aa6e47164f6c3c4e8e218e1798e275f5b"
+    },
+    "Iraq_2015.jsonl": {
+      "query": {
+        "country": "Iraq",
+        "year": 2015,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Iraq_2016.jsonl": {
+      "query": {
+        "country": "Iraq",
+        "year": 2016,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 6454,
+      "pages": 2,
+      "pulled": "2026-10-19",
+      "sha256": "d1ebe3ddac3c6e93468025d822f7ad0c5973b24d133564fa4d307a01da931b5f"
+    },
+    "Iraq_2017.jsonl": {
+      "query": {
+        "country": "Iraq",
+        "year": 2017,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 2858,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "9bede2e03d41a762362d236cd718230da02c31cbcd9d603cfabc1588df30b809"
+    },
+    "Iraq_2018.jsonl": {
+      "query": {
+        "country": "Iraq",
+        "year": 2018,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 1819,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "33f9fcb917db7c6273334f611d2d96593a4581cd5b6470b35c26d08cb84f0798"
+    },
+    "Iraq_2019.jsonl": {
+      "query": {
+        "country": "Iraq",
+        "year": 2019,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 1358,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "4685e6a6c40600795bd9f040e56c9d828811ea5fdb2d90b7c479595fd0d27984"
+    },
+    "Iraq_2020.jsonl": {
+      "query": {
+        "country": "Iraq",
+        "year": 2020,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 2014,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "2f8d8bceb9b25efbc2bcb9fa819d2cf5b7569ad68e5e8ee119c091c1f8511f6c"
+    },
+    "Iraq_2021.jsonl": {
+      "query": {
+        "country": "Iraq",
+        "year": 2021,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 2883,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "87fa49127b1ee538272931aa5b3fad54bab889b5c1976a95c3fcb9c8c794ca51"
+    },
+    "Iraq_2022.jsonl": {
+      "query": {
+        "country": "Iraq",
+        "year": 2022,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 3390,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "5d8ef307a686317eaef2a67067e2792ecb0170961270564c9a856a83c5dd4ecf"
+    },
+    "Iraq_2023.jsonl": {
+      "query": {
+        "country": "Iraq",
+        "year": 2023,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 3190,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "fe6e79499496528e67cfbb6f6f45834cce8a837e1634c091e095db6a93ee6dfd"
+    },
+    "Iraq_2024.jsonl": {
+      "query": {
+        "country": "Iraq",
+        "year": 2024,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 5569,
+      "pages": 2,
+      "pulled": "2026-10-19",
+      "sha256": "7664f2e7701c6efeed99fd4ff3b151ee50ca99438ffc1d36d729c2cd08f67f08"
+    },
+    "Iraq_2025.jsonl": {
+      "query": {
+        "country": "Iraq",
+        "year": 2025,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 1782,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "334ea2fba60a380f3c25e4649604bb4a281adb8364dae6948023908c30b77011"
+    },
+    "Iran_2015.jsonl": {
+      "query": {
+        "country": "Iran",
+        "year": 2015,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Iran_2016.jsonl": {
+      "query": {
+        "country": "Iran",
+        "year": 2016,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 3,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "8bda6b9ae8d2751b45ef37a846560d7fe4df8f51bde256a3c3c49467e67dc955"
+    },
+    "Iran_2017.jsonl": {
+      "query": {
+        "country": "Iran",
+        "year": 2017,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 4,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "6d47f75a3659ed9ffa151fc3cc96606a1515ef1868a90de2b0b708954ee6bf16"
+    },
+    "Iran_2018.jsonl": {
+      "query": {
+        "country": "Iran",
+        "year": 2018,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 4,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "72907d99f46faaf05ff1fab2a142dd9ad50f2da5f729c034986ac6e4e8d3bb4e"
+    },
+    "Iran_2019.jsonl": {
+      "query": {
+        "country": "Iran",
+        "year": 2019,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 8,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "fc384bbcfbbecd924d318611ef122ccb825b187199dc278415bd9b4dc20ee1e7"
+    },
+    "Iran_2020.jsonl": {
+      "query": {
+        "country": "Iran",
+        "year": 2020,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 19,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "2aa2ac16926a39d5848795c387675cd44836ea3673de7b55317c2e56eeee8473"
+    },
+    "Iran_2021.jsonl": {
+      "query": {
+        "country": "Iran",
+        "year": 2021,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 13,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "069c97896d1c186733dea1a9c96cb267bdd655f1781f7fdd2267e4a01acf3dff"
+    },
+    "Iran_2022.jsonl": {
+      "query": {
+        "country": "Iran",
+        "year": 2022,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 3,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "1ba95b0514dc651d7595d4113b203fc4142f3a083f441a4ac074e94b84be3881"
+    },
+    "Iran_2023.jsonl": {
+      "query": {
+        "country": "Iran",
+        "year": 2023,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 17,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "1822c99c8ae79e02951265614a703d6354cac40f8f269c743ba8e0fb4aab66a2"
+    },
+    "Iran_2024.jsonl": {
+      "query": {
+        "country": "Iran",
+        "year": 2024,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 43,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "ef4b3fc8ef319d7925b998a60284575f06966965ed179bb289f262602c9fcf4a"
+    },
+    "Iran_2025.jsonl": {
+      "query": {
+        "country": "Iran",
+        "year": 2025,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 452,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "b5883ee9fda7d0aa43b75f89971bd734a83f7f589833e2546dc38fb125f8fa04"
+    },
+    "Israel_2015.jsonl": {
+      "query": {
+        "country": "Israel",
+        "year": 2015,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Israel_2016.jsonl": {
+      "query": {
+        "country": "Israel",
+        "year": 2016,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 13,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "8116d3fedb29233048702924beafe06b0fb363887a33702bd4a9cf4505a248e5"
+    },
+    "Israel_2017.jsonl": {
+      "query": {
+        "country": "Israel",
+        "year": 2017,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 25,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "314d5c9cf98abd7650d80ebb427f0fd189e8360b9e1d17a827377ee26352a720"
+    },
+    "Israel_2018.jsonl": {
+      "query": {
+        "country": "Israel",
+        "year": 2018,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 251,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "22ff33b623eaa0510674782847d373973811f219678bee23dfdee44b2d437061"
+    },
+    "Israel_2019.jsonl": {
+      "query": {
+        "country": "Israel",
+        "year": 2019,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 182,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "629acf5ed96129a46ea55181eb4c7f2abff9b325e00170574ea15428f08f0601"
+    },
+    "Israel_2020.jsonl": {
+      "query": {
+        "country": "Israel",
+        "year": 2020,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 152,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "47e3c1f71c0c186fa604104610c7207d2653812142e4e792c03614ae4b0a8977"
+    },
+    "Israel_2021.jsonl": {
+      "query": {
+        "country": "Israel",
+        "year": 2021,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 169,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "f06195b080d92081f92e55127815f64bfaee479f2b9e272dec9301c1d7c054d7"
+    },
+    "Israel_2022.jsonl": {
+      "query": {
+        "country": "Israel",
+        "year": 2022,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 30,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "6f497cda00b32faccbef6447f95fb0ab8447e454a247d39dfb4418fd048bc9bb"
+    },
+    "Israel_2023.jsonl": {
+      "query": {
+        "country": "Israel",
+        "year": 2023,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 914,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "4fa5bb050a8dffb131e1328c258ee5e420d8b9ff919aad892a6aaf11f81a01c7"
+    },
+    "Israel_2024.jsonl": {
+      "query": {
+        "country": "Israel",
+        "year": 2024,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 3172,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "cfc6ee69274db007702cb2a8e07ef4595f0114c0a14f2ac79771bae466a0e2b2"
+    },
+    "Israel_2025.jsonl": {
+      "query": {
+        "country": "Israel",
+        "year": 2025,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 129,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "9d9ac1b46d7aa2386fbbedb9351bdc043ed93eb47231f69286b1b2c8d384e76b"
+    },
+    "Afghanistan_2015.jsonl": {
+      "query": {
+        "country": "Afghanistan",
+        "year": 2015,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Afghanistan_2016.jsonl": {
+      "query": {
+        "country": "Afghanistan",
+        "year": 2016,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Afghanistan_2017.jsonl": {
+      "query": {
+        "country": "Afghanistan",
+        "year": 2017,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 3843,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "fa0f1d7570b40f9d0e3b9a46629a13c9d6d8777449f755b6e95d97b259761612"
+    },
+    "Afghanistan_2018.jsonl": {
+      "query": {
+        "country": "Afghanistan",
+        "year": 2018,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 3774,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "0bf663d0d4e3a72d88e28203c432c63b2d4b81b7083eeb95fd6882de079f8a12"
+    },
+    "Afghanistan_2019.jsonl": {
+      "query": {
+        "country": "Afghanistan",
+        "year": 2019,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 4016,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "cd27e84527746cbcc2eb160c71e249e82f92ea5aee38bf536145da2218590976"
+    },
+    "Afghanistan_2020.jsonl": {
+      "query": {
+        "country": "Afghanistan",
+        "year": 2020,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 2883,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "58d9076f882b0a4549c26bbe7c4cbdfaf51bfb1402c86cc07d216b3dcdf9860f"
+    },
+    "Afghanistan_2021.jsonl": {
+      "query": {
+        "country": "Afghanistan",
+        "year": 2021,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 2273,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "8da37415bf4c1e9360038e29a088b9cf3d1f482ac3178120a4d332a207e29853"
+    },
+    "Afghanistan_2022.jsonl": {
+      "query": {
+        "country": "Afghanistan",
+        "year": 2022,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 416,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "0203af64f0b127d785ca950e421a90b44b04235baa4754a652ec47866a55c5d2"
+    },
+    "Afghanistan_2023.jsonl": {
+      "query": {
+        "country": "Afghanistan",
+        "year": 2023,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 115,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "1ac3e86a77ce1c37a39b701b5c094cb64a8b7da5e4407ca1df0e2ebd375fb193"
+    },
+    "Afghanistan_2024.jsonl": {
+      "query": {
+        "country": "Afghanistan",
+        "year": 2024,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 111,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "b4f188bf4cae6e6cce535a6c5e63dda73f821c2b2d3a310a62312d5b810f9801"
+    },
+    "Afghanistan_2025.jsonl": {
+      "query": {
+        "country": "Afghanistan",
+        "year": 2025,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 126,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "7f10d54f75f33cd55b7b36f92f521a9308ba7b0db7cb1735a85c6c8879a5a7eb"
+    },
+    "Jordan_2015.jsonl": {
+      "query": {
+        "country": "Jordan",
+        "year": 2015,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Jordan_2016.jsonl": {
+      "query": {
+        "country": "Jordan",
+        "year": 2016,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 4,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "59bd6597107bb9e4653d8f30473aec67db77994b8d2509c32dc62ae4982f2e85"
+    },
+    "Jordan_2017.jsonl": {
+      "query": {
+        "country": "Jordan",
+        "year": 2017,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 12,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "5d3a6c2d890a6a341fd524067fd7361f33b96c27300cbea2de1588f678a2a248"
+    },
+    "Jordan_2018.jsonl": {
+      "query": {
+        "country": "Jordan",
+        "year": 2018,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 6,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "737a2b96d5e217ee45a9c350dde07e61f162b85b830355a197ba45c9f8bf1501"
+    },
+    "Jordan_2019.jsonl": {
+      "query": {
+        "country": "Jordan",
+        "year": 2019,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 2,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "b7456f32d6db758e37f00977e66fdf5ef7ee92025547cbcb6060d4450b68e0a3"
+    },
+    "Jordan_2020.jsonl": {
+      "query": {
+        "country": "Jordan",
+        "year": 2020,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 1,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "34dede29292ce886dd0c408002030547c7516b0826896e8b1c6bdde7a3efe6e5"
+    },
+    "Jordan_2021.jsonl": {
+      "query": {
+        "country": "Jordan",
+        "year": 2021,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Jordan_2022.jsonl": {
+      "query": {
+        "country": "Jordan",
+        "year": 2022,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Jordan_2023.jsonl": {
+      "query": {
+        "country": "Jordan",
+        "year": 2023,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 1,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "94e2b8f298597aa6b96d3a38713baa6fb9f5359b00be371264e0889a78f5e3d7"
+    },
+    "Jordan_2024.jsonl": {
+      "query": {
+        "country": "Jordan",
+        "year": 2024,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 1,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "79aea994d3b2afc4a3d4b949bb2fb557bbfb0974192f5659e5ccea22557b2b0e"
+    },
+    "Jordan_2025.jsonl": {
+      "query": {
+        "country": "Jordan",
+        "year": 2025,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 3,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e2ca59a913ebb38af813a5a74c800f10f8a89cd37d8fa9393b2b5cf4ef4dfbc9"
+    },
+    "United_Arab_Emirates_2015.jsonl": {
+      "query": {
+        "country": "United Arab Emirates",
+        "year": 2015,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "United_Arab_Emirates_2016.jsonl": {
+      "query": {
+        "country": "United Arab Emirates",
+        "year": 2016,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "United_Arab_Emirates_2017.jsonl": {
+      "query": {
+        "country": "United Arab Emirates",
+        "year": 2017,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "United_Arab_Emirates_2018.jsonl": {
+      "query": {
+        "country": "United Arab Emirates",
+        "year": 2018,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 1,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "62d23b79353e2743d7f94283a64fb4d1f918102547d1ee90e8b5f854b6ad52bc"
+    },
+    "United_Arab_Emirates_2019.jsonl": {
+      "query": {
+        "country": "United Arab Emirates",
+        "year": 2019,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 1,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "193a495ae12fef320cc1449fa3042a9173b3dfc11cc9250cbea0eceff1f17867"
+    },
+    "United_Arab_Emirates_2020.jsonl": {
+      "query": {
+        "country": "United Arab Emirates",
+        "year": 2020,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "United_Arab_Emirates_2021.jsonl": {
+      "query": {
+        "country": "United Arab Emirates",
+        "year": 2021,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 1,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "0359b9ea230332417b362bb68459ec339fc2ad060754e69d82ef4621c8de61de"
+    },
+    "United_Arab_Emirates_2022.jsonl": {
+      "query": {
+        "country": "United Arab Emirates",
+        "year": 2022,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 7,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "f3fe4ffb0ed74a77b1e75a8daf1b8dcf4371b6f0b1b95e9e631167ad27f0f605"
+    },
+    "United_Arab_Emirates_2023.jsonl": {
+      "query": {
+        "country": "United Arab Emirates",
+        "year": 2023,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "United_Arab_Emirates_2024.jsonl": {
+      "query": {
+        "country": "United Arab Emirates",
+        "year": 2024,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "United_Arab_Emirates_2025.jsonl": {
+      "query": {
+        "country": "United Arab Emirates",
+        "year": 2025,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Bahrain_2015.jsonl": {
+      "query": {
+        "country": "Bahrain",
+        "year": 2015,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Bahrain_2016.jsonl": {
+      "query": {
+        "country": "Bahrain",
+        "year": 2016,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 2,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "d2d33f61bf21ee75c12c3bdc8b1100915a9c6f07a2190c5791f500c0062f4742"
+    },
+    "Bahrain_2017.jsonl": {
+      "query": {
+        "country": "Bahrain",
+        "year": 2017,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 13,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "de7bacc24c9782e7d28fa0c32ae773dfb5353d9a878464698a12495af125ba17"
+    },
+    "Bahrain_2018.jsonl": {
+      "query": {
+        "country": "Bahrain",
+        "year": 2018,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Bahrain_2019.jsonl": {
+      "query": {
+        "country": "Bahrain",
+        "year": 2019,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Bahrain_2020.jsonl": {
+      "query": {
+        "country": "Bahrain",
+        "year": 2020,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Bahrain_2021.jsonl": {
+      "query": {
+        "country": "Bahrain",
+        "year": 2021,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Bahrain_2022.jsonl": {
+      "query": {
+        "country": "Bahrain",
+        "year": 2022,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Bahrain_2023.jsonl": {
+      "query": {
+        "country": "Bahrain",
+        "year": 2023,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Bahrain_2024.jsonl": {
+      "query": {
+        "country": "Bahrain",
+        "year": 2024,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Bahrain_2025.jsonl": {
+      "query": {
+        "country": "Bahrain",
+        "year": 2025,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Kuwait_2015.jsonl": {
+      "query": {
+        "country": "Kuwait",
+        "year": 2015,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Kuwait_2016.jsonl": {
+      "query": {
+        "country": "Kuwait",
+        "year": 2016,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Kuwait_2017.jsonl": {
+      "query": {
+        "country": "Kuwait",
+        "year": 2017,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Kuwait_2018.jsonl": {
+      "query": {
+        "country": "Kuwait",
+        "year": 2018,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Kuwait_2019.jsonl": {
+      "query": {
+        "country": "Kuwait",
+        "year": 2019,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Kuwait_2020.jsonl": {
+      "query": {
+        "country": "Kuwait",
+        "year": 2020,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Kuwait_2021.jsonl": {
+      "query": {
+        "country": "Kuwait",
+        "year": 2021,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Kuwait_2022.jsonl": {
+      "query": {
+        "country": "Kuwait",
+        "year": 2022,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Kuwait_2023.jsonl": {
+      "query": {
+        "country": "Kuwait",
+        "year": 2023,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Kuwait_2024.jsonl": {
+      "query": {
+        "country": "Kuwait",
+        "year": 2024,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Kuwait_2025.jsonl": {
+      "query": {
+        "country": "Kuwait",
+        "year": 2025,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Qatar_2015.jsonl": {
+      "query": {
+        "country": "Qatar",
+        "year": 2015,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Qatar_2016.jsonl": {
+      "query": {
+        "country": "Qatar",
+        "year": 2016,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Qatar_2017.jsonl": {
+      "query": {
+        "country": "Qatar",
+        "year": 2017,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Qatar_2018.jsonl": {
+      "query": {
+        "country": "Qatar",
+        "year": 2018,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Qatar_2019.jsonl": {
+      "query": {
+        "country": "Qatar",
+        "year": 2019,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Qatar_2020.jsonl": {
+      "query": {
+        "country": "Qatar",
+        "year": 2020,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Qatar_2021.jsonl": {
+      "query": {
+        "country": "Qatar",
+        "year": 2021,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Qatar_2022.jsonl": {
+      "query": {
+        "country": "Qatar",
+        "year": 2022,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Qatar_2023.jsonl": {
+      "query": {
+        "country": "Qatar",
+        "year": 2023,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Qatar_2024.jsonl": {
+      "query": {
+        "country": "Qatar",
+        "year": 2024,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Qatar_2025.jsonl": {
+      "query": {
+        "country": "Qatar",
+        "year": 2025,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 2,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "7ceb43bcf836127e0490ac5d118d7576e555d56fe3a77b9684e0ef969a2010ce"
+    },
+    "Saudi_Arabia_2015.jsonl": {
+      "query": {
+        "country": "Saudi Arabia",
+        "year": 2015,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 358,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "a5c03b564176fc75e844dc4cb22b3e4bd9ccce9f66837fc9ee7d7fd312c2d489"
+    },
+    "Saudi_Arabia_2016.jsonl": {
+      "query": {
+        "country": "Saudi Arabia",
+        "year": 2016,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 545,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "7890a347710a1f81d5b92722d74c2ad500b327cc91c98659aae0abc35ca2c383"
+    },
+    "Saudi_Arabia_2017.jsonl": {
+      "query": {
+        "country": "Saudi Arabia",
+        "year": 2017,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 535,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "0aa3b1c7afe7bc9bd5a69ce67536f212bc5b6d7175ba433967e8530517715f8c"
+    },
+    "Saudi_Arabia_2018.jsonl": {
+      "query": {
+        "country": "Saudi Arabia",
+        "year": 2018,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 569,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "9e3f351905356ef1cbdbd59f9595e097c8d363a64c8505966602a6a02b7ab950"
+    },
+    "Saudi_Arabia_2019.jsonl": {
+      "query": {
+        "country": "Saudi Arabia",
+        "year": 2019,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 161,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "4370e43a050838884e12600c41a0889dcbc9b5e69307e0d9adf9244afdd31113"
+    },
+    "Saudi_Arabia_2020.jsonl": {
+      "query": {
+        "country": "Saudi Arabia",
+        "year": 2020,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 42,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "96f9d16ae1c148a33bb5f3fbddae21502556310bfd784d812d30b24e3225d653"
+    },
+    "Saudi_Arabia_2021.jsonl": {
+      "query": {
+        "country": "Saudi Arabia",
+        "year": 2021,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 78,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "cac7342426721ab58ca0f593305d34aa9f7bb81170fde1c96b4742e6c84365a5"
+    },
+    "Saudi_Arabia_2022.jsonl": {
+      "query": {
+        "country": "Saudi Arabia",
+        "year": 2022,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 33,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "259677253015cf4e0a92d9d0aedaac1c782fc9ed3ecfee18237a37bf0f408a3f"
+    },
+    "Saudi_Arabia_2023.jsonl": {
+      "query": {
+        "country": "Saudi Arabia",
+        "year": 2023,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 3,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "d606ca1924cd34d77b430bb4f93f93b15c028d000ca3706bce557d58f758c8f8"
+    },
+    "Saudi_Arabia_2024.jsonl": {
+      "query": {
+        "country": "Saudi Arabia",
+        "year": 2024,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Saudi_Arabia_2025.jsonl": {
+      "query": {
+        "country": "Saudi Arabia",
+        "year": 2025,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 4,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "42c0cbbe68922b67f62db4dc883082784dba08fcba8aa00a1f33c5d68d37cb7a"
+    },
+    "Oman_2015.jsonl": {
+      "query": {
+        "country": "Oman",
+        "year": 2015,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Oman_2016.jsonl": {
+      "query": {
+        "country": "Oman",
+        "year": 2016,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Oman_2017.jsonl": {
+      "query": {
+        "country": "Oman",
+        "year": 2017,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Oman_2018.jsonl": {
+      "query": {
+        "country": "Oman",
+        "year": 2018,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Oman_2019.jsonl": {
+      "query": {
+        "country": "Oman",
+        "year": 2019,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Oman_2020.jsonl": {
+      "query": {
+        "country": "Oman",
+        "year": 2020,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Oman_2021.jsonl": {
+      "query": {
+        "country": "Oman",
+        "year": 2021,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 1,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "b6be17e4faaa7e674457f3b1b8670a5fdaa1b12bac70f4096d3e1afa93b707e3"
+    },
+    "Oman_2022.jsonl": {
+      "query": {
+        "country": "Oman",
+        "year": 2022,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Oman_2023.jsonl": {
+      "query": {
+        "country": "Oman",
+        "year": 2023,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Oman_2024.jsonl": {
+      "query": {
+        "country": "Oman",
+        "year": 2024,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "Oman_2025.jsonl": {
+      "query": {
+        "country": "Oman",
+        "year": 2025,
+        "event_type": "Explosions/Remote violence"
+      },
+      "rows": 0,
+      "pages": 1,
+      "pulled": "2026-10-19",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}
