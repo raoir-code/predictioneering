@@ -87,24 +87,32 @@ def params(pair):
     if not wk:
         ini = pair.split("->")[0]; cls = "defacto_authority" if ini in FACTION else "state_vs_state"; C = W["classes"][cls]
         return {"world_pair": None, "via": "class_prior", "class": cls, "h": math.exp(C["log_h"]["mean"]), "mu": math.exp(C["log_mu"]["mean"]),
+                "mu_lm": C["log_mu"]["mean"], "mu_ls": C["log_mu"]["tau"],
                 "q_c": 0.5, "q0_c": clip(cmed(cls), 0.001, 0.3)}
     p, f = W["pairs"][wk], F[wk]
     qc, q0c = (f["p_rec_F"], f["p_rec_N"]) if via in ("direct", "faction") else (0.5, cmed(p["class"]))
     return {"world_pair": wk, "via": via, "class": p["class"], "h": math.exp(p["log_h"]["mean"]), "mu": math.exp(p["log_mu"]["mean"]),
+            "mu_lm": p["log_mu"]["mean"], "mu_ls": p["log_mu"]["sd"],
             "q_c": clip(qc, 0.02, 0.98), "q0_c": clip(q0c, 0.001, 0.3)}
 
 def lbeta(x, c, w=2.0):
     return (w * c - 1) * math.log(x) + (w * (1 - c) - 1) * math.log(1 - x)
 
+GH = [(-2.856970, 0.011257), (-1.355626, 0.222076), (0.0, 0.533333), (1.355626, 0.222076), (2.856970, 0.011257)]   # 5-pt Gauss-Hermite, N(0,1)
+
 def grid(P, Tn, wins, p_start=None, nds=()):
+    """Posterior over (mu, q, q0). mu is NOT a point value: log mu ~ N(prior mean, prior sd) from the worldwide fit (pair posterior,
+    or class spread tau), integrated by 5-point Gauss-Hermite (Oct 20: one average war length treated every retaliatory exchange as a
+    campaign). The group's own evidence reweights the mu nodes, so a pair can learn that its episodes are short or long."""
     rows = []
-    if True:
-      for q in QG:
-        for q0 in Q0G:
-            if q0 >= q: continue
-            ll, st = U.forward_joint(Tn, wins, P["h"], P["mu"], q, q0, p_start=p_start, news_days=nds, news_ratio=NEWS_FALSE / NEWS_CATCH)
-            if ll != -math.inf:
-                rows.append((ll + lbeta(q, P["q_c"]) + lbeta(q0, P["q0_c"]), q, q0, st))
+    for zk, wk in GH:
+        mu = math.exp(P["mu_lm"] + P["mu_ls"] * zk)
+        for q in QG:
+            for q0 in Q0G:
+                if q0 >= q: continue
+                ll, st = U.forward_joint(Tn, wins, P["h"], mu, q, q0, p_start=p_start, news_days=nds, news_ratio=NEWS_FALSE / NEWS_CATCH)
+                if ll != -math.inf:
+                    rows.append((ll + lbeta(q, P["q_c"]) + lbeta(q0, P["q0_c"]) + math.log(wk), q, q0, st, mu))
     if not rows:
         return np.array([]), []
     lw = np.array([r[0] for r in rows]); w = np.exp(lw - lw.max()); w /= w.sum()
@@ -155,13 +163,14 @@ def price_group(grp, as_of, P, opens, G, pair):
     out = {}
     for k, (a, b) in idx.items():
         ps = []
-        for _, q, q0, st in rows:
-            stk = st if a >= Tn else U.forward_joint(Tn, wins, P["h"], P["mu"], q, q0, p_start=seed, keep_from=a, news_days=nds, news_ratio=NEWS_FALSE / NEWS_CATCH)[1]
-            ps.append(U.price_open(stk, P["h"], P["mu"], q, q0, Tn, a, b))
+        for _, q, q0, st, mu in rows:
+            stk = st if a >= Tn else U.forward_joint(Tn, wins, P["h"], mu, q, q0, p_start=seed, keep_from=a, news_days=nds, news_ratio=NEWS_FALSE / NEWS_CATCH)[1]
+            ps.append(U.price_open(stk, P["h"], mu, q, q0, Tn, a, b))
         out[k] = round(float(np.dot(w, ps)), 4)
     pis = [sum(v for (s, _), v in r[3].items() if s == 1) for r in rows]
     return out, {"source": src + f", {len(nds)} news days", "windows": len(wins), "days": Tn, "q": float(np.dot(w, [r[1] for r in rows])),
-                 "q0": float(np.dot(w, [r[2] for r in rows])), "pi": float(np.dot(w, pis))}
+                 "q0": float(np.dot(w, [r[2] for r in rows])), "pi": float(np.dot(w, pis)),
+                 "war_half_life_post": float(np.dot(w, [math.log(2) / r[4] for r in rows]))}
 
 def feed_index():
     f = json.loads((ROOT / "pipeline" / "classified_feed.json").read_text()); f = f if isinstance(f, list) else f.get("markets", f.get("data", []))
