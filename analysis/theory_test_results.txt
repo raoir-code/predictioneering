@@ -1,0 +1,6 @@
+  V    rows  17595 pairs 18 episodes ended   153 | H1 slope(cum, state_vs_state) +0.071 (p 0.613) | H2 extra slope vs nonstate -0.046 (p 0.691) | elapsed -0.698 (p 0.000)
+  G7   rows  15578 pairs 18 episodes ended   790 | H1 slope(cum, state_vs_state) +0.366 (p 0.029) | H2 extra slope vs nonstate +0.001 (p 0.996) | elapsed -1.219 (p 0.000)
+  G14  rows  18649 pairs 18 episodes ended   464 | H1 slope(cum, state_vs_state) +0.331 (p 0.028) | H2 extra slope vs nonstate +0.066 (p 0.712) | elapsed -1.067 (p 0.000)
+  G30  rows  23009 pairs 18 episodes ended   246 | H1 slope(cum, state_vs_state) +0.203 (p 0.178) | H2 extra slope vs nonstate +0.084 (p 0.588) | elapsed -0.882 (p 0.000)
+  H1: NOT SUPPORTED under the pre-registered rule (['G7', 'G14'] pass)
+  H2: NOT SUPPORTED under the pre-registered rule ([] pass)
