@@ -416,71 +416,161 @@
    "class": "coalition",
    "identified": true,
    "log_h": {
-    "mean": -5.426321127870361,
-    "sd": 0.15859549361000888
+    "mean": -5.358709257031855,
+    "sd": 0.17380028151018434
    },
    "log_mu": {
-    "mean": -4.898481849234788,
-    "sd": 0.3365031098755082
+    "mean": -4.658222784396311,
+    "sd": 0.7217101546189647
    },
-   "onset_median_wait_days": 157.56029450922009,
-   "episode_half_life_days": 92.941375986541
+   "onset_median_wait_days": 147.2594999809355,
+   "episode_half_life_days": 73.09133794825603,
+   "break": {
+    "country": "Afghanistan",
+    "date": "2021-08-15",
+    "source": "Taliban capture Kabul; Ghani government collapses; widely reported Aug 15 2021",
+    "how": "class prior (3 active days after break)"
+   },
+   "pre_break": {
+    "log_h": {
+     "mean": -5.426321127870361,
+     "sd": 0.15859549361000888
+    },
+    "log_mu": {
+     "mean": -4.898481849234788,
+     "sd": 0.3365031098755082
+    },
+    "onset_median_wait_days": 157.56029450922009,
+    "episode_half_life_days": 92.941375986541
+   }
   },
   "Turkey->Syria": {
    "class": "cross_border_nonstate",
    "identified": true,
    "log_h": {
-    "mean": -4.788807834529936,
-    "sd": 0.3125461175316725
+    "mean": -5.85307146003042,
+    "sd": 0.8284881351538681
    },
    "log_mu": {
-    "mean": -4.691416154804611,
-    "sd": 0.30186483030218836
+    "mean": -4.033005785494863,
+    "sd": 0.7651419814724105
    },
-   "onset_median_wait_days": 83.28720316884423,
-   "episode_half_life_days": 75.5582010579281
+   "onset_median_wait_days": 241.42492119787258,
+   "episode_half_life_days": 39.11448524123148,
+   "break": {
+    "country": "Syria",
+    "date": "2024-12-08",
+    "source": "Fall of the Assad government (HTS-led offensive); widely reported, e.g. Reuters / AP Dec 8 2024",
+    "how": "refit on 106 post-break active days, shrunk to cross_border_nonstate"
+   },
+   "pre_break": {
+    "log_h": {
+     "mean": -4.788807834529936,
+     "sd": 0.3125461175316725
+    },
+    "log_mu": {
+     "mean": -4.691416154804611,
+     "sd": 0.30186483030218836
+    },
+    "onset_median_wait_days": 83.28720316884423,
+    "episode_half_life_days": 75.5582010579281
+   }
   },
   "Global Coalition Against Daesh->Syria": {
    "class": "coalition",
    "identified": true,
    "log_h": {
-    "mean": -5.433328875174017,
-    "sd": 0.15868031640306723
+    "mean": -5.368903451062762,
+    "sd": 0.1721195792633682
    },
    "log_mu": {
-    "mean": -4.41460993113185,
-    "sd": 0.3335738183251362
+    "mean": -4.7530882102173395,
+    "sd": 0.6554906744798498
    },
-   "onset_median_wait_days": 158.6683150678374,
-   "episode_half_life_days": 57.28833415303024
+   "onset_median_wait_days": 148.76836968491116,
+   "episode_half_life_days": 80.36472126368837,
+   "break": {
+    "country": "Syria",
+    "date": "2024-12-08",
+    "source": "Fall of the Assad government (HTS-led offensive); widely reported, e.g. Reuters / AP Dec 8 2024",
+    "how": "refit on 30 post-break active days, shrunk to coalition"
+   },
+   "pre_break": {
+    "log_h": {
+     "mean": -5.433328875174017,
+     "sd": 0.15868031640306723
+    },
+    "log_mu": {
+     "mean": -4.41460993113185,
+     "sd": 0.3335738183251362
+    },
+    "onset_median_wait_days": 158.6683150678374,
+    "episode_half_life_days": 57.28833415303024
+   }
   },
   "Russia->Syria": {
    "class": "cross_border_nonstate",
    "identified": true,
    "log_h": {
-    "mean": -4.542582590975981,
-    "sd": 0.2649489760764592
+    "mean": -5.892136769733848,
+    "sd": 0.9963611269442476
    },
    "log_mu": {
-    "mean": -4.44942597464749,
-    "sd": 0.26678890633746516
+    "mean": -3.818621194077868,
+    "sd": 0.8370685373368094
    },
-   "onset_median_wait_days": 65.10944807434582,
-   "episode_half_life_days": 59.31801499595677
+   "onset_median_wait_days": 251.0429020812137,
+   "episode_half_life_days": 31.56687380693795,
+   "break": {
+    "country": "Syria",
+    "date": "2024-12-08",
+    "source": "Fall of the Assad government (HTS-led offensive); widely reported, e.g. Reuters / AP Dec 8 2024",
+    "how": "class prior (1 active days after break)"
+   },
+   "pre_break": {
+    "log_h": {
+     "mean": -4.542582590975981,
+     "sd": 0.2649489760764592
+    },
+    "log_mu": {
+     "mean": -4.44942597464749,
+     "sd": 0.26678890633746516
+    },
+    "onset_median_wait_days": 65.10944807434582,
+    "episode_half_life_days": 59.31801499595677
+   }
   },
   "Israel->Syria": {
    "class": "state_vs_state",
    "identified": true,
    "log_h": {
-    "mean": -5.044213880795381,
-    "sd": 0.31569899822921477
+    "mean": -4.593982439566243,
+    "sd": 0.5910859385375637
    },
    "log_mu": {
-    "mean": -3.092743112184233,
-    "sd": 0.29393787555634915
+    "mean": -2.561873699718583,
+    "sd": 0.5584514263330996
    },
-   "onset_median_wait_days": 107.52258948252974,
-   "episode_half_life_days": 15.275193788202744
+   "onset_median_wait_days": 68.54356434663922,
+   "episode_half_life_days": 8.983241438346054,
+   "break": {
+    "country": "Syria",
+    "date": "2024-12-08",
+    "source": "Fall of the Assad government (HTS-led offensive); widely reported, e.g. Reuters / AP Dec 8 2024",
+    "how": "refit on 71 post-break active days, shrunk to state_vs_state"
+   },
+   "pre_break": {
+    "log_h": {
+     "mean": -5.044213880795381,
+     "sd": 0.31569899822921477
+    },
+    "log_mu": {
+     "mean": -3.092743112184233,
+     "sd": 0.29393787555634915
+    },
+    "onset_median_wait_days": 107.52258948252974,
+    "episode_half_life_days": 15.275193788202744
+   }
   },
   "Israel->Egypt": {
    "class": "cross_border_nonstate",
@@ -500,71 +590,161 @@
    "class": "cross_border_nonstate",
    "identified": true,
    "log_h": {
-    "mean": -5.512584510004638,
-    "sd": 0.4176259301515982
+    "mean": -6.053695248899052,
+    "sd": 0.8342544266147526
    },
    "log_mu": {
-    "mean": -2.75861710353834,
-    "sd": 0.36909708415212183
+    "mean": -3.762712473067231,
+    "sd": 0.6709814551648686
    },
-   "onset_median_wait_days": 171.7554374026175,
-   "episode_half_life_days": 10.936482108165498
+   "onset_median_wait_days": 295.0610630523349,
+   "episode_half_life_days": 29.850439175742327,
+   "break": {
+    "country": "Afghanistan",
+    "date": "2021-08-15",
+    "source": "Taliban capture Kabul; Ghani government collapses; widely reported Aug 15 2021",
+    "how": "refit on 40 post-break active days, shrunk to cross_border_nonstate"
+   },
+   "pre_break": {
+    "log_h": {
+     "mean": -5.512584510004638,
+     "sd": 0.4176259301515982
+    },
+    "log_mu": {
+     "mean": -2.75861710353834,
+     "sd": 0.36909708415212183
+    },
+    "onset_median_wait_days": 171.7554374026175,
+    "episode_half_life_days": 10.936482108165498
+   }
   },
   "Jordan->Syria": {
    "class": "cross_border_nonstate",
    "identified": true,
    "log_h": {
-    "mean": -6.2973923579715745,
-    "sd": 0.8007895559437495
+    "mean": -5.892136769733848,
+    "sd": 0.9963611269442476
    },
    "log_mu": {
-    "mean": -3.5221994758034203,
-    "sd": 0.6269857684680029
+    "mean": -3.818621194077868,
+    "sd": 0.8370685373368094
    },
-   "onset_median_wait_days": 376.4854636720852,
-   "episode_half_life_days": 23.469144425166526
+   "onset_median_wait_days": 251.0429020812137,
+   "episode_half_life_days": 31.56687380693795,
+   "break": {
+    "country": "Syria",
+    "date": "2024-12-08",
+    "source": "Fall of the Assad government (HTS-led offensive); widely reported, e.g. Reuters / AP Dec 8 2024",
+    "how": "class prior (2 active days after break)"
+   },
+   "pre_break": {
+    "log_h": {
+     "mean": -6.2973923579715745,
+     "sd": 0.8007895559437495
+    },
+    "log_mu": {
+     "mean": -3.5221994758034203,
+     "sd": 0.6269857684680029
+    },
+    "onset_median_wait_days": 376.4854636720852,
+    "episode_half_life_days": 23.469144425166526
+   }
   },
   "Iraq->Syria": {
    "class": "cross_border_nonstate",
    "identified": true,
    "log_h": {
-    "mean": -6.3078342819978745,
-    "sd": 0.5860595683096895
+    "mean": -5.892136769733848,
+    "sd": 0.9963611269442476
    },
    "log_mu": {
-    "mean": -4.053947732435796,
-    "sd": 0.5871192482694793
+    "mean": -3.818621194077868,
+    "sd": 0.8370685373368094
    },
-   "onset_median_wait_days": 380.43729272327533,
-   "episode_half_life_days": 39.942256029340555
+   "onset_median_wait_days": 251.0429020812137,
+   "episode_half_life_days": 31.56687380693795,
+   "break": {
+    "country": "Syria",
+    "date": "2024-12-08",
+    "source": "Fall of the Assad government (HTS-led offensive); widely reported, e.g. Reuters / AP Dec 8 2024",
+    "how": "class prior (0 active days after break)"
+   },
+   "pre_break": {
+    "log_h": {
+     "mean": -6.3078342819978745,
+     "sd": 0.5860595683096895
+    },
+    "log_mu": {
+     "mean": -4.053947732435796,
+     "sd": 0.5871192482694793
+    },
+    "onset_median_wait_days": 380.43729272327533,
+    "episode_half_life_days": 39.942256029340555
+   }
   },
   "Syria->Lebanon": {
    "class": "cross_border_nonstate",
    "identified": true,
    "log_h": {
-    "mean": -6.437846300198001,
-    "sd": 0.547498588836165
+    "mean": -5.892136769733848,
+    "sd": 0.9963611269442476
    },
    "log_mu": {
-    "mean": -2.7557633754808775,
-    "sd": 0.49631303288896167
+    "mean": -3.818621194077868,
+    "sd": 0.8370685373368094
    },
-   "onset_median_wait_days": 433.25799397843247,
-   "episode_half_life_days": 10.905316852056579
+   "onset_median_wait_days": 251.0429020812137,
+   "episode_half_life_days": 31.56687380693795,
+   "break": {
+    "country": "Syria",
+    "date": "2024-12-08",
+    "source": "Fall of the Assad government (HTS-led offensive); widely reported, e.g. Reuters / AP Dec 8 2024",
+    "how": "class prior (8 active days after break)"
+   },
+   "pre_break": {
+    "log_h": {
+     "mean": -6.437846300198001,
+     "sd": 0.547498588836165
+    },
+    "log_mu": {
+     "mean": -2.7557633754808775,
+     "sd": 0.49631303288896167
+    },
+    "onset_median_wait_days": 433.25799397843247,
+    "episode_half_life_days": 10.905316852056579
+   }
   },
   "Iraq [Popular Mobilization Forces]->Syria": {
    "class": "defacto_authority",
    "identified": true,
    "log_h": {
-    "mean": -6.5994352952572335,
-    "sd": 0.3457841200364033
+    "mean": -6.414183200186241,
+    "sd": 0.36672112853882227
    },
    "log_mu": {
-    "mean": -5.8135988909390734,
-    "sd": 0.79704398548929
+    "mean": -4.412942577721241,
+    "sd": 1.5831416539957217
    },
-   "onset_median_wait_days": 509.2415055611827,
-   "episode_half_life_days": 232.08088899441464
+   "onset_median_wait_days": 423.1261153327521,
+   "episode_half_life_days": 57.19289384216684,
+   "break": {
+    "country": "Syria",
+    "date": "2024-12-08",
+    "source": "Fall of the Assad government (HTS-led offensive); widely reported, e.g. Reuters / AP Dec 8 2024",
+    "how": "class prior (0 active days after break)"
+   },
+   "pre_break": {
+    "log_h": {
+     "mean": -6.5994352952572335,
+     "sd": 0.3457841200364033
+    },
+    "log_mu": {
+     "mean": -5.8135988909390734,
+     "sd": 0.79704398548929
+    },
+    "onset_median_wait_days": 509.2415055611827,
+    "episode_half_life_days": 232.08088899441464
+   }
   },
   "Iran->Syria": {
    "class": "cross_border_nonstate",
@@ -578,7 +758,25 @@
     "sd": 0.8370685373368094
    },
    "onset_median_wait_days": 251.0429020812137,
-   "episode_half_life_days": 31.56687380693795
+   "episode_half_life_days": 31.56687380693795,
+   "break": {
+    "country": "Syria",
+    "date": "2024-12-08",
+    "source": "Fall of the Assad government (HTS-led offensive); widely reported, e.g. Reuters / AP Dec 8 2024",
+    "how": "class prior (3 active days after break)"
+   },
+   "pre_break": {
+    "log_h": {
+     "mean": -5.892136769733848,
+     "sd": 0.9963611269442476
+    },
+    "log_mu": {
+     "mean": -3.818621194077868,
+     "sd": 0.8370685373368094
+    },
+    "onset_median_wait_days": 251.0429020812137,
+    "episode_half_life_days": 31.56687380693795
+   }
   },
   "Yemen [Houthi]->Saudi Arabia": {
    "class": "defacto_authority",
@@ -668,15 +866,33 @@
    "class": "coalition",
    "identified": true,
    "log_h": {
-    "mean": -5.378944816298558,
-    "sd": 0.15858706526475608
+    "mean": -5.358709257031855,
+    "sd": 0.17380028151018434
    },
    "log_mu": {
-    "mean": -4.760240344648249,
-    "sd": 0.34255335047594837
+    "mean": -4.658222784396311,
+    "sd": 0.7217101546189647
    },
-   "onset_median_wait_days": 150.26973247144036,
-   "episode_half_life_days": 80.9415609121017
+   "onset_median_wait_days": 147.2594999809355,
+   "episode_half_life_days": 73.09133794825603,
+   "break": {
+    "country": "Syria",
+    "date": "2024-12-08",
+    "source": "Fall of the Assad government (HTS-led offensive); widely reported, e.g. Reuters / AP Dec 8 2024",
+    "how": "refit on 39 post-break active days, shrunk to coalition"
+   },
+   "pre_break": {
+    "log_h": {
+     "mean": -5.378944816298558,
+     "sd": 0.15858706526475608
+    },
+    "log_mu": {
+     "mean": -4.760240344648249,
+     "sd": 0.34255335047594837
+    },
+    "onset_median_wait_days": 150.26973247144036,
+    "episode_half_life_days": 80.9415609121017
+   }
   },
   "France->Niger": {
    "class": "cross_border_nonstate",
@@ -831,6 +1047,16 @@
    },
    "onset_median_wait_days": 499.6750589964735,
    "episode_half_life_days": 58.681993824929926
+  }
+ },
+ "_breaks": {
+  "Syria": {
+   "date": "2024-12-08",
+   "source": "Fall of the Assad government (HTS-led offensive); widely reported, e.g. Reuters / AP Dec 8 2024"
+  },
+  "Afghanistan": {
+   "date": "2021-08-15",
+   "source": "Taliban capture Kabul; Ghani government collapses; widely reported Aug 15 2021"
   }
  }
 }
