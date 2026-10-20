@@ -60,14 +60,16 @@ echo "Translator done." | tee -a "$LOGFILE"
 
 echo "[5/6] Resolver..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.resolver >> "$LOGFILE" 2>&1
+echo "[unified] Recompute publish policy from the replay (non-fatal)..." | tee -a "$LOGFILE"
+$PYTHON -u pilot/unified_price.py --policy >> "$LOGFILE" 2>&1 || echo "  [unified] policy refresh failed (non-fatal; previous policy kept)" | tee -a "$LOGFILE"
 echo "Resolver done." | tee -a "$LOGFILE"
 
 echo "[pilot] Shadow pricer, Israel->Lebanon (logs only, non-fatal)..." | tee -a "$LOGFILE"
-$PYTHON -u pilot/shadow_pricer.py >> "$LOGFILE" 2>&1 || echo "  [pilot] shadow pricer failed (non-fatal)" | tee -a "$LOGFILE"
+# retired Oct 20 (production prices these markets): $PYTHON -u pilot/shadow_pricer.py >> "$LOGFILE" 2>&1 || echo "  [pilot] shadow pricer failed (non-fatal)" | tee -a "$LOGFILE"
 echo "[pilot] Ceasefire classifier: label new articles (non-fatal)..." | tee -a "$LOGFILE"
 $PYTHON -u pilot/ceasefire_news.py --classify >> "$LOGFILE" 2>&1 || echo "  [pilot] ceasefire classifier failed (non-fatal)" | tee -a "$LOGFILE"
 echo "[pilot] Shadow v2b fighting-state filter (logs only, non-fatal)..." | tee -a "$LOGFILE"
-$PYTHON -u pilot/fighting_state.py >> "$LOGFILE" 2>&1 || echo "  [pilot] shadow v2b failed (non-fatal)" | tee -a "$LOGFILE"
+# retired Oct 20 (production prices these markets): $PYTHON -u pilot/fighting_state.py >> "$LOGFILE" 2>&1 || echo "  [pilot] shadow v2b failed (non-fatal)" | tee -a "$LOGFILE"
 
 if [ "$WEEKLY_AGE" -gt 168 ]; then
     echo "[6/6] Context keeper weekly sweep (weekly marker is ${WEEKLY_AGE}h old)..." | tee -a "$LOGFILE"
