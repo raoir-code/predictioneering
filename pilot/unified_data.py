@@ -17,11 +17,12 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parent.parent; PIPE = ROOT / "pipeline"; UTC = dt.timezone.utc
 _M = "January|February|March|April|May|June|July|August|September|October|November|December"
 MON = {m.lower(): i + 1 for i, m in enumerate(_M.split("|"))}
-TPL = re.compile(r"^(?:Will (?:there be )?)?(?:an? )?(.+?)(?: take)? military action (?:against|on) (.+?) (on|by) (" + _M + r") (\d{1,2})(?:, (\d{4}))?\?\s*$", re.I)
+TPL = re.compile(r"^(?:Will (?:there be )?)?(?:an? |the )?(.+?)(?: take)? (?:military action (?:against|on)|target) (?:the )?(.+?) (on|by) (" + _M + r") (\d{1,2})(?:, (\d{4}))?\?\s*$", re.I)
 ALIAS = {"saudiarabian": "saudiarabia"}
 REGIONS = [("jerusalem|israel", "Asia/Jerusalem"), ("yemen", "Asia/Aden"), ("syria", "Asia/Damascus"), ("lebanon|beirut", "Asia/Beirut"),
            ("gulf", "Asia/Dubai"), ("arabia|riyadh", "Asia/Riyadh"), ("iran|tehran", "Asia/Tehran"), ("pakistan", "Asia/Karachi"),
-           ("afghanistan|kabul", "Asia/Kabul"), ("central european", "Europe/Berlin"), ("eastern", "America/New_York"),
+           ("afghanistan|kabul", "Asia/Kabul"), ("amman|jordan", "Asia/Amman"), ("manama|bahrain", "Asia/Bahrain"), ("kuwait", "Asia/Kuwait"),
+           ("doha|qatar", "Asia/Qatar"), ("muscat|oman", "Asia/Muscat"), ("cairo|egypt", "Africa/Cairo"), ("baghdad|iraq", "Asia/Baghdad"), ("abu dhabi|dubai|emirates", "Asia/Dubai"), ("central european", "Europe/Berlin"), ("eastern", "America/New_York"),
            ("pacific", "America/Los_Angeles"), ("coordinated universal|greenwich", "UTC")]
 TZ = [(rf"(?:{r}) (?:standard |daylight |summer )?time", z) for r, z in REGIONS] + [
       (r"\bE[SD]?T\b", "America/New_York"), (r"\bCES?T\b", "Europe/Berlin"), (r"\bUTC\b|\bGMT\b", "UTC")]
@@ -81,8 +82,28 @@ def load():
             s, e = created, de
         if outcome == 1 and known and known < e: e = max(s, known)
         out.append({"id": mid, "pair": f"{norm(m.group(1))}->{norm(m.group(2))}", "kind": kind, "fp": fp, "tz": tz, "start": s, "end": e, "date": d,
-                    "outcome": outcome, "known": known, "open": mid in open_ids and outcome is None, "question": r.get("question")})
+                    "outcome": outcome, "known": known, "open": mid in open_ids and outcome is None, "question": r.get("question"),
+                    "sfp": struct_fp(r.get("description"), m.group(1), m.group(2)), "members": members_of(r.get("description"))})
     return out, skip
+
+def definition(desc):
+    d = re.sub(r"\s+", " ", desc or ""); i = d.lower().find("qualifying military action refers to")
+    if i < 0: return None
+    j = min([k for k in (d.lower().find("the occurrence, attribution", i), d.lower().find("resolution source", i)) if k > 0] or [len(d)])
+    return d[i:j].strip()
+
+def struct_fp(desc, ini, ter):
+    """Definition with the initiator and target names blanked: same kind of event, any target (links collectives to members)."""
+    d = definition(desc)
+    if not d: return None
+    t = d.lower(); core = re.sub(r"^(an?|the) ", "", ter.strip().lower())
+    t = re.sub(r"(?:an? |the )?(?:qualifying )?" + re.escape(core), "<T>", t)
+    t = t.replace(ini.strip().lower(), "<A>")
+    return __import__("hashlib").sha1(t.encode()).hexdigest()[:10]
+
+def members_of(desc):
+    m = re.search(r"Qualifying [A-Za-z ]+? (?:countries|states|nations) are(?: as follows)?: (.+?)\.(?:\s|$)", re.sub(r"\s+", " ", desc or ""))
+    return [norm(re.sub(r"^(?:and |the )+", "", x.strip())) for x in re.split(r",\s*|\s+and\s+", m.group(1)) if x.strip()] if m else None
 
 def groups(cs):
     g = defaultdict(list)

@@ -36,6 +36,25 @@ for _dy, (_a, _b) in NS.DYADS.items():
     NEWS_DIR[f"{_ka}->{_kb}"] = (_dy, "A_STRIKES_B"); NEWS_DIR[f"{_kb}->{_ka}"] = (_dy, "B_STRIKES_A")
 _NEWS = {}
 
+def news_dates(pair, as_of, tz):
+    ini, ter = pair.split("->"); src = NEWS_DIR.get(pair) or NEWS_DIR.get(f"{FACTION_HOME.get(ini, ini)}->{ter}")
+    if not src: return set()
+    if src not in _NEWS: _NEWS[src] = NS.day_obs(*src)
+    today = as_of.astimezone(tz).date()
+    return {d for d, v in _NEWS[src].items() if v and d < today}
+
+def evidence(grp, pair, as_of, G):
+    """Dated windows: the group's own + YES windows of MEMBER groups with the same structural definition (a strike on any
+    member is a strike on the collective). News pairs: the pair itself + initiator->member pairs."""
+    d0, T, w = UD.windows(grp, as_of); ev = [(d0 + dt.timedelta(a), d0 + dt.timedelta(b), y) for a, b, y in w]
+    mem = next((c["members"] for c in grp if c.get("members")), None); sfp = grp[0].get("sfp"); ini = pair.split("->")[0]; linked = []
+    for m in mem or []:
+        for (p2, f2), g2 in G.items():
+            if p2 == f"{ini}->{m}" and g2[0].get("sfp") == sfp:
+                d2, T2, w2 = UD.windows(g2, as_of)
+                ev += [(d2 + dt.timedelta(a), d2 + dt.timedelta(b), 1) for a, b, y in w2 if y == 1]; linked.append(p2)
+    return ev, [pair] + [f"{ini}->{m}" for m in (mem or [])], linked
+
 def news_days(pair, as_of, d0n, tz):
     """Day indices (relative to d0n) of positive reports, from files written strictly before as_of's day (walk-forward)."""
     ini, ter = pair.split("->"); src = NEWS_DIR.get(pair) or NEWS_DIR.get(f"{FACTION_HOME.get(ini, ini)}->{ter}")
@@ -62,9 +81,13 @@ def world_pair(pair):
     return None, None
 
 def params(pair):
+    """World pair if fitted; otherwise the CLASS prior (rule 4: faction initiator -> defacto_authority, else state_vs_state).
+    Class-prior groups are priced only with positive evidence of fighting (enforced in price_group)."""
     wk, via = world_pair(pair)
     if not wk:
-        return None
+        ini = pair.split("->")[0]; cls = "defacto_authority" if ini in FACTION else "state_vs_state"; C = W["classes"][cls]
+        return {"world_pair": None, "via": "class_prior", "class": cls, "h": math.exp(C["log_h"]["mean"]), "mu": math.exp(C["log_mu"]["mean"]),
+                "q_c": 0.5, "q0_c": clip(cmed(cls), 0.001, 0.3)}
     p, f = W["pairs"][wk], F[wk]
     qc, q0c = (f["p_rec_F"], f["p_rec_N"]) if via in ("direct", "faction") else (0.5, cmed(p["class"]))
     return {"world_pair": wk, "via": via, "class": p["class"], "h": math.exp(p["log_h"]["mean"]), "mu": math.exp(p["log_mu"]["mean"]),
@@ -75,12 +98,15 @@ def lbeta(x, c, w=2.0):
 
 def grid(P, Tn, wins, p_start=None, nds=()):
     rows = []
-    for q in QG:
+    if True:
+      for q in QG:
         for q0 in Q0G:
             if q0 >= q: continue
             ll, st = U.forward_joint(Tn, wins, P["h"], P["mu"], q, q0, p_start=p_start, news_days=nds, news_ratio=NEWS_FALSE / NEWS_CATCH)
             if ll != -math.inf:
                 rows.append((ll + lbeta(q, P["q_c"]) + lbeta(q0, P["q0_c"]), q, q0, st))
+    if not rows:
+        return np.array([]), []
     lw = np.array([r[0] for r in rows]); w = np.exp(lw - lw.max()); w /= w.sum()
     return w, rows
 
@@ -105,27 +131,27 @@ def reverse_seed(pair, G, as_of):
 
 def price_group(grp, as_of, P, opens, G, pair):
     z = ZoneInfo(UD.group_tz(grp)); today = as_of.astimezone(z).date()
-    d0, T, wins = UD.windows(grp, as_of)
     spans = {c["id"]: ((c["date"] if c["kind"] == "daily" else c["start"].astimezone(z).date()), c["date"]) for c in opens if c["date"] >= today}
     if not spans:
         return {}, None
-    seed, src = None, "own evidence"
-    d0n_try = min([d0 if wins else today] + [a for a, _ in spans.values()])
-    nd_probe = news_days(pair, as_of, d0n_try - dt.timedelta(60), z)
-    if not wins and nd_probe:
-        src = "own news evidence"
-    elif not wins:
+    ev, npairs, linked = evidence(grp, pair, as_of, G)
+    nd = set().union(*[news_dates(p, as_of, z) for p in npairs])
+    seed = None
+    if P["via"] == "class_prior" and not any(y == 1 for _, _, y in ev) and not nd:
+        return {}, {"unpriced": "no fitted history and no positive evidence of fighting (engine decides onset)"}
+    src = ("own windows" if ev else "news only") + (f" + {len(linked)} member groups" if linked else "")
+    if not ev and not nd:
         pi = reverse_seed(pair, G, as_of)
         if pi is None:
             return {}, {"unpriced": "no evidence of its own, none in the reverse direction"}
         seed, src = np.array([1 - pi, pi]), f"seeded by reverse direction, P(fighting) {pi:.2f}"
-    d0n = min([d0 if wins else today] + [a for a, _ in spans.values()])
-    if not wins and nd_probe: d0n = min(d0n, today - dt.timedelta(60))   # look back 60 days of news for groups with no windows
-    off = (d0 - d0n).days if wins else 0
-    wins = [(a + off, b + off, y) for a, b, y in wins]; Tn = (today - d0n).days
+    d0n = min([today] + [a for a, _ in spans.values()] + [a for a, _, _ in ev] + ([today - dt.timedelta(60)] if nd else []))
+    wins = [((a - d0n).days, (b - d0n).days, y) for a, b, y in ev]; Tn = (today - d0n).days
+    nds = {(d - d0n).days for d in nd if d >= d0n}
     idx = {k: ((a - d0n).days, (b - d0n).days) for k, (a, b) in spans.items()}
-    nds = news_days(pair, as_of, d0n, z)
     w, rows = grid(P, Tn, wins, p_start=seed, nds=nds)
+    if not len(rows):
+        return {}, {"unpriced": "contradictory evidence"}
     out = {}
     for k, (a, b) in idx.items():
         ps = []

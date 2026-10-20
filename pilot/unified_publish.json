@@ -2,13 +2,19 @@
   "enabled": true,
   "rule": "A group is priced by the unified engine if in scope, UNLESS the walk-forward replay shows harm: >= 3 replayed contracts and unified Brier worse than production by > 0.05. Groups with < 3 replayed contracts are published (no evidence of harm). Lebanon / Saudi->Yemen dailies stay on the during-war model (pilot/fighting_state.py). Exclusions are computed, never hand-picked.",
   "excluded": {
-    "israel->syria|45eb12dac6": "replay n=6: unified 0.486 vs production 0.259"
+    "israel->syria|45eb12dac6": "replay n=6: unified 0.517 vs production 0.259"
   },
-  "computed_at": "2026-10-20T17:59:23.369080+00:00",
+  "computed_at": "2026-10-20T18:04:58.300103+00:00",
   "replayed_groups": {
     "israel->yemen|25d58e61af": 2,
     "saudiarabia->yemen|811e1df6e5": 4,
     "israel->syria|45eb12dac6": 6,
+    "iran->anarabcountry|5c5c4d1c74": 4,
+    "iran->unitedarabemirates|a00f8486c8": 1,
+    "iran->iraq|0411082d09": 4,
+    "iran->jordan|d62f645775": 3,
+    "iran->kuwait|e674da7a95": 2,
+    "iran->bahrain|740f99c274": 1,
     "israel->lebanon|1c61235068": 37,
     "saudiarabia->yemen|9e6c787515": 5
   }
