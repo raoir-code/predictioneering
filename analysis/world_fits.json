@@ -1,0 +1,864 @@
+{
+ "United States->Pakistan": {
+  "active_days": 29,
+  "h_per_day": 0.0002887415148475979,
+  "mu_per_day": 0.0004385897750401798,
+  "p_rec_F": 0.022362604979586975,
+  "p_rec_N": 1.865174681370263e-14,
+  "sd_log": null,
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 32
+  }
+ },
+ "United States->Somalia": {
+  "active_days": 404,
+  "h_per_day": 0.013347208647404905,
+  "mu_per_day": 0.012704353623338919,
+  "p_rec_F": 0.18328280505426187,
+  "p_rec_N": 0.011469207478923216,
+  "sd_log": {
+   "h": 0.3310533376910382,
+   "mu": 0.32285357283351057,
+   "rhoN": 0.6478925167625595,
+   "d": 0.0758232466080884
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 497,
+   "defacto": 1
+  }
+ },
+ "United States->Yemen": {
+  "active_days": 399,
+  "h_per_day": 0.003584311909494647,
+  "mu_per_day": 0.005744162181160515,
+  "p_rec_F": 0.21575455242808372,
+  "p_rec_N": 0.02138077936683802,
+  "sd_log": {
+   "h": 0.5463672988540493,
+   "mu": 0.5838374080131394,
+   "rhoN": 0.15831582751209547,
+   "d": 0.08570990892652143
+  },
+  "class": "defacto_authority",
+  "targets": {
+   "nonstate": 294,
+   "state": 1,
+   "defacto": 530
+  }
+ },
+ "Egypt->Libya": {
+  "active_days": 21,
+  "h_per_day": 0.0002950040387623755,
+  "mu_per_day": 0.005811368001592597,
+  "p_rec_F": 0.07708842923248782,
+  "p_rec_N": 0.001302284014998989,
+  "sd_log": {
+   "h": 1.0188633640106386,
+   "mu": 0.9712790143277341,
+   "rhoN": 0.45873953856067307,
+   "d": 0.29133651143830414
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 17
+  }
+ },
+ "Operation Decisive Storm->Yemen": {
+  "active_days": 28,
+  "h_per_day": 0.00024905140538325265,
+  "mu_per_day": 0.03730577105275105,
+  "p_rec_F": 1.0,
+  "p_rec_N": 0.0,
+  "sd_log": null,
+  "class": "coalition",
+  "targets": {
+   "defacto": 341,
+   "nonstate": 15
+  }
+ },
+ "Operation Libya Dawn->Libya": {
+  "active_days": 12,
+  "h_per_day": 0.00027523331346405853,
+  "mu_per_day": 0.007358874615175354,
+  "p_rec_F": 0.07936598028788833,
+  "p_rec_N": 9.658940314238862e-15,
+  "sd_log": null,
+  "class": "coalition",
+  "targets": {
+   "nonstate": 10
+  }
+ },
+ "Kenya->Somalia": {
+  "active_days": 102,
+  "h_per_day": 0.009289026308074154,
+  "mu_per_day": 0.07089970026448153,
+  "p_rec_F": 0.15398053484974183,
+  "p_rec_N": 0.008470007290434789,
+  "sd_log": {
+   "h": 0.4714040723612692,
+   "mu": 0.4893952791102262,
+   "rhoN": 0.30963678518821247,
+   "d": 0.2779084226211643
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 84
+  }
+ },
+ "Operation Restoring Hope->Yemen": {
+  "active_days": 2813,
+  "h_per_day": 0.006627656221340793,
+  "mu_per_day": 0.003739288475657811,
+  "p_rec_F": 0.9766457424018513,
+  "p_rec_N": 0.13642514224776814,
+  "sd_log": {
+   "h": 0.37864098319146605,
+   "mu": 0.348897814041707,
+   "rhoN": 0.09328250853888305,
+   "d": 0.04128559384671715
+  },
+  "class": "coalition",
+  "targets": {
+   "defacto": 6639,
+   "nonstate": 193,
+   "state": 1
+  }
+ },
+ "Sudan->South Sudan": {
+  "active_days": 13,
+  "h_per_day": 0.002643179360123238,
+  "mu_per_day": 0.6799592443608178,
+  "p_rec_F": 0.7385251723021258,
+  "p_rec_N": 2.1538326677728037e-14,
+  "sd_log": null,
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 2
+  }
+ },
+ "Yemen [Houthi-Saleh]->Saudi Arabia": {
+  "active_days": 504,
+  "h_per_day": 0.0017267463156533487,
+  "mu_per_day": 0.006995185393706576,
+  "p_rec_F": 0.5959152912312455,
+  "p_rec_N": 0.0008391894895091179,
+  "sd_log": {
+   "h": 0.49686016194419763,
+   "mu": 0.47486496887028423,
+   "rhoN": 1.5901319539567431,
+   "d": 0.06058013714687
+  },
+  "class": "defacto_authority",
+  "targets": {
+   "state": 1024,
+   "nonstate": 7,
+   "defacto": 2
+  }
+ },
+ "United States->Libya": {
+  "active_days": 69,
+  "h_per_day": 0.0014624029863617278,
+  "mu_per_day": 0.029832351080084012,
+  "p_rec_F": 0.28263883928083056,
+  "p_rec_N": 0.003941288824439448,
+  "sd_log": {
+   "h": 0.628659188863796,
+   "mu": 0.5615835463629184,
+   "rhoN": 0.353349893422128,
+   "d": 0.1706030111343663
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 69,
+   "state": 3
+  }
+ },
+ "India->Pakistan": {
+  "active_days": 40,
+  "h_per_day": 0.0016868792720462543,
+  "mu_per_day": 0.008977964000042008,
+  "p_rec_F": 0.053680516492407904,
+  "p_rec_N": 0.0013580649392336275,
+  "sd_log": {
+   "h": 0.6028150277993707,
+   "mu": 0.5849771971894459,
+   "rhoN": 0.6300581797731464,
+   "d": 0.22590413390259925
+  },
+  "class": "state_vs_state",
+  "targets": {
+   "state": 4,
+   "nonstate": 2
+  }
+ },
+ "Iran->Pakistan": {
+  "active_days": 14,
+  "h_per_day": 0.0009719638174323241,
+  "mu_per_day": 0.0040718710728710255,
+  "p_rec_F": 0.01621915762392867,
+  "p_rec_N": 0.00018518498687647433,
+  "sd_log": {
+   "h": 0.8767517938245857,
+   "mu": 0.784743944454564,
+   "rhoN": 2.2251409067697847,
+   "d": 0.3678356641203459
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 1
+  }
+ },
+ "Turkey->Iraq": {
+  "active_days": 2425,
+  "h_per_day": 0.01695288579449158,
+  "mu_per_day": 0.016008937100835185,
+  "p_rec_F": 0.9385093338149768,
+  "p_rec_N": 0.25580470647918185,
+  "sd_log": {
+   "h": 0.28450884206623217,
+   "mu": 0.2634407112938535,
+   "rhoN": 0.07079203765213918,
+   "d": 0.04647728031892844
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 14230,
+   "defacto": 7,
+   "state": 4
+  }
+ },
+ "Israel->Palestine": {
+  "active_days": 1122,
+  "h_per_day": 0.010806020184134704,
+  "mu_per_day": 0.03540675589703457,
+  "p_rec_F": 0.9707500100629711,
+  "p_rec_N": 0.06104126141692501,
+  "sd_log": {
+   "h": 0.2185132918995427,
+   "mu": 0.21104450636504904,
+   "rhoN": 0.09207597616372312,
+   "d": 0.06801699197433426
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 1898,
+   "state": 1
+  }
+ },
+ "Israel->Lebanon": {
+  "active_days": 749,
+  "h_per_day": 0.001276644490687724,
+  "mu_per_day": 0.0059933693774498415,
+  "p_rec_F": 0.9638686371584388,
+  "p_rec_N": 0.0062795968938179625,
+  "sd_log": {
+   "h": 0.5080581384560929,
+   "mu": 0.4863334852237543,
+   "rhoN": 0.2306567796437448,
+   "d": 0.05708753752899383
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 4691,
+   "state": 60
+  }
+ },
+ "Global Coalition Against Daesh->Iraq": {
+  "active_days": 865,
+  "h_per_day": 0.006594228574514764,
+  "mu_per_day": 0.024801380097517162,
+  "p_rec_F": 0.8784147818913346,
+  "p_rec_N": 0.04194754205969098,
+  "sd_log": {
+   "h": 0.2622025358903683,
+   "mu": 0.2572305255378876,
+   "rhoN": 0.1095515757375786,
+   "d": 0.06243770290239251
+  },
+  "class": "coalition",
+  "targets": {
+   "nonstate": 3977,
+   "state": 7,
+   "defacto": 11
+  }
+ },
+ "United Arab Emirates->Libya": {
+  "active_days": 21,
+  "h_per_day": 0.0013054760749189574,
+  "mu_per_day": 0.0178453097786738,
+  "p_rec_F": 0.06362764961202749,
+  "p_rec_N": 0.0008614401496815915,
+  "sd_log": {
+   "h": 0.6601345253764361,
+   "mu": 0.633622392055046,
+   "rhoN": 0.73906819168398,
+   "d": 0.35691991217803637
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 10,
+   "defacto": 1
+  }
+ },
+ "Somaliland->Somalia": {
+  "active_days": 19,
+  "h_per_day": 0.0014888349900353502,
+  "mu_per_day": 0.01098227778112162,
+  "p_rec_F": 0.03845109745559827,
+  "p_rec_N": 1.3322676295501878e-15,
+  "sd_log": null,
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 7,
+   "defacto": 4
+  }
+ },
+ "Iran->Iraq": {
+  "active_days": 63,
+  "h_per_day": 0.002509940746339805,
+  "mu_per_day": 0.17682180826600177,
+  "p_rec_F": 0.7483793024141587,
+  "p_rec_N": 0.004868403137631927,
+  "sd_log": {
+   "h": 0.41992564215106354,
+   "mu": 0.42376331100372994,
+   "rhoN": 0.2515555122494927,
+   "d": 0.26240415914349074
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 41,
+   "state": 4
+  }
+ },
+ "Pakistan->India": {
+  "active_days": 36,
+  "h_per_day": 0.0045652892133890045,
+  "mu_per_day": 0.046595580920911775,
+  "p_rec_F": 0.09969627861249786,
+  "p_rec_N": 9.752199048307375e-13,
+  "sd_log": null,
+  "class": "state_vs_state",
+  "targets": {
+   "state": 14,
+   "nonstate": 1,
+   "defacto": 3
+  }
+ },
+ "France->Mali": {
+  "active_days": 67,
+  "h_per_day": 0.0017694421429245654,
+  "mu_per_day": 0.004594037575065551,
+  "p_rec_F": 0.053033918122123436,
+  "p_rec_N": 0.0013921977462565405,
+  "sd_log": {
+   "h": 2.2083216104336305,
+   "mu": 2.44969723493439,
+   "rhoN": 1.1010225924931951,
+   "d": 0.46589319133976453
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 71
+  }
+ },
+ "NATO->Afghanistan": {
+  "active_days": 559,
+  "h_per_day": 0.003142274099810206,
+  "mu_per_day": 0.006976398193695971,
+  "p_rec_F": 0.44839353475572663,
+  "p_rec_N": 0.004587254466559831,
+  "sd_log": {
+   "h": 0.38772462785522227,
+   "mu": 0.38038044937791465,
+   "rhoN": 0.37173188163196974,
+   "d": 0.052068716176354425
+  },
+  "class": "coalition",
+  "targets": {
+   "nonstate": 754,
+   "state": 13
+  }
+ },
+ "Turkey->Syria": {
+  "active_days": 1648,
+  "h_per_day": 0.009387357788930895,
+  "mu_per_day": 0.00805156408319407,
+  "p_rec_F": 0.6937223119536315,
+  "p_rec_N": 0.05770627773809078,
+  "sd_log": {
+   "h": 0.3291600604036647,
+   "mu": 0.3236419586753733,
+   "rhoN": 0.12768040068547207,
+   "d": 0.03451123149768172
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 2251,
+   "state": 457,
+   "defacto": 2
+  }
+ },
+ "Global Coalition Against Daesh->Syria": {
+  "active_days": 950,
+  "h_per_day": 0.00300619656582599,
+  "mu_per_day": 0.012927100377375505,
+  "p_rec_F": 0.9460154812540437,
+  "p_rec_N": 0.06454805674849229,
+  "sd_log": {
+   "h": 0.38896899557281794,
+   "mu": 0.37616462361339925,
+   "rhoN": 0.07601313779311016,
+   "d": 0.06073466176079493
+  },
+  "class": "coalition",
+  "targets": {
+   "nonstate": 2044,
+   "state": 93,
+   "defacto": 10
+  }
+ },
+ "Russia->Syria": {
+  "active_days": 1357,
+  "h_per_day": 0.011797212875380908,
+  "mu_per_day": 0.010880871018074383,
+  "p_rec_F": 0.620746360326996,
+  "p_rec_N": 0.016432988249217795,
+  "sd_log": {
+   "h": 0.2748444667072467,
+   "mu": 0.2814675675761365,
+   "rhoN": 0.2353980136312624,
+   "d": 0.0362710449393357
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 1035,
+   "state": 17
+  }
+ },
+ "Israel->Syria": {
+  "active_days": 460,
+  "h_per_day": 0.007527840232599766,
+  "mu_per_day": 0.04926671094172528,
+  "p_rec_F": 0.45962421989638536,
+  "p_rec_N": 0.06099290730390894,
+  "sd_log": {
+   "h": 0.33369264254170067,
+   "mu": 0.30561092587312033,
+   "rhoN": 0.09072248030020136,
+   "d": 0.11388522517357542
+  },
+  "class": "state_vs_state",
+  "targets": {
+   "defacto": 33,
+   "state": 672,
+   "nonstate": 246
+  }
+ },
+ "Israel->Egypt": {
+  "active_days": 13,
+  "h_per_day": 0.0013477940393243075,
+  "mu_per_day": 0.016857636504237113,
+  "p_rec_F": 0.03495871732870415,
+  "p_rec_N": 0.0006698265493217948,
+  "sd_log": {
+   "h": 1.0285105511376604,
+   "mu": 0.7600478346913406,
+   "rhoN": 1.3587370486510155,
+   "d": 0.678328461911971
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 20
+  }
+ },
+ "Pakistan->Afghanistan": {
+  "active_days": 97,
+  "h_per_day": 0.004375696350186938,
+  "mu_per_day": 0.08185706777212799,
+  "p_rec_F": 0.2694943461235366,
+  "p_rec_N": 0.011197506217428432,
+  "sd_log": {
+   "h": 0.45998277215326466,
+   "mu": 0.41123349351288974,
+   "rhoN": 0.2146674538442291,
+   "d": 0.2966758351701541
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 23,
+   "state": 12
+  }
+ },
+ "Jordan->Syria": {
+  "active_days": 14,
+  "h_per_day": 0.0008789471358428054,
+  "mu_per_day": 0.043138459978648014,
+  "p_rec_F": 0.08233998915201046,
+  "p_rec_N": 0.001865036475886317,
+  "sd_log": {
+   "h": 1.3458295731158758,
+   "mu": 0.9463349772600678,
+   "rhoN": 0.5077401374108989,
+   "d": 0.7765634955064037
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 19
+  }
+ },
+ "Iraq->Syria": {
+  "active_days": 23,
+  "h_per_day": 0.0014623074469554047,
+  "mu_per_day": 0.013817397776984377,
+  "p_rec_F": 0.0580933074594322,
+  "p_rec_N": 2.2288917797874674e-05,
+  "sd_log": {
+   "h": 0.7246794993456853,
+   "mu": 0.8237164817385698,
+   "rhoN": 16.24592859747224,
+   "d": 0.3650891007550969
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 14
+  }
+ },
+ "Syria->Lebanon": {
+  "active_days": 23,
+  "h_per_day": 0.001263464693082258,
+  "mu_per_day": 0.11309329122161842,
+  "p_rec_F": 0.35723145006218004,
+  "p_rec_N": 0.0017515060197675902,
+  "sd_log": {
+   "h": 0.6552985112024888,
+   "mu": 0.6163367076903916,
+   "rhoN": 0.42855267947245806,
+   "d": 0.40184079096522374
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 12,
+   "state": 2
+  }
+ },
+ "Iraq [Popular Mobilization Forces]->Syria": {
+  "active_days": 15,
+  "h_per_day": 0.0003083595603027331,
+  "mu_per_day": 0.001856313536331158,
+  "p_rec_F": 0.021675907745617895,
+  "p_rec_N": 4.107825191113079e-15,
+  "sd_log": {
+   "h": 1.038220568199573,
+   "mu": 0.9224830505269228,
+   "rhoN": 8388.608,
+   "d": 0.2787132531641237
+  },
+  "class": "defacto_authority",
+  "targets": {
+   "nonstate": 8
+  }
+ },
+ "Iran->Syria": {
+  "active_days": 20,
+  "h_per_day": 0.004255078075678489,
+  "mu_per_day": 5.860504661130879,
+  "p_rec_F": 1.0,
+  "p_rec_N": 0.0,
+  "sd_log": null,
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 10,
+   "state": 5
+  }
+ },
+ "Yemen [Houthi]->Saudi Arabia": {
+  "active_days": 423,
+  "h_per_day": 0.0017300082945119932,
+  "mu_per_day": 0.008702416772433262,
+  "p_rec_F": 0.528396070099431,
+  "p_rec_N": 0.016906269444363353,
+  "sd_log": {
+   "h": 0.5533127378590673,
+   "mu": 0.5417811920990856,
+   "rhoN": 0.15100800891944277,
+   "d": 0.0686683586659698
+  },
+  "class": "defacto_authority",
+  "targets": {
+   "state": 628,
+   "defacto": 9,
+   "nonstate": 103
+  }
+ },
+ "Azerbaijan->Armenia": {
+  "active_days": 77,
+  "h_per_day": 0.0012680964301045735,
+  "mu_per_day": 0.003394311910108362,
+  "p_rec_F": 0.06403517154173666,
+  "p_rec_N": 1.6730155551258896e-05,
+  "sd_log": {
+   "h": 0.6095186469955393,
+   "mu": 0.5833006758051675,
+   "rhoN": 26.006599392257332,
+   "d": 0.1377011139099707
+  },
+  "class": "state_vs_state",
+  "targets": {
+   "state": 249
+  }
+ },
+ "France->Burkina Faso": {
+  "active_days": 26,
+  "h_per_day": 0.000758316380433807,
+  "mu_per_day": 0.010341527843425975,
+  "p_rec_F": 0.06421286657204461,
+  "p_rec_N": 0.002062467453637029,
+  "sd_log": {
+   "h": 0.7613864838407487,
+   "mu": 0.7663635743458,
+   "rhoN": 0.4229098836839816,
+   "d": 0.3934929966141468
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 32
+  }
+ },
+ "Ethiopia->Somalia": {
+  "active_days": 21,
+  "h_per_day": 0.0014402393898721331,
+  "mu_per_day": 0.05075738469652957,
+  "p_rec_F": 0.1428544947047381,
+  "p_rec_N": 0.0012876101864852663,
+  "sd_log": {
+   "h": 0.6942677799835352,
+   "mu": 0.5893201030565157,
+   "rhoN": 0.5880592894236198,
+   "d": 0.40067707802872254
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 29
+  }
+ },
+ "Armenia->Azerbaijan": {
+  "active_days": 24,
+  "h_per_day": 0.000301120843806045,
+  "mu_per_day": 0.026561516912753366,
+  "p_rec_F": 0.3958492867137806,
+  "p_rec_N": 0.001464645242466145,
+  "sd_log": {
+   "h": 1.019738225667624,
+   "mu": 0.9807810060853,
+   "rhoN": 0.43222569061381627,
+   "d": 0.26284940283893676
+  },
+  "class": "state_vs_state",
+  "targets": {
+   "state": 27
+  }
+ },
+ "United States->Iraq": {
+  "active_days": 13,
+  "h_per_day": 0.003857922013596378,
+  "mu_per_day": 0.32297608876575573,
+  "p_rec_F": 0.25353981589348284,
+  "p_rec_N": 0.00019942109940440655,
+  "sd_log": {
+   "h": 1.2002980329690187,
+   "mu": 0.5884165875244539,
+   "rhoN": 6.7485279828828615,
+   "d": 0.7239399338596135
+  },
+  "class": "defacto_authority",
+  "targets": {
+   "state": 2,
+   "defacto": 6,
+   "nonstate": 1
+  }
+ },
+ "Operation Peace Spring->Syria": {
+  "active_days": 700,
+  "h_per_day": 0.004171046995396611,
+  "mu_per_day": 0.00831323345076249,
+  "p_rec_F": 0.48158697231072456,
+  "p_rec_N": 0.010542575051524339,
+  "sd_log": {
+   "h": 0.38760152512026097,
+   "mu": 0.38918583372103294,
+   "rhoN": 0.23915840972473199,
+   "d": 0.05181445263687597
+  },
+  "class": "coalition",
+  "targets": {
+   "nonstate": 1058,
+   "state": 90,
+   "defacto": 1
+  }
+ },
+ "France->Niger": {
+  "active_days": 11,
+  "h_per_day": 0.000785051233674018,
+  "mu_per_day": 0.003094966337323928,
+  "p_rec_F": 0.012339416874793008,
+  "p_rec_N": 1.1102230246251565e-16,
+  "sd_log": null,
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 11
+  }
+ },
+ "Artsakh->Azerbaijan": {
+  "active_days": 43,
+  "h_per_day": 0.000508786663126671,
+  "mu_per_day": 0.04612825969051696,
+  "p_rec_F": 0.9514698768923747,
+  "p_rec_N": 4.440892098500626e-16,
+  "sd_log": null,
+  "class": "state_vs_state",
+  "targets": {
+   "state": 1
+  }
+ },
+ "Russia->Ukraine": {
+  "active_days": 1335,
+  "h_per_day": 0.00028551364830980465,
+  "mu_per_day": 0.0009269623967066835,
+  "p_rec_F": 1.0,
+  "p_rec_N": 4.8890780313115556e-11,
+  "sd_log": null,
+  "class": "state_vs_state",
+  "targets": {
+   "state": 20156,
+   "nonstate": 226,
+   "defacto": 116
+  }
+ },
+ "Israel->Iran": {
+  "active_days": 15,
+  "h_per_day": 0.00026283575020676016,
+  "mu_per_day": 0.09561085549718672,
+  "p_rec_F": 0.9999999999994955,
+  "p_rec_N": 0.0007363228009225065,
+  "sd_log": null,
+  "class": "state_vs_state",
+  "targets": {
+   "state": 231,
+   "nonstate": 23,
+   "defacto": 7
+  }
+ },
+ "Uganda->Democratic Republic of Congo": {
+  "active_days": 11,
+  "h_per_day": 0.0009209181997606452,
+  "mu_per_day": 1.1031974279162935,
+  "p_rec_F": 0.999999989740096,
+  "p_rec_N": 0.001128808858751551,
+  "sd_log": null,
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 13
+  }
+ },
+ "Ukraine->Russia": {
+  "active_days": 1104,
+  "h_per_day": 0.003604421005237661,
+  "mu_per_day": 0.009074677425950478,
+  "p_rec_F": 0.9194156790647902,
+  "p_rec_N": 0.0035469263549403607,
+  "sd_log": {
+   "h": 0.3600492965661695,
+   "mu": 0.35030959169432274,
+   "rhoN": 0.4464768889272204,
+   "d": 0.047899854197891806
+  },
+  "class": "state_vs_state",
+  "targets": {
+   "nonstate": 222,
+   "state": 354,
+   "defacto": 50
+  }
+ },
+ "United Arab Emirates->Somalia": {
+  "active_days": 16,
+  "h_per_day": 0.00029166042202930545,
+  "mu_per_day": 0.011191550589783874,
+  "p_rec_F": 0.14176056603414744,
+  "p_rec_N": 0.0002418378012764011,
+  "sd_log": {
+   "h": 1.014926326113137,
+   "mu": 0.9814110135402832,
+   "rhoN": 1.0882139391594678,
+   "d": 0.2791965000919529
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 38
+  }
+ },
+ "Niger->Mali": {
+  "active_days": 15,
+  "h_per_day": 0.0008256114972096181,
+  "mu_per_day": 0.01817786965066263,
+  "p_rec_F": 0.06978993162838587,
+  "p_rec_N": 0.0006676044431195294,
+  "sd_log": {
+   "h": 0.8105249270946298,
+   "mu": 0.7611897832432929,
+   "rhoN": 0.7590269184135799,
+   "d": 0.41509174512470975
+  },
+  "class": "cross_border_nonstate",
+  "targets": {
+   "nonstate": 11
+  }
+ },
+ "Yemen [Houthi]->Israel": {
+  "active_days": 21,
+  "h_per_day": 0.0002596490243073222,
+  "mu_per_day": 0.0010967922456076936,
+  "p_rec_F": 0.03231943525863035,
+  "p_rec_N": 2.220446049250313e-16,
+  "sd_log": null,
+  "class": "defacto_authority",
+  "targets": {}
+ },
+ "Iran->Israel": {
+  "active_days": 14,
+  "h_per_day": 0.00026107234899024593,
+  "mu_per_day": 0.09560772825686172,
+  "p_rec_F": 1.0,
+  "p_rec_N": 0.0004874371432135316,
+  "sd_log": {
+   "h": 1.0054055774803785,
+   "mu": 0.9973551030697279,
+   "rhoN": 0.7256531857813305,
+   "d": 8432.952770200101
+  },
+  "class": "state_vs_state",
+  "targets": {
+   "state": 8
+  }
+ },
+ "Israel->Yemen": {
+  "active_days": 20,
+  "h_per_day": 0.0006870272961552203,
+  "mu_per_day": 0.011740639296171737,
+  "p_rec_F": 0.08024201362166072,
+  "p_rec_N": 0.0004114197524975882,
+  "sd_log": {
+   "h": 0.753841747287965,
+   "mu": 0.7682749015322535,
+   "rhoN": 1.0048329005185468,
+   "d": 0.3775092858944701
+  },
+  "class": "defacto_authority",
+  "targets": {
+   "defacto": 26,
+   "nonstate": 3
+  }
+ }
+}

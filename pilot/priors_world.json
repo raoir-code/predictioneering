@@ -1,0 +1,836 @@
+{
+ "_doc": "Worldwide class priors (Oct 20). Pairs = cross-border strikers in ACLED 2015-2025 (data/external/acled_world). Units of one\nstate are merged (Air Force, Navy, Mossad, IRGC ...); other suffixes are factions = de facto authorities (e.g. Yemen [Houthi]).\nMaritime 'territories' dropped. CLASS BY A FIXED RULE (Adi, Oct 20), from who the strikes hit (ACLED actor2):\n  1 coalition: actor1 is a multinational operation or coalition\n  2 initiator itself a faction (de facto authority) -> defacto_authority\n  3 else plurality of NAMED targets: state forces (any state) -> state_vs_state; faction-suffixed state forces -> defacto_authority;\n    any other named armed actor -> cross_border_nonstate. Civilians / unnamed targets ignored. Ties: nonstate > defacto > state.\n  4 no named targets -> state_vs_state\nPairs with >= 10 active days fitted with the same two-state model as analysis/pair_fits.py (air/drone + shelling/missile; imprecise\ndates unobserved), then (log h, log mu) shrunk toward the class mean (DerSimonian-Laird; class needs >= 3 identified pairs, else\nthe world mean). A NEW pair with no history uses its class mean and spread. Output: pilot/priors_world.json, analysis/world_fits.json.",
+ "frozen": "2026-10-20",
+ "data": "ACLED 2015-2025 worldwide cross-border (data/external/acled_world/MANIFEST.json)",
+ "classes": {
+  "coalition": {
+   "members_identified": [
+    "Operation Restoring Hope->Yemen",
+    "Global Coalition Against Daesh->Iraq",
+    "NATO->Afghanistan",
+    "Global Coalition Against Daesh->Syria",
+    "Operation Peace Spring->Syria"
+   ],
+   "source": "class",
+   "log_h": {
+    "mean": -5.358709257031855,
+    "tau": 0.17380028151018434
+   },
+   "log_mu": {
+    "mean": -4.658222784396311,
+    "tau": 0.7217101546189647
+   },
+   "onset_median_wait_days": 147.2594999809355,
+   "episode_half_life_days": 73.09133794825603
+  },
+  "cross_border_nonstate": {
+   "members_identified": [
+    "United States->Somalia",
+    "Egypt->Libya",
+    "Kenya->Somalia",
+    "United States->Libya",
+    "Iran->Pakistan",
+    "Turkey->Iraq",
+    "Israel->Palestine",
+    "Israel->Lebanon",
+    "United Arab Emirates->Libya",
+    "Iran->Iraq",
+    "France->Mali",
+    "Turkey->Syria",
+    "Russia->Syria",
+    "Israel->Egypt",
+    "Pakistan->Afghanistan",
+    "Jordan->Syria",
+    "Iraq->Syria",
+    "Syria->Lebanon",
+    "France->Burkina Faso",
+    "Ethiopia->Somalia",
+    "United Arab Emirates->Somalia",
+    "Niger->Mali"
+   ],
+   "source": "class",
+   "log_h": {
+    "mean": -5.892136769733848,
+    "tau": 0.9963611269442476
+   },
+   "log_mu": {
+    "mean": -3.818621194077868,
+    "tau": 0.8370685373368094
+   },
+   "onset_median_wait_days": 251.0429020812137,
+   "episode_half_life_days": 31.56687380693795
+  },
+  "defacto_authority": {
+   "members_identified": [
+    "United States->Yemen",
+    "Yemen [Houthi-Saleh]->Saudi Arabia",
+    "Iraq [Popular Mobilization Forces]->Syria",
+    "Yemen [Houthi]->Saudi Arabia",
+    "United States->Iraq",
+    "Israel->Yemen"
+   ],
+   "source": "class",
+   "log_h": {
+    "mean": -6.414183200186241,
+    "tau": 0.36672112853882227
+   },
+   "log_mu": {
+    "mean": -4.412942577721241,
+    "tau": 1.5831416539957217
+   },
+   "onset_median_wait_days": 423.1261153327521,
+   "episode_half_life_days": 57.19289384216684
+  },
+  "state_vs_state": {
+   "members_identified": [
+    "India->Pakistan",
+    "Israel->Syria",
+    "Azerbaijan->Armenia",
+    "Armenia->Azerbaijan",
+    "Ukraine->Russia",
+    "Iran->Israel"
+   ],
+   "source": "class",
+   "log_h": {
+    "mean": -6.366846877810547,
+    "tau": 0.9745562753533743
+   },
+   "log_mu": {
+    "mean": -4.107978082291609,
+    "tau": 1.0737915431056615
+   },
+   "onset_median_wait_days": 403.5635439538542,
+   "episode_half_life_days": 42.159715736181816
+  }
+ },
+ "pairs": {
+  "United States->Pakistan": {
+   "class": "cross_border_nonstate",
+   "identified": false,
+   "log_h": {
+    "mean": -5.892136769733848,
+    "sd": 0.9963611269442476
+   },
+   "log_mu": {
+    "mean": -3.818621194077868,
+    "sd": 0.8370685373368094
+   },
+   "onset_median_wait_days": 251.0429020812137,
+   "episode_half_life_days": 31.56687380693795
+  },
+  "United States->Somalia": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -4.473106533737193,
+    "sd": 0.31416556152040614
+   },
+   "log_mu": {
+    "mean": -4.2949512002118695,
+    "sd": 0.3012248182233232
+   },
+   "onset_median_wait_days": 60.73946266827034,
+   "episode_half_life_days": 50.82753725321473
+  },
+  "United States->Yemen": {
+   "class": "defacto_authority",
+   "identified": true,
+   "log_h": {
+    "mean": -6.170995821792171,
+    "sd": 0.3044919912137155
+   },
+   "log_mu": {
+    "mean": -5.0701851204628525,
+    "sd": 0.547775281174132
+   },
+   "onset_median_wait_days": 331.7835840881957,
+   "episode_half_life_days": 110.35166267566704
+  },
+  "Egypt->Libya": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -6.98536051470571,
+    "sd": 0.7123562091244824
+   },
+   "log_mu": {
+    "mean": -4.385162433182817,
+    "sd": 0.6340818363317371
+   },
+   "onset_median_wait_days": 749.0813537623736,
+   "episode_half_life_days": 55.625932956706684
+  },
+  "Operation Decisive Storm->Yemen": {
+   "class": "coalition",
+   "identified": false,
+   "log_h": {
+    "mean": -5.358709257031855,
+    "sd": 0.17380028151018434
+   },
+   "log_mu": {
+    "mean": -4.658222784396311,
+    "sd": 0.7217101546189647
+   },
+   "onset_median_wait_days": 147.2594999809355,
+   "episode_half_life_days": 73.09133794825603
+  },
+  "Operation Libya Dawn->Libya": {
+   "class": "coalition",
+   "identified": false,
+   "log_h": {
+    "mean": -5.358709257031855,
+    "sd": 0.17380028151018434
+   },
+   "log_mu": {
+    "mean": -4.658222784396311,
+    "sd": 0.7217101546189647
+   },
+   "onset_median_wait_days": 147.2594999809355,
+   "episode_half_life_days": 73.09133794825603
+  },
+  "Kenya->Somalia": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -4.900824708956552,
+    "sd": 0.42611772402583986
+   },
+   "log_mu": {
+    "mean": -2.945082201895758,
+    "sd": 0.422486308753354
+   },
+   "onset_median_wait_days": 93.15937986936493,
+   "episode_half_life_days": 13.17827026803388
+  },
+  "Operation Restoring Hope->Yemen": {
+   "class": "coalition",
+   "identified": true,
+   "log_h": {
+    "mean": -5.299156885399746,
+    "sd": 0.15795516887984742
+   },
+   "log_mu": {
+    "mean": -5.412565181513867,
+    "sd": 0.31411763215517047
+   },
+   "onset_median_wait_days": 138.74586700313267,
+   "episode_half_life_days": 155.40774268687142
+  },
+  "Sudan->South Sudan": {
+   "class": "cross_border_nonstate",
+   "identified": false,
+   "log_h": {
+    "mean": -5.892136769733848,
+    "sd": 0.9963611269442476
+   },
+   "log_mu": {
+    "mean": -3.818621194077868,
+    "sd": 0.8370685373368094
+   },
+   "onset_median_wait_days": 251.0429020812137,
+   "episode_half_life_days": 31.56687380693795
+  },
+  "Yemen [Houthi-Saleh]->Saudi Arabia": {
+   "class": "defacto_authority",
+   "identified": true,
+   "log_h": {
+    "mean": -6.3956102812364035,
+    "sd": 0.2950568655157762
+   },
+   "log_mu": {
+    "mean": -4.917167718868565,
+    "sd": 0.45484427910819974
+   },
+   "onset_median_wait_days": 415.3399579426347,
+   "episode_half_life_days": 94.69439374553609
+  },
+  "United States->Libya": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -6.346707645997191,
+    "sd": 0.5316740521528652
+   },
+   "log_mu": {
+    "mean": -3.6072841620043814,
+    "sd": 0.4663540532501919
+   },
+   "onset_median_wait_days": 395.5173779429672,
+   "episode_half_life_days": 25.553422007090887
+  },
+  "India->Pakistan": {
+   "class": "state_vs_state",
+   "identified": true,
+   "log_h": {
+    "mean": -6.379886120310718,
+    "sd": 0.512665984876303
+   },
+   "log_mu": {
+    "mean": -4.574520609641246,
+    "sd": 0.5136950837867422
+   },
+   "onset_median_wait_days": 408.86016377797904,
+   "episode_half_life_days": 67.2224782294653
+  },
+  "Iran->Pakistan": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -6.48056272714279,
+    "sd": 0.6582044923818418
+   },
+   "log_mu": {
+    "mean": -4.715444628268056,
+    "sd": 0.5725025681802757
+   },
+   "onset_median_wait_days": 452.1661978289708,
+   "episode_half_life_days": 77.3957374741969
+  },
+  "Turkey->Iraq": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -4.214137277139339,
+    "sd": 0.27357408450418097
+   },
+   "log_mu": {
+    "mean": -4.106131001460712,
+    "sd": 0.25128967740121294
+   },
+   "onset_median_wait_days": 46.881556971078815,
+   "episode_half_life_days": 42.08191520746144
+  },
+  "Israel->Palestine": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -4.590268439520027,
+    "sd": 0.2134405959569078
+   },
+   "log_mu": {
+    "mean": -3.3694074322474292,
+    "sd": 0.20464059676753732
+   },
+   "onset_median_wait_days": 68.28946569876493,
+   "episode_half_life_days": 20.14375896566592
+  },
+  "Israel->Lebanon": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -6.504339993181506,
+    "sd": 0.4526120207842811
+   },
+   "log_mu": {
+    "mean": -4.789406694535161,
+    "sd": 0.4205117406207665
+   },
+   "onset_median_wait_days": 463.04631088773465,
+   "episode_half_life_days": 83.33709548153337
+  },
+  "Global Coalition Against Daesh->Iraq": {
+   "class": "coalition",
+   "identified": true,
+   "log_h": {
+    "mean": -5.255794580416589,
+    "sd": 0.14486542482052728
+   },
+   "log_mu": {
+    "mean": -3.805216615452802,
+    "sd": 0.242300343382085
+   },
+   "onset_median_wait_days": 132.85810245359846,
+   "episode_half_life_days": 31.14655654655462
+  },
+  "United Arab Emirates->Libya": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -6.412684499347158,
+    "sd": 0.5503096274138557
+   },
+   "log_mu": {
+    "mean": -3.950468674585724,
+    "sd": 0.5052065835100226
+   },
+   "onset_median_wait_days": 422.4924508240366,
+   "episode_half_life_days": 36.01572879476714
+  },
+  "Somaliland->Somalia": {
+   "class": "cross_border_nonstate",
+   "identified": false,
+   "log_h": {
+    "mean": -5.892136769733848,
+    "sd": 0.9963611269442476
+   },
+   "log_mu": {
+    "mean": -3.818621194077868,
+    "sd": 0.8370685373368094
+   },
+   "onset_median_wait_days": 251.0429020812137,
+   "episode_half_life_days": 31.56687380693795
+  },
+  "Iran->Iraq": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -5.9731125698909695,
+    "sd": 0.3869620253506939
+   },
+   "log_mu": {
+    "mean": -2.1581644057549014,
+    "sd": 0.37807600474761105
+   },
+   "onset_median_wait_days": 272.21702911748343,
+   "episode_half_life_days": 5.999352130651501
+  },
+  "Pakistan->India": {
+   "class": "state_vs_state",
+   "identified": false,
+   "log_h": {
+    "mean": -6.366846877810547,
+    "sd": 0.9745562753533743
+   },
+   "log_mu": {
+    "mean": -4.107978082291609,
+    "sd": 1.0737915431056615
+   },
+   "onset_median_wait_days": 403.5635439538542,
+   "episode_half_life_days": 42.159715736181816
+  },
+  "France->Mali": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -5.967394942911557,
+    "sd": 0.9082000262315543
+   },
+   "log_mu": {
+    "mean": -3.982181475065854,
+    "sd": 0.7921016720653403
+   },
+   "onset_median_wait_days": 270.6650347779514,
+   "episode_half_life_days": 37.17619192908686
+  },
+  "NATO->Afghanistan": {
+   "class": "coalition",
+   "identified": true,
+   "log_h": {
+    "mean": -5.426321127870361,
+    "sd": 0.15859549361000888
+   },
+   "log_mu": {
+    "mean": -4.898481849234788,
+    "sd": 0.3365031098755082
+   },
+   "onset_median_wait_days": 157.56029450922009,
+   "episode_half_life_days": 92.941375986541
+  },
+  "Turkey->Syria": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -4.788807834529936,
+    "sd": 0.3125461175316725
+   },
+   "log_mu": {
+    "mean": -4.691416154804611,
+    "sd": 0.30186483030218836
+   },
+   "onset_median_wait_days": 83.28720316884423,
+   "episode_half_life_days": 75.5582010579281
+  },
+  "Global Coalition Against Daesh->Syria": {
+   "class": "coalition",
+   "identified": true,
+   "log_h": {
+    "mean": -5.433328875174017,
+    "sd": 0.15868031640306723
+   },
+   "log_mu": {
+    "mean": -4.41460993113185,
+    "sd": 0.3335738183251362
+   },
+   "onset_median_wait_days": 158.6683150678374,
+   "episode_half_life_days": 57.28833415303024
+  },
+  "Russia->Syria": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -4.542582590975981,
+    "sd": 0.2649489760764592
+   },
+   "log_mu": {
+    "mean": -4.44942597464749,
+    "sd": 0.26678890633746516
+   },
+   "onset_median_wait_days": 65.10944807434582,
+   "episode_half_life_days": 59.31801499595677
+  },
+  "Israel->Syria": {
+   "class": "state_vs_state",
+   "identified": true,
+   "log_h": {
+    "mean": -5.044213880795381,
+    "sd": 0.31569899822921477
+   },
+   "log_mu": {
+    "mean": -3.092743112184233,
+    "sd": 0.29393787555634915
+   },
+   "onset_median_wait_days": 107.52258948252974,
+   "episode_half_life_days": 15.275193788202744
+  },
+  "Israel->Egypt": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -6.239327919055506,
+    "sd": 0.7156295827996291
+   },
+   "log_mu": {
+    "mean": -3.963504071350817,
+    "sd": 0.5626987644721749
+   },
+   "onset_median_wait_days": 355.24759549731573,
+   "episode_half_life_days": 36.48828137317957
+  },
+  "Pakistan->Afghanistan": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -5.512584510004638,
+    "sd": 0.4176259301515982
+   },
+   "log_mu": {
+    "mean": -2.75861710353834,
+    "sd": 0.36909708415212183
+   },
+   "onset_median_wait_days": 171.7554374026175,
+   "episode_half_life_days": 10.936482108165498
+  },
+  "Jordan->Syria": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -6.2973923579715745,
+    "sd": 0.8007895559437495
+   },
+   "log_mu": {
+    "mean": -3.5221994758034203,
+    "sd": 0.6269857684680029
+   },
+   "onset_median_wait_days": 376.4854636720852,
+   "episode_half_life_days": 23.469144425166526
+  },
+  "Iraq->Syria": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -6.3078342819978745,
+    "sd": 0.5860595683096895
+   },
+   "log_mu": {
+    "mean": -4.053947732435796,
+    "sd": 0.5871192482694793
+   },
+   "onset_median_wait_days": 380.43729272327533,
+   "episode_half_life_days": 39.942256029340555
+  },
+  "Syria->Lebanon": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -6.437846300198001,
+    "sd": 0.547498588836165
+   },
+   "log_mu": {
+    "mean": -2.7557633754808775,
+    "sd": 0.49631303288896167
+   },
+   "onset_median_wait_days": 433.25799397843247,
+   "episode_half_life_days": 10.905316852056579
+  },
+  "Iraq [Popular Mobilization Forces]->Syria": {
+   "class": "defacto_authority",
+   "identified": true,
+   "log_h": {
+    "mean": -6.5994352952572335,
+    "sd": 0.3457841200364033
+   },
+   "log_mu": {
+    "mean": -5.8135988909390734,
+    "sd": 0.79704398548929
+   },
+   "onset_median_wait_days": 509.2415055611827,
+   "episode_half_life_days": 232.08088899441464
+  },
+  "Iran->Syria": {
+   "class": "cross_border_nonstate",
+   "identified": false,
+   "log_h": {
+    "mean": -5.892136769733848,
+    "sd": 0.9963611269442476
+   },
+   "log_mu": {
+    "mean": -3.818621194077868,
+    "sd": 0.8370685373368094
+   },
+   "onset_median_wait_days": 251.0429020812137,
+   "episode_half_life_days": 31.56687380693795
+  },
+  "Yemen [Houthi]->Saudi Arabia": {
+   "class": "defacto_authority",
+   "identified": true,
+   "log_h": {
+    "mean": -6.397533126743224,
+    "sd": 0.3056785403593861
+   },
+   "log_mu": {
+    "mean": -4.7094315355020555,
+    "sd": 0.5125959898481939
+   },
+   "onset_median_wait_days": 416.13936083239014,
+   "episode_half_life_days": 76.93174613461004
+  },
+  "Azerbaijan->Armenia": {
+   "class": "state_vs_state",
+   "identified": true,
+   "log_h": {
+    "mean": -6.584931337757657,
+    "sd": 0.5167704271951352
+   },
+   "log_mu": {
+    "mean": -5.3261822149511024,
+    "sd": 0.512558672218894
+   },
+   "onset_median_wait_days": 501.90879362356503,
+   "episode_half_life_days": 142.54664712241507
+  },
+  "France->Burkina Faso": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -6.707990730134859,
+    "sd": 0.604970536086393
+   },
+   "log_mu": {
+    "mean": -4.228242809966457,
+    "sd": 0.5652472654535492
+   },
+   "onset_median_wait_days": 567.6345476094702,
+   "episode_half_life_days": 47.54753223774436
+  },
+  "Ethiopia->Somalia": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -6.330234290896199,
+    "sd": 0.5696204571616484
+   },
+   "log_mu": {
+    "mean": -3.25838343553053,
+    "sd": 0.48187609198312736
+   },
+   "onset_median_wait_days": 389.0552523083368,
+   "episode_half_life_days": 18.026997853506582
+  },
+  "Armenia->Azerbaijan": {
+   "class": "state_vs_state",
+   "identified": true,
+   "log_h": {
+    "mean": -7.197996271277563,
+    "sd": 0.704546886301578
+   },
+   "log_mu": {
+    "mean": -3.8464639699460035,
+    "sd": 0.7241707543020619
+   },
+   "onset_median_wait_days": 926.5642132802776,
+   "episode_half_life_days": 32.45813319072359
+  },
+  "United States->Iraq": {
+   "class": "defacto_authority",
+   "identified": true,
+   "log_h": {
+    "mean": -6.341053750356459,
+    "sd": 0.3507173162326184
+   },
+   "log_mu": {
+    "mean": -1.5286263493457366,
+    "sd": 0.5515519285696986
+   },
+   "onset_median_wait_days": 393.2874737270341,
+   "episode_half_life_days": 3.196682101926681
+  },
+  "Operation Peace Spring->Syria": {
+   "class": "coalition",
+   "identified": true,
+   "log_h": {
+    "mean": -5.378944816298558,
+    "sd": 0.15858706526475608
+   },
+   "log_mu": {
+    "mean": -4.760240344648249,
+    "sd": 0.34255335047594837
+   },
+   "onset_median_wait_days": 150.26973247144036,
+   "episode_half_life_days": 80.9415609121017
+  },
+  "France->Niger": {
+   "class": "cross_border_nonstate",
+   "identified": false,
+   "log_h": {
+    "mean": -5.892136769733848,
+    "sd": 0.9963611269442476
+   },
+   "log_mu": {
+    "mean": -3.818621194077868,
+    "sd": 0.8370685373368094
+   },
+   "onset_median_wait_days": 251.0429020812137,
+   "episode_half_life_days": 31.56687380693795
+  },
+  "Artsakh->Azerbaijan": {
+   "class": "state_vs_state",
+   "identified": false,
+   "log_h": {
+    "mean": -6.366846877810547,
+    "sd": 0.9745562753533743
+   },
+   "log_mu": {
+    "mean": -4.107978082291609,
+    "sd": 1.0737915431056615
+   },
+   "onset_median_wait_days": 403.5635439538542,
+   "episode_half_life_days": 42.159715736181816
+  },
+  "Russia->Ukraine": {
+   "class": "state_vs_state",
+   "identified": false,
+   "log_h": {
+    "mean": -6.366846877810547,
+    "sd": 0.9745562753533743
+   },
+   "log_mu": {
+    "mean": -4.107978082291609,
+    "sd": 1.0737915431056615
+   },
+   "onset_median_wait_days": 403.5635439538542,
+   "episode_half_life_days": 42.159715736181816
+  },
+  "Israel->Iran": {
+   "class": "state_vs_state",
+   "identified": false,
+   "log_h": {
+    "mean": -6.366846877810547,
+    "sd": 0.9745562753533743
+   },
+   "log_mu": {
+    "mean": -4.107978082291609,
+    "sd": 1.0737915431056615
+   },
+   "onset_median_wait_days": 403.5635439538542,
+   "episode_half_life_days": 42.159715736181816
+  },
+  "Uganda->Democratic Republic of Congo": {
+   "class": "cross_border_nonstate",
+   "identified": false,
+   "log_h": {
+    "mean": -5.892136769733848,
+    "sd": 0.9963611269442476
+   },
+   "log_mu": {
+    "mean": -3.818621194077868,
+    "sd": 0.8370685373368094
+   },
+   "onset_median_wait_days": 251.0429020812137,
+   "episode_half_life_days": 31.56687380693795
+  },
+  "Ukraine->Russia": {
+   "class": "state_vs_state",
+   "identified": true,
+   "log_h": {
+    "mean": -5.714618656969173,
+    "sd": 0.337736969107535
+   },
+   "log_mu": {
+    "mean": -4.645101404757692,
+    "sd": 0.3330351364034726
+   },
+   "onset_median_wait_days": 210.2097278490578,
+   "episode_half_life_days": 72.138543414369
+  },
+  "United Arab Emirates->Somalia": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -6.995282159774748,
+    "sd": 0.7110066223690329
+   },
+   "log_mu": {
+    "mean": -4.1024466292463355,
+    "sd": 0.636875715038439
+   },
+   "onset_median_wait_days": 756.550464745406,
+   "episode_half_life_days": 41.92715504044018
+  },
+  "Niger->Mali": {
+   "class": "cross_border_nonstate",
+   "identified": true,
+   "log_h": {
+    "mean": -6.6186261060753555,
+    "sd": 0.628756498139408
+   },
+   "log_mu": {
+    "mean": -3.922035197695746,
+    "sd": 0.5631616881602308
+   },
+   "onset_median_wait_days": 519.1086392769597,
+   "episode_half_life_days": 35.0060980780382
+  },
+  "Yemen [Houthi]->Israel": {
+   "class": "defacto_authority",
+   "identified": false,
+   "log_h": {
+    "mean": -6.414183200186241,
+    "sd": 0.36672112853882227
+   },
+   "log_mu": {
+    "mean": -4.412942577721241,
+    "sd": 1.5831416539957217
+   },
+   "onset_median_wait_days": 423.1261153327521,
+   "episode_half_life_days": 57.19289384216684
+  },
+  "Iran->Israel": {
+   "class": "state_vs_state",
+   "identified": true,
+   "log_h": {
+    "mean": -7.279434999752799,
+    "sd": 0.6997673563626373
+   },
+   "log_mu": {
+    "mean": -3.1628571822693776,
+    "sd": 0.7307660902117595
+   },
+   "onset_median_wait_days": 1005.1801711194842,
+   "episode_half_life_days": 16.384639198685207
+  },
+  "Israel->Yemen": {
+   "class": "defacto_authority",
+   "identified": true,
+   "log_h": {
+    "mean": -6.580470925731955,
+    "sd": 0.3297706910940045
+   },
+   "log_mu": {
+    "mean": -4.438645851209166,
+    "sd": 0.6911861086974854
+   },
+   "onset_median_wait_days": 499.6750589964735,
+   "episode_half_life_days": 58.681993824929926
+  }
+ }
+}

@@ -106,8 +106,87 @@ def actors():
         print(f"--- {ini} -> {c}: {len(t['days'])} active days | {dict(t['sub'].most_common(3))}")
         print(f"    actor1 names: {dict(t['names'].most_common(4))}")
 
+WORLD = ROOT / "data" / "external" / "acled_world"
+CROSS_KEEP = ("event_id_cnty", "event_date", "year", "time_precision", "sub_event_type", "actor1", "inter1", "actor2", "inter2",
+              "assoc_actor_2", "country", "admin1", "fatalities")
+COALITION = re.compile(r"^(Operation |Global Coalition|NATO\b|Coalition)", re.I)
+
+def home_of(actor1):
+    m = re.match(r"^Military Forces of (?:the )?(.+?) \(", actor1 or "")
+    return m.group(1) if m else None
+
+def cross_border(r):
+    a = r.get("actor1") or ""
+    if COALITION.match(a):
+        return True
+    h = home_of(a)
+    return bool(h) and h != r.get("country")
+
+def pull_world():
+    """All countries, Explosions/Remote violence, 2015-2025, month by month; keep only cross-border state / de facto / coalition strikes."""
+    WORLD.mkdir(parents=True, exist_ok=True)
+    man_p = WORLD / "MANIFEST.json"
+    man = json.loads(man_p.read_text()) if man_p.exists() else {"_doc": "ACLED Explosions/Remote violence, ALL countries 2015-2025, filtered to cross-border strikes "
+           "(actor1 = Military Forces of X striking outside X, or a coalition operation). For class priors only. JSONL gitignored.", "files": {}}
+    tok = token()
+    for y in YEARS:
+        fn = f"world_{y}.jsonl"
+        if fn in man["files"]:
+            continue
+        kept, seen = [], 0
+        for mth in range(1, 13):
+            last = (dt.date(y + (mth == 12), mth % 12 + 1, 1) - dt.timedelta(1)).day
+            page = 1
+            while True:
+                for attempt in range(4):
+                    try:
+                        j = read(tok, event_date=f"{y}-{mth:02d}-01|{y}-{mth:02d}-{last}", event_date_where="BETWEEN",
+                                 event_type="Explosions/Remote violence", limit=PAGE, page=page); break
+                    except Exception:
+                        if attempt == 3: raise
+                        time.sleep(5 * (attempt + 1)); tok = token()
+                d = j.get("data") or []; seen += len(d)
+                kept += [{k: x.get(k) for k in CROSS_KEEP} for x in d if cross_border(x)]
+                if len(d) < PAGE: break
+                page += 1; time.sleep(0.5)
+        f = WORLD / fn; f.write_text("".join(json.dumps(r) + "\n" for r in kept))
+        man["files"][fn] = {"query": {"year": y, "event_type": "Explosions/Remote violence", "countries": "all", "filter": "cross-border"},
+                            "rows_seen": seen, "rows_kept": len(kept), "pulled": dt.date.today().isoformat(),
+                            "sha256": hashlib.sha256(f.read_bytes()).hexdigest()}
+        man_p.write_text(json.dumps(man, indent=2) + "\n")
+        print(f"  {y}: {seen} events scanned, {len(kept)} cross-border kept", flush=True)
+
+def pull_live(start="2026-01-01"):
+    """2026 to today, all countries, Explosions/Remote violence, cross-border only, WITH ACLED's timestamp (last-update time)
+    for walk-forward use as a LIVE fighting signal. Overwrites live_2026.jsonl; the manifest records the pull time."""
+    WORLD.mkdir(parents=True, exist_ok=True); tok = token(); kept, seen = [], 0
+    s0, today = dt.date.fromisoformat(start), dt.date.today()
+    m = dt.date(s0.year, s0.month, 1)
+    while m <= today:
+        nxt = dt.date(m.year + (m.month == 12), m.month % 12 + 1, 1); end = min(today, nxt - dt.timedelta(1)); page = 1
+        while True:
+            for attempt in range(4):
+                try:
+                    j = read(tok, event_date=f"{m}|{end}", event_date_where="BETWEEN", event_type="Explosions/Remote violence", limit=PAGE, page=page); break
+                except Exception:
+                    if attempt == 3: raise
+                    time.sleep(5 * (attempt + 1)); tok = token()
+            d = j.get("data") or []; seen += len(d)
+            kept += [{**{k: x.get(k) for k in CROSS_KEEP}, "timestamp": x.get("timestamp")} for x in d if cross_border(x)]
+            if len(d) < PAGE: break
+            page += 1; time.sleep(0.5)
+        print(f"  {m:%Y-%m}: cumulative {seen} scanned, {len(kept)} cross-border kept", flush=True); m = nxt
+    f = WORLD / "live_2026.jsonl"; f.write_text("".join(json.dumps(r) + "\n" for r in kept))
+    man_p = WORLD / "MANIFEST.json"; man = json.loads(man_p.read_text())
+    man["files"]["live_2026.jsonl"] = {"query": {"from": start, "to": str(today), "event_type": "Explosions/Remote violence", "countries": "all", "filter": "cross-border"},
+                                       "rows_seen": seen, "rows_kept": len(kept), "pulled_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+                                       "sha256": hashlib.sha256(f.read_bytes()).hexdigest(), "note": "LIVE signal; timestamp = ACLED last-update time (walk-forward safe, conservative)"}
+    man_p.write_text(json.dumps(man, indent=2) + "\n")
+
 if __name__ == "__main__":
     if "--test" in sys.argv: test()
     elif "--pull" in sys.argv: pull()
     elif "--actors" in sys.argv: actors()
+    elif "--world" in sys.argv: pull_world()
+    elif "--live" in sys.argv: pull_live()
     else: print("use --test | --pull | --actors")

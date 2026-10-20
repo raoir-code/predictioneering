@@ -1,0 +1,151 @@
+{
+  "_doc": "ACLED Explosions/Remote violence, ALL countries 2015-2025, filtered to cross-border strikes (actor1 = Military Forces of X striking outside X, or a coalition operation). For class priors only. JSONL gitignored.",
+  "files": {
+    "world_2015.jsonl": {
+      "query": {
+        "year": 2015,
+        "event_type": "Explosions/Remote violence",
+        "countries": "all",
+        "filter": "cross-border"
+      },
+      "rows_seen": 8218,
+      "rows_kept": 4907,
+      "pulled": "2026-10-20",
+      "sha256": "69d520ba555bedee1bb9fbcb3502b26892b8822363873e7dfdf942f896fefbe7"
+    },
+    "world_2016.jsonl": {
+      "query": {
+        "year": 2016,
+        "event_type": "Explosions/Remote violence",
+        "countries": "all",
+        "filter": "cross-border"
+      },
+      "rows_seen": 17342,
+      "rows_kept": 9116,
+      "pulled": "2026-10-20",
+      "sha256": "8d7b1e0d312e07b5ad849d7614fe6a4df7c11b0d140f5c084da704b1117eafd9"
+    },
+    "world_2017.jsonl": {
+      "query": {
+        "year": 2017,
+        "event_type": "Explosions/Remote violence",
+        "countries": "all",
+        "filter": "cross-border"
+      },
+      "rows_seen": 37005,
+      "rows_kept": 10399,
+      "pulled": "2026-10-20",
+      "sha256": "06299f5a0c4b35a707e8db0b309425389eeaf0e7541fc2525fea2fd99e090aa0"
+    },
+    "world_2018.jsonl": {
+      "query": {
+        "year": 2018,
+        "event_type": "Explosions/Remote violence",
+        "countries": "all",
+        "filter": "cross-border"
+      },
+      "rows_seen": 35285,
+      "rows_kept": 8164,
+      "pulled": "2026-10-20",
+      "sha256": "fcde934f6e12cffc250b35a5e8bb51bed8a0306dfcf3a3dfc7ced00c229029fd"
+    },
+    "world_2019.jsonl": {
+      "query": {
+        "year": 2019,
+        "event_type": "Explosions/Remote violence",
+        "countries": "all",
+        "filter": "cross-border"
+      },
+      "rows_seen": 37410,
+      "rows_kept": 5285,
+      "pulled": "2026-10-20",
+      "sha256": "67e6d9a84ed46bd0a0dfa7aacc70cf05c3c224003747f529ca05a4b18d608fb1"
+    },
+    "world_2020.jsonl": {
+      "query": {
+        "year": 2020,
+        "event_type": "Explosions/Remote violence",
+        "countries": "all",
+        "filter": "cross-border"
+      },
+      "rows_seen": 26290,
+      "rows_kept": 6199,
+      "pulled": "2026-10-20",
+      "sha256": "79e679cdaaf5fd1f7d06c202e120b8e04bb486f350bb7f29f25d6fa59fc64743"
+    },
+    "world_2021.jsonl": {
+      "query": {
+        "year": 2021,
+        "event_type": "Explosions/Remote violence",
+        "countries": "all",
+        "filter": "cross-border"
+      },
+      "rows_seen": 26278,
+      "rows_kept": 6341,
+      "pulled": "2026-10-20",
+      "sha256": "f805291192488b05e4f251dec49e11cad1d9d86b077894de80e9f6cac21cf86a"
+    },
+    "world_2022.jsonl": {
+      "query": {
+        "year": 2022,
+        "event_type": "Explosions/Remote violence",
+        "countries": "all",
+        "filter": "cross-border"
+      },
+      "rows_seen": 55221,
+      "rows_kept": 31265,
+      "pulled": "2026-10-20",
+      "sha256": "c4cdc26b3e902e623cc05f0dc45b3879347e8949d30fe7e9d639b196e27641b9"
+    },
+    "world_2023.jsonl": {
+      "query": {
+        "year": 2023,
+        "event_type": "Explosions/Remote violence",
+        "countries": "all",
+        "filter": "cross-border"
+      },
+      "rows_seen": 73450,
+      "rows_kept": 49658,
+      "pulled": "2026-10-20",
+      "sha256": "ccc0a5833d32b5aecd7d7d3919347dc9c83696c3b70f9f979a6071a31193dab2"
+    },
+    "world_2024.jsonl": {
+      "query": {
+        "year": 2024,
+        "event_type": "Explosions/Remote violence",
+        "countries": "all",
+        "filter": "cross-border"
+      },
+      "rows_seen": 100517,
+      "rows_kept": 73835,
+      "pulled": "2026-10-20",
+      "sha256": "d02949f0c51c126bf2b212d24b89ba31a6d90427a511b83e7165c622a7d97e72"
+    },
+    "world_2025.jsonl": {
+      "query": {
+        "year": 2025,
+        "event_type": "Explosions/Remote violence",
+        "countries": "all",
+        "filter": "cross-border"
+      },
+      "rows_seen": 73674,
+      "rows_kept": 58813,
+      "pulled": "2026-10-20",
+      "sha256": "2d92267dae02254ba3e1528820610a930903fa75c2ed15a56a0789b15abed2b6"
+    },
+    "live_2026.jsonl": {
+      "query": {
+        "from": "2026-01-01",
+        "to": "2026-10-20",
+        "event_type": "Explosions/Remote violence",
+        "countries": "all",
+        "filter": "cross-border"
+      },
+      "rows_seen": 0,
+      "rows_kept": 0,
+      "pulled_at": "2026-10-20T15:59:32.261639+00:00",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "note": "LIVE signal; timestamp = ACLED last-update time (walk-forward safe, conservative)"
+    }
+  }
+}

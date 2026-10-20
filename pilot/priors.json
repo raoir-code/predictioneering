@@ -1,0 +1,297 @@
+{
+  "_doc": "Frozen external priors for the during-war two-state model: log h (onset) and log mu (cessation) per pair, from unpooled ACLED fits (analysis/pair_fits.json) shrunk toward reference-class means (DerSimonian-Laird; class needs >=3 identified pairs, else global). Classes by bargaining relationship (Adi, Oct 19-20). h, mu independent in v1 (no covariance). Observation rates NOT carried over.",
+  "frozen": "2026-10-20",
+  "data": "ACLED 2015-2025 (data/external/acled/MANIFEST.json)",
+  "production_map": {
+    "Israel->Lebanon": "Israel->Lebanon",
+    "Saudi Arabia->Yemen": "SaudiCoalition->Yemen"
+  },
+  "production_map_note": "Saudi->Yemen contracts count Saudi forces only; coalition-level prior used for episode timing with that caveat (ChatGPT review).",
+  "pairs": {
+    "Israel->Lebanon": {
+      "class": "cross_border_nonstate",
+      "pooled_toward": "class",
+      "identified_alone": true,
+      "members_identified": [
+        "Israel->Lebanon",
+        "Israel->Syria",
+        "Iran->Iraq",
+        "Pakistan->Afghanistan",
+        "Turkey->Iraq",
+        "Turkey->Syria",
+        "US->Iraq"
+      ],
+      "log_h": {
+        "mean": -6.246341330811387,
+        "sd": 0.426977476140084
+      },
+      "log_mu": {
+        "mean": -4.872756046641717,
+        "sd": 0.45374228726165977
+      },
+      "onset_median_wait_days": 357.7478505704611,
+      "episode_half_life_days": 90.58087753712995
+    },
+    "Israel->Syria": {
+      "class": "cross_border_nonstate",
+      "pooled_toward": "class",
+      "identified_alone": true,
+      "members_identified": [
+        "Israel->Lebanon",
+        "Israel->Syria",
+        "Iran->Iraq",
+        "Pakistan->Afghanistan",
+        "Turkey->Iraq",
+        "Turkey->Syria",
+        "US->Iraq"
+      ],
+      "log_h": {
+        "mean": -4.942908875514364,
+        "sd": 0.30727383971691513
+      },
+      "log_mu": {
+        "mean": -3.0232780543252806,
+        "sd": 0.2970097234688514
+      },
+      "onset_median_wait_days": 97.16358048957596,
+      "episode_half_life_days": 14.250117235644883
+    },
+    "Iran->Iraq": {
+      "class": "cross_border_nonstate",
+      "pooled_toward": "class",
+      "identified_alone": true,
+      "members_identified": [
+        "Israel->Lebanon",
+        "Israel->Syria",
+        "Iran->Iraq",
+        "Pakistan->Afghanistan",
+        "Turkey->Iraq",
+        "Turkey->Syria",
+        "US->Iraq"
+      ],
+      "log_h": {
+        "mean": -5.822743812368165,
+        "sd": 0.3705838712093734
+      },
+      "log_mu": {
+        "mean": -1.8856844213002915,
+        "sd": 0.4016809496134312
+      },
+      "onset_median_wait_days": 234.21298455381185,
+      "episode_half_life_days": 4.568438678633404
+    },
+    "Pakistan->Afghanistan": {
+      "class": "cross_border_nonstate",
+      "pooled_toward": "class",
+      "identified_alone": true,
+      "members_identified": [
+        "Israel->Lebanon",
+        "Israel->Syria",
+        "Iran->Iraq",
+        "Pakistan->Afghanistan",
+        "Turkey->Iraq",
+        "Turkey->Syria",
+        "US->Iraq"
+      ],
+      "log_h": {
+        "mean": -5.3836879326522915,
+        "sd": 0.39724435397916535
+      },
+      "log_mu": {
+        "mean": -2.573721603507339,
+        "sd": 0.3909649643855578
+      },
+      "onset_median_wait_days": 150.98417229319327,
+      "episode_half_life_days": 9.09030701753754
+    },
+    "Turkey->Iraq": {
+      "class": "cross_border_nonstate",
+      "pooled_toward": "class",
+      "identified_alone": true,
+      "members_identified": [
+        "Israel->Lebanon",
+        "Israel->Syria",
+        "Iran->Iraq",
+        "Pakistan->Afghanistan",
+        "Turkey->Iraq",
+        "Turkey->Syria",
+        "US->Iraq"
+      ],
+      "log_h": {
+        "mean": -4.211726886958618,
+        "sd": 0.2675989624266144
+      },
+      "log_mu": {
+        "mean": -4.097209631055843,
+        "sd": 0.25787143828506914
+      },
+      "onset_median_wait_days": 46.768690207614156,
+      "episode_half_life_days": 41.708156553225066
+    },
+    "Turkey->Syria": {
+      "class": "cross_border_nonstate",
+      "pooled_toward": "class",
+      "identified_alone": true,
+      "members_identified": [
+        "Israel->Lebanon",
+        "Israel->Syria",
+        "Iran->Iraq",
+        "Pakistan->Afghanistan",
+        "Turkey->Iraq",
+        "Turkey->Syria",
+        "US->Iraq"
+      ],
+      "log_h": {
+        "mean": -4.753743946148881,
+        "sd": 0.30372786990600664
+      },
+      "log_mu": {
+        "mean": -4.724159838261141,
+        "sd": 0.31348210584803393
+      },
+      "onset_median_wait_days": 80.41743658082417,
+      "episode_half_life_days": 78.07320542851897
+    },
+    "US->Iraq": {
+      "class": "cross_border_nonstate",
+      "pooled_toward": "class",
+      "identified_alone": true,
+      "members_identified": [
+        "Israel->Lebanon",
+        "Israel->Syria",
+        "Iran->Iraq",
+        "Pakistan->Afghanistan",
+        "Turkey->Iraq",
+        "Turkey->Syria",
+        "US->Iraq"
+      ],
+      "log_h": {
+        "mean": -5.337542121112876,
+        "sd": 0.6586736580447594
+      },
+      "log_mu": {
+        "mean": -1.5076456845912396,
+        "sd": 0.533199433132666
+      },
+      "onset_median_wait_days": 144.17519622659566,
+      "episode_half_life_days": 3.1303122626773354
+    },
+    "Iran->Syria": {
+      "class": "cross_border_nonstate",
+      "pooled_toward": "class",
+      "identified_alone": false,
+      "members_identified": [
+        "Israel->Lebanon",
+        "Israel->Syria",
+        "Iran->Iraq",
+        "Pakistan->Afghanistan",
+        "Turkey->Iraq",
+        "Turkey->Syria",
+        "US->Iraq"
+      ],
+      "log_h": {
+        "mean": -5.242670700795227,
+        "sd": 0.7879487881805768
+      },
+      "log_mu": {
+        "mean": -3.2406364685261213,
+        "sd": 1.2607760657158196
+      },
+      "onset_median_wait_days": 131.12588031026235,
+      "episode_half_life_days": 17.709895443120093
+    },
+    "Israel->Iran": {
+      "class": "state_vs_state",
+      "pooled_toward": "global",
+      "identified_alone": false,
+      "members_identified": [
+        "Iran->Israel"
+      ],
+      "log_h": {
+        "mean": -5.5706486948887735,
+        "sd": 0.8730695002693221
+      },
+      "log_mu": {
+        "mean": -3.6704924518799213,
+        "sd": 1.3372791050577637
+      },
+      "onset_median_wait_days": 182.02349539236204,
+      "episode_half_life_days": 27.220749487837963
+    },
+    "Iran->Israel": {
+      "class": "state_vs_state",
+      "pooled_toward": "global",
+      "identified_alone": true,
+      "members_identified": [
+        "Iran->Israel"
+      ],
+      "log_h": {
+        "mean": -6.722806292529024,
+        "sd": 0.6592112763295148
+      },
+      "log_mu": {
+        "mean": -2.8203677085289813,
+        "sd": 0.7994894287016451
+      },
+      "onset_median_wait_days": 576.1069796141976,
+      "episode_half_life_days": 11.633103547104737
+    },
+    "Israel->Yemen": {
+      "class": "defacto_authority",
+      "pooled_toward": "global",
+      "identified_alone": true,
+      "members_identified": [
+        "Israel->Yemen",
+        "US->Yemen"
+      ],
+      "log_h": {
+        "mean": -6.551716991243283,
+        "sd": 0.57057772287551
+      },
+      "log_mu": {
+        "mean": -4.252566312987706,
+        "sd": 0.666148288987499
+      },
+      "onset_median_wait_days": 485.5120322617277,
+      "episode_half_life_days": 48.71823485787098
+    },
+    "US->Yemen": {
+      "class": "defacto_authority",
+      "pooled_toward": "global",
+      "identified_alone": true,
+      "members_identified": [
+        "Israel->Yemen",
+        "US->Yemen"
+      ],
+      "log_h": {
+        "mean": -5.602099793262132,
+        "sd": 0.4633647944289532
+      },
+      "log_mu": {
+        "mean": -4.902198243414357,
+        "sd": 0.5367832582232968
+      },
+      "onset_median_wait_days": 187.83931176315275,
+      "episode_half_life_days": 93.2874254050301
+    },
+    "SaudiCoalition->Yemen": {
+      "class": "coalition",
+      "pooled_toward": "global",
+      "identified_alone": true,
+      "members_identified": [
+        "SaudiCoalition->Yemen"
+      ],
+      "log_h": {
+        "mean": -5.098752888179881,
+        "sd": 0.35041630857655665
+      },
+      "log_mu": {
+        "mean": -5.479411308321568,
+        "sd": 0.3400764702192434
+      },
+      "onset_median_wait_days": 113.54962517736563,
+      "episode_half_life_days": 166.1512283414053
+    }
+  },
+  "_superseded_by": "pilot/priors_world.json (Oct 20): worldwide pairs, rule-assigned classes"
+}
