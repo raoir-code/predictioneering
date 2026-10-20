@@ -383,7 +383,7 @@ def generate_suppressor_and_q_static(dyad):
 
 # ── Classification ────────────────────────────────────────────────────────────
 
-def classify_market(question, event_title):
+def _classify_once(question, event_title):
     user_msg = "Event: " + event_title + "\nQuestion: " + question
 
     payload = {
@@ -416,12 +416,34 @@ def classify_market(question, event_title):
     return json.loads(text)
 
 
+def classify_market(question, event_title):
+    """Oct 20: the weekly run lost 63 markets to a brief network outage (DNS failure) because each market got one attempt.
+    Retry transient failures (connection / DNS / timeout / 429 / 5xx) with backoff: 10, 30, 60, 120, 240 s (~7.5 min)."""
+    import time as _t
+    waits = [10, 30, 60, 120, 240]
+    for k in range(len(waits) + 1):
+        try:
+            return _classify_once(question, event_title)
+        except Exception as ex:
+            msg = str(ex)
+            transient = isinstance(ex, (requests.exceptions.ConnectionError, requests.exceptions.Timeout)) or \
+                        any(c in msg for c in ("API error 429", "API error 500", "API error 502", "API error 503", "API error 529", "overloaded"))
+            if not transient or k == len(waits):
+                raise
+            print(f"        [retry {k + 1}/{len(waits)}] transient error, waiting {waits[k]}s: {msg[:80]}")
+            _t.sleep(waits[k])
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
-def run_disciplinarian(dry_run=False):
+def run_disciplinarian(dry_run=False, only_errors=None):
+    """only_errors (or --retry-errors): reclassify ONLY markets whose bucket is ERROR in classified_feed.json, same code path."""
+    if only_errors is None:
+        only_errors = "--retry-errors" in sys.argv
     base     = os.path.dirname(__file__)
     in_path  = os.path.join(base, "live_feed.json")
     out_path = os.path.join(base, "classified_feed.json")
+    if only_errors:
+        in_path = out_path
 
     with open(in_path) as f:
         markets = json.load(f)
@@ -437,6 +459,8 @@ def run_disciplinarian(dry_run=False):
     new_configs_added = 0
 
     for i, m in enumerate(markets):
+        if only_errors and m.get("bucket") != "ERROR":
+            continue
         question    = m.get("question", "")
         event_title = m.get("event_title", "")
 

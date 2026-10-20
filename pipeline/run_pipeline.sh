@@ -43,6 +43,8 @@ else
 fi
 
 echo "[3/6] Engine (predict.py)..." | tee -a "$LOGFILE"
+echo "[classify] Retry markets left in ERROR by an earlier outage (non-fatal)..." | tee -a "$LOGFILE"
+$PYTHON -u -m pipeline.disciplinarian --retry-errors >> "$LOGFILE" 2>&1 || echo "  [classify] retry failed (non-fatal)" | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.predict >> "$LOGFILE" 2>&1
 echo "Engine done." | tee -a "$LOGFILE"
 
