@@ -58,9 +58,11 @@ def p_any(pi, h, mu, q, q0, gap_days, length_days):
     E, M0, _ = mats(h, mu, q, q0); mp = np.linalg.matrix_power
     return float(1 - np.asarray(pi) @ mp(E, gap_days) @ mp(M0, length_days) @ np.ones(2))
 
-def forward_joint(T, windows, h, mu, q, q0, p_start=None, keep_from=None):
+def forward_joint(T, windows, h, mu, q, q0, p_start=None, keep_from=None, news_days=(), news_ratio=1.0):
     """forward() that also keeps strike days L >= keep_from distinct (to price an open window starting at keep_from);
-    returns (loglik, joint {(state, L): prob} at the end of day T-1)."""
+    returns (loglik, joint {(state, L): prob} at the end of day T-1).
+    news_days: days t with a POSITIVE news report of a strike in [t-2, t]; weight 1 if L >= t-2 else news_ratio (= false-alarm / catch
+    rate). Days without a report carry no information (coverage gaps are clustered, never read as quiet)."""
     E, M0, M1 = mats(h, mu, q, q0); M0, M1 = M0.tolist(), M1.tolist()
     p = stationary(h, mu) if p_start is None else np.asarray(p_start, float)
     st = {(0, None): float(p[0]), (1, None): float(p[1])}
@@ -79,7 +81,9 @@ def forward_joint(T, windows, h, mu, q, q0, p_start=None, keep_from=None):
             new = {k: v for k, v in new.items() if k[1] != t}
         for a in yes_end.get(t, []):
             new = {k: v for k, v in new.items() if k[1] is not None and k[1] >= a}
-        pend = [a for a, b, y in windows if y and b > t] + ([keep_from] if keep_from is not None else [])
+        if t in news_days:
+            new = {k: (v if (k[1] is not None and k[1] >= t - 2) else v * news_ratio) for k, v in new.items()}
+        pend = [a for a, b, y in windows if y and b > t] + ([keep_from] if keep_from is not None else []) + [n - 2 for n in news_days if n > t]
         cut = min(pend) if pend else None
         merged = {}
         for (s, L), v in new.items():
@@ -101,6 +105,22 @@ def price_open(st, h, mu, q, q0, T, a, b):
     past = sum(v for (s, L), v in st.items() if L is not None and L >= a)
     rest = marg(lambda L: not (L is not None and L >= a))
     return past if rest.sum() <= 0 else past + (1 - past) * p_any(rest / rest.sum(), h, mu, q, q0, 0, b - T + 1)
+
+def _tests_news():
+    h, mu, q, q0, r = 1 / 40, 1 / 15, 0.6, 0.03, 0.01; E, M0, M1 = mats(h, mu, q, q0); p = stationary(h, mu); res = []
+    for hist, news in (([], {3}), ([(0, 1, 0)], {4, 6}), ([(2, 5, 1)], {7}), ([(0, 2, 0), (5, 7, 0)], {4})):
+        brute = 0.0
+        for z in itertools.product((0, 1), repeat=8):
+            if not all((any(z[x:y + 1]) if v else not any(z[x:y + 1])) for x, y, v in hist): continue
+            pr = p.copy()
+            for zt in z: pr = pr @ (M1 if zt else M0)
+            w = float(pr.sum())
+            for n in news: w *= 1.0 if any(z[max(0, n - 2):n + 1]) else r
+            brute += w
+        ll, _ = forward_joint(8, hist, h, mu, q, q0, news_days=news, news_ratio=r)
+        ok = abs(math.exp(ll) - brute) < 1e-12; res.append(ok)
+        print(f"  {'PASS' if ok else 'FAIL'}  news days {sorted(news)} + windows {hist}: {math.exp(ll):.12f} vs brute force {brute:.12f}")
+    return all(res)
 
 def _tests_pricing():
     h, mu, q, q0 = 1 / 50, 1 / 20, 0.7, 0.05; E, M0, M1 = mats(h, mu, q, q0); p = stationary(h, mu)
@@ -157,4 +177,4 @@ def _tests():
     return all(r)
 
 if __name__ == "__main__":
-    raise SystemExit(0 if (_tests() and _tests_pricing()) else 1)
+    raise SystemExit(0 if (_tests() and _tests_pricing() and _tests_news()) else 1)

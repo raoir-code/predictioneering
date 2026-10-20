@@ -2258,20 +2258,31 @@ def _apply_during_war_pricing(feed: list):
     except Exception as ex:
         print(f"[during-war] import failed ({ex!r}); engine prices kept for ALL markets")
         return 0
-    n = 0
+    n = nu = 0
+    try:
+        import unified_price as _up
+        _UP = _up.production_prices()
+    except Exception as ex:
+        print(f"[unified] FAILED to load ({ex!r}); engine prices kept for its groups"); _UP = {}
     for market in feed:
         if not isinstance(market, dict) or market.get("resolved"):
             continue
         r = _fs.price_for_market(market.get("market_id"), market.get("question") or market.get("label") or "")
         if not r:
+            u = _UP.get(str(market.get("market_id")))
+            if u:
+                market["engine_conditional_p"] = market.get("conditional_p")
+                market["conditional_p"] = u["p"]; market["pricing_component"] = "unified-v1"
+                market["during_war"] = {"group": u["group"], "source": u["source"], "q": u["q"], "pi_now": u["pi"]}
+                nu += 1
             continue
         market["engine_conditional_p"] = market.get("conditional_p")
         market["conditional_p"] = r["p"]
         market["pricing_component"] = r["model_version"]
         market["during_war"] = {k: r[k] for k in ("pair", "days_ahead", "pi_now", "q", "q_n", "news_status")}
         n += 1
-    print(f"[during-war] {n} markets priced by the during-war component")
-    return n
+    print(f"[during-war] {n} markets priced by the during-war component; [unified] {nu} by the unified engine")
+    return n + nu
 
 
 def run_translator():
