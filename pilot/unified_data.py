@@ -19,10 +19,15 @@ _M = "January|February|March|April|May|June|July|August|September|October|Novemb
 MON = {m.lower(): i + 1 for i, m in enumerate(_M.split("|"))}
 TPL = re.compile(r"^(?:Will (?:there be )?)?(?:an? |the )?(.+?)(?: take)? (?:military action (?:against|on)|target) (?:the )?(.+?) (on|by) (" + _M + r") (\d{1,2})(?:, (\d{4}))?\?\s*$", re.I)
 ALIAS = {"saudiarabian": "saudiarabia"}
-REGIONS = [("jerusalem|israel", "Asia/Jerusalem"), ("yemen", "Asia/Aden"), ("syria", "Asia/Damascus"), ("lebanon|beirut", "Asia/Beirut"),
+REGIONS = [("jerusalem|israel", "Asia/Jerusalem"), ("yemen", "Asia/Aden"), ("syria|damascus", "Asia/Damascus"), ("lebanon|beirut", "Asia/Beirut"),
            ("gulf", "Asia/Dubai"), ("arabia|riyadh", "Asia/Riyadh"), ("iran|tehran", "Asia/Tehran"), ("pakistan", "Asia/Karachi"),
            ("afghanistan|kabul", "Asia/Kabul"), ("amman|jordan", "Asia/Amman"), ("manama|bahrain", "Asia/Bahrain"), ("kuwait", "Asia/Kuwait"),
-           ("doha|qatar", "Asia/Qatar"), ("muscat|oman", "Asia/Muscat"), ("cairo|egypt", "Africa/Cairo"), ("baghdad|iraq", "Asia/Baghdad"), ("abu dhabi|dubai|emirates", "Asia/Dubai"), ("central european", "Europe/Berlin"), ("eastern", "America/New_York"),
+           ("doha|qatar", "Asia/Qatar"), ("muscat|oman", "Asia/Muscat"), ("cairo|egypt", "Africa/Cairo"), ("baghdad|iraq", "Asia/Baghdad"), ("abu dhabi|dubai|emirates", "Asia/Dubai"),
+           ("sanaa|aden", "Asia/Aden"), ("kyiv|kiev|ukraine", "Europe/Kyiv"), ("moscow|russia", "Europe/Moscow"), ("beijing|china", "Asia/Shanghai"),
+           ("taipei|taiwan", "Asia/Taipei"), ("seoul|korea", "Asia/Seoul"), ("tokyo|japan", "Asia/Tokyo"), ("manila|philippines", "Asia/Manila"),
+           ("new delhi|delhi|india", "Asia/Kolkata"), ("islamabad", "Asia/Karachi"), ("caracas|venezuela", "America/Caracas"), ("havana|cuba", "America/Havana"),
+           ("addis ababa|ethiopia|east africa|asmara|eritrea", "Africa/Addis_Ababa"), ("khartoum|sudan", "Africa/Khartoum"), ("ankara|istanbul|turkey", "Europe/Istanbul"),
+           ("central european|paris|berlin|brussels", "Europe/Berlin"), ("london|british", "Europe/London"), ("warsaw|poland", "Europe/Warsaw"), ("central european", "Europe/Berlin"), ("eastern", "America/New_York"),
            ("pacific", "America/Los_Angeles"), ("coordinated universal|greenwich", "UTC")]
 TZ = [(rf"(?:{r}) (?:standard |daylight |summer )?time", z) for r, z in REGIONS] + [
       (r"\bE[SD]?T\b", "America/New_York"), (r"\bCES?T\b", "Europe/Berlin"), (r"\bUTC\b|\bGMT\b", "UTC")]
