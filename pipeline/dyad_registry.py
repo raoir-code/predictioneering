@@ -97,7 +97,7 @@ class UnknownDyadError(ValueError):
     pass
 
 
-def canonicalize(raw_key, known_bilateral_keys=None):
+def _canonicalize_exact(raw_key, known_bilateral_keys=None):
     """
     Resolve a raw dyad string to its canonical form.
     Returns: (canonical_key: str, is_bilateral: bool)
@@ -120,3 +120,23 @@ def canonicalize(raw_key, known_bilateral_keys=None):
         f"This is a new dyad or a new naming variant -- add it to dyad_registry.py "
         f"deliberately rather than letting it pass through silently."
     )
+
+
+def canonicalize(raw_key, known_bilateral_keys=None):
+    """Oct 20: order-independent. A pair is the same pair whichever country comes first ('Ethiopia-Eritrea' ==
+    'Eritrea-Ethiopia'); the exact matcher sent reversed keys to default inputs (Ethiopia 'target' markets priced with no
+    crisis while the real dyad had P(A)=0.98). Direction lives in contract_initiator/contract_target, not the dyad key."""
+    try:
+        return _canonicalize_exact(raw_key, known_bilateral_keys)
+    except UnknownDyadError:
+        n = _normalize(raw_key)
+        for k in (known_bilateral_keys or []):
+            if _normalize(k) == n:
+                return k, True
+        a, sep, b = (raw_key or "").partition("-")
+        if sep and b.strip():
+            try:
+                return _canonicalize_exact(f"{b.strip()}-{a.strip()}", known_bilateral_keys)
+            except UnknownDyadError:
+                pass
+        raise
