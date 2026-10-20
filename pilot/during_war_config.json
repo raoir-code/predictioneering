@@ -31,12 +31,13 @@
         "cache/gnews_pilot/lebanon_*.json",
         "cache/gnews_pilot/hezbollah_*.json"
       ],
-      "publish": true,
+      "publish": false,
       "overrides": {
         "mu_half_life_days": 83.3,
         "h_half_life_days": 463.0
       },
-      "_overrides_source": "pilot/priors_world.json (Israel->Lebanon, class cross_border_nonstate, frozen 2026-10-20); ACLED 2015-2025 worldwide, pooled by rule-assigned class."
+      "_overrides_source": "pilot/priors_world.json (Israel->Lebanon, class cross_border_nonstate, frozen 2026-10-20); ACLED 2015-2025 worldwide, pooled by rule-assigned class.",
+      "note_switch": "Oct 20: moved to unified-v1 by the pre-registered rule (replayed dailies at production's first-forecast time: Lebanon n=37 unified 0.045 vs during-war 0.386; Saudi n=5 unified 0.227 vs 0.361). Kill switch back: publish=true."
     },
     "Saudi Arabia->Yemen": {
       "theater": "middle_east_war",
@@ -54,12 +55,13 @@
       "news_globs": [
         "cache/gnews/*Saudi*Yemen*.json"
       ],
-      "publish": true,
+      "publish": false,
       "overrides": {
         "mu_half_life_days": 155.4,
         "h_half_life_days": 138.7
       },
-      "_overrides_source": "pilot/priors_world.json (Operation Restoring Hope->Yemen, class coalition, frozen 2026-10-20); ACLED 2015-2025 worldwide, pooled by rule-assigned class."
+      "_overrides_source": "pilot/priors_world.json (Operation Restoring Hope->Yemen, class coalition, frozen 2026-10-20); ACLED 2015-2025 worldwide, pooled by rule-assigned class.",
+      "note_switch": "Oct 20: moved to unified-v1 by the pre-registered rule (replayed dailies at production's first-forecast time: Lebanon n=37 unified 0.045 vs during-war 0.386; Saudi n=5 unified 0.227 vs 0.361). Kill switch back: publish=true."
     }
   },
   "_publish_note": "Oct 19: publish=true means v2c sets the published price for this pair's single-day contracts. Set false to fall back to the engine."
