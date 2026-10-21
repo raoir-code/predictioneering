@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parent.parent
 log = sorted(glob.glob(str(ROOT / "logs" / "pipeline_*.log")))[-1]; txt = Path(log).read_text(errors="replace")
 print(f"== run: {Path(log).name} | last written {dt.datetime.fromtimestamp(Path(log).stat().st_mtime):%m-%d %H:%M}")
 print("   complete:", "YES" if "Pipeline complete" in txt else "NO (still running, or died)")
-print("   push:", "OK" if re.search(r"main -> main", txt) else ("FAILED" if re.search(r"Could not resolve|failed 5 times|rejected", txt) else "not seen"))
+print("   push:", "OK" if re.search(r"main -> main", txt) else ("FAILED" if re.search(r"Could not resolve|failed 5 times|! \[rejected\]|failed to push", txt) else "not seen"))
 for tag, pat in (("during-war/unified", r"\[during-war\][^\n]*"), ("rules", r"\[rules\] stored[^\n]*"), ("news", r"new headlines labeled"),
                  ("policy", r"excluded by rule:[^\n]*"), ("scopes", r"resolved: *\d+"), ("meta", r"\[meta\] stored[^\n]*")):
     m = re.findall(pat, txt); print(f"   {tag:18} {m[-1] if m else 'NOT SEEN'}" + (f"  ({len(m)} dyads)" if tag == 'news' and m else ""))

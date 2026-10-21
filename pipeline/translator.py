@@ -2014,6 +2014,7 @@ def _run_action_bridge_activation_pass(feed: list, cache: dict):
     activated = 0
     overlap_activated = 0
     failed = 0
+    no_pre = []
 
     for market in feed:
         candidate_status = market.get(
@@ -2069,6 +2070,17 @@ def _run_action_bridge_activation_pass(feed: list, cache: dict):
 
         engine_p = market.get("our_prediction")
         if engine_p is None:
+            failed += 1
+            continue
+
+        # Fail closed if production never priced this market (conditional_p None):
+        # the bridge must not publish a market upstream left unpriced, and the
+        # audit delta below needs a numeric pre value. (Crashed the Oct 21 run.)
+        if market.get("conditional_p") is None:
+            market["action_bridge_activation_status"] = (
+                "activation_failed_no_pre_conditional"
+            )
+            no_pre.append(f"{mid} {(market.get('question') or '')[:50]}")
             failed += 1
             continue
 
@@ -2238,6 +2250,10 @@ def _run_action_bridge_activation_pass(feed: list, cache: dict):
 
         activated += 1
 
+    if no_pre:
+        print(f"\n  [action bridge production] fail-closed, no production conditional_p: {len(no_pre)}")
+        for s in no_pre[:15]:
+            print(f"      {s}")
     print("\n  [action bridge production]")
     print(f"    activated: {activated}")
     print(
