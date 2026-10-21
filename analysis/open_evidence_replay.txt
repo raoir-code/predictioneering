@@ -1,0 +1,18 @@
+Open-contract evidence: pre-registered replay A/B, 2026-10-21 12:25
+Rule (written before running): adopt iff Brier(on) <= Brier(off) overall AND Brier(on) < Brier(off) on NO outcomes; same contracts.
+n=73 (YES 61, NO 12); rows with >=1 open-day observation: 19
+overall: off 0.1482 | on 0.1484 | production 0.4145
+NO:      off 0.4681 | on 0.4681
+YES:     off 0.0852 | on 0.0856
+by pair (n, off, on, diff):
+   iran->anarabcountry          n=  6  off 0.0059  on 0.0059  +0.0000
+   iran->bahrain                n=  1  off 0.3166  on 0.3166  +0.0000
+   iran->iraq                   n=  6  off 0.3377  on 0.3377  +0.0000
+   iran->jordan                 n=  3  off 0.3206  on 0.3206  +0.0000
+   iran->kuwait                 n=  2  off 0.1483  on 0.1483  +0.0000
+   iran->unitedarabemirates     n=  1  off 0.5021  on 0.5021  +0.0000
+   israel->lebanon              n= 37  off 0.0450  on 0.0453  +0.0004
+   israel->syria                n=  6  off 0.4907  on 0.4907  +0.0000
+   israel->yemen                n=  2  off 0.0226  on 0.0226  +0.0000
+   saudiarabia->yemen           n=  9  off 0.2249  on 0.2255  +0.0007
+RULE -> FAIL: revert
