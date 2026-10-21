@@ -1004,9 +1004,21 @@ def run(dry_run: bool = False, filter_dyad: str = None):
 
             if _acute_core > 0 and _icb_boost > 0:
                 if _detected_date is None:
-                    dyad_meta["decision_detected_at"] = str(today)
-                    config["decision_detected_at"]    = str(today)
-                    _detected_date = today
+                    # Oct 21: persisted (was in-memory only, so the lag clock restarted every run and never elapsed).
+                    # First stamp seeds from the already-recorded acute_phase_onset_date (captured data, not hindsight).
+                    _seed = acute_onset if (acute_onset and acute_onset <= today) else today
+                    dyad_meta["decision_detected_at"] = str(_seed)
+                    config["decision_detected_at"]    = str(_seed)
+                    _detected_date = _seed
+                    if not dry_run:
+                        try:
+                            _cf = load_dyad_configs()
+                            if dyad in _cf:
+                                _cf[dyad]["decision_detected_at"] = str(_seed)
+                                with open(DYAD_CONFIGS_PATH, "w") as _f:
+                                    json.dump(_cf, _f, indent=2, ensure_ascii=False); _f.write("\n")
+                        except Exception as ex:
+                            print(f"  [warn] failed to persist decision_detected_at (non-fatal): {ex}")
 
                 _days_since_detection = max((today - _detected_date).days, 0)
                 _lag_remaining        = max(_lag_days - _days_since_detection, 0)
@@ -1020,6 +1032,15 @@ def run(dry_run: bool = False, filter_dyad: str = None):
             elif _acute_core == 0 and _detected_date is not None:
                 dyad_meta.pop("decision_detected_at", None)
                 config.pop("decision_detected_at", None)
+                if not dry_run:
+                    try:
+                        _cf = load_dyad_configs()
+                        if dyad in _cf:
+                            _cf[dyad].pop("decision_detected_at", None)
+                            with open(DYAD_CONFIGS_PATH, "w") as _f:
+                                json.dump(_cf, _f, indent=2, ensure_ascii=False); _f.write("\n")
+                    except Exception as ex:
+                        print(f"  [warn] failed to persist decision_detected_at (non-fatal): {ex}")
 
             # Horizon scaling FIRST (matches engine.py Run 21 order -- Sept 10
             # fix: this previously ran AFTER the ICB boost was applied, which
