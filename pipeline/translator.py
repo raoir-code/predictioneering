@@ -1678,6 +1678,12 @@ def _run_action_bridge_candidate_pass(feed: list, cache: dict):
         market["action_bridge_candidate_p_b_given_not_a"] = None
         market["action_bridge_candidate_conditional_p"] = None
         market["action_bridge_candidate_blended_p"] = None
+
+        # Oct 21: production never priced it (or it has settled) -> nothing for the bridge to act on.
+        # An unpriced market reaching the activation pass crashed the Oct 21 09:00 run.
+        if market.get("conditional_p") is None or market.get("resolved"):
+            market["action_bridge_candidate_status"] = "not_eligible_unpriced_or_resolved"
+            continue
         market["action_bridge_candidate_delta_pp"] = None
 
         try:
