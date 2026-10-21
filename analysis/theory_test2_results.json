@@ -1,0 +1,30 @@
+{
+  "G7": {
+    "episodes": 17854,
+    "rows": 172348,
+    "median_len_days": 1.0,
+    "prior_coef": -0.2809229259429705,
+    "prior_p": 7.935015242699304e-12,
+    "elapsed_coef": -0.941160747459942,
+    "age_coef": 0.30776372763186544
+  },
+  "G14": {
+    "episodes": 10842,
+    "rows": 232912,
+    "median_len_days": 1.0,
+    "prior_coef": -0.15972229462257942,
+    "prior_p": 0.0003703264274080625,
+    "elapsed_coef": -0.9153763341177993,
+    "age_coef": 0.14967390140005246
+  },
+  "G30": {
+    "episodes": 5952,
+    "rows": 300032,
+    "median_len_days": 3.0,
+    "prior_coef": -0.03439784289559302,
+    "prior_p": 0.437960904503068,
+    "elapsed_coef": -0.8883127180560743,
+    "age_coef": 0.06199862771943306
+  },
+  "H3": "NOT SUPPORTED"
+}
