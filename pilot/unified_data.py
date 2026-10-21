@@ -37,7 +37,7 @@ def T(s):
     x = dt.datetime.fromisoformat(str(s).replace("Z", "+00:00")); return x if x.tzinfo else x.replace(tzinfo=UTC)
 
 def norm(x):
-    k = re.sub(r"[^a-z]", "", (x or "").lower()); return ALIAS.get(k, k)
+    k = re.sub(r"[^a-z]", "", re.sub(r"^(?:a|an|the)\s+", "", (x or "").strip().lower())); return ALIAS.get(k, k)   # leading article stripped (Oct 21: "a"/"an Arab country" split one collective)
 
 def tz_of(desc):
     """Zone mentioned FIRST anywhere in the rules text (window clauses precede dispute clauses)."""
@@ -107,12 +107,12 @@ def struct_fp(desc, ini, ter):
     return __import__("hashlib").sha1(t.encode()).hexdigest()[:10]
 
 def members_of(desc):
-    m = re.search(r"Qualifying [A-Za-z ]+? (?:countries|states|nations) are(?: as follows)?: (.+?)\.(?:\s|$)", re.sub(r"\s+", " ", desc or ""))
+    m = re.search(r"Qualifying [A-Za-z ]+? (?:countries|states|nations) are(?: as follows)?: (.+?)\.(?:\s|$)", re.sub(r"\s+", " ", desc or ""), flags=re.I)
     return [norm(re.sub(r"^(?:and |the )+", "", x.strip())) for x in re.split(r",\s*|\s+and\s+", m.group(1)) if x.strip()] if m else None
 
 def groups(cs):
     g = defaultdict(list)
-    for c in cs: g[(c["pair"], c["fp"])].append(c)
+    for c in cs: g[(c["pair"], c.get("sfp") or c["fp"])].append(c)   # same pair + same structural definition = one group (Oct 21)
     return g
 
 def group_tz(group):
