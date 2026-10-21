@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-10-20T17:32:39.269975+00:00",
-  "n_resolved": 157,
-  "brier_conditional_mean": 0.289458,
-  "brier_engine_mean": 0.398828,
-  "brier_market_mean": 0.140545,
-  "edge_vs_market": -0.148913,
+  "last_updated": "2026-10-21T15:44:57.076343+00:00",
+  "n_resolved": 161,
+  "brier_conditional_mean": 0.305368,
+  "brier_engine_mean": 0.411261,
+  "brier_market_mean": 0.137153,
+  "edge_vs_market": -0.168215,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -1732,6 +1732,50 @@
       "brier_conditional": 0.390875,
       "brier_market": 0.060025,
       "resolved_at": "2026-10-20T17:32:34.739340+00:00"
+    },
+    {
+      "market_id": "5763365",
+      "market_label": "Will Iran target an Arab country by October 22, 2026?",
+      "dyad": "Iran-Saudi Arabia",
+      "outcome": 1,
+      "conditional_p": 0.0088,
+      "market_p": 0.925,
+      "brier_conditional": 0.982477,
+      "brier_market": 0.005625,
+      "resolved_at": "2026-10-21T15:44:49.434453+00:00"
+    },
+    {
+      "market_id": "5763355",
+      "market_label": "Will Iran target Iraq by October 22, 2026?",
+      "dyad": "Iran-Iraq",
+      "outcome": 1,
+      "conditional_p": 0.0061,
+      "market_p": 0.9345,
+      "brier_conditional": 0.987837,
+      "brier_market": 0.00429,
+      "resolved_at": "2026-10-21T15:44:51.293853+00:00"
+    },
+    {
+      "market_id": "5763366",
+      "market_label": "Will Iran target an Arab country by October 31, 2026?",
+      "dyad": "Iran-Saudi Arabia",
+      "outcome": 1,
+      "conditional_p": 0.096,
+      "market_p": 0.9655,
+      "brier_conditional": 0.817216,
+      "brier_market": 0.00119,
+      "resolved_at": "2026-10-21T15:44:53.254634+00:00"
+    },
+    {
+      "market_id": "5763356",
+      "market_label": "Will Iran target Iraq by October 31, 2026?",
+      "dyad": "Iran-Iraq",
+      "outcome": 1,
+      "conditional_p": 0.0347,
+      "market_p": 0.9295,
+      "brier_conditional": 0.931804,
+      "brier_market": 0.00497,
+      "resolved_at": "2026-10-21T15:44:55.254959+00:00"
     }
   ]
 }
