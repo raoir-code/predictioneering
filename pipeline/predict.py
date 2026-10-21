@@ -997,7 +997,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
                 "naval_blockade":     3,
                 "ground_invasion":    14,
             }
-            _action_type     = dyad_meta.get("action_type", "airstrike")
+            _action_type     = m.get("action_type") or dyad_meta.get("action_type", "airstrike")   # Oct 21: the CONTRACT's action sets the lag (Ethiopia "target" = airstrike, not the pair's ground_invasion)
             _lag_days        = _OP_LAG_DAYS.get(_action_type, 2)
             _detected_str    = dyad_meta.get("decision_detected_at")
             _detected_date   = _parse_date_str(_detected_str) if _detected_str else None
