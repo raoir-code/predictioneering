@@ -53,6 +53,16 @@ def evidence(grp, pair, as_of, G):
             if p2 == f"{ini}->{m}" and g2[0].get("sfp") == sfp:
                 d2, T2, w2 = UD.windows(g2, as_of)
                 ev += [(d2 + dt.timedelta(a), d2 + dt.timedelta(b), 1) for a, b, y in w2 if y == 1]; linked.append(p2)
+    # Oct 21: downward link. A collective NO window ("Iran targeted no Arab country on day t") is a NO window for every
+    # member with the same structural definition. Env UNIFIED_DOWNLINK=0/1 (replay A/B); default on.
+    import os
+    if os.environ.get("UNIFIED_DOWNLINK", "1") == "1":
+        ter = pair.split("->")[1]
+        for (p2, f2), g2 in G.items():
+            if p2 != pair and p2.split("->")[0] == ini and g2[0].get("sfp") == sfp and any(ter in (c.get("members") or []) for c in g2):
+                d2, T2, w2 = UD.windows(g2, as_of)
+                nos = [(d2 + dt.timedelta(a), d2 + dt.timedelta(b), 0) for a, b, y in w2 if y == 0]
+                if nos: ev += nos; linked.append(p2 + " (NO)")
     return ev, [pair] + [f"{ini}->{m}" for m in (mem or [])], linked
 
 def news_days(pair, as_of, d0n, tz):
@@ -211,7 +221,7 @@ def replay():
             pr, d = price_group(grp, as_of, P, [c], G, pair)
             if c["id"] not in pr: continue
             mk = last.get("market_p_true_first") if last.get("market_p_true_first") is not None else last.get("market_p_at_first")
-            rows.append({"gkey": f"{pair}|{fp}", "pair": pair, "kind": c["kind"], "y": c["outcome"], "u": pr[c["id"]], "p": float(last["first_p"]), "m": mk, "src": d["source"]})
+            rows.append({"id": c["id"], "gkey": f"{pair}|{fp}", "pair": pair, "kind": c["kind"], "y": c["outcome"], "u": pr[c["id"]], "p": float(last["first_p"]), "m": mk, "src": d["source"]})
     B = lambda xs, k: sum((x[k] - x["y"]) ** 2 for x in xs) / len(xs)
     n = len(rows); bu, bp = B(rows, "u"), B(rows, "p"); mrows = [x for x in rows if x["m"] is not None]
     print(f"\n=== REPLAY: {n} contracts scored at production's first-forecast time ===")
