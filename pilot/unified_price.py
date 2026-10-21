@@ -147,6 +147,8 @@ def price_group(grp, as_of, P, opens, G, pair):
     seed = None
     if P["via"] == "class_prior" and not any(y == 1 for _, _, y in ev) and not nd:
         return {}, {"unpriced": "no fitted history and no positive evidence of fighting (engine decides onset)"}
+    if not ev and nd:   # Oct 21 rule: positive-only news can only push the price up; no settled window can pull it down
+        return {}, {"unpriced": "news-only evidence (no settled window): one-sided likelihood; revisit with a quiet-day source"}
     src = ("own windows" if ev else "news only") + (f" + {len(linked)} member groups" if linked else "")
     if not ev and not nd:
         pi = reverse_seed(pair, G, as_of)
@@ -235,7 +237,7 @@ def replay():
 PUB = ROOT / "pilot" / "unified_publish.json"
 RULE = ("A group is priced by the unified engine if in scope, UNLESS the walk-forward replay shows harm: >= 3 replayed contracts "
         "and unified Brier worse than production by > 0.05. Groups with < 3 replayed contracts are published (no evidence of harm). "
-        "Lebanon / Saudi->Yemen dailies stay on the during-war model (pilot/fighting_state.py). Exclusions are computed, never hand-picked.")
+        "Groups whose only evidence is positive news (no settled window, no reverse seed) are not priced: one-sided likelihood (Oct 21). Exclusions are computed, never hand-picked.")
 
 def policy():
     import io, contextlib
