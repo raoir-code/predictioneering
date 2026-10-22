@@ -32,6 +32,7 @@ NAMES = {"russia": "Russia", "ukraine": "Ukraine", "israel": "Israel", "hamas": 
          "thailand": "Thailand", "cambodia": "Cambodia", "pakistan": "Pakistan", "afghanistan": "Afghanistan", "yemen": "Yemen",
          "venezuela": "Venezuela", "india": "India", "armenia": "Armenia", "azerbaijan": "Azerbaijan", "ethiopia": "Ethiopia",
          "eritrea": "Eritrea", "drc": "Congo", "rwanda": "Rwanda", "m23": "M23", "china": "China", "taiwan": "Taiwan"}
+ALIASES = {"hamas": ["Hamas", "Gaza"], "houthi": ["Houthi", "Houthis"], "us": ["United States", "Washington"]}   # query aliases (lookup table)
 TOPIC = "(ceasefire OR truce OR talks OR negotiations OR negotiators OR mediation OR \"peace deal\")"
 
 PROMPT = """You are labeling news items for a conflict-forecasting system. Parties: {parties}.
@@ -56,7 +57,7 @@ def load_env():
                 k, v = line.split("=", 1); os.environ.setdefault(k.replace("export ", "").strip(), v.strip().strip('"').strip("'"))
 
 def query(actors):
-    parts = [f'"{NAMES[a]}"' for a in actors.split("|") if a in NAMES]
+    parts = [("(" + " OR ".join(f'"{x}"' for x in ALIASES[a]) + ")") if a in ALIASES else f'"{NAMES[a]}"' for a in actors.split("|") if a in NAMES]
     return (" AND ".join(parts) + " AND " + TOPIC) if parts else None
 
 def actor_sets():
@@ -150,6 +151,7 @@ def main():
 def _tests():
     assert query("russia|ukraine") == '"Russia" AND "Ukraine" AND ' + TOPIC
     assert query("sudan") == '"Sudan" AND ' + TOPIC
+    assert query("hamas|israel") == '("Hamas" OR "Gaza") AND "Israel" AND ' + TOPIC
     assert query("zzz") is None
     assert akey("A  b") == akey("a b")
     print("talks_collector tests: OK")
