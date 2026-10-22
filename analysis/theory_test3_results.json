@@ -1,0 +1,55 @@
+{
+  "G7": {
+    "episodes": 347,
+    "dyads": 8,
+    "rows": 2059,
+    "median_len_days": 1.0,
+    "excluded": {
+      "before 1992": 22,
+      "missing expenditure": 126,
+      "right-censored": 2
+    },
+    "shift_coef": -0.12562229757243623,
+    "shift_p": 0.6012871101483184,
+    "gap_coef": 0.13551197111731728,
+    "elapsed_coef": -0.8159406465508192,
+    "prior_coef": -0.28722431824757066
+  },
+  "G14": {
+    "episodes": 224,
+    "dyads": 8,
+    "rows": 3221,
+    "median_len_days": 1.0,
+    "excluded": {
+      "before 1992": 16,
+      "right-censored": 3,
+      "missing expenditure": 103
+    },
+    "shift_coef": -0.34916159859227053,
+    "shift_p": 0.31739204650238495,
+    "gap_coef": 0.05121916388227722,
+    "elapsed_coef": -0.8434479425079495,
+    "prior_coef": -0.6183365398915459
+  },
+  "G30": {
+    "episodes": 132,
+    "dyads": 8,
+    "rows": 5017,
+    "median_len_days": 1.0,
+    "excluded": {
+      "before 1992": 9,
+      "right-censored": 4,
+      "missing expenditure": 74
+    },
+    "shift_coef": 0.11274824225346709,
+    "shift_p": 0.76832612413249,
+    "gap_coef": -0.20716555774200915,
+    "elapsed_coef": -0.8162662505750174,
+    "prior_coef": -1.2863642475272559
+  },
+  "unmatched_names": {
+    "Syria": 174,
+    "Eritrea": 64
+  },
+  "H4": "NOT SUPPORTED"
+}
