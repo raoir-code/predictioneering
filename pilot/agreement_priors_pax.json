@@ -1,0 +1,39 @@
+{
+ "sources": {
+  "pax": "pax_v10.csv",
+  "pax_sha256": "a11d6491bf4c2d4092609fc3653c87a7463ace19311422720d41b1b7af8f02c9",
+  "ucdp": "UCDPConflictTerminationDataset_v4_2024_Dyad.csv",
+  "ucdp_sha256": "37b250d228db2ba51999debc93dd3cea3bdccb536d13b8dc21b9665f8d577ba9"
+ },
+ "citation": "Bell & Badanjak (2019) PA-X, JPR 56(3); PA-X v10 codebook (PeaceRep). Kreutz (2010) UCDP Conflict Termination, JPR 47(2).",
+ "rates": {
+  "CEASEFIRE": {
+   "events": 330,
+   "exposure_years": 1545.0,
+   "conflicts": 194,
+   "pooled_rate_per_year": 0.2136,
+   "log_mu": -3.7,
+   "log_sigma": 2.0,
+   "median_rate_per_year": 0.0247
+  },
+  "EXTENSION": {
+   "events": 6,
+   "exposure_years": 145.0,
+   "conflicts": 54,
+   "pooled_rate_per_year": 0.0414,
+   "log_mu": -3.2,
+   "log_sigma": 0.05,
+   "median_rate_per_year": 0.0408
+  },
+  "DEAL": {
+   "events": 74,
+   "exposure_years": 1545.0,
+   "conflicts": 194,
+   "pooled_rate_per_year": 0.0479,
+   "log_mu": -4.9,
+   "log_sigma": 2.3,
+   "median_rate_per_year": 0.0074
+  }
+ },
+ "computed_at": "2026-10-22T16:25:38.403730+00:00"
+}
