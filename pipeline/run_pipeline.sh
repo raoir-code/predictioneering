@@ -73,6 +73,8 @@ echo "[pilot] Shadow pricer, Israel->Lebanon (logs only, non-fatal)..." | tee -a
 # retired Oct 20 (production prices these markets): $PYTHON -u pilot/shadow_pricer.py >> "$LOGFILE" 2>&1 || echo "  [pilot] shadow pricer failed (non-fatal)" | tee -a "$LOGFILE"
 echo "[pilot] Ceasefire classifier: label new articles (non-fatal)..." | tee -a "$LOGFILE"
 $PYTHON -u pilot/ceasefire_news.py --classify >> "$LOGFILE" 2>&1 || echo "  [pilot] ceasefire classifier failed (non-fatal)" | tee -a "$LOGFILE"
+echo "[talks] Negotiation-evidence collector, agreement actor sets (forward-only, logs only, non-fatal)..." | tee -a "$LOGFILE"
+$PYTHON -u pilot/talks_collector.py >> "$LOGFILE" 2>&1 || echo "  [talks] collector failed (non-fatal)" | tee -a "$LOGFILE"
 echo "[pilot] Shadow v2b fighting-state filter (logs only, non-fatal)..." | tee -a "$LOGFILE"
 # retired Oct 20 (production prices these markets): $PYTHON -u pilot/fighting_state.py >> "$LOGFILE" 2>&1 || echo "  [pilot] shadow v2b failed (non-fatal)" | tee -a "$LOGFILE"
 
@@ -102,6 +104,8 @@ $GIT add pilot/shadow_log.jsonl >> "$LOGFILE" 2>&1 || echo "  [pilot] could not 
 $GIT add pilot/shadow_log_v2.jsonl >> "$LOGFILE" 2>&1 || echo "  [pilot] could not stage v2 log (non-fatal)" | tee -a "$LOGFILE"
 $GIT add pilot/ceasefire_labels.jsonl >> "$LOGFILE" 2>&1 || echo "  [pilot] could not stage ceasefire labels (non-fatal)" | tee -a "$LOGFILE"
 $GIT add -f cache/gnews_pilot >> "$LOGFILE" 2>&1 || echo "  [pilot] could not stage pilot news cache (non-fatal)" | tee -a "$LOGFILE"
+$GIT add pilot/talks_labels.jsonl >> "$LOGFILE" 2>&1 || echo "  [talks] could not stage talks labels (non-fatal)" | tee -a "$LOGFILE"
+$GIT add -f cache/gnews_talks >> "$LOGFILE" 2>&1 || echo "  [talks] could not stage talks news cache (non-fatal)" | tee -a "$LOGFILE"
 $GIT commit -m "Daily predictions: $(date +%Y-%m-%d)" >> "$LOGFILE" 2>&1 || echo "Nothing to commit." | tee -a "$LOGFILE"
 # Retry: after sleep/wake the network may not be back yet (Oct 19: "Could not resolve host").
 for i in 1 2 3 4 5; do
