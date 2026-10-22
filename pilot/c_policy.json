@@ -1,22 +1,24 @@
 {
-  "model": "C1",
-  "rule": "docs/c1_prereg.md item 5",
+  "model": "C1b",
+  "rule": "docs/c1b_prereg.md (C1b vs C1); C1 adopted earlier by docs/c1_prereg.md item 5",
   "n": 122,
   "brier": {
     "C0": 0.249,
     "C0fix": 0.249,
     "C1": 0.2473,
+    "C1b": 0.2199,
     "m": 0.1468
   },
   "logloss": {
     "C0": 1.2091,
     "C0fix": 1.2092,
     "C1": 1.1237,
+    "C1b": 0.7969,
     "m": 0.4525
   },
-  "bootstrap_c1_minus_c0": [
-    -0.004,
-    0.0013
+  "bootstrap_c1b_minus_c1": [
+    -0.0393,
+    -0.0037
   ],
-  "computed_at": "2026-10-22T16:27:50.579442+00:00"
+  "computed_at": "2026-10-22T16:33:31.391188+00:00"
 }

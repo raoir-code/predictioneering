@@ -33,7 +33,7 @@ PRI = json.loads((ROOT / "pilot" / "agreement_priors.json").read_text())
 PAX = json.loads((ROOT / "pilot" / "agreement_priors_pax.json").read_text()) if (ROOT / "pilot" / "agreement_priors_pax.json").exists() else None
 CPOL = ROOT / "pilot" / "c_policy.json"            # which C model production uses (written once by --compare, docs/c1_prereg.md)
 LAMX = np.exp(np.linspace(math.log(1e-3), math.log(30.0), 100))      # grid for the exact likelihood (C0+fix, C1)
-COMPONENT = {"C0": "agreement-v0", "C0fix": "agreement-v0.1", "C1": "agreement-v1"}
+COMPONENT = {"C0": "agreement-v0", "C0fix": "agreement-v0.1", "C1": "agreement-v1", "C1b": "agreement-v1b"}
 REPLAY = ROOT / "pilot" / "bc_replay.json"
 PRIOR_SD = 1.5
 LAM = np.exp(np.linspace(math.log(1e-3), math.log(30.0), 400))       # events per year
@@ -169,6 +169,40 @@ def prior_pax(typ):
     sg = r["log_sigma"] if r["events"] >= 20 else PAX["rates"]["CEASEFIRE"]["log_sigma"]
     return r["log_mu"], sg, f"PA-X {typ.lower()} rate: median {math.exp(r['log_mu']):.3f}/yr, log-sd {sg:.2f}"
 
+def _own_windows(x, as_of):
+    if x["y"] is None or not (x["known"] and x["known"] < as_of): return None
+    return (x["start"], min(x["end"], x["known"].date()) if x["y"] == 1 else x["end"], x["y"])
+
+def prior_listed(c, allc, as_of):
+    """C1b (docs/c1b_prereg.md): pooled rate over OTHER actor sets' resolved listed contracts (close time < as_of); spread by the
+    pre-registered moment formula. Returns (log_mu, sigma, why) or None (-> C1 prior)."""
+    def pool(types):
+        per = defaultdict(list)
+        for x in allc:
+            if x["actors"] == c["actors"] or x["type"] not in types: continue
+            w = _own_windows(x, as_of)
+            if w and w[1] >= w[0]: per[x["actors"]].append(w)
+        out = []
+        for a, ws in per.items():
+            expo = len(set().union(*[_days(s, e) for s, e, _ in ws])) / 365.25
+            ev, cur = 0, None
+            for s, e in sorted((s, e) for s, e, y in ws if y == 1):
+                if cur is None or s > cur: ev += 1; cur = e
+                else: cur = max(cur, e)
+            if expo > 0: out.append((ev, expo))
+        return out
+    for label, types in ((c["type"], {c["type"]}), ("all types", set(PRIOR_KEY))):
+        g = pool(types)
+        if len(g) < 3: continue
+        E, X = sum(e for e, _ in g), sum(x for _, x in g)
+        if E == 0: continue                                  # undefined at m = 0: next fallback (mechanical, logged in the commit)
+        m = E / X; r = [e / x for e, x in g]
+        var = sum(x * (ri - m) ** 2 for (e, x), ri in zip(g, r)) / X
+        V = max(0.0, var - m / (X / len(g)))
+        sg = max(0.05, math.sqrt(math.log(1 + V / m ** 2)))
+        return math.log(m) - sg ** 2 / 2, sg, f"listed-market pool ({label}, {len(g)} other actor sets): mean {m:.2f}/yr, log-sd {sg:.2f}"
+    return None
+
 def model_in_use():
     try: return json.loads(CPOL.read_text())["model"]
     except Exception: return "C0"
@@ -177,9 +211,12 @@ def agreement_price(c, allc, as_of, model=None):
     model = model or model_in_use()
     mu, why = prior_rate(c["type"], c["actors"], as_of)
     lmu, lsd = math.log(mu), PRIOR_SD
-    if model == "C1":
+    if model in ("C1", "C1b"):
         px = prior_pax(c["type"])
         if px: lmu, lsd, why = px
+    if model == "C1b":
+        pl = prior_listed(c, allc, as_of)
+        if pl: lmu, lsd, why = pl
     wins = []
     for x in allc:
         if x["actors"] != c["actors"] or x["type"] != c["type"] or x["id"] == c["id"] or x["y"] is None: continue
@@ -355,7 +392,7 @@ def compare(write=True):
         if c["y"] is None: continue
         as_of = c["created"] + dt.timedelta(hours=24)
         if not c["known"] or c["known"] <= as_of: skip["resolved before first run"] += 1; continue
-        ps = {m: agreement_price(c, allc, as_of, m)[0] for m in ("C0", "C0fix", "C1")}
+        ps = {m: agreement_price(c, allc, as_of, m)[0] for m in ("C0", "C0fix", "C1", "C1b")}
         if any(v is None for v in ps.values()): skip["past date"] += 1; continue
         mk = CH.market_price(c["tok"], as_of, cache) if c["tok"] else None
         if mk is None: skip["no market price"] += 1; continue
@@ -364,8 +401,8 @@ def compare(write=True):
     cl = lambda p: min(0.999, max(0.001, p))
     B = lambda xs, k: sum((x[k] - x["y"]) ** 2 for x in xs) / len(xs)
     LL = lambda xs, k: -sum(math.log(cl(x[k]) if x["y"] else 1 - cl(x[k])) for x in xs) / len(xs)
-    M = ("C0", "C0fix", "C1", "m")
-    print(f"\n=== C1 COMPARISON (docs/c1_prereg.md): n={len(rows)} | skipped {dict(skip)}")
+    M = ("C0", "C0fix", "C1", "C1b", "m")
+    print(f"\n=== C COMPARISON (docs/c1_prereg.md, docs/c1b_prereg.md): n={len(rows)} | skipped {dict(skip)}")
     print("  overall   " + " | ".join(f"{k}: Brier {B(rows, k):.4f} logloss {LL(rows, k):.3f}" for k in M))
     for y in (1, 0):
         s = [x for x in rows if x["y"] == y]
@@ -376,16 +413,16 @@ def compare(write=True):
     groups = sorted({x["actors"] for x in rows}); rng = np.random.default_rng(20261022); diffs = []
     for _ in range(2000):
         pick = rng.choice(groups, len(groups)); xs = [x for g in pick for x in rows if x["actors"] == g]
-        diffs.append(B(xs, "C1") - B(xs, "C0"))
+        diffs.append(B(xs, "C1b") - B(xs, "C1"))
     lo, hi = np.percentile(diffs, [2.5, 97.5])
-    print(f"  cluster bootstrap by actor set (2,000): Brier(C1) - Brier(C0) = {B(rows, 'C1') - B(rows, 'C0'):+.4f}  95% [{lo:+.4f}, {hi:+.4f}]")
-    pick = "C1" if B(rows, "C1") < B(rows, "C0") else ("C0fix" if B(rows, "C0fix") < B(rows, "C0") else "C0")
+    print(f"  cluster bootstrap by actor set (2,000): Brier(C1b) - Brier(C1) = {B(rows, 'C1b') - B(rows, 'C1'):+.4f}  95% [{lo:+.4f}, {hi:+.4f}]")
+    pick = "C1b" if B(rows, "C1b") < B(rows, "C1") else "C1"          # docs/c1b_prereg.md switch rule (C1 already in production)
     print(f"  SWITCH RULE -> production model: {pick} ({COMPONENT[pick]})")
     print("  caveat: development data (C0's failure here motivated C1); not confirmation.")
     if write:
-        CPOL.write_text(json.dumps({"model": pick, "rule": "docs/c1_prereg.md item 5", "n": len(rows),
+        CPOL.write_text(json.dumps({"model": pick, "rule": "docs/c1b_prereg.md (C1b vs C1); C1 adopted earlier by docs/c1_prereg.md item 5", "n": len(rows),
                                     "brier": {k: round(B(rows, k), 4) for k in M}, "logloss": {k: round(LL(rows, k), 4) for k in M},
-                                    "bootstrap_c1_minus_c0": [round(float(lo), 4), round(float(hi), 4)],
+                                    "bootstrap_c1b_minus_c1": [round(float(lo), 4), round(float(hi), 4)],
                                     "computed_at": dt.datetime.now(UTC).isoformat()}, indent=2) + "\n")
         (ROOT / "pilot" / "c1_comparison_rows.json").write_text(json.dumps(rows, indent=1) + "\n")
     return rows
