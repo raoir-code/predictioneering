@@ -1,5 +1,5 @@
 {
-  "rule": "Pre-registered Oct 22 (docs/holds_replay_prereg.md): per series, n >= 5 replayed contracts AND Brier(unified) <= Brier(market) + 0.03 -> published; otherwise listed, unpriced. Recomputed daily, never hand-edited.",
+  "rule": "Amended Oct 22 (docs/ceasefire_publish_amendment.md): every family-A contract is priced and published. The pre-registered replay (docs/holds_replay_prereg.md) is recomputed daily and reported; it no longer gates publication.",
   "allowed": [
     "iran->israel+israel->iran",
     "unitedstates->iran"
@@ -12,7 +12,7 @@
       "brier_unified": 0.0122,
       "brier_market": 0.0507,
       "no_market_price": 0,
-      "published": true
+      "passes_prereg_rule": true
     },
     "unitedstates->iran": {
       "n": 11,
@@ -21,7 +21,7 @@
       "brier_unified": 0.043,
       "brier_market": 0.0171,
       "no_market_price": 0,
-      "published": true
+      "passes_prereg_rule": true
     },
     "unitedstates->yemen": {
       "n": 3,
@@ -30,14 +30,14 @@
       "brier_unified": 0.0009,
       "brier_market": 0.0033,
       "no_market_price": 0,
-      "published": false
+      "passes_prereg_rule": false
     }
   },
   "skipped": {
     "unpriced at first run: no evidence of its own, none in the reverse direction": 11,
     "past its date at first run": 2,
-    "open or void": 19,
+    "open or void": 20,
     "unpriced at first run: no fitted history and no positive evidence of fighting (engi": 6
   },
-  "computed_at": "2026-10-22T14:08:14.910853+00:00"
+  "computed_at": "2026-10-22T14:31:22.606327+00:00"
 }

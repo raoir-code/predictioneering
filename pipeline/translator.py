@@ -1684,6 +1684,10 @@ def _run_action_bridge_candidate_pass(feed: list, cache: dict):
         if market.get("conditional_p") is None or market.get("resolved"):
             market["action_bridge_candidate_status"] = "not_eligible_unpriced_or_resolved"
             continue
+        # Oct 22: date has passed but the market has not settled (5183420, Israel->Lebanon "on October 19", failed closed Oct 21-22).
+        if str(market.get("end_date") or "9999")[:10] < datetime.now(timezone.utc).date().isoformat():
+            market["action_bridge_candidate_status"] = "not_eligible_past_date"
+            continue
         market["action_bridge_candidate_delta_pp"] = None
 
         try:
@@ -2294,7 +2298,7 @@ def _apply_during_war_pricing(feed: list):
             u = _UP.get(str(market.get("market_id")))
             if u:
                 market["engine_conditional_p"] = market.get("conditional_p")
-                market["conditional_p"] = u["p"]; market["pricing_component"] = "unified-v1"
+                market["conditional_p"] = u["p"]; market["pricing_component"] = u.get("component", "unified-v1")
                 market["during_war"] = {"group": u["group"], "source": u["source"], "q": u["q"], "pi_now": u["pi"]}
                 nu += 1
             continue
@@ -2317,7 +2321,7 @@ def run_translator():
         _CH.tag_feed(feed)
     except Exception as ex:
         print(f"[holds] tagging FAILED ({ex!r}); ceasefire contracts keep their classifier bucket")
-    core  = [m for m in feed if m.get("bucket") == "CORE" and not m.get("resolved") and m.get("contract_family") != "HOLDS"]
+    core  = [m for m in feed if m.get("bucket") == "CORE" and not m.get("resolved") and not m.get("contract_family")]
 
     mode = "SCHOLAR-ONLY" if SCHOLAR_ONLY else "FULL"
     print(f"\nTranslator [{mode}]: {len(core)} CORE markets")
@@ -2383,8 +2387,8 @@ def _append_log(feed: list):
                 continue
             if market.get("resolved"):
                 continue
-            if market.get("contract_family") == "HOLDS":
-                if market.get("pricing_component") != "unified-v1":
+            if market.get("contract_family"):          # ceasefire families: logged only when their own component priced them
+                if market.get("pricing_component") in (None, "engine"):
                     continue
             elif market.get("our_prediction") is None:
                 continue

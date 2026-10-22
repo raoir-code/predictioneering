@@ -1,0 +1,194 @@
+{
+ "source": "UCDPConflictTerminationDataset_v4_2024_Dyad.csv",
+ "sha256": "37b250d228db2ba51999debc93dd3cea3bdccb536d13b8dc21b9665f8d577ba9",
+ "episodes": 985,
+ "citation": "Kreutz, J. (2010). How and when armed conflicts end. Journal of Peace Research 47(2). UCDP Conflict Termination v4-2024.",
+ "agree": {
+  "bins": [
+   {
+    "lo": 0,
+    "hi": 1,
+    "events": 48,
+    "exposure_years": 617.5,
+    "rate_per_year": 0.07773
+   },
+   {
+    "lo": 1,
+    "hi": 2,
+    "events": 18,
+    "exposure_years": 392.7,
+    "rate_per_year": 0.04584
+   },
+   {
+    "lo": 2,
+    "hi": 5,
+    "events": 19,
+    "exposure_years": 676.0,
+    "rate_per_year": 0.02811
+   },
+   {
+    "lo": 5,
+    "hi": 10,
+    "events": 19,
+    "exposure_years": 539.5,
+    "rate_per_year": 0.03522
+   },
+   {
+    "lo": 10,
+    "hi": 99,
+    "events": 7,
+    "exposure_years": 457.8,
+    "rate_per_year": 0.01529
+   }
+  ],
+  "pooled_rate_per_year": 0.04136,
+  "events": 111,
+  "exposure_years": 2683.5
+ },
+ "peace": {
+  "bins": [
+   {
+    "lo": 0,
+    "hi": 1,
+    "events": 16,
+    "exposure_years": 620.2,
+    "rate_per_year": 0.0258
+   },
+   {
+    "lo": 1,
+    "hi": 2,
+    "events": 8,
+    "exposure_years": 393.4,
+    "rate_per_year": 0.02034
+   },
+   {
+    "lo": 2,
+    "hi": 5,
+    "events": 10,
+    "exposure_years": 676.9,
+    "rate_per_year": 0.01477
+   },
+   {
+    "lo": 5,
+    "hi": 10,
+    "events": 9,
+    "exposure_years": 540.3,
+    "rate_per_year": 0.01666
+   },
+   {
+    "lo": 10,
+    "hi": 99,
+    "events": 5,
+    "exposure_years": 459.3,
+    "rate_per_year": 0.01089
+   }
+  ],
+  "pooled_rate_per_year": 0.01784,
+  "events": 48,
+  "exposure_years": 2690.1
+ },
+ "recur": {
+  "bins": [
+   {
+    "lo": 0,
+    "hi": 1,
+    "events": 0,
+    "exposure_years": 210,
+    "rate_per_year": 0.0
+   },
+   {
+    "lo": 1,
+    "hi": 2,
+    "events": 17,
+    "exposure_years": 201.9,
+    "rate_per_year": 0.08418
+   },
+   {
+    "lo": 2,
+    "hi": 5,
+    "events": 27,
+    "exposure_years": 511.7,
+    "rate_per_year": 0.05277
+   },
+   {
+    "lo": 5,
+    "hi": 10,
+    "events": 14,
+    "exposure_years": 726.0,
+    "rate_per_year": 0.01928
+   },
+   {
+    "lo": 10,
+    "hi": 99,
+    "events": 11,
+    "exposure_years": 3356.8,
+    "rate_per_year": 0.00328
+   }
+  ],
+  "pooled_rate_per_year": 0.01378,
+  "events": 69,
+  "exposure_years": 5006.5
+ },
+ "episode_start": {
+  "afghanistan": "2024-08-12",
+  "armenia": "2017-07-09",
+  "azerbaijan": "2004-06-19",
+  "cambodia": "2020-12-25",
+  "china": "2017-07-09",
+  "drc": "2024-01-25",
+  "eritrea": "2015-03-24",
+  "ethiopia": "2023-06-27",
+  "hamas": "2023-07-06",
+  "hezbollah": "2023-10-18",
+  "india": "2005-01-30",
+  "iran": "2023-12-15",
+  "israel": "2023-10-18",
+  "pakistan": "2024-08-12",
+  "russia": "2024-06-23",
+  "rwanda": "2024-01-25",
+  "saudi": "2015-03-24",
+  "sudan": "2023-04-16",
+  "thailand": "2003-10-27",
+  "ukraine": "2022-02-24",
+  "us": "2024-12-31",
+  "yemen": "2024-02-03",
+  "afghanistan|pakistan": "2024-08-12",
+  "afghanistan|us": "2015-03-03",
+  "armenia|cambodia": "2017-07-09",
+  "armenia|china": "2017-07-09",
+  "armenia|ethiopia": "2017-07-09",
+  "armenia|us": "2017-07-09",
+  "armenia|yemen": "2017-07-09",
+  "azerbaijan|ukraine": "2004-06-19",
+  "azerbaijan|us": "2004-06-19",
+  "cambodia|china": "2017-07-09",
+  "cambodia|ethiopia": "2017-07-09",
+  "cambodia|pakistan": "2020-12-25",
+  "cambodia|rwanda": "2020-12-25",
+  "cambodia|us": "2017-07-09",
+  "cambodia|yemen": "2017-07-09",
+  "china|ethiopia": "2017-07-09",
+  "china|us": "2017-07-09",
+  "china|yemen": "2017-07-09",
+  "drc|rwanda": "2024-01-25",
+  "eritrea|saudi": "2015-03-24",
+  "eritrea|sudan": "2015-03-24",
+  "eritrea|yemen": "2015-03-24",
+  "ethiopia|us": "2017-07-09",
+  "ethiopia|yemen": "2017-07-09",
+  "hamas|israel": "2023-07-06",
+  "hamas|yemen": "2023-07-06",
+  "hezbollah|israel": "2023-10-18",
+  "iran|israel": "2018-04-29",
+  "israel|yemen": "2023-07-06",
+  "pakistan|rwanda": "2020-12-25",
+  "pakistan|us": "2015-03-03",
+  "russia|ukraine": "2022-02-24",
+  "saudi|sudan": "2015-03-24",
+  "saudi|yemen": "2015-03-24",
+  "sudan|yemen": "2015-03-24",
+  "ukraine|us": "2004-06-19",
+  "us|yemen": "2024-02-03"
+ },
+ "computed_at": "2026-10-22T14:22:57.424022+00:00"
+}

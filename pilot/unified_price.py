@@ -286,6 +286,10 @@ def production_prices():
     except Exception as ex:
         print(f"[holds] combine FAILED ({ex!r}); holds contracts unpriced")
         for k in [k for k in _PP if "@" in k]: _PP.pop(k)
+    try:                                   # Oct 22: families B (unified-gap-v0) and C (agreement-v0), pilot/ceasefire_bc.py
+        import ceasefire_bc as _BC; _BC.price_all(_PP, G, now)
+    except Exception as ex:
+        print(f"[ceasefire-bc] FAILED ({ex!r}); effective-ceasefire and agreement contracts unpriced")
     print(f"[unified] {len(_PP)} open contracts priced in {len({v['group'] for v in _PP.values()})} groups"); return _PP
 
 if __name__ == "__main__":

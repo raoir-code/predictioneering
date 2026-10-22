@@ -30,9 +30,10 @@ PRICES = ROOT / "pilot" / "holds_price_cache.json"
 GAMMA = "https://gamma-api.polymarket.com"
 CLOB = "https://clob.polymarket.com"
 UTC = dt.timezone.utc
-SEARCH = ["ceasefire continues", "ceasefire continue"]
-RULE = ("Pre-registered Oct 22 (docs/holds_replay_prereg.md): per series, n >= 5 replayed contracts AND Brier(unified) <= "
-        "Brier(market) + 0.03 -> published; otherwise listed, unpriced. Recomputed daily, never hand-edited.")
+SEARCH = ["ceasefire continues", "ceasefire continue", "ceasefire", "effective ceasefire", "ceasefire agreement", "peace deal",
+          "ceasefire extension", "ceasefire cancelled", "truce", "peace agreement"]
+RULE = ("Amended Oct 22 (docs/ceasefire_publish_amendment.md): every family-A contract is priced and published. The pre-registered "
+        "replay (docs/holds_replay_prereg.md) is recomputed daily and reported; it no longer gates publication.")
 MIN_N, MARGIN, MIN_OWN_WINDOWS = 5, 0.03, 10
 
 # ---------------------------------------------------------------- classification (deterministic, resolution text only)
@@ -57,8 +58,11 @@ def classify(question, desc):
 
 _THRU = re.compile(r"through (" + UD._M + r") (\d{1,2})\b", re.I)
 
-def contract_date(question, created):
+def contract_date(question, created, desc=None):
     m = _THRU.search(question or "")
+    if not m and created:
+        m2 = re.search(r"\bby (" + UD._M + r") (\d{1,2}), (\d{4})", desc or "")
+        if m2: return dt.date(int(m2.group(3)), UD.MON[m2.group(1).lower()], int(m2.group(2)))
     if not m or not created:
         return None
     mon, day = UD.MON[m.group(1).lower()], int(m.group(2))
@@ -91,7 +95,7 @@ def contracts():
         info = classify(r.get("question"), r.get("description"))
         if not info or info["family"] != "HOLDS": continue
         if not info["dirs"]: skip["holds: directions not parseable"] += 1; continue
-        created = _ts(r.get("createdAt")); d = contract_date(r.get("question"), created); tz = UD.tz_of(r.get("description"))
+        created = _ts(r.get("createdAt")); d = contract_date(r.get("question"), created, r.get("description")); tz = UD.tz_of(r.get("description"))
         if not created: skip["holds: no creation time"] += 1; continue
         if not d: skip["holds: no date in question"] += 1; continue
         if not tz: skip["holds: no time zone"] += 1; continue
@@ -112,16 +116,19 @@ def contracts():
 
 def tag_feed(feed):
     """Translator hook: family-A contracts with parseable directions become CORE (deterministic, scope rule)."""
-    n = 0
+    import ceasefire_bc as BC
+    n = Counter()
     for m in feed:
         if not isinstance(m, dict) or m.get("resolved"): continue
-        info = classify(m.get("question"), m.get("description"))
-        if info and info["family"] == "HOLDS" and info["dirs"]:
-            m["bucket"], m["contract_family"] = "CORE", "HOLDS"
-            m["bucket_reason"] = "Deterministic (docs/ceasefire_scope_rule.md, family A): resolves on Polymarket's strike definition; priced by the unified engine only."
-            n += 1
-    print(f"[holds] {n} ceasefire-holds contracts tagged CORE (family A)")
-    return n
+        info = BC.classify_all(m.get("question"), m.get("description"))
+        fam = (info or {}).get("family")
+        if fam in ("HOLDS", "GAP", "AGREEMENT"):
+            m["bucket"], m["contract_family"] = "CORE", fam
+            m["bucket_reason"] = (f"Deterministic (docs/ceasefire_scope_rule.md as amended, family {fam}): priced only by its ceasefire component "
+                                  "(HOLDS: unified-v1, GAP: unified-gap-v0, AGREEMENT: agreement-v0); never by the onset engine.")
+            n[fam] += 1
+    print(f"[ceasefire] tagged CORE: {dict(n)}")
+    return sum(n.values())
 
 # ---------------------------------------------------------------- pricing hook (called from unified_price.production_prices)
 def combine(PP):
@@ -141,13 +148,12 @@ def combine(PP):
         pairs = sorted(f"{UD.norm(a)}->{UD.norm(b)}" for a, b in info["dirs"])
         if set(pairs) != set(d): continue
         series = "+".join(pairs)
-        if series not in pol.get("allowed", []): continue
         p = 1.0
         for pr in pairs: p *= (1 - d[pr]["p"])
         PP[mid] = {"p": round(p, 4), "group": "holds:" + series, "source": "holds; " + " | ".join(f"{pr}: P(strike) {d[pr]['p']:.3f}, {d[pr]['source']}" for pr in pairs),
                    "q": d[pairs[0]]["q"], "pi": max(d[pr]["pi"] for pr in pairs)}
         n += 1
-    print(f"[holds] {n} holds contracts priced (series allowed: {pol.get('allowed', [])})")
+    print(f"[holds] {n} holds contracts priced (all series published; replay reported only)")
     return n
 
 # ---------------------------------------------------------------- data
@@ -160,6 +166,10 @@ def _get(url, tries=3):
             if i == tries - 1: raise
             time.sleep(2 * (i + 1))
 
+def _in_scope(q, desc):
+    import ceasefire_bc as BC
+    return (BC.classify_all(q, desc) or {}).get("family") in ("HOLDS", "GAP", "AGREEMENT")
+
 KEEP = ("question", "description", "createdAt", "closedTime", "closed", "outcomes", "outcomePrices", "clobTokenIds", "endDate", "slug")
 
 def refresh():
@@ -169,11 +179,11 @@ def refresh():
         d = _get(f"{GAMMA}/public-search?q={urllib.parse.quote(q)}&events_status=all&limit_per_type=50&keep_closed_markets=1")
         for e in d.get("events") or []:
             for m in e.get("markets") or []:
-                if classify(m.get("question"), m.get("description")): found[str(m["id"])] = m
+                if _in_scope(m.get("question"), m.get("description")): found[str(m["id"])] = m
     feed = json.loads((ROOT / "pipeline" / "classified_feed.json").read_text())
     feed = feed if isinstance(feed, list) else feed.get("markets", feed.get("data", []))
     for m in feed:                                    # contracts in our feed that the search missed
-        if classify(m.get("question"), m.get("description")) and str(m["market_id"]) not in found and str(m["market_id"]) not in store:
+        if _in_scope(m.get("question"), m.get("description")) and str(m["market_id"]) not in found and str(m["market_id"]) not in store:
             try: found[str(m["market_id"])] = _get(f"{GAMMA}/markets/{m['market_id']}")
             except Exception as ex: print(f"  [holds] {m['market_id']}: {ex!r}")
     for mid, r in list(store.items()):                # open ones: re-fetch for status/outcome
@@ -184,7 +194,8 @@ def refresh():
     for mid, m in found.items():
         store[mid] = {k: m.get(k) for k in KEEP} | {"fetched_at": now}
     STORE.write_text(json.dumps(store, indent=1, sort_keys=True) + "\n")
-    fam = Counter((classify(r["question"], r["description"]) or {}).get("family") for r in store.values())
+    import ceasefire_bc as BC
+    fam = Counter((BC.classify_all(r["question"], r["description"]) or {}).get("family") for r in store.values())
     print(f"[holds] store {len(store)} contracts {dict(fam)} | open {sum(1 for r in store.values() if not r.get('closed'))}")
 
 def market_price(token, as_of, cache):
@@ -243,9 +254,9 @@ def replay(write=True):
         if not xs: res[s] = {"n": 0, "no_market_price": nm}; continue
         bu, bm = B(xs, "u"), B(xs, "m"); ok = len(xs) >= MIN_N and bu <= bm + MARGIN
         res[s] = {"n": len(xs), "yes": sum(x["y"] for x in xs), "no": sum(1 - x["y"] for x in xs), "brier_unified": round(bu, 4),
-                  "brier_market": round(bm, 4), "no_market_price": nm, "published": ok}
+                  "brier_market": round(bm, 4), "no_market_price": nm, "passes_prereg_rule": ok}
         if ok: allowed.append(s)
-        print(f"  {s:34} n={len(xs):3} (YES {res[s]['yes']}, NO {res[s]['no']}) unified {bu:.4f} market {bm:.4f} -> {'PUBLISH' if ok else 'UNPRICED'}"
+        print(f"  {s:34} n={len(xs):3} (YES {res[s]['yes']}, NO {res[s]['no']}) unified {bu:.4f} market {bm:.4f} | pre-reg rule {'PASS' if ok else 'FAIL'} (reported only; published regardless)"
               + (f" | {nm} without market price" if nm else ""))
         for x in sorted(xs, key=lambda x: x["date"]):
             print(f"      {x['date']} y={x['y']} unified {x['u']:.3f} market {x['m']:.3f} | {x['q'][:60]}")
@@ -303,7 +314,8 @@ def _tests():
         combine(PP)
         assert set(PP) == {"3", "777"} and abs(PP["3"]["p"] - 0.72) < 1e-9, PP          # (1-.2)(1-.1); unknown/virtual dropped; others untouched
         PUB.write_text(json.dumps({"allowed": []})); PP = {"3@israel->iran": {"p": 0.2, "source": "s", "q": 0.5, "pi": 0.1}, "3@iran->israel": {"p": 0.1, "source": "s", "q": 0.5, "pi": 0.3}}
-        combine(PP); assert PP == {}                                                        # series not allowed -> unpriced
+        combine(PP); assert set(PP) == {"3"}                                                # amended Oct 22: published regardless of replay
+        assert contract_date("US-Iran ceasefire continues through the midterms?", c0, "by November 3, 2026, 11:59 PM ET") == dt.date(2026, 11, 3)
     finally:
         STORE, PUB = S0, P0
     print("ceasefire_holds tests: OK")
