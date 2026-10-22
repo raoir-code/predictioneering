@@ -18,3 +18,6 @@
    Publication is unaffected (everything in scope is published).
 6. Caveat: development data -- C0's failure on these contracts motivated C1. Not confirmation; the real test is forward.
 7. Out of scope here: the talks state (C2), provisions (family E).
+8. Amendment (Oct 22, before any C1 replay; made after seeing only the PA-X prior fit, no Polymarket outcome): a type with
+   < 20 PA-X events has an unidentified between-conflict spread (EXTENSION: 6 events, MLE sigma 0.05 at the grid boundary).
+   Such types keep their own median rate and take the CEASEFIRE sigma (2.0, the best-identified heterogeneity).
