@@ -20,3 +20,13 @@ either model is pre-registered (rule + spec) before it is replayed again.
 
 Tier 2: unified-v1 (A) and unified-gap-v0 (B) are inside the Tier 2 rule as written (unified machinery); agreement-v0 (C) is
 reported as its own stratum, outside Tier 2.
+
+## Scope addition (Oct 22, afternoon): normalization between conflict dyads (family E2)
+- "X and Y normalize relations" contracts (resolution: both officially announce diplomatic relations / a formal normalization
+  agreement) are family C, type DEAL, priced by the production C model, when X|Y is a conflict dyad: an actor pair we already
+  price CORE strike contracts for (data-derived from the feed, no hand list). Third-country normalization (e.g. Israel-Saudi,
+  Abraham Accords joiners) and recognitions stay out of scope (diplomacy, not conflict).
+- Not yet in scope, by event class (a new family, not withheld): (E1) a deal containing a named term ("Ukraine agrees to cede
+  territory", "give up the rest of Donbas", "agrees not to join NATO") and war outcomes (withdrawals, territorial control).
+  Reason: no defensible reference class yet for P(term | this deal); PA-X has 14 interstate deals (3 with territorial provisions),
+  and a generic rate repeats the reference-class error C0 and C1 made.

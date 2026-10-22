@@ -31,7 +31,7 @@ GAMMA = "https://gamma-api.polymarket.com"
 CLOB = "https://clob.polymarket.com"
 UTC = dt.timezone.utc
 SEARCH = ["ceasefire continues", "ceasefire continue", "ceasefire", "effective ceasefire", "ceasefire agreement", "peace deal",
-          "ceasefire extension", "ceasefire cancelled", "truce", "peace agreement"]
+          "ceasefire extension", "ceasefire cancelled", "truce", "peace agreement", "normalize relations"]
 RULE = ("Amended Oct 22 (docs/ceasefire_publish_amendment.md): every family-A contract is priced and published. The pre-registered "
         "replay (docs/holds_replay_prereg.md) is recomputed daily and reported; it no longer gates publication.")
 MIN_N, MARGIN, MIN_OWN_WINDOWS = 5, 0.03, 10

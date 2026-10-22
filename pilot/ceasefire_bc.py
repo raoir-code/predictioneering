@@ -44,7 +44,10 @@ ACTORS = [(r"\brussia", "russia"), (r"\bukrain", "ukraine"), (r"\bisrael", "isra
           (r"\bhouthi", "houthi"), (r"\bsudan", "sudan"), (r"\bthailand", "thailand"), (r"\bcambodia", "cambodia"), (r"\bpakistan", "pakistan"),
           (r"\bafghanistan", "afghanistan"), (r"\bvenezuela", "venezuela"), (r"\byemen", "yemen"), (r"\bindia\b", "india"),
           (r"\barmenia", "armenia"), (r"\bazerbaijan", "azerbaijan"), (r"\bethiopia", "ethiopia"), (r"\beritrea", "eritrea"),
-          (r"\bcongo|\bdrc\b", "drc"), (r"\brwanda", "rwanda"), (r"\bm23\b", "m23")]       # lookup table, not per-pair logic
+          (r"\bcongo|\bdrc\b", "drc"), (r"\brwanda", "rwanda"), (r"\bm23\b", "m23"), (r"\bsyria", "syria"), (r"\biraq", "iraq"),
+          (r"\bjordan", "jordan"), (r"\bturkey|t[uü]rkiye", "turkey"), (r"\bqatar", "qatar"), (r"\bkuwait", "kuwait"), (r"\bbahrain", "bahrain"),
+          (r"\bemirates|\buae\b", "uae"), (r"\boman\b", "oman"), (r"\begypt", "egypt"), (r"\bchina", "china"), (r"\btaiwan", "taiwan"),
+          (r"\bnorth korea", "northkorea"), (r"\bsouth korea", "southkorea"), (r"\bjapan", "japan"), (r"\bphilippines", "philippines")]       # lookup table, not per-pair logic
 PRIOR_KEY = {"CEASEFIRE": "agree", "EXTENSION": "agree", "DEAL": "peace", "BREAKDOWN": "recur"}
 
 def actor_key(title):
@@ -60,6 +63,19 @@ def dir_pair(ini, ter):
     a, b = f(ini), f(ter)
     return f"{a}->{UP.FACTION_HOME.get(b, b)}"
 
+_CD = None
+def conflict_dyads():
+    """Actor sets we already price strike markets for (CORE strike contracts in the feed): data-derived, no hand list."""
+    global _CD
+    if _CD is None:
+        try:
+            f = json.loads((ROOT / "pipeline" / "classified_feed.json").read_text()); f = f if isinstance(f, list) else f.get("markets", [])
+            _CD = {actor_key((m.get("dyad") or "").replace("-", " ")) for m in f if m.get("bucket") == "CORE" and not m.get("contract_family") and m.get("dyad")}
+            _CD = {k for k in _CD if "|" in k}
+        except Exception:
+            _CD = set()
+    return _CD
+
 def classify_all(q, desc):
     h = CH.classify(q, desc)
     if h and h["family"] == "HOLDS": return h
@@ -70,6 +86,9 @@ def classify_all(q, desc):
         if m1: return {"family": "GAP", "N": int(m1.group(1)), "dirs": [dir_pair(m1.group(2), m1.group(3))]}
         return {"family": "GAP", "N": None, "dirs": None}
     t = (q or "").lower(); dl = d.lower()
+    if re.search(r"normaliz", t) and re.search(r"diplomatic relations|normalization agreement", dl):     # Oct 22: family E2
+        ak = actor_key(q)
+        return {"family": "AGREEMENT", "type": "DEAL", "actors": ak} if ak in conflict_dyads() else None
     if not re.search(r"ceasefire|cease-fire|truce|armistice|peace", t): return None
     if re.search(r"attend|take place|\btalks\b|referendum|peacekeep|combo|meeting|summit|nobel|envoy", t): return {"family": "PROCESS"}
     if not re.search(r"agree|deal|signed|announce|cancel|framework|extension|halt|suspension", dl): return None
@@ -447,6 +466,11 @@ def _tests():
     assert classify_all("Israel x Hamas ceasefire cancelled by December 31?", "resolve Yes if the ceasefire agreement is cancelled")["type"] == "BREAKDOWN"
     assert classify_all("Will Steve Witkoff attend a US x Iran diplomatic meeting by December 31, 2026?", "x")  is None
     assert classify_all("Russia-Ukraine peace talks by October 31, 2026?", "agree")["family"] == "PROCESS"
+    global _CD; _s = _CD; _CD = {"israel|syria", "israel|lebanon"}
+    nd = "resolve to Yes if both Israel and Syria officially announce the establishment of diplomatic relations"
+    assert classify_all("Israel and Syria normalize relations by December 31, 2026?", nd) == {"family": "AGREEMENT", "type": "DEAL", "actors": "israel|syria"}
+    assert classify_all("Israel and Saudi Arabia normalize relations before 2027?", nd.replace("Syria", "Saudi Arabia")) is None   # not a conflict dyad
+    _CD = _s
     c0 = dt.datetime(2026, 5, 13, tzinfo=UTC)
     assert due_date("Russia x Ukraine ceasefire agreement by October 31, 2026?", "", c0) == dt.date(2026, 10, 31)
     assert due_date("Ukraine signs peace deal with Russia before 2027?", "", c0) == dt.date(2026, 12, 31)
