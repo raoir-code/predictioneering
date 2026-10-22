@@ -2312,7 +2312,12 @@ def run_translator():
 
     feed  = json.loads(CLASSIFIED_FEED.read_text())
     cache = _load_cache()
-    core  = [m for m in feed if m.get("bucket") == "CORE" and not m.get("resolved")]
+    try:                                   # Oct 22: family A "ceasefire holds" (docs/ceasefire_scope_rule.md), deterministic
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pilot")); import ceasefire_holds as _CH
+        _CH.tag_feed(feed)
+    except Exception as ex:
+        print(f"[holds] tagging FAILED ({ex!r}); ceasefire contracts keep their classifier bucket")
+    core  = [m for m in feed if m.get("bucket") == "CORE" and not m.get("resolved") and m.get("contract_family") != "HOLDS"]
 
     mode = "SCHOLAR-ONLY" if SCHOLAR_ONLY else "FULL"
     print(f"\nTranslator [{mode}]: {len(core)} CORE markets")
@@ -2378,7 +2383,10 @@ def _append_log(feed: list):
                 continue
             if market.get("resolved"):
                 continue
-            if market.get("our_prediction") is None:
+            if market.get("contract_family") == "HOLDS":
+                if market.get("pricing_component") != "unified-v1":
+                    continue
+            elif market.get("our_prediction") is None:
                 continue
             entry = {
                 "timestamp":                now,
@@ -2406,6 +2414,7 @@ def _append_log(feed: list):
                 "days_remaining":           market.get("days_remaining"),
                 "model_version":            MODEL_VERSION,
                 "pricing_component":        market.get("pricing_component", "engine"),
+                "contract_family":          market.get("contract_family"),
                 "engine_conditional_p":     market.get("engine_conditional_p"),
                 "during_war":               market.get("during_war"),
                 "parent_event_relation":    market.get("parent_event_relation"),

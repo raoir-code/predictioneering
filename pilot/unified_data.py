@@ -89,6 +89,11 @@ def load():
         out.append({"id": mid, "pair": f"{norm(m.group(1))}->{norm(m.group(2))}", "kind": kind, "fp": fp, "tz": tz, "start": s, "end": e, "date": d,
                     "outcome": outcome, "known": known, "open": mid in open_ids and outcome is None, "question": r.get("question"),
                     "sfp": struct_fp(r.get("description"), m.group(1), m.group(2)), "members": members_of(r.get("description"))})
+    try:                                   # Oct 22: family A "ceasefire holds" contracts (pilot/ceasefire_holds.py), own "H" groups
+        import ceasefire_holds as _CH
+        hc, hs = _CH.contracts(); out += hc; skip.update(hs)
+    except Exception as ex:
+        skip[f"holds contracts failed: {ex!r}"[:90]] += 1
     return out, skip
 
 def definition(desc):

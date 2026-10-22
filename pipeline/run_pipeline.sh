@@ -51,6 +51,8 @@ echo "Engine done." | tee -a "$LOGFILE"
 echo "[4/6] Translator..." | tee -a "$LOGFILE"
 echo "[rules] Rules text + listing dates for new contracts (non-fatal)..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.market_rules >> "$LOGFILE" 2>&1 || echo "  [rules] fetch failed (non-fatal)" | tee -a "$LOGFILE"
+echo "[holds] Ceasefire-holds contracts: refresh + pre-registered replay -> publish policy (non-fatal)..." | tee -a "$LOGFILE"
+$PYTHON -u pilot/ceasefire_holds.py --refresh --replay >> "$LOGFILE" 2>&1 || echo "  [holds] refresh/replay failed (non-fatal; previous policy kept)" | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.translator >> "$LOGFILE" 2>&1
 echo "[scope] Contract-scope refresh for new kinetic markets (non-fatal; G4)..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.backfill_contract_scopes >> "$LOGFILE" 2>&1 || echo "  [scope] refresh failed (non-fatal)" | tee -a "$LOGFILE"
@@ -88,7 +90,7 @@ if [ -f "predictions/log.jsonl" ]; then cp predictions/log.jsonl docs/prediction
 if [ -f "predictions/brier_log.jsonl" ]; then cp predictions/brier_log.jsonl docs/brier_log.jsonl; fi
 
 echo "Pushing to GitHub..." | tee -a "$LOGFILE"
-for f in pipeline/classified_feed.json predictions/log.jsonl pipeline/translator_cache.json predictions/brier_log.jsonl predictions/brier_summary.json pipeline/dyad_configs.json pipeline/context_changelog.jsonl pipeline/node_score_history.jsonl pipeline/.context_cooldown_state.json pipeline/node_memory_state.json pipeline/theater_state.json pipeline/contract_scopes.json pipeline/market_meta.json pipeline/market_rules.json pilot/news_strike_labels.jsonl pilot/unified_publish.json docs/classified_feed.json docs/predictions_log.jsonl docs/brier_log.jsonl docs/index.html; do
+for f in pipeline/classified_feed.json predictions/log.jsonl pipeline/translator_cache.json predictions/brier_log.jsonl predictions/brier_summary.json pipeline/dyad_configs.json pipeline/context_changelog.jsonl pipeline/node_score_history.jsonl pipeline/.context_cooldown_state.json pipeline/node_memory_state.json pipeline/theater_state.json pipeline/contract_scopes.json pipeline/market_meta.json pipeline/market_rules.json pilot/news_strike_labels.jsonl pilot/unified_publish.json pilot/ceasefire_markets.json pilot/holds_publish.json pilot/holds_price_cache.json docs/classified_feed.json docs/predictions_log.jsonl docs/brier_log.jsonl docs/index.html; do
     if [ -f "$f" ]; then
         $GIT add "$f"
     else

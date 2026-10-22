@@ -606,7 +606,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
     with open(CLASSIFIED_FEED) as f:
         markets = json.load(f)
 
-    core = [m for m in markets if m.get("bucket") == "CORE" and not m.get("resolved")]
+    core = [m for m in markets if m.get("bucket") == "CORE" and not m.get("resolved") and m.get("contract_family") != "HOLDS"]
     if filter_dyad:
         core = [m for m in core if filter_dyad.lower() in (m.get("dyad") or "").lower()]
 

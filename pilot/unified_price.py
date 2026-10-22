@@ -155,7 +155,8 @@ def price_group(grp, as_of, P, opens, G, pair):
     ev, npairs, linked = evidence(grp, pair, as_of, G)
     nd = set().union(*[news_dates(p, as_of, z) for p in npairs])
     seed = None
-    if P["via"] == "class_prior" and not any(y == 1 for _, _, y in ev) and not nd:
+    own_ok = str(grp[0].get("sfp") or "").startswith("H") and len(ev) >= 10     # Oct 22 pre-reg: holds groups with >= 10 settled windows of their own
+    if P["via"] == "class_prior" and not any(y == 1 for _, _, y in ev) and not nd and not own_ok:
         return {}, {"unpriced": "no fitted history and no positive evidence of fighting (engine decides onset)"}
     src = ("own windows" if ev else "news only") + (f" + {len(linked)} member groups" if linked else "")
     if not ev and not nd:
@@ -280,6 +281,11 @@ def production_prices():
         if not d or "unpriced" in d: continue
         for mid, p in pr.items():
             _PP[mid] = {"p": p, "group": gk, "source": d["source"], "q": round(d["q"], 3), "pi": round(d["pi"], 3)}
+    try:
+        import ceasefire_holds as _CH; _CH.combine(_PP)
+    except Exception as ex:
+        print(f"[holds] combine FAILED ({ex!r}); holds contracts unpriced")
+        for k in [k for k in _PP if "@" in k]: _PP.pop(k)
     print(f"[unified] {len(_PP)} open contracts priced in {len({v['group'] for v in _PP.values()})} groups"); return _PP
 
 if __name__ == "__main__":
