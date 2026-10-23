@@ -1659,6 +1659,10 @@ def _run_action_bridge_candidate_pass(feed: list, cache: dict):
 
     for market in feed:
         if market.get("translator_verdict") != "TRANSLATED":
+            # Oct 23: clear any status left by an earlier run. A market that stops being translated (EXPIRED) kept its old
+            # "candidate_ready" status, and the activation pass acted on it (5183420 failed closed Oct 21-23).
+            if market.get("action_bridge_candidate_status") not in (None, "not_eligible_not_translated"):
+                market["action_bridge_candidate_status"] = "not_eligible_not_translated"
             continue
 
         before = {
