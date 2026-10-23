@@ -183,10 +183,61 @@ def pull_live(start="2026-01-01"):
                                        "sha256": hashlib.sha256(f.read_bytes()).hexdigest(), "note": "LIVE signal; timestamp = ACLED last-update time (walk-forward safe, conservative)"}
     man_p.write_text(json.dumps(man, indent=2) + "\n")
 
+FULL = ROOT / "data" / "external" / "local_full"          # entirely gitignored (data AND manifest): offline refit only
+FULL_KEEP = ("event_id_cnty", "event_date", "year", "time_precision", "event_type", "sub_event_type", "actor1", "assoc_actor_1", "inter1",
+             "actor2", "assoc_actor_2", "inter2", "country", "admin1", "fatalities", "timestamp")
+MIL = re.compile(r"^Military Forces of (?:the )?(.+?) \(")
+
+def interstate(r):
+    """Keep rows involving a state's (or coalition's) military outside its own country, or two different states' militaries."""
+    if COALITION.match(r.get("actor1") or ""): return True
+    homes = []
+    for k in ("actor1", "assoc_actor_1", "actor2", "assoc_actor_2"):
+        for part in re.split(r";\s*", r.get(k) or ""):
+            m = MIL.match(part.strip())
+            if m: homes.append(m.group(1))
+    c = r.get("country")
+    return any(h != c for h in homes) or len(set(homes)) >= 2
+
+def pull_full(start="2015-01", end=None, types=("Explosions/Remote violence", "Battles")):
+    """Worldwide, month by month, filtered by interstate(); one file per (month, type). Resumable: finished months are skipped,
+    except the current month, which is always re-pulled. Prints a per-month row count."""
+    FULL.mkdir(parents=True, exist_ok=True); man_p = FULL / "MANIFEST.json"
+    man = json.loads(man_p.read_text()) if man_p.exists() else {"files": {}}
+    today = dt.date.today(); m = dt.date(int(start[:4]), int(start[5:7]), 1)
+    stop = dt.date(int(end[:4]), int(end[5:7]), 1) if end else dt.date(today.year, today.month, 1)
+    tok = token()
+    while m <= stop:
+        last = min(today, dt.date(m.year + (m.month == 12), m.month % 12 + 1, 1) - dt.timedelta(1))
+        for ty in types:
+            fn = f"{m:%Y-%m}_{'battles' if ty == 'Battles' else 'explosions'}.jsonl"
+            if fn in man["files"] and m < dt.date(today.year, today.month, 1): continue
+            kept, seen, page = [], 0, 1
+            while True:
+                for attempt in range(5):
+                    try:
+                        j = read(tok, event_date=f"{m}|{last}", event_date_where="BETWEEN", event_type=ty, limit=PAGE, page=page); break
+                    except Exception as ex:
+                        if attempt == 4: raise
+                        print(f"    retry {attempt + 1} ({ex!r})", flush=True); time.sleep(10 * (attempt + 1)); tok = token()
+                d = j.get("data") or []; seen += len(d)
+                kept += [{k: x.get(k) for k in FULL_KEEP} for x in d if interstate(x)]
+                if len(d) < PAGE: break
+                page += 1; time.sleep(0.5)
+            f = FULL / fn; f.write_text("".join(json.dumps(r) + "\n" for r in kept))
+            man["files"][fn] = {"query": {"from": str(m), "to": str(last), "event_type": ty, "filter": "interstate"}, "rows_seen": seen,
+                                "rows_kept": len(kept), "pulled_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+                                "sha256": hashlib.sha256(f.read_bytes()).hexdigest()}
+            man_p.write_text(json.dumps(man, indent=2) + "\n")
+            print(f"  {m:%Y-%m} {ty[:10]:10}: {seen:6d} scanned, {len(kept):5d} kept", flush=True)
+        m = dt.date(m.year + (m.month == 12), m.month % 12 + 1, 1)
+    print(f"done: {len(man['files'])} files in {FULL}")
+
 if __name__ == "__main__":
     if "--test" in sys.argv: test()
     elif "--pull" in sys.argv: pull()
     elif "--actors" in sys.argv: actors()
     elif "--world" in sys.argv: pull_world()
+    elif "--full" in sys.argv: pull_full()
     elif "--live" in sys.argv: pull_live()
     else: print("use --test | --pull | --actors")

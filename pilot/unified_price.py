@@ -24,8 +24,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import unified as U, unified_data as UD, news_strikes as NS
 
 ROOT = Path(__file__).resolve().parent.parent
-W = json.loads((ROOT / "pilot" / "priors_world.json").read_text())
-F = json.loads((ROOT / "analysis" / "world_fits.json").read_text())
+LOCAL = ROOT / "pilot" / "local"                         # gitignored local override (offline refit), used when present
+W = json.loads(((LOCAL / "priors_world.json") if (LOCAL / "priors_world.json").exists() else (ROOT / "pilot" / "priors_world.json")).read_text())
+F = json.loads(((LOCAL / "world_fits.json") if (LOCAL / "world_fits.json").exists() else (ROOT / "analysis" / "world_fits.json")).read_text())
+PRIORS_SOURCE = "local" if (LOCAL / "priors_world.json").exists() else "repo"
 FACTION = {"houthi": "yemenhouthi"}; FACTION_HOME = {"houthi": "yemen"}             # lookup tables, not per-pair logic
 LEADS = {"saudiarabia": ["operationrestoringhope", "operationdecisivestorm"], "turkey": ["operationpeacespring"]}
 NEWS_CATCH = 0.36        # measured: P(report | strike in last 3 days), Israel->Lebanon Jul 25-Oct 19 (v2 labels)
