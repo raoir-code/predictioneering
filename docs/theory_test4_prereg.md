@@ -4,8 +4,11 @@ H5 (Werner 1999; Fortna 2004; Hartzell, Hoddie & Rothchild 2001): the hazard tha
 declines with the time since its last fighting episode ended (the quiet-side counterpart of the duration dependence found in tests 1-3).
 Data: the local offline pull (2015-01 -> last complete day), same strike filter and actor rules as the unified world fit
 (air/drone + shelling/missile; initiator = a state's military, coalition or de facto authority, striking outside its own country).
-Episodes per directed pair: strike days split at gaps > G days, G in {14, 30, 60}. Quiet spell = from the day after an episode's
-last strike to the first strike of the next episode (event) or the data end (censored). A pair's first episode opens no spell.
+Episodes per directed pair: strike days split at gaps > G days, G in {14, 30, 60}. Quiet spell: its clock starts G + 1 days after an
+episode's last strike (the episode counts as over only then; a restart inside the first G days is impossible by construction) and
+runs to the first strike of the next episode (event) or the data end (censored). A pair's first episode opens no spell.
+(Design check before any real data: with the clock starting the day after the last strike, synthetic data with a CONSTANT hazard
+produced spurious positive coefficients of +0.3 to +1.0; with the clock at G + 1 the null gives ~0 and built-in hardening is recovered.)
 Model: discrete-time hazard logit on WEEKS of quiet spells; y = 1 in the week the next episode starts. Covariates:
 log(weeks since the spell began), log(1 + prior episodes of the pair), log(length in days of the episode that preceded the spell),
 class (state_vs_state / cross_border_nonstate / defacto_authority / coalition, by the world-fit rule). Errors clustered by pair.
