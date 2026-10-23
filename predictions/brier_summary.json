@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-10-22T13:44:09.050241+00:00",
-  "n_resolved": 163,
-  "brier_conditional_mean": 0.307265,
-  "brier_engine_mean": 0.414339,
-  "brier_market_mean": 0.136705,
-  "edge_vs_market": -0.17056,
+  "last_updated": "2026-10-23T13:58:29.878300+00:00",
+  "n_resolved": 165,
+  "brier_conditional_mean": 0.306115,
+  "brier_engine_mean": 0.419918,
+  "brier_market_mean": 0.136272,
+  "edge_vs_market": -0.169843,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -1798,6 +1798,28 @@
       "brier_conditional": 0.217996,
       "brier_market": 0.0121,
       "resolved_at": "2026-10-22T13:44:03.063503+00:00"
+    },
+    {
+      "market_id": "5183423",
+      "market_label": "Israel military action against Lebanon on October 22?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.5321,
+      "market_p": 0.63,
+      "brier_conditional": 0.21893,
+      "brier_market": 0.1369,
+      "resolved_at": "2026-10-23T13:58:19.242140+00:00"
+    },
+    {
+      "market_id": "5183420",
+      "market_label": "Israel military action against Lebanon on October 19?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.5462,
+      "market_p": 0.745,
+      "brier_conditional": 0.205934,
+      "brier_market": 0.065025,
+      "resolved_at": "2026-10-23T13:58:21.472558+00:00"
     }
   ]
 }
