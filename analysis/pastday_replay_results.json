@@ -1,0 +1,338 @@
+{
+ "results": {
+  "iran->arabcountry": {
+   "n": 1,
+   "yes": 1,
+   "brier_unified": 0.5034,
+   "brier_market": 0.0003
+  },
+  "iran->gulfstate": {
+   "n": 1,
+   "yes": 0,
+   "brier_unified": 0.0402,
+   "brier_market": 0.003
+  },
+  "israel->lebanon": {
+   "n": 30,
+   "yes": 29,
+   "brier_unified": 0.034,
+   "brier_market": 0.0338
+  },
+  "saudiarabia->yemen": {
+   "n": 5,
+   "yes": 5,
+   "brier_unified": 0.189,
+   "brier_market": 0.104
+  },
+  "overall": {
+   "n": 37,
+   "brier_unified": 0.0678,
+   "brier_market": 0.0415,
+   "logloss_unified": 0.2468,
+   "logloss_market": 0.1536
+  }
+ },
+ "skipped": {
+  "unpriced: no fitted history and no positive evidence of figh": 14,
+  "settled within 12h of the day's end": 9,
+  "unpriced: no evidence of its own, none in the reverse direct": 5
+ },
+ "rows": [
+  {
+   "id": "2851436",
+   "pair": "iran->gulfstate",
+   "y": 0,
+   "u": 0.2005,
+   "m": 0.0545,
+   "q": "Iran military action against a Gulf State on July 31?"
+  },
+  {
+   "id": "3253035",
+   "pair": "iran->arabcountry",
+   "y": 1,
+   "u": 0.2905,
+   "m": 0.983,
+   "q": "Will Iran target a Arab country on August 31, 2026?"
+  },
+  {
+   "id": "4178253",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9229,
+   "m": 0.958,
+   "q": "Israel military action against Lebanon on September 11?"
+  },
+  {
+   "id": "4178254",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9158,
+   "m": 0.67,
+   "q": "Israel military action against Lebanon on September 12?"
+  },
+  {
+   "id": "4178256",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9417,
+   "m": 0.959,
+   "q": "Israel military action against Lebanon on September 14?"
+  },
+  {
+   "id": "4178257",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9345,
+   "m": 0.97,
+   "q": "Israel military action against Lebanon on September 15?"
+  },
+  {
+   "id": "4178258",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9273,
+   "m": 0.984,
+   "q": "Israel military action against Lebanon on September 16?"
+  },
+  {
+   "id": "4178259",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.941,
+   "m": 0.984,
+   "q": "Israel military action against Lebanon on September 17?"
+  },
+  {
+   "id": "4178260",
+   "pair": "israel->lebanon",
+   "y": 0,
+   "u": 0.9507,
+   "m": 0.93,
+   "q": "Israel military action against Lebanon on September 18?"
+  },
+  {
+   "id": "4178261",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9434,
+   "m": 0.9995,
+   "q": "Israel military action against Lebanon on September 19?"
+  },
+  {
+   "id": "4178262",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9363,
+   "m": 0.9885,
+   "q": "Israel military action against Lebanon on September 20?"
+  },
+  {
+   "id": "4178263",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9292,
+   "m": 0.967,
+   "q": "Israel military action against Lebanon on September 21?"
+  },
+  {
+   "id": "4178264",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9221,
+   "m": 0.986,
+   "q": "Israel military action against Lebanon on September 22?"
+  },
+  {
+   "id": "4178265",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9152,
+   "m": 0.9,
+   "q": "Israel military action against Lebanon on September 23?"
+  },
+  {
+   "id": "4178266",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9083,
+   "m": 0.9765,
+   "q": "Israel military action against Lebanon on September 24?"
+  },
+  {
+   "id": "4178267",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9354,
+   "m": 0.9935,
+   "q": "Israel military action against Lebanon on September 25?"
+  },
+  {
+   "id": "4178268",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9283,
+   "m": 0.9505,
+   "q": "Israel military action against Lebanon on September 26?"
+  },
+  {
+   "id": "4178272",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9446,
+   "m": 0.988,
+   "q": "Israel military action against Lebanon on September 29?"
+  },
+  {
+   "id": "4178273",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9375,
+   "m": 0.983,
+   "q": "Israel military action against Lebanon on September 30?"
+  },
+  {
+   "id": "5183404",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9166,
+   "m": 0.9205,
+   "q": "Israel military action against Lebanon on October 3?"
+  },
+  {
+   "id": "5183405",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9495,
+   "m": 0.9865,
+   "q": "Israel military action against Lebanon on October 4?"
+  },
+  {
+   "id": "5183406",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9424,
+   "m": 0.9775,
+   "q": "Israel military action against Lebanon on October 5?"
+  },
+  {
+   "id": "5183408",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9452,
+   "m": 0.91,
+   "q": "Israel military action against Lebanon on October 7?"
+  },
+  {
+   "id": "5183409",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9381,
+   "m": 0.9765,
+   "q": "Israel military action against Lebanon on October 8?"
+  },
+  {
+   "id": "5183410",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9312,
+   "m": 0.9915,
+   "q": "Israel military action against Lebanon on October 9?"
+  },
+  {
+   "id": "5183411",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9556,
+   "m": 0.9855,
+   "q": "Israel military action against Lebanon on October 10?"
+  },
+  {
+   "id": "5183413",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9574,
+   "m": 0.9885,
+   "q": "Israel military action against Lebanon on October 12?"
+  },
+  {
+   "id": "5183414",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9582,
+   "m": 0.952,
+   "q": "Israel military action against Lebanon on October 13?"
+  },
+  {
+   "id": "5183418",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9611,
+   "m": 0.9885,
+   "q": "Israel military action against Lebanon on October 17?"
+  },
+  {
+   "id": "5183420",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.947,
+   "m": 0.9815,
+   "q": "Israel military action against Lebanon on October 19?"
+  },
+  {
+   "id": "5183422",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9622,
+   "m": 0.981,
+   "q": "Israel military action against Lebanon on October 21?"
+  },
+  {
+   "id": "5183423",
+   "pair": "israel->lebanon",
+   "y": 1,
+   "u": 0.9628,
+   "m": 0.9855,
+   "q": "Israel military action against Lebanon on October 22?"
+  },
+  {
+   "id": "5167188",
+   "pair": "saudiarabia->yemen",
+   "y": 1,
+   "u": 0.4899,
+   "m": 0.5,
+   "q": "Saudi Arabia military action against Yemen on October 7?"
+  },
+  {
+   "id": "5167190",
+   "pair": "saudiarabia->yemen",
+   "y": 1,
+   "u": 0.4857,
+   "m": 0.68,
+   "q": "Saudi Arabia military action against Yemen on October 9?"
+  },
+  {
+   "id": "5167191",
+   "pair": "saudiarabia->yemen",
+   "y": 1,
+   "u": 0.4837,
+   "m": 0.64,
+   "q": "Saudi Arabia military action against Yemen on October 10?"
+  },
+  {
+   "id": "5167194",
+   "pair": "saudiarabia->yemen",
+   "y": 1,
+   "u": 0.7116,
+   "m": 0.999,
+   "q": "Saudi Arabia military action against Yemen on October 13?"
+  },
+  {
+   "id": "5167201",
+   "pair": "saudiarabia->yemen",
+   "y": 1,
+   "u": 0.7344,
+   "m": 0.805,
+   "q": "Saudi Arabia military action against Yemen on October 20?"
+  }
+ ]
+}

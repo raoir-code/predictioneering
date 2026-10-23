@@ -147,9 +147,28 @@ def reverse_seed(pair, G, as_of):
     Pr = params(rev)
     return pi_now(best[1], as_of, Pr) if Pr else None
 
+PASTDAY_DAYS = 3
+
+def _past_window_p(rows, w, Tn, wins, P, seed, nds, a, b):
+    """P(>= 1 strike in a window that has fully ended, [a, b] with b < Tn) = E[ L(evidence + YES window) / L(evidence) ] under the
+    posterior (exact likelihood ratio per grid row; rows carrying 99.9% of the posterior mass are used)."""
+    order = np.argsort(-w); keep, acc = [], 0.0
+    for i in order:
+        keep.append(i); acc += w[i]
+        if acc >= 0.999: break
+    num = den = 0.0
+    for i in keep:
+        _, q, q0, st, mu = rows[i]
+        l0 = U.forward_joint(Tn, wins, P["h"], mu, q, q0, p_start=seed, news_days=nds, news_ratio=NEWS_FALSE / NEWS_CATCH)[0]
+        l1 = U.forward_joint(Tn, wins + [(a, b, 1)], P["h"], mu, q, q0, p_start=seed, news_days=nds, news_ratio=NEWS_FALSE / NEWS_CATCH)[0]
+        num += w[i] * (math.exp(l1 - l0) if l1 != -math.inf and l0 != -math.inf else 0.0); den += w[i]
+    return num / den if den else None
+
 def price_group(grp, as_of, P, opens, G, pair):
     z = ZoneInfo(UD.group_tz(grp)); today = as_of.astimezone(z).date()
-    spans = {c["id"]: ((c["date"] if c["kind"] == "daily" else c["start"].astimezone(z).date()), c["date"]) for c in opens if c["date"] >= today}
+    # Oct 23 (docs/pastday_prereg.md): open dailies whose day ended up to PASTDAY_DAYS ago are priced too (not yet settled)
+    spans = {c["id"]: ((c["date"] if c["kind"] == "daily" else c["start"].astimezone(z).date()), c["date"]) for c in opens
+             if c["date"] >= today or (c["kind"] == "daily" and c["date"] >= today - dt.timedelta(PASTDAY_DAYS))}
     if not spans:
         return {}, None
     ev, npairs, linked = evidence(grp, pair, as_of, G)
@@ -173,6 +192,10 @@ def price_group(grp, as_of, P, opens, G, pair):
         return {}, {"unpriced": "contradictory evidence"}
     out = {}
     for k, (a, b) in idx.items():
+        if b < Tn:                                           # past-day daily, not yet settled
+            pp = _past_window_p(rows, w, Tn, wins, P, seed, nds, a, b)
+            if pp is not None: out[k] = round(float(pp), 4)
+            continue
         ps = []
         for _, q, q0, st, mu in rows:
             stk = st if a >= Tn else U.forward_joint(Tn, wins, P["h"], mu, q, q0, p_start=seed, keep_from=a, news_days=nds, news_ratio=NEWS_FALSE / NEWS_CATCH)[1]
