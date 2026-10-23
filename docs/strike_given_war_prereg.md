@@ -32,3 +32,13 @@ Parameters derived from the local data stay in gitignored local files; the publi
 Synthetic check: an episode's last Battles day can be followed by strikes within the 30-day merge gap (the same episode by the
 episode rule), which the "first to last day" window missed. B's window is now the episode's first day to 30 days after its last
 day (the same for the shelling/missile upper bound). Everything else unchanged.
+
+## Amendment 2 (Oct 23, before any fit on real data): the primary gate is an out-of-time test on wars
+The contract replay can barely discriminate: a smoke run with a placeholder rate (no real data) found only 10 qualifying resolved
+contracts (the horizon-scaled P(B|not A) and days remaining are logged only since mid-October), all resolved YES, nearly all with
+P(A) < 0.1. On an all-YES set any higher P(B|A) lowers Brier, so as a gate it would pass anything above the logged values.
+Added, as the primary test of the quantity itself: P(B|A) fitted on episodes starting on or before 2022-12-31 (data through then),
+scored by Brier on the war directions of episodes starting 2023-01-01 .. 2026-06-30 (data through 2026-06-30), against the engine's
+typical LLM P(B|A) on strike contracts (the mean over qualifying logged engine forecasts, first per market).
+Adoption rule: the full-data rate goes live iff (1) Brier(empirical) <= Brier(LLM reference) on the out-of-time wars AND (2) Brier(with)
+<= Brier(without) on the contract replay. Both reported in full either way.
