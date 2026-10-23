@@ -2294,6 +2294,16 @@ def _apply_during_war_pricing(feed: list):
         _UP = _up.production_prices()
     except Exception as ex:
         print(f"[unified] FAILED to load ({ex!r}); engine prices kept for its groups"); _UP = {}
+    stale = 0
+    for market in feed:                    # Oct 23: clear labels left by an earlier run (a contract unified priced yesterday but
+        if not isinstance(market, dict):   # not today was published as "unified-v1" at the engine's price, with stale details)
+            continue
+        if market.get("pricing_component") not in (None, "engine") or market.get("during_war") is not None:
+            stale += 1
+            market["pricing_component"] = "engine"; market["during_war"] = None; market["engine_conditional_p"] = None
+            if market.get("contract_family"):          # never engine-priced: no price unless its own component prices it today
+                market["conditional_p"] = None
+    print(f"[during-war] reset {stale} pricing labels from the previous run")
     for market in feed:
         if not isinstance(market, dict) or market.get("resolved"):
             continue
