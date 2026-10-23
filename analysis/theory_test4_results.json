@@ -1,0 +1,41 @@
+{
+  "data_end": "last complete day of the local data",
+  "pairs": 185,
+  "G14": {
+    "spell_weeks": 47682,
+    "events": 1214,
+    "spells": 183,
+    "coef_log_weeks_since": -0.811863504968752,
+    "p": 4.800699896742213e-143,
+    "coef_prior_episodes": 0.3954966754992756,
+    "coef_prev_episode_len": 0.16401747510254575,
+    "robust_coef_log_weeks_since": -0.7915578132627161,
+    "robust_p": 1.3130263125689562e-128,
+    "robust_coef_prev_rate": 0.39570259063604674
+  },
+  "G30": {
+    "spell_weeks": 44947,
+    "events": 681,
+    "spells": 180,
+    "coef_log_weeks_since": -0.6694752301521609,
+    "p": 4.181532499919257e-96,
+    "coef_prior_episodes": 0.41068794325442437,
+    "coef_prev_episode_len": 0.1650766802071451,
+    "robust_coef_log_weeks_since": -0.6583071604074061,
+    "robust_p": 8.511269776100935e-90,
+    "robust_coef_prev_rate": 0.40684408736904876
+  },
+  "G60": {
+    "spell_weeks": 41835,
+    "events": 438,
+    "spells": 177,
+    "coef_log_weeks_since": -0.6232747123114449,
+    "p": 7.455747836236678e-66,
+    "coef_prior_episodes": 0.36681529142339747,
+    "coef_prev_episode_len": 0.15907107433395237,
+    "robust_coef_log_weeks_since": -0.6114441393178166,
+    "robust_p": 2.9056651660184073e-65,
+    "robust_coef_prev_rate": 0.5043457720051849
+  },
+  "H5": "SUPPORTED"
+}
