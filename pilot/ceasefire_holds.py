@@ -132,6 +132,11 @@ def tag_feed(feed):
             m["bucket_reason"] = (f"Deterministic (docs/ceasefire_scope_rule.md as amended, family {fam}): priced only by its ceasefire component "
                                   "(HOLDS: unified-v1, GAP: unified-gap-v0, AGREEMENT: production C model, WAR_OUTCOME: war-outcome-v0); never by the onset engine.")
             n[fam] += 1
+        elif m.get("contract_family") or ((info or {}).get("family") in ("RACE", "PROCESS") and m.get("bucket") == "CORE"):   # Oct 23: out of scope -> never CORE;
+            m["contract_family"] = None; m["bucket"] = "ADJACENT"; m["conditional_p"] = None     # stale tags from earlier runs cleared
+            m["bucket_reason"] = (f"Deterministic (docs/ceasefire_publish_amendment.md): out of the priced families "
+                                  f"({(info or {}).get('family') or 'unclassified'}{'/' + info['other_leg'] if info and info.get('other_leg') else ''}).")
+            n["cleared"] += 1
     print(f"[ceasefire] tagged CORE: {dict(n)}")
     return sum(n.values())
 

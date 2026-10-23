@@ -76,6 +76,12 @@ def conflict_dyads():
             _CD = set()
     return _CD
 
+# Oct 23 scope rule (docs/ceasefire_publish_amendment.md): "X before <event>" is a race between two events, not "X by a date".
+# Races whose other leg is a political/economic event (a leader leaving, a visit, an oil price, an election) are out of scope;
+# races between two conflict events are not yet in scope (no race model). Neither is priced as a by-date contract.
+_RACE = re.compile(r"\bbefore\s+(?!(?:the\s+)?(?:end\b|(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sept?(?:ember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\b|\d|eoy\b|q[1-4]\b|next\b|this\b))(.+?)\??$", re.I)
+_CONFLICT_LEG = re.compile(r"ceasefire|cease-fire|truce|armistice|peace|strike|attack|invad|\bwar\b|offensive|withdraw|captur", re.I)
+
 def classify_all(q, desc):
     h = CH.classify(q, desc)
     if h and h["family"] == "HOLDS": return h
@@ -86,6 +92,9 @@ def classify_all(q, desc):
         if m1: return {"family": "GAP", "N": int(m1.group(1)), "dirs": [dir_pair(m1.group(2), m1.group(3))]}
         return {"family": "GAP", "N": None, "dirs": None}
     t = (q or "").lower(); dl = d.lower()
+    race = _RACE.search(t)
+    if race and re.search(r"ceasefire|cease-fire|truce|armistice|peace|normaliz", t):    # Oct 23: X before <an event>, not a date
+        return {"family": "RACE", "other_leg": "conflict" if _CONFLICT_LEG.search(race.group(1)) else "political"}
     if re.search(r"normaliz", t) and re.search(r"diplomatic relations|normalization agreement", dl):     # Oct 22: family E2
         ak = actor_key(q)
         return {"family": "AGREEMENT", "type": "DEAL", "actors": ak} if ak in conflict_dyads() else None
@@ -466,6 +475,15 @@ def _tests():
     assert classify_all("Israel x Hamas ceasefire cancelled by December 31?", "resolve Yes if the ceasefire agreement is cancelled")["type"] == "BREAKDOWN"
     assert classify_all("Will Steve Witkoff attend a US x Iran diplomatic meeting by December 31, 2026?", "x")  is None
     assert classify_all("Russia-Ukraine peace talks by October 31, 2026?", "agree")["family"] == "PROCESS"
+    ag = "resolve Yes if a ceasefire agreement is announced"
+    assert classify_all("Israel x Iran ceasefire ends before Netanyahu out?", ag) == {"family": "RACE", "other_leg": "political"}
+    assert classify_all("US x Iran ceasefire before Trump visits China?", ag) == {"family": "RACE", "other_leg": "political"}
+    assert classify_all("US x Iran ceasefire before Oil hits $120?", ag) == {"family": "RACE", "other_leg": "political"}
+    assert classify_all("Russia x Ukraine ceasefire before US x Iran ceasefire?", ag) == {"family": "RACE", "other_leg": "conflict"}
+    assert classify_all("US x Iran permanent peace deal before ceasefire ends?", ag) == {"family": "RACE", "other_leg": "conflict"}
+    assert classify_all("Another Israel x Hamas ceasefire before February?", ag)["family"] == "AGREEMENT"
+    assert classify_all("Israel x Hamas ceasefire before the end of 2026?", ag)["family"] == "AGREEMENT"
+    assert classify_all("Russia x Ukraine ceasefire before Oct 31?", ag)["family"] == "AGREEMENT"
     global _CD; _s = _CD; _CD = {"israel|syria", "israel|lebanon"}
     nd = "resolve to Yes if both Israel and Syria officially announce the establishment of diplomatic relations"
     assert classify_all("Israel and Syria normalize relations by December 31, 2026?", nd) == {"family": "AGREEMENT", "type": "DEAL", "actors": "israel|syria"}

@@ -35,3 +35,16 @@ reported as its own stratum, outside Tier 2.
 War outcomes are split by event class (docs/war_outcomes_prereg.md amendment): withdrawals are in scope (withdrawal-v0);
 captures of places and entries into sub-national places are out of scope (operational battlefield progress, not bargaining);
 entries into another country are onset, priced by the engine where the classifier tags them CORE.
+
+## Oct 23: event races
+"X before <an event>" (the other leg is an event, not a date: "Israel x Iran ceasefire ends before Netanyahu out?", "US x Iran
+ceasefire before Trump visits China?") resolves on which of two events happens first, a different quantity from "X by a date".
+Until now family C priced them as by-date contracts (the market's end date stood in for the other leg). Now family RACE, deterministic
+(pilot/ceasefire_bc.py):
+- other leg a political or economic event (a leader leaving office, a visit, an election, a price level): OUT OF SCOPE (not conflict).
+- other leg a conflict event (another ceasefire, a deal, a ceasefire ending): NOT YET IN SCOPE, by event class (no race model), the
+  same status as E1; listed, not withheld.
+Of 270 stored ceasefire contracts, 5 are races (3 political, 2 conflict); one is open (political). No other contract changes family.
+Replays of family C from this commit on exclude races by scope; the C1b adoption (decided on the earlier set) stands.
+Tagging also clears a family tag left by an earlier run when a contract no longer qualifies, and keeps PROCESS and RACE contracts
+out of CORE, so they are never priced by the onset engine.
