@@ -1,0 +1,234 @@
+{
+ "results": {
+  "WITHDRAWAL": {
+   "n": 23,
+   "yes": 0,
+   "brier_model": 0.043,
+   "brier_market": 0.0473
+  },
+  "overall": {
+   "n": 23,
+   "brier_model": 0.043,
+   "brier_market": 0.0473,
+   "logloss_model": 0.1973,
+   "logloss_market": 0.2245,
+   "bootstrap_model_minus_market": [
+    -0.0203,
+    0.0379
+   ]
+  }
+ },
+ "skipped": {
+  "no market price": 5
+ },
+ "rows": [
+  {
+   "id": "2002607",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from lebanon",
+   "y": 0,
+   "u": 0.0173,
+   "m": 0.038,
+   "q": "Israel withdraws from Lebanon by April 30, 2026?"
+  },
+  {
+   "id": "2002609",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from lebanon",
+   "y": 0,
+   "u": 0.0841,
+   "m": 0.135,
+   "q": "Israel withdraws from Lebanon by June 30, 2026?"
+  },
+  {
+   "id": "2333782",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from lebanon",
+   "y": 0,
+   "u": 0.0769,
+   "m": 0.195,
+   "q": "Israel withdraws from Lebanon by July 31, 2026?"
+  },
+  {
+   "id": "2467333",
+   "type": "WITHDRAWAL",
+   "series": "israeli forces withdraw from beyond the litani river",
+   "y": 0,
+   "u": 0.0521,
+   "m": 0.06,
+   "q": "Will Israeli forces withdraw from beyond the Litani River by June 15?"
+  },
+  {
+   "id": "2467334",
+   "type": "WITHDRAWAL",
+   "series": "israeli forces withdraw from beyond the litani river",
+   "y": 0,
+   "u": 0.1353,
+   "m": 0.155,
+   "q": "Will Israeli forces withdraw from beyond the Litani River by June 30?"
+  },
+  {
+   "id": "2639519",
+   "type": "WITHDRAWAL",
+   "series": "israeli forces withdraw from beyond the litani river",
+   "y": 0,
+   "u": 0.1787,
+   "m": 0.285,
+   "q": "Will Israeli forces withdraw from beyond the Litani River by July 31?"
+  },
+  {
+   "id": "2641010",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from lebanon",
+   "y": 0,
+   "u": 0.0729,
+   "m": 0.155,
+   "q": "Israel withdraws from Lebanon by August 31, 2026?"
+  },
+  {
+   "id": "2641011",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from lebanon",
+   "y": 0,
+   "u": 0.1001,
+   "m": 0.215,
+   "q": "Israel withdraws from Lebanon by September 30, 2026?"
+  },
+  {
+   "id": "3002443",
+   "type": "WITHDRAWAL",
+   "series": "israeli forces withdraw from beyond the litani river",
+   "y": 0,
+   "u": 0.1562,
+   "m": 0.19,
+   "q": "Will Israeli forces withdraw from beyond the Litani River by August 31?"
+  },
+  {
+   "id": "4338163",
+   "type": "WITHDRAWAL",
+   "series": "israeli forces withdraw from beyond the litani river",
+   "y": 0,
+   "u": 0.0577,
+   "m": 0.255,
+   "q": "Will Israeli forces withdraw from beyond the Litani River by September 30?"
+  },
+  {
+   "id": "501973",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from gaza",
+   "y": 0,
+   "u": 0.3291,
+   "m": 0.425,
+   "q": "Israel withdraws from Gaza before September?"
+  },
+  {
+   "id": "508461",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from gaza",
+   "y": 0,
+   "u": 0.0721,
+   "m": 0.086,
+   "q": "Israel withdraws from Gaza before November?"
+  },
+  {
+   "id": "510132",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from gaza",
+   "y": 0,
+   "u": 0.1495,
+   "m": 0.155,
+   "q": "Israel withdraws from Gaza in 2024?"
+  },
+  {
+   "id": "510785",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from lebanon",
+   "y": 0,
+   "u": 0.195,
+   "m": 0.18,
+   "q": "Israel withdraws from Lebanon before December?"
+  },
+  {
+   "id": "516948",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from gaza",
+   "y": 0,
+   "u": 0.3465,
+   "m": 0.265,
+   "q": "Israel withdraws from Gaza in 2025?"
+  },
+  {
+   "id": "518741",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraw from philadelphi corridor",
+   "y": 0,
+   "u": 0.2412,
+   "m": 0.25,
+   "q": "Will Israel withdraw from Philadelphi corridor by March 8?"
+  },
+  {
+   "id": "520076",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from lebanon",
+   "y": 0,
+   "u": 0.0965,
+   "m": 0.26,
+   "q": "Israel withdraws from Lebanon before March?"
+  },
+  {
+   "id": "523936",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from lebanon",
+   "y": 0,
+   "u": 0.2332,
+   "m": 0.31,
+   "q": "Israel withdraws from Lebanon before July?"
+  },
+  {
+   "id": "525478",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from syria",
+   "y": 0,
+   "u": 0.3791,
+   "m": 0.11,
+   "q": "Israel withdraws from Syria before July?"
+  },
+  {
+   "id": "537895",
+   "type": "WITHDRAWAL",
+   "series": "u s withdraws from syria",
+   "y": 0,
+   "u": 0.5082,
+   "m": 0.38,
+   "q": "U.S. withdraws from Syria in 2025?"
+  },
+  {
+   "id": "558007",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from syria",
+   "y": 0,
+   "u": 0.1246,
+   "m": 0.16,
+   "q": "Israel withdraws from Syria before October?"
+  },
+  {
+   "id": "565933",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from syria",
+   "y": 0,
+   "u": 0.196,
+   "m": 0.145,
+   "q": "Israel withdraws from Syria in 2025?"
+  },
+  {
+   "id": "654465",
+   "type": "WITHDRAWAL",
+   "series": "israel withdraws from lebanon",
+   "y": 0,
+   "u": 0.0836,
+   "m": 0.075,
+   "q": "Israel withdraws from Lebanon by December 31?"
+  }
+ ],
+ "computed_at": "2026-10-23T13:48:38.347837+00:00"
+}

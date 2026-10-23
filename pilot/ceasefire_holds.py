@@ -122,10 +122,14 @@ def tag_feed(feed):
         if not isinstance(m, dict) or m.get("resolved"): continue
         info = BC.classify_all(m.get("question"), m.get("description"))
         fam = (info or {}).get("family")
-        if fam in ("HOLDS", "GAP", "AGREEMENT"):
+        if fam not in ("HOLDS", "GAP", "AGREEMENT"):
+            try:
+                import war_outcomes as WO; fam = WO.tag(m)                  # Oct 22: family F (docs/war_outcomes_prereg.md)
+            except Exception: fam = None
+        if fam in ("HOLDS", "GAP", "AGREEMENT", "WAR_OUTCOME"):
             m["bucket"], m["contract_family"] = "CORE", fam
             m["bucket_reason"] = (f"Deterministic (docs/ceasefire_scope_rule.md as amended, family {fam}): priced only by its ceasefire component "
-                                  "(HOLDS: unified-v1, GAP: unified-gap-v0, AGREEMENT: agreement-v0); never by the onset engine.")
+                                  "(HOLDS: unified-v1, GAP: unified-gap-v0, AGREEMENT: production C model, WAR_OUTCOME: war-outcome-v0); never by the onset engine.")
             n[fam] += 1
     print(f"[ceasefire] tagged CORE: {dict(n)}")
     return sum(n.values())

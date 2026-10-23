@@ -290,6 +290,10 @@ def production_prices():
         import ceasefire_bc as _BC; _BC.price_all(_PP, G, now)
     except Exception as ex:
         print(f"[ceasefire-bc] FAILED ({ex!r}); effective-ceasefire and agreement contracts unpriced")
+    try:                                   # Oct 22: family F, war outcomes (pilot/war_outcomes.py)
+        import war_outcomes as _WO; _WO.price_all(_PP, now)
+    except Exception as ex:
+        print(f"[war-outcome] FAILED ({ex!r}); war-outcome contracts unpriced")
     print(f"[unified] {len(_PP)} open contracts priced in {len({v['group'] for v in _PP.values()})} groups"); return _PP
 
 if __name__ == "__main__":

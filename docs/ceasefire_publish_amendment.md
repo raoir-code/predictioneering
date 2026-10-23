@@ -30,3 +30,8 @@ reported as its own stratum, outside Tier 2.
   territory", "give up the rest of Donbas", "agrees not to join NATO") and war outcomes (withdrawals, territorial control).
   Reason: no defensible reference class yet for P(term | this deal); PA-X has 14 interstate deals (3 with territorial provisions),
   and a generic rate repeats the reference-class error C0 and C1 made.
+
+## Oct 23: war outcomes
+War outcomes are split by event class (docs/war_outcomes_prereg.md amendment): withdrawals are in scope (withdrawal-v0);
+captures of places and entries into sub-national places are out of scope (operational battlefield progress, not bargaining);
+entries into another country are onset, priced by the engine where the classifier tags them CORE.

@@ -18,3 +18,13 @@ same moment; Brier, log loss, YES/NO, by type; cluster bootstrap by series.
 Component war-outcome-v0; outside Tier 2 (own stratum).
 Caveats stated in advance: v0 ignores distance to the front line, the obvious main driver of capture timing; resolution sources
 differ by series (ISW map shading vs official announcements); one-shot series sharing an offensive are correlated.
+
+## Amendment (Oct 23, 2026, AFTER the first replay): scope narrowed to state decisions — withdrawals only
+Decision (Adi): town captures are battlefield progress (operational military questions), not bargaining; the model has no
+mechanism for them, and its replay edge there (0.063 vs market 0.122) was market long-shot overpricing, not theory. Entries into
+another COUNTRY are onset (the engine already prices e.g. "Turkish troops enter Yemen"); entries into sub-national places are
+operational. In scope now: WITHDRAWAL (a state withdraws its forces from a place or territory: a settlement decision, usually a
+deal term). Component renamed withdrawal-v0.
+Disclosure: this amendment was made after the first replay and removes the best-performing part (captures); it is scope-driven,
+not result-driven. Captures and sub-national entries are out of scope by event class (not withheld); country entries stay with
+the engine and the classifier.
