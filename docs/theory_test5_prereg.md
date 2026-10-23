@@ -10,3 +10,11 @@ covariates measured at each spell-week, using only episodes that STARTED BEFORE 
 Decision rule: H6 supported iff the `recent` coefficient is > 0 with p < 0.05 under ALL THREE G (14, 30, 60), with `older` in the
 model. Reported in full either way, including whether `older` remains significant once `recent` is included.
 If supported: production use (restart rates estimated with recent years weighted more) gets its own pre-registered held-out replay.
+
+## Amendment (Oct 23, before any analysis of real data)
+Covariate timing changed. As registered, `recent` was measured at each spell-week, so it dropped to 0 exactly 730 days after the
+episode that opened the spell: a second clock for time-since-peace that absorbs the hardening shape. Synthetic check: data with NO
+regime shifts came out "supported" (recent +0.32 to +0.54, all p < .001). Now both `recent` and `older` are measured at the START of
+the episode that opened the spell, EXCLUDING that episode, and held fixed through the spell. Synthetic re-check: no shifts -> recent
++0.04 to +0.09 (all p > .2, not supported); shifts in half the pairs -> detected under G = 14 and 30 (not 60: small synthetic sample).
+Decision rule unchanged.
