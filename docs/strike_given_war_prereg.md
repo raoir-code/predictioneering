@@ -27,3 +27,8 @@ at its FIRST such logged forecast whose published price was the engine's: logged
 market at that moment. Brier, log loss, YES/NO, by dyad; cluster bootstrap by dyad (2,000).
 Adoption rule: the full-data rate goes live iff Brier(with) <= Brier(without) on that replay; otherwise not.
 Parameters derived from the local data stay in gitignored local files; the public repo records only this rule and the verdict.
+
+## Amendment (Oct 23, before any fit on real data)
+Synthetic check: an episode's last Battles day can be followed by strikes within the 30-day merge gap (the same episode by the
+episode rule), which the "first to last day" window missed. B's window is now the episode's first day to 30 days after its last
+day (the same for the shelling/missile upper bound). Everything else unchanged.
