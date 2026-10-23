@@ -244,7 +244,9 @@ def price_union(mids, G, as_of, S=None):
     if not len(rows): return {}, {"unpriced": "contradictory evidence"}
     pos = [d0n + dt.timedelta(bb) for aa, bb, y in wins if y == 1] + list(nd)
     tl = UP.table_last(pairs, today)
-    hm = UP.harden_mult(max([x for x in pos if x < today] + ([tl] if tl else []), default=None), today, max([(b - d0n).days - Tn + 1 for _, _, b in opens] + [1]))
+    nh = max([(b - d0n).days - Tn + 1 for _, _, b in opens] + [1])
+    hm = UP.total_mult(UP.harden_mult(max([x for x in pos if x < today] + ([tl] if tl else []), default=None), today, nh),
+                       UP.phase_mult(pairs, today, pos), nh)                                  # docs/phase_prereg.md
     out = {}
     for mid, a, b in opens:
         A, B = (a - d0n).days, (b - d0n).days; ps = []

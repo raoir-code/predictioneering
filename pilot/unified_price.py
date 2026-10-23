@@ -30,17 +30,23 @@ F = json.loads(((LOCAL / "world_fits.json") if (LOCAL / "world_fits.json").exist
 PRIORS_SOURCE = "local" if (LOCAL / "priors_world.json").exists() else "repo"
 HARDEN = json.loads((LOCAL / "hardening.json").read_text()) if (LOCAL / "hardening.json").exists() else None   # docs/hardening_prereg.md
 
+PHASE = json.loads((LOCAL / "phase.json").read_text()) if (LOCAL / "phase.json").exists() else None   # docs/phase_prereg.md
+if PHASE and PHASE.get("none"): PHASE = None
+
 _LAST = None
-def table_last(pairs, day):
-    """Frozen per-pair strike-date table (pilot/local/last_strike.json, docs/hardening_prereg.md amendment): latest strike of any
-    of `pairs` dated at least 7 days before `day`; None if no table or no match."""
+def _table():
     global _LAST
     if _LAST is None:
         f = LOCAL / "last_strike.json"; _LAST = {k: sorted(v) for k, v in json.loads(f.read_text()).items()} if f.exists() else {}
+    return _LAST
+
+def table_last(pairs, day):
+    """Frozen per-pair strike-date table (pilot/local/last_strike.json, docs/hardening_prereg.md amendment): latest strike of any
+    of `pairs` dated at least 7 days before `day`; None if no table or no match."""
     import bisect; best = None; lim = (day - dt.timedelta(7)).isoformat()
     for p in pairs:
         wk, _ = world_pair(p)
-        ds = _LAST.get(wk) if wk else None
+        ds = _table().get(wk) if wk else None
         if ds:
             i = bisect.bisect_right(ds, lim)
             if i: best = max(best or ds[i - 1], ds[i - 1])
@@ -54,6 +60,53 @@ def harden_mult(last_strike, first_day, n_days):
         d = (first_day + dt.timedelta(k) - last_strike).days
         out.append(round(max(1.0, (d - G) / 7.0) ** b / K, 6))
     return out
+
+def phase_arrays(days, d0, n, G, beta, K):
+    """docs/phase_prereg.md amendment. Day i = d0 + i, i < n. at_risk[i]: the pair's last strike before day i is more than G days
+    earlier (a strike on day i would start a new episode); event[i]: at risk and a strike on day i; m[i]: hardening multiplier on
+    an at-risk day (beta = 0, K = 1 -> 1). Uses only strikes before day i."""
+    s = np.zeros(n, bool)
+    for d in days:
+        k = (d - d0).days
+        if 0 <= k < n: s[k] = True
+    last = np.concatenate([[-10 ** 9], np.maximum.accumulate(np.where(s, np.arange(n), -10 ** 9))[:-1]])   # last strike before day i
+    gap = np.arange(n) - last; at_risk = (gap > G) & (last >= 0)                   # not at risk before the pair's first strike
+    m = np.where(at_risk, np.maximum(1.0, (gap - G) / 7.0) ** beta / K, 0.0)
+    return at_risk, at_risk & s, m
+
+def phase_ratio(at_risk, event, m, o, H, kappa, rho_class, a=1.0):
+    """phi at day index o from days < o: [(S_H + kappa rho) / (E_H + kappa)] / rho, with S = at-risk strikes (episode starts),
+    E = hardening-weighted at-risk exposure in weeks, _H = discounted with half-life H days, rho = (S + a) / (E + a / rho_class)."""
+    idx = np.arange(o); w = 0.5 ** ((o - idx) / H)
+    S, E = float(event[:o].sum()), float(m[:o].sum()) / 7.0
+    SH, EH = float((event[:o] * w).sum()), float((m[:o] * w).sum()) / 7.0
+    rho = (S + a) / (E + a / rho_class)
+    return ((SH + kappa * rho) / (EH + kappa)) / rho, {"starts": int(S), "starts_disc": round(SH, 2), "exposure_wk": round(E, 1),
+                                                       "exposure_disc_wk": round(EH, 1), "rho_per_yr": round(rho * 52.18, 3)}
+
+def phase_detail(pair, day, pos=()):
+    """docs/phase_prereg.md amendment: phi for one direction from the frozen table (strikes >= 7 days before `day`) plus our own
+    positive evidence days before `day`; None if off, no world pair or no strikes."""
+    if not PHASE: return None
+    wk, _ = world_pair(pair)
+    if not wk: return None
+    lim = (day - dt.timedelta(7)).isoformat()
+    ds = sorted({dt.date.fromisoformat(x) for x in _table().get(wk, []) if x <= lim} | {x for x in pos if x < day})
+    if not ds: return None
+    n = (day - ds[0]).days
+    ar, ev, m = phase_arrays(ds, ds[0], n, PHASE["G"], PHASE["beta"], PHASE["K"])
+    phi, info = phase_ratio(ar, ev, m, n, PHASE["H_days"], PHASE["kappa_weeks"], PHASE["rho_class"])
+    return {"phi": phi, **info}
+
+def phase_mult(pairs, day, pos=()):
+    """phi for a direction set: geometric mean over directions (the union's h is the geometric mean of theirs); None if off."""
+    if not PHASE: return None
+    return math.exp(sum(math.log(d["phi"]) if (d := phase_detail(p, day, pos)) else 0.0 for p in pairs) / len(pairs))
+
+def total_mult(hm, phi, n_days):
+    """Per-day restart-rate multipliers: hardening m(t) x phase phi (either may be off)."""
+    if phi is None or abs(phi - 1) < 1e-9: return hm
+    return [round(m * phi, 6) for m in (hm or [1.0] * max(1, n_days))]
 FACTION = {"houthi": "yemenhouthi"}; FACTION_HOME = {"houthi": "yemen"}             # lookup tables, not per-pair logic
 LEADS = {"saudiarabia": ["operationrestoringhope", "operationdecisivestorm"], "turkey": ["operationpeacespring"]}
 NEWS_CATCH = 0.36        # measured: P(report | strike in last 3 days), Israel->Lebanon Jul 25-Oct 19 (v2 labels)
@@ -218,7 +271,8 @@ def price_group(grp, as_of, P, opens, G, pair):
     w, rows = grid(P, Tn, wins, p_start=seed, nds=nds)
     pos = [d0n + dt.timedelta(bb) for aa, bb, y in wins if y == 1] + list(nd)
     last_strike = max([x for x in pos if x < today] + ([tl] if (tl := table_last([pair], today)) else []), default=None)
-    hm = harden_mult(last_strike, today, max([b - Tn + 1 for a, b in idx.values()] + [1]))
+    nh = max([b - Tn + 1 for a, b in idx.values()] + [1])
+    hm = total_mult(harden_mult(last_strike, today, nh), phase_mult([pair], today, pos), nh)   # docs/phase_prereg.md
     if not len(rows):
         return {}, {"unpriced": "contradictory evidence"}
     out = {}
