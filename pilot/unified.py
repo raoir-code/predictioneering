@@ -53,10 +53,26 @@ def forward(T, windows, h, mu, q, q0, p_start=None):
         ll += math.log(z); st = {k: v / z for k, v in merged.items()}
     return ll, np.array([sum(v for (s, _), v in st.items() if s == 0), sum(v for (s, _), v in st.items() if s == 1)])
 
-def p_any(pi, h, mu, q, q0, gap_days, length_days):
-    """P(>= 1 qualifying strike in a window starting gap_days after the current state, lasting length_days)."""
-    E, M0, _ = mats(h, mu, q, q0); mp = np.linalg.matrix_power
-    return float(1 - np.asarray(pi) @ mp(E, gap_days) @ mp(M0, length_days) @ np.ones(2))
+def p_any(pi, h, mu, q, q0, gap_days, length_days, hmult=None):
+    """P(>= 1 qualifying strike in a window starting gap_days after the current state, lasting length_days).
+    hmult (docs/hardening_prereg.md): optional list of per-day multipliers of the restart rate h, day 0 = the first projected day;
+    consecutive equal multipliers are stepped as one block (exact)."""
+    mp = np.linalg.matrix_power
+    if hmult is None:
+        E, M0, _ = mats(h, mu, q, q0)
+        return float(1 - np.asarray(pi) @ mp(E, gap_days) @ mp(M0, length_days) @ np.ones(2))
+    v = np.asarray(pi, float); k = 0; n = gap_days + length_days
+    while k < n:
+        m = hmult[min(k, len(hmult) - 1)]; j = k
+        while j < n and hmult[min(j, len(hmult) - 1)] == m and (j < gap_days) == (k < gap_days): j += 1
+        E, M0, _ = _mats_c(round(h * m, 12), mu, q, q0)
+        v = v @ mp(E if k < gap_days else M0, j - k); k = j
+    return float(1 - v.sum())
+
+from functools import lru_cache
+@lru_cache(maxsize=200000)
+def _mats_c(h, mu, q, q0):
+    return mats(h, mu, q, q0)
 
 def forward_joint(T, windows, h, mu, q, q0, p_start=None, keep_from=None, news_days=(), news_ratio=1.0):
     """forward() that also keeps strike days L >= keep_from distinct (to price an open window starting at keep_from);
@@ -95,16 +111,17 @@ def forward_joint(T, windows, h, mu, q, q0, p_start=None, keep_from=None, news_d
         ll += math.log(z); st = {k: v / z for k, v in merged.items()}
     return ll, st
 
-def price_open(st, h, mu, q, q0, T, a, b):
-    """P(YES) for an open window [a, b] (day indices), given the joint state at the end of day T-1. None if b < T (post-event)."""
+def price_open(st, h, mu, q, q0, T, a, b, hmult=None):
+    """P(YES) for an open window [a, b] (day indices), given the joint state at the end of day T-1. None if b < T (post-event).
+    hmult: per-day restart-rate multipliers from day T on (see p_any)."""
     if b < T:
         return None
     marg = lambda keep: np.array([sum(v for (s, L), v in st.items() if s == k and keep(L)) for k in (0, 1)])
     if a >= T:
-        return p_any(marg(lambda L: True), h, mu, q, q0, a - T, b - a + 1)
+        return p_any(marg(lambda L: True), h, mu, q, q0, a - T, b - a + 1, hmult)
     past = sum(v for (s, L), v in st.items() if L is not None and L >= a)
     rest = marg(lambda L: not (L is not None and L >= a))
-    return past if rest.sum() <= 0 else past + (1 - past) * p_any(rest / rest.sum(), h, mu, q, q0, 0, b - T + 1)
+    return past if rest.sum() <= 0 else past + (1 - past) * p_any(rest / rest.sum(), h, mu, q, q0, 0, b - T + 1, hmult)
 
 def _tests_news():
     h, mu, q, q0, r = 1 / 40, 1 / 15, 0.6, 0.03, 0.01; E, M0, M1 = mats(h, mu, q, q0); p = stationary(h, mu); res = []

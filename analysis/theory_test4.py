@@ -11,8 +11,8 @@ import numpy as np, pandas as pd, statsmodels.api as sm
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import world_fits as WF, refit_local as RL
 
-def strike_days():
-    end = RL.last_complete_day(); P = defaultdict(set); kind = {}; tk = defaultdict(lambda: defaultdict(int))
+def strike_days(end=None):
+    end = end or RL.last_complete_day(); P = defaultdict(set); kind = {}; tk = defaultdict(lambda: defaultdict(int))
     for r in RL.rows():
         d = dt.date.fromisoformat(r["event_date"][:10])
         if d > end or r.get("sub_event_type") not in WF.SUBS or WF.MARITIME.search(r.get("country") or ""): continue

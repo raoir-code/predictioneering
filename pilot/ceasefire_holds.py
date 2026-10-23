@@ -242,12 +242,15 @@ def price_union(mids, G, as_of, S=None):
     nds = {(x - d0n).days for x in nd if x >= d0n}
     w, rows = UP.grid(P, Tn, wins, nds=nds)
     if not len(rows): return {}, {"unpriced": "contradictory evidence"}
+    pos = [d0n + dt.timedelta(bb) for aa, bb, y in wins if y == 1] + list(nd)
+    tl = UP.table_last(pairs, today)
+    hm = UP.harden_mult(max([x for x in pos if x < today] + ([tl] if tl else []), default=None), today, max([(b - d0n).days - Tn + 1 for _, _, b in opens] + [1]))
     out = {}
     for mid, a, b in opens:
         A, B = (a - d0n).days, (b - d0n).days; ps = []
         for _, q, q0, st, mu in rows:
             stk = st if A >= Tn else U.forward_joint(Tn, wins, P["h"], mu, q, q0, keep_from=A, news_days=nds, news_ratio=UP.NEWS_FALSE / UP.NEWS_CATCH)[1]
-            ps.append(U.price_open(stk, P["h"], mu, q, q0, Tn, A, B))
+            ps.append(U.price_open(stk, P["h"], mu, q, q0, Tn, A, B, hm))
         out[mid] = round(1 - float(np.dot(w, ps)), 4)
     return out, {"source": f"holds v1 union {'+'.join(pairs)}: {len(wins)} windows, {len(nds)} news days",
                  "q": float(np.dot(w, [r[1] for r in rows])), "pi": float(np.dot(w, [sum(v for (s, _), v in r[3].items() if s == 1) for r in rows]))}

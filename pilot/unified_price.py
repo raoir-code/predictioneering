@@ -28,6 +28,32 @@ LOCAL = ROOT / "pilot" / "local"                         # gitignored local over
 W = json.loads(((LOCAL / "priors_world.json") if (LOCAL / "priors_world.json").exists() else (ROOT / "pilot" / "priors_world.json")).read_text())
 F = json.loads(((LOCAL / "world_fits.json") if (LOCAL / "world_fits.json").exists() else (ROOT / "analysis" / "world_fits.json")).read_text())
 PRIORS_SOURCE = "local" if (LOCAL / "priors_world.json").exists() else "repo"
+HARDEN = json.loads((LOCAL / "hardening.json").read_text()) if (LOCAL / "hardening.json").exists() else None   # docs/hardening_prereg.md
+
+_LAST = None
+def table_last(pairs, day):
+    """Frozen per-pair strike-date table (pilot/local/last_strike.json, docs/hardening_prereg.md amendment): latest strike of any
+    of `pairs` dated at least 7 days before `day`; None if no table or no match."""
+    global _LAST
+    if _LAST is None:
+        f = LOCAL / "last_strike.json"; _LAST = {k: sorted(v) for k, v in json.loads(f.read_text()).items()} if f.exists() else {}
+    import bisect; best = None; lim = (day - dt.timedelta(7)).isoformat()
+    for p in pairs:
+        wk, _ = world_pair(p)
+        ds = _LAST.get(wk) if wk else None
+        if ds:
+            i = bisect.bisect_right(ds, lim)
+            if i: best = max(best or ds[i - 1], ds[i - 1])
+    return dt.date.fromisoformat(best) if best else None
+
+def harden_mult(last_strike, first_day, n_days):
+    """Per-day restart-rate multipliers m(t) = t^beta / K for days first_day .. first_day + n_days - 1 (None if off or no anchor)."""
+    if not HARDEN or last_strike is None: return None
+    b, K, G = HARDEN["beta"], HARDEN["K"], HARDEN.get("G", 30); out = []
+    for k in range(max(1, n_days)):
+        d = (first_day + dt.timedelta(k) - last_strike).days
+        out.append(round(max(1.0, (d - G) / 7.0) ** b / K, 6))
+    return out
 FACTION = {"houthi": "yemenhouthi"}; FACTION_HOME = {"houthi": "yemen"}             # lookup tables, not per-pair logic
 LEADS = {"saudiarabia": ["operationrestoringhope", "operationdecisivestorm"], "turkey": ["operationpeacespring"]}
 NEWS_CATCH = 0.36        # measured: P(report | strike in last 3 days), Israel->Lebanon Jul 25-Oct 19 (v2 labels)
@@ -190,6 +216,9 @@ def price_group(grp, as_of, P, opens, G, pair):
     nds = {(d - d0n).days for d in nd if d >= d0n}
     idx = {k: ((a - d0n).days, (b - d0n).days) for k, (a, b) in spans.items()}
     w, rows = grid(P, Tn, wins, p_start=seed, nds=nds)
+    pos = [d0n + dt.timedelta(bb) for aa, bb, y in wins if y == 1] + list(nd)
+    last_strike = max([x for x in pos if x < today] + ([tl] if (tl := table_last([pair], today)) else []), default=None)
+    hm = harden_mult(last_strike, today, max([b - Tn + 1 for a, b in idx.values()] + [1]))
     if not len(rows):
         return {}, {"unpriced": "contradictory evidence"}
     out = {}
@@ -201,7 +230,7 @@ def price_group(grp, as_of, P, opens, G, pair):
         ps = []
         for _, q, q0, st, mu in rows:
             stk = st if a >= Tn else U.forward_joint(Tn, wins, P["h"], mu, q, q0, p_start=seed, keep_from=a, news_days=nds, news_ratio=NEWS_FALSE / NEWS_CATCH)[1]
-            ps.append(U.price_open(stk, P["h"], mu, q, q0, Tn, a, b))
+            ps.append(U.price_open(stk, P["h"], mu, q, q0, Tn, a, b, hm))
         out[k] = round(float(np.dot(w, ps)), 4)
     pis = [sum(v for (s, _), v in r[3].items() if s == 1) for r in rows]
     return out, {"source": src + f", {len(nds)} news days", "windows": len(wins), "days": Tn, "q": float(np.dot(w, [r[1] for r in rows])),
