@@ -16,6 +16,7 @@ group's price. Rules text + outcomes come from Polymarket (Gamma); an outcome is
 """
 import json, re, sys, math, time, datetime as dt
 import urllib.request, urllib.parse
+import numpy as np
 from collections import Counter, defaultdict
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -135,7 +136,7 @@ def tag_feed(feed):
     return sum(n.values())
 
 # ---------------------------------------------------------------- pricing hook (called from unified_price.production_prices)
-def combine(PP):
+def combine(PP, G=None, now=None):
     """Replace per-direction entries "<mid>@<pair>" by one entry per holds market, if every direction is priced and the
     series passed the pre-registered rule. Virtual entries are always removed."""
     virt = {k: v for k, v in PP.items() if "@" in k}
@@ -152,6 +153,14 @@ def combine(PP):
         pairs = sorted(f"{UD.norm(a)}->{UD.norm(b)}" for a, b in info["dirs"])
         if set(pairs) != set(d): continue
         series = "+".join(pairs)
+        if len(pairs) == 2 and G is not None and now is not None and two_dir_model() == "v1":
+            try:
+                pu, du = price_union([mid], G, now)
+                if mid in pu:
+                    PP[mid] = {"p": pu[mid], "group": "holds-v1:" + series, "source": du["source"], "q": round(du["q"], 3), "pi": round(du["pi"], 3)}
+                    n += 1; continue
+            except Exception as ex:
+                print(f"[holds] v1 FAILED for {mid} ({ex!r}); v0 price used")
         p = 1.0
         for pr in pairs: p *= (1 - d[pr]["p"])
         PP[mid] = {"p": round(p, 4), "group": "holds:" + series, "source": "holds; " + " | ".join(f"{pr}: P(strike) {d[pr]['p']:.3f}, {d[pr]['source']}" for pr in pairs),
@@ -159,6 +168,136 @@ def combine(PP):
         n += 1
     print(f"[holds] {n} holds contracts priced (all series published; replay reported only)")
     return n
+
+# ---------------------------------------------------------------- v1: shared fighting state for two-direction holds
+def _two_dir(r):
+    info = classify(r.get("question"), r.get("description"))
+    return info if info and info.get("dirs") and len(info["dirs"]) == 2 else None
+
+def _runs(days):
+    out, cur = [], None
+    for d in sorted(days):
+        if cur and d == cur[1] + dt.timedelta(1): cur = (cur[0], d)
+        else:
+            if cur: out.append(cur)
+            cur = (d, d)
+    if cur: out.append(cur)
+    return out
+
+def union_params(pairs):
+    import unified_price as UP
+    Ps = [UP.params(p) for p in pairs]
+    if any(p is None for p in Ps): return None
+    cl = lambda x, lo, hi: min(hi, max(lo, x))
+    return {"world_pair": "+".join(p["world_pair"] or "class" for p in Ps), "via": "union", "class": Ps[0]["class"],
+            "h": math.exp(sum(math.log(p["h"]) for p in Ps) / len(Ps)), "mu": math.exp(sum(p["mu_lm"] for p in Ps) / len(Ps)),
+            "mu_lm": sum(p["mu_lm"] for p in Ps) / len(Ps), "mu_ls": max(p["mu_ls"] for p in Ps),
+            "q_c": cl(1 - math.prod(1 - p["q_c"] for p in Ps), 0.02, 0.98), "q0_c": cl(1 - math.prod(1 - p["q0_c"] for p in Ps), 0.001, 0.3)}
+
+def price_union(mids, G, as_of, S=None):
+    """docs/holds_v1_prereg.md. P(holds) for two-direction holds contracts `mids` (same direction set), as of `as_of`."""
+    import unified_price as UP, unified as U
+    from zoneinfo import ZoneInfo
+    S = S or json.loads(STORE.read_text())
+    r0 = S[mids[0]]; info = _two_dir(r0)
+    if not info: return {}, {"unpriced": "not a two-direction holds contract"}
+    pairs = sorted(f"{UD.norm(a)}->{UD.norm(b)}" for a, b in info["dirs"]); P = union_params(pairs)
+    if not P: return {}, {"unpriced": "no parameters for a direction"}
+    tz = UD.tz_of(r0.get("description")) or "UTC"; z = ZoneInfo(tz); today = as_of.astimezone(z).date(); last = today - dt.timedelta(1)
+    ev = []
+    for mid, r in S.items():                                     # resolved holds of the same direction set
+        i2 = _two_dir(r)
+        if not i2 or sorted(f"{UD.norm(a)}->{UD.norm(b)}" for a, b in i2["dirs"]) != pairs: continue
+        ho, known, created = holds_outcome(r), (_ts(r.get("closedTime")) if r.get("closed") else None), _ts(r.get("createdAt"))
+        d = contract_date(r.get("question"), created, r.get("description")) if created else None
+        if ho is None or not known or not (known < as_of) or not d: continue
+        a = created.astimezone(z).date()
+        if ho == 1:                                              # held: no union strike after the creation day through D
+            a2, b2 = (a if created.astimezone(z).time() == dt.time(0) else a + dt.timedelta(1)), min(d, last)
+            if b2 >= a2: ev.append((a2, b2, 0))
+        else:                                                    # broken: >= 1 union strike in [created, close]
+            b2 = min(d, known.astimezone(z).date(), last)
+            if b2 >= a: ev.append((a, b2, 1))
+    base = {UD.struct_fp(r0.get("description"), a, b) for a, b in info["dirs"]}
+    nos = []
+    for p in pairs:                                              # direction strike groups, same structural definition
+        dn = set()
+        for (p2, f2), g2 in G.items():
+            if p2 != p or str(f2).startswith("H") or g2[0].get("sfp") not in base: continue
+            d0, T2, w2 = UD.windows(g2, as_of)
+            for a2, b2, y in w2:
+                A, B = d0 + dt.timedelta(a2), d0 + dt.timedelta(b2)
+                if y == 1: ev.append((A, B, 1))
+                else: dn |= {A + dt.timedelta(k) for k in range((B - A).days + 1)}
+        nos.append(dn)
+    ev += [(a, b, 0) for a, b in _runs(set.intersection(*nos))] if nos else []
+    nd = set().union(*[UP.news_dates(p, as_of, z) for p in pairs])
+    opens = []
+    for mid in mids:
+        r = S[mid]; created = _ts(r.get("createdAt")); d = contract_date(r.get("question"), created, r.get("description"))
+        if created and d and d >= today: opens.append((mid, created.astimezone(z).date(), d))
+    if not opens: return {}, None
+    d0n = min([today] + [a for _, a, _ in opens] + [a for a, _, _ in ev] + ([today - dt.timedelta(60)] if nd else []))
+    wins = [((a - d0n).days, (b - d0n).days, y) for a, b, y in ev]; Tn = (today - d0n).days
+    nds = {(x - d0n).days for x in nd if x >= d0n}
+    w, rows = UP.grid(P, Tn, wins, nds=nds)
+    if not len(rows): return {}, {"unpriced": "contradictory evidence"}
+    out = {}
+    for mid, a, b in opens:
+        A, B = (a - d0n).days, (b - d0n).days; ps = []
+        for _, q, q0, st, mu in rows:
+            stk = st if A >= Tn else U.forward_joint(Tn, wins, P["h"], mu, q, q0, keep_from=A, news_days=nds, news_ratio=UP.NEWS_FALSE / UP.NEWS_CATCH)[1]
+            ps.append(U.price_open(stk, P["h"], mu, q, q0, Tn, A, B))
+        out[mid] = round(1 - float(np.dot(w, ps)), 4)
+    return out, {"source": f"holds v1 union {'+'.join(pairs)}: {len(wins)} windows, {len(nds)} news days",
+                 "q": float(np.dot(w, [r[1] for r in rows])), "pi": float(np.dot(w, [sum(v for (s, _), v in r[3].items() if s == 1) for r in rows]))}
+
+def two_dir_model():
+    try: return json.loads(PUB.read_text()).get("two_direction_model", "v0")
+    except Exception: return "v0"
+
+def replay_v1(write=True):
+    """docs/holds_v1_prereg.md: v1 vs v0 vs market on resolved two-direction holds (24h after listing); adoption rule."""
+    import unified_price as UP
+    cs, _ = UD.load(); G = UD.groups(cs); S = json.loads(STORE.read_text())
+    cache = json.loads(PRICES.read_text()) if PRICES.exists() else {}
+    vc = defaultdict(list)
+    for c in cs:
+        if c.get("holds_of"): vc[c["holds_of"]].append(c)
+    rows, skip = [], Counter()
+    for mid, r in S.items():
+        if not _two_dir(r): continue
+        ho = holds_outcome(r)
+        if ho is None: skip["open or void"] += 1; continue
+        created, known = _ts(r["createdAt"]), _ts(r["closedTime"]); as_of = created + dt.timedelta(hours=24)
+        if known <= as_of: skip["resolved before first run"] += 1; continue
+        pu, _ = price_union([mid], G, as_of, S)
+        if mid not in pu: skip["v1 unpriced"] += 1; continue
+        p0 = 1.0
+        for c in vc.get(mid, []):
+            pr, d = UP.price_group(G[(c["pair"], c["sfp"])], as_of, UP.params(c["pair"]), [dict(c, open=True)], G, c["pair"])
+            if c["id"] not in pr: p0 = None; break
+            p0 *= (1 - pr[c["id"]])
+        if p0 is None: skip["v0 unpriced"] += 1; continue
+        tok = json.loads(r.get("clobTokenIds") or "[]"); mk = market_price(tok[0], as_of, cache) if tok else None
+        if mk is None: skip["no market price"] += 1; continue
+        rows.append({"id": mid, "y": ho, "v1": pu[mid], "v0": round(p0, 4), "m": mk, "q": r["question"]})
+    PRICES.write_text(json.dumps(cache) + "\n")
+    cl = lambda p: min(0.999, max(0.001, p))
+    B = lambda xs, k: sum((x[k] - x["y"]) ** 2 for x in xs) / len(xs)
+    LL = lambda xs, k: -sum(math.log(cl(x[k]) if x["y"] else 1 - cl(x[k])) for x in xs) / len(xs)
+    print(f"\n=== HOLDS v1 REPLAY (docs/holds_v1_prereg.md): n={len(rows)} | skipped {dict(skip)}")
+    if not rows: return rows
+    for k in ("v1", "v0", "m"): print(f"  {k:3} Brier {B(rows, k):.4f} logloss {LL(rows, k):.3f}")
+    for x in sorted(rows, key=lambda x: x["q"]): print(f"    y={x['y']} v1 {x['v1']:.3f} v0 {x['v0']:.3f} mkt {x['m']:.3f} | {x['q'][:60]}")
+    pick = "v0" if B(rows, "v1") > B(rows, "v0") + 0.01 else "v1"
+    print(f"  ADOPTION RULE -> two-direction model: {pick}  (caveat: all outcomes YES here; harm check only)")
+    if write:
+        pol = json.loads(PUB.read_text()) if PUB.exists() else {}
+        pol["two_direction_model"] = pick
+        pol["two_direction_replay"] = {"n": len(rows), "brier": {k: round(B(rows, k), 4) for k in ("v1", "v0", "m")}, "rule": "docs/holds_v1_prereg.md"}
+        PUB.write_text(json.dumps(pol, indent=2) + "\n")
+    return rows
 
 # ---------------------------------------------------------------- data
 def _get(url, tries=3):
@@ -266,8 +405,9 @@ def replay(write=True):
             print(f"      {x['date']} y={x['y']} unified {x['u']:.3f} market {x['m']:.3f} | {x['q'][:60]}")
     print("  caveat: each series is one or two episodes (a quiet spell, a break); effective sample << n.")
     if write:
-        PUB.write_text(json.dumps({"rule": RULE, "allowed": allowed, "results": res, "skipped": dict(skip),
-                                   "computed_at": dt.datetime.now(UTC).isoformat()}, indent=2) + "\n")
+        pol = json.loads(PUB.read_text()) if PUB.exists() else {}          # merge: keep keys other steps own (two_direction_model)
+        pol.update({"rule": RULE, "allowed": allowed, "results": res, "skipped": dict(skip), "computed_at": dt.datetime.now(UTC).isoformat()})
+        PUB.write_text(json.dumps(pol, indent=2) + "\n")
     return rows
 
 # ---------------------------------------------------------------- tests
@@ -328,3 +468,4 @@ if __name__ == "__main__":
     if "--test" in sys.argv: _tests()
     if "--refresh" in sys.argv: refresh()
     if "--replay" in sys.argv: replay()
+    if "--replay-v1" in sys.argv: replay_v1()

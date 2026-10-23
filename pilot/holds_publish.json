@@ -39,5 +39,15 @@
     "open or void": 19,
     "unpriced at first run: no fitted history and no positive evidence of fighting (engi": 6
   },
-  "computed_at": "2026-10-23T13:49:01.050593+00:00"
+  "computed_at": "2026-10-23T15:10:18.521914+00:00",
+  "two_direction_model": "v1",
+  "two_direction_replay": {
+    "n": 16,
+    "brier": {
+      "v1": 0.0032,
+      "v0": 0.0116,
+      "m": 0.0478
+    },
+    "rule": "docs/holds_v1_prereg.md"
+  }
 }

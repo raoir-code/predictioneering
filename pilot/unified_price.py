@@ -305,7 +305,7 @@ def production_prices():
         for mid, p in pr.items():
             _PP[mid] = {"p": p, "group": gk, "source": d["source"], "q": round(d["q"], 3), "pi": round(d["pi"], 3)}
     try:
-        import ceasefire_holds as _CH; _CH.combine(_PP)
+        import ceasefire_holds as _CH; _CH.combine(_PP, G, now)
     except Exception as ex:
         print(f"[holds] combine FAILED ({ex!r}); holds contracts unpriced")
         for k in [k for k in _PP if "@" in k]: _PP.pop(k)
