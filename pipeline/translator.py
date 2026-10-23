@@ -2330,6 +2330,11 @@ def run_translator():
 
     feed  = json.loads(CLASSIFIED_FEED.read_text())
     cache = _load_cache()
+    try:                                   # Oct 23 (docs/strike_given_war_prereg.md): undo last run's empirical P(B|A) before any pass
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pilot")); import strike_given_war as _SGW
+        print(f"[strike|war] restored the model's own P(B|A) on {_SGW.restore(feed)} markets")
+    except Exception as ex:
+        _SGW = None; print(f"[strike|war] restore FAILED ({ex!r}); empirical P(B|A) not applied this run")
     try:                                   # Oct 22: family A "ceasefire holds" (docs/ceasefire_scope_rule.md), deterministic
         sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pilot")); import ceasefire_holds as _CH
         _CH.tag_feed(feed)
@@ -2377,6 +2382,9 @@ def run_translator():
     _run_action_bridge_activation_pass(feed, cache)
     _save_cache(cache)
 
+    if _SGW is not None:                   # last step before the during-war pass; off unless pilot/local/strike_given_war.json exists
+        try: print(f"[strike|war] empirical P(B|A) applied to {_SGW.apply(feed)} strike markets")
+        except Exception as ex: print(f"[strike|war] apply FAILED ({ex!r}); model P(B|A) kept")
     _apply_during_war_pricing(feed)
     CLASSIFIED_FEED.write_text(json.dumps(feed, indent=2))
 
@@ -2423,6 +2431,9 @@ def _append_log(feed: list):
                 "translator_route":         market.get("translator_route"),
                 "translator_verdict":       market.get("translator_verdict"),
                 "p_b_given_a":              market.get("p_b_given_a"),
+                "p_b_given_a_source":       market.get("p_b_given_a_source"),
+                "p_b_given_a_pre_empirical": market.get("p_b_given_a_pre_empirical"),
+                "conditional_p_pre_empirical": market.get("conditional_p_pre_empirical"),
                 "p_b_given_a_raw":          market.get("p_b_given_a_raw"),
                 "p_b_given_not_a":          market.get("p_b_given_not_a"),
                 "p_b_given_not_a_reference_days": market.get("p_b_given_not_a_reference_days"),
