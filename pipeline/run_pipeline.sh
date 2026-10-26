@@ -19,6 +19,16 @@ mkdir -p "$LOG_DIR"
 LOGFILE="$LOG_DIR/pipeline_$(date +%Y%m%d_%H%M%S).log"
 
 echo "[$(date +%H:%M:%S)] === Predictioneering pipeline run: $(date) ===" | tee -a "$LOGFILE"
+RUN_DATE=$(date +%Y-%m-%d)
+# Stale-run guard (Oct 26): the Oct 24 run slept with the lid closed and published Saturday's news on Monday, 51h later,
+# while launchd swallowed the Sunday/Monday fires. If the date has rolled over before any prediction is written, stop:
+# counted failure, nothing priced from an old information set. Once the translator starts, the run finishes and publishes.
+fresh_or_abort() {
+    if [ "$(date +%Y-%m-%d)" != "$RUN_DATE" ]; then
+        echo "[$(date +%H:%M:%S)] STALE RUN: started $RUN_DATE, now $(date +%Y-%m-%d) at $1; aborted before pricing (counted failure)" | tee -a "$LOGFILE"
+        exit 3
+    fi
+}
 
 echo "[$(date +%H:%M:%S)] Watchdog check..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.watchdog >> "$LOGFILE" 2>&1 || echo "  [watchdog] check itself failed to run (non-fatal)" | tee -a "$LOGFILE"
@@ -42,6 +52,7 @@ else
     echo "[$(date +%H:%M:%S)] [2/6] Disciplinarian skipped (weekly marker is ${WEEKLY_AGE}h old, < 7 days)." | tee -a "$LOGFILE"
 fi
 
+fresh_or_abort "engine"
 echo "[$(date +%H:%M:%S)] [3/6] Engine (predict.py)..." | tee -a "$LOGFILE"
 echo "[$(date +%H:%M:%S)] [classify] Retry markets left in ERROR by an earlier outage (non-fatal)..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.disciplinarian --retry-errors >> "$LOGFILE" 2>&1 || echo "  [classify] retry failed (non-fatal)" | tee -a "$LOGFILE"
@@ -55,6 +66,7 @@ echo "[$(date +%H:%M:%S)] [ceasefire] Ceasefire contracts (families A/B/C): refr
 $PYTHON -u pilot/ceasefire_holds.py --refresh --replay >> "$LOGFILE" 2>&1 || echo "  [holds] refresh/replay failed (non-fatal; previous policy kept)" | tee -a "$LOGFILE"
 $PYTHON -u pilot/ceasefire_bc.py --replay >> "$LOGFILE" 2>&1 || echo "  [ceasefire-bc] replay failed (non-fatal; report only)" | tee -a "$LOGFILE"
 $PYTHON -u pilot/war_outcomes.py --refresh --replay >> "$LOGFILE" 2>&1 || echo "  [war-outcome] refresh/replay failed (non-fatal; report only)" | tee -a "$LOGFILE"
+fresh_or_abort "translator"
 $PYTHON -u -m pipeline.translator >> "$LOGFILE" 2>&1
 echo "[$(date +%H:%M:%S)] [scope] Contract-scope refresh for new kinetic markets (non-fatal; G4)..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.backfill_contract_scopes >> "$LOGFILE" 2>&1 || echo "  [scope] refresh failed (non-fatal)" | tee -a "$LOGFILE"
