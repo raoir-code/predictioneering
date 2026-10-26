@@ -14,7 +14,8 @@ print("   complete:", "FAILED (stale run, aborted before pricing)" if "STALE RUN
 print(f"   started {start:%a %m-%d %H:%M}, ran {hrs:.1f}h" + ("  FAILED: over 3h" if hrs > 3 else "") + ("  FAILED: no run started today" if start.date() != dt.date.today() else ""))
 print("   push:", "OK" if re.search(r"main -> main", txt) else ("FAILED" if re.search(r"Could not resolve|failed 5 times|! \[rejected\]|failed to push", txt) else "not seen"))
 for tag, pat in (("during-war/unified", r"\[during-war\][^\n]*"), ("rules", r"\[rules\] stored[^\n]*"), ("news", r"new headlines labeled"),
-                 ("policy", r"excluded by rule:[^\n]*"), ("scopes", r"resolved: *\d+"), ("meta", r"\[meta\] stored[^\n]*")):
+                 ("policy", r"excluded by rule:[^\n]*"), ("scopes", r"resolved: *\d+"), ("meta", r"\[meta\] stored[^\n]*"),
+                 ("strike|no war", r"\[strike\|no war\] empirical[^\n]*"), ("strike|war", r"\[strike\|war\] restored[^\n]*")):
     m = re.findall(pat, txt); print(f"   {tag:18} {m[-1] if m else 'NOT SEEN'}" + (f"  ({len(m)} dyads)" if tag == 'news' and m else ""))
 errs = [l.strip() for l in txt.splitlines() if re.search(r"Traceback|ERROR|failed \(non-fatal\)|FAILED|Exception", l)]
 print(f"   errors/failures: {len(errs)}"); [print("     ", e[:150]) for e in errs[-8:]]
