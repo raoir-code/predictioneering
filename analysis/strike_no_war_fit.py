@@ -114,7 +114,7 @@ def universe():
             r = json.loads(l); mid = str(r.get("market_id"))
             if mid not in first and r.get("pricing_component") in (None, "engine") and qualifies(r) and r.get("p_b_given_not_a") is not None:
                 first[mid] = r
-    pairs = defaultdict(lambda: {"h": [], "ref": [], "markets": []})
+    pairs = defaultdict(lambda: {"h": [], "ref": [], "markets": [], "fields": set()})
     daily = set()
     for mid, r in first.items():
         ini, tgt = _parse(r.get("market_label"))
@@ -122,8 +122,9 @@ def universe():
         k = (tuple(sorted(ini)), tgt); p, ref = float(r["p_b_given_not_a"]), float(r.get("p_b_given_not_a_reference_days") or 365)
         if ref < MIN_REF: daily.add(k); continue
         pairs[k]["h"].append(1 - (1 - min(p, 0.999999)) ** (1 / ref)); pairs[k]["ref"].append(ref); pairs[k]["markets"].append(mid)
+        pairs[k]["fields"].add((NAMES.get(r.get("contract_initiator"), r.get("contract_initiator")), NAMES.get(r.get("contract_target"), r.get("contract_target"))))
     if daily - set(pairs): print("  daily-contract-only directions (excluded):", sorted(daily - set(pairs)))
-    return {k: {"h": sum(v["h"]) / len(v["h"]), "ref": sorted(v["ref"])[len(v["ref"]) // 2], "markets": v["markets"]} for k, v in pairs.items()}
+    return {k: {"h": sum(v["h"]) / len(v["h"]), "ref": sorted(v["ref"])[len(v["ref"]) // 2], "markets": v["markets"], "fields": v["fields"]} for k, v in pairs.items()}
 
 def series(end, subs):
     """(initiators, target) -> (prefix strikes, prefix war) over D0..end, for every universe direction found in the data."""
@@ -131,13 +132,18 @@ def series(end, subs):
     U = universe(); N = (end - D0).days + 1
     strike = defaultdict(set); countries = set()
     for r, d in SGW._rows("explosions", end):
-        countries.add(r.get("country"))
+        countries.add(r.get("country")); countries |= SGW._side(r, "actor1", "assoc_actor_1") | SGW._side(r, "actor2", "assoc_actor_2")
         if d < D0 or r.get("sub_event_type") not in subs or WF.MARITIME.search(r.get("country") or ""): continue
         for x in SGW._side(r, "actor1", "assoc_actor_1"):
             if x != r.get("country"): strike[(x, r["country"])].add((d - D0).days)
     E = SGW.episodes(end); out = {}; skipped = []
     for (ini, tgt), v in U.items():
-        if tgt not in countries or any(x not in countries for x in ini): skipped.append((ini, tgt)); continue
+        # Amendment 1 (Oct 26): a name is matched if the event data knows it (as a location or a state's forces) OR it is the
+        # contract's own translated initiator/target field; a country with no events is a matched name with zero strikes, not
+        # an unmatched name. A target that differs from the contract's target field (e.g. "Greater Beirut" vs Lebanon) is sub-state.
+        ti, tt = {f[0] for f in v["fields"]}, {f[1] for f in v["fields"]}
+        if tgt not in tt or not any(x in countries or x in ti for x in ini): skipped.append((ini, tgt)); continue
+        if any(x not in countries for x in ini): print(f"  initiator(s) with no events in the data (zero strikes): {[x for x in ini if x not in countries]} -> {tgt}")
         sd = set().union(*(strike.get((x, tgt), set()) for x in ini)); wd = set()
         for x in ini:
             for s, e, fat in E.get(tuple(sorted((x, tgt))), []):

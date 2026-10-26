@@ -63,3 +63,13 @@ Before any real data: a synthetic check of the estimator (zero-rate pair near 0;
 window hit rate unbiased where the daily-rate conversion is not; a rate drop tracked by the short lookback; strikes inside war
 episodes not counted). Any flaw found there is fixed by a dated amendment before the real fit.
 Parameters derived from the local data stay in gitignored local files; the public repo records only this rule and the verdict.
+
+## Amendment 1 (Oct 26, after the first real run; the verdict is decided by the corrected run, both reported)
+Implementation bug, not a design change: the name check required each country to appear as an event LOCATION in the pull, so
+directions whose countries had no located events were dropped as "unmatched" (France + UK + Germany -> Yemen, two of the seven live
+contracts this change targets; US -> Cuba, Colombia, Mexico). The rule as written matches names: a name now matches if the event
+data knows it (as a location or as a state's forces) or it is the contract's own translated initiator/target; a country with no
+events is a matched name with zero strikes (for a multi-initiator contract, at least one initiator must match; the others are
+reported and contribute zero strikes). A target different from the contract's target field (e.g. "Greater Beirut" vs Lebanon)
+stays excluded as sub-state. First run, as recorded: 19 pairs, 2,268 pair-windows, Brier 0.0645 (empirical) vs 0.0684 (LLM),
+bootstrap [-0.0093, +0.0001], L = 730 -> PASS. The corrected run decides gate 1.
