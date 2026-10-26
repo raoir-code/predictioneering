@@ -4623,5 +4623,43 @@
     },
     "route": "scoped_bilateral",
     "version": 1
+  },
+  "1194695": {
+    "market_id": "1194695",
+    "dyad": "Russia-Ukraine",
+    "question": "Will Russia invade another country in 2026?",
+    "end_date": "2026-12-31",
+    "action_type": "ground_invasion",
+    "initiator": "Russia",
+    "target": "Ukraine",
+    "source_signature": "b2a78e45519ebb4350c7fef62676f99b1d6afd6fc56da6497e79ea4e761d558d",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Russia",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "undefined_union",
+        "canonical_actor": null,
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "unspecified",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": false,
+      "confidence": "high",
+      "reasoning": "The assigned target is Ukraine, but the contract explicitly excludes Ukraine and asks whether Russia invades any other UN member state. The direction is incompatible with the contract as written. The initiator is Russia (single_actor, state). The target is an open-ended set of any UN member state other than Ukraine (undefined_union). Geography is unspecified beyond the resolution-level exclusion of Ukraine.",
+      "scope_fingerprint": "915db562b3d62fc2",
+      "action_prior_fingerprint": "3ec8e73c656c7375"
+    },
+    "route": "fail_closed_direction",
+    "version": 1
   }
 }

@@ -9,37 +9,36 @@
       "n": 16,
       "yes": 16,
       "no": 0,
-      "brier_unified": 0.0116,
+      "brier_unified": 0.0179,
       "brier_market": 0.0478,
       "no_market_price": 0,
       "passes_prereg_rule": true
     },
     "unitedstates->iran": {
-      "n": 11,
-      "yes": 11,
+      "n": 12,
+      "yes": 12,
       "no": 0,
-      "brier_unified": 0.043,
-      "brier_market": 0.0171,
+      "brier_unified": 0.0354,
+      "brier_market": 0.0168,
       "no_market_price": 0,
       "passes_prereg_rule": true
     },
     "unitedstates->yemen": {
-      "n": 3,
-      "yes": 3,
+      "n": 4,
+      "yes": 4,
       "no": 0,
-      "brier_unified": 0.0009,
-      "brier_market": 0.0033,
+      "brier_unified": 0.0035,
+      "brier_market": 0.0028,
       "no_market_price": 0,
       "passes_prereg_rule": false
     }
   },
   "skipped": {
-    "unpriced at first run: no evidence of its own, none in the reverse direction": 11,
+    "unpriced at first run: no evidence of its own, none in the reverse direction": 17,
     "past its date at first run": 2,
-    "open or void": 19,
-    "unpriced at first run: no fitted history and no positive evidence of fighting (engi": 6
+    "open or void": 17
   },
-  "computed_at": "2026-10-23T15:10:18.521914+00:00",
+  "computed_at": "2026-10-26T13:55:00.586623+00:00",
   "two_direction_model": "v1",
   "two_direction_replay": {
     "n": 16,

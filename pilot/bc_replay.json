@@ -2,31 +2,31 @@
  "results": {
   "B": {
    "n": 19,
-   "brier_model": 0.1456,
+   "brier_model": 0.1115,
    "brier_market": 0.1686
   },
   "B:houthi->saudiarabia+saudiarabia->yemen": {
    "n": 3,
    "yes": 0,
-   "brier_model": 0.0017,
+   "brier_model": 0.0009,
    "brier_market": 0.0903
   },
   "B:israel->lebanon": {
    "n": 6,
    "yes": 0,
-   "brier_model": 0.0123,
+   "brier_model": 0.0064,
    "brier_market": 0.0845
   },
   "B:unitedstates->iran": {
    "n": 10,
    "yes": 8,
-   "brier_model": 0.2689,
+   "brier_model": 0.2078,
    "brier_market": 0.2425
   },
   "C": {
-   "n": 125,
-   "brier_model": 0.213,
-   "brier_market": 0.145
+   "n": 123,
+   "brier_model": 0.2055,
+   "brier_market": 0.1408
   },
   "C:hamas|israel:BREAKDOWN": {
    "n": 11,
@@ -55,7 +55,7 @@
   "C:hezbollah|israel:DEAL": {
    "n": 3,
    "yes": 0,
-   "brier_model": 0.009,
+   "brier_model": 0.0136,
    "brier_market": 0.0844
   },
   "C:hezbollah|israel:EXTENSION": {
@@ -67,37 +67,37 @@
   "C:houthi|saudi:CEASEFIRE": {
    "n": 2,
    "yes": 0,
-   "brier_model": 0.0012,
+   "brier_model": 0.0014,
    "brier_market": 0.0091
   },
   "C:iran|israel:DEAL": {
    "n": 4,
    "yes": 0,
-   "brier_model": 0.0105,
+   "brier_model": 0.0121,
    "brier_market": 0.0298
   },
   "C:iran|us:BREAKDOWN": {
-   "n": 9,
+   "n": 8,
    "yes": 1,
-   "brier_model": 0.1259,
-   "brier_market": 0.1028
+   "brier_model": 0.1207,
+   "brier_market": 0.0526
   },
   "C:iran|us:CEASEFIRE": {
-   "n": 14,
-   "yes": 7,
-   "brier_model": 0.4034,
-   "brier_market": 0.1526
+   "n": 13,
+   "yes": 6,
+   "brier_model": 0.3735,
+   "brier_market": 0.1406
   },
   "C:iran|us:DEAL": {
    "n": 16,
    "yes": 5,
-   "brier_model": 0.1916,
+   "brier_model": 0.1712,
    "brier_market": 0.114
   },
   "C:iran|us:EXTENSION": {
    "n": 25,
    "yes": 8,
-   "brier_model": 0.2917,
+   "brier_model": 0.2887,
    "brier_market": 0.2242
   },
   "C:israel|lebanon:DEAL": {
@@ -109,7 +109,7 @@
   "C:israel|lebanon:EXTENSION": {
    "n": 3,
    "yes": 2,
-   "brier_model": 0.5873,
+   "brier_model": 0.5723,
    "brier_market": 0.2446
   },
   "C:israel|syria:DEAL": {
@@ -127,7 +127,7 @@
   "C:russia|ukraine:CEASEFIRE": {
    "n": 10,
    "yes": 1,
-   "brier_model": 0.0702,
+   "brier_model": 0.0741,
    "brier_market": 0.0984
   }
  },
@@ -140,7 +140,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 0,
-   "u": 0.8928,
+   "u": 0.9453,
    "m": 0.055,
    "q": "US x Iran Effective Ceasefire by July 18?",
    "date": "2026-07-18"
@@ -149,7 +149,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 0,
-   "u": 0.9097,
+   "u": 0.9619,
    "m": 0.155,
    "q": "US x Iran Effective Ceasefire by July 24?",
    "date": "2026-07-24"
@@ -158,7 +158,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.9253,
+   "u": 0.9767,
    "m": 0.225,
    "q": "US x Iran Effective Ceasefire by July 31?",
    "date": "2026-07-31"
@@ -167,7 +167,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.9425,
+   "u": 0.9884,
    "m": 0.425,
    "q": "US x Iran Effective Ceasefire by August 14?",
    "date": "2026-08-14"
@@ -176,7 +176,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.9575,
+   "u": 0.9947,
    "m": 0.575,
    "q": "US x Iran Effective Ceasefire by August 31?",
    "date": "2026-08-31"
@@ -185,7 +185,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.4332,
+   "u": 0.6739,
    "m": 0.285,
    "q": "US x Iran Effective Ceasefire by September 4?",
    "date": "2026-09-04"
@@ -194,7 +194,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.5299,
+   "u": 0.7803,
    "m": 0.51,
    "q": "US x Iran Effective Ceasefire by September 11?",
    "date": "2026-09-11"
@@ -203,7 +203,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.6121,
+   "u": 0.8545,
    "m": 0.595,
    "q": "US x Iran Effective Ceasefire by September 18?",
    "date": "2026-09-18"
@@ -212,7 +212,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.7077,
+   "u": 0.922,
    "m": 0.675,
    "q": "US x Iran Effective Ceasefire by September 30?",
    "date": "2026-09-30"
@@ -221,7 +221,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.4755,
+   "u": 0.7232,
    "m": 0.485,
    "q": "US x Iran Effective Ceasefire by September 7?",
    "date": "2026-09-07"
@@ -230,7 +230,7 @@
    "fam": "B",
    "series": "israel->lebanon",
    "y": 0,
-   "u": 0.028,
+   "u": 0.0198,
    "m": 0.16,
    "q": "Israel x Lebanon Effective Ceasefire by September 4?",
    "date": "2026-09-04"
@@ -239,7 +239,7 @@
    "fam": "B",
    "series": "israel->lebanon",
    "y": 0,
-   "u": 0.0484,
+   "u": 0.0343,
    "m": 0.25,
    "q": "Israel x Lebanon Effective Ceasefire by September 7?",
    "date": "2026-09-07"
@@ -248,7 +248,7 @@
    "fam": "B",
    "series": "israel->lebanon",
    "y": 0,
-   "u": 0.075,
+   "u": 0.0534,
    "m": 0.385,
    "q": "Israel x Lebanon Effective Ceasefire by September 11?",
    "date": "2026-09-11"
@@ -257,7 +257,7 @@
    "fam": "B",
    "series": "israel->lebanon",
    "y": 0,
-   "u": 0.1201,
+   "u": 0.0862,
    "m": 0.37,
    "q": "Israel x Lebanon Effective Ceasefire by September 18?",
    "date": "2026-09-18"
@@ -266,7 +266,7 @@
    "fam": "B",
    "series": "israel->lebanon",
    "y": 0,
-   "u": 0.1919,
+   "u": 0.1396,
    "m": 0.36,
    "q": "Israel x Lebanon Effective Ceasefire by September 30?",
    "date": "2026-09-30"
@@ -275,7 +275,7 @@
    "fam": "B",
    "series": "houthi->saudiarabia+saudiarabia->yemen",
    "y": 0,
-   "u": 0.0243,
+   "u": 0.017,
    "m": 0.26,
    "q": "Houthi x Saudi Arabia effective ceasefire by September 23?",
    "date": "2026-09-23"
@@ -284,7 +284,7 @@
    "fam": "B",
    "series": "houthi->saudiarabia+saudiarabia->yemen",
    "y": 0,
-   "u": 0.0434,
+   "u": 0.0307,
    "m": 0.365,
    "q": "Houthi x Saudi Arabia effective ceasefire by September 30?",
    "date": "2026-09-30"
@@ -293,7 +293,7 @@
    "fam": "B",
    "series": "israel->lebanon",
    "y": 0,
-   "u": 0.1166,
+   "u": 0.0843,
    "m": 0.065,
    "q": "Israel x Lebanon Effective Ceasefire by October 15?",
    "date": "2026-10-15"
@@ -302,7 +302,7 @@
    "fam": "B",
    "series": "houthi->saudiarabia+saudiarabia->yemen",
    "y": 0,
-   "u": 0.0505,
+   "u": 0.0388,
    "m": 0.265,
    "q": "Houthi x Saudi Arabia effective ceasefire by October 15?",
    "date": "2026-10-15"
@@ -399,24 +399,6 @@
   },
   {
    "fam": "C",
-   "series": "china|iran|us:CEASEFIRE",
-   "y": 1,
-   "u": 0.1289,
-   "m": null,
-   "q": "US x Iran ceasefire before Trump visits China?",
-   "date": "2026-06-30"
-  },
-  {
-   "fam": "C",
-   "series": "iran|russia|ukraine|us:CEASEFIRE",
-   "y": 0,
-   "u": 0.3069,
-   "m": null,
-   "q": "Russia x Ukraine ceasefire before US x Iran ceasefire?",
-   "date": "2026-12-31"
-  },
-  {
-   "fam": "C",
    "series": "iran|us:CEASEFIRE",
    "y": 1,
    "u": 0.0409,
@@ -453,15 +435,6 @@
   },
   {
    "fam": "C",
-   "series": "iran|us:CEASEFIRE",
-   "y": 1,
-   "u": 0.1084,
-   "m": 0.445,
-   "q": "US x Iran ceasefire before Oil hits $120?",
-   "date": "2026-06-30"
-  },
-  {
-   "fam": "C",
    "series": "russia|ukraine:CEASEFIRE",
    "y": 1,
    "u": 0.1998,
@@ -482,7 +455,7 @@
    "fam": "C",
    "series": "iran|us:BREAKDOWN",
    "y": 0,
-   "u": 0.0016,
+   "u": 0.0014,
    "m": 0.011,
    "q": "Trump announces US x Iran ceasefire end by April 8, 2026?",
    "date": "2026-04-08"
@@ -491,7 +464,7 @@
    "fam": "C",
    "series": "iran|us:BREAKDOWN",
    "y": 0,
-   "u": 0.0049,
+   "u": 0.0041,
    "m": 0.06,
    "q": "Trump announces US x Iran ceasefire end by April 10, 2026?",
    "date": "2026-04-10"
@@ -500,7 +473,7 @@
    "fam": "C",
    "series": "iran|us:BREAKDOWN",
    "y": 0,
-   "u": 0.0081,
+   "u": 0.0068,
    "m": 0.185,
    "q": "Trump announces US x Iran ceasefire end by April 12, 2026?",
    "date": "2026-04-12"
@@ -509,7 +482,7 @@
    "fam": "C",
    "series": "iran|us:BREAKDOWN",
    "y": 0,
-   "u": 0.0128,
+   "u": 0.0109,
    "m": 0.21,
    "q": "Trump announces US x Iran ceasefire end by April 15, 2026?",
    "date": "2026-04-15"
@@ -518,7 +491,7 @@
    "fam": "C",
    "series": "iran|us:BREAKDOWN",
    "y": 0,
-   "u": 0.0174,
+   "u": 0.0149,
    "m": 0.225,
    "q": "Trump announces US x Iran ceasefire end by April 18, 2026?",
    "date": "2026-04-18"
@@ -527,7 +500,7 @@
    "fam": "C",
    "series": "iran|us:BREAKDOWN",
    "y": 0,
-   "u": 0.0219,
+   "u": 0.019,
    "m": 0.26,
    "q": "Trump announces US x Iran ceasefire end by April 21, 2026?",
    "date": "2026-04-21"
@@ -536,7 +509,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.0097,
+   "u": 0.0082,
    "m": 0.19,
    "q": "Will the US x Iran ceasefire be extended by April 14, 2026?",
    "date": "2026-04-14"
@@ -545,7 +518,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.0204,
+   "u": 0.0176,
    "m": 0.585,
    "q": "US x Iran ceasefire extended by April 21, 2026?",
    "date": "2026-04-21"
@@ -554,7 +527,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 0,
-   "u": 0.0219,
+   "u": 0.019,
    "m": 0.125,
    "q": "US x Iran permanent peace deal by April 22, 2026?",
    "date": "2026-04-22"
@@ -563,7 +536,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 0,
-   "u": 0.0335,
+   "u": 0.0296,
    "m": 0.19,
    "q": "US x Iran permanent peace deal by April 30, 2026?",
    "date": "2026-04-30"
@@ -572,7 +545,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 0,
-   "u": 0.0735,
+   "u": 0.0699,
    "m": 0.365,
    "q": "US x Iran permanent peace deal by May 31, 2026?",
    "date": "2026-05-31"
@@ -581,7 +554,7 @@
    "fam": "C",
    "series": "iran|us:BREAKDOWN",
    "y": 0,
-   "u": 0.0096,
+   "u": 0.0082,
    "m": 0.21,
    "q": "Will Trump announce that the US x Iran ceasefire has been broken by April 14, 2026?",
    "date": "2026-04-14"
@@ -590,7 +563,7 @@
    "fam": "C",
    "series": "iran|us:BREAKDOWN",
    "y": 1,
-   "u": 0.0202,
+   "u": 0.0176,
    "m": 0.58,
    "q": "Will Trump announce that the US x Iran ceasefire has been broken by April 21, 2026?",
    "date": "2026-04-21"
@@ -599,7 +572,7 @@
    "fam": "C",
    "series": "israel|lebanon:CEASEFIRE",
    "y": 1,
-   "u": 0.0461,
+   "u": 0.0442,
    "m": null,
    "q": "Will Trump endorse an Israeli Ceasefire in Lebanon by April 30?",
    "date": "2026-04-30"
@@ -617,7 +590,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 1,
-   "u": 0.1026,
+   "u": 0.1024,
    "m": null,
    "q": "US x Iran permanent peace deal by June 30, 2026?",
    "date": "2026-06-30"
@@ -626,7 +599,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.0047,
+   "u": 0.0041,
    "m": null,
    "q": "Will the US x Iran ceasefire be extended by April 18, 2026?",
    "date": "2026-04-18"
@@ -635,7 +608,7 @@
    "fam": "C",
    "series": "hezbollah|israel:CEASEFIRE",
    "y": 1,
-   "u": 0.0212,
+   "u": 0.0181,
    "m": null,
    "q": "Israel x Hezbollah ceasefire by April 18, 2026?",
    "date": "2026-04-18"
@@ -644,7 +617,7 @@
    "fam": "C",
    "series": "hezbollah|israel:EXTENSION",
    "y": 0,
-   "u": 0.0134,
+   "u": 0.0132,
    "m": 0.16,
    "q": "Israel x Hezbollah Ceasefire extended by April 21, 2026??",
    "date": "2026-04-21"
@@ -671,7 +644,7 @@
    "fam": "C",
    "series": "hezbollah|israel:DEAL",
    "y": 0,
-   "u": 0.1041,
+   "u": 0.1086,
    "m": null,
    "q": "Israel x Hezbollah permanent peace deal by May 31, 2026?",
    "date": "2026-05-31"
@@ -680,7 +653,7 @@
    "fam": "C",
    "series": "iran|israel:DEAL",
    "y": 0,
-   "u": 0.0187,
+   "u": 0.0191,
    "m": 0.09,
    "q": "Israel x Iran permanent peace deal by April 22, 2026?",
    "date": "2026-04-22"
@@ -689,7 +662,7 @@
    "fam": "C",
    "series": "iran|israel:DEAL",
    "y": 0,
-   "u": 0.042,
+   "u": 0.0434,
    "m": 0.12,
    "q": "Israel x Iran permanent peace deal by April 30, 2026?",
    "date": "2026-04-30"
@@ -698,7 +671,7 @@
    "fam": "C",
    "series": "iran|israel:DEAL",
    "y": 0,
-   "u": 0.182,
+   "u": 0.1954,
    "m": 0.305,
    "q": "Israel x Iran permanent peace deal by June 30, 2026?",
    "date": "2026-06-30"
@@ -707,7 +680,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.0051,
+   "u": 0.0052,
    "m": 0.48,
    "q": "US x Iran ceasefire extended by April 22, 2026?",
    "date": "2026-04-22"
@@ -716,7 +689,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 0,
-   "u": 0.0081,
+   "u": 0.008,
    "m": 0.034,
    "q": "US x Iran permanent peace deal by April 24, 2026?",
    "date": "2026-04-24"
@@ -725,7 +698,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 0,
-   "u": 0.0425,
+   "u": 0.0455,
    "m": 0.115,
    "q": "US x Iran permanent peace deal by May 15, 2026?",
    "date": "2026-05-15"
@@ -734,7 +707,7 @@
    "fam": "C",
    "series": "iran|israel:DEAL",
    "y": 0,
-   "u": 0.0819,
+   "u": 0.0892,
    "m": 0.06,
    "q": "Israel x Iran permanent peace deal by May 31, 2026?",
    "date": "2026-05-31"
@@ -743,7 +716,7 @@
    "fam": "C",
    "series": "iran|israel:DEAL",
    "y": 0,
-   "u": 0.206,
+   "u": 0.2317,
    "m": null,
    "q": "Israel x Iran permanent peace deal by July 31, 2026?",
    "date": "2026-07-31"
@@ -752,7 +725,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 1,
-   "u": 0.3533,
+   "u": 0.4309,
    "m": 0.63,
    "q": "US x Iran permanent peace deal by December 31, 2026?",
    "date": "2026-12-31"
@@ -761,7 +734,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 0,
-   "u": 0.0024,
+   "u": 0.0026,
    "m": 0.0185,
    "q": "US x Iran permanent peace deal by May 8, 2026?",
    "date": "2026-05-08"
@@ -770,7 +743,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 0,
-   "u": 0.0096,
+   "u": 0.0103,
    "m": 0.075,
    "q": "US x Iran permanent peace deal by May 11, 2026?",
    "date": "2026-05-11"
@@ -779,7 +752,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 0,
-   "u": 0.0143,
+   "u": 0.0153,
    "m": 0.165,
    "q": "US x Iran permanent peace deal by May 13, 2026?",
    "date": "2026-05-13"
@@ -788,7 +761,7 @@
    "fam": "C",
    "series": "russia|ukraine:CEASEFIRE",
    "y": 0,
-   "u": 0.0458,
+   "u": 0.0615,
    "m": 0.035,
    "q": "Russia x Ukraine ceasefire agreement by May 31, 2026?",
    "date": "2026-05-31"
@@ -797,7 +770,7 @@
    "fam": "C",
    "series": "russia|ukraine:CEASEFIRE",
    "y": 0,
-   "u": 0.112,
+   "u": 0.1487,
    "m": 0.085,
    "q": "Russia x Ukraine ceasefire agreement by June 30, 2026?",
    "date": "2026-06-30"
@@ -806,7 +779,7 @@
    "fam": "C",
    "series": "russia|ukraine:CEASEFIRE",
    "y": 0,
-   "u": 0.0411,
+   "u": 0.0553,
    "m": 0.035,
    "q": "Russia x Ukraine ceasefire by May 31, 2026?",
    "date": "2026-05-31"
@@ -815,7 +788,7 @@
    "fam": "C",
    "series": "russia|ukraine:CEASEFIRE",
    "y": 0,
-   "u": 0.1078,
+   "u": 0.1432,
    "m": 0.09,
    "q": "Russia x Ukraine ceasefire by June 30, 2026?",
    "date": "2026-06-30"
@@ -824,7 +797,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 1,
-   "u": 0.0813,
+   "u": 0.095,
    "m": 0.185,
    "q": "US x Iran permanent peace deal by June 15, 2026?",
    "date": "2026-06-15"
@@ -833,7 +806,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 1,
-   "u": 0.1818,
+   "u": 0.2195,
    "m": 0.395,
    "q": "US x Iran permanent peace deal by July 31, 2026?",
    "date": "2026-07-31"
@@ -842,7 +815,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 0,
-   "u": 0.0112,
+   "u": 0.0128,
    "m": 0.0365,
    "q": "US x Iran permanent peace deal by May 22, 2026?",
    "date": "2026-05-22"
@@ -851,7 +824,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 0,
-   "u": 0.014,
+   "u": 0.016,
    "m": 0.135,
    "q": "US x Iran permanent peace deal by May 26, 2026?",
    "date": "2026-05-26"
@@ -860,7 +833,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 0,
-   "u": 0.0431,
+   "u": 0.0502,
    "m": 0.2,
    "q": "US x Iran permanent peace deal by June 7, 2026?",
    "date": "2026-06-07"
@@ -869,7 +842,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.003,
+   "u": 0.0032,
    "m": 0.445,
    "q": "US announces new Iran agreement/ceasefire extension by May 24?",
    "date": "2026-05-24"
@@ -878,7 +851,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.006,
+   "u": 0.0064,
    "m": 0.65,
    "q": "US announces new Iran agreement/ceasefire extension by May 25?",
    "date": "2026-05-25"
@@ -887,7 +860,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.009,
+   "u": 0.0096,
    "m": 0.715,
    "q": "US announces new Iran agreement/ceasefire extension by May 26?",
    "date": "2026-05-26"
@@ -896,7 +869,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.0236,
+   "u": 0.0254,
    "m": 0.79,
    "q": "US announces new Iran agreement/ceasefire extension by May 31?",
    "date": "2026-05-31"
@@ -905,25 +878,16 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.0434,
+   "u": 0.0472,
    "m": 0.875,
    "q": "US announces new Iran agreement/ceasefire extension by June 7?",
    "date": "2026-06-07"
   },
   {
    "fam": "C",
-   "series": "iran|us:BREAKDOWN",
-   "y": 0,
-   "u": 0.4145,
-   "m": 0.71,
-   "q": "US x Iran permanent peace deal before ceasefire ends?",
-   "date": "2026-12-31"
-  },
-  {
-   "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.006,
+   "u": 0.0064,
    "m": 0.15,
    "q": "US announces new Iran agreement/ceasefire extension by May 27?",
    "date": "2026-05-27"
@@ -932,7 +896,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.0089,
+   "u": 0.0096,
    "m": 0.21,
    "q": "US announces new Iran agreement/ceasefire extension by May 28?",
    "date": "2026-05-28"
@@ -941,7 +905,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 1,
-   "u": 0.0979,
+   "u": 0.1094,
    "m": 0.815,
    "q": "US announces new Iran agreement/ceasefire extension by June 30?",
    "date": "2026-06-30"
@@ -950,7 +914,7 @@
    "fam": "C",
    "series": "hezbollah|israel:DEAL",
    "y": 0,
-   "u": 0.0552,
+   "u": 0.0642,
    "m": 0.205,
    "q": "Israel x Hezbollah permanent peace deal by June 15, 2026?",
    "date": "2026-06-15"
@@ -959,7 +923,7 @@
    "fam": "C",
    "series": "hezbollah|israel:DEAL",
    "y": 0,
-   "u": 0.0916,
+   "u": 0.1076,
    "m": 0.325,
    "q": "Israel x Hezbollah permanent peace deal by June 30, 2026?",
    "date": "2026-06-30"
@@ -968,7 +932,7 @@
    "fam": "C",
    "series": "israel|lebanon:EXTENSION",
    "y": 0,
-   "u": 0.015,
+   "u": 0.0175,
    "m": 0.21,
    "q": "Israel announces Lebanon ceasefire extension by May 31?",
    "date": "2026-05-31"
@@ -977,7 +941,7 @@
    "fam": "C",
    "series": "israel|lebanon:EXTENSION",
    "y": 1,
-   "u": 0.0352,
+   "u": 0.0415,
    "m": 0.24,
    "q": "Israel announces Lebanon ceasefire extension by June 7?",
    "date": "2026-06-07"
@@ -986,7 +950,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.0089,
+   "u": 0.0096,
    "m": 0.27,
    "q": "US announces new Iran agreement/ceasefire extension by May 29?",
    "date": "2026-05-29"
@@ -995,7 +959,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.0119,
+   "u": 0.0128,
    "m": 0.32,
    "q": "US announces new Iran agreement/ceasefire extension by May 30?",
    "date": "2026-05-30"
@@ -1004,7 +968,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.0234,
+   "u": 0.0254,
    "m": 0.54,
    "q": "US announces new Iran agreement/ceasefire extension by June 3?",
    "date": "2026-06-03"
@@ -1013,7 +977,7 @@
    "fam": "C",
    "series": "israel|lebanon:EXTENSION",
    "y": 1,
-   "u": 0.0885,
+   "u": 0.1067,
    "m": 0.665,
    "q": "Israel announces Lebanon ceasefire extension by June 30?",
    "date": "2026-06-30"
@@ -1022,7 +986,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 1,
-   "u": 0.202,
+   "u": 0.2405,
    "m": 0.505,
    "q": "US x Iran permanent peace deal by August 31, 2026?",
    "date": "2026-08-31"
@@ -1031,7 +995,7 @@
    "fam": "C",
    "series": "iran|us:DEAL",
    "y": 1,
-   "u": 0.3027,
+   "u": 0.3683,
    "m": 0.655,
    "q": "US x Iran permanent peace deal by October 31, 2026?",
    "date": "2026-10-31"
@@ -1040,7 +1004,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 1,
-   "u": 0.1469,
+   "u": 0.1634,
    "m": 0.745,
    "q": "US announces new Iran agreement/ceasefire extension by July 31?",
    "date": "2026-07-31"
@@ -1049,7 +1013,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.0197,
+   "u": 0.0209,
    "m": 0.155,
    "q": "US announces new Iran agreement/ceasefire extension by June 9?",
    "date": "2026-06-09"
@@ -1058,7 +1022,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.0279,
+   "u": 0.0298,
    "m": 0.245,
    "q": "US announces new Iran agreement/ceasefire extension by June 12?",
    "date": "2026-06-12"
@@ -1067,7 +1031,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 1,
-   "u": 0.036,
+   "u": 0.0386,
    "m": 0.3,
    "q": "US announces new Iran agreement/ceasefire extension by June 15?",
    "date": "2026-06-15"
@@ -1076,7 +1040,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.0085,
+   "u": 0.009,
    "m": 0.045,
    "q": "US announces new Iran agreement/ceasefire extension by June 5?",
    "date": "2026-06-05"
@@ -1085,7 +1049,7 @@
    "fam": "C",
    "series": "iran|us:CEASEFIRE",
    "y": 0,
-   "u": 0.0307,
+   "u": 0.0317,
    "m": 0.0475,
    "q": "Trump announces US x Iran ceasefire over by June 12?",
    "date": "2026-06-12"
@@ -1094,7 +1058,7 @@
    "fam": "C",
    "series": "iran|us:CEASEFIRE",
    "y": 0,
-   "u": 0.1782,
+   "u": 0.1836,
    "m": 0.185,
    "q": "Trump announces US x Iran ceasefire over by June 30?",
    "date": "2026-06-30"
@@ -1103,7 +1067,7 @@
    "fam": "C",
    "series": "iran|us:CEASEFIRE",
    "y": 0,
-   "u": 0.0593,
+   "u": 0.0613,
    "m": 0.115,
    "q": "Trump announces US x Iran ceasefire over by June 15?",
    "date": "2026-06-15"
@@ -1112,7 +1076,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 0,
-   "u": 0.0065,
+   "u": 0.0072,
    "m": 0.235,
    "q": "US announces new Iran agreement/ceasefire extension by June 13?",
    "date": "2026-06-13"
@@ -1121,7 +1085,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 1,
-   "u": 0.0097,
+   "u": 0.0108,
    "m": 0.285,
    "q": "US announces new Iran agreement/ceasefire extension by June 14",
    "date": "2026-06-14"
@@ -1130,7 +1094,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 1,
-   "u": 0.0161,
+   "u": 0.0179,
    "m": 0.5,
    "q": "US announces new Iran agreement/ceasefire extension by June 16?",
    "date": "2026-06-16"
@@ -1139,7 +1103,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 1,
-   "u": 0.0193,
+   "u": 0.0215,
    "m": 0.6,
    "q": "US announces new Iran agreement/ceasefire extension by June 17?",
    "date": "2026-06-17"
@@ -1148,7 +1112,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 1,
-   "u": 0.0225,
+   "u": 0.025,
    "m": 0.61,
    "q": "US announces new Iran agreement/ceasefire extension by June 18?",
    "date": "2026-06-18"
@@ -1157,7 +1121,7 @@
    "fam": "C",
    "series": "iran|us:EXTENSION",
    "y": 1,
-   "u": 0.0256,
+   "u": 0.0286,
    "m": 0.63,
    "q": "US announces new Iran agreement/ceasefire extension by June 19?",
    "date": "2026-06-19"
@@ -1247,7 +1211,7 @@
    "fam": "C",
    "series": "hezbollah|israel:DEAL",
    "y": 0,
-   "u": 0.1253,
+   "u": 0.1585,
    "m": 0.325,
    "q": "Israel x Hezbollah permanent peace deal by July 31, 2026?",
    "date": "2026-07-31"
@@ -1274,7 +1238,7 @@
    "fam": "C",
    "series": "russia|ukraine:CEASEFIRE",
    "y": 0,
-   "u": 0.1568,
+   "u": 0.2057,
    "m": 0.145,
    "q": "Russia x Ukraine ceasefire agreement by August 31, 2026?",
    "date": "2026-08-31"
@@ -1292,7 +1256,7 @@
    "fam": "C",
    "series": "houthi|saudi:CEASEFIRE",
    "y": 0,
-   "u": 0.0193,
+   "u": 0.021,
    "m": 0.05,
    "q": "Saudi-Houthi ceasefire agreement announced by September 23?",
    "date": "2026-09-23"
@@ -1301,7 +1265,7 @@
    "fam": "C",
    "series": "houthi|saudi:CEASEFIRE",
    "y": 0,
-   "u": 0.044,
+   "u": 0.0478,
    "m": 0.125,
    "q": "Saudi-Houthi ceasefire agreement announced by September 30?",
    "date": "2026-09-30"
@@ -1523,5 +1487,5 @@
    "date": "2026-06-30"
   }
  ],
- "computed_at": "2026-10-23T13:49:16.500449+00:00"
+ "computed_at": "2026-10-26T13:55:34.919330+00:00"
 }
