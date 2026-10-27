@@ -38,6 +38,18 @@ def rates(table):
             "d": (sum(s1) + 0.5) / (len(s1) + 1) if s1 else None, "alpha": (sum(s0) + 0.5) / (len(s0) + 1) if s0 else None,
             "hits_on_strike_days": sum(s1), "hits_on_quiet_days": sum(s0)}
 
+def persistence(table):
+    """Are misses clustered? Among consecutive observed days that both had a true strike: P(miss today | missed yesterday) vs
+    P(miss). Equal -> independent misses (k quiet days multiply); higher -> clustered (a run of no-hit days is worth less).
+    The unified engine reads no-hit days as no information because it assumes clustering; this measures it."""
+    prev = {f: (s, o) for f, s, o in table}; pairs = []
+    for f, s, o in table:
+        y = prev.get(f - dt.timedelta(1))
+        if s and y and y[0]: pairs.append((not y[1], not o))
+    miss = [b for _, b in pairs]; after = [b for a, b in pairs if a]
+    return {"n_pairs": len(pairs), "p_miss": round(sum(miss) / len(miss), 3) if miss else None,
+            "p_miss_after_miss": round(sum(after) / len(after), 3) if after else None, "n_after_miss": len(after)}
+
 def jeffreys(k, n, z=1.96):
     """Approximate 95% interval (Wilson around the Jeffreys point estimate); fine for a report."""
     if not n: return None
@@ -115,6 +127,13 @@ def synthetic():
     chk("lag 0 stream", L and all(x == 0 for x in L), f"{len(L)} strike days, lags {sorted(set(L))}")
     # 6. posterior: d = 0.9, alpha = 0.05, pi = 0.5 -> 0.095
     p = posterior_quiet(0.5, 0.9, 0.05); chk("posterior arithmetic", abs(p - 0.1 / 1.05) < 1e-9, f"{p:.4f}")
+    # 6b. persistence: independent misses -> P(miss | missed yesterday) ~ P(miss); a blackout process -> clearly higher
+    t, fl = world(0.6, 0.5, 0.0, lag_max=0); r = persistence(day_table(t, fl))
+    chk("independent misses", abs(r["p_miss_after_miss"] - r["p_miss"]) < 0.08, f"{r}")
+    t, fl = world(0.6, 1.0, 0.0, lag_max=0); fs = sorted(fl); blind = set()
+    for i in range(0, len(fs), 10): blind |= set(fs[i:i + 4])          # 4-day blackouts every 10 days
+    fl = {f: ((v[0], []) if f in blind else v) for f, v in fl.items()}; r = persistence(day_table(t, fl))
+    chk("clustered misses", r["p_miss_after_miss"] > r["p_miss"] + 0.3, f"{r}")
     # 7. bootstrap returns ordered intervals
     t, fl = world(0.3, 0.7, 0.03); ci_d, ci_a = cluster_boot({"x": day_table(t, fl)}, B=300)
     chk("bootstrap intervals", ci_d[0] <= ci_d[1] and ci_a[0] <= ci_a[1], f"d {ci_d}, alpha {ci_a}")
@@ -179,12 +198,15 @@ def real():
                     r["window"] = [min(fl).isoformat(), max(fl).isoformat()]
                     r["d_ci"] = jeffreys(r["hits_on_strike_days"], r["n_strike_days"]); r["alpha_ci"] = jeffreys(r["hits_on_quiet_days"], r["n_quiet_days"])
                     L = lags(T.get((x, y), set()), fl); r["lag"] = {"n": len(L), "same_day": sum(1 for v in L if v == 0), "within_2": sum(1 for v in L if v is not None and v <= 2), "never": sum(1 for v in L if v is None)}
-                    r["unlabeled_share"] = unlabeled_share(dyad)
+                    r["unlabeled_share"] = unlabeled_share(dyad); r["persistence"] = persistence(t)
                     res[group].setdefault(name, {})[tag] = r
                     if group == "directions": tables[name] = t
         C = contract_directions(); keep = {k: v for k, v in tables.items() if k in C} or tables
         res["pooled_over"] = sorted(keep)
         pooled = rates([row for t in keep.values() for row in t]); pooled["d_ci_cluster"], pooled["alpha_ci_cluster"] = cluster_boot(keep)
+        pooled["persistence"] = persistence([row for t in keep.values() for row in t]) if len(keep) == 1 else \
+            {k: sum(persistence(t)[k] * persistence(t)["n_pairs"] for t in keep.values() if persistence(t)[k] is not None) /
+                max(1, sum(persistence(t)["n_pairs"] for t in keep.values() if persistence(t)[k] is not None)) for k in ("p_miss", "p_miss_after_miss")}
         res[f"pooled_{tag}"] = pooled
     out = RL.LOCAL / "detection_rate.json"; out.write_text(json.dumps(res, indent=1, default=str))
     print(f"[detection] event data through {end}; written {out.relative_to(ROOT)}; pooled over {len(res['pooled_over'])} contract directions")
@@ -199,6 +221,9 @@ def real():
             print(f"  {name[:34]:34} {r['coverage']:5.2f} {r['n_strike_days']:9d} {dd:>6} {str(r['d_ci']) if dd.strip() != '-' else '':>14} "
                   f"{(r['alpha'] or 0):6.3f} {r['lag']['same_day']:9d} {r['lag']['within_2']:5d} {r['lag']['never']:5d} "
                   f"{(r['unlabeled_share'] or 0):6.2f}" + ("  (peaceful)" if group == "peaceful" else ""))
+    pp = res["pooled_primary"]["persistence"]
+    print(f"  misses clustered? P(miss) = {pp['p_miss']:.3f}, P(miss | missed the day before) = {pp['p_miss_after_miss']:.3f} "
+          f"(equal = independent; higher = clustered, a run of no-hit days is worth less than the product)")
     # what a no-hit day is worth at the pooled rates
     p = res["pooled_primary"]
     for pi in (0.2, 0.5, 0.9):

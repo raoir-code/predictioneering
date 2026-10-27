@@ -72,3 +72,15 @@ Also reported:
 - **The labels were made after the fact, but each file holds only what existed that morning.** The labeler judges each
   headline on its own text.
 - **Overlap with the event data ends at its last complete day.** Recent weeks are not in the test.
+
+## Amendment 1 (Oct 27, before any real data)
+
+Added a check of whether misses come in clusters. Among consecutive observed days that both had a true strike, it
+compares P(miss today | missed yesterday) with P(miss).
+
+- **Why:** the unified engine treats no-report days as no information, because it assumes coverage gaps come in
+  clusters. This measures that assumption.
+- **What follows:** if misses are independent, k no-hit days are worth roughly the product of k single-day likelihood
+  ratios. If they are clustered, they are worth less, and the next stage must model the clustering.
+- **Status:** report only. The decision rule above is unchanged.
+- **Synthetic checks:** independent misses recovered (0.29 vs 0.25), and 4-day blackouts detected (0.75 vs 0.41).
