@@ -157,5 +157,8 @@ def _tests():
     print("talks_collector tests: OK")
 
 if __name__ == "__main__":
+    import importlib.util as _iu, pathlib as _pl   # token log, logs/api_usage_<date>.jsonl (report only)
+    _sp = _iu.spec_from_file_location("pq_api_usage", _pl.Path(__file__).resolve().parents[1] / "pipeline" / "api_usage.py")
+    _um = _iu.module_from_spec(_sp); _sp.loader.exec_module(_um); _um.enable()
     if "--test" in sys.argv: _tests()
     else: main()

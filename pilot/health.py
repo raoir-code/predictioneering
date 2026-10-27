@@ -70,3 +70,14 @@ sw = pba_swings(plog)
 print(f"== P(B|A) swings > 0.10 since the previous run: {len(sw)}  (LLM re-estimate; not a model change)")
 for lab, a, b, ca, cb in sw[:8]:
     print(f"   {lab[:58]:58} P(B|A) {a:.2f}->{b:.2f}  published {ca:.2f}->{cb:.2f}")
+
+# API spend (Oct 27): tokens per calling function from logs/api_usage_<run date>.jsonl; estimate only, the Console is authoritative.
+import importlib.util as _iu
+_sp = _iu.spec_from_file_location("pq_api_usage", ROOT / "pipeline" / "api_usage.py"); AU = _iu.module_from_spec(_sp); _sp.loader.exec_module(AU)
+_us = AU.summary(ROOT / "logs" / f"api_usage_{start:%Y%m%d}.jsonl")
+if not _us:
+    print(f"== API spend: no usage log for {start:%m-%d} (it starts with the first run after the Oct 27 patch)")
+else:
+    print(f"== API spend {start:%m-%d}: ~${sum(v[3] for v in _us.values()):.2f} est. over {sum(v[0] for v in _us.values())} calls (Console is authoritative)")
+    for (step, caller, model), (n, ti, to, usd) in sorted(_us.items(), key=lambda kv: -kv[1][3])[:8]:
+        print(f"   ${usd:6.2f}  {n:4d} calls  {ti / 1e3:7.0f}k in {to / 1e3:6.0f}k out  {model.replace('claude-', ''):11} {step}:{caller}")

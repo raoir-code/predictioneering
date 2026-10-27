@@ -667,9 +667,14 @@ def run(dry_run: bool = False, filter_dyad: str = None):
     _today_theater_contrib = {}
 
     print("\n[predict.py] PASS 1 — scoring all dyads before theater propagation...")
+    # Timing (Oct 27, report only): stamped lines feed pilot/health.py's slowest-steps list.
+    _stamp = lambda: datetime.now().strftime("%H:%M:%S")
+    _t_pass1 = time.perf_counter(); _timing = {}
+    print(f"[{_stamp()}] [engine] PASS 1: news + node scoring for {len(_ordered_dyads)} dyads...", flush=True)
 
     for _dyad, _dyad_markets in _ordered_dyads:
         _role = _theater_role_cache[_dyad]
+        _t0 = time.perf_counter()
 
         try:
             _articles = fetch_gnews(
@@ -701,6 +706,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
                         _seen_titles.add(_t)
 
         print(f"  {_dyad}: scoring {len(_articles)} articles")
+        _t1 = time.perf_counter()
 
         _call_a = score_nodes_call_a(
             _dyad,
@@ -709,6 +715,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
             persist_failures=not dry_run,
         )
         _trigger_was_violent = _call_a.get("TriggerType", 0.0) >= 0.60
+        _t2 = time.perf_counter()
 
         # Only real host/target dyads need the routing judgment.
         # Trigger dyads contribute directly; aggregate dyads never write.
@@ -726,6 +733,10 @@ def run(dry_run: bool = False, filter_dyad: str = None):
             shared_patron=_shared_patron,
             persist_failures=not dry_run,
         )
+
+        _t3 = time.perf_counter()
+        _timing[_dyad] = (_t1 - _t0, _t2 - _t1, _t3 - _t2)
+        print(f"  [timing] {_dyad}: news {_t1 - _t0:.1f}s, call A {_t2 - _t1:.1f}s, call B {_t3 - _t2:.1f}s", flush=True)
 
         _pre_scores[_dyad] = {
             "articles": _articles,
@@ -795,7 +806,14 @@ def run(dry_run: bool = False, filter_dyad: str = None):
     # PASS 2:
     # Use the scores above and the already-finalized theater state.
     # ------------------------------------------------------------------
+    _tot = [sum(v[i] for v in _timing.values()) / 60 for i in range(3)]
+    _slow = sorted(_timing.items(), key=lambda kv: -sum(kv[1]))[:3]
+    print(f"[{_stamp()}] [engine] PASS 1 done in {(time.perf_counter() - _t_pass1) / 60:.1f} min "
+          f"(news {_tot[0]:.1f}, call A {_tot[1]:.1f}, call B {_tot[2]:.1f}); slowest: "
+          + ", ".join(f"{d} {sum(v):.0f}s" for d, v in _slow), flush=True)
     print("\n[predict.py] PASS 2 — calculating market probabilities...")
+    _t_pass2 = time.perf_counter()
+    print(f"[{_stamp()}] [engine] PASS 2: market probabilities...", flush=True)
 
     for dyad, dyad_markets in _ordered_dyads:
         print(f"\n{'='*60}")
@@ -1107,11 +1125,15 @@ def run(dry_run: bool = False, filter_dyad: str = None):
     with open(CLASSIFIED_FEED, "w") as f:
         json.dump(markets, f, indent=2)
 
+    print(f"[{_stamp()}] [engine] PASS 2 done in {(time.perf_counter() - _t_pass2) / 60:.1f} min", flush=True)
     print(f"\n[predict.py] Written to {CLASSIFIED_FEED}")
     print("Now run: git add docs/classified_feed.json && git commit -m 'Predictions: first fronttest batch' && git push")
 
 
 if __name__ == "__main__":
+    import importlib.util as _iu, pathlib as _pl   # token log, logs/api_usage_<date>.jsonl (report only)
+    _sp = _iu.spec_from_file_location("pq_api_usage", _pl.Path(__file__).resolve().parents[1] / "pipeline" / "api_usage.py")
+    _um = _iu.module_from_spec(_sp); _sp.loader.exec_module(_um); _um.enable()
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--dyad", type=str, default=None)
