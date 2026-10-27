@@ -38,6 +38,15 @@ def rates(table):
             "d": (sum(s1) + 0.5) / (len(s1) + 1) if s1 else None, "alpha": (sum(s0) + 0.5) / (len(s0) + 1) if s0 else None,
             "hits_on_strike_days": sum(s1), "hits_on_quiet_days": sum(s0)}
 
+CAP = 20   # pipeline/engine.py fetch_gnews: max 20 articles per dyad per day, covering the past 7 days
+
+def crowding(table, files):
+    """d on file days that hit the article cap vs days under it. Much lower d at the cap -> strike headlines crowded out
+    (a news-gathering fix, not a model fix)."""
+    at = [(s, o) for f, s, o in table if files[f][0] >= CAP]; under = [(s, o) for f, s, o in table if files[f][0] < CAP]
+    d = lambda rows: (lambda s1: (round(sum(s1) / len(s1), 3), len(s1)) if s1 else (None, 0))([o for s, o in rows if s])
+    return {"share_days_at_cap": round(len(at) / max(1, len(table)), 3), "d_at_cap": d(at), "d_under_cap": d(under)}
+
 def persistence(table):
     """Are misses clustered? Among consecutive observed days that both had a true strike: P(miss today | missed yesterday) vs
     P(miss). Equal -> independent misses (k quiet days multiply); higher -> clustered (a run of no-hit days is worth less).
@@ -134,6 +143,11 @@ def synthetic():
     for i in range(0, len(fs), 10): blind |= set(fs[i:i + 4])          # 4-day blackouts every 10 days
     fl = {f: ((v[0], []) if f in blind else v) for f, v in fl.items()}; r = persistence(day_table(t, fl))
     chk("clustered misses", r["p_miss_after_miss"] > r["p_miss"] + 0.3, f"{r}")
+    # 6c. crowding: recall 0.9 on days under the cap, 0.3 on capped days -> d_at_cap clearly lower
+    t, fl = world(0.4, 0.9, 0.0, lag_max=0); fs = sorted(fl)
+    capped = set(fs[::2]); fl = {f: ((CAP, [p for p in v[1] if rnd.random() < 0.33]) if f in capped else (5, v[1])) for f, v in fl.items()}
+    c = crowding(day_table(t, fl), fl)
+    chk("crowding detected", c["d_at_cap"][0] < c["d_under_cap"][0] - 0.3, f"{c}")
     # 7. bootstrap returns ordered intervals
     t, fl = world(0.3, 0.7, 0.03); ci_d, ci_a = cluster_boot({"x": day_table(t, fl)}, B=300)
     chk("bootstrap intervals", ci_d[0] <= ci_d[1] and ci_a[0] <= ci_a[1], f"d {ci_d}, alpha {ci_a}")
@@ -198,7 +212,7 @@ def real():
                     r["window"] = [min(fl).isoformat(), max(fl).isoformat()]
                     r["d_ci"] = jeffreys(r["hits_on_strike_days"], r["n_strike_days"]); r["alpha_ci"] = jeffreys(r["hits_on_quiet_days"], r["n_quiet_days"])
                     L = lags(T.get((x, y), set()), fl); r["lag"] = {"n": len(L), "same_day": sum(1 for v in L if v == 0), "within_2": sum(1 for v in L if v is not None and v <= 2), "never": sum(1 for v in L if v is None)}
-                    r["unlabeled_share"] = unlabeled_share(dyad); r["persistence"] = persistence(t)
+                    r["unlabeled_share"] = unlabeled_share(dyad); r["persistence"] = persistence(t); r["crowding"] = crowding(t, fl)
                     res[group].setdefault(name, {})[tag] = r
                     if group == "directions": tables[name] = t
         C = contract_directions(); keep = {k: v for k, v in tables.items() if k in C} or tables
@@ -224,6 +238,9 @@ def real():
     pp = res["pooled_primary"]["persistence"]
     print(f"  misses clustered? P(miss) = {pp['p_miss']:.3f}, P(miss | missed the day before) = {pp['p_miss_after_miss']:.3f} "
           f"(equal = independent; higher = clustered, a run of no-hit days is worth less than the product)")
+    cr = [(n, v["primary"]["crowding"]) for n, v in res["directions"].items() if n in res["pooled_over"] and v["primary"]["n_strike_days"]]
+    for n, c in sorted(cr, key=lambda x: -res["directions"][x[0]]["primary"]["n_strike_days"])[:8]:
+        print(f"  crowding {n[:30]:30} days at the {CAP}-article cap {c['share_days_at_cap']:.2f}; d at cap {c['d_at_cap']}, under cap {c['d_under_cap']} (d, strike days)")
     # what a no-hit day is worth at the pooled rates
     p = res["pooled_primary"]
     for pi in (0.2, 0.5, 0.9):

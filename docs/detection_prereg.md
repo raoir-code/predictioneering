@@ -84,3 +84,14 @@ compares P(miss today | missed yesterday) with P(miss).
   ratios. If they are clustered, they are worth less, and the next stage must model the clustering.
 - **Status:** report only. The decision rule above is unchanged.
 - **Synthetic checks:** independent misses recovered (0.29 vs 0.25), and 4-day blackouts detected (0.75 vs 0.41).
+
+## Amendment 2 (Oct 27, before any real data)
+
+Added a crowding check. `fetch_gnews` asks for at most 20 articles per dyad per day, covering the past 7 days. On a busy
+week, a fresh strike headline competes with a week of older coverage.
+
+- **The check:** d on file days that hit the 20-article cap vs days under it.
+- **What follows:** much lower d at the cap points to a news-gathering fix, such as a shorter window or more articles,
+  not a model fix.
+- **Status:** report only. The decision rule is unchanged.
+- **Synthetic check:** recall 0.3 vs 0.9 recovered as d of 0.34 at the cap vs 0.96 under it.
