@@ -1,0 +1,27 @@
+name: daily-run watchdog
+# Runs on GitHub's servers, independent of the laptop. A failed run emails the repo owner
+# (GitHub notifies the account that last edited this schedule). Read-only.
+on:
+  schedule:
+    - cron: "41 17 * * *"   # 13:41 EDT / 12:41 EST: the 9am run should be pushed by then
+    - cron: "11 23 * * *"   # 19:11 EDT / 18:11 EST: second look, for slow or late runs
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 60
+          sparse-checkout: |
+            .github
+            predictions/log.jsonl
+          sparse-checkout-cone-mode: false
+          lfs: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python .github/watchdog_check.py
