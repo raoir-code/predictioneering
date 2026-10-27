@@ -31,3 +31,38 @@ print("== biggest disagreements (|ours - market| > 0.35):")
 for m in sorted(live, key=lambda m: -abs(m["conditional_p"] - m["market_price"]))[:12]:
     if abs(m["conditional_p"] - m["market_price"]) > 0.35:
         print(f"   {m.get('pricing_component', 'engine'):16} {(m.get('question') or '')[:62]:62} ours {m['conditional_p']:.2f} mkt {m['market_price']:.2f}")
+# Stage times (Oct 27): the gap after each "[HH:MM:SS] ..." line is how long that step took. Slowest first.
+stamps = [(dt.datetime.strptime(m.group(1), "%H:%M:%S"), m.group(2).strip()[:70]) for m in re.finditer(r"^\[(\d\d:\d\d:\d\d)\] (.*)$", txt, re.M)]
+gaps = [((b[0] - a[0]).total_seconds() % 86400 / 60, a[1]) for a, b in zip(stamps, stamps[1:])]
+print(f"== slowest steps (of {len(gaps)}; minutes):"); [print(f"   {g:6.1f}  {s}") for g, s in sorted(gaps, reverse=True)[:6]]
+
+
+def pba_swings(rows, thresh=0.10):
+    """P(B|A) moves > thresh between the last two runs on the same contract (the LLM re-estimates it when inputs change)."""
+    runs = sorted({r["timestamp"] for r in rows})
+    if len(runs) < 2: return []
+    prev = {r["market_id"]: r for r in rows if r["timestamp"] == runs[-2]}
+    out = []
+    for r in rows:
+        p = prev.get(r["market_id"])
+        if r["timestamp"] != runs[-1] or not p or r.get("conditional_p") is None or p.get("conditional_p") is None: continue
+        a, b = p.get("p_b_given_a"), r.get("p_b_given_a")
+        if isinstance(a, (int, float)) and isinstance(b, (int, float)) and abs(b - a) > thresh:
+            out.append((r["market_label"], a, b, p["conditional_p"], r["conditional_p"]))
+    return sorted(out, key=lambda x: -abs(x[2] - x[1]))
+
+
+def _swing_tests():
+    rows = [{"timestamp": "t1", "market_id": "1", "market_label": "A", "p_b_given_a": 0.41, "conditional_p": 0.39},
+            {"timestamp": "t2", "market_id": "1", "market_label": "A", "p_b_given_a": 0.24, "conditional_p": 0.21},
+            {"timestamp": "t1", "market_id": "2", "market_label": "B", "p_b_given_a": 0.50, "conditional_p": 0.10},
+            {"timestamp": "t2", "market_id": "2", "market_label": "B", "p_b_given_a": 0.55, "conditional_p": 0.11}]
+    assert pba_swings(rows) == [("A", 0.41, 0.24, 0.39, 0.21)]
+
+
+_swing_tests()
+plog = [json.loads(l) for l in open(ROOT / "predictions" / "log.jsonl") if l.strip()]
+sw = pba_swings(plog)
+print(f"== P(B|A) swings > 0.10 since the previous run: {len(sw)}  (LLM re-estimate; not a model change)")
+for lab, a, b, ca, cb in sw[:8]:
+    print(f"   {lab[:58]:58} P(B|A) {a:.2f}->{b:.2f}  published {ca:.2f}->{cb:.2f}")
