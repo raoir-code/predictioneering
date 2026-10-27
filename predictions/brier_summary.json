@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-10-26T17:30:55.909717+00:00",
-  "n_resolved": 167,
-  "brier_conditional_mean": 0.30566,
-  "brier_engine_mean": 0.425085,
-  "brier_market_mean": 0.136224,
-  "edge_vs_market": -0.169436,
+  "last_updated": "2026-10-27T14:46:58.903673+00:00",
+  "n_resolved": 174,
+  "brier_conditional_mean": 0.313273,
+  "brier_engine_mean": 0.427219,
+  "brier_market_mean": 0.137258,
+  "edge_vs_market": -0.176015,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -1842,6 +1842,83 @@
       "brier_conditional": 0.315282,
       "brier_market": 0.0576,
       "resolved_at": "2026-10-26T16:00:54.069367+00:00"
+    },
+    {
+      "market_id": "5167200",
+      "market_label": "Saudi Arabia military action against Yemen on October 19?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.2248,
+      "market_p": 0.745,
+      "brier_conditional": 0.600935,
+      "brier_market": 0.065025,
+      "resolved_at": "2026-10-27T14:46:35.382227+00:00"
+    },
+    {
+      "market_id": "5183427",
+      "market_label": "Israel military action against Lebanon on October 26?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.6993,
+      "market_p": 0.88,
+      "brier_conditional": 0.09042,
+      "brier_market": 0.0144,
+      "resolved_at": "2026-10-27T14:46:38.360514+00:00"
+    },
+    {
+      "market_id": "5167198",
+      "market_label": "Saudi Arabia military action against Yemen on October 17?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.2155,
+      "market_p": 0.57,
+      "brier_conditional": 0.61544,
+      "brier_market": 0.1849,
+      "resolved_at": "2026-10-27T14:46:40.333527+00:00"
+    },
+    {
+      "market_id": "5167206",
+      "market_label": "Saudi Arabia military action against Yemen on October 25?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.2535,
+      "market_p": 0.47,
+      "brier_conditional": 0.557262,
+      "brier_market": 0.2809,
+      "resolved_at": "2026-10-27T14:46:42.275106+00:00"
+    },
+    {
+      "market_id": "5167207",
+      "market_label": "Saudi Arabia military action against Yemen on October 26?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.3568,
+      "market_p": 0.51,
+      "brier_conditional": 0.413706,
+      "brier_market": 0.2401,
+      "resolved_at": "2026-10-27T14:46:44.127872+00:00"
+    },
+    {
+      "market_id": "5167205",
+      "market_label": "Saudi Arabia military action against Yemen on October 24?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.2489,
+      "market_p": 0.445,
+      "brier_conditional": 0.564151,
+      "brier_market": 0.308025,
+      "resolved_at": "2026-10-27T14:46:46.163061+00:00"
+    },
+    {
+      "market_id": "5167197",
+      "market_label": "Saudi Arabia military action against Yemen on October 16?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.2111,
+      "market_p": 0.8,
+      "brier_conditional": 0.622363,
+      "brier_market": 0.04,
+      "resolved_at": "2026-10-27T14:46:48.160399+00:00"
     }
   ]
 }
