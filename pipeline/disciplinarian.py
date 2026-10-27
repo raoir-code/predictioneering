@@ -435,10 +435,68 @@ def classify_market(question, event_title):
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
-def run_disciplinarian(dry_run=False, only_errors=None):
-    """only_errors (or --retry-errors): reclassify ONLY markets whose bucket is ERROR in classified_feed.json, same code path."""
+# ── Classification cache (Oct 27) ──────────────────────────────────────────────
+# The weekly full run sent every scraped market (~3,000; ~80% NOISE) to Opus, one call each, at the default temperature,
+# so unchanged markets were paid for every week and could flip label at random. A market's classification depends only on
+# its text, the prompt and the model, so it is cached on exactly those. Changing SYSTEM_PROMPT or MODEL invalidates every
+# entry. Errors are never cached. DISCIPLINARIAN_NO_CACHE=1 forces a full re-classification.
+import hashlib
+CACHE_PATH = os.path.join(os.path.dirname(__file__), "disciplinarian_cache.json")
+
+def cache_key(question, event_title):
+    return hashlib.sha256((MODEL + "\x00" + SYSTEM_PROMPT + "\x00" + (event_title or "") + "\x00" + (question or "")).encode()).hexdigest()[:20]
+
+def load_cache():
+    if os.environ.get("DISCIPLINARIAN_NO_CACHE") == "1" or not os.path.exists(CACHE_PATH):
+        return {}
+    try:
+        with open(CACHE_PATH) as f:
+            return json.load(f)
+    except Exception as ex:
+        print("  [cache] unreadable, starting empty (" + str(ex) + ")")
+        return {}
+
+def save_cache(cache):
+    tmp = CACHE_PATH + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(cache, f, indent=0, sort_keys=True)
+    os.replace(tmp, CACHE_PATH)
+
+def seed_cache_from_feed(path=None):
+    """One-time: seed the cache from the current classified_feed.json (last full run's labels), so the next weekly run
+    only pays for markets it has never seen. Entries keep the stored bucket, reason, nodes and dyad."""
+    path = path or os.path.join(os.path.dirname(__file__), "classified_feed.json")
+    if not os.path.exists(path):
+        print("[cache] nothing to seed from (" + os.path.basename(path) + " missing)")
+        return 0
+    with open(path) as f:
+        feed = json.load(f)
+    cache = load_cache(); n = 0
+    for m in feed:
+        if m.get("bucket") in ("CORE", "ADJACENT", "NOISE"):
+            k = cache_key(m.get("question", ""), m.get("event_title", ""))
+            if k not in cache:
+                cache[k] = {"bucket": m["bucket"], "reason": m.get("bucket_reason", ""), "relevant_nodes": m.get("relevant_nodes", []),
+                            "dyad": m.get("dyad"), "seeded": True}
+                n += 1
+    save_cache(cache)
+    print("[cache] seeded " + str(n) + " entries from " + os.path.basename(path) + " (" + str(len(cache)) + " total)")
+    return n
+
+
+SYNC_FIELDS = ("market_price", "volume", "liquidity", "scraped_at")
+
+def run_disciplinarian(dry_run=False, only_errors=None, daily_sync=None):
+    """only_errors (or --retry-errors): reclassify ONLY markets whose bucket is ERROR in classified_feed.json, same code path.
+    daily_sync (or --daily-sync, Oct 27): on days without the weekly run. (1) Refresh market_price, volume, liquidity and
+    scraped_at of every market already in classified_feed.json from today's live_feed.json; nothing else on those markets
+    changes. Before this, every logged market price between weekly runs was the weekly run's price (all 151 on Oct 27 were
+    Oct 20's). Published prices never read market_price (only the bettor and the logs do). (2) Classify only markets listed
+    since (cache first, the API only for text never seen) and append them, so a new contract is priced the day it lists."""
     if only_errors is None:
         only_errors = "--retry-errors" in sys.argv
+    if daily_sync is None:
+        daily_sync = "--daily-sync" in sys.argv
     base     = os.path.dirname(__file__)
     in_path  = os.path.join(base, "live_feed.json")
     out_path = os.path.join(base, "classified_feed.json")
@@ -448,6 +506,24 @@ def run_disciplinarian(dry_run=False, only_errors=None):
     with open(in_path) as f:
         markets = json.load(f)
 
+    existing = None
+    if daily_sync:
+        with open(out_path) as f:
+            existing = json.load(f)
+        live_by_id = {str(m.get("market_id")): m for m in markets}
+        n_ref = 0
+        for m in existing:
+            l = live_by_id.get(str(m.get("market_id")))
+            if l is not None:
+                for k in SYNC_FIELDS:
+                    if k in l: m[k] = l[k]
+                n_ref += 1
+        known = {str(m.get("market_id")) for m in existing}
+        markets = [m for m in markets if str(m.get("market_id")) not in known]
+        print("[sync] prices refreshed on " + str(n_ref) + " of " + str(len(existing)) + " tracked markets; "
+              + str(len(existing) - n_ref) + " not in today's scrape (closed or delisted; price unchanged); "
+              + str(len(markets)) + " new listings to classify")
+
     if dry_run:
         markets = markets[:5]
         print("[DRY RUN] Processing first 5 markets only\n")
@@ -455,6 +531,9 @@ def run_disciplinarian(dry_run=False, only_errors=None):
     print("Classifying " + str(len(markets)) + " markets...\n")
 
     counts = {"CORE": 0, "ADJACENT": 0, "NOISE": 0, "ERROR": 0}
+    if not os.path.exists(CACHE_PATH) and os.environ.get("DISCIPLINARIAN_NO_CACHE") != "1" and not dry_run:
+        seed_cache_from_feed()      # first run with the cache: start from the last full run's labels
+    cache = load_cache(); n_hit = n_call = 0
     dyad_configs = load_dyad_configs()
     new_configs_added = 0
 
@@ -464,8 +543,19 @@ def run_disciplinarian(dry_run=False, only_errors=None):
         question    = m.get("question", "")
         event_title = m.get("event_title", "")
 
+        called = False
         try:
-            result = classify_market(question, event_title)
+            ck = cache_key(question, event_title)
+            result = cache.get(ck)
+            if result is not None:
+                n_hit += 1
+            else:
+                called = True; n_call += 1
+                result = classify_market(question, event_title)
+                if result.get("bucket", "NOISE") in ("CORE", "ADJACENT", "NOISE"):
+                    cache[ck] = {k: result.get(k) for k in ("bucket", "reason", "relevant_nodes", "dyad")}
+                    if n_call % 50 == 0 and not dry_run:
+                        save_cache(cache)
             m["bucket"]         = result.get("bucket", "NOISE")
             m["bucket_reason"]  = result.get("reason", "")
             m["relevant_nodes"] = result.get("relevant_nodes", [])
@@ -531,10 +621,22 @@ def run_disciplinarian(dry_run=False, only_errors=None):
             print("  " + str(i+1).rjust(3) + ". ERROR: " + question[:65])
             print("        " + str(e))
 
-        time.sleep(0.3)
+        if called:
+            time.sleep(0.3)
 
+    if not dry_run:
+        save_cache(cache)
+    print("\n  [cache] " + str(n_hit) + " from cache, " + str(n_call) + " sent to the API")
+
+    to_write = (existing + markets) if daily_sync else markets
+    if daily_sync:
+        print("[sync] appended " + str(len(markets)) + " new listings ("
+              + str(sum(1 for m in markets if m.get("bucket") == "CORE")) + " CORE); feed now " + str(len(to_write)) + " markets")
+    if dry_run and daily_sync:
+        print("[DRY RUN] classified_feed.json not written")
+        return to_write
     with open(out_path, "w") as f:
-        json.dump(markets, f, indent=2, default=str)
+        json.dump(to_write, f, indent=2, default=str)
 
     if new_configs_added > 0:
         save_dyad_configs(dyad_configs)
@@ -559,5 +661,8 @@ def run_disciplinarian(dry_run=False, only_errors=None):
 
 
 if __name__ == "__main__":
-    dry_run = "--dry-run" in sys.argv
-    run_disciplinarian(dry_run=dry_run)
+    if "--seed-cache" in sys.argv:
+        seed_cache_from_feed()
+    else:
+        dry_run = "--dry-run" in sys.argv
+        run_disciplinarian(dry_run=dry_run)

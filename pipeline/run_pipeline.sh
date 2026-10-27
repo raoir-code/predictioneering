@@ -49,7 +49,8 @@ if [ "$WEEKLY_AGE" -gt 168 ]; then
     echo "[$(date +%H:%M:%S)] [2/6] Disciplinarian (full re-run -- weekly marker is ${WEEKLY_AGE}h old)..." | tee -a "$LOGFILE"
     $PYTHON -u -m pipeline.disciplinarian >> "$LOGFILE" 2>&1
 else
-    echo "[$(date +%H:%M:%S)] [2/6] Disciplinarian skipped (weekly marker is ${WEEKLY_AGE}h old, < 7 days)." | tee -a "$LOGFILE"
+    echo "[$(date +%H:%M:%S)] [2/6] Disciplinarian daily sync: today's prices + new listings only (weekly marker is ${WEEKLY_AGE}h old)..." | tee -a "$LOGFILE"
+    $PYTHON -u -m pipeline.disciplinarian --daily-sync >> "$LOGFILE" 2>&1 || echo "  [sync] FAILED (non-fatal; prices and market list stay at the last sync)" | tee -a "$LOGFILE"
 fi
 
 fresh_or_abort "engine"
@@ -106,7 +107,7 @@ if [ -f "predictions/log.jsonl" ]; then cp predictions/log.jsonl docs/prediction
 if [ -f "predictions/brier_log.jsonl" ]; then cp predictions/brier_log.jsonl docs/brier_log.jsonl; fi
 
 echo "[$(date +%H:%M:%S)] Pushing to GitHub..." | tee -a "$LOGFILE"
-for f in pipeline/classified_feed.json predictions/log.jsonl pipeline/translator_cache.json predictions/brier_log.jsonl predictions/brier_summary.json pipeline/dyad_configs.json pipeline/context_changelog.jsonl pipeline/node_score_history.jsonl pipeline/.context_cooldown_state.json pipeline/node_memory_state.json pipeline/theater_state.json pipeline/contract_scopes.json pipeline/agglomeration_configs.json pipeline/market_meta.json pipeline/market_rules.json pilot/news_strike_labels.jsonl pilot/unified_publish.json pilot/ceasefire_markets.json pilot/holds_publish.json pilot/holds_price_cache.json pilot/bc_replay.json pilot/war_outcome_markets.json pilot/war_outcome_replay.json docs/classified_feed.json docs/predictions_log.jsonl docs/brier_log.jsonl docs/index.html; do
+for f in pipeline/classified_feed.json predictions/log.jsonl pipeline/translator_cache.json predictions/brier_log.jsonl predictions/brier_summary.json pipeline/dyad_configs.json pipeline/context_changelog.jsonl pipeline/node_score_history.jsonl pipeline/.context_cooldown_state.json pipeline/node_memory_state.json pipeline/theater_state.json pipeline/contract_scopes.json pipeline/agglomeration_configs.json pipeline/disciplinarian_cache.json pipeline/market_meta.json pipeline/market_rules.json pilot/news_strike_labels.jsonl pilot/unified_publish.json pilot/ceasefire_markets.json pilot/holds_publish.json pilot/holds_price_cache.json pilot/bc_replay.json pilot/war_outcome_markets.json pilot/war_outcome_replay.json docs/classified_feed.json docs/predictions_log.jsonl docs/brier_log.jsonl docs/index.html; do
     if [ -f "$f" ]; then
         $GIT add "$f"
     else
