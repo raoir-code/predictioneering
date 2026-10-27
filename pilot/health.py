@@ -19,7 +19,9 @@ for tag, pat in (("during-war/unified", r"\[during-war\][^\n]*"), ("rules", r"\[
                  ("feed sync", r"\[sync\] (?:prices refreshed|FAILED)[^\n]*"), ("new listings", r"\[sync\] appended[^\n]*"),
                  ("classify cache", r"\[cache\] \d+ from cache[^\n]*")):
     m = re.findall(pat, txt); print(f"   {tag:18} {m[-1] if m else 'NOT SEEN'}" + (f"  ({len(m)} dyads)" if tag == 'news' and m else ""))
-errs = [l.strip() for l in txt.splitlines() if re.search(r"Traceback|ERROR|failed \(non-fatal\)|FAILED|Exception", l)]
+# Step announcements ("[hh:mm:ss] ... ...") are not failures, even when they name one ("Retry markets left in ERROR").
+errs = [l.strip() for l in txt.splitlines() if re.search(r"Traceback|ERROR|failed \(non-fatal\)|FAILED|Exception", l)
+        and not re.match(r"^\[\d\d:\d\d:\d\d\] .*\.\.\.\s*$", l)]
 print(f"   errors/failures: {len(errs)}"); [print("     ", e[:150]) for e in errs[-8:]]
 feed = json.load(open(ROOT / "pipeline" / "classified_feed.json")); feed = feed if isinstance(feed, list) else feed.get("markets", feed.get("data", []))
 today = dt.date.today().isoformat()
