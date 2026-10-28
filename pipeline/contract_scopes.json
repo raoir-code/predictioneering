@@ -4661,5 +4661,245 @@
     },
     "route": "fail_closed_direction",
     "version": 1
+  },
+  "6065847": {
+    "market_id": "6065847",
+    "dyad": "Iran-Iraq",
+    "question": "Will Iran target Iraq by October 31, 2026?",
+    "end_date": "2026-10-31",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Iraq",
+    "source_signature": "158b074f276f7c09f330a3f51b39dc690de0e72dcf3f43c5af010ad39a194e99",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iraq",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract assigns Iran as the sole initiator and Iraq as the sole target. Only direct Iranian state military actions (air strikes or surface-to-surface missile strikes) explicitly claimed by Iran or confirmed to originate from Iranian territory qualify; proxy forces are excluded. The geographic scope is Iraq's terrestrial territory including internal waters, which is simply the target's general territory (target_wide). The geographic detail about 'terrestrial territory including internal waters' exists only to define what counts as 'directed at Iraq' for resolution purposes, making it resolution_only.",
+      "scope_fingerprint": "2426ea60a91fc54d",
+      "action_prior_fingerprint": "7f416c7867136324"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6065845": {
+    "market_id": "6065845",
+    "dyad": "Iran-Saudi Arabia",
+    "question": "Will Iran target an Arab country by October 31, 2026?",
+    "end_date": "2026-10-31",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Saudi Arabia",
+    "source_signature": "c85931f4b119ba2ca503cf6c0c25b8926a72160966d967de764dde7f79ab186d",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "enumerable_union",
+        "canonical_actor": null,
+        "entity_type": "state",
+        "members": [
+          "Algeria",
+          "Bahrain",
+          "Comoros",
+          "Djibouti",
+          "Egypt",
+          "Iraq",
+          "Jordan",
+          "Kuwait",
+          "Lebanon",
+          "Libya",
+          "Mauritania",
+          "Morocco",
+          "Oman",
+          "Qatar",
+          "Saudi Arabia",
+          "Somalia",
+          "Sudan",
+          "Syria",
+          "Tunisia",
+          "United Arab Emirates",
+          "Yemen"
+        ],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "multiple",
+        "places": [
+          "Algeria",
+          "Bahrain",
+          "Comoros",
+          "Djibouti",
+          "Egypt",
+          "Iraq",
+          "Jordan",
+          "Kuwait",
+          "Lebanon",
+          "Libya",
+          "Mauritania",
+          "Morocco",
+          "Oman",
+          "Qatar",
+          "Saudi Arabia",
+          "Somalia",
+          "Sudan",
+          "Syria",
+          "Tunisia",
+          "United Arab Emirates",
+          "Yemen"
+        ],
+        "prior_relevance": "structural_theater"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The assigned initiator is Iran (single state actor) and the assigned target is Saudi Arabia, but the contract's resolution criteria expand the target to any member of an explicitly enumerated list of 21 Arab countries. The target scope is therefore an enumerable_union of those named states. The geography is multiple named operational theaters (the terrestrial territories of each qualifying Arab country), and this is structural_theater because the specific country targeted would materially affect the feasibility and nature of Iranian military action. The direction is compatible: Iran is the initiator and the enumerated Arab countries (including Saudi Arabia) are the targets.",
+      "scope_fingerprint": "157ca041c8a5c2b3",
+      "action_prior_fingerprint": "5e41959078392ef5"
+    },
+    "route": "agglomeration_required",
+    "version": 1
+  },
+  "6065846": {
+    "market_id": "6065846",
+    "dyad": "Iran-Saudi Arabia",
+    "question": "Will Iran target an Arab country by November 15, 2026?",
+    "end_date": "2026-11-15",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Saudi Arabia",
+    "source_signature": "391db2d60e22044ae178cdf0dc72a802cf394116e3a381e3f07da7b7ce42da46",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "enumerable_union",
+        "canonical_actor": null,
+        "entity_type": "state",
+        "members": [
+          "Algeria",
+          "Bahrain",
+          "Comoros",
+          "Djibouti",
+          "Egypt",
+          "Iraq",
+          "Jordan",
+          "Kuwait",
+          "Lebanon",
+          "Libya",
+          "Mauritania",
+          "Morocco",
+          "Oman",
+          "Qatar",
+          "Saudi Arabia",
+          "Somalia",
+          "Sudan",
+          "Syria",
+          "Tunisia",
+          "United Arab Emirates",
+          "Yemen"
+        ],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "multiple",
+        "places": [
+          "Algeria",
+          "Bahrain",
+          "Comoros",
+          "Djibouti",
+          "Egypt",
+          "Iraq",
+          "Jordan",
+          "Kuwait",
+          "Lebanon",
+          "Libya",
+          "Mauritania",
+          "Morocco",
+          "Oman",
+          "Qatar",
+          "Saudi Arabia",
+          "Somalia",
+          "Sudan",
+          "Syria",
+          "Tunisia",
+          "United Arab Emirates",
+          "Yemen"
+        ],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The assigned initiator is Iran (single state actor) and the assigned target is Saudi Arabia, but the contract's resolution criteria expand the target to an enumerable union of 21 explicitly listed Arab countries, of which Saudi Arabia is one. The geographic scope is defined by the terrestrial territory of any of these enumerated states, which is a resolution-level definition of the qualifying target set rather than a structural theater distinction. The contract explicitly excludes proxy forces, requiring actions by Iranian forces claimed by or confirmed to originate from Iran.",
+      "scope_fingerprint": "e706bb580e9d3921",
+      "action_prior_fingerprint": "39ece0df040128c4"
+    },
+    "route": "agglomeration_required",
+    "version": 1
+  },
+  "6065848": {
+    "market_id": "6065848",
+    "dyad": "Iran-Iraq",
+    "question": "Will Iran target Iraq by November 15, 2026?",
+    "end_date": "2026-11-15",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Iraq",
+    "source_signature": "9ae9420f617a9abbd86dce5d02f1cda0faf54570e9e4c8129ad271156e2bdb37",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iraq",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract assigns Iran as the sole initiator and Iraq as the sole target. Only actions by Iranian state forces (explicitly claimed by Iran or confirmed to originate from Iranian territory) qualify; proxy forces are excluded. The geographic scope is Iraq's terrestrial territory including internal waters, which is simply the target's general territory (target_wide). The geographic detail about terrestrial territory and internal waters exists only to define what counts as 'directed at Iraq' for resolution purposes, making it resolution_only rather than a structurally distinct theater.",
+      "scope_fingerprint": "2426ea60a91fc54d",
+      "action_prior_fingerprint": "7f416c7867136324"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
   }
 }
