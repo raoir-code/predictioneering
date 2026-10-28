@@ -35,11 +35,21 @@ def fp(desc):
     x = definition(desc)
     return hashlib.sha1(x.lower().encode()).hexdigest()[:10] if x else None
 
+def _target_tpl(q):
+    """Oct 28: also fetch rules for every feed contract the unified engine's own template matches ("Will Iran target Iraq by
+    ..."), the day it enters the feed. Before, those got rules only via market_meta.json, which runs after the translator,
+    so a new "target" listing was engine-priced on its first day (Oct 28: the Iran->Iraq and Arab-country ladders)."""
+    try:
+        sys.path.insert(0, str(ROOT.parent / "pilot")); import unified_data as _UD
+        return bool(_UD.TPL.match(q or ""))
+    except Exception as ex:
+        print(f"  [rules] unified template unavailable ({ex!r}); military-action template only"); return False
+
 def fetch():
     rules = json.loads(RULES.read_text()) if RULES.exists() else {}
     ids = set(json.loads(META.read_text())) if META.exists() else set()
     feed = json.loads(FEED.read_text()); feed = feed if isinstance(feed, list) else feed.get("markets", feed.get("data", []))
-    ids |= {str(m["market_id"]) for m in feed if parse(m.get("question"))[0]}
+    ids |= {str(m["market_id"]) for m in feed if parse(m.get("question"))[0] or _target_tpl(m.get("question"))}
     todo = sorted(i for i in ids if i not in rules or "createdAt" not in rules[i]); bad = 0
     for i, mid in enumerate(todo, 1):
         try:
