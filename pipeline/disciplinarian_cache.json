@@ -9048,6 +9048,17 @@
 "WinProbability"
 ]
 },
+"540b45396488767c1ef7": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This concerns the lifting of a US naval/economic blockade on Iran, which is related to interstate conflict dynamics but is about de-escalation/sanctions policy rather than direct conflict onset.",
+"relevant_nodes": [
+"WarCosts",
+"HardlineClaims",
+"PreferenceAlignment",
+"CommitmentProblem"
+]
+},
 "544c6b233f0dd609af0e": {
 "bucket": "NOISE",
 "dyad": null,
@@ -19179,6 +19190,12 @@
 "reason": "This question is about Chinese AI company rankings, not interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"b33725291c953f9a7495": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about sports broadcasting decisions, not interstate conflict between state actors.",
+"relevant_nodes": []
 },
 "b3480beb2828f2458c6c": {
 "bucket": "NOISE",
