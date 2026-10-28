@@ -1116,7 +1116,7 @@ def run(dry_run: bool = False, filter_dyad: str = None):
 
             edge = round((engine_p_final - (m.get("market_price") or 0)) * 100, 1)
             print(f"  ✓ {m['question'][:70]}")
-            print(f"    engine={engine_p_final:.4f}  market={m.get('market_price',0):.3f}  edge={edge:+.1f}pp  days={days_rem}  boost={_icb_boost:.4f}")
+            print(f"    engine={engine_p_final:.4f}  market={(m.get('market_price') if m.get('market_price') is not None else float('nan')):.3f}  edge={edge:+.1f}pp  days={days_rem}  boost={_icb_boost:.4f}")
 
     if dry_run:
         print("\n[DRY RUN] Not writing to disk.")
