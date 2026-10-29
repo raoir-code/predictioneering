@@ -906,6 +906,23 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"07588db9c0ffe5f66665": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This is about the continuation of a ceasefire between two state actors, not about new conflict onset but related to conflict dynamics in the US-Iran dyad.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
+},
+"07605d206d5c287ce468": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "0779cd9a44c567d9d2a9": {
 "bucket": "NOISE",
 "dyad": null,
@@ -1744,6 +1761,12 @@
 "reason": "This is about a domestic election outcome in Taiwan, not about interstate conflict onset between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"0f450cff7c26431780bb": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a shipping/maritime traffic volume question, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "0f4ae10bb89f5ab3acfc": {
 "bucket": "NOISE",
@@ -2863,6 +2886,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"198a976a0cb64a0636c0": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This is about the continuation of a ceasefire between two state actors, which relates to conflict dynamics but is about ceasefire timing rather than conflict onset.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
+},
 "19ae1c73277df98aa906": {
 "bucket": "NOISE",
 "dyad": null,
@@ -3126,6 +3160,12 @@
 "reason": "This question is about corporate espionage accusations involving a private company, not interstate conflict onset between state actors.",
 "relevant_nodes": []
 },
+"1c0dc95e449344cf2075": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a domestic election/political event within Israel, not about interstate conflict between two state actors.",
+"relevant_nodes": []
+},
 "1c2017059fb09f180d6d": {
 "bucket": "ADJACENT",
 "dyad": "Iran-Saudi Arabia",
@@ -3191,6 +3231,12 @@
 "reason": "This is about an internal Israeli legislative leadership selection, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"1c8b4c4590d0da1ab4de": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "1c8f864745d967c56c66": {
 "bucket": "NOISE",
@@ -4421,6 +4467,12 @@
 "reason": "Houthis are a non-state actor (rebel/militia group), not a sovereign state, so this is not an interstate conflict dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"27d44c549ed7cb381bbe": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "27d54980449b48bba62c": {
 "bucket": "ADJACENT",
@@ -7592,6 +7644,17 @@
 "reason": "This question is about domestic political leadership survival, not interstate conflict onset between two state actors.",
 "relevant_nodes": []
 },
+"46d5e08fb1016dac0480": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This is about the duration/continuation of a ceasefire between two state actors, not directly about conflict onset but related to whether interstate conflict resumes.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
+},
 "46d66b7e9683cd5ea787": {
 "bucket": "NOISE",
 "dyad": null,
@@ -8053,6 +8116,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"4b566c4c98a973623adf": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "4b586329118259389142": {
 "bucket": "NOISE",
 "dyad": null,
@@ -8254,6 +8323,12 @@
 "reason": "This is about elections in multiple countries, not about interstate conflict between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"4ce95a8a3cb2e40b3894": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a shipping traffic volume question, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "4cfaed1c1104fa3ecc50": {
 "bucket": "NOISE",
@@ -10396,6 +10471,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"5f69957f3fdcd74c6f8c": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about tourism statistics, not interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "5f777b6377774de1d63b": {
 "bucket": "NOISE",
 "dyad": null,
@@ -10591,6 +10672,17 @@
 "reason": "This is a local election question in Taiwan with no direct connection to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"60dcde0c3dc2d8283ca9": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This is about the continuation of a ceasefire between two state actors, which is related to but not directly about conflict onset \u2014 it concerns ceasefire timing/durability rather than new conflict initiation.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
 },
 "60fe898a5f549e168d63": {
 "bucket": "NOISE",
@@ -11430,6 +11522,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"6985f91b89b4a262d0e0": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This question concerns the continuation of a ceasefire between two state actors, which is related to but not directly about conflict onset \u2014 it asks about ceasefire durability rather than new conflict initiation.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
+},
 "698b66e3367c33082537": {
 "bucket": "NOISE",
 "dyad": null,
@@ -11476,6 +11579,12 @@
 "reason": "Gaza operations involve Israel vs. Hamas (a non-state actor), making this an intrastate/asymmetric conflict rather than interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"69dc8e72a6234c1029e3": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about shipping traffic volume through a strait, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "69dd8d11335904dbb642": {
 "bucket": "NOISE",
@@ -11926,6 +12035,17 @@
 ],
 "seeded": true
 },
+"6dc311ca526cf2617f9b": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This concerns the continuation of a ceasefire between two state actors rather than conflict onset, giving the model only partial traction on commitment credibility and bargaining dynamics.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"PreferenceAlignment",
+"Patience"
+]
+},
 "6dd38450b49edbbf558f": {
 "bucket": "NOISE",
 "dyad": null,
@@ -12067,6 +12187,12 @@
 "reason": "This question is about an internal Israeli political appointment, not about interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"6f59b4f85b41f5e68a3a": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the count of UK Maritime Trade Operations notices, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "6f6fbf3ed3c48f26d883": {
 "bucket": "ADJACENT",
@@ -14821,6 +14947,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"8a2ba78870bdbf44233a": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This is about the continuation of a ceasefire between two state actors, which relates to conflict dynamics but is not directly about conflict onset \u2014 it concerns ceasefire timing/durability.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
+},
 "8a3978bebf71b3dc5bbe": {
 "bucket": "NOISE",
 "dyad": null,
@@ -15740,6 +15877,17 @@
 "reason": "This question is about leadership/political survival of an individual leader in Iran, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"9305f2b2d3badf6f3d9b": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This concerns the continuation of a ceasefire between two state actors, which is related to but not directly about conflict onset \u2014 it asks about ceasefire persistence rather than new conflict initiation.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
 },
 "930bdce6d646eef57434": {
 "bucket": "NOISE",
@@ -17405,6 +17553,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"a2d99c8cb067982e6950": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a shipping traffic volume question, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "a2f1b189738c492b7caa": {
 "bucket": "NOISE",
 "dyad": null,
@@ -18577,6 +18731,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"ad64722e64334efc933c": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about counting maritime safety notices from the UK Maritime Trade Operations office, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "ad677f7e066ee0818796": {
 "bucket": "NOISE",
 "dyad": null,
@@ -19217,6 +19377,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"b375f5549b34aec53e18": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "b380a88600d9e90d3b6f": {
 "bucket": "NOISE",
 "dyad": null,
@@ -19681,6 +19847,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"b73e35d489cdedcbc684": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This is about the continuation of a ceasefire between two state actors, which relates to conflict dynamics but is about ceasefire duration rather than conflict onset.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"PreferenceAlignment",
+"Patience"
+]
+},
 "b74a450572d1655ae5ab": {
 "bucket": "NOISE",
 "dyad": null,
@@ -19757,6 +19934,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"b85c56d8b7b89d0c41e4": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "b8668a17bd0da8e2b228": {
 "bucket": "NOISE",
 "dyad": null,
@@ -19827,6 +20010,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about US domestic politics and presidential tenure, not interstate conflict between two state actors.",
+"relevant_nodes": []
+},
+"b90172eb2e9d1cd636ac": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the number of maritime security notices published by UKMTO, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": []
 },
 "b91a8371d3b8b09c97fd": {
@@ -20585,6 +20774,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"be823e5ac128678a7707": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a domestic election and party disqualification within Israel, not about interstate conflict between two state actors.",
+"relevant_nodes": []
+},
 "be95c8bc8ec59fef15de": {
 "bucket": "NOISE",
 "dyad": null,
@@ -20915,6 +21110,17 @@
 "reason": "This is about an internal Israeli political appointment, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"c0d08a869ac5c748aef0": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This is about the continuation of a ceasefire between two state actors, which relates to conflict dynamics but is about ceasefire duration rather than conflict onset.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"PreferenceAlignment",
+"Patience"
+]
 },
 "c10d386314a60daabb4e": {
 "bucket": "NOISE",
@@ -21513,6 +21719,17 @@
 "reason": "This is a local election question unrelated to interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"c5e86e59dea7419c0c2c": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This is about the duration of a ceasefire between two state actors, not directly about conflict onset but related to whether interstate conflict resumes.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
 },
 "c61bbac4637a06bf21ea": {
 "bucket": "NOISE",
@@ -23893,6 +24110,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"dcbbe7d3c02fe2448e03": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the count of UKMTO maritime security notices, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "dcc21a0eea2d3e79ea8b": {
 "bucket": "NOISE",
 "dyad": null,
@@ -24013,6 +24236,17 @@
 "reason": "This question is about diplomatic normalization agreements, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"de473d87560eeea6223b": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This is about the duration of a ceasefire between two state actors, not directly about conflict onset but related to whether interstate conflict resumes.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
 },
 "de4cc5fd0fa2962b3e88": {
 "bucket": "NOISE",
@@ -24270,6 +24504,12 @@
 "reason": "This is a municipal election question, not about interstate conflict onset between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"e04538b0234d563e21e3": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about shipping traffic volume through a strait, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "e050f492561ce3034f82": {
 "bucket": "NOISE",
@@ -25705,6 +25945,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"ec506f2fec68037ef6b0": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This is about the continuation of a ceasefire between two state actors, which relates to conflict dynamics but is about ceasefire duration rather than conflict onset.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
+},
 "ec7a8f5df9a0a12de74a": {
 "bucket": "NOISE",
 "dyad": null,
@@ -26527,6 +26778,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This question concerns the arrest of a cartel leader, which is a law enforcement/criminal matter involving non-state actors, not interstate conflict.",
+"relevant_nodes": []
+},
+"f4af9c758052c1118036": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the count of UKMTO maritime security notices, not about interstate conflict onset between a specific dyad of state actors.",
 "relevant_nodes": []
 },
 "f4bef7cfc4fff9b11c72": {
