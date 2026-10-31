@@ -4901,5 +4901,501 @@
     },
     "route": "scoped_bilateral",
     "version": 1
+  },
+  "6424261": {
+    "market_id": "6424261",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Greater Beirut by November 30?",
+    "end_date": "2026-11-30",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "b552357be6002d53926967d52f7c4b9f7dd536df336f1fa9a5281c836097984a",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "subterritory",
+        "places": [
+          "Greater Beirut"
+        ],
+        "prior_relevance": "structural_theater"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "Israel is the single initiator state; Lebanon is the single target state. The geographic restriction to Greater Beirut (defined as the continuous urbanized zone encompassing Beirut Governorate and adjacent coastal/suburban municipalities of Mount Lebanon Governorate) constitutes a named subterritory of Lebanon. This subterritory is structurally significant because it defines a distinct operational theater—strikes on Greater Beirut represent a qualitatively different targeting decision than strikes elsewhere in Lebanon, affecting the relative feasibility and political calculus of the action family. Hence prior_relevance is structural_theater rather than resolution_only.",
+      "scope_fingerprint": "f3910206937a6e24",
+      "action_prior_fingerprint": "847e3c442b8a2413"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6424795": {
+    "market_id": "6424795",
+    "dyad": "Israel-Syria",
+    "question": "Israel military action against Syria by December 31, 2026?",
+    "end_date": "2026-12-31",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Syria",
+    "source_signature": "7af7d254fff9d74e8b904bcee0384ff2c7946b91d7dbc713011178c9242b8dff",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Syria",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) taking qualifying military action against a single target (Syria). The geographic scope is Syria's terrestrial territory, which is the target's own territory, making this target_wide. The geographic detail (excluding maritime territory and airspace, specifying de facto control) exists only to define the legal boundaries of the particular action being asked about, not to define a structurally different operational theater, so prior_relevance is resolution_only.",
+      "scope_fingerprint": "29f54ce7edd2c511",
+      "action_prior_fingerprint": "3d08ac7faf122bf2"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6424756": {
+    "market_id": "6424756",
+    "dyad": "Iran-Saudi Arabia",
+    "question": "Will Iran target Saudi Arabia by December 31, 2026?",
+    "end_date": "2026-12-31",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Saudi Arabia",
+    "source_signature": "0b5c8a2f92fc96d2b419720402460a326be574d1ef02361398c744852f7d5005",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Saudi Arabia",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Iran, acting through its own forces or from its own territory, explicitly excluding proxies) targeting a single state (Saudi Arabia). The geographic scope is Saudi Arabia's terrestrial territory including internal waters, which is simply the target's general recognized territory and thus target_wide. The geographic detail (terrestrial territory including internal waters) exists only to define what counts as 'directed at Saudi Arabia' for resolution purposes, making it resolution_only in terms of prior relevance.",
+      "scope_fingerprint": "a7ed9ad1f20915a8",
+      "action_prior_fingerprint": "8a876ad706db2c5c"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6424807": {
+    "market_id": "6424807",
+    "dyad": "Iran-Egypt",
+    "question": "Will Iran target Egypt by December 31, 2026?",
+    "end_date": "2026-12-31",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Egypt",
+    "source_signature": "0c21cc73d98c6eb3cb854b42e441c77096dff50901ec2f2fb91aa2be76d4ab40",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Egypt",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract is straightforward: Iran (single state actor) must conduct a qualifying military strike (air or surface-to-surface) directed at Egypt's terrestrial territory. Proxy forces are explicitly excluded, requiring action by Iranian forces claimed by or confirmed to originate from Iran. The geographic restriction to Egypt's terrestrial territory including internal waters is definitional to the action type (what counts as 'directed at Egypt'), not a structural theater distinction, so it is resolution_only. The target is Egypt's general territory, making it target_wide.",
+      "scope_fingerprint": "8090564481e8dc80",
+      "action_prior_fingerprint": "e2a2a92a52e81076"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6424808": {
+    "market_id": "6424808",
+    "dyad": "Iran-Syria",
+    "question": "Will Iran target Syria by December 31, 2026?",
+    "end_date": "2026-12-31",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Syria",
+    "source_signature": "f8b9982ba87bf1c4ecea8735939b551ccb44db01914c3e27ed02a784b863b3e6",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Syria",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Iran, explicitly excluding proxy forces) conducting qualifying military strikes against Syria's terrestrial territory. The geographic restriction to Syrian territory is intrinsic to the definition of the action being directed at Syria, making it resolution_only rather than a structurally distinct theater. The target is Syria as a whole (target_wide), with no subterritory restriction.",
+      "scope_fingerprint": "03818ab1e16bd596",
+      "action_prior_fingerprint": "b454ebd03bc5c52b"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6424794": {
+    "market_id": "6424794",
+    "dyad": "Iran-Oman",
+    "question": "Will Iran target Oman by December 31, 2026?",
+    "end_date": "2026-12-31",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Oman",
+    "source_signature": "ffcea4458a05757b23d4851e3ea631540f714644579f4f517652bb9202e1d84b",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Oman",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Iran, acting through its own forces, not proxies) targeting a single state (Oman). The geographic restriction—terrestrial territory of Oman including internal waters—defines what counts as 'directed at Oman' for resolution purposes and is intrinsic to the action definition rather than indicating a structurally distinct operational theater. The action types are constrained to air strikes and surface-to-surface missile strikes by Iranian forces explicitly claimed by or confirmed to originate from Iran.",
+      "scope_fingerprint": "db81d8b171194c1a",
+      "action_prior_fingerprint": "403fa402b0cdbbf3"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6424810": {
+    "market_id": "6424810",
+    "dyad": "Iran-Qatar",
+    "question": "Will Iran target Qatar by December 31, 2026?",
+    "end_date": "2026-12-31",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Qatar",
+    "source_signature": "619f3c7ee263a11637b8552747ff8109425959ec493f3e69500b5e4242aadf36",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Qatar",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Iran, acting through its own forces, explicitly claimed or confirmed from Iranian territory) targeting a single state (Qatar). The geographic restriction to Qatar's terrestrial territory including internal waters is intrinsic to the definition of the qualifying action (directed at Qatar) and does not define a special operational theater distinct from Qatar's general territory, so it is resolution_only. Proxy forces are explicitly excluded, keeping the initiator as the Iranian state itself.",
+      "scope_fingerprint": "252f943000b320c0",
+      "action_prior_fingerprint": "1e987db0725ff628"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6424253": {
+    "market_id": "6424253",
+    "dyad": "Iran-UAE",
+    "question": "Will Iran target the United Arab Emirates by November 15, 2026?",
+    "end_date": "2026-11-15",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "UAE",
+    "source_signature": "f276f982a3e3cdb3c9dc4a81f26df5e27d0619994cf70a42b5d8d145202ff882",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "UAE",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract is straightforward: Iran (single state actor) must conduct a qualifying military strike against the UAE (single state actor). The geographic restriction to UAE terrestrial territory including internal waters is intrinsic to the definition of 'directed at the UAE' and does not constitute a structurally distinct operational theater — it is resolution_only. Proxy forces are explicitly excluded, so only Iranian state forces acting under Iranian claim or from Iranian territory qualify. No enumeration of multiple actors or locations is present.",
+      "scope_fingerprint": "cd3084dfc8b74a2a",
+      "action_prior_fingerprint": "c3101b30cf7b8d01"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6424259": {
+    "market_id": "6424259",
+    "dyad": "Iran-Kuwait",
+    "question": "Will Iran target Kuwait by November 30, 2026?",
+    "end_date": "2026-11-30",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Kuwait",
+    "source_signature": "babb44e7e9e83ae1ab3a71c221b2573584745cfca600b3c61d3e6c06845f48b2",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Kuwait",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Iran, acting through its own forces, explicitly excluding proxies) targeting a single state (Kuwait). The geographic scope is Kuwait's terrestrial territory including internal waters, which is simply the target's general recognized territory and thus target_wide. The geographic detail (terrestrial territory including internal waters) exists only to define what counts as 'directed at Kuwait' for resolution purposes, making it resolution_only in terms of prior relevance.",
+      "scope_fingerprint": "466d9b8589501044",
+      "action_prior_fingerprint": "de62f68eefe35248"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6424260": {
+    "market_id": "6424260",
+    "dyad": "Iran-Bahrain",
+    "question": "Will Iran target Bahrain by November 30, 2026?",
+    "end_date": "2026-11-30",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Bahrain",
+    "source_signature": "a6e490def2449532885f1ca3714d459995c38f44c24432eaa1527faf24e8324f",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Bahrain",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Iran, acting through its own forces, not proxies) targeting a single state (Bahrain). The geographic restriction to Bahrain's terrestrial territory including internal waters is intrinsic to the definition of the qualifying action (directed at Bahrain) and does not define a structurally distinct operational theater beyond the target itself, so it is resolution_only. The action-type restrictions (air strikes, surface-to-surface missiles/drones) are weapon/action qualifiers, not geographic or party scope elements.",
+      "scope_fingerprint": "a408a4963eb4a314",
+      "action_prior_fingerprint": "b315653e9eabefa4"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6424258": {
+    "market_id": "6424258",
+    "dyad": "Iran-Jordan",
+    "question": "Will Iran target Jordan by November 30, 2026?",
+    "end_date": "2026-11-30",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Jordan",
+    "source_signature": "c8ac5468bf2417ea737eced2c0159f23a46752d833611c4f22dcc84134630d7f",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Jordan",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Iran, acting through its own forces or from Iranian territory, explicitly excluding proxies) targeting a single state (Jordan). The geographic scope is Jordan's terrestrial territory including internal waters, which is simply the target's general recognized territory and thus target_wide. The geographic detail about 'terrestrial territory including internal waters' is intrinsic to the resolution definition of what counts as 'directed at Jordan' and does not define a special operational theater, so it is resolution_only.",
+      "scope_fingerprint": "c98a906e767c101f",
+      "action_prior_fingerprint": "e069c94343c5a047"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6424262": {
+    "market_id": "6424262",
+    "dyad": "Israel-Iraq",
+    "question": "Israel military action against Iraq by November 30, 2026?",
+    "end_date": "2026-11-30",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Iraq",
+    "source_signature": "2209131ce0478c719b5ef1d6ab8db61ec6ffc33cdc9f78228a52bc75e77f0b78",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iraq",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract is straightforward: Israel (single state actor) must conduct a qualifying military strike against Iraq (single state target). The geographic restriction to Iraq's terrestrial territory is intrinsic to defining the target of the action and does not constitute a structurally distinct operational theater beyond the target itself, so it is resolution_only. The action must be by Israel's armed forces directly, excluding proxies or contractors.",
+      "scope_fingerprint": "13a302006242fcc9",
+      "action_prior_fingerprint": "47dd2f7c946746d7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6424255": {
+    "market_id": "6424255",
+    "dyad": "Pakistan-Afghanistan",
+    "question": "Pakistan military action against Afghanistan by November 30, 2026?",
+    "end_date": "2026-11-30",
+    "action_type": "airstrike",
+    "initiator": "Pakistan",
+    "target": "Afghanistan",
+    "source_signature": "537fdfa9b129945742eb439b2db2bfd872535c07856f94a066a6a7c5e65510d9",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Pakistan",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Afghanistan",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Pakistan armed forces) conducting qualifying strikes against Afghanistan's terrestrial territory. The geographic restriction to Afghanistan's territory is intrinsic to the definition of the action (impact must occur in Afghanistan) and does not define a structurally distinct operational theater separate from the target itself, so it is resolution_only. The target is Afghanistan as a whole (target_wide), with the contract clarifying that airspace is excluded and de facto controlled territory counts.",
+      "scope_fingerprint": "033e51763743238c",
+      "action_prior_fingerprint": "528c99029c05ee0d"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
   }
 }
