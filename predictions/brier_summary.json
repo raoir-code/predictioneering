@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-10-31T15:29:24.771454+00:00",
-  "n_resolved": 189,
-  "brier_conditional_mean": 0.323231,
-  "brier_engine_mean": 0.427604,
-  "brier_market_mean": 0.139457,
-  "edge_vs_market": -0.183774,
+  "last_updated": "2026-11-01T19:47:25.345333+00:00",
+  "n_resolved": 208,
+  "brier_conditional_mean": 0.314338,
+  "brier_engine_mean": 0.439241,
+  "brier_market_mean": 0.12964,
+  "edge_vs_market": -0.184698,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -2084,6 +2084,215 @@
       "brier_conditional": 0.635687,
       "brier_market": 0.1369,
       "resolved_at": "2026-10-31T15:27:58.680701+00:00"
+    },
+    {
+      "market_id": "3120760",
+      "market_label": "NATO x Russia military clash by October 31, 2026?",
+      "dyad": "NATO-Russia",
+      "outcome": 0,
+      "conditional_p": 0.265,
+      "market_p": 0.175,
+      "brier_conditional": 0.070225,
+      "brier_market": 0.030625,
+      "resolved_at": "2026-11-01T19:46:15.199314+00:00"
+    },
+    {
+      "market_id": "3903076",
+      "market_label": "Iran invades Kuwait by October 31?",
+      "dyad": "Iran-Kuwait",
+      "outcome": 0,
+      "conditional_p": 0.0014,
+      "market_p": 0.027,
+      "brier_conditional": 2e-06,
+      "brier_market": 0.000729,
+      "resolved_at": "2026-11-01T19:46:18.787565+00:00"
+    },
+    {
+      "market_id": "5167187",
+      "market_label": "Saudi Arabia military action against Yemen on October 6?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.1829,
+      "market_p": 0.745,
+      "brier_conditional": 0.667652,
+      "brier_market": 0.065025,
+      "resolved_at": "2026-11-01T19:46:29.938814+00:00"
+    },
+    {
+      "market_id": "5183429",
+      "market_label": "Israel military action against Lebanon on October 28?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.6973,
+      "market_p": 0.855,
+      "brier_conditional": 0.091627,
+      "brier_market": 0.021025,
+      "resolved_at": "2026-11-01T19:46:33.847947+00:00"
+    },
+    {
+      "market_id": "5183419",
+      "market_label": "Israel military action against Lebanon on October 18?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.5464,
+      "market_p": 0.865,
+      "brier_conditional": 0.205753,
+      "brier_market": 0.018225,
+      "resolved_at": "2026-11-01T19:46:38.619084+00:00"
+    },
+    {
+      "market_id": "5183426",
+      "market_label": "Israel military action against Lebanon on October 25?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.5445,
+      "market_p": 0.72,
+      "brier_conditional": 0.20748,
+      "brier_market": 0.0784,
+      "resolved_at": "2026-11-01T19:46:40.682217+00:00"
+    },
+    {
+      "market_id": "5167212",
+      "market_label": "Saudi Arabia military action against Yemen on October 31?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.3134,
+      "market_p": 0.455,
+      "brier_conditional": 0.47142,
+      "brier_market": 0.297025,
+      "resolved_at": "2026-11-01T19:46:42.754348+00:00"
+    },
+    {
+      "market_id": "3399459",
+      "market_label": "Israel x Iran ceasefire continues through October 31?",
+      "dyad": "Israel-Iran",
+      "outcome": 1,
+      "conditional_p": 0.9135,
+      "market_p": 0.865,
+      "brier_conditional": 0.007482,
+      "brier_market": 0.018225,
+      "resolved_at": "2026-11-01T19:46:47.250353+00:00"
+    },
+    {
+      "market_id": "2243896",
+      "market_label": "Russia x Ukraine ceasefire agreement by October 31, 2026?",
+      "dyad": "Russia-Ukraine",
+      "outcome": 0,
+      "conditional_p": 0.0194,
+      "market_p": 0.0295,
+      "brier_conditional": 0.000376,
+      "brier_market": 0.00087,
+      "resolved_at": "2026-11-01T19:46:49.169940+00:00"
+    },
+    {
+      "market_id": "2264327",
+      "market_label": "Russia x Ukraine ceasefire by October 31, 2026?",
+      "dyad": "Russia-Ukraine",
+      "outcome": 0,
+      "conditional_p": 0.0194,
+      "market_p": 0.0235,
+      "brier_conditional": 0.000376,
+      "brier_market": 0.000552,
+      "resolved_at": "2026-11-01T19:46:51.468082+00:00"
+    },
+    {
+      "market_id": "4761462",
+      "market_label": "US x Yemen ceasefire continues through October 31?",
+      "dyad": "US-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.918,
+      "market_p": 0.945,
+      "brier_conditional": 0.006724,
+      "brier_market": 0.003025,
+      "resolved_at": "2026-11-01T19:46:54.323350+00:00"
+    },
+    {
+      "market_id": "4688838",
+      "market_label": "Saudi-Houthi ceasefire agreement announced by October 31?",
+      "dyad": null,
+      "outcome": 0,
+      "conditional_p": 0.0296,
+      "market_p": 0.0385,
+      "brier_conditional": 0.000876,
+      "brier_market": 0.001482,
+      "resolved_at": "2026-11-01T19:46:56.696213+00:00"
+    },
+    {
+      "market_id": "5686982",
+      "market_label": "US x Iran ceasefire continues through October 28?",
+      "dyad": "US-Iran",
+      "outcome": 1,
+      "conditional_p": 0.9193,
+      "market_p": 0.815,
+      "brier_conditional": 0.006512,
+      "brier_market": 0.034225,
+      "resolved_at": "2026-11-01T19:46:58.853838+00:00"
+    },
+    {
+      "market_id": "3913254",
+      "market_label": "Ukraine signs peace deal with Russia by October 31?",
+      "dyad": "Russia-Ukraine",
+      "outcome": 0,
+      "conditional_p": 0.0073,
+      "market_p": 0.0045,
+      "brier_conditional": 5.3e-05,
+      "brier_market": 2e-05,
+      "resolved_at": "2026-11-01T19:47:03.201237+00:00"
+    },
+    {
+      "market_id": "4338162",
+      "market_label": "Will Israeli forces withdraw from beyond the Litani River by October 31?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 0,
+      "conditional_p": 0.0141,
+      "market_p": 0.01,
+      "brier_conditional": 0.000199,
+      "brier_market": 0.0001,
+      "resolved_at": "2026-11-01T19:47:07.749738+00:00"
+    },
+    {
+      "market_id": "6065847",
+      "market_label": "Will Iran target Iraq by October 31, 2026?",
+      "dyad": "Iran-Iraq",
+      "outcome": 1,
+      "conditional_p": 0.2319,
+      "market_p": 0.93,
+      "brier_conditional": 0.589978,
+      "brier_market": 0.0049,
+      "resolved_at": "2026-11-01T19:47:11.640917+00:00"
+    },
+    {
+      "market_id": "6065845",
+      "market_label": "Will Iran target an Arab country by October 31, 2026?",
+      "dyad": "Iran-Saudi Arabia",
+      "outcome": 1,
+      "conditional_p": 0.016,
+      "market_p": 0.875,
+      "brier_conditional": 0.968256,
+      "brier_market": 0.015625,
+      "resolved_at": "2026-11-01T19:47:13.696827+00:00"
+    },
+    {
+      "market_id": "6065846",
+      "market_label": "Will Iran target an Arab country by November 15, 2026?",
+      "dyad": "Iran-Saudi Arabia",
+      "outcome": 1,
+      "conditional_p": 0.2078,
+      "market_p": 0.875,
+      "brier_conditional": 0.627581,
+      "brier_market": 0.015625,
+      "resolved_at": "2026-11-01T19:47:15.957618+00:00"
+    },
+    {
+      "market_id": "6065848",
+      "market_label": "Will Iran target Iraq by November 15, 2026?",
+      "dyad": "Iran-Iraq",
+      "outcome": 1,
+      "conditional_p": 0.3924,
+      "market_p": 0.955,
+      "brier_conditional": 0.369178,
+      "brier_market": 0.002025,
+      "resolved_at": "2026-11-01T19:47:18.291102+00:00"
     }
   ]
 }

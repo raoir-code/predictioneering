@@ -1,20 +1,20 @@
 {
  "results": {
   "WITHDRAWAL": {
-   "n": 23,
+   "n": 24,
    "yes": 0,
-   "brier_model": 0.043,
-   "brier_market": 0.0473
+   "brier_model": 0.0418,
+   "brier_market": 0.0489
   },
   "overall": {
-   "n": 23,
-   "brier_model": 0.043,
-   "brier_market": 0.0473,
-   "logloss_model": 0.1973,
-   "logloss_market": 0.2245,
+   "n": 24,
+   "brier_model": 0.0418,
+   "brier_market": 0.0489,
+   "logloss_model": 0.1944,
+   "logloss_market": 0.2297,
    "bootstrap_model_minus_market": [
-    -0.0203,
-    0.0379
+    -0.0237,
+    0.0365
    ]
   }
  },
@@ -102,6 +102,15 @@
    "u": 0.1562,
    "m": 0.19,
    "q": "Will Israeli forces withdraw from beyond the Litani River by August 31?"
+  },
+  {
+   "id": "4338162",
+   "type": "WITHDRAWAL",
+   "series": "israeli forces withdraw from beyond the litani river",
+   "y": 0,
+   "u": 0.1207,
+   "m": 0.295,
+   "q": "Will Israeli forces withdraw from beyond the Litani River by October 31?"
   },
   {
    "id": "4338163",
@@ -230,5 +239,5 @@
    "q": "Israel withdraws from Lebanon by December 31?"
   }
  ],
- "computed_at": "2026-10-31T13:18:36.779785+00:00"
+ "computed_at": "2026-11-01T19:37:19.280393+00:00"
 }

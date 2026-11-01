@@ -24,9 +24,9 @@
    "brier_market": 0.2425
   },
   "C": {
-   "n": 126,
-   "brier_model": 0.2029,
-   "brier_market": 0.1412
+   "n": 130,
+   "brier_model": 0.1985,
+   "brier_market": 0.1386
   },
   "C:hamas|israel:BREAKDOWN": {
    "n": 11,
@@ -65,10 +65,10 @@
    "brier_market": 0.0506
   },
   "C:houthi|saudi:CEASEFIRE": {
-   "n": 2,
+   "n": 3,
    "yes": 0,
-   "brier_model": 0.0009,
-   "brier_market": 0.0091
+   "brier_model": 0.0053,
+   "brier_market": 0.036
   },
   "C:iran|israel:DEAL": {
    "n": 4,
@@ -125,10 +125,16 @@
    "brier_market": 0.0672
   },
   "C:russia|ukraine:CEASEFIRE": {
-   "n": 10,
+   "n": 12,
    "yes": 1,
-   "brier_model": 0.0752,
-   "brier_market": 0.0984
+   "brier_model": 0.0816,
+   "brier_market": 0.0942
+  },
+  "C:russia|ukraine:DEAL": {
+   "n": 1,
+   "yes": 0,
+   "brier_model": 0.0022,
+   "brier_market": 0.0025
   },
   "C:sudan:CEASEFIRE": {
    "n": 3,
@@ -785,6 +791,15 @@
    "fam": "C",
    "series": "russia|ukraine:CEASEFIRE",
    "y": 0,
+   "u": 0.3384,
+   "m": 0.285,
+   "q": "Russia x Ukraine ceasefire agreement by October 31, 2026?",
+   "date": "2026-10-31"
+  },
+  {
+   "fam": "C",
+   "series": "russia|ukraine:CEASEFIRE",
+   "y": 0,
    "u": 0.0435,
    "m": 0.035,
    "q": "Russia x Ukraine ceasefire by May 31, 2026?",
@@ -798,6 +813,15 @@
    "m": 0.09,
    "q": "Russia x Ukraine ceasefire by June 30, 2026?",
    "date": "2026-06-30"
+  },
+  {
+   "fam": "C",
+   "series": "russia|ukraine:CEASEFIRE",
+   "y": 0,
+   "u": 0.3355,
+   "m": 0.255,
+   "q": "Russia x Ukraine ceasefire by October 31, 2026?",
+   "date": "2026-10-31"
   },
   {
    "fam": "C",
@@ -1260,6 +1284,15 @@
   },
   {
    "fam": "C",
+   "series": "russia|ukraine:DEAL",
+   "y": 0,
+   "u": 0.0467,
+   "m": 0.05,
+   "q": "Ukraine signs peace deal with Russia by October 31?",
+   "date": "2026-10-31"
+  },
+  {
+   "fam": "C",
    "series": "houthi|saudi:CEASEFIRE",
    "y": 0,
    "u": 0.0173,
@@ -1275,6 +1308,15 @@
    "m": 0.125,
    "q": "Saudi-Houthi ceasefire agreement announced by September 30?",
    "date": "2026-09-30"
+  },
+  {
+   "fam": "C",
+   "series": "houthi|saudi:CEASEFIRE",
+   "y": 0,
+   "u": 0.1185,
+   "m": 0.3,
+   "q": "Saudi-Houthi ceasefire agreement announced by October 31?",
+   "date": "2026-10-31"
   },
   {
    "fam": "C",
@@ -1520,5 +1562,5 @@
    "date": "2026-06-30"
   }
  ],
- "computed_at": "2026-10-31T13:18:13.757992+00:00"
+ "computed_at": "2026-11-01T19:36:55.510791+00:00"
 }
