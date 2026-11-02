@@ -71,6 +71,8 @@ fresh_or_abort "translator"
 $PYTHON -u -m pipeline.translator >> "$LOGFILE" 2>&1
 echo "[$(date +%H:%M:%S)] [scope] Contract-scope refresh for new kinetic markets (non-fatal; G4)..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.backfill_contract_scopes >> "$LOGFILE" 2>&1 || echo "  [scope] refresh failed (non-fatal)" | tee -a "$LOGFILE"
+echo "[$(date +%H:%M:%S)] [strike-news] Full-recall headline fetch for the 18 strike pairs (non-fatal)..." | tee -a "$LOGFILE"
+$PYTHON -u pilot/strike_news_fetch.py >> "$LOGFILE" 2>&1 || echo "  [strike-news] fetch failed (non-fatal)" | tee -a "$LOGFILE"
 echo "[$(date +%H:%M:%S)] [news] Label new headlines for tomorrow (non-fatal)..." | tee -a "$LOGFILE"
 $PYTHON -u pilot/news_strikes.py --label >> "$LOGFILE" 2>&1 || echo "  [news] labeling failed (non-fatal)" | tee -a "$LOGFILE"
 echo "[$(date +%H:%M:%S)] [meta] Listing metadata for new markets (non-fatal)..." | tee -a "$LOGFILE"
@@ -120,6 +122,7 @@ $GIT add pilot/ceasefire_labels.jsonl >> "$LOGFILE" 2>&1 || echo "  [pilot] coul
 $GIT add -f cache/gnews_pilot >> "$LOGFILE" 2>&1 || echo "  [pilot] could not stage pilot news cache (non-fatal)" | tee -a "$LOGFILE"
 $GIT add pilot/talks_labels.jsonl >> "$LOGFILE" 2>&1 || echo "  [talks] could not stage talks labels (non-fatal)" | tee -a "$LOGFILE"
 $GIT add -f cache/gnews_talks >> "$LOGFILE" 2>&1 || echo "  [talks] could not stage talks news cache (non-fatal)" | tee -a "$LOGFILE"
+$GIT add -f cache/gnews_strike >> "$LOGFILE" 2>&1 || echo "  [strike-news] could not stage strike news cache (non-fatal)" | tee -a "$LOGFILE"
 $GIT commit -m "Daily predictions: $(date +%Y-%m-%d)" >> "$LOGFILE" 2>&1 || echo "Nothing to commit." | tee -a "$LOGFILE"
 # Retry: after sleep/wake the network may not be back yet (Oct 19: "Could not resolve host").
 for i in 1 2 3 4 5; do

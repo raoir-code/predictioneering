@@ -77,16 +77,21 @@ def test():
     print(f"[news strike tests, prompt {PROMPT_VERSION}] {'ALL PASS' if ok else 'FAILED'}")
     return ok
 
+SOURCES = ("gnews", "gnews_strike")   # Nov 2: + pilot/strike_news_fetch.py (full-recall pair query); union per day, by title
+
 def files(dyad):
-    out = []
-    for f in sorted(glob.glob(str(ROOT / "cache" / "gnews" / f"{dyad}_2026*.json"))):
-        m = re.search(r"_(\d{8})\.json$", f)
-        try:
-            d = json.load(open(f)); arts = d.get("articles", d) if isinstance(d, dict) else d
-        except Exception:
-            arts = []
-        out.append((dt.datetime.strptime(m.group(1), "%Y%m%d").date(), [a for a in arts if isinstance(a, dict) and a.get("title")]))
-    return out
+    by = {}
+    for src in SOURCES:
+        for f in sorted(glob.glob(str(ROOT / "cache" / src / f"{dyad}_2026*.json"))):
+            m = re.search(r"_(\d{8})\.json$", f)
+            try:
+                d = json.load(open(f)); arts = d.get("articles", d) if isinstance(d, dict) else d
+            except Exception:
+                arts = []
+            day = by.setdefault(dt.datetime.strptime(m.group(1), "%Y%m%d").date(), {})
+            for a in arts:
+                if isinstance(a, dict) and a.get("title"): day.setdefault(key(a["title"]), a)
+    return [(d, list(v.values())) for d, v in sorted(by.items())]
 
 def load_labels():
     lab = {}
