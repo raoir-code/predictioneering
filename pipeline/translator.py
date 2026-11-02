@@ -77,6 +77,7 @@ ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 CLAUDE_MODEL      = "claude-sonnet-4-6"  # unified model string across pipeline
 MAX_TOKENS        = 900
 API_URL           = "https://api.anthropic.com/v1/messages"
+_USAGE            = None   # pipeline/api_usage.py, set in __main__ (Nov 2: translator calls use urllib, which the requests hook misses)
 
 SCHOLAR_ONLY      = "--scholar-only" in sys.argv
 
@@ -264,6 +265,11 @@ def _claude_call(system_prompt: str, user_content: str) -> dict | None:
         try:
             with urllib.request.urlopen(req, timeout=30) as resp:
                 body = json.loads(resp.read())
+                try:
+                    if _USAGE is not None and isinstance(body.get("usage"), dict):
+                        _USAGE.record(body.get("model") or CLAUDE_MODEL, body["usage"], "translator._claude_call")
+                except Exception:
+                    pass                                    # never let accounting break a run
                 text = body["content"][0]["text"].strip()
                 # Strip markdown fences robustly
                 if "```" in text:
@@ -2524,5 +2530,5 @@ def _append_log(feed: list):
 if __name__ == "__main__":
     import importlib.util as _iu, pathlib as _pl   # token log, logs/api_usage_<date>.jsonl (report only)
     _sp = _iu.spec_from_file_location("pq_api_usage", _pl.Path(__file__).resolve().parents[1] / "pipeline" / "api_usage.py")
-    _um = _iu.module_from_spec(_sp); _sp.loader.exec_module(_um); _um.enable()
+    _um = _iu.module_from_spec(_sp); _sp.loader.exec_module(_um); _um.enable(); _USAGE = _um
     run_translator()

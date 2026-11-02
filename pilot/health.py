@@ -17,17 +17,21 @@ for tag, pat in (("during-war/unified", r"\[during-war\][^\n]*"), ("rules", r"\[
                  ("policy", r"excluded by rule:[^\n]*"), ("scopes", r"resolved: *\d+"), ("meta", r"\[meta\] stored[^\n]*"),
                  ("strike|no war", r"\[strike\|no war\] empirical[^\n]*"), ("strike|war", r"\[strike\|war\] restored[^\n]*"),
                  ("feed sync", r"\[sync\] (?:prices refreshed|FAILED)[^\n]*"), ("new listings", r"\[sync\] appended[^\n]*"),
-                 ("classify cache", r"\[cache\] \d+ from cache[^\n]*")):
-    m = re.findall(pat, txt); print(f"   {tag:18} {m[-1] if m else 'NOT SEEN'}" + (f"  ({len(m)} dyads)" if tag == 'news' and m else ""))
+                 ("classify cache", r"\[cache\] \d+ from cache[^\n]*"), ("strike news", r"\[strike-news\] \d+ headlines fetched[^\n]*")):
+    m = re.findall(pat, txt); pick = (m[0] if tag == "classify cache" else m[-1]) if m else None   # cache: the sync/weekly line, not the retry step's 0/0
+    print(f"   {tag:18} {pick or 'NOT SEEN'}" + (f"  ({len(m)} dyads)" if tag == 'news' and m else ""))
 # Step announcements ("[hh:mm:ss] ... ...") are not failures, even when they name one ("Retry markets left in ERROR").
-errs = [l.strip() for l in txt.splitlines() if re.search(r"Traceback|ERROR|failed \(non-fatal\)|FAILED|Exception", l)
+errs = [l.strip() for l in txt.splitlines() if re.search(r"Traceback|ERROR|failed \(non-fatal\)|FAILED|Exception|\[strike-news\].*(?:failed|errors=)", l)
         and not re.match(r"^\[\d\d:\d\d:\d\d\] .*\.\.\.\s*$", l)]
 print(f"   errors/failures: {len(errs)}"); [print("     ", e[:150]) for e in errs[-8:]]
+plog = [json.loads(l) for l in open(ROOT / "predictions" / "log.jsonl") if l.strip()]
+_last = max((r["timestamp"] for r in plog), default=None)
+published = {str(r["market_id"]) for r in plog if r["timestamp"] == _last}   # Nov 2: NOISE markets carry a feed price but are never published
 feed = json.load(open(ROOT / "pipeline" / "classified_feed.json")); feed = feed if isinstance(feed, list) else feed.get("markets", feed.get("data", []))
 today = dt.date.today().isoformat()
-live = [m for m in feed if not m.get("resolved") and m.get("conditional_p") is not None and m.get("market_price") is not None and str(m.get("end_date"))[:10] >= today]
+live = [m for m in feed if not m.get("resolved") and m.get("conditional_p") is not None and m.get("market_price") is not None and str(m.get("end_date"))[:10] >= today and str(m.get("market_id")) in published]
 comp = collections.Counter(m.get("pricing_component", "engine") for m in live)
-print(f"== {len(live)} live published markets by component: {dict(comp)}")
+print(f"== {len(live)} live markets published in the latest run, by component: {dict(comp)}")
 ex = collections.defaultdict(float)
 for m in live: ex[m.get("pricing_component", "engine")] += (m["conditional_p"] - m["market_price"]) ** 2
 print("   expected excess Brier vs a calibrated market:", {k: round(v, 2) for k, v in sorted(ex.items(), key=lambda kv: -kv[1])}, "total", round(sum(ex.values()), 2))
@@ -65,7 +69,6 @@ def _swing_tests():
 
 
 _swing_tests()
-plog = [json.loads(l) for l in open(ROOT / "predictions" / "log.jsonl") if l.strip()]
 sw = pba_swings(plog)
 print(f"== P(B|A) swings > 0.10 since the previous run: {len(sw)}  (LLM re-estimate; not a model change)")
 for lab, a, b, ca, cb in sw[:8]:

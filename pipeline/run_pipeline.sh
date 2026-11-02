@@ -68,6 +68,7 @@ $PYTHON -u pilot/ceasefire_holds.py --refresh --replay >> "$LOGFILE" 2>&1 || ech
 $PYTHON -u pilot/ceasefire_bc.py --replay >> "$LOGFILE" 2>&1 || echo "  [ceasefire-bc] replay failed (non-fatal; report only)" | tee -a "$LOGFILE"
 $PYTHON -u pilot/war_outcomes.py --refresh --replay >> "$LOGFILE" 2>&1 || echo "  [war-outcome] refresh/replay failed (non-fatal; report only)" | tee -a "$LOGFILE"
 fresh_or_abort "translator"
+echo "[$(date +%H:%M:%S)] [translator] Translator: Scholar/Clergyman/Bettor + unified pricing + publish..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.translator >> "$LOGFILE" 2>&1
 echo "[$(date +%H:%M:%S)] [scope] Contract-scope refresh for new kinetic markets (non-fatal; G4)..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.backfill_contract_scopes >> "$LOGFILE" 2>&1 || echo "  [scope] refresh failed (non-fatal)" | tee -a "$LOGFILE"
