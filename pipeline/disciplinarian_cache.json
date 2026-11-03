@@ -493,6 +493,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"03b29f2a2197bbe3e2df": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about municipal elections in Taiwan, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "03b2a8b3db2104060782": {
 "bucket": "ADJACENT",
 "dyad": "Russia-Ukraine",
@@ -537,6 +543,16 @@
 "reason": "This is about an internal Israeli political appointment, not interstate conflict between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"03f71ae096b3761a5b92": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital, which is a specific military incident/escalation question rather than conflict onset (the conflict already exists).",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "040a21b35e0d8b06fe58": {
 "bucket": "NOISE",
@@ -1221,6 +1237,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"08b59b328939c58e8756": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition conducting strikes in a civil war/intrastate conflict context (Yemen), not interstate conflict onset between two sovereign states.",
+"relevant_nodes": []
+},
 "08ccf5dfd5b33fbf786e": {
 "bucket": "NOISE",
 "dyad": null,
@@ -1359,6 +1381,16 @@
 "reason": "This is about an internal legislative leadership selection in Israel, not about interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"09e27e46dbe370898f95": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (targeting Kyiv on a particular date) within an ongoing interstate conflict, not conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
 },
 "09eb7440df69e2bb3b5c": {
 "bucket": "NOISE",
@@ -1790,6 +1822,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"0d84d303d87eaf77ae1a": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (Ukrainian strike on Moscow) rather than full conflict onset, as the Russia-Ukraine interstate conflict is already ongoing.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "0d9533c273737e27e41d": {
 "bucket": "NOISE",
 "dyad": null,
@@ -1916,6 +1958,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"0ef30c29ab00a6ed9df4": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "0ef4d3d32e1a354021f0": {
 "bucket": "NOISE",
 "dyad": null,
@@ -1985,6 +2033,12 @@
 "CommitmentProblem"
 ],
 "seeded": true
+},
+"0f975c452f6e8300eb9d": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a currency exchange rate question, not about interstate conflict onset between state actors.",
+"relevant_nodes": []
 },
 "0fa5ed9725eb51fee060": {
 "bucket": "NOISE",
@@ -2060,6 +2114,12 @@
 "reason": "This is about a domestic legislative election outcome, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"101236d30cd75f4b1083": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition military operation against non-state or intrastate actors in Yemen's civil war, not interstate conflict onset between two sovereign states.",
+"relevant_nodes": []
 },
 "10517ce4a2668949adac": {
 "bucket": "NOISE",
@@ -2193,6 +2253,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"1125d7c079ec0a35553e": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This concerns a potential diplomatic agreement between the US and Iran regarding the Strait of Hormuz, which is geopolitics-related between state actors but is about a peace/diplomatic deal rather than direct conflict onset.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"WarCosts",
+"CommitmentProblem"
+]
+},
 "11277710fa80c154e74b": {
 "bucket": "NOISE",
 "dyad": null,
@@ -2238,6 +2309,17 @@
 "reason": "This question is about leadership tenure/political survival of an Iranian leader, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"11718e18777c186ee235": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This is about the continuation of a ceasefire between two state actors rather than conflict onset, giving the model partial but not direct traction.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
 },
 "117d6153e9ec1999d809": {
 "bucket": "NOISE",
@@ -2296,6 +2378,17 @@
 "CommitmentProblem"
 ],
 "seeded": true
+},
+"11fef31ace4e9d339244": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital on a particular date, which relates to conflict escalation but is not about conflict onset between a new dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem",
+"WarCosts"
+]
 },
 "1207fd28f8f72a7eb91c": {
 "bucket": "NOISE",
@@ -2382,6 +2475,17 @@
 "reason": "This is about a local mayoral election in Taiwan, not interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"128b6bb782bf7aff6a27": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital on a specific date, which relates to conflict escalation but is not about conflict onset between a new dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem",
+"WarCosts"
+]
 },
 "1298fe869d96bc119529": {
 "bucket": "NOISE",
@@ -2682,6 +2786,16 @@
 "Patience"
 ]
 },
+"14d5fd4e99d627029e3e": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (targeting Kyiv on a particular date) within the ongoing Russia-Ukraine conflict, rather than conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
+},
 "14e2b049c7ff200f54f9": {
 "bucket": "NOISE",
 "dyad": null,
@@ -2857,6 +2971,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"1691b5a503bc8f765939": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition conducting strikes against non-state or intrastate actors in Yemen (Houthis), not interstate conflict onset between two sovereign states.",
+"relevant_nodes": []
+},
 "16980ec2fdafae8c0bdb": {
 "bucket": "CORE",
 "dyad": null,
@@ -2897,6 +3017,17 @@
 "reason": "This question is about elections in multiple countries, not about interstate conflict between any specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"16b6d036bd773de5bd77": {
+"bucket": "ADJACENT",
+"dyad": "US-Mexico",
+"reason": "This involves potential U.S. military operations on foreign soil (likely Mexico) which could constitute interstate conflict, but the question is about anti-cartel operations targeting non-state actors rather than a direct interstate war onset.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"PreferenceAlignment",
+"Patience"
+]
 },
 "16cb8d6e337051b31615": {
 "bucket": "NOISE",
@@ -3101,6 +3232,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"17e12400731d2392e309": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition military operation against non-state or intrastate actors in Yemen's civil war, not a clear interstate conflict onset between two state dyads.",
+"relevant_nodes": []
+},
 "17f1e5d591c2eb71511c": {
 "bucket": "NOISE",
 "dyad": null,
@@ -3217,6 +3354,12 @@
 "reason": "This is about a domestic legislative election outcome, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"18e4cec2129f9b662a65": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about local municipal elections in Taiwan, not interstate conflict between state actors.",
+"relevant_nodes": []
 },
 "18f6a5d7a9cdeaa44a1d": {
 "bucket": "NOISE",
@@ -3366,6 +3509,16 @@
 "WarCosts"
 ],
 "seeded": true
+},
+"1a0a49eecde46daefbc4": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (Ukraine striking Moscow) rather than full conflict onset, as the Russia-Ukraine interstate conflict is already ongoing.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "1a227843860d7f530fb0": {
 "bucket": "NOISE",
@@ -3736,6 +3889,12 @@
 "reason": "This is a local election question in Taiwan with no direct relevance to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"1c9376920407ab1afb84": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a Saudi-led coalition conducting strikes in Yemen, which is an intrastate/civil war intervention scenario rather than interstate conflict onset between two sovereign states.",
+"relevant_nodes": []
 },
 "1c968e372f470e13a9c8": {
 "bucket": "NOISE",
@@ -4416,6 +4575,12 @@
 "reason": "This question is about a diplomatic meeting between leaders, not about interstate conflict onset or escalation between a specific dyad.",
 "relevant_nodes": []
 },
+"2132c55c64e64f0a9e4f": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "21358316c637adcad7f3": {
 "bucket": "NOISE",
 "dyad": null,
@@ -4478,6 +4643,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"21b2a25a986c237732be": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through the Strait of Hormuz, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "21c3af299006a8faa20c": {
 "bucket": "NOISE",
 "dyad": null,
@@ -4491,6 +4662,16 @@
 "reason": "This is a local election question, not about interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"21fa8e909c88e5b8a79e": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike event on a particular date within the ongoing Russia-Ukraine conflict, not about conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
 },
 "221d31f06e27b9cc5a32": {
 "bucket": "NOISE",
@@ -4712,6 +4893,16 @@
 "reason": "This question is about elections and political candidates, not interstate conflict between state actors.",
 "relevant_nodes": []
 },
+"23943da258c82468179f": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike event within an ongoing interstate conflict rather than conflict onset between the dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
+},
 "2397c95f346406dc6f1f": {
 "bucket": "NOISE",
 "dyad": null,
@@ -4828,6 +5019,17 @@
 "reason": "The Houthis are a non-state actor (rebel/militant group), not a state, so this is not an interstate conflict dyad question.",
 "relevant_nodes": [],
 "seeded": true
+},
+"24a57697e8c51f15ae7e": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike targeting a capital city, which is a battlefield escalation event within an ongoing conflict rather than conflict onset per se.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "24b7dd3a84735d557c36": {
 "bucket": "NOISE",
@@ -5454,6 +5656,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"291dd4bd1273130ca47e": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition intervention in a civil war (intrastate conflict in Yemen), not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "2934f2481509c8359338": {
 "bucket": "NOISE",
 "dyad": null,
@@ -5985,11 +6193,31 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"2d69e3c1ba388e9829ab": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital, which is a battlefield escalation event rather than conflict onset, since the Russia-Ukraine interstate conflict is already ongoing.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "2d6fb68911d562fefe2e": {
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about domestic political leadership survival, not interstate conflict onset between two state actors.",
 "relevant_nodes": []
+},
+"2d7ddd2ecb6b4f7c4d13": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (Ukraine striking Moscow) rather than full conflict onset, as the Russia-Ukraine interstate conflict is already ongoing.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "2d8bf971446102fdec08": {
 "bucket": "NOISE",
@@ -6103,6 +6331,16 @@
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"2f00e7413c3d74411805": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (targeting Kyiv on a particular date) within the ongoing Russia-Ukraine conflict, rather than conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
 },
 "2f0d6819cedab04ec93a": {
 "bucket": "ADJACENT",
@@ -6316,6 +6554,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"3068bf8be49345b18ec4": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This question concerns the continuation of a ceasefire between two state actors rather than conflict onset, giving the model partial but not direct traction.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
+},
 "3072eaa2c5d238ca509b": {
 "bucket": "NOISE",
 "dyad": null,
@@ -6334,6 +6583,23 @@
 "reason": "This is about domestic coalition politics and government formation in Israel, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"309d3e59bb872bb42db0": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital on a specific date, which relates to conflict escalation but is not directly about conflict onset between the dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"WarCosts",
+"CommitmentProblem"
+]
+},
+"30a3feaeb8374e497d51": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition military operation against non-state or intrastate actors (Houthis) in Yemen, which is primarily a civil war/intrastate conflict rather than interstate conflict onset between two sovereign states.",
+"relevant_nodes": []
 },
 "30ae20dd7bc3bfa8c094": {
 "bucket": "NOISE",
@@ -7412,6 +7678,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"3a94ae603722e6759d91": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "The question concerns diplomatic engagement between two states currently at war, which is related to conflict resolution but not directly about conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "3ab8a358df74255e28dc": {
 "bucket": "ADJACENT",
 "dyad": "Russia-NATO",
@@ -7443,6 +7720,17 @@
 "reason": "This is about domestic Israeli election results for a specific party's seat count, not about interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"3ad1fbdd33ebbe323a7c": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike event by Ukraine against Russia's capital, which relates to conflict escalation but is not directly about conflict onset between a new dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem",
+"WarCosts"
+]
 },
 "3ad821c407ffa1f53c55": {
 "bucket": "NOISE",
@@ -7568,6 +7856,16 @@
 "reason": "This question is about domestic Israeli politics and government formation, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"3be8abbd6ca1c5252e9d": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike event within an ongoing interstate conflict rather than conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
 },
 "3bf48335e544fef82b20": {
 "bucket": "NOISE",
@@ -7698,6 +7996,16 @@
 "Patience"
 ],
 "seeded": true
+},
+"3ce417a74f062b551df2": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike event within an ongoing interstate conflict rather than conflict onset between the dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
 },
 "3cfd8d85e22e705a7975": {
 "bucket": "NOISE",
@@ -8299,6 +8607,12 @@
 ],
 "seeded": true
 },
+"411034a282ac10048866": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about municipal elections in Taiwan, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "41201a73109d69c52c53": {
 "bucket": "NOISE",
 "dyad": null,
@@ -8392,6 +8706,12 @@
 "Patience",
 "PreferenceAlignment"
 ]
+},
+"420e8042d3436c62ff7d": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition military operation against non-state or intrastate actors in Yemen's civil war, not interstate conflict onset between two state dyads.",
+"relevant_nodes": []
 },
 "4210c86b16ebdbe1c8ab": {
 "bucket": "NOISE",
@@ -8982,6 +9302,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"46b91fa380f0ab422929": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a shipping/maritime traffic measurement question, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "46ba5032fa320afa81fb": {
 "bucket": "ADJACENT",
 "dyad": "Russia-Ukraine",
@@ -9151,6 +9477,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"47e4bce665c4de938153": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital, which is a battlefield escalation question rather than conflict onset, since the Russia-Ukraine interstate conflict is already ongoing.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "47f64704d2376b68f093": {
 "bucket": "NOISE",
 "dyad": null,
@@ -9268,6 +9604,16 @@
 ],
 "seeded": true
 },
+"48a73fb52a760d9c5361": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital on a particular date, which relates to battlefield escalation but is not directly about conflict onset (the war is already ongoing).",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "48c7b4bb2fa96dd54324": {
 "bucket": "NOISE",
 "dyad": null,
@@ -9285,6 +9631,16 @@
 "Patience"
 ],
 "seeded": true
+},
+"48dadb6341fff6acb496": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital, which is a battlefield escalation question rather than conflict onset \u2014 the Russia-Ukraine interstate conflict is already ongoing.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "48e07f6be2ace9d0e7de": {
 "bucket": "NOISE",
@@ -10762,6 +11118,17 @@
 "reason": "This question is about a trade deal, not interstate conflict onset or escalation between state actors.",
 "relevant_nodes": []
 },
+"53a23b1306ba35a40281": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This is about the continuation of a ceasefire between two state actors rather than conflict onset, giving the model only partial traction on commitment credibility and escalation risk.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"PreferenceAlignment",
+"Patience"
+]
+},
 "53cc89f46fcd31bd79ac": {
 "bucket": "NOISE",
 "dyad": null,
@@ -11586,6 +11953,12 @@
 "reason": "This question is about Formula 1 racing events, not interstate conflict between state actors.",
 "relevant_nodes": []
 },
+"59de26535ce6045f8a77": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition military operation against non-state or sub-state actors (Houthis) in a civil war context, not interstate conflict onset between two sovereign states.",
+"relevant_nodes": []
+},
 "59e1b363399844272a04": {
 "bucket": "NOISE",
 "dyad": null,
@@ -11892,6 +12265,12 @@
 ],
 "seeded": true
 },
+"5befc87ca5711db76e09": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a currency exchange rate question, not about interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "5c145e99e6cceb9fadcf": {
 "bucket": "NOISE",
 "dyad": null,
@@ -11995,6 +12374,16 @@
 "reason": "This is about a domestic presidential election, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"5cdbd10ab2de4ed83261": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike on a specific date within the ongoing Russia-Ukraine conflict, which is about battlefield conduct rather than conflict onset.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
+},
 "5cdeab3b660beb81bdb3": {
 "bucket": "NOISE",
 "dyad": null,
@@ -12061,6 +12450,16 @@
 "reason": "This is about domestic Israeli election results and vote share for minor parties, not interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"5d42104731d055dd8ae6": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (Ukrainian strike on Moscow) rather than conflict onset, as the Russia-Ukraine interstate conflict is already ongoing.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "5d4617adbb72af2bb61b": {
 "bucket": "ADJACENT",
@@ -12493,6 +12892,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"60859e8da72bd132c763": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition military operation against non-state/intrastate actors in Yemen's civil war, not a clear interstate conflict onset between two state dyads.",
+"relevant_nodes": []
+},
 "6088ec7b0503b6466c6a": {
 "bucket": "NOISE",
 "dyad": null,
@@ -12622,6 +13027,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"614f8a4d4dd587aac132": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition conducting strikes against non-state or intrastate actors in Yemen (Houthis), which is an intrastate/civil war context rather than interstate conflict onset between two sovereign states.",
+"relevant_nodes": []
+},
 "61799020904b52aa448f": {
 "bucket": "NOISE",
 "dyad": null,
@@ -12717,6 +13128,16 @@
 "HardlineClaims"
 ]
 },
+"623929734883981286e9": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (Ukraine striking Moscow) rather than full conflict onset, as the Russia-Ukraine interstate conflict is already ongoing.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "624050b94cc1bff35c39": {
 "bucket": "NOISE",
 "dyad": null,
@@ -12762,6 +13183,12 @@
 "reason": "This question is about ranking Chinese AI companies, not about interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"6290367010dc7d32976c": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about municipal elections in Taiwan, not interstate conflict between state actors.",
+"relevant_nodes": []
 },
 "62b5f7a2c905e200edce": {
 "bucket": "NOISE",
@@ -13034,6 +13461,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is a compound question combining US domestic election outcomes with a ceasefire condition involving a non-state actor (Hamas), not an interstate conflict onset question between two states.",
+"relevant_nodes": []
+},
+"64dd5f80d9a46518dc29": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping transit volume through a strait, which is a maritime/economic metric rather than a question about interstate conflict onset between specific state actors.",
 "relevant_nodes": []
 },
 "64f79c5bd1e2bb8d7a65": {
@@ -13459,6 +13892,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This question is about presidential travel/diplomacy, not about interstate conflict onset between any specific dyad.",
+"relevant_nodes": []
+},
+"684ef04d62db87d63e15": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a Saudi-led coalition conducting strikes in Yemen, which is an intrastate/civil war intervention scenario rather than interstate conflict onset between two sovereign states.",
 "relevant_nodes": []
 },
 "6853307f5cb9650a3f98": {
@@ -14311,6 +14750,12 @@
 "reason": "This question is about commercial AI company rankings, not interstate conflict between state actors.",
 "relevant_nodes": []
 },
+"6ef5535bafba1724a643": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a currency exchange rate question, not about interstate conflict onset between state actors.",
+"relevant_nodes": []
+},
 "6effbd046bebf76440d5": {
 "bucket": "NOISE",
 "dyad": null,
@@ -14407,6 +14852,17 @@
 "dyad": null,
 "reason": "This question is about a diplomatic communication event (phone call/meeting), not about interstate conflict onset or escalation between specific state actors.",
 "relevant_nodes": []
+},
+"70099fa3eb119c42069f": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital on a specific date, which relates to escalation dynamics but is not directly about conflict onset (the conflict already exists).",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "7010c2ccbd66da5993f9": {
 "bucket": "NOISE",
@@ -14580,6 +15036,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"715bc6de30bbaf991a15": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (targeting Kyiv on a particular date) within the ongoing Russia-Ukraine conflict, rather than conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
+},
 "717d647b5f8084d961a2": {
 "bucket": "NOISE",
 "dyad": null,
@@ -14692,6 +15158,12 @@
 "reason": "This is a domestic municipal election question, not related to interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"71fa04dcd8f16a335942": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "72094be1dfa3c75751d5": {
 "bucket": "NOISE",
@@ -14985,6 +15457,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"74348095b39f626a9673": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike event within an ongoing interstate conflict rather than conflict onset, giving the model only partial traction.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
+},
 "7443d1632e9dae519317": {
 "bucket": "NOISE",
 "dyad": null,
@@ -15018,6 +15500,17 @@
 "reason": "This is about an Israeli domestic political appointment, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"74afb16f35ad00a2bf8e": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital on a specific date, which relates to escalation within an ongoing conflict rather than conflict onset per se.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "74bba358f54469371631": {
 "bucket": "NOISE",
@@ -15591,6 +16084,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"79e5f5b9a1d6c4f0c307": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike event on a particular date within the ongoing Russia-Ukraine conflict, not about conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
+},
 "79e8653a89fc932f7a02": {
 "bucket": "CORE",
 "dyad": "NATO-Russia",
@@ -15835,6 +16338,12 @@
 "reason": "This is a local municipal election question with no interstate conflict dimension.",
 "relevant_nodes": [],
 "seeded": true
+},
+"7bbcce40e229f614d0d9": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a domestic election event in Belgium, not interstate conflict between two state actors.",
+"relevant_nodes": []
 },
 "7bbe63c633717a09dbc8": {
 "bucket": "NOISE",
@@ -16169,6 +16678,16 @@
 "reason": "This question is about AI company rankings, not interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"7edd18e2df5af65b672c": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (targeting Kyiv on a particular date) within an ongoing interstate conflict rather than conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
 },
 "7efe303588146a32f729": {
 "bucket": "ADJACENT",
@@ -16922,6 +17441,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"84dfdb5d48273890e58e": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition military operation against non-state or sub-state actors (Houthis) in a civil war context, not interstate conflict onset between two sovereign states.",
+"relevant_nodes": []
+},
 "84e0efb31ee8f29cc199": {
 "bucket": "NOISE",
 "dyad": null,
@@ -17289,6 +17814,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"881bcdcacd1683614afc": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "881c09b8f366f82ea23d": {
 "bucket": "NOISE",
 "dyad": null,
@@ -17365,6 +17896,17 @@
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"88c0e41da4e4070b2f7f": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This question concerns the continuation of a ceasefire between two state actors rather than conflict onset, giving the model partial but not direct traction.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
 },
 "88c65135f60b00d20686": {
 "bucket": "NOISE",
@@ -17763,6 +18305,16 @@
 "reason": "This is about a domestic political appointment in Israel, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"8b706512637569aa9a4f": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike event (targeting Kyiv) within an ongoing interstate conflict rather than conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
 },
 "8ba5706229dc6e2f49d1": {
 "bucket": "NOISE",
@@ -18361,6 +18913,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"908c875b055dd4b8ae23": {
+"bucket": "ADJACENT",
+"dyad": "Iran-Israel",
+"reason": "Airspace closure is related to interstate conflict risk (e.g., missile attacks from Iran or regional adversaries) but is not directly about conflict onset between a specific dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "90923da35506534dcfa3": {
 "bucket": "NOISE",
 "dyad": null,
@@ -18555,6 +19117,12 @@
 "reason": "This is about a domestic legislative election, not interstate conflict between state actors.",
 "relevant_nodes": []
 },
+"923cd0ab3a08bc281470": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a Saudi-led coalition conducting strikes in a civil war context (Yemen), which is intrastate/non-state actor conflict rather than interstate conflict onset between two state dyads.",
+"relevant_nodes": []
+},
 "924303a4fae45034d1e1": {
 "bucket": "NOISE",
 "dyad": null,
@@ -18656,6 +19224,12 @@
 "WinProbability",
 "HardlineClaims"
 ]
+},
+"92ac1fb5cb1a04a61756": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a maritime strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "92af7bb52c4666ab254e": {
 "bucket": "NOISE",
@@ -18916,6 +19490,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"94d621eb1547792c7ffb": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition military operation against a non-state or intrastate actor (Houthi rebels) in Yemen, not interstate conflict onset between two sovereign states.",
+"relevant_nodes": []
+},
 "94e24521f46a894423d7": {
 "bucket": "NOISE",
 "dyad": null,
@@ -19146,6 +19726,12 @@
 "reason": "A coup attempt is an intrastate event, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"96d89114f069f428535b": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "96f19727382cccaade7b": {
 "bucket": "NOISE",
@@ -19793,6 +20379,17 @@
 ],
 "seeded": true
 },
+"9c5edf88e309af210751": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine on Russia's capital, which relates to conflict escalation but is about a particular tactical event rather than conflict onset between the dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"WarCosts",
+"CommitmentProblem"
+]
+},
 "9c615baae7100b148240": {
 "bucket": "NOISE",
 "dyad": null,
@@ -19968,6 +20565,16 @@
 ],
 "seeded": true
 },
+"9d8c2c26721f23a20543": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (targeting Kyiv on a particular date) within an ongoing interstate conflict, rather than conflict onset between the dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
+},
 "9d8f8e66868be6310d78": {
 "bucket": "NOISE",
 "dyad": null,
@@ -20085,6 +20692,16 @@
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"9ec475ac9bd1d4b9885f": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (Ukraine striking Moscow) rather than full conflict onset, as the Russia-Ukraine interstate conflict is already ongoing.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "9ed2b2c38aa89981071d": {
 "bucket": "NOISE",
@@ -20574,6 +21191,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"a29b29a59ea9a4dedf7a": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (targeting Kyiv on a particular date) within the ongoing Russia-Ukraine conflict, rather than conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
+},
 "a29f51ee1032a38c37a9": {
 "bucket": "ADJACENT",
 "dyad": "US-China",
@@ -21047,6 +21674,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"a73c89a3a5efdfc18ba4": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition conducting strikes in a civil war context (Yemen), not interstate conflict onset between two state actors in a clear dyad.",
+"relevant_nodes": []
+},
 "a75ca82ed6ade32d58b1": {
 "bucket": "NOISE",
 "dyad": null,
@@ -21183,6 +21816,17 @@
 "reason": "This question is about domestic elections in three countries, not about interstate conflict between any dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"a84ab07d557e6454b4e4": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital, which is a specific military incident/escalation event rather than conflict onset (the Russia-Ukraine conflict is already ongoing).",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "a850764239c881342395": {
 "bucket": "NOISE",
@@ -21357,6 +22001,12 @@
 "relevant_nodes": [
 "WinProbability"
 ]
+},
+"a91bfb17e21b905dc91e": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition intervention in a civil war (intrastate conflict in Yemen), not interstate conflict onset between two state actors in a dyad.",
+"relevant_nodes": []
 },
 "a93175803a15a6a88bdc": {
 "bucket": "NOISE",
@@ -22241,6 +22891,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"af4c0663f885c956bfcb": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a currency exchange rate question, not about interstate conflict onset between state actors.",
+"relevant_nodes": []
+},
 "af5be19014fcc84864e1": {
 "bucket": "NOISE",
 "dyad": null,
@@ -22834,6 +23490,12 @@
 "reason": "This question is about a diplomatic communication event (phone call/meeting), not about interstate conflict onset or escalation between specific state actors.",
 "relevant_nodes": []
 },
+"b3e8b451c15bf68df353": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition intervention in a civil war (Yemen), which is an intrastate conflict scenario with non-state actors (Houthis), not a standard interstate dyad conflict onset question.",
+"relevant_nodes": []
+},
 "b3f17c34694d43f910c9": {
 "bucket": "NOISE",
 "dyad": null,
@@ -22881,6 +23543,16 @@
 "reason": "This question is about leadership/political survival of an individual leader, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"b418fa5d94187debfc10": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (targeting Kyiv on a specific date) within the ongoing Russia-Ukraine conflict, rather than conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
 },
 "b42f175613f58de77142": {
 "bucket": "NOISE",
@@ -23256,6 +23928,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"b6dd3b9424a7ff28ef2c": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike event within an ongoing interstate conflict rather than conflict onset, giving the model only partial traction.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
+},
 "b6ddc043647e9ae632b7": {
 "bucket": "ADJACENT",
 "dyad": "US-Iran",
@@ -23287,6 +23969,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This question is about domestic political leadership change in Spain, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
+"b6f5a69ee610fb453a1b": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition military operation against non-state/intrastate actors in Yemen's civil war, not a clear interstate conflict onset between two state dyads.",
 "relevant_nodes": []
 },
 "b6fd373dc578526c4f76": {
@@ -23677,6 +24365,12 @@
 "reason": "This is a municipal election question, not about interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"ba40ddbea1d7a40a0d4b": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a Saudi-led coalition conducting strikes in a civil war context (Yemen), which is intrastate/non-state actor conflict rather than interstate conflict onset between two state dyads.",
+"relevant_nodes": []
 },
 "ba48d41b722704456664": {
 "bucket": "NOISE",
@@ -25195,6 +25889,16 @@
 "reason": "This question is about a diplomatic meeting between a US president and a UK mayor, not about interstate conflict onset.",
 "relevant_nodes": []
 },
+"c46e105775c0cf888d74": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike event on a particular date within the ongoing Russia-Ukraine conflict, not about conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
+},
 "c471206d327444e5fbb2": {
 "bucket": "NOISE",
 "dyad": null,
@@ -25302,6 +26006,12 @@
 "reason": "This is about an internal Israeli legislative leadership election, not interstate conflict between a dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"c50ffefb3ac04924292b": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "c5139524bd78fea249c7": {
 "bucket": "CORE",
@@ -25503,6 +26213,12 @@
 "reason": "This is a local election question in Taiwan with no direct connection to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"c69a2510de7fdbd07caa": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a Saudi-led coalition conducting strikes in Yemen, which is part of an internationalized civil war/intrastate conflict rather than a pure interstate conflict onset between two state actors.",
+"relevant_nodes": []
 },
 "c69f2f234126a3c91503": {
 "bucket": "NOISE",
@@ -25873,6 +26589,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"c9b5d6dfb4148a2f88c8": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition conducting strikes against non-state or intrastate actors in Yemen (Houthis), not interstate conflict onset between two sovereign states.",
+"relevant_nodes": []
+},
 "c9cf945006b642b1d6a4": {
 "bucket": "NOISE",
 "dyad": null,
@@ -26177,6 +26899,12 @@
 "reason": "This is a local election question in Taiwan with no direct connection to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"cc6cd5b9718c6792bf68": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition military operation against non-state or intrastate actors in Yemen (Houthis), not interstate conflict onset between two sovereign states.",
+"relevant_nodes": []
 },
 "cc75a8a1f4cd18fee8c2": {
 "bucket": "NOISE",
@@ -26491,6 +27219,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"cecaef2ba5875558da38": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about municipal mayoral elections in Taiwan, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "cf0e1406b827bc2b9479": {
 "bucket": "NOISE",
 "dyad": null,
@@ -26646,6 +27380,16 @@
 "reason": "This is about an internal Israeli cabinet appointment, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"d03c7ed57cdda287d8bb": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (targeting Kyiv on a particular date) within the ongoing Russia-Ukraine conflict, rather than conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
 },
 "d07d2e59d40d4699de27": {
 "bucket": "NOISE",
@@ -26825,6 +27569,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"d1ee4195449849ecb767": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (targeting Kyiv on a particular date) within the ongoing Russia-Ukraine conflict rather than conflict onset, giving the model only partial traction.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
+},
 "d221aa588f8db9b85471": {
 "bucket": "NOISE",
 "dyad": null,
@@ -26872,6 +27626,12 @@
 "reason": "This is a local election question in Taiwan with no direct connection to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"d2497b78aa99536f6ca2": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a Saudi-led coalition conducting strikes in Yemen, which is an intrastate/civil war intervention scenario involving non-state actors (Houthis), not interstate conflict onset between two sovereign states.",
+"relevant_nodes": []
 },
 "d263a6565f4466232862": {
 "bucket": "NOISE",
@@ -27003,6 +27763,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"d31a1973733dd4b5535e": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital, which is a battlefield escalation question rather than conflict onset between a new dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "d31c0b96c76e58a18fd4": {
 "bucket": "ADJACENT",
 "dyad": "US-Russia",
@@ -27053,6 +27824,16 @@
 "reason": "This question is about AI company rankings, not interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"d38c5dc424879536eac1": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike event within an ongoing interstate conflict rather than conflict onset between the dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
 },
 "d3ab8208a38724744785": {
 "bucket": "NOISE",
@@ -27109,6 +27890,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"d43af2b6bf3471fa6597": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a Saudi-led coalition conducting strikes in Yemen, which is an intrastate/civil war intervention context rather than interstate conflict onset between two sovereign states.",
+"relevant_nodes": []
+},
 "d444ed3ec1d16a2fbe25": {
 "bucket": "NOISE",
 "dyad": null,
@@ -27149,6 +27936,16 @@
 "dyad": null,
 "reason": "This question is about AI company rankings, not interstate conflict between state actors.",
 "relevant_nodes": []
+},
+"d48f86b35798b13b2a62": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (targeting Kyiv on a particular date) within an ongoing interstate conflict, rather than conflict onset between the dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
 },
 "d4b334ba5c4e3e99a1a7": {
 "bucket": "NOISE",
@@ -27363,6 +28160,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"d64aab46eafb23dfb9f6": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This describes a military operation in the Yemen civil war, which is primarily an intrastate conflict with external intervention rather than interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "d6500b0f00317272f203": {
 "bucket": "ADJACENT",
 "dyad": "Russia-Ukraine",
@@ -27447,11 +28250,30 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"d6dabdb100d5239e320d": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a currency exchange rate question, not about interstate conflict onset between state actors.",
+"relevant_nodes": []
+},
 "d6ded0fd130ed91cea81": {
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"d6f6e9532b770c30632b": {
+"bucket": "CORE",
+"dyad": "Iran-ArabState",
+"reason": "This question directly asks about interstate conflict onset between Iran and Arab states, though the dyad is not fully specified it concerns Iranian military action against sovereign states.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"PreferenceAlignment",
+"Patience"
+]
 },
 "d6fd2a3e53b9acccbc12": {
 "bucket": "ADJACENT",
@@ -28007,6 +28829,16 @@
 "DemocraticPeace"
 ]
 },
+"dad98e43d0277c836242": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (targeting Kyiv on a particular date) within the ongoing Russia-Ukraine conflict, rather than conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
+},
 "daf9430d05cf172d8afd": {
 "bucket": "NOISE",
 "dyad": null,
@@ -28064,6 +28896,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"db4f4d6ee16867bd352a": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital on a particular date, which relates to conflict escalation but is not directly about conflict onset between two states already at war.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem",
+"WarCosts"
+]
+},
 "db65a76300f7ced328f6": {
 "bucket": "NOISE",
 "dyad": null,
@@ -28104,6 +28947,20 @@
 "Patience"
 ],
 "seeded": true
+},
+"dbbff4654de921537570": {
+"bucket": "CORE",
+"dyad": "Iran-Iraq",
+"reason": "This question directly asks about interstate conflict onset between Iran and Iraq, a specific state dyad, which is exactly what the Fearon bargaining model is designed to forecast.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"PreferenceAlignment",
+"Patience",
+"DemocraticPeace"
+]
 },
 "dbd4870a0a0a4425c870": {
 "bucket": "ADJACENT",
@@ -28191,6 +29048,17 @@
 "dyad": null,
 "reason": "This is about a domestic presidential election, not interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"dc435fcda3e3f86531d1": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military action (targeting Kyiv) within an ongoing interstate conflict rather than conflict onset, giving the model only partial traction.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience",
+"WarCosts"
+]
 },
 "dc71f8386a9f29ad3907": {
 "bucket": "NOISE",
@@ -28546,6 +29414,16 @@
 "reason": "This is about a domestic political appointment, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"dfa52ebaf520075bb70e": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital, which relates to escalation dynamics rather than conflict onset (the war is already ongoing).",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "dfac0794ad7f731d8fb9": {
 "bucket": "NOISE",
 "dyad": null,
@@ -28689,6 +29567,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"e09ff3cb8ef1471a01fb": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (targeting Kyiv on a particular date) within the ongoing Russia-Ukraine conflict, rather than conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
+},
 "e0a1835fd3c8b72ac79c": {
 "bucket": "ADJACENT",
 "dyad": "Russia-Ukraine",
@@ -28794,6 +29682,16 @@
 ],
 "seeded": true
 },
+"e11920fe0e903969407a": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike event within an ongoing interstate conflict rather than conflict onset between the dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
+},
 "e122a57c03f3ce8bfb43": {
 "bucket": "ADJACENT",
 "dyad": "US-Iran",
@@ -28804,6 +29702,12 @@
 "CommitmentProblem"
 ],
 "seeded": true
+},
+"e12707580c3090f1d3f7": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a currency exchange rate question, not about interstate conflict between state actors.",
+"relevant_nodes": []
 },
 "e13083aab171a06b8fd3": {
 "bucket": "NOISE",
@@ -29190,6 +30094,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"e4e98ad8b84bc9ac59ca": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital, which is a battlefield escalation event rather than conflict onset (the Russia-Ukraine conflict is already ongoing).",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "e4fd0a4ee24ce4a8e603": {
 "bucket": "NOISE",
 "dyad": null,
@@ -29417,6 +30331,17 @@
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not about interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"e63a786455149f456a6b": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike event (Ukraine targeting Moscow) rather than conflict onset, as the Russia-Ukraine conflict is already ongoing; the model has partial traction on escalation dynamics.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "e655a9bad850bd4abe55": {
 "bucket": "CORE",
@@ -29734,6 +30659,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"e85931cb50a8b26fb58f": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a currency exchange rate question, not about interstate conflict onset between state actors.",
+"relevant_nodes": []
+},
 "e85dd1738fba87771325": {
 "bucket": "NOISE",
 "dyad": null,
@@ -29848,6 +30779,12 @@
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"e95e37b62b2a9eb937be": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a coalition military operation against non-state or intrastate actors (Houthis) in Yemen, which is primarily an intrastate/civil war context rather than interstate conflict onset between two state dyads.",
+"relevant_nodes": []
+},
 "e96500950db550021257": {
 "bucket": "NOISE",
 "dyad": null,
@@ -29937,6 +30874,17 @@
 "reason": "This question is about a diplomatic meeting/event, not about interstate conflict onset or escalation between state actors.",
 "relevant_nodes": []
 },
+"ea17160572ed9356e3dc": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike by Ukraine against Russia's capital on a particular date, which relates to conflict escalation but is not directly about conflict onset between a new dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem",
+"WarCosts"
+]
+},
 "ea1ce258885cb0e2e25d": {
 "bucket": "NOISE",
 "dyad": null,
@@ -29954,6 +30902,12 @@
 "CommitmentProblem"
 ],
 "seeded": true
+},
+"ea293336ccb5815671f7": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This involves a Saudi-led coalition conducting strikes in Yemen, which is an intrastate/civil war intervention rather than interstate conflict onset between two state actors.",
+"relevant_nodes": []
 },
 "ea2c60fa3fd1f4e826fd": {
 "bucket": "NOISE",
@@ -29989,6 +30943,16 @@
 "reason": "This is a local election question about a county magistrate race, not about interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"ea562cf433aabeb0101d": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military strike on a particular date, which is a battlefield tactical event within the ongoing Russia-Ukraine conflict rather than conflict onset.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
 },
 "ea65853969a3ac45fed7": {
 "bucket": "NOISE",
@@ -30198,6 +31162,12 @@
 "reason": "This is a local county-level election in Taiwan with no direct connection to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"ebd325e20bc516e97fdd": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "ebdaf5399fd681fd79d6": {
 "bucket": "NOISE",
@@ -30991,6 +31961,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"f2843520fa0e9937bbfe": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "f299c5da11a8283bc851": {
 "bucket": "NOISE",
 "dyad": null,
@@ -31276,6 +32252,16 @@
 "dyad": null,
 "reason": "This is about domestic political leadership change in Albania, not interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"f4ff6702be0696384871": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (Ukrainian strike on Moscow) rather than full conflict onset, as the Russia-Ukraine war is already ongoing.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "f50c5edf66809d5b850d": {
 "bucket": "ADJACENT",
@@ -31875,6 +32861,16 @@
 "reason": "This question is about China's domestic inflation/CPI data, not interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"fa5b1fb91451c09b17e1": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This asks about a specific military incident (targeting Kyiv on a particular date) within the ongoing Russia-Ukraine conflict, rather than conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"Patience"
+]
 },
 "fa5b3101281e83b3dc57": {
 "bucket": "NOISE",

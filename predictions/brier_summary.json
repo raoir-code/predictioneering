@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-11-02T17:12:03.520197+00:00",
-  "n_resolved": 213,
-  "brier_conditional_mean": 0.314219,
-  "brier_engine_mean": 0.445489,
-  "brier_market_mean": 0.127466,
-  "edge_vs_market": -0.186753,
+  "last_updated": "2026-11-03T15:23:36.906249+00:00",
+  "n_resolved": 225,
+  "brier_conditional_mean": 0.327805,
+  "brier_engine_mean": 0.445431,
+  "brier_market_mean": 0.139188,
+  "edge_vs_market": -0.188617,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -2348,6 +2348,138 @@
       "brier_conditional": 4.6e-05,
       "brier_market": 9e-05,
       "resolved_at": "2026-11-02T17:11:59.172374+00:00"
+    },
+    {
+      "market_id": "5167193",
+      "market_label": "Saudi Arabia military action against Yemen on October 12?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.1068,
+      "market_p": 0.715,
+      "brier_conditional": 0.797806,
+      "brier_market": 0.081225,
+      "resolved_at": "2026-11-03T15:23:01.174059+00:00"
+    },
+    {
+      "market_id": "5183431",
+      "market_label": "Israel military action against Lebanon on October 30?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 0,
+      "conditional_p": 0.6755,
+      "market_p": 0.66,
+      "brier_conditional": 0.4563,
+      "brier_market": 0.4356,
+      "resolved_at": "2026-11-03T15:23:05.857835+00:00"
+    },
+    {
+      "market_id": "5167196",
+      "market_label": "Saudi Arabia military action against Yemen on October 15?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.3714,
+      "market_p": 0.63,
+      "brier_conditional": 0.395138,
+      "brier_market": 0.1369,
+      "resolved_at": "2026-11-03T15:23:08.212240+00:00"
+    },
+    {
+      "market_id": "5183430",
+      "market_label": "Israel military action against Lebanon on October 29?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 0,
+      "conditional_p": 0.5245,
+      "market_p": 0.755,
+      "brier_conditional": 0.2751,
+      "brier_market": 0.570025,
+      "resolved_at": "2026-11-03T15:23:10.113778+00:00"
+    },
+    {
+      "market_id": "5167195",
+      "market_label": "Saudi Arabia military action against Yemen on October 14?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 1,
+      "conditional_p": 0.3727,
+      "market_p": 0.59,
+      "brier_conditional": 0.393505,
+      "brier_market": 0.1681,
+      "resolved_at": "2026-11-03T15:23:11.944158+00:00"
+    },
+    {
+      "market_id": "5447182",
+      "market_label": "US-Iran ceasefire continues through the midterms?",
+      "dyad": "US-Iran",
+      "outcome": 0,
+      "conditional_p": 0.8786,
+      "market_p": 0.775,
+      "brier_conditional": 0.771938,
+      "brier_market": 0.600625,
+      "resolved_at": "2026-11-03T15:23:15.508227+00:00"
+    },
+    {
+      "market_id": "4713483",
+      "market_label": "US x Iran ceasefire continues through November 30?",
+      "dyad": "US-Iran",
+      "outcome": 0,
+      "conditional_p": 0.7362,
+      "market_p": 0.455,
+      "brier_conditional": 0.54199,
+      "brier_market": 0.207025,
+      "resolved_at": "2026-11-03T15:23:17.289488+00:00"
+    },
+    {
+      "market_id": "4713484",
+      "market_label": "US x Iran ceasefire continues through December 31?",
+      "dyad": "US-Iran",
+      "outcome": 0,
+      "conditional_p": 0.6201,
+      "market_p": 0.34,
+      "brier_conditional": 0.384524,
+      "brier_market": 0.1156,
+      "resolved_at": "2026-11-03T15:23:19.200328+00:00"
+    },
+    {
+      "market_id": "5190747",
+      "market_label": "US x Iran ceasefire continues through November 15?",
+      "dyad": "US-Iran",
+      "outcome": 0,
+      "conditional_p": 0.8085,
+      "market_p": 0.555,
+      "brier_conditional": 0.653672,
+      "brier_market": 0.308025,
+      "resolved_at": "2026-11-03T15:23:21.187291+00:00"
+    },
+    {
+      "market_id": "5686980",
+      "market_label": "US x Iran ceasefire continues through November 8?",
+      "dyad": "US-Iran",
+      "outcome": 0,
+      "conditional_p": 0.8478,
+      "market_p": 0.675,
+      "brier_conditional": 0.718765,
+      "brier_market": 0.455625,
+      "resolved_at": "2026-11-03T15:23:23.648487+00:00"
+    },
+    {
+      "market_id": "5686978",
+      "market_label": "US x Iran ceasefire continues through November 22?",
+      "dyad": "US-Iran",
+      "outcome": 0,
+      "conditional_p": 0.773,
+      "market_p": 0.51,
+      "brier_conditional": 0.597529,
+      "brier_market": 0.2601,
+      "resolved_at": "2026-11-03T15:23:26.011635+00:00"
+    },
+    {
+      "market_id": "6369331",
+      "market_label": "US x Iran ceasefire continues through November 4?",
+      "dyad": "US-Iran",
+      "outcome": 0,
+      "conditional_p": 0.9172,
+      "market_p": 0.91,
+      "brier_conditional": 0.841256,
+      "brier_market": 0.8281,
+      "resolved_at": "2026-11-03T15:23:30.842104+00:00"
     }
   ]
 }
