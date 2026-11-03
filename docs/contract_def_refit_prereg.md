@@ -52,3 +52,23 @@ Reported, not deciding: the cluster-bootstrap interval by pair, YES/NO split, ev
 - **The replay is small** (about a hundred contracts, mostly YES days in two wars); a pass is weak evidence, a pair-level harm
   is the stronger signal.
 - **Data-bound:** the refit needs the local event data, so it must run before Nov 23.
+
+## Amendment 1 (Nov 3, before any completed fit and before any replay)
+
+- **What happened:** `--describe` (monthly strike counts only, no outcomes) showed Iran→Israel collapsing from 31 strike days in
+  March 2026 to 3. A look at the rows showed why: **the local tables carry no notes text** (fields: date, type, sub-type, actors,
+  country, province, fatalities). The missile keyword rule could therefore never fire. A `--fit` had been started and was
+  stopped before it finished; no replay was run.
+- **New contract definition:** every "Air/drone strike" event, plus "Shelling/artillery/missile attack" events **only where the
+  attacker's home state shares no land border with the target**. Such strikes are beyond artillery range, so they are missiles.
+  - Bordering pairs (Israel→Syria, Israel→Lebanon, Saudi Arabia→Yemen, Pakistan→Afghanistan, Iran→Iraq) and forces fighting in
+    their own country keep air/drone events only.
+  - Home state: a faction maps to its territory (`Yemen [Houthi]` → Yemen); a named coalition to its lead state
+    (`Operation Restoring Hope` → Saudi Arabia, `Global Coalition Against Daesh` → United States). A fixed land-border table
+    covers the world fit's region; a pair outside it keeps air/drone events only, and `--describe` reports how many events that
+    affects.
+- **New known limits:**
+  - Missiles fired across a land border are dropped (for example a cross-border ballistic missile).
+  - Expeditionary forces' in-country artillery (e.g. foreign forces shelling inside Syria or Iraq) is counted as a missile strike
+    when their home state does not border the target.
+- Arms, replay and adoption rule are unchanged.

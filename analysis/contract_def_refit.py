@@ -3,8 +3,10 @@ a strike. Polymarket's strike contracts count air strikes (incl. one-way attack 
 artillery, mortars, rocket artillery, ground incursions, small arms and ATGMs. Our fits count every "Air/drone strike" and every
 "Shelling/artillery/missile attack" event, so where a side mostly shells (Israel->Syria: Sep 2026 19 broad days, 0 air/drone days,
 three contracts resolved NO) the priors are fitted to a different event than the contract pays on.
-CONTRACT definition: every Air/drone strike event, plus Shelling/artillery/missile attack events whose notes name a missile
-(ballistic/cruise/surface-to-surface/"missile"), minus anti-tank guided missiles. Everything else is unchanged (analysis/world_fits.py).
+CONTRACT definition (amendment 1, Nov 3: the local tables carry no notes text): every Air/drone strike event, plus
+Shelling/artillery/missile attack events only where the attacker's home state shares no land border with the target (beyond
+artillery range, so a missile). Bordering pairs and forces fighting in their own country keep air/drone events only.
+Everything else is unchanged (analysis/world_fits.py).
   --describe   monthly 2026 strike days, broad vs contract, for the tracked pairs (no outcomes)
   --fit        held-out (<= 2026-06-30) and production fits + anchors on the contract definition -> pilot/local/*_contract (gitignored)
   --compare    pre-registered replay and adoption rule (copies the production contract fit into pilot/local/ only if adopted)
@@ -18,17 +20,54 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "analysis")); sys.path.insert(0, str(ROOT / "pilot"))
 import refit_local as RL
 
-MISSILE = re.compile(r"\b(?:ballistic|cruise|surface-to-surface|missiles?)\b", re.I)
-ATGM = re.compile(r"anti-?tank|\bATGM|guided anti|Kornet", re.I)
 LOCAL = RL.LOCAL; TAG = "_contract"
 _raw = RL.rows
+
+# Land borders (a fact table, symmetric) for the countries in the world fit's region. A pair not covered keeps air/drone only.
+BORDERS = {
+    "Israel": "Lebanon Syria Jordan Egypt Palestine", "Palestine": "Israel Egypt Jordan", "Lebanon": "Israel Syria",
+    "Syria": "Israel Lebanon Jordan Iraq Turkey", "Jordan": "Israel Palestine Syria Iraq Saudi_Arabia",
+    "Iraq": "Syria Jordan Saudi_Arabia Kuwait Iran Turkey", "Iran": "Iraq Turkey Armenia Azerbaijan Turkmenistan Afghanistan Pakistan",
+    "Saudi_Arabia": "Jordan Iraq Kuwait Qatar United_Arab_Emirates Oman Yemen", "Yemen": "Saudi_Arabia Oman",
+    "Oman": "Yemen Saudi_Arabia United_Arab_Emirates", "United_Arab_Emirates": "Saudi_Arabia Oman", "Qatar": "Saudi_Arabia",
+    "Kuwait": "Iraq Saudi_Arabia", "Bahrain": "", "Egypt": "Israel Palestine Libya Sudan", "Libya": "Egypt Sudan Chad Niger Algeria Tunisia",
+    "Sudan": "Egypt Libya Chad Central_African_Republic South_Sudan Ethiopia Eritrea",
+    "South_Sudan": "Sudan Ethiopia Kenya Uganda Democratic_Republic_of_Congo Central_African_Republic",
+    "Ethiopia": "Eritrea Djibouti Somalia Kenya South_Sudan Sudan", "Eritrea": "Ethiopia Sudan Djibouti", "Somalia": "Ethiopia Kenya Djibouti Somaliland",
+    "Somaliland": "Somalia Ethiopia Djibouti", "Kenya": "Somalia Ethiopia South_Sudan Uganda Tanzania",
+    "Uganda": "Kenya South_Sudan Democratic_Republic_of_Congo Rwanda Tanzania",
+    "Democratic_Republic_of_Congo": "Uganda Rwanda Burundi South_Sudan Central_African_Republic Republic_of_Congo Angola Zambia Tanzania",
+    "Mali": "Niger Burkina_Faso Algeria Mauritania Senegal Guinea Ivory_Coast", "Niger": "Mali Burkina_Faso Algeria Libya Chad Nigeria Benin",
+    "Burkina_Faso": "Mali Niger Benin Togo Ghana Ivory_Coast", "Afghanistan": "Pakistan Iran Turkmenistan Uzbekistan Tajikistan China",
+    "Pakistan": "Afghanistan Iran India China", "India": "Pakistan China Nepal Bhutan Bangladesh Myanmar",
+    "Turkey": "Syria Iraq Iran Armenia Azerbaijan Georgia Greece Bulgaria", "Armenia": "Azerbaijan Turkey Iran Georgia Artsakh",
+    "Azerbaijan": "Armenia Iran Russia Georgia Turkey Artsakh", "Artsakh": "Azerbaijan Armenia",
+    "Russia": "Ukraine Belarus Georgia Azerbaijan Kazakhstan China Finland Estonia Latvia Lithuania Poland Norway Mongolia North_Korea",
+    "Ukraine": "Russia Belarus Poland Slovakia Hungary Romania Moldova"}
+NB = {}
+for a, bs in BORDERS.items():
+    for b in bs.split():
+        NB.setdefault(a.replace("_", " "), set()).add(b.replace("_", " ")); NB.setdefault(b.replace("_", " "), set()).add(a.replace("_", " "))
+COALITION_HOME = {"Operation Restoring Hope": "Saudi Arabia", "Operation Decisive Storm": "Saudi Arabia", "Operation Peace Spring": "Turkey",
+                  "Global Coalition Against Daesh": "United States", "NATO": "United States", "Operation Libya Dawn": "Libya"}
+
+def home(key):
+    k = re.sub(r"\s*\[.*\]$", "", key or "").strip(); return COALITION_HOME.get(k, k)
+
+def beyond_artillery(attacker_key, target):
+    """True when the attacker's home state shares no land border with the target (and is not fighting in its own country).
+    None when either side is outside the border table (then only air/drone events count)."""
+    h = home(attacker_key)
+    if h == target: return False
+    if h not in NB or target not in NB: return None
+    return target not in NB[h]
 
 def qualifies(r):
     s = r.get("sub_event_type")
     if s == "Air/drone strike": return True
     if s == "Shelling/artillery/missile attack":
-        n = r.get("notes") or ""
-        return bool(MISSILE.search(n)) and not ATGM.search(n)
+        import world_fits as WF
+        return beyond_artillery(WF.ident(r.get("actor1"))[0], r.get("country")) is True
     return False
 
 def contract_rows():
@@ -45,7 +84,10 @@ def describe():
     for n in ("Israel->Syria", "Israel->Lebanon", "Israel->Iran", "Iran->Israel", "Saudi Arabia->Yemen", "Pakistan->Afghanistan", "Iran->Iraq"):
         b = Counter(d.strftime("%m") for d in Pb.get(n, ()) if d.year == 2026); c = Counter(d.strftime("%m") for d in Pc.get(n, ()) if d.year == 2026)
         print(f"  {n:24} broad {dict(sorted(b.items()))}\n  {'':24} contr {dict(sorted(c.items()))}")
-    print(f"  event data through {end}")
+    import world_fits as WF
+    unk = Counter(f"{home(WF.ident(r.get('actor1'))[0])}->{r.get('country')}" for r in _raw() if r["event_date"][:4] == "2026"
+                  and r.get("sub_event_type") == "Shelling/artillery/missile attack" and beyond_artillery(WF.ident(r.get("actor1"))[0], r.get("country")) is None)
+    print(f"  event data through {end} | 2026 shelling/missile events on pairs outside the border table (counted as non-strikes): {dict(unk.most_common(8))}")
 
 def fit():
     import theory_test4 as T4
@@ -104,15 +146,20 @@ def synthetic():
     def chk(name, cond, detail):
         nonlocal ok; ok &= bool(cond); print(f"  {'PASS' if cond else 'FAIL'}  {name}: {detail}")
     S = "Shelling/artillery/missile attack"
-    cases = [({"sub_event_type": "Air/drone strike", "notes": "Israeli drone strike on a car"}, True),
-             ({"sub_event_type": S, "notes": "Israeli forces shelled the outskirts of the village with artillery"}, False),
-             ({"sub_event_type": S, "notes": "Iran fired ballistic missiles at the base"}, True),
-             ({"sub_event_type": S, "notes": "Hezbollah fired an anti-tank guided missile at a tank"}, False),
-             ({"sub_event_type": S, "notes": "Rockets fired from southern Lebanon"}, False),
-             ({"sub_event_type": S}, False), ({"sub_event_type": "Armed clash", "notes": "missile"}, False)]
-    for r, want in cases: chk(f"qualifies: {r.get('notes', '(no notes)')[:44]}", qualifies(r) == want, f"want {want}")
+    import world_fits as WF
+    I = lambda c: WF.ident(c)[0]
+    cases = [("Air/drone strike", "Military Forces of Israel (2022-)", "Syria", True),
+             (S, "Military Forces of Israel (2022-)", "Syria", False), (S, "Military Forces of Iran (1989-)", "Israel", True),
+             (S, "Military Forces of Iran (1989-)", "Iraq", False), (S, "Military Forces of Pakistan (2024-)", "Afghanistan", False),
+             (S, "Military Forces of Saudi Arabia (2017-)", "Yemen", False), ("Armed clash", "Military Forces of Iran (1989-)", "Israel", False)]
+    for st, a1, c, want in cases:
+        got = qualifies({"sub_event_type": st, "actor1": a1, "country": c})
+        chk(f"qualifies: {st[:12]} {I(a1)}->{c}", got == want, f"want {want}, got {got}")
+    chk("home(): faction and coalition", home("Yemen [Houthi]") == "Yemen" and home("Operation Restoring Hope") == "Saudi Arabia", "")
+    chk("borders symmetric; unknown pair -> None", "Israel" in NB["Syria"] and beyond_artillery("Nowhere", "Israel") is None, "")
     global _raw
-    raw0 = _raw; _raw = lambda: iter([{"sub_event_type": S, "notes": "artillery"}, {"sub_event_type": S, "notes": "cruise missile"}, {"sub_event_type": "Air/drone strike"}])
+    raw0 = _raw; _raw = lambda: iter([{"sub_event_type": S, "actor1": "Military Forces of Israel (2022-)", "country": "Syria"},
+                                      {"sub_event_type": S, "actor1": "Military Forces of Iran (1989-)", "country": "Israel"}, {"sub_event_type": "Air/drone strike"}])
     try:
         import world_fits as WF
         out = [r["sub_event_type"] in WF.SUBS for r in contract_rows()]
