@@ -108,6 +108,16 @@
         "gwnoa",
         "gwnob"
       ]
+    },
+    "GEDEvent_v26_01_26_09.csv": {
+      "source": "https://ucdp.uu.se/downloads/candidateged/GEDEvent_v26_01_26_09.csv",
+      "citation": "Hegre, H., Croicu, M., Eck, K. & Hogbladh, S. (2020). Introducing the UCDP Candidate Events Dataset. Research & Politics 7(3).",
+      "license": "CC BY 4.0",
+      "note": "UCDP GED Candidate, global, Jan 1 - Sep 30, 2026 (quarterly cumulative release). Used offline only (docs/open_events_agreement_prereg.md).",
+      "downloaded": "2026-11-03",
+      "bytes": 13065779,
+      "sha256": "134da9b3df08b65266802c4b662e572f396c70c92ab62297319be657540bcede",
+      "rows": 16633
     }
   }
 }
