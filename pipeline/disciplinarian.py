@@ -435,6 +435,42 @@ def classify_market(question, event_title):
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
+# ── Scope rule (Nov 3): a de facto authority counts as its state ──────────────────────────────────────────────────
+# Adi, Nov 3: armed groups that hold territory are in scope (intrastate actors, not lone-wolf terrorism). The classifier's
+# prompt calls them non-state and buckets their strike contracts NOISE, while contracts naming the same actor's country are
+# CORE (Houthi->Saudi NOISE, Saudi->Yemen CORE). A strike contract whose initiator is a faction the unified engine already
+# models as its territory's de facto authority (pilot/unified_price.FACTION, e.g. houthi -> "Yemen [Houthi]") becomes CORE
+# under the existing dyad for (home state, target), but only if the unified engine can price that pair and exactly one dyad
+# config exists. Deterministic and applied after classification: the classifier's prompt and cache are untouched.
+# Contracts already past their date stay unpublished (the translator's expiry filter); nothing is re-scored.
+def apply_scope_rules(markets, dyad_configs):
+    try:
+        import re as _re
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "pilot"))
+        import unified_data as UD, unified_price as UP
+    except Exception as ex:
+        print("  [scope] rule FAILED to load (non-fatal; buckets unchanged): " + repr(ex)); return 0
+    key = lambda s: _re.sub(r"[^a-z]", "", (s or "").lower())
+    nodes = {}
+    for m in markets:
+        if m.get("bucket") == "CORE" and m.get("dyad") and m.get("relevant_nodes"): nodes.setdefault(m["dyad"], m["relevant_nodes"])
+    n = 0
+    for m in markets:
+        if m.get("bucket") == "CORE": continue
+        t = UD.TPL.match(m.get("question") or "")
+        if not t: continue
+        ini, ter = UD.norm(t.group(1)), UD.norm(t.group(2))
+        if ini not in UP.FACTION: continue
+        P = UP.params(ini + "->" + ter)
+        if not P or not P.get("world_pair"): continue
+        dy = [k for k in dyad_configs if {key(x) for x in k.split("-")} == {UP.FACTION_HOME[ini], ter}]
+        if len(dy) != 1: continue
+        m.update({"bucket": "CORE", "dyad": dy[0], "relevant_nodes": nodes.get(dy[0], []), "scope_rule": "defacto_authority",
+                  "bucket_reason": "Scope rule (Nov 3): " + t.group(1).strip() + " treated as " + P["world_pair"].split("->")[0]
+                                   + "; classifier said: " + (m.get("bucket_reason") or "")[:120]})
+        n += 1
+    return n
+
 # ── Classification cache (Oct 27) ──────────────────────────────────────────────
 # The weekly full run sent every scraped market (~3,000; ~80% NOISE) to Opus, one call each, at the default temperature,
 # so unchanged markets were paid for every week and could flip label at random. A market's classification depends only on
@@ -629,6 +665,8 @@ def run_disciplinarian(dry_run=False, only_errors=None, daily_sync=None):
     print("\n  [cache] " + str(n_hit) + " from cache, " + str(n_call) + " sent to the API")
 
     to_write = (existing + markets) if daily_sync else markets
+    n_scope = apply_scope_rules(to_write, dyad_configs)
+    print("  [scope] de facto authority rule: " + str(n_scope) + " contracts moved to CORE")
     if daily_sync:
         print("[sync] appended " + str(len(markets)) + " new listings ("
               + str(sum(1 for m in markets if m.get("bucket") == "CORE")) + " CORE); feed now " + str(len(to_write)) + " markets")
