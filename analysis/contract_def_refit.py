@@ -43,9 +43,15 @@ BORDERS = {
     "Turkey": "Syria Iraq Iran Armenia Azerbaijan Georgia Greece Bulgaria", "Armenia": "Azerbaijan Turkey Iran Georgia Artsakh",
     "Azerbaijan": "Armenia Iran Russia Georgia Turkey Artsakh", "Artsakh": "Azerbaijan Armenia",
     "Russia": "Ukraine Belarus Georgia Azerbaijan Kazakhstan China Finland Estonia Latvia Lithuania Poland Norway Mongolia North_Korea",
-    "Ukraine": "Russia Belarus Poland Slovakia Hungary Romania Moldova"}
+    "Ukraine": "Russia Belarus Poland Slovakia Hungary Romania Moldova",
+    "United_States": "Canada Mexico", "United_Kingdom": "Ireland", "France": "Spain Belgium Luxembourg Germany Switzerland Italy Andorra Monaco",
+    "China": "India Pakistan Afghanistan Myanmar Laos Vietnam North_Korea Russia Mongolia Kazakhstan Kyrgyzstan Tajikistan Nepal Bhutan",
+    "North_Korea": "China Russia South_Korea", "South_Korea": "North_Korea", "Myanmar": "Thailand Laos China India Bangladesh",
+    "Thailand": "Myanmar Laos Cambodia Malaysia", "Cambodia": "Thailand Laos Vietnam", "Greece": "Turkey Albania North_Macedonia Bulgaria",
+    "Venezuela": "Colombia Brazil Guyana", "Colombia": "Venezuela Ecuador Peru Brazil Panama"}
 NB = {}
 for a, bs in BORDERS.items():
+    NB.setdefault(a.replace("_", " "), set())                 # erratum: states with no land border (Bahrain) were unknown
     for b in bs.split():
         NB.setdefault(a.replace("_", " "), set()).add(b.replace("_", " ")); NB.setdefault(b.replace("_", " "), set()).add(a.replace("_", " "))
 COALITION_HOME = {"Operation Restoring Hope": "Saudi Arabia", "Operation Decisive Storm": "Saudi Arabia", "Operation Peace Spring": "Turkey",
@@ -157,6 +163,7 @@ def synthetic():
         chk(f"qualifies: {st[:12]} {I(a1)}->{c}", got == want, f"want {want}, got {got}")
     chk("home(): faction and coalition", home("Yemen [Houthi]") == "Yemen" and home("Operation Restoring Hope") == "Saudi Arabia", "")
     chk("borders symmetric; unknown pair -> None", "Israel" in NB["Syria"] and beyond_artillery("Nowhere", "Israel") is None, "")
+    chk("erratum: island state and US covered", beyond_artillery("Iran", "Bahrain") is True and beyond_artillery("United States", "Iran") is True, "")
     global _raw
     raw0 = _raw; _raw = lambda: iter([{"sub_event_type": S, "actor1": "Military Forces of Israel (2022-)", "country": "Syria"},
                                       {"sub_event_type": S, "actor1": "Military Forces of Iran (1989-)", "country": "Israel"}, {"sub_event_type": "Air/drone strike"}])

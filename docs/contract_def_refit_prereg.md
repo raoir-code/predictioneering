@@ -72,3 +72,10 @@ Reported, not deciding: the cluster-bootstrap interval by pair, YES/NO split, ev
   - Expeditionary forces' in-country artillery (e.g. foreign forces shelling inside Syria or Iraq) is counted as a missile strike
     when their home state does not border the target.
 - Arms, replay and adoption rule are unchanged.
+
+**Erratum to amendment 1 (Nov 3, before any completed fit and before any replay).** `--describe` listed the shelling/missile
+events falling outside the border table: United States→Iran (26 events) and Iran→Bahrain (7) were among them, i.e. counted as
+non-strikes. Causes: the United States was missing from the table, and a state with no land border (Bahrain) was never registered.
+Fixed by registering every listed state and adding the United States, United Kingdom, France, China, the two Koreas, Myanmar,
+Thailand, Cambodia, Greece, Venezuela and Colombia. The definition itself is unchanged. The second `--fit` was stopped before it
+finished.
