@@ -232,7 +232,31 @@ def _load_recent_headlines(dyad, as_of_date, days=HEADLINE_WINDOW_DAYS):
 # Deterministic validators -- cheap, run before spending a verifier call
 # -----------------------------------------------------------------
 
-def _validate_candidate(old_context, new_context, dyad):
+_MONTHS = "January|February|March|April|May|June|July|August|September|October|November|December"
+_STAMP = re.compile(r"(?:updated|as of|through|week ending|anchored to events through)\W{0,3}[^.\n]{0,30}?"
+                    r"(\d{4}-\d{2}-\d{2}|(?:" + _MONTHS + r")\s+\d{1,2}(?!\d)(?:,\s*\d{4})?)", re.I)
+
+def _future_stamp(text, as_of_date):
+    """Nov 4, 2026: the first date in an 'updated / as of / through / week ending' stamp must not be after as_of_date
+    (Pakistan-Yemen was stamped 'week ending November 7' on Nov 4). Scheduled events elsewhere in the text are fine."""
+    for m in _STAMP.finditer(text or ""):
+        raw = m.group(1)
+        try:
+            if re.match(r"\d{4}-", raw):
+                d = datetime.strptime(raw, "%Y-%m-%d").date()
+            else:
+                parts = re.split(r"[\s,]+", raw.strip())
+                y = int(parts[2]) if len(parts) > 2 else as_of_date.year
+                d = datetime.strptime(f"{parts[0]} {parts[1]} {y}", "%B %d %Y").date()
+        except ValueError:
+            continue
+        if d > as_of_date:
+            return raw
+    return None
+
+def _validate_candidate(old_context, new_context, dyad, as_of_date=None):
+    if as_of_date is not None and (fut := _future_stamp(new_context, as_of_date)):
+        return False, f"stamped with a date after today ({fut} > {as_of_date})"
     if not new_context or len(new_context) < MIN_CONTEXT_LEN:
         return False, "too short / empty"
     if len(new_context) > MAX_CONTEXT_LEN:
@@ -252,11 +276,12 @@ def _validate_candidate(old_context, new_context, dyad):
 # Generation + verification calls
 # ----------------------------------------------------------------
 
-def _generate_candidate(dyad, old_context, headlines, trigger_reason):
+def _generate_candidate(dyad, old_context, headlines, trigger_reason, as_of_date=None):
     headline_text = "\n".join(
         f"- {a.get('title','')} ({a.get('publishedAt','')[:10]})" for a in headlines[:25]
     )
-    prompt = f"""Dyad: {dyad}
+    prompt = f"""Today's date: {as_of_date}
+Dyad: {dyad}
 Trigger reason: {trigger_reason}
 
 CURRENT crisis_context:
@@ -276,6 +301,18 @@ If there is no prior context, write a new one from scratch using the same
 style: a CRISIS CONTEXT summary followed by explicit guidance on how to score
 specific named nodes given this dyad's current situation.
 
+Two hard rules (Nov 4, 2026):
+1. DATES: never date the context, or any event that has happened, after today
+   ({as_of_date}). A future event may appear only as scheduled or expected
+   ("a vote is scheduled for ...").
+2. CONFIRMED vs CLAIMED: write as fact only what the acting government
+   acknowledges, or what several independent outlets report with no official
+   denial. A single-source report, a claim from anonymous officials, or a report
+   the government concerned denies is written as a claim, naming its source and
+   any denial ("reported by X; denied by Y"). Never call such a report
+   "confirmed". Attribution matters: many contracts resolve only on a consensus
+   of credible reporting.
+
 Respond with ONLY the new crisis_context text. No preamble, no markdown, no
 JSON wrapper -- just the raw text that will be stored directly."""
 
@@ -292,7 +329,10 @@ Approve only if:
   aren't supported by them or by the prior context).
 - It does not silently delete or contradict still-relevant facts from the old
   context without explanation.
-- It does not claim a future event as having already happened, or vice versa.
+- It does not claim a future event as having already happened, or vice versa,
+  and it is not dated after today's date (given in the request).
+- It does not present a single-source report, an anonymous-official claim, or a
+  report the government concerned denies as confirmed fact.
 - It's a genuine update reflecting new information, not a degenerate
   paraphrase loop of the old text.
 
@@ -305,11 +345,12 @@ QUARANTINE means: plausible but you are not confident enough to auto-apply it.
 Do not apply it, but do not treat the underlying signal as wrong either."""
 
 
-def _verify_candidate(dyad, old_context, new_context, headlines):
+def _verify_candidate(dyad, old_context, new_context, headlines, as_of_date=None):
     headline_text = "\n".join(
         f"- {a.get('title','')} ({a.get('publishedAt','')[:10]})" for a in headlines[:25]
     )
-    prompt = f"""Dyad: {dyad}
+    prompt = f"""Today's date: {as_of_date}
+Dyad: {dyad}
 
 OLD crisis_context:
 {old_context if old_context else "(none)"}
@@ -369,7 +410,7 @@ def refresh_context(dyad, trigger_reason, as_of_date=None):
 
     headlines = _load_recent_headlines(dyad, as_of_date)
 
-    new_context = _generate_candidate(dyad, old_context, headlines, trigger_reason)
+    new_context = _generate_candidate(dyad, old_context, headlines, trigger_reason, as_of_date)
     if new_context is None:
         _append_changelog({
             "dyad": dyad, "date": str(as_of_date), "trigger_reason": trigger_reason,
@@ -378,7 +419,7 @@ def refresh_context(dyad, trigger_reason, as_of_date=None):
         print(f"  [context_keeper] {dyad}: generation call failed")
         return
 
-    ok, reason = _validate_candidate(old_context, new_context, dyad)
+    ok, reason = _validate_candidate(old_context, new_context, dyad, as_of_date)
     if not ok:
         _append_changelog({
             "dyad": dyad, "date": str(as_of_date), "trigger_reason": trigger_reason,
@@ -388,7 +429,7 @@ def refresh_context(dyad, trigger_reason, as_of_date=None):
         print(f"  [context_keeper] {dyad}: validator rejected ({reason})")
         return
 
-    verdict, verifier_reason = _verify_candidate(dyad, old_context, new_context, headlines)
+    verdict, verifier_reason = _verify_candidate(dyad, old_context, new_context, headlines, as_of_date)
 
     log_entry = {
         "dyad": dyad, "date": str(as_of_date), "trigger_reason": trigger_reason,
