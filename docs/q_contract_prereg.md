@@ -55,3 +55,9 @@ emissions for the traded pairs, no outcomes).
 - **Pairs with many resolved contracts barely move** (their own windows dominate the q posterior); the change matters for pairs
   priced mostly from the prior.
 - **Data-bound:** needs the local data; must run before Nov 23.
+
+**Erratum (Nov 4, before any result):** the first `--heldout` run stopped with a math domain error: for some pairs the fit's
+`p_rec_F` is stored as exactly 1.0 (a very large recorded-activity rate on fighting days), so log(1 − p) is undefined. The recovery
+of the fit's rates now caps p at 1 − 10⁻⁹ (a daily rate of ~20.7, i.e. activity recorded on essentially every fighting day, which is
+what 1.0 meant). No output was produced; method, arms and rule are unchanged.
+

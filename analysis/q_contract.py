@@ -29,7 +29,8 @@ TRADED = ("Israel->Lebanon", "Israel->Syria", "Israel->Yemen", "Israel->Iran", "
 # ── estimator (pure; synthetic-checked) ──────────────────────────────────────────────────────────────────────────────
 def theta(fit):
     """Recover (h, mu, rhoN, d) on the log scale from a world_fits.json entry."""
-    rN = -math.log(1 - fit["p_rec_N"]); rF = -math.log(1 - fit["p_rec_F"])
+    c = lambda p: min(max(p, 0.0), 1 - 1e-9)                # erratum: p_rec_F can round to exactly 1.0 (rhoF very large)
+    rN = -math.log(1 - c(fit["p_rec_N"])); rF = -math.log(1 - c(fit["p_rec_F"]))
     return np.log([fit["h_per_day"], fit["mu_per_day"], max(rN, 1e-9), max(rF - rN, 1e-9)])
 
 def posterior_F(th, y):
