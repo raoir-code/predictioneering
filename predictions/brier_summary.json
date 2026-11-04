@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-11-03T15:23:36.906249+00:00",
-  "n_resolved": 225,
-  "brier_conditional_mean": 0.327805,
-  "brier_engine_mean": 0.445431,
-  "brier_market_mean": 0.139188,
-  "edge_vs_market": -0.188617,
+  "last_updated": "2026-11-04T15:32:35.775338+00:00",
+  "n_resolved": 239,
+  "brier_conditional_mean": 0.318299,
+  "brier_engine_mean": 0.440128,
+  "brier_market_mean": 0.135277,
+  "edge_vs_market": -0.183022,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -2480,6 +2480,160 @@
       "brier_conditional": 0.841256,
       "brier_market": 0.8281,
       "resolved_at": "2026-11-03T15:23:30.842104+00:00"
+    },
+    {
+      "market_id": "4119722",
+      "market_label": "Israel military action against Greater Beirut by October 31?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 0,
+      "conditional_p": 0.3078,
+      "market_p": 0.26,
+      "brier_conditional": 0.094741,
+      "brier_market": 0.0676,
+      "resolved_at": "2026-11-04T15:31:47.509004+00:00"
+    },
+    {
+      "market_id": "4424725",
+      "market_label": "Will Iran target Jordan by October 31, 2026?",
+      "dyad": "Iran-Jordan",
+      "outcome": 0,
+      "conditional_p": 0.4293,
+      "market_p": 0.58,
+      "brier_conditional": 0.184298,
+      "brier_market": 0.3364,
+      "resolved_at": "2026-11-04T15:31:52.437752+00:00"
+    },
+    {
+      "market_id": "4618478",
+      "market_label": "Will Iran target Saudi Arabia by October 31, 2026?",
+      "dyad": "Iran-Saudi Arabia",
+      "outcome": 0,
+      "conditional_p": 0.3184,
+      "market_p": 0.335,
+      "brier_conditional": 0.101379,
+      "brier_market": 0.112225,
+      "resolved_at": "2026-11-04T15:31:54.359112+00:00"
+    },
+    {
+      "market_id": "4618776",
+      "market_label": "Israel military action against Yemen by October 31?",
+      "dyad": "Israel-Yemen",
+      "outcome": 0,
+      "conditional_p": 0.4696,
+      "market_p": 0.465,
+      "brier_conditional": 0.220524,
+      "brier_market": 0.216225,
+      "resolved_at": "2026-11-04T15:31:56.411501+00:00"
+    },
+    {
+      "market_id": "4839199",
+      "market_label": "Will Iran target Egypt by October 31, 2026?",
+      "dyad": "Iran-Egypt",
+      "outcome": 0,
+      "conditional_p": 0.0205,
+      "market_p": 0.0335,
+      "brier_conditional": 0.00042,
+      "brier_market": 0.001122,
+      "resolved_at": "2026-11-04T15:31:59.471508+00:00"
+    },
+    {
+      "market_id": "4839220",
+      "market_label": "Will Iran target Qatar by October 31, 2026?",
+      "dyad": "Iran-Qatar",
+      "outcome": 0,
+      "conditional_p": 0.1208,
+      "market_p": 0.25,
+      "brier_conditional": 0.014593,
+      "brier_market": 0.0625,
+      "resolved_at": "2026-11-04T15:32:02.507781+00:00"
+    },
+    {
+      "market_id": "5162971",
+      "market_label": "Will Iran target Kuwait by October 31, 2026?",
+      "dyad": "Iran-Kuwait",
+      "outcome": 0,
+      "conditional_p": 0.0153,
+      "market_p": 0.35,
+      "brier_conditional": 0.000234,
+      "brier_market": 0.1225,
+      "resolved_at": "2026-11-04T15:32:08.000076+00:00"
+    },
+    {
+      "market_id": "5163038",
+      "market_label": "Will Iran target Bahrain by October 31, 2026?",
+      "dyad": "Iran-Bahrain",
+      "outcome": 0,
+      "conditional_p": 0.0771,
+      "market_p": 0.2,
+      "brier_conditional": 0.005944,
+      "brier_market": 0.04,
+      "resolved_at": "2026-11-04T15:32:10.141857+00:00"
+    },
+    {
+      "market_id": "6556938",
+      "market_label": "Will the Democrats fail to sweep the House and Senate and the US-Iran ceasefire hold through 2027?",
+      "dyad": null,
+      "outcome": 0,
+      "conditional_p": 0.3092,
+      "market_p": 0.055,
+      "brier_conditional": 0.095605,
+      "brier_market": 0.003025,
+      "resolved_at": "2026-11-04T15:32:21.402147+00:00"
+    },
+    {
+      "market_id": "6556939",
+      "market_label": "Will the Democrats fail to sweep the House and Senate and the US-Iran ceasefire not hold through 2027?",
+      "dyad": null,
+      "outcome": 0,
+      "conditional_p": 0.3092,
+      "market_p": 0.2265,
+      "brier_conditional": 0.095605,
+      "brier_market": 0.051302,
+      "resolved_at": "2026-11-04T15:32:23.398226+00:00"
+    },
+    {
+      "market_id": "6588210",
+      "market_label": "US x Iran ceasefire continues through November 3?",
+      "dyad": "US-Iran",
+      "outcome": 0,
+      "conditional_p": 0.6585,
+      "market_p": 0.0265,
+      "brier_conditional": 0.433622,
+      "brier_market": 0.000702,
+      "resolved_at": "2026-11-04T15:32:25.402378+00:00"
+    },
+    {
+      "market_id": "6588212",
+      "market_label": "US x Iran ceasefire continues through November 5?",
+      "dyad": "US-Iran",
+      "outcome": 0,
+      "conditional_p": 0.6149,
+      "market_p": 0.0115,
+      "brier_conditional": 0.378102,
+      "brier_market": 0.000132,
+      "resolved_at": "2026-11-04T15:32:27.509493+00:00"
+    },
+    {
+      "market_id": "6588209",
+      "market_label": "US x Iran ceasefire continues through November 6?",
+      "dyad": "US-Iran",
+      "outcome": 0,
+      "conditional_p": 0.5967,
+      "market_p": 0.0125,
+      "brier_conditional": 0.356051,
+      "brier_market": 0.000156,
+      "resolved_at": "2026-11-04T15:32:29.664291+00:00"
+    },
+    {
+      "market_id": "6588211",
+      "market_label": "US x Iran ceasefire continues through November 7?",
+      "dyad": "US-Iran",
+      "outcome": 0,
+      "conditional_p": 0.5797,
+      "market_p": 0.0105,
+      "brier_conditional": 0.336052,
+      "brier_market": 0.00011,
+      "resolved_at": "2026-11-04T15:32:31.553243+00:00"
     }
   ]
 }

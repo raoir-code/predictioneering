@@ -24,9 +24,9 @@
    "brier_market": 0.2425
   },
   "C": {
-   "n": 130,
-   "brier_model": 0.1985,
-   "brier_market": 0.1386
+   "n": 132,
+   "brier_model": 0.1969,
+   "brier_market": 0.137
   },
   "C:hamas|israel:BREAKDOWN": {
    "n": 11,
@@ -83,10 +83,10 @@
    "brier_market": 0.0526
   },
   "C:iran|us:CEASEFIRE": {
-   "n": 13,
+   "n": 15,
    "yes": 6,
-   "brier_model": 0.3737,
-   "brier_market": 0.1406
+   "brier_model": 0.3364,
+   "brier_market": 0.1254
   },
   "C:iran|us:DEAL": {
    "n": 16,
@@ -1473,6 +1473,24 @@
   },
   {
    "fam": "C",
+   "series": "iran|us:CEASEFIRE",
+   "y": 0,
+   "u": 0.306,
+   "m": 0.038,
+   "q": "Will the Democrats fail to sweep the House and Senate and the US-Iran ceasefire hold through 2027?",
+   "date": "2027-01-04"
+  },
+  {
+   "fam": "C",
+   "series": "iran|us:CEASEFIRE",
+   "y": 0,
+   "u": 0.306,
+   "m": 0.2285,
+   "q": "Will the Democrats fail to sweep the House and Senate and the US-Iran ceasefire not hold through 2027?",
+   "date": "2027-01-04"
+  },
+  {
+   "fam": "C",
    "series": "hamas|israel:DEAL",
    "y": 0,
    "u": 0.0087,
@@ -1562,5 +1580,5 @@
    "date": "2026-06-30"
   }
  ],
- "computed_at": "2026-11-03T15:11:36.162631+00:00"
+ "computed_at": "2026-11-04T15:21:44.433735+00:00"
 }

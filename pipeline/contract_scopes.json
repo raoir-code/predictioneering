@@ -5637,5 +5637,45 @@
     },
     "route": "agglomeration_required",
     "version": 1
+  },
+  "5162761": {
+    "market_id": "5162761",
+    "dyad": "Israel-Yemen",
+    "question": "Will there be Houthi military action against Israel by December 31, 2026?",
+    "end_date": "2026-12-31",
+    "action_type": "missile_strike",
+    "initiator": "Yemen",
+    "target": "Israel",
+    "source_signature": "787e358d7c63a06a90b5f3d988b7cb4008a3c4f0dafe7783bc4b133c400f85bc",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Yemen",
+        "entity_type": "nonstate_actor",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "subterritory",
+        "places": [
+          "Israeli ground territory (including Israeli-controlled Golan Heights and East Jerusalem, excluding West Bank and Gaza Strip)"
+        ],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The initiator is the Houthis (Ansar Allah), a single nonstate actor based in Yemen. The target is the state of Israel. The geographic restriction defines 'Israeli ground territory' with specific inclusions and exclusions, but this is intrinsic to the resolution definition of a qualifying strike (impact on Israeli soil) rather than a structurally distinct operational theater — the same Houthi-vs-Israel action family would be evaluated regardless of these boundary details, so it is resolution_only. The assigned initiator (Yemen) maps to the Houthis as the relevant nonstate actor operating from Yemen, which is direction-compatible.",
+      "scope_fingerprint": "46eab3016716c47d",
+      "action_prior_fingerprint": "2976f8bf2f39c10d"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
   }
 }
