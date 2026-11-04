@@ -256,14 +256,19 @@ def price_group(grp, as_of, P, opens, G, pair):
     nd = set().union(*[news_dates(p, as_of, z) for p in npairs])
     seed = None
     own_ok = str(grp[0].get("sfp") or "").startswith("H") and len(ev) >= 10     # Oct 22 pre-reg: holds groups with >= 10 settled windows of their own
-    if P["via"] == "class_prior" and not any(y == 1 for _, _, y in ev) and not nd and not own_ok:
+    # Nov 4 (docs/dag_onset_prereg.md): P["h_dag"] set = the onset rate comes from the DAG, so a quiet class-prior pair is priced.
+    # Inert unless a caller sets it (the replay; production only after adoption).
+    if P["via"] == "class_prior" and not any(y == 1 for _, _, y in ev) and not nd and not own_ok and not P.get("h_dag"):
         return {}, {"unpriced": "no fitted history and no positive evidence of fighting (engine decides onset)"}
     src = ("own windows" if ev else "news only") + (f" + {len(linked)} member groups" if linked else "")
     if not ev and not nd:
         pi = reverse_seed(pair, G, as_of)
-        if pi is None:
+        if pi is None and P.get("h_dag"):
+            src = "DAG onset rate, model's own start"                   # seed stays None (model start)
+        elif pi is None:
             return {}, {"unpriced": "no evidence of its own, none in the reverse direction"}
-        seed, src = np.array([1 - pi, pi]), f"seeded by reverse direction, P(fighting) {pi:.2f}"
+        else:
+            seed, src = np.array([1 - pi, pi]), f"seeded by reverse direction, P(fighting) {pi:.2f}"
     d0n = min([today] + [a for a, _ in spans.values()] + [a for a, _, _ in ev] + ([today - dt.timedelta(60)] if nd else []))
     wins = [((a - d0n).days, (b - d0n).days, y) for a, b, y in ev]; Tn = (today - d0n).days
     nds = {(d - d0n).days for d in nd if d >= d0n}
