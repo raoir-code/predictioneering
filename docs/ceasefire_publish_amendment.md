@@ -48,3 +48,13 @@ Of 270 stored ceasefire contracts, 5 are races (3 political, 2 conflict); one is
 Replays of family C from this commit on exclude races by scope; the C1b adoption (decided on the earlier set) stands.
 Tagging also clears a family tag left by an earlier run when a contract no longer qualifies, and keeps PROCESS and RACE contracts
 out of CORE, so they are never priced by the onset engine.
+
+## Nov 4: conjunctions
+A contract that resolves on "the combined outcome of" two events (e.g. "Will the Democrats sweep the House and Senate and the US-Iran
+ceasefire hold through 2027?") is a joint event; family C priced it as if it were its ceasefire leg alone, so complementary twins got
+the same price (0.22 each). Now family COMBO, deterministic and checked first (pilot/ceasefire_bc.py):
+- other leg political (an election, a vote, an office): OUT OF SCOPE (not conflict).
+- other leg a conflict event: NOT YET IN SCOPE (no joint model), the same status as races.
+Tagging clears the earlier AGREEMENT tag and keeps COMBO contracts out of CORE. 8 stored contracts change family (4 Israel x Hamas
+Phase II, 4 US x Iran ceasefire, each crossed with the Democratic sweep); no other contract changes family. Nothing retroactive.
+

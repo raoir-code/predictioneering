@@ -82,7 +82,15 @@ def conflict_dyads():
 _RACE = re.compile(r"\bbefore\s+(?!(?:the\s+)?(?:end\b|(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sept?(?:ember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\b|\d|eoy\b|q[1-4]\b|next\b|this\b))(.+?)\??$", re.I)
 _CONFLICT_LEG = re.compile(r"ceasefire|cease-fire|truce|armistice|peace|strike|attack|invad|\bwar\b|offensive|withdraw|captur", re.I)
 
+# Nov 4 scope rule (docs/ceasefire_publish_amendment.md): a contract resolving on "the combined outcome of" two events (a conjunction,
+# e.g. "Democrats sweep the House and Senate and the US-Iran ceasefire holds") is out of scope: no joint model. Political other
+# leg (an election, a vote, an office) -> out of scope by event class; conflict other leg -> not yet in scope. Checked first.
+_COMBO = re.compile(r"combined outcome of", re.I)
+_POLITICAL_LEG = re.compile(r"election|midterm|house of representatives|senate|parliament|president|prime minister|\bvote|referendum|office", re.I)
+
 def classify_all(q, desc):
+    if _COMBO.search(desc or ""):
+        return {"family": "COMBO", "other_leg": "political" if _POLITICAL_LEG.search(desc or "") else "conflict"}
     h = CH.classify(q, desc)
     if h and h["family"] == "HOLDS": return h
     d = re.sub(r"\s+", " ", desc or "")
@@ -484,6 +492,11 @@ def _tests():
     assert classify_all("Another Israel x Hamas ceasefire before February?", ag)["family"] == "AGREEMENT"
     assert classify_all("Israel x Hamas ceasefire before the end of 2026?", ag)["family"] == "AGREEMENT"
     assert classify_all("Russia x Ukraine ceasefire before Oct 31?", ag)["family"] == "AGREEMENT"
+    cb = ("This market will resolve according to the combined outcome of (1) whether the Democratic Party wins control of both the United States "
+          "House of Representatives and the United States Senate in the 2026 United States midterm election and (2) whether the United States refrains")
+    assert classify_all("Will the Democrats sweep the House and Senate and the US-Iran ceasefire hold through 2027?", cb) == {"family": "COMBO", "other_leg": "political"}
+    assert classify_all("Will the Democrats fail to sweep the House and Senate and Israel and Hamas agree to ceasefire Phase II by the end of 2027?", cb)["family"] == "COMBO"
+    assert classify_all("Israel x Hamas ceasefire Phase II and Russia x Ukraine ceasefire by 2027?", "resolve according to the combined outcome of (1) a ceasefire and (2) a truce") == {"family": "COMBO", "other_leg": "conflict"}
     global _CD; _s = _CD; _CD = {"israel|syria", "israel|lebanon"}
     nd = "resolve to Yes if both Israel and Syria officially announce the establishment of diplomatic relations"
     assert classify_all("Israel and Syria normalize relations by December 31, 2026?", nd) == {"family": "AGREEMENT", "type": "DEAL", "actors": "israel|syria"}
