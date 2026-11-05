@@ -14625,6 +14625,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"6c1504070ebfdfbc66e0": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about an internal Israeli legislative leadership selection, not interstate conflict between two state actors.",
+"relevant_nodes": []
+},
 "6c18a341db8f835beff9": {
 "bucket": "CORE",
 "dyad": "Turkey-Yemen",
@@ -15288,6 +15294,12 @@
 "reason": "This is a local election question in Taiwan with no direct connection to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"71524a9536774d82e560": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about an Israeli election outcome and leadership succession, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "715bc6de30bbaf991a15": {
 "bucket": "ADJACENT",
@@ -17795,6 +17807,17 @@
 "reason": "This question is about domestic Israeli legislative election outcomes, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"850f9d0783497c84a464": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "A peace referendum relates to conflict resolution between Russia and Ukraine but is not directly about conflict onset or escalation; it concerns a domestic political mechanism (referendum) tied to war termination.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"Patience",
+"DemocraticPeace"
+]
 },
 "8514c300ad074c0df587": {
 "bucket": "CORE",
@@ -21446,6 +21469,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"a15b84d6fffea63cb3c3": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about an Israeli election outcome and leadership succession, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "a15f7255b1364ffed534": {
 "bucket": "NOISE",
 "dyad": null,
@@ -22007,6 +22036,19 @@
 "reason": "This question is about an Israeli domestic political appointment, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"a6a6ca599a831e4c3f03": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns the termination of an ongoing interstate conflict via peace deal rather than conflict onset, giving the model partial but not direct traction.",
+"relevant_nodes": [
+"HardlineClaims",
+"CommitmentProblem",
+"WarCosts",
+"PreferenceAlignment",
+"Patience",
+"WinProbability"
+]
 },
 "a6b7512cedad886de9ac": {
 "bucket": "CORE",
@@ -27758,6 +27800,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about municipal mayoral elections in Taiwan, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
+"cedf1c49012afc9b2312": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about an internal Israeli legislative procedural matter, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
 "cf0e1406b827bc2b9479": {

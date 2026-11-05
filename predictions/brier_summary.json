@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-11-04T15:32:35.775338+00:00",
-  "n_resolved": 239,
-  "brier_conditional_mean": 0.318299,
-  "brier_engine_mean": 0.440128,
-  "brier_market_mean": 0.135277,
-  "edge_vs_market": -0.183022,
+  "last_updated": "2026-11-05T17:16:45.329787+00:00",
+  "n_resolved": 249,
+  "brier_conditional_mean": 0.305722,
+  "brier_engine_mean": 0.426384,
+  "brier_market_mean": 0.130671,
+  "edge_vs_market": -0.175051,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -2634,6 +2634,116 @@
       "brier_conditional": 0.336052,
       "brier_market": 0.00011,
       "resolved_at": "2026-11-04T15:32:31.553243+00:00"
+    },
+    {
+      "market_id": "4603351",
+      "market_label": "France, UK, or Germany military action against Yemen by October 31, 2026?",
+      "dyad": "UK-Yemen",
+      "outcome": 0,
+      "conditional_p": 0.1307,
+      "market_p": 0.0305,
+      "brier_conditional": 0.017082,
+      "brier_market": 0.00093,
+      "resolved_at": "2026-11-05T17:16:08.335303+00:00"
+    },
+    {
+      "market_id": "4839197",
+      "market_label": "Will Iran target the United Arab Emirates by October 31, 2026?",
+      "dyad": "Iran-UAE",
+      "outcome": 0,
+      "conditional_p": 0.0833,
+      "market_p": 0.29,
+      "brier_conditional": 0.006939,
+      "brier_market": 0.0841,
+      "resolved_at": "2026-11-05T17:16:12.085148+00:00"
+    },
+    {
+      "market_id": "4639441",
+      "market_label": "Saudi Arabia military action against Iran by October 31, 2026?",
+      "dyad": "Saudi Arabia-Iran",
+      "outcome": 0,
+      "conditional_p": 0.0307,
+      "market_p": 0.11,
+      "brier_conditional": 0.000942,
+      "brier_market": 0.0121,
+      "resolved_at": "2026-11-05T17:16:14.098875+00:00"
+    },
+    {
+      "market_id": "4839219",
+      "market_label": "Will Iran target Oman by October 31, 2026?",
+      "dyad": "Iran-Oman",
+      "outcome": 0,
+      "conditional_p": 0.0061,
+      "market_p": 0.045,
+      "brier_conditional": 3.7e-05,
+      "brier_market": 0.002025,
+      "resolved_at": "2026-11-05T17:16:16.015727+00:00"
+    },
+    {
+      "market_id": "4839216",
+      "market_label": "Will Iran target Syria by October 31, 2026?",
+      "dyad": "Iran-Syria",
+      "outcome": 0,
+      "conditional_p": 0.1405,
+      "market_p": 0.3,
+      "brier_conditional": 0.01974,
+      "brier_market": 0.09,
+      "resolved_at": "2026-11-05T17:16:18.048960+00:00"
+    },
+    {
+      "market_id": "5475271",
+      "market_label": "Turkish troops enter Yemen by October 31, 2026?",
+      "dyad": "Turkey-Yemen",
+      "outcome": 0,
+      "conditional_p": 0.0319,
+      "market_p": 0.0415,
+      "brier_conditional": 0.001018,
+      "brier_market": 0.001722,
+      "resolved_at": "2026-11-05T17:16:22.418673+00:00"
+    },
+    {
+      "market_id": "5636154",
+      "market_label": "Turkey military action against Yemen by October 31, 2026?",
+      "dyad": "Turkey-Yemen",
+      "outcome": 0,
+      "conditional_p": 0.0059,
+      "market_p": 0.007,
+      "brier_conditional": 3.5e-05,
+      "brier_market": 4.9e-05,
+      "resolved_at": "2026-11-05T17:16:25.073272+00:00"
+    },
+    {
+      "market_id": "4640288",
+      "market_label": "Houthi x Saudi Arabia effective ceasefire by October 31?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 0,
+      "conditional_p": 0.0056,
+      "market_p": 0.104,
+      "brier_conditional": 3.1e-05,
+      "brier_market": 0.010816,
+      "resolved_at": "2026-11-05T17:16:29.077445+00:00"
+    },
+    {
+      "market_id": "5165446",
+      "market_label": "Israel x Lebanon Effective Ceasefire by October 31?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 0,
+      "conditional_p": 0.0726,
+      "market_p": 0.0535,
+      "brier_conditional": 0.005271,
+      "brier_market": 0.002862,
+      "resolved_at": "2026-11-05T17:16:31.872159+00:00"
+    },
+    {
+      "market_id": "6367376",
+      "market_label": "Israel x Iran ceasefire continues through November 1?",
+      "dyad": "Israel-Iran",
+      "outcome": 1,
+      "conditional_p": 0.9821,
+      "market_p": 0.964,
+      "brier_conditional": 0.00032,
+      "brier_market": 0.001296,
+      "resolved_at": "2026-11-05T17:16:36.478544+00:00"
     }
   ]
 }

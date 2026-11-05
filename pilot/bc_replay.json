@@ -1,21 +1,21 @@
 {
  "results": {
   "B": {
-   "n": 19,
-   "brier_model": 0.1115,
-   "brier_market": 0.1686
+   "n": 21,
+   "brier_model": 0.1026,
+   "brier_market": 0.1633
   },
   "B:houthi->saudiarabia+saudiarabia->yemen": {
-   "n": 3,
+   "n": 4,
    "yes": 0,
-   "brier_model": 0.0009,
-   "brier_market": 0.0903
+   "brier_model": 0.0036,
+   "brier_market": 0.1195
   },
   "B:israel->lebanon": {
-   "n": 6,
+   "n": 7,
    "yes": 0,
-   "brier_model": 0.0064,
-   "brier_market": 0.0845
+   "brier_model": 0.0088,
+   "brier_market": 0.075
   },
   "B:unitedstates->iran": {
    "n": 10,
@@ -24,9 +24,9 @@
    "brier_market": 0.2425
   },
   "C": {
-   "n": 132,
-   "brier_model": 0.1969,
-   "brier_market": 0.137
+   "n": 130,
+   "brier_model": 0.1985,
+   "brier_market": 0.1386
   },
   "C:hamas|israel:BREAKDOWN": {
    "n": 11,
@@ -83,10 +83,10 @@
    "brier_market": 0.0526
   },
   "C:iran|us:CEASEFIRE": {
-   "n": 15,
+   "n": 13,
    "yes": 6,
-   "brier_model": 0.3364,
-   "brier_market": 0.1254
+   "brier_model": 0.3737,
+   "brier_market": 0.1406
   },
   "C:iran|us:DEAL": {
    "n": 16,
@@ -303,12 +303,30 @@
   },
   {
    "fam": "B",
+   "series": "houthi->saudiarabia+saudiarabia->yemen",
+   "y": 0,
+   "u": 0.1077,
+   "m": 0.455,
+   "q": "Houthi x Saudi Arabia effective ceasefire by October 31?",
+   "date": "2026-10-31"
+  },
+  {
+   "fam": "B",
    "series": "israel->lebanon",
    "y": 0,
    "u": 0.0843,
    "m": 0.065,
    "q": "Israel x Lebanon Effective Ceasefire by October 15?",
    "date": "2026-10-15"
+  },
+  {
+   "fam": "B",
+   "series": "israel->lebanon",
+   "y": 0,
+   "u": 0.1532,
+   "m": 0.135,
+   "q": "Israel x Lebanon Effective Ceasefire by October 31?",
+   "date": "2026-10-31"
   },
   {
    "fam": "B",
@@ -1473,24 +1491,6 @@
   },
   {
    "fam": "C",
-   "series": "iran|us:CEASEFIRE",
-   "y": 0,
-   "u": 0.306,
-   "m": 0.038,
-   "q": "Will the Democrats fail to sweep the House and Senate and the US-Iran ceasefire hold through 2027?",
-   "date": "2027-01-04"
-  },
-  {
-   "fam": "C",
-   "series": "iran|us:CEASEFIRE",
-   "y": 0,
-   "u": 0.306,
-   "m": 0.2285,
-   "q": "Will the Democrats fail to sweep the House and Senate and the US-Iran ceasefire not hold through 2027?",
-   "date": "2027-01-04"
-  },
-  {
-   "fam": "C",
    "series": "hamas|israel:DEAL",
    "y": 0,
    "u": 0.0087,
@@ -1580,5 +1580,5 @@
    "date": "2026-06-30"
   }
  ],
- "computed_at": "2026-11-04T15:21:44.433735+00:00"
+ "computed_at": "2026-11-05T17:02:24.324437+00:00"
 }
