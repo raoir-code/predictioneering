@@ -11,7 +11,7 @@ print(f"== run: {Path(log).name} | last written {dt.datetime.fromtimestamp(Path(
 start = dt.datetime.strptime(Path(log).stem.split("_", 1)[1], "%Y%m%d_%H%M%S")
 hrs = (dt.datetime.fromtimestamp(Path(log).stat().st_mtime) - start).total_seconds() / 3600
 print("   complete:", "FAILED (stale run, aborted before pricing)" if "STALE RUN" in txt else ("YES" if "Pipeline complete" in txt else "NO (still running, or died)"))
-print(f"   started {start:%a %m-%d %H:%M}, ran {hrs:.1f}h" + ("  FAILED: over 3h" if hrs > 3 else "") + ("  FAILED: no run started today" if start.date() != dt.date.today() else ""))
+print(f"   started {start:%a %m-%d %H:%M}, ran {hrs:.1f}h" + ("  FAILED: over 3h" if hrs > 3 else "") + ("  FAILED: no run in the last 26h" if (dt.datetime.now() - start).total_seconds() > 26 * 3600 else ""))
 print("   push:", "OK" if re.search(r"main -> main", txt) else ("FAILED" if re.search(r"Could not resolve|failed 5 times|! \[rejected\]|failed to push", txt) else "not seen"))
 for tag, pat in (("during-war/unified", r"\[during-war\][^\n]*"), ("rules", r"\[rules\] stored[^\n]*"), ("news", r"new headlines labeled"),
                  ("policy", r"excluded by rule:[^\n]*"), ("scopes", r"resolved: *\d+"), ("meta", r"\[meta\] stored[^\n]*"),

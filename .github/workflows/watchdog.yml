@@ -3,8 +3,8 @@ name: daily-run watchdog
 # (GitHub notifies the account that last edited this schedule). Read-only.
 on:
   schedule:
-    - cron: "41 17 * * *"   # 13:41 EDT / 12:41 EST: the 9am run should be pushed by then
-    - cron: "11 23 * * *"   # 19:11 EDT / 18:11 EST: second look, for slow or late runs
+    - cron: "11 1 * * *"    # 21:11 EDT / 20:11 EST (same ET day): the 17:00 run should be pushed by then (Nov 5: run moved to 17:00)
+    - cron: "41 3 * * *"    # 23:41 EDT / 22:41 EST (same ET day): second look, for slow or late runs
   workflow_dispatch: {}
 permissions:
   contents: read
