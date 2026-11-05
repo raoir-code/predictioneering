@@ -1,5 +1,5 @@
 """
-Strike-news fetch (Nov 2): a dedicated, full-recall headline feed for the 18 tracked strike pairs.
+Strike-news fetch (Nov 2): a dedicated, full-recall headline feed for the tracked strike pairs (18; 20 from Nov 4 with US-Iran, US-Yemen).
 
 Why: the engine's GNews queries (pipeline/dyad_configs.json "query") were written for node scoring, not for seeing strikes.
 Several stack a third AND clause and use bare "Israel", so they miss the usual strike phrasing ("Israeli airstrikes ...",
@@ -27,7 +27,8 @@ TERMS = {"Israel": ["Israel", "Israeli", "IDF"], "Lebanon": ["Lebanon", "Lebanes
          "Jordan": ["Jordan", "Jordanian", "Amman"], "Qatar": ["Qatar", "Qatari", "Doha"], "Kuwait": ["Kuwait", "Kuwaiti"],
          "Oman": ["Oman", "Omani", "Muscat"], "Egypt": ["Egypt", "Egyptian", "Cairo"], "Pakistan": ["Pakistan", "Pakistani", "Islamabad"],
          "Afghanistan": ["Afghanistan", "Afghan", "Taliban", "Kabul"], "Eritrea": ["Eritrea", "Eritrean", "Asmara"],
-         "Ethiopia": ["Ethiopia", "Ethiopian", '"Addis Ababa"']}
+         "Ethiopia": ["Ethiopia", "Ethiopian", '"Addis Ababa"'],
+         "United States": ['"United States"', "US", "American", "Pentagon", "CENTCOM"]}   # Nov 4: US directions had no strike feed (Qeshm, Nov 2-3)
 
 def pairs():
     sys.path.insert(0, str(ROOT / "pilot"))
