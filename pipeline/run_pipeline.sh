@@ -72,7 +72,7 @@ echo "[$(date +%H:%M:%S)] [translator] Translator: Scholar/Clergyman/Bettor + un
 $PYTHON -u -m pipeline.translator >> "$LOGFILE" 2>&1
 echo "[$(date +%H:%M:%S)] [scope] Contract-scope refresh for new kinetic markets (non-fatal; G4)..." | tee -a "$LOGFILE"
 $PYTHON -u -m pipeline.backfill_contract_scopes >> "$LOGFILE" 2>&1 || echo "  [scope] refresh failed (non-fatal)" | tee -a "$LOGFILE"
-echo "[$(date +%H:%M:%S)] [strike-news] Full-recall headline fetch for the 18 strike pairs (non-fatal)..." | tee -a "$LOGFILE"
+echo "[$(date +%H:%M:%S)] [strike-news] Full-recall headline fetch for the tracked strike pairs (non-fatal)..." | tee -a "$LOGFILE"
 $PYTHON -u pilot/strike_news_fetch.py >> "$LOGFILE" 2>&1 || echo "  [strike-news] fetch failed (non-fatal)" | tee -a "$LOGFILE"
 echo "[$(date +%H:%M:%S)] [news] Label new headlines for tomorrow (non-fatal)..." | tee -a "$LOGFILE"
 $PYTHON -u pilot/news_strikes.py --label >> "$LOGFILE" 2>&1 || echo "  [news] labeling failed (non-fatal)" | tee -a "$LOGFILE"

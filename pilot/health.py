@@ -20,6 +20,9 @@ for tag, pat in (("during-war/unified", r"\[during-war\][^\n]*"), ("rules", r"\[
                  ("classify cache", r"\[cache\] \d+ from cache[^\n]*"), ("strike news", r"\[strike-news\] \d+ headlines fetched[^\n]*"),
                  ("scope rule", r"\[scope\] (?:de facto authority rule|rule FAILED)[^\n]*"), ("ceasefire tags", r"\[ceasefire\] tagged CORE[^\n]*")):
     m = re.findall(pat, txt); pick = (m[0] if tag == "classify cache" else m[-1]) if m else None   # cache: the sync/weekly line, not the retry step's 0/0
+    if not pick and tag in ("feed sync", "new listings") and "Disciplinarian (full re-run" in txt:     # Nov 5: weekly days print no [sync] lines
+        c = re.findall(r"Classifying \d+ markets", txt)
+        pick = (f"weekly full re-run: {c[-1]}, complete" if "Classification complete" in txt and c else None)
     print(f"   {tag:18} {pick or 'NOT SEEN'}" + (f"  ({len(m)} dyads)" if tag == 'news' and m else ""))
 # Step announcements ("[hh:mm:ss] ... ...") are not failures, even when they name one ("Retry markets left in ERROR").
 errs = [l.strip() for l in txt.splitlines() if re.search(r"Traceback|ERROR|failed \(non-fatal\)|FAILED|Exception|\[strike-news\].*(?:failed|errors=)", l)
