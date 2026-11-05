@@ -276,7 +276,8 @@ def _validate_candidate(old_context, new_context, dyad, as_of_date=None):
 
     actors = [p.strip() for p in dyad.replace("Europe(", "").replace(")", "").split("-")
               if len(p.strip()) > 2]
-    if actors and not any(a.lower() in new_context.lower() for a in actors):
+    _nc = new_context.lower().replace(" ", "")   # v2.1: 'LatinAmerica' matches 'Latin America'
+    if actors and not any(a.lower().replace(" ", "") in _nc for a in actors):
         return False, f"doesn't mention any of this dyad's actors ({actors})"
 
     return True, "ok"
@@ -306,12 +307,13 @@ Recent headlines (trailing ~{REBASE_HEADLINE_DAYS if rebase else HEADLINE_WINDOW
 Task: write the crisis_context for this dyad. It is injected as BACKGROUND into a node-scoring prompt; another model reads the
 headlines and decides every score itself. Your job is to state facts, not to tell it what to conclude.
 
-Format, plain text, under 2,500 characters:
+Format, plain text, UNDER 2,200 CHARACTERS IN TOTAL (v2.1; hard limit, longer drafts are discarded):
 STATUS (as of {as_of_date}): one or two sentences on the DIRECT relationship between the two parties now (e.g. active direct
   hostilities / ceasefire in force since <date> / no direct hostilities), supported by the headlines or the previous context.
-FACTS (newest first, each dated): "- YYYY-MM-DD: <fact>". Only events in the last {FACT_EXPIRY_DAYS} days.
+FACTS (newest first, each dated): "- YYYY-MM-DD: <fact>", one line each, AT MOST 10 lines (keep the most consequential).
+  Only events in the last {FACT_EXPIRY_DAYS} days.
 ALREADY HAPPENED (do not re-count as new): a short list of the past events above that later headlines may still mention.
-THIRD PARTIES: at most three dated lines on related actions by OTHER actors (proxies, allies, mediators), each saying who acted.
+THIRD PARTIES: at most three dated one-line entries on related actions by OTHER actors (proxies, allies, mediators), each saying who acted.
 
 Hard rules:
 1. DATES: never date the context or any event after today ({as_of_date}). A future event appears only as scheduled.
@@ -331,7 +333,7 @@ Hard rules:
 
 Respond with ONLY the crisis_context text. No preamble, no markdown, no JSON wrapper."""
 
-    return _call_claude_raw(prompt, max_tokens=900)
+    return _call_claude_raw(prompt, max_tokens=1000)
 
 
 VERIFIER_SYSTEM = """You are an independent quality-control reviewer for an automated
@@ -438,6 +440,17 @@ def refresh_context(dyad, trigger_reason, as_of_date=None, rebase=False):
 
     headlines = _rebase_headlines(dyad, as_of_date) if rebase else _load_recent_headlines(dyad, as_of_date)
 
+    if rebase and not headlines:                     # v2.1: no headlines -> state our coverage, invent nothing
+        parties = " and ".join(p.strip() for p in dyad.split("-"))
+        new_context = (f"STATUS (as of {as_of_date}): our news feed has no reporting on direct hostilities between {parties} "
+                       f"in the last {REBASE_HEADLINE_DAYS} days. No dated facts in this window.")
+        configs[dyad] = configs.get(dyad, {}); configs[dyad]["crisis_context"] = new_context
+        DYAD_CONFIGS_PATH.write_text(json.dumps(configs, indent=2)); _mark_refreshed(dyad)
+        _append_changelog({"dyad": dyad, "date": str(as_of_date), "trigger_reason": trigger_reason, "stage": "verified",
+                           "verdict": "APPROVE", "verifier_reason": "deterministic: no headlines in the rebase window",
+                           "old_context": old_context, "new_context": new_context})
+        print(f"  [context_keeper] {dyad}: no headlines; deterministic coverage note applied")
+        return
     new_context = _generate_candidate(dyad, old_context, headlines, trigger_reason, as_of_date, rebase=rebase)
     if new_context is None:
         _append_changelog({
