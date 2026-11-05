@@ -21,7 +21,7 @@ BATCH = 40
 DYADS = {"Israel_Lebanon": ("Israel", "Lebanon"), "Saudi_Arabia_Yemen": ("Saudi Arabia", "Yemen"), "Israel_Syria": ("Israel", "Syria"),
          "Israel_Yemen": ("Israel", "Yemen"), "Israel_Iran": ("Israel", "Iran"), "Israel_Iraq": ("Israel", "Iraq"),
          "Iran_UAE": ("Iran", "United Arab Emirates"), "Iran_Bahrain": ("Iran", "Bahrain"), "Iran_Jordan": ("Iran", "Jordan"),
-         "Iran_Iraq": ("Iran", "Iraq"), "Iran_Qatar": ("Iran", "Qatar"), "Iran_Kuwait": ("Iran", "Kuwait"), "Iran_Saudi_Arabia": ("Iran", "Saudi Arabia"),
+         "Iran_Iraq": ("Iran", "Iraq"), "US_Iran": ("United States", "Iran"), "US_Yemen": ("United States", "Yemen"), "Iran_Qatar": ("Iran", "Qatar"), "Iran_Kuwait": ("Iran", "Kuwait"), "Iran_Saudi_Arabia": ("Iran", "Saudi Arabia"),
          "Iran_Oman": ("Iran", "Oman"), "Iran_Egypt": ("Iran", "Egypt"), "Pakistan_Afghanistan": ("Pakistan", "Afghanistan"),
          "Eritrea_Ethiopia": ("Eritrea", "Ethiopia"), "Pakistan_Yemen": ("Pakistan", "Yemen")}
 PEACEFUL = {"China_Taiwan": ("China", "Taiwan"), "US_Denmark": ("United States", "Denmark"), "China_Japan": ("China", "Japan"),
