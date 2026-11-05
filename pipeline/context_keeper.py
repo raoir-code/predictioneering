@@ -72,6 +72,12 @@ SEVERE_OVERRIDE_THRESHOLD = 0.9
 MIN_CONTEXT_LEN = 80
 MAX_CONTEXT_LEN = 3000
 HEADLINE_WINDOW_DAYS = 7
+# v2 (Nov 5, 2026; docs/context_keeper_v2.md)
+FACT_EXPIRY_DAYS = 30            # a fact older than this leaves the context unless a recent headline says it still holds
+REBASE_HEADLINE_DAYS = 30        # --rebase: headline window (the old context is withheld)
+REBASE_MAX_HEADLINES = 90        # --rebase: at most this many, newest first, at most 3 per day (covers the 30 days)
+_INSTRUCTION = re.compile(r"scoring guidance|routing (?:guidance|implication)|\bshould be (?:scored|rated|weighted|treated as)\b"
+                          r"|\bnodes? (?:related to|should|must)\b|\bscore[ds]? (?:at|as|toward|these|this|it|them)\b|\bscore (?:military|escalation|diplomatic)", re.I)
 
 
 # ----------------------------------------------------------------------
@@ -259,6 +265,10 @@ def _validate_candidate(old_context, new_context, dyad, as_of_date=None):
         return False, f"stamped with a date after today ({fut} > {as_of_date})"
     if not new_context or len(new_context) < MIN_CONTEXT_LEN:
         return False, "too short / empty"
+    if (m := _INSTRUCTION.search(new_context)):
+        return False, f"contains a scoring instruction ({m.group(0)!r}); v2 contexts state facts only"
+    if "STATUS" not in new_context:
+        return False, "no STATUS line (v2 format)"
     if len(new_context) > MAX_CONTEXT_LEN:
         return False, "too long"
     if new_context.strip() == (old_context or "").strip():
@@ -276,65 +286,70 @@ def _validate_candidate(old_context, new_context, dyad, as_of_date=None):
 # Generation + verification calls
 # ----------------------------------------------------------------
 
-def _generate_candidate(dyad, old_context, headlines, trigger_reason, as_of_date=None):
+def _generate_candidate(dyad, old_context, headlines, trigger_reason, as_of_date=None, rebase=False):
     headline_text = "\n".join(
-        f"- {a.get('title','')} ({a.get('publishedAt','')[:10]})" for a in headlines[:25]
+        f"- {a.get('title','')} ({a.get('publishedAt','')[:10]})" for a in headlines[:REBASE_MAX_HEADLINES if rebase else 25]
     )
+    actors = [p.strip() for p in dyad.split("-")]
+    prev = ("(withheld: this is a one-time rebuild from the headlines alone)" if rebase else
+            (old_context if old_context else "(none set yet)"))
     prompt = f"""Today's date: {as_of_date}
-Dyad: {dyad}
+Dyad: {dyad}   (the two parties: {" and ".join(actors)})
 Trigger reason: {trigger_reason}
 
-CURRENT crisis_context:
-{old_context if old_context else "(none set yet -- this dyad has no prior context)"}
+PREVIOUS crisis_context (may contain errors, expired items or instructions; carry forward ONLY what the rules below allow):
+{prev}
 
-Recent headlines (trailing ~{HEADLINE_WINDOW_DAYS} days, already actor-relevance-filtered upstream):
+Recent headlines (trailing ~{REBASE_HEADLINE_DAYS if rebase else HEADLINE_WINDOW_DAYS} days, newest first):
 {headline_text if headline_text else "(no cached headlines available)"}
 
-Task: propose an UPDATED crisis_context for this dyad. This text gets injected
-directly into a node-scoring prompt to help an LLM correctly route evidence to
-the right structural nodes -- e.g. distinguishing routine posturing from
-genuine operational preparation, or noting that a precipitating event already
-happened so it isn't re-scored as new. If prior context exists, preserve its
-routing-guidance STYLE and update the FACTUAL anchor to reflect what's
-changed. If nothing has materially changed, return the old context unchanged.
-If there is no prior context, write a new one from scratch using the same
-style: a CRISIS CONTEXT summary followed by explicit guidance on how to score
-specific named nodes given this dyad's current situation.
+Task: write the crisis_context for this dyad. It is injected as BACKGROUND into a node-scoring prompt; another model reads the
+headlines and decides every score itself. Your job is to state facts, not to tell it what to conclude.
 
-Two hard rules (Nov 4, 2026):
-1. DATES: never date the context, or any event that has happened, after today
-   ({as_of_date}). A future event may appear only as scheduled or expected
-   ("a vote is scheduled for ...").
-2. CONFIRMED vs CLAIMED: write as fact only what the acting government
-   acknowledges, or what several independent outlets report with no official
-   denial. A single-source report, a claim from anonymous officials, or a report
-   the government concerned denies is written as a claim, naming its source and
-   any denial ("reported by X; denied by Y"). Never call such a report
-   "confirmed". Attribution matters: many contracts resolve only on a consensus
-   of credible reporting.
+Format, plain text, under 2,500 characters:
+STATUS (as of {as_of_date}): one or two sentences on the DIRECT relationship between the two parties now (e.g. active direct
+  hostilities / ceasefire in force since <date> / no direct hostilities), supported by the headlines or the previous context.
+FACTS (newest first, each dated): "- YYYY-MM-DD: <fact>". Only events in the last {FACT_EXPIRY_DAYS} days.
+ALREADY HAPPENED (do not re-count as new): a short list of the past events above that later headlines may still mention.
+THIRD PARTIES: at most three dated lines on related actions by OTHER actors (proxies, allies, mediators), each saying who acted.
 
-Respond with ONLY the new crisis_context text. No preamble, no markdown, no
-JSON wrapper -- just the raw text that will be stored directly."""
+Hard rules:
+1. DATES: never date the context or any event after today ({as_of_date}). A future event appears only as scheduled.
+2. CONFIRMED vs CLAIMED: write as fact only what the acting government acknowledges, or what several independent outlets
+   report with no official denial. Single-source reports, anonymous-official claims, and reports the government concerned
+   denies are written as claims, naming the source and any denial. Never call such a report "confirmed".
+3. NO INSTRUCTIONS: never say how any node, factor or signal should be scored, rated, weighted or routed. No "scoring
+   guidance", no "should be scored", no "elevated/maximum levels". Facts only.
+4. EXPIRY: drop any fact dated more than {FACT_EXPIRY_DAYS} days before today. A standing status (a ceasefire, an ongoing war)
+   stays only if a recent headline shows it still holds.
+5. SCOPE: only actions between {" and ".join(actors)} themselves are this dyad's hostilities. A proxy's or ally's action
+   (e.g. a militia's attack) goes under THIRD PARTIES, never under FACTS as the dyad's own fighting.
+6. NO ALARM LANGUAGE: no "most dangerous", "critical", "unprecedented", "maximally", capital-letter emphasis, or counts of
+   weeks; quote a named official, with attribution, if their words matter.
+7. If the previous context states something the rules forbid (an instruction, an expired fact, a claim written as confirmed,
+   a third party's action as the dyad's own), remove or correct it.
 
-    return _call_claude_raw(prompt, max_tokens=600)
+Respond with ONLY the crisis_context text. No preamble, no markdown, no JSON wrapper."""
+
+    return _call_claude_raw(prompt, max_tokens=900)
 
 
 VERIFIER_SYSTEM = """You are an independent quality-control reviewer for an automated
-geopolitical forecasting system. Your ONLY job is to check whether a proposed
-update to a dyad's crisis context is a coherent, evidence-grounded incremental
-update -- you do not write or improve the content yourself.
+geopolitical forecasting system. Your ONLY job is to check a proposed crisis context for one dyad
+-- you do not write or improve the content yourself. (Context keeper v2, Nov 5, 2026.)
 
-Approve only if:
-- The new context is consistent with the provided headlines (no claims that
-  aren't supported by them or by the prior context).
-- It does not silently delete or contradict still-relevant facts from the old
-  context without explanation.
-- It does not claim a future event as having already happened, or vice versa,
-  and it is not dated after today's date (given in the request).
-- It does not present a single-source report, an anonymous-official claim, or a
-  report the government concerned denies as confirmed fact.
-- It's a genuine update reflecting new information, not a degenerate
-  paraphrase loop of the old text.
+Approve only if ALL hold:
+- Every fact is supported by the provided headlines or by the old context, and is dated.
+- It contains no instructions on how to score, rate, weight or route nodes, factors or signals (facts only).
+- Nothing is dated after today; future events appear only as scheduled.
+- Single-source, anonymous-official or officially denied reports are written as claims, never as confirmed.
+- Only actions between the dyad's two parties are presented as the dyad's hostilities; other actors' actions are
+  labeled under THIRD PARTIES.
+- No alarm language or capital-letter emphasis.
+
+Dropping facts older than 30 days, dropping instructions, rewriting an over-stated claim as a claim, or moving a third
+party's action under THIRD PARTIES is CORRECT and must never count against the update. Do not require that old text be
+kept. The old context may be withheld (a one-time rebuild); judge the proposal against the headlines alone then.
 
 Respond with ONLY valid JSON in this exact form, no other text:
 {"verdict": "APPROVE", "reason": "<one sentence>"}
@@ -347,13 +362,13 @@ Do not apply it, but do not treat the underlying signal as wrong either."""
 
 def _verify_candidate(dyad, old_context, new_context, headlines, as_of_date=None):
     headline_text = "\n".join(
-        f"- {a.get('title','')} ({a.get('publishedAt','')[:10]})" for a in headlines[:25]
+        f"- {a.get('title','')} ({a.get('publishedAt','')[:10]})" for a in headlines[:REBASE_MAX_HEADLINES]
     )
     prompt = f"""Today's date: {as_of_date}
 Dyad: {dyad}
 
 OLD crisis_context:
-{old_context if old_context else "(none)"}
+{old_context if old_context else "(none, or withheld for a one-time rebuild)"}
 
 PROPOSED NEW crisis_context:
 {new_context}
@@ -396,7 +411,20 @@ def _append_changelog(entry):
 # Main entry point
 # ----------------------------------------------------------------
 
-def refresh_context(dyad, trigger_reason, as_of_date=None):
+def _rebase_headlines(dyad, as_of_date):
+    """Newest first, at most 3 per day, at most REBASE_MAX_HEADLINES, over REBASE_HEADLINE_DAYS."""
+    allh = _load_recent_headlines(dyad, as_of_date, days=REBASE_HEADLINE_DAYS)
+    allh.sort(key=lambda a: a.get("publishedAt", ""), reverse=True)
+    per, out = {}, []
+    for a in allh:
+        d = a.get("publishedAt", "")[:10]
+        if per.get(d, 0) >= 3: continue
+        per[d] = per.get(d, 0) + 1; out.append(a)
+        if len(out) >= REBASE_MAX_HEADLINES: break
+    return out
+
+
+def refresh_context(dyad, trigger_reason, as_of_date=None, rebase=False):
     if as_of_date is None:
         as_of_date = datetime.now(timezone.utc).date()
 
@@ -408,9 +436,9 @@ def refresh_context(dyad, trigger_reason, as_of_date=None):
     cfg = configs.get(dyad, {})
     old_context = cfg.get("crisis_context", "")
 
-    headlines = _load_recent_headlines(dyad, as_of_date)
+    headlines = _rebase_headlines(dyad, as_of_date) if rebase else _load_recent_headlines(dyad, as_of_date)
 
-    new_context = _generate_candidate(dyad, old_context, headlines, trigger_reason, as_of_date)
+    new_context = _generate_candidate(dyad, old_context, headlines, trigger_reason, as_of_date, rebase=rebase)
     if new_context is None:
         _append_changelog({
             "dyad": dyad, "date": str(as_of_date), "trigger_reason": trigger_reason,
@@ -429,7 +457,7 @@ def refresh_context(dyad, trigger_reason, as_of_date=None):
         print(f"  [context_keeper] {dyad}: validator rejected ({reason})")
         return
 
-    verdict, verifier_reason = _verify_candidate(dyad, old_context, new_context, headlines, as_of_date)
+    verdict, verifier_reason = _verify_candidate(dyad, None if rebase else old_context, new_context, headlines, as_of_date)
 
     log_entry = {
         "dyad": dyad, "date": str(as_of_date), "trigger_reason": trigger_reason,
@@ -487,6 +515,19 @@ if __name__ == "__main__":
                   if v.get("acute_phase_onset_date") or v.get("crisis_context")]
         print(f"[context_keeper] weekly sweep: {len(active)} active dyads")
         weekly_sweep(active)
+    elif len(sys.argv) > 1 and sys.argv[1] == "--rebase":
+        configs = json.loads(DYAD_CONFIGS_PATH.read_text())
+        only = sys.argv[sys.argv.index("--only") + 1].split(",") if "--only" in sys.argv else None
+        todo = [k for k, v in configs.items() if v.get("crisis_context") and (only is None or k in only)]
+        print(f"[context_keeper] v2 rebase: {len(todo)} dyads (old context withheld, {REBASE_HEADLINE_DAYS}-day headlines)")
+        n0 = sum(1 for _ in open(CHANGELOG_PATH)) if CHANGELOG_PATH.exists() else 0
+        for d in todo:
+            refresh_context(d, trigger_reason="rebase_v2", rebase=True)
+        new = [json.loads(l) for l in list(open(CHANGELOG_PATH))[n0:]]
+        from collections import Counter
+        print("[context_keeper] v2 rebase outcomes:", dict(Counter(e.get("verdict") or e.get("stage") for e in new)))
+        left = [e["dyad"] for e in new if e.get("verdict") != "APPROVE"]
+        if left: print("[context_keeper] NOT rebuilt (old context kept):", left)
     else:
-        print("Usage: python3 -m pipeline.context_keeper --sweep")
+        print("Usage: python3 -m pipeline.context_keeper --sweep | --rebase [--only A,B]")
         print("(event-triggered refresh is called from predict.py directly, not this CLI)")
