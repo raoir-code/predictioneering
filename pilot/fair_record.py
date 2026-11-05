@@ -38,12 +38,12 @@ def rows(buffer_h=BUFFER_H):
             if S:
                 r = S[-1] if kind == "daily" else S[0]
                 out.append({"model": model, "kind": kind, "y": int(b["outcome"]), "p": float(r["conditional_p"]), "m": float(r["market_p"]),
-                            "resolved": b["resolved_at"][:10], "q": b.get("market_label") or "", "holds": "ceasefire continues" in (b.get("market_label") or "")})
+                            "resolved": b["resolved_at"][:10], "ts": r["timestamp"][:10], "q": b.get("market_label") or "", "holds": "ceasefire continues" in (b.get("market_label") or "")})
     return out
 
 def summary(rs, days=None):
     if days:
-        lim = (dt.date.today() - dt.timedelta(days=days)).isoformat(); rs = [r for r in rs if r["resolved"] >= lim]
+        lim = (dt.date.today() - dt.timedelta(days=days)).isoformat(); rs = [r for r in rs if r["ts"] >= lim]   # by FORECAST date: the model as it is now
     if not rs: return None
     B = lambda k: sum((r[k] - r["y"]) ** 2 for r in rs) / len(rs)
     return {"n": len(rs), "ours": round(B("p"), 4), "market": round(B("m"), 4)}
@@ -55,7 +55,7 @@ def report(prefix="   "):
         for lab, sub in (("all", s), ("excl. holds", [r for r in s if not r["holds"]]), ("holds", [r for r in s if r["holds"]])):
             a, w = summary(sub), summary(sub, 14)
             if a: lines.append(f"{prefix}{model:10} {lab:12} all-time n {a['n']:3} ours {a['ours']:.4f} mkt {a['market']:.4f}" +
-                               (f" | last 14d n {w['n']:3} ours {w['ours']:.4f} mkt {w['market']:.4f}" if w else ""))
+                               (f" | forecast in last 14d n {w['n']:3} ours {w['ours']:.4f} mkt {w['market']:.4f}" if w else ""))
     return lines
 
 if __name__ == "__main__":
