@@ -40,6 +40,19 @@ def query(A, B):
     assert len(q) <= QMAX, f"query too long ({len(q)}): {q}"
     return q
 
+ACTION = "strike OR strikes OR airstrike OR airstrikes OR attack OR attacks OR missile OR drone"     # fits every pair under QMAX (longest 193)
+# Nov 5: used ONLY when a pair's fetch hits the cap (MAX_PAGES x PER_PAGE): GNews returns the newest articles first, so an
+# overflowing pair (US-Iran: 607 in 48h) keeps only the last few hours. The re-query keeps the pair's terms and adds this
+# clause; the union of both fetches is saved. Precision stays with the labeler.
+
+def query_action(A, B):
+    q = query(A, B) + " AND (" + ACTION + ")"
+    return q if len(q) <= QMAX else None
+
+def union(first, second):
+    seen = {a.get("url") for a in first}
+    return first + [a for a in second if a.get("url") not in seen]
+
 def load_env():
     p = ROOT / ".env"
     if p.exists():
@@ -95,13 +108,25 @@ def main():
             try:
                 q = query(A, B)
                 arts, total, errors, pages = collect(requests, key, q, now)
+                ov = None
+                if not errors and total is not None and total > len(arts):           # overflow: re-query with the strike clause
+                    q2 = query_action(A, B)
+                    if q2:
+                        a2_, t2, e2, p2 = collect(requests, key, q2, now)
+                        n0 = len(arts); arts = union(arts, a2_)
+                        ov = {"query": q2, "total_reported": t2, "pages_read": p2, "errors": e2, "added": len(arts) - n0}
+                    else:
+                        ov = {"skipped": "action query too long"}
                 rec = {"fetched_at": now.isoformat(), "query": q, "window_h": WINDOW_H, "total_reported": total, "pages_read": pages,
                        "errors": errors, "articles": [{"title": a.get("title"), "description": a.get("description"), "url": a.get("url"),
                                                        "source": (a.get("source") or {}).get("name"), "publishedAt": a.get("publishedAt")}
                                                       for a in arts if a.get("title")]}
+                if ov: rec["overflow"] = ov
                 path = OUTDIR / f"{dyad}_{day}.json"
                 rec = merge(path, rec); path.write_text(json.dumps(rec)); tot_new += len(arts)
-                print(f"  [strike-news] {dyad:22} {len(arts):3} of {total} reported, {pages} page(s)" + (f"  errors={errors}" if errors else ""))
+                print(f"  [strike-news] {dyad:22} {len(arts):3} of {total} reported, {pages} page(s)" + (f"  errors={errors}" if errors else "")
+                      + (f"  | overflow re-query: +{ov.get('added')} of {ov.get('total_reported')} strike-word articles" + (f" errors={ov.get('errors')}" if ov.get('errors') else "")
+                         if ov and "added" in ov else (f"  | overflow: {ov['skipped']}" if ov else "")))
             except Exception as ex:
                 print(f"  [strike-news] {dyad}: failed ({ex!r}) -- continuing")
         print(f"[strike-news] {tot_new} headlines fetched for {len(pairs())} pairs -> {OUTDIR.relative_to(ROOT)}")
@@ -118,7 +143,11 @@ def _tests():
     p.write_text(json.dumps({"articles": [{"url": "u1", "title": "a"}, {"url": "u2", "title": "b"}]}))
     r = merge(p, {"articles": [{"url": "u2", "title": "b"}, {"url": "u3", "title": "c"}]})
     assert sorted(a["url"] for a in r["articles"]) == ["u1", "u2", "u3"] and r["n"] == 3, r
-    print(f"strike_news_fetch tests: OK ({len(pairs())} pairs, longest query {max(len(query(*v)) for v in pairs().values())} chars)")
+    for dyad, (A, B) in pairs().items():
+        q2 = query_action(A, B)
+        assert q2 and q2.count(" AND ") == 2 and len(q2) <= QMAX, (dyad, q2)      # every pair can re-query on overflow
+    assert [a["url"] for a in union([{"url": "u1"}, {"url": "u2"}], [{"url": "u2"}, {"url": "u3"}])] == ["u1", "u2", "u3"]
+    print(f"strike_news_fetch tests: OK ({len(pairs())} pairs, longest query {max(len(query(*v)) for v in pairs().values())} chars, longest overflow query {max(len(query_action(*v)) for v in pairs().values())})")
 
 if __name__ == "__main__":
     _tests() if "--test" in sys.argv else main()
