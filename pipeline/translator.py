@@ -2346,6 +2346,11 @@ def run_translator():
         print(f"[strike|no war] restored the model's own P(B|not A) on {_SNW.restore(feed)} markets")
     except Exception as ex:
         _SNW = None; print(f"[strike|no war] restore FAILED ({ex!r}); empirical P(B|not A) not applied this run")
+    try:                                   # Nov 5 (docs/declare_war_prereg.md): undo last run's declaration-of-war P(B|A)
+        import declare_war as _DW
+        print(f"[declare war] restored the model's own P(B|A) on {_DW.restore(feed)} markets")
+    except Exception as ex:
+        _DW = None; print(f"[declare war] restore FAILED ({ex!r}); empirical P(B|A) not applied this run")
     try:                                   # Oct 22: family A "ceasefire holds" (docs/ceasefire_scope_rule.md), deterministic
         sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pilot")); import ceasefire_holds as _CH
         _CH.tag_feed(feed)
@@ -2399,6 +2404,9 @@ def run_translator():
     if _SGW is not None:                   # last step before the during-war pass; off unless pilot/local/strike_given_war.json exists
         try: print(f"[strike|war] empirical P(B|A) applied to {_SGW.apply(feed)} strike markets")
         except Exception as ex: print(f"[strike|war] apply FAILED ({ex!r}); model P(B|A) kept")
+    if _DW is not None:                    # after strike|war, before the during-war pass
+        try: print(f"[declare war] empirical P(B|A) {_DW.P_DECLARE_GIVEN_A} applied to {_DW.apply(feed)} declaration-of-war markets")
+        except Exception as ex: print(f"[declare war] apply FAILED ({ex!r}); model P(B|A) kept")
     _apply_during_war_pricing(feed)
     CLASSIFIED_FEED.write_text(json.dumps(feed, indent=2))
 
