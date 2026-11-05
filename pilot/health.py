@@ -17,7 +17,8 @@ for tag, pat in (("during-war/unified", r"\[during-war\][^\n]*"), ("rules", r"\[
                  ("policy", r"excluded by rule:[^\n]*"), ("scopes", r"resolved: *\d+"), ("meta", r"\[meta\] stored[^\n]*"),
                  ("strike|no war", r"\[strike\|no war\] empirical[^\n]*"), ("strike|war", r"\[strike\|war\] restored[^\n]*"),
                  ("feed sync", r"\[sync\] (?:prices refreshed|FAILED)[^\n]*"), ("new listings", r"\[sync\] appended[^\n]*"),
-                 ("classify cache", r"\[cache\] \d+ from cache[^\n]*"), ("strike news", r"\[strike-news\] \d+ headlines fetched[^\n]*")):
+                 ("classify cache", r"\[cache\] \d+ from cache[^\n]*"), ("strike news", r"\[strike-news\] \d+ headlines fetched[^\n]*"),
+                 ("scope rule", r"\[scope\] (?:de facto authority rule|rule FAILED)[^\n]*"), ("ceasefire tags", r"\[ceasefire\] tagged CORE[^\n]*")):
     m = re.findall(pat, txt); pick = (m[0] if tag == "classify cache" else m[-1]) if m else None   # cache: the sync/weekly line, not the retry step's 0/0
     print(f"   {tag:18} {pick or 'NOT SEEN'}" + (f"  ({len(m)} dyads)" if tag == 'news' and m else ""))
 # Step announcements ("[hh:mm:ss] ... ...") are not failures, even when they name one ("Retry markets left in ERROR").
@@ -84,3 +85,9 @@ else:
     print(f"== API spend {start:%m-%d}: ~${sum(v[3] for v in _us.values()):.2f} est. over {sum(v[0] for v in _us.values())} calls (Console is authoritative)")
     for (step, caller, model), (n, ti, to, usd) in sorted(_us.items(), key=lambda kv: -kv[1][3])[:8]:
         print(f"   ${usd:6.2f}  {n:4d} calls  {ti / 1e3:7.0f}k in {to / 1e3:6.0f}k out  {model.replace('claude-', ''):11} {step}:{caller}")
+try:                                                       # Nov 4: the honest scoreboard (pilot/fair_record.py)
+    import sys as _s; _s.path.insert(0, str(ROOT / "pilot")); import fair_record as _FR
+    print("== fair record (pre-event forecasts vs the market at the same moment; window contracts >= 72h before resolution):")
+    [print(l) for l in _FR.report()]
+except Exception as ex:
+    print(f"== fair record FAILED: {ex!r}")
