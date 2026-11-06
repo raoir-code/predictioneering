@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent; PIPE = ROOT / "pipeline"; UTC = d
 _M = "January|February|March|April|May|June|July|August|September|October|November|December"
 MON = {m.lower(): i + 1 for i, m in enumerate(_M.split("|"))}
 TPL = re.compile(r"^(?:Will (?:there be )?)?(?:an? |the )?(.+?)(?: take)? (?:military action (?:against|on)|target) (?:the )?(.+?) (on|by) (" + _M + r") (\d{1,2})(?:, (\d{4}))?\?\s*$", re.I)
-ALIAS = {"saudiarabian": "saudiarabia"}
+ALIAS = {"saudiarabian": "saudiarabia", "houthis": "houthi"}   # Nov 6: plural "Will Houthis target..." silently missed the faction table (houthi)
 REGIONS = [("jerusalem|israel", "Asia/Jerusalem"), ("yemen", "Asia/Aden"), ("syria|damascus", "Asia/Damascus"), ("lebanon|beirut", "Asia/Beirut"),
            ("gulf", "Asia/Dubai"), ("arabia|riyadh", "Asia/Riyadh"), ("iran|tehran", "Asia/Tehran"), ("pakistan", "Asia/Karachi"),
            ("afghanistan|kabul", "Asia/Kabul"), ("amman|jordan", "Asia/Amman"), ("manama|bahrain", "Asia/Bahrain"), ("kuwait", "Asia/Kuwait"),
