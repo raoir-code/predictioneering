@@ -60,3 +60,20 @@ lag. After the cut, anchors come only from news sightings and resolved windows, 
 
 Out of scope: the old path's P(B|¬A) table (`strike_no_war.json`). UCDP can't stand in for its low-casualty strike pairs (T1); if
 the table can't be kept, the old path falls back to its own estimate, as before Oct 26.
+
+## Result (Nov 6, 2026; `analysis/degradation_replay.py --measure-open`, 124 resolved strike contracts)
+
+| Arm | Brier |
+|---|---|
+| FULL | 0.1471 |
+| REPO | 0.1674 |
+| OPEN | 0.1984 |
+| OPEN_NOHARDEN | 0.2031 |
+| market | 0.1323 |
+
+OPEN − REPO +0.031 (95% −0.043 to +0.087); REPO − FULL +0.020 (0.005 to 0.064); OPEN − FULL +0.051 (0.003 to 0.111);
+OPEN − OPEN_NOHARDEN −0.005 (−0.014 to +0.010).
+
+**Verdict (rule 1): REPO.** If the local tables must go, production deletes `pilot/local/` (existing path, no new code). The gap is
+mostly Saudi Arabia → Yemen (n = 37: OPEN 0.364 vs REPO 0.242), the pair UCDP doesn't code; OPEN beats REPO on Iran → Iraq,
+Israel → Syria and Iran → Arab country. Per rule 4, the open refit is not re-tuned on these contracts.
