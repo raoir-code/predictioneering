@@ -126,12 +126,15 @@ def label():
 
 def day_obs(dyad, direction):
     """direction 'A_STRIKES_B' or 'B_STRIKES_A' -> {date: 1 | 0} (days with no file / empty file are absent = unobserved)."""
-    lab = load_labels(); out = {}
+    lab = load_labels(); out = {}; seen = set(); dedup = __import__("os").environ.get("NEWS_DEDUP", "1") == "1"
     for d, arts in files(dyad):
         if not arts: continue
         hit = 0
         for a in arts:
-            if lab.get((dyad, key(a["title"]))) == direction:
+            k = key(a["title"])
+            if dedup and k in seen: continue   # Nov 6: an article counts once, on the first file day it appears (re-fetched copies are not new reports)
+            seen.add(k)
+            if lab.get((dyad, k)) == direction:
                 try: pub = dt.date.fromisoformat(str(a.get("publishedAt"))[:10])
                 except ValueError: pub = d
                 if d - dt.timedelta(2) <= pub <= d: hit = 1
