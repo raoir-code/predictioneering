@@ -7,6 +7,7 @@ on or after 2026-07-01, priced at production's first-forecast time, scored on th
   REPO      the complete fallback: repo priors, hardening off, no anchors (production with pilot/local/ deleted)
   python analysis/degradation_replay.py --synthetic   rule and anchor-cut checks only
   python analysis/degradation_replay.py --measure     -> pilot/local/degradation_replay.json
+  python analysis/degradation_replay.py --measure-open   open-data arms (docs/ucdp_refit_prereg.md) -> pilot/local/ucdp_replay.json
 Report only: reads pilot/local/, writes one result file there, never touches the engine's own files.
 """
 import sys, json, datetime as dt
@@ -76,6 +77,51 @@ def measure():
     print("  by pair:")
     for p, v in sorted(res["by_pair"].items(), key=lambda kv: -kv[1]["n"]): print(f"    {p:28} n {v['n']:3} FULL {v['full']:.4f}  " + "  ".join(f"{a} {v[a]:+.4f}" for a in ARMS))
 
+# ── docs/ucdp_refit_prereg.md: the open-data arms (added Nov 6) ─────────────────────────────────────────────────────
+UCDP = LOCAL / "ucdp"; OPEN_OUT = LOCAL / "ucdp_replay.json"; TIE = 0.002
+
+def boot2(rows, a, b, seed=20261106, B=2000):
+    """Brier(a) - Brier(b), bootstrap over pairs."""
+    pairs = sorted({x["pair"] for x in rows}); rng = np.random.default_rng(seed); ds = []
+    for _ in range(B):
+        xs = [x for p in rng.choice(pairs, len(pairs)) for x in rows if x["pair"] == p]; ds.append(brier(xs, a) - brier(xs, b))
+    lo, hi = np.percentile(ds, [2.5, 97.5]); return round(float(lo), 4), round(float(hi), 4)
+
+def choose(b):
+    """The post-loss fallback: lowest Brier among OPEN, OPEN_NOHARDEN, REPO; an open arm within TIE of the best wins (open licence,
+    refreshable monthly), the lower open arm first."""
+    best = min(b[k] for k in ("OPEN", "OPEN_NOHARDEN", "REPO"))
+    for k in sorted(("OPEN", "OPEN_NOHARDEN"), key=lambda k: b[k]):
+        if b[k] <= best + TIE: return k
+    return "REPO"
+
+def measure_open():
+    import unified_price as UP
+    harden = UP.HARDEN; full_tab = {k: sorted(v) for k, v in json.loads(ANCHORS.read_text()).items()}
+    hw, hf = HELDOUT / "priors_world.json", HELDOUT / "world_fits.json"
+    ow, of = UCDP / "heldout" / "priors_world.json", UCDP / "heldout" / "world_fits.json"
+    oh = json.loads((UCDP / "production" / "hardening.json").read_text())
+    otab = cut({k: sorted(v) for k, v in json.loads((UCDP / "last_strike.json").read_text()).items()}, CUT_ANCHORS)
+    R = {"full": run_arm(hw, hf, harden, full_tab), "REPO": run_arm(REPO_W, REPO_F, None, {}),
+         "OPEN": run_arm(ow, of, oh, otab), "OPEN_NOHARDEN": run_arm(ow, of, None, otab)}
+    ids = sorted(set.intersection(*[set(v) for v in R.values()]))
+    rows = [{"id": i, "pair": R["full"][i]["pair"], "y": R["full"][i]["y"], "m": R["full"][i]["m"], **{k: R[k][i]["u"] for k in R}} for i in ids]
+    b = {k: round(brier(rows, k), 4) for k in R}
+    res = {"n": len(rows), "dropped": {k: len(set(v) - set(ids)) for k, v in R.items()}, "brier": b,
+           "market": round(brier([x for x in rows if x["m"] is not None], "m"), 4),
+           "diffs": {f"{a}-{c}": {"d": round(b[a] - b[c], 4), "ci": boot2(rows, a, c)} for a, c in
+                     (("OPEN", "REPO"), ("OPEN_NOHARDEN", "REPO"), ("OPEN", "OPEN_NOHARDEN"), ("OPEN", "full"), ("REPO", "full"))},
+           "choice": choose(b), "ucdp_hardening": oh, "by_pair": {}}
+    for p in sorted({x["pair"] for x in rows}):
+        s = [x for x in rows if x["pair"] == p]; res["by_pair"][p] = {"n": len(s), **{k: round(brier(s, k), 4) for k in R}}
+    res["rows"] = rows; OPEN_OUT.write_text(json.dumps(res, indent=1))
+    print(f"=== OPEN-DATA REPLAY: {res['n']} resolved strike contracts (dropped per arm {res['dropped']})")
+    print("  Brier: " + "  ".join(f"{k} {v}" for k, v in b.items()) + f"  | market {res['market']}")
+    for k, v in res["diffs"].items(): print(f"  {k:22} {v['d']:+.4f}  95% {list(v['ci'])}")
+    print(f"  -> fallback after the data ends: {res['choice']}")
+    print("  by pair (Brier):")
+    for p, v in sorted(res["by_pair"].items(), key=lambda kv: -kv[1]["n"]): print(f"    {p:28} n {v['n']:3}  " + "  ".join(f"{k} {v[k]:.4f}" for k in R))
+
 def synthetic():
     t = {"Israel->Lebanon": ["2026-06-29", "2026-06-30", "2026-07-02"], "X->Y": ["2026-08-01"]}
     assert cut(t, CUT_ANCHORS) == {"Israel->Lebanon": ["2026-06-29", "2026-06-30"], "X->Y": []}
@@ -83,8 +129,11 @@ def synthetic():
             for i in range(60)]
     ci = boot(rows, "STALE"); assert ci[0] > 0 and grade(ci) == "LOAD-BEARING", ci
     ci = boot(rows, "NOHARDEN"); assert ci == (0.0, 0.0) and grade(ci) == "NOT LOAD-BEARING", ci
+    assert choose({"OPEN": 0.150, "OPEN_NOHARDEN": 0.149, "REPO": 0.148}) == "OPEN_NOHARDEN"   # open within TIE of REPO: open wins
+    assert choose({"OPEN": 0.140, "OPEN_NOHARDEN": 0.155, "REPO": 0.150}) == "OPEN"
+    assert choose({"OPEN": 0.160, "OPEN_NOHARDEN": 0.158, "REPO": 0.150}) == "REPO"            # both open arms worse by > TIE
     print("synthetic: all checks pass")
 
 if __name__ == "__main__":
     a = sys.argv[1:] or ["--synthetic"]
-    {"--synthetic": synthetic, "--measure": measure}[a[0]]()
+    {"--synthetic": synthetic, "--measure": measure, "--measure-open": measure_open}[a[0]]()
