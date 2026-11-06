@@ -109,7 +109,7 @@ def total_mult(hm, phi, n_days):
     return [round(m * phi, 6) for m in (hm or [1.0] * max(1, n_days))]
 FACTION = {"houthi": "yemenhouthi"}; FACTION_HOME = {"houthi": "yemen"}             # lookup tables, not per-pair logic
 LEADS = {"saudiarabia": ["operationrestoringhope", "operationdecisivestorm"], "turkey": ["operationpeacespring"]}
-NEWS_CATCH = 0.36        # measured: P(report | strike in last 3 days), Israel->Lebanon Jul 25-Oct 19 (v2 labels)
+NEWS_CATCH = 0.27        # measured: P(new report | strike in last 3 days), Israel->Lebanon, event data through Oct 9, one-article-once rule (Nov 6; 0.41 under the old overlapping rule; was 0.36)
 NEWS_FALSE = 3 / 2200    # conservative: upper 95% bound, 0 false alarms in ~2,200 peaceful direction-days
 NEWS_DIR = {}            # contract pair -> (cache dyad, direction), built generically from news_strikes.DYADS
 for _dy, (_a, _b) in NS.DYADS.items():

@@ -157,11 +157,14 @@ def synthetic():
 # ── real data (local only) ───────────────────────────────────────────────────────────────────────────────────────────
 def news_files(dyad, direction):
     sys.path.insert(0, str(ROOT / "pilot")); import news_strikes as NS
-    lab = NS.load_labels(); out = {}
+    lab = NS.load_labels(); out = {}; seen = set(); dedup = __import__("os").environ.get("NEWS_DEDUP", "1") == "1"
     for f, arts in NS.files(dyad):
         pubs = []
         for a in arts:
-            if lab.get((dyad, NS.key(a["title"]))) == direction:
+            k = NS.key(a["title"])
+            if dedup and k in seen: continue      # Nov 6: production's day definition (news_strikes.day_obs): an article counts once
+            seen.add(k)
+            if lab.get((dyad, k)) == direction:
                 try: pubs.append(dt.date.fromisoformat(str(a.get("publishedAt"))[:10]))
                 except ValueError: pubs.append(f)
         out[f] = (len(arts), pubs)
