@@ -1168,6 +1168,18 @@
 ],
 "seeded": true
 },
+"082152d02907a7963851": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "This question directly asks about interstate conflict onset/occurrence between Israel and Lebanon on a specific date, which is a core dyadic conflict question.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "08290e1ddb14da11a81e": {
 "bucket": "ADJACENT",
 "dyad": "Russia-Ukraine",
@@ -1639,6 +1651,18 @@
 "dyad": null,
 "reason": "This question is about AI company rankings, not interstate conflict between state actors.",
 "relevant_nodes": []
+},
+"0b89a5b19da01c1a0e5c": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/occurrence between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "0b8c1947127243762095": {
 "bucket": "CORE",
@@ -5152,6 +5176,12 @@
 "reason": "This is about a domestic presidential election, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"24dd38f378e7799cc906": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "Hezbollah is a non-state actor, not a sovereign state, so this is not an interstate conflict dyad question suitable for the model.",
+"relevant_nodes": []
+},
 "24e4c0609057f105b6c9": {
 "bucket": "NOISE",
 "dyad": null,
@@ -5165,6 +5195,18 @@
 "reason": "This question is about domestic Israeli politics and government formation, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"25040ad81069ff999ee1": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/escalation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "251ff0c53b5a5ae99fd4": {
 "bucket": "ADJACENT",
@@ -6400,6 +6442,18 @@
 "reason": "This question is about US domestic immigration policy, not interstate conflict between state actors.",
 "relevant_nodes": []
 },
+"2e175b61ca6edba0eaf8": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/continuation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "2e2928e26f9d5b3509fc": {
 "bucket": "ADJACENT",
 "dyad": "Russia-Ukraine",
@@ -7458,6 +7512,18 @@
 "dyad": null,
 "reason": "This question is about US energy policy and petroleum reserve management, not interstate conflict onset between a specific dyad.",
 "relevant_nodes": []
+},
+"372cff98652942ef60ce": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/continuation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "3748db89a798eeef5442": {
 "bucket": "NOISE",
@@ -8528,6 +8594,18 @@
 "reason": "This is about an internal Israeli legislative leadership selection, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"3fc2af8ec9cef55eccb9": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/escalation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "3fd0a5c7513423d8a975": {
 "bucket": "NOISE",
@@ -11779,6 +11857,18 @@
 "reason": "This question is about elections in multiple countries, not about interstate conflict between a specific dyad.",
 "relevant_nodes": []
 },
+"56eb408da4e7ec31e0fd": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/continuation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "57183161f33e7ccd496c": {
 "bucket": "ADJACENT",
 "dyad": "US-Iran",
@@ -12476,6 +12566,18 @@
 "reason": "This is a currency exchange rate question, not about interstate conflict between state actors.",
 "relevant_nodes": []
 },
+"5bf76a3d9b9e14437254": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/continuation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "5c145e99e6cceb9fadcf": {
 "bucket": "NOISE",
 "dyad": null,
@@ -12866,6 +12968,18 @@
 "CommitmentProblem"
 ],
 "seeded": true
+},
+"5e99979226c3655da815": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/continuation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "5ea48010f8889355d74f": {
 "bucket": "NOISE",
@@ -16679,6 +16793,18 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"7c72626fef5f3e3b6d0d": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/continuation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "7caa0ab3388d4e7c2091": {
 "bucket": "NOISE",
 "dyad": null,
@@ -17360,6 +17486,18 @@
 "reason": "This question is about AI company rankings, not interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"820a88ef2f151353d3b0": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/escalation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "822556ce943c689bf6c3": {
 "bucket": "NOISE",
@@ -19982,6 +20120,18 @@
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"9598ce5bb0ac025da2ad": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/occurrence between Israel and Lebanon on a specific date, which maps to the dyadic conflict framework.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "95a1af0f376cad4960a9": {
 "bucket": "NOISE",
 "dyad": null,
@@ -20055,6 +20205,18 @@
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"965c281578ced55f8c14": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/continuation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "965d7984678d47b6eddd": {
 "bucket": "NOISE",
@@ -22283,6 +22445,18 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"a844da26d075ce76951c": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/occurrence between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "a84ab07d557e6454b4e4": {
 "bucket": "ADJACENT",
 "dyad": "Russia-Ukraine",
@@ -24123,6 +24297,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"b47d83c6d3b7ca44eb78": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "Hezbollah is a non-state actor, not a sovereign state, so this is not an interstate conflict dyad.",
+"relevant_nodes": []
+},
 "b4ad63877d60e400fd6e": {
 "bucket": "NOISE",
 "dyad": null,
@@ -24155,6 +24335,18 @@
 "reason": "This question is about leadership survival/domestic politics in Iran, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"b4cbdf368cebd1347386": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/occurrence between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "b4db7cba724b3a6d066e": {
 "bucket": "ADJACENT",
@@ -24611,6 +24803,18 @@
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not about interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"b831e6573814352d6296": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/escalation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "b84641aba48f552dca87": {
 "bucket": "NOISE",
@@ -25298,6 +25502,18 @@
 "reason": "This question is about a domestic political meeting between a US leader and a US political figure, not about interstate conflict.",
 "relevant_nodes": []
 },
+"bcfed85138c2fe17ed1c": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/occurrence between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "bd0b552f2a97ba83c559": {
 "bucket": "NOISE",
 "dyad": null,
@@ -25957,6 +26173,18 @@
 "Patience"
 ]
 },
+"c0d8779e741d80471c88": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/escalation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "c10c7f7e348ec02b2f07": {
 "bucket": "NOISE",
 "dyad": null,
@@ -26009,6 +26237,18 @@
 "reason": "This question is about internal regime survival/collapse, not interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"c16c6964e438cd46dd27": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/continuation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "c1712afdc4973ba1dfee": {
 "bucket": "NOISE",
@@ -27025,6 +27265,18 @@
 "reason": "This is a local election question in Taiwan with no direct connection to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"c8bafd573fc28aa005f4": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/occurrence between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "c8c58bc7445c59e0efcd": {
 "bucket": "NOISE",
@@ -28654,6 +28906,18 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"d54316fbfb2ea72b0b80": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/continuation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "d55e74f6e7190e1ece19": {
 "bucket": "NOISE",
 "dyad": null,
@@ -29496,6 +29760,18 @@
 "reason": "This question is about a specific individual's public appearance, not about interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"db487f71ee4196967b71": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/occurrence between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "db4f4d6ee16867bd352a": {
 "bucket": "ADJACENT",
@@ -32934,6 +33210,18 @@
 ],
 "seeded": true
 },
+"f518fba2e86e1b22f799": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/escalation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "f531bcce4b23108589c1": {
 "bucket": "NOISE",
 "dyad": null,
@@ -33146,6 +33434,18 @@
 "reason": "This is about a central bank monetary policy decision, not interstate conflict.",
 "relevant_nodes": []
 },
+"f70a2da675104755aaf4": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "This question directly asks about interstate conflict onset/occurrence between Israel and Lebanon on a specific date, which is a classic dyadic conflict question.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "f71868218a4332ce39eb": {
 "bucket": "NOISE",
 "dyad": null,
@@ -33221,6 +33521,18 @@
 "reason": "This question is about ranking Chinese AI companies, not about interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"f7dacdfbcfa7be91847c": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks about interstate conflict onset/continuation between Israel and Lebanon on a specific date.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
 },
 "f7dcbc8d03f9dc7a96f4": {
 "bucket": "NOISE",

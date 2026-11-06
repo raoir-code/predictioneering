@@ -2,7 +2,7 @@
  "results": {
   "B": {
    "n": 21,
-   "brier_model": 0.1026,
+   "brier_model": 0.0457,
    "brier_market": 0.1633
   },
   "B:houthi->saudiarabia+saudiarabia->yemen": {
@@ -20,7 +20,7 @@
   "B:unitedstates->iran": {
    "n": 10,
    "yes": 8,
-   "brier_model": 0.2078,
+   "brier_model": 0.0884,
    "brier_market": 0.2425
   },
   "C": {
@@ -152,7 +152,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 0,
-   "u": 0.9453,
+   "u": 0.3917,
    "m": 0.055,
    "q": "US x Iran Effective Ceasefire by July 18?",
    "date": "2026-07-18"
@@ -161,7 +161,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 0,
-   "u": 0.9619,
+   "u": 0.5402,
    "m": 0.155,
    "q": "US x Iran Effective Ceasefire by July 24?",
    "date": "2026-07-24"
@@ -170,7 +170,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.9767,
+   "u": 0.6675,
    "m": 0.225,
    "q": "US x Iran Effective Ceasefire by July 31?",
    "date": "2026-07-31"
@@ -179,7 +179,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.9884,
+   "u": 0.8212,
    "m": 0.425,
    "q": "US x Iran Effective Ceasefire by August 14?",
    "date": "2026-08-14"
@@ -188,7 +188,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.9947,
+   "u": 0.9127,
    "m": 0.575,
    "q": "US x Iran Effective Ceasefire by August 31?",
    "date": "2026-08-31"
@@ -197,7 +197,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.6739,
+   "u": 0.6628,
    "m": 0.285,
    "q": "US x Iran Effective Ceasefire by September 4?",
    "date": "2026-09-04"
@@ -206,7 +206,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.7803,
+   "u": 0.7648,
    "m": 0.51,
    "q": "US x Iran Effective Ceasefire by September 11?",
    "date": "2026-09-11"
@@ -215,7 +215,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.8545,
+   "u": 0.8386,
    "m": 0.595,
    "q": "US x Iran Effective Ceasefire by September 18?",
    "date": "2026-09-18"
@@ -224,7 +224,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.922,
+   "u": 0.9074,
    "m": 0.675,
    "q": "US x Iran Effective Ceasefire by September 30?",
    "date": "2026-09-30"
@@ -233,7 +233,7 @@
    "fam": "B",
    "series": "unitedstates->iran",
    "y": 1,
-   "u": 0.7232,
+   "u": 0.7093,
    "m": 0.485,
    "q": "US x Iran Effective Ceasefire by September 7?",
    "date": "2026-09-07"
@@ -1580,5 +1580,5 @@
    "date": "2026-06-30"
   }
  ],
- "computed_at": "2026-11-05T17:02:24.324437+00:00"
+ "computed_at": "2026-11-06T03:29:35.352288+00:00"
 }

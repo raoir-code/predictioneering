@@ -5677,5 +5677,955 @@
     },
     "route": "scoped_bilateral",
     "version": 1
+  },
+  "6713437": {
+    "market_id": "6713437",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 7?",
+    "end_date": "2026-11-08",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "5771cf1dbcab358e98dd1e93d8547cc3d0f4109d541a51f636497ae30dc245a3",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic restriction to Lebanon's terrestrial territory (excluding maritime and airspace) is intrinsic to the resolution definition of the qualifying action and does not define a structurally distinct operational theater; it is resolution_only. The target is Lebanon's general recognized territory, making the geography mode target_wide.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713506": {
+    "market_id": "6713506",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 24?",
+    "end_date": "2026-11-25",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "b2d549f918ced5c4c69b0833467432df6d4481d5f8b4f1ca4297aef509e6a0f1",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic scope is Lebanon's terrestrial territory, which is the target's own territory (target_wide). The geographic detail about terrestrial territory vs. maritime/airspace is intrinsic to the resolution definition of the qualifying action and does not define a structurally different operational theater, so it is resolution_only.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713433": {
+    "market_id": "6713433",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 6?",
+    "end_date": "2026-11-07",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "4a0afa03d93f4d7d7467ae0242f2349d8887faf10afb4f251656f0d1829cddcb",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic scope is Lebanon's terrestrial territory, which is the target's own territory (target_wide). The geographic detail about internal waters, airspace exclusion, and disputed borders exists solely to define the legal boundaries of the qualifying action, not to identify a structurally distinct operational theater, so prior_relevance is resolution_only.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713514": {
+    "market_id": "6713514",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 26?",
+    "end_date": "2026-11-27",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "96a3f4345d765bdf8caaa47a994f57361086676fca9fe1740df21576a112924d",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic scope is Lebanon's terrestrial territory, which is the target's own territory (target_wide). The geographic detail about terrestrial vs. maritime territory and airspace is intrinsic to the resolution definition of the qualifying action, not a structural theater distinction, so it is resolution_only.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713441": {
+    "market_id": "6713441",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 8?",
+    "end_date": "2026-11-09",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "7c051bce6eacab3e8a846b42942a0ff87dc43a7817a73ec56141c3620eb25f3a",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic restriction to Lebanon's terrestrial territory (including internal waters, excluding maritime territory and airspace) is intrinsic to the resolution definition of the qualifying action and does not define a structurally distinct operational theater—it would largely disappear if a different action family were considered. The weapon/action type restrictions are resolution criteria, not party or geographic scope.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713445": {
+    "market_id": "6713445",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 9?",
+    "end_date": "2026-11-10",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "5e60ab4f1bc342df699bffc7be4db1880d3f4641bb878a6e0adba05a97479119",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies Israel as the sole initiator and Lebanon as the sole target. The geographic restriction to Lebanese terrestrial territory is intrinsic to the definition of the qualifying action (impact on Lebanon) and does not define a structurally distinct operational theater separate from the target's general territory, so it is resolution_only. The action-type restrictions (air strikes and surface-to-surface missiles only) are resolution criteria, not party or geographic scope.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713510": {
+    "market_id": "6713510",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 25?",
+    "end_date": "2026-11-26",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "1136ab4ddc23b8595cd85be87c2cc765cf5d2560e7f307dc861c5f4a4d6087ac",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic scope is Lebanon's terrestrial territory, which is the target's own territory (target_wide). The detailed geographic definition (terrestrial territory, internal waters, excluding maritime/airspace) exists solely to define what counts as a qualifying impact location for this specific action type, making it resolution_only rather than structural_theater.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713528": {
+    "market_id": "6713528",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 29?",
+    "end_date": "2026-11-30",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "54eeadd97919531bdfee54c0295552845c0a2609a49f2ceb231ddc7a2d520061",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic restriction to Lebanon's terrestrial territory is intrinsic to the definition of the qualifying action (impact on Lebanon) and does not define a structurally distinct operational theater separate from the target's general territory, so it is resolution_only. The contract excludes maritime territory and airspace, but these are definitional constraints on the action type, not structural geographic scope changes.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713476": {
+    "market_id": "6713476",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 17?",
+    "end_date": "2026-11-18",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "7c62134a2e46f606a1262b718e23dc242e87ae8c80d7d4f4b14d7dc862fed385",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target state (Lebanon). The geographic restriction to Lebanon's terrestrial territory (excluding maritime and airspace) is intrinsic to the resolution definition of the qualifying action and does not define a structurally distinct operational theater; it is resolution_only. The action type restrictions (air strikes or surface-to-surface missiles) are weapon/action-type resolution criteria, not party or geographic scope.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713453": {
+    "market_id": "6713453",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 11?",
+    "end_date": "2026-11-12",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "d2720610d1523f2a16236a9661032eeffa0ab1c7ea19863734d6a3922faf83d3",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic scope is Lebanon's terrestrial territory, which is the target's own territory (target_wide). The geographic detail about terrestrial vs. maritime territory and airspace is intrinsic to the resolution definition of the qualifying action rather than defining a structurally distinct operational theater, so it is resolution_only.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713468": {
+    "market_id": "6713468",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 15?",
+    "end_date": "2026-11-16",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "428bf1027223cf743f992f59b7fdacc2cc0c429bbe79fbc7e8fe5eda0840cc3f",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic restriction to Lebanon's terrestrial territory (excluding maritime and airspace) is intrinsic to the definition of the qualifying action and does not define a structurally distinct operational theater; it is resolution_only. The action type restrictions (air strikes or surface-to-surface missiles) are weapon/action-type resolution criteria, not party or geographic scope.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713457": {
+    "market_id": "6713457",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 12?",
+    "end_date": "2026-11-13",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "3a9d5445348590f487db894fbec45b477a91a90d7676b2854866fa9c1d160670",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic scope is Lebanon's terrestrial territory, which is the target's own territory (target_wide). The geographic details (exclusion of maritime territory and airspace, de facto control clause) exist solely to define the legal boundaries of the qualifying action and do not represent a structurally distinct operational theater, hence resolution_only.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713460": {
+    "market_id": "6713460",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 13?",
+    "end_date": "2026-11-14",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "446f7d3262d125919c950786e08dafb5136d22587c4e2cd25ff20daf04a3f519",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies Israel as the sole initiator and Lebanon as the sole target. The geographic restriction to Lebanon's terrestrial territory (excluding maritime and airspace) is intrinsic to the resolution definition of the qualifying action and does not define a structurally distinct operational theater; it is resolution_only. The action type restrictions (qualifying vs. non-qualifying munitions) are resolution criteria, not party or geographic scope.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713463": {
+    "market_id": "6713463",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 14?",
+    "end_date": "2026-11-15",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "85ed366c340b4bd11016352bb0ffb6a00619f4489ff80e6d31b1451fbc4ef3b1",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic scope is Lebanon's terrestrial territory, which is the target's own territory (target_wide). The geographic detail about terrestrial vs. maritime/airspace exists only to define the legal boundaries of the qualifying action, not to identify a structurally distinct operational theater, so prior_relevance is resolution_only.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713532": {
+    "market_id": "6713532",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 30?",
+    "end_date": "2026-12-01",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "0a21a8129d12d42a90b4f86886ddf55c69f1152538dacfbfb72c829f8329f961",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic restriction to Lebanon's terrestrial territory (including internal waters, excluding maritime territory and airspace) is intrinsic to the resolution definition of the qualifying action and does not define a structurally distinct operational theater—it would largely disappear if a different action family were considered. The target is Lebanon's general recognized territory, making this target_wide with resolution_only geographic relevance.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713474": {
+    "market_id": "6713474",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 16?",
+    "end_date": "2026-11-17",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "5562511ea9c922f904e77cfccfcc770029f47d47cddc22c6da5da03a4b5af36a",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies Israel as the sole initiator and Lebanon as the sole target. The geographic restriction to Lebanon's terrestrial territory (excluding maritime and airspace) is intrinsic to the resolution definition of the qualifying action and does not define a structurally distinct operational theater; it is resolution_only. The action type restrictions (air strikes and surface-to-surface missiles only) are weapon/action-type resolution criteria, not party or geographic scope.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713488": {
+    "market_id": "6713488",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 20?",
+    "end_date": "2026-11-21",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "504cd48649c3358d0995ddd39f56b959318f1d4a25af4560615f8f1dfd25bdf7",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic restriction to Lebanon's terrestrial territory (excluding maritime and airspace) is intrinsic to the resolution definition of the qualifying action and does not define a structurally distinct operational theater; it would largely disappear if a different action family were considered. The weapon/action type restrictions are resolution criteria, not party or geographic scope.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713492": {
+    "market_id": "6713492",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 21?",
+    "end_date": "2026-11-22",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "10e96ffa9af77f6c2270f60af411b4d7c1dde653ae26b21141d2d00effa9c73b",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic scope is Lebanon's terrestrial territory, which is the target's own territory (target_wide). The geographic detail about terrestrial vs. maritime territory and airspace is intrinsic to the resolution definition of the qualifying action, not a structural theater distinction, so it is resolution_only.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713497": {
+    "market_id": "6713497",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 22?",
+    "end_date": "2026-11-23",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "88b7c297fa6fe7bf2bf4649439a693d8063ae3d85cd3a7dedd0fc95d1c867272",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic scope is Lebanon's terrestrial territory, which is the target's own territory (target_wide). The geographic detail about internal waters, airspace exclusion, and disputed borders exists solely to define the legal boundaries of the qualifying action, not to identify a structurally distinct operational theater, so prior_relevance is resolution_only.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713501": {
+    "market_id": "6713501",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 23?",
+    "end_date": "2026-11-24",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "1dfce5a133ef5e458cec21496d46467fbe1f4647442c4e9cbb1e32b54b545cad",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target state (Lebanon). The geographic restriction to Lebanon's terrestrial territory (excluding maritime and airspace) is intrinsic to the resolution definition of the qualifying action and does not define a structurally distinct operational theater; it is resolution_only. The action type restrictions (air strikes or surface-to-surface missiles) are weapon/action-type resolution criteria, not party or geographic scope.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713519": {
+    "market_id": "6713519",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 27?",
+    "end_date": "2026-11-28",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "2184443603c794b1c01e30fd1c342709f49ae447b7e7a06a1e53e9cb15fb6d4d",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic scope is Lebanon's terrestrial territory, which is the target's own territory (target_wide). The geographic details (exclusion of maritime territory and airspace, de facto control clause) exist solely to define the legal boundaries of the qualifying action and do not represent a structurally distinct operational theater, hence resolution_only.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713524": {
+    "market_id": "6713524",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 28?",
+    "end_date": "2026-11-29",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "db7154c1641ad2a49363c759ddeff9040b73ccfdf2a8bc985cb1c83ead50ebaa",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies Israel as the sole initiator and Lebanon as the sole target. The geographic restriction to Lebanon's terrestrial territory (excluding maritime and airspace) is intrinsic to the resolution definition of the qualifying action and does not define a structurally distinct operational theater; it is resolution_only. The action type restrictions (qualifying vs. non-qualifying munitions) are resolution criteria, not party or geographic scope.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713450": {
+    "market_id": "6713450",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 10?",
+    "end_date": "2026-11-11",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "ac4d4f0754e4ca759cb1d593f50b0838bfc79151227ed09f3a6f2533aa2bff72",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic scope is Lebanon's terrestrial territory, which is the target's own territory (target_wide). The geographic detail about terrestrial territory vs. maritime/airspace exists only to define the legal boundaries of the qualifying action, not to identify a structurally distinct operational theater, so it is resolution_only.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713477": {
+    "market_id": "6713477",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 18?",
+    "end_date": "2026-11-19",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "4f4c913269a561b50bcde61e8926ae498ee07e955d54089336a94a5bb33cb5fa",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic restriction to Lebanon's terrestrial territory is intrinsic to the definition of the qualifying action (impact on Lebanon) and does not define a structurally distinct operational theater beyond the target itself, so it is resolution_only. The contract excludes maritime territory and airspace, but these are definitional constraints on the action type, not separate geographic theaters.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "6713484": {
+    "market_id": "6713484",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Lebanon on November 19?",
+    "end_date": "2026-11-20",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "50532a709d03e8b8233e870f16dd2f1e9e00c4ba2882e57c2adbae7b24c82ad8",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Israel) acting against a single target (Lebanon). The geographic restriction to Lebanon's terrestrial territory is intrinsic to the definition of the qualifying action (impact on Lebanon) and does not define a structurally distinct operational theater separate from the target's general territory, so it is resolution_only. The contract excludes maritime territory and airspace, but these are definitional constraints on the action type, not separate geographic theaters.",
+      "scope_fingerprint": "c5fda44801a9b235",
+      "action_prior_fingerprint": "6dedb0e0026885b7"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
   }
 }
