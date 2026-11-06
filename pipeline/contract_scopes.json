@@ -6627,5 +6627,45 @@
     },
     "route": "scoped_bilateral",
     "version": 1
+  },
+  "6753654": {
+    "market_id": "6753654",
+    "dyad": "Israel-Lebanon",
+    "question": "Israel military action against Greater Beirut by December 31?",
+    "end_date": "2026-12-31",
+    "action_type": "airstrike",
+    "initiator": "Israel",
+    "target": "Lebanon",
+    "source_signature": "a6b5771af49e3a7611de5b0939ad6e0ab36bc160824e6db6255f2e4fd1b7401f",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Israel",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Lebanon",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "subterritory",
+        "places": [
+          "Greater Beirut"
+        ],
+        "prior_relevance": "structural_theater"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "Israel is the single initiator state; Lebanon is the single target state. The geographic restriction to Greater Beirut (defined as the continuous urbanized zone encompassing Beirut Governorate and adjacent coastal/suburban municipalities of Mount Lebanon Governorate) constitutes a named subterritory of Lebanon. This restriction is structural rather than resolution-only because Greater Beirut represents a distinct operational theater within Lebanon—strikes elsewhere in Lebanon (e.g., the south, the Bekaa Valley) would not qualify, meaning the geography genuinely conditions the action-family prior by narrowing the operational zone to a specific urban area rather than Lebanon generally.",
+      "scope_fingerprint": "f3910206937a6e24",
+      "action_prior_fingerprint": "847e3c442b8a2413"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
   }
 }

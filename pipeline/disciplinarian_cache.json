@@ -2439,6 +2439,18 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"11b65c007f43957cee74": {
+"bucket": "CORE",
+"dyad": "Israel-Lebanon",
+"reason": "Directly asks whether Israel will conduct military action against a target in Lebanon (Beirut), constituting interstate conflict onset/escalation in the Israel-Lebanon dyad.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "11be8185977c268a4d53": {
 "bucket": "NOISE",
 "dyad": null,
@@ -7120,6 +7132,12 @@
 "reason": "This question is about the location of a diplomatic meeting, not about interstate conflict onset or escalation between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"3409181e8a392706eaea": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a US political personnel change, not about interstate conflict between a specific dyad.",
+"relevant_nodes": []
 },
 "340b28ea001c6795b617": {
 "bucket": "ADJACENT",
@@ -12882,6 +12900,12 @@
 ],
 "seeded": true
 },
+"5df44b087acb902fb37a": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a US domestic political/personnel matter, not about interstate conflict between two state actors.",
+"relevant_nodes": []
+},
 "5dfba39aa3a373c23191": {
 "bucket": "NOISE",
 "dyad": null,
@@ -16344,6 +16368,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"78b7a29629e7acc6288b": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a US domestic political personnel change, not about interstate conflict between a specific dyad.",
+"relevant_nodes": []
+},
 "78c4489a80f07b4ee4e8": {
 "bucket": "NOISE",
 "dyad": null,
@@ -16993,6 +17023,12 @@
 "reason": "Houthis are a non-state actor (rebel/militia group in Yemen), so this is not an interstate conflict dyad between two sovereign states.",
 "relevant_nodes": [],
 "seeded": true
+},
+"7df30e3bb77a67161c7d": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a US domestic political personnel question, not about interstate conflict between a specific dyad.",
+"relevant_nodes": []
 },
 "7dff503b8cefba87e441": {
 "bucket": "NOISE",
@@ -17696,6 +17732,12 @@
 "WarCosts"
 ],
 "seeded": true
+},
+"833d7f6e6e93b9303455": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a US domestic political appointment, not interstate conflict between state actors.",
+"relevant_nodes": []
 },
 "834a7678c8d67ef31fe0": {
 "bucket": "ADJACENT",
@@ -28982,6 +29024,12 @@
 "reason": "This is about an Israeli domestic election outcome and leadership succession, not about interstate conflict between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"d5f10d55926ea4d1b705": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a US domestic political/personnel question, not about interstate conflict between two state actors.",
+"relevant_nodes": []
 },
 "d5f8fbe70013d5ae1e32": {
 "bucket": "NOISE",
