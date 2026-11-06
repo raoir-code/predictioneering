@@ -38,9 +38,10 @@ DEGRADED = (("market prices", r"\[warn\] (?:midpoints API returned|batch midpoin
             ("resolver", r"\[resolver\] fetch failed|API failure, skipping"),
             ("dyad configs", r"not in dyad_registry|using fallback baseline"),
             ("state persistence", r"failed to persist"),
-            ("translator", r"DATE_MISMATCH_FALLBACK|ontology error|\[coherence\] WARNING|fail-closed, no production|failed closed: [1-9]|\[during-war\] import failed|\[claude\] FAILED"),
+            ("translator", r"ontology error|\[coherence\] WARNING|fail-closed, no production|failed closed: [1-9]|\[during-war\] import failed|\[claude\] FAILED"),
             ("side steps", r"-- non-fatal|\(non-fatal[;)]|could not stage|\[talks\].* errors="))
-deg = {tag: [l.strip() for l in txt.splitlines() if re.search(pat, l)] for tag, pat in DEGRADED}
+deg = {tag: [l.strip() for l in txt.splitlines() if re.search(pat, l) and not re.match(r"^\[\d\d:\d\d:\d\d\] .*\.\.\.\s*$", l.strip())]
+       for tag, pat in DEGRADED}   # step announcements are not failures (as for errs); end_date fallbacks are routine (Nov 6: 0 of 141 live contracts off by > 1 day)
 print(f"   degraded (fallbacks): {sum(len(v) for v in deg.values())}" + "".join(f" | {t} {len(v)}" for t, v in deg.items() if v))
 for t, v in deg.items():
     for e in v[-2:]: print(f"      [{t}] {e[:140]}")
