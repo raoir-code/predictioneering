@@ -278,6 +278,8 @@ def _load_dyad_query(dyad):
 
     cfg = _DYAD_CONFIGS_CACHE.get(dyad)
     if cfg and cfg.get("query"):
+        if len(cfg["query"]) > 200:   # Nov 6: GNews rejects queries over 200 chars (HTTP 400)
+            print(f"    [fetch_gnews] FAILED: query for {dyad} is {len(cfg['query'])} chars (GNews max 200)")
         return cfg["query"]
 
     if dyad in DYAD_QUERIES:
@@ -347,6 +349,8 @@ def fetch_gnews(dyad, as_of_date, max_retries=3, base_sleep=3.0, write_cache=Tru
         try:
             r = requests.get("https://gnews.io/api/v4/search", params=params, timeout=30)
             body = r.json()
+            if r.status_code != 200 or "errors" in body:   # Nov 6: HTTP 400 (query > 200 chars) was cached as [] = "no news", daily, silently
+                raise RuntimeError(f"GNews API error status={r.status_code} detail={body.get('errors')}")
             articles = body.get("articles", [])
             if not articles:
                 print(f"    [fetch_gnews] {dyad}: 0 articles. status={r.status_code} "
