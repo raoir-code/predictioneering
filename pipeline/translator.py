@@ -288,6 +288,7 @@ def _claude_call(system_prompt: str, user_content: str) -> dict | None:
         except Exception as e:
             print(f"    [claude] attempt {attempt+1} failed: {e}")
         time.sleep(2 ** attempt)
+    print("    [claude] FAILED after 3 attempts")   # Nov 6 audit: was a silent None
     return None
 
 

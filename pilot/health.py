@@ -28,6 +28,22 @@ for tag, pat in (("during-war/unified", r"\[during-war\][^\n]*"), ("rules", r"\[
 errs = [l.strip() for l in txt.splitlines() if re.search(r"Traceback|ERROR|failed \(non-fatal\)|FAILED|Exception|\[strike-news\].*(?:failed|errors=)", l)
         and not re.match(r"^\[\d\d:\d\d:\d\d\] .*\.\.\.\s*$", l)]
 print(f"   errors/failures: {len(errs)}"); [print("     ", e[:150]) for e in errs[-8:]]
+# Nov 6 audit: messages that mean a component fell back or skipped work, but match none of the patterns above. Each is a counted
+# degradation (the GNews HTTP 400 ran daily for weeks as "0 articles" because its line said "API error detail", not FAILED).
+DEGRADED = (("market prices", r"\[warn\] (?:midpoints API returned|batch midpoints failed)"),
+            ("context keeper", r"\[context_keeper\].*(?:after retry|Claude API error|generation call failed|not found, aborting)"),
+            ("new dyad", r"NOT saved|LIKELY DUPLICATE DYAD"),
+            ("news fetch", r"\[fetch_gnews\].*(?:WARNING: no query|FALLBACK --|NO FALLBACK)|\[error\] GNews failed"),
+            ("node scoring", r"\[warn\] \u26a0|\[warn\] could not write"),
+            ("resolver", r"\[resolver\] fetch failed|API failure, skipping"),
+            ("dyad configs", r"not in dyad_registry|using fallback baseline"),
+            ("state persistence", r"failed to persist"),
+            ("translator", r"DATE_MISMATCH_FALLBACK|ontology error|\[coherence\] WARNING|fail-closed, no production|failed closed: [1-9]|\[during-war\] import failed|\[claude\] FAILED"),
+            ("side steps", r"-- non-fatal|\(non-fatal[;)]|could not stage|\[talks\].* errors="))
+deg = {tag: [l.strip() for l in txt.splitlines() if re.search(pat, l)] for tag, pat in DEGRADED}
+print(f"   degraded (fallbacks): {sum(len(v) for v in deg.values())}" + "".join(f" | {t} {len(v)}" for t, v in deg.items() if v))
+for t, v in deg.items():
+    for e in v[-2:]: print(f"      [{t}] {e[:140]}")
 plog = [json.loads(l) for l in open(ROOT / "predictions" / "log.jsonl") if l.strip()]
 _last = max((r["timestamp"] for r in plog), default=None)
 published = {str(r["market_id"]) for r in plog if r["timestamp"] == _last}   # Nov 2: NOISE markets carry a feed price but are never published
