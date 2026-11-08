@@ -665,6 +665,9 @@ def _call_claude_json(prompt, expected_fields, max_tokens, retries=3,
         ("fence-strip",   _fence_strip(text)),
         ("brace-extract", _brace_extract(text)),
     ]:
+        # Nov 8: JSON forbids a leading "+" ("NuclearDeterrence": +0.5). The strip lived only in the fence tier, so unfenced
+        # replies with any positive score failed every tier and returned zeros (Russia-EU, NATO-Russia, Nov 6-7).
+        candidate = re.sub(r'(":\s*)(-?)\.(\d)', r'\1\g<2>0.\3', re.sub(r'(":\s*)\+(?=[\d.])', r'\1', candidate))   # also ".25" -> "0.25"
         try:
             parsed = json.loads(candidate)
             return {n: float(parsed.get(n, 0.0)) for n in expected_fields}
