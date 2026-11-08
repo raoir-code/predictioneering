@@ -606,7 +606,17 @@ def run(dry_run: bool = False, filter_dyad: str = None):
     with open(CLASSIFIED_FEED) as f:
         markets = json.load(f)
 
-    core = [m for m in markets if m.get("bucket") == "CORE" and not m.get("resolved") and not m.get("contract_family")]
+    # Nov 8: a contract with no dyad has no pair to score. It was grouped under 'Unknown' and engine-scored on a bare-word
+    # news query and a placeholder baseline (5 'degraded' lines a run). No price reads that P(A): agreement contracts are
+    # priced by their own component, and the translator never translates a dyad-less contract (UNSCORABLE_DYADS). The
+    # stale our_prediction was still logged daily as engine_p, so it is cleared (agreement rows log engine_p None).
+    _no_dyad = lambda m: (m.get("dyad") or "").strip() in ("", "None", "Unknown", "unknown")
+    _dyadless = [m for m in markets if m.get("bucket") == "CORE" and not m.get("resolved") and _no_dyad(m)]
+    for m in _dyadless:
+        m["our_prediction"] = None
+    print(f"[predict.py] {len(_dyadless)} CORE markets with no dyad: not engine-scored.")
+    core = [m for m in markets if m.get("bucket") == "CORE" and not m.get("resolved") and not m.get("contract_family")
+            and not _no_dyad(m)]
     if filter_dyad:
         core = [m for m in core if filter_dyad.lower() in (m.get("dyad") or "").lower()]
 
