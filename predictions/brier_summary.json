@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-11-07T22:30:54.397717+00:00",
-  "n_resolved": 260,
-  "brier_conditional_mean": 0.297859,
+  "last_updated": "2026-11-08T22:25:35.885714+00:00",
+  "n_resolved": 261,
+  "brier_conditional_mean": 0.296721,
   "brier_engine_mean": 0.424475,
-  "brier_market_mean": 0.131539,
-  "edge_vs_market": -0.16632,
+  "brier_market_mean": 0.131063,
+  "edge_vs_market": -0.165658,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -2865,6 +2865,17 @@
       "brier_conditional": 0.11189,
       "brier_market": 0.156025,
       "resolved_at": "2026-11-07T22:30:46.477723+00:00"
+    },
+    {
+      "market_id": "6367374",
+      "market_label": "Israel x Iran ceasefire continues through November 4?",
+      "dyad": "Israel-Iran",
+      "outcome": 1,
+      "conditional_p": 0.9715,
+      "market_p": 0.915,
+      "brier_conditional": 0.000812,
+      "brier_market": 0.007225,
+      "resolved_at": "2026-11-08T22:25:17.337263+00:00"
     }
   ]
 }

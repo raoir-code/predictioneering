@@ -187,6 +187,19 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"01343bb7394ec27615a0": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This question concerns ceasefire timing between two state actors rather than direct conflict onset, giving the model partial but not full traction.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"PreferenceAlignment",
+"Patience"
+]
+},
 "013d846a39052953e0b0": {
 "bucket": "ADJACENT",
 "dyad": null,
@@ -2522,6 +2535,19 @@
 "CommitmentProblem"
 ],
 "seeded": true
+},
+"11d66591df6d119a8f9a": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This asks about ceasefire timing between two state actors rather than conflict onset, giving the model partial but not direct traction.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"PreferenceAlignment",
+"Patience"
+]
 },
 "11fef31ace4e9d339244": {
 "bucket": "ADJACENT",
@@ -26678,6 +26704,19 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"c05722aef4ffebebb656": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This concerns ceasefire timing between two state actors rather than direct conflict onset, giving the model partial but not full traction.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"PreferenceAlignment",
+"Patience"
+]
+},
 "c0578f434a98cf56468f": {
 "bucket": "NOISE",
 "dyad": null,
@@ -29664,6 +29703,19 @@
 "reason": "This question is about ranking Chinese AI companies, not about interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"d6459c842354ca181415": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This question concerns ceasefire timing between US and Iran, which is related to interstate conflict dynamics but is about de-escalation/ceasefire rather than conflict onset directly.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"PreferenceAlignment",
+"Patience"
+]
 },
 "d64aab46eafb23dfb9f6": {
 "bucket": "NOISE",
@@ -34261,6 +34313,19 @@
 "WinProbability"
 ],
 "seeded": true
+},
+"f78d2ea4ae4d158d807d": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This asks about ceasefire timing between the US-Iran dyad, which is related to interstate conflict dynamics but is not directly about conflict onset or escalation.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"PreferenceAlignment",
+"Patience"
+]
 },
 "f7a00c32854bdfcacf02": {
 "bucket": "NOISE",
