@@ -5,7 +5,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "pipeline"))
 import context_keeper as CK
 
 TODAY = dt.date(2026, 11, 4)
-BODY = " Pakistan and Yemen: background text long enough to pass the minimum length check for a crisis context." * 2
+BODY = (" STATUS: no direct fighting between the two."   # Nov 9: v2 contexts need a STATUS line (464bcaa); these fixtures predated it
+        + " Pakistan and Yemen: background text long enough to pass the minimum length check for a crisis context." * 2)
 
 def test_future_stamp_rejected():
     ok, why = CK._validate_candidate("old", "CRISIS CONTEXT (Updated through week ending November 7, 2026)." + BODY, "Pakistan-Yemen", TODAY)
