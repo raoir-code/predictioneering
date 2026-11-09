@@ -542,6 +542,48 @@ CRITICAL DISTINCTION for military pressure nodes:
 Return ONLY valid JSON, no preamble: {{"RoutineMilitaryPressure": 0, "OperationalPreparation": 0, "LiveViolenceObserved": 0, "LiveUltimatumDeadline": 0, "LiveMediationAccepted": 0, "LiveAbatementSignal": 0}}
 """
 
+NODE_SCORES_LAST_GOOD = LOGS_DIR / "node_scores_last_good.json"
+LAST_GOOD_MAX_AGE_DAYS = 7
+
+def _live_date(as_of_date, persist_failures):
+    """Nov 9: the last-good cache is for the live run only (as_of within a day of today, UTC); backtests neither read nor write it."""
+    if not persist_failures or as_of_date is None:
+        return None
+    try:
+        d = date.fromisoformat(str(as_of_date)[:10])
+    except Exception:
+        return None
+    return d if abs((datetime.utcnow().date() - d).days) <= 1 else None
+
+def _save_last_good(dyad, expected_fields, as_of_date, persist_failures, scores):
+    d = _live_date(as_of_date, persist_failures)
+    if d is None or not dyad:
+        return
+    try:
+        cache = json.loads(NODE_SCORES_LAST_GOOD.read_text()) if NODE_SCORES_LAST_GOOD.exists() else {}
+        cache[f"{dyad}|{expected_fields[0]}|{len(expected_fields)}"] = {"as_of": str(d), "scores": scores}
+        NODE_SCORES_LAST_GOOD.parent.mkdir(exist_ok=True)
+        tmp = NODE_SCORES_LAST_GOOD.with_suffix(".tmp"); tmp.write_text(json.dumps(cache, indent=1)); tmp.replace(NODE_SCORES_LAST_GOOD)
+    except Exception as e:
+        print(f"    [warn] could not save last-good node scores ({e!r})")
+
+def _fallback_scores(dyad, expected_fields, as_of_date, persist_failures):
+    """Nov 9: a failed node-scoring call returns the pair's last good scores (live run, <= 7 days old), not zeros. Zeros read as
+    'nothing happened', and failures cluster on escalation days (a '+' means a positive score; long replies come from busy news days)."""
+    d = _live_date(as_of_date, persist_failures)
+    if d is not None and dyad:
+        try:
+            cache = json.loads(NODE_SCORES_LAST_GOOD.read_text()) if NODE_SCORES_LAST_GOOD.exists() else {}
+            e = cache.get(f"{dyad}|{expected_fields[0]}|{len(expected_fields)}")
+            if e and 0 <= (d - date.fromisoformat(e["as_of"])).days <= LAST_GOOD_MAX_AGE_DAYS:
+                print(f"    [warn] node scoring FALLBACK: using {dyad}'s last good scores from {e['as_of']} (not zeros)")
+                return {n: float(e["scores"].get(n, 0.0)) for n in expected_fields}
+        except Exception as ex:
+            print(f"    [warn] last-good node scores unreadable ({ex!r})")
+    if d is not None:
+        print(f"    [warn] node scoring FALLBACK: no last good scores for {dyad} within {LAST_GOOD_MAX_AGE_DAYS} days -- zeros")
+    return {n: 0.0 for n in expected_fields}
+
 def _log_node_scoring_failure(dyad, as_of_date, reason, raw_excerpt=None):
     """Append a structured record every time this function is about to return
     zeros instead of a real score. This is the same failure shape as the
@@ -616,32 +658,32 @@ def _call_claude_json(prompt, expected_fields, max_tokens, retries=3,
                 time.sleep(wait)
                 continue
             print(f"    [warn] \u26a0\ufe0f\u26a0\ufe0f  API request failed ({type(e).__name__}) "
-                  f"after {retries} retries -- returning zeros. THIS RUN IS DEGRADED.")
+                  f"after {retries} retries -- falling back (last good scores, else zeros). THIS RUN IS DEGRADED.")
             if persist_failures:
                 _log_node_scoring_failure(
                     dyad,
                     as_of_date,
                     f"request_exception:{type(e).__name__}: {e}",
                 )
-            return {n: 0.0 for n in expected_fields}
+            return _fallback_scores(dyad, expected_fields, as_of_date, persist_failures)
         except ValueError:
             print(f"    [warn] \u26a0\ufe0f\u26a0\ufe0f  API returned non-JSON response -- "
-                  f"returning zeros. THIS RUN IS DEGRADED.")
+                  f"falling back (last good scores, else zeros). THIS RUN IS DEGRADED.")
             if persist_failures:
                 _log_node_scoring_failure(
                     dyad, as_of_date, "non_json_http_response"
                 )
-            return {n: 0.0 for n in expected_fields}
+            return _fallback_scores(dyad, expected_fields, as_of_date, persist_failures)
 
     if "content" not in resp:
         err_msg = resp.get('error', {}).get('message', 'unknown')
         print(f"    [warn] \u26a0\ufe0f\u26a0\ufe0f  Claude API error: {err_msg} -- "
-              f"returning zeros. THIS RUN IS DEGRADED.")
+              f"falling back (last good scores, else zeros). THIS RUN IS DEGRADED.")
         if persist_failures:
             _log_node_scoring_failure(
                 dyad, as_of_date, f"api_error: {err_msg}"
             )
-        return {n: 0.0 for n in expected_fields}
+        return _fallback_scores(dyad, expected_fields, as_of_date, persist_failures)
     text = resp["content"][0]["text"].strip()
 
     # Three-tier JSON extraction (June 18 2026):
@@ -683,11 +725,13 @@ def _call_claude_json(prompt, expected_fields, max_tokens, retries=3,
         candidate = _norm(candidate)
         try:
             parsed = json.loads(candidate)
-            return {n: float(parsed.get(n, 0.0)) for n in expected_fields}
+            _scores = {n: float(parsed.get(n, 0.0)) for n in expected_fields}
+            _save_last_good(dyad, expected_fields, as_of_date, persist_failures, _scores)
+            return _scores
         except Exception:
             continue
     print(f"    [warn] \u26a0\ufe0f\u26a0\ufe0f  Node scoring parse error (all 3 tiers) -- "
-          f"returning zeros. THIS RUN IS DEGRADED.")
+          f"falling back (last good scores, else zeros). THIS RUN IS DEGRADED.")
     print(f"    [warn] raw response (first 300 chars, stop_reason={resp.get('stop_reason')}): {text[:300]!r}")
     if persist_failures:
         _log_node_scoring_failure(
@@ -696,7 +740,7 @@ def _call_claude_json(prompt, expected_fields, max_tokens, retries=3,
             f"parse_error_all_3_tiers:stop_reason={resp.get('stop_reason')}",
             raw_excerpt=text[:300],
         )
-    return {n: 0.0 for n in expected_fields}
+    return _fallback_scores(dyad, expected_fields, as_of_date, persist_failures)
 
 def score_nodes_call_a(dyad, articles, as_of_date, persist_failures=True):
     """Call A: existing 11 primitives + 3 new onset-context q-parents, one call."""
