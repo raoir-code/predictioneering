@@ -2448,6 +2448,17 @@
 "reason": "This question is about a UN leadership selection, not about interstate conflict between any dyad.",
 "relevant_nodes": []
 },
+"11648d39c092f0f38def": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This concerns the cessation of a US maritime/economic blockade against Iran, which is related to interstate conflict dynamics but is about policy change rather than conflict onset.",
+"relevant_nodes": [
+"WarCosts",
+"PreferenceAlignment",
+"HardlineClaims",
+"Patience"
+]
+},
 "11667fa6e3ed19848371": {
 "bucket": "NOISE",
 "dyad": null,
@@ -7572,6 +7583,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"365525c507ca932b240e": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "This question concerns US-Iran diplomatic negotiations rather than direct conflict onset, but involves a dyad with active conflict risk and touches on preference alignment and commitment problems.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"CommitmentProblem",
+"HardlineClaims",
+"Patience"
+]
+},
 "365ede92567fa11da67b": {
 "bucket": "NOISE",
 "dyad": null,
@@ -7885,6 +7907,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"3900f06fd24233427bc4": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This question concerns the continuation of a ceasefire between two state actors, which is related to conflict onset/escalation but is about ceasefire duration rather than direct conflict onset.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
+},
 "3909d535b0041ecc8d75": {
 "bucket": "NOISE",
 "dyad": null,
@@ -8109,6 +8142,16 @@
 "HardlineClaims",
 "CommitmentProblem",
 "Patience"
+]
+},
+"3aa59b0dc5022aab9f74": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Lebanon",
+"reason": "This concerns a diplomatic event between two state actors with a history of interstate conflict, but it asks about a meeting rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"WarCosts"
 ]
 },
 "3ab8a358df74255e28dc": {
@@ -13184,6 +13227,17 @@
 "reason": "Houthis are a non-state actor (rebel/militia group), so this is not interstate conflict between two sovereign states.",
 "relevant_nodes": [],
 "seeded": true
+},
+"5e1997d08625ce9d2ec0": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This is about the continuation of a ceasefire between two state actors, which relates to conflict dynamics but is not directly about conflict onset \u2014 it concerns ceasefire timing/duration.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
 },
 "5e2445b779207006a799": {
 "bucket": "NOISE",
@@ -24322,6 +24376,17 @@
 ],
 "seeded": true
 },
+"b048a674a874664b2bb2": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This is about the continuation of a ceasefire between two state actors, which relates to conflict dynamics but is about ceasefire duration rather than conflict onset.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"PreferenceAlignment",
+"Patience"
+]
+},
 "b05fce6717e1da52fe83": {
 "bucket": "NOISE",
 "dyad": null,
@@ -30102,6 +30167,17 @@
 "dyad": null,
 "reason": "This is a monetary policy / central banking question with no connection to interstate conflict.",
 "relevant_nodes": []
+},
+"d8e17a80f38c5ee0d745": {
+"bucket": "ADJACENT",
+"dyad": "Israel-Iran",
+"reason": "This is about the duration/continuation of a ceasefire between two state actors, not directly about conflict onset but related to whether interstate conflict resumes.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"Patience",
+"PreferenceAlignment"
+]
 },
 "d8e744b04d0a55918672": {
 "bucket": "NOISE",
