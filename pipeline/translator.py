@@ -2337,6 +2337,11 @@ def run_translator():
 
     feed  = json.loads(CLASSIFIED_FEED.read_text())
     cache = _load_cache()
+    try:                                   # Nov 9 (docs/directional_pba_prereg.md): undo last run's role tilt FIRST (it is applied after strike|no war)
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pilot")); import directional_pba as _ROLE
+        print(f"[role tilt] restored the pre-tilt P(B|A) on {_ROLE.restore(feed)} markets")
+    except Exception as ex:
+        _ROLE = None; print(f"[role tilt] restore FAILED ({ex!r}); role tilt not applied this run")
     try:                                   # Oct 23 (docs/strike_given_war_prereg.md): undo last run's empirical P(B|A) before any pass
         sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pilot")); import strike_given_war as _SGW
         print(f"[strike|war] restored the model's own P(B|A) on {_SGW.restore(feed)} markets")
@@ -2408,6 +2413,12 @@ def run_translator():
     if _DW is not None:                    # after strike|war, before the during-war pass
         try: print(f"[declare war] empirical P(B|A) {_DW.P_DECLARE_GIVEN_A} applied to {_DW.apply(feed)} declaration-of-war markets")
         except Exception as ex: print(f"[declare war] apply FAILED ({ex!r}); model P(B|A) kept")
+    if _ROLE is not None:                  # Nov 9: after strike|no war, strike|war and declare war; before the during-war pass
+        try:
+            _n, _unl = _ROLE.apply(feed)
+            print(f"[role tilt] P(B|A) tilted by episode role (OR {_ROLE.OR}): {dict(_n)}"
+                  + (f"; WARNING unlabeled pairs, no tilt: {', '.join(_unl)}" if _unl else ""))
+        except Exception as ex: print(f"[role tilt] apply FAILED ({ex!r}); model P(B|A) kept")
     _apply_during_war_pricing(feed)
     CLASSIFIED_FEED.write_text(json.dumps(feed, indent=2))
 

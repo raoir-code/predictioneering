@@ -1,7 +1,8 @@
 {
-  "rule": "docs/directional_pba_prereg.md (64f739d): initiator = X's side made the first militarized move (threat, display or use of force) of the episode current on as_of; 6+ months with no militarized move starts a new episode. Groups of states (not a single state) are unclear.",
-  "as_of": "2026-10-17",
-  "labeled_by": "ChatGPT (sources in the Nov 8 work log), hand-checked by Adi",
+  "rule": "docs/directional_pba_prereg.md (64f739d): initiator = X's side made the first militarized move (threat, display or use of force) of the episode current on as_of; 6+ months with no militarized move starts a new episode. Groups of states (not a single state) are unclear. Nov 9: implicit threats ('not ruling out') and deployments to a third country do not count as a first move.",
+  "as_of": "2026-11-08",
+  "history": "a9393a3: the 17 replay labels as of Oct 17 (used by the gate-2 replay); unchanged on Nov 8",
+  "labeled_by": "ChatGPT (sources in the Nov 8-9 work log), hand-checked by Adi",
   "pairs": {
     "Israel->Lebanon":       {"role": "unclear",   "episode_start": null,         "basis": "continuous militarized interaction since before 2021; first move not establishable"},
     "Saudi Arabia->Yemen":   {"role": "unclear",   "episode_start": "2026-07-03", "basis": "Houthi threat Jul 3 vs alleged earlier Saudi interception that morning (unverified)"},
@@ -19,6 +20,18 @@
     "Iran->Egypt":           {"role": "unclear",   "episode_start": null,         "basis": "Jul 29 Damietta drone strike; responsibility not established"},
     "Iran->Qatar":           {"role": "initiator", "episode_start": "2026-02-28", "basis": "Iranian ballistic missiles at Qatar"},
     "Iran->Oman":            {"role": "initiator", "episode_start": "2026-03-01", "basis": "Duqm port drone strike, attributed to Iran by the GCC Secretary-General on Mar 1"},
-    "Turkey->Yemen":         {"role": "unclear",   "episode_start": null,         "basis": "Turkey ruled out direct combat against the Houthis"}
+    "Turkey->Yemen":         {"role": "unclear",   "episode_start": null,         "basis": "Turkey ruled out direct combat against the Houthis"},
+    "Russia->EU":            {"role": "unclear",   "episode_start": null,         "basis": "group of states; repeated airspace incursions since 2022, first move not isolable"},
+    "Pakistan->Afghanistan": {"role": "unclear",   "episode_start": null,         "basis": "continuous cross-border incidents 2024-25 before the Oct 9, 2025 airstrikes; first move not established"},
+    "Israel->Syria":         {"role": "unclear",   "episode_start": null,         "basis": "Israeli strikes in Syria for years before Dec 2024; no 6-month reset verified"},
+    "US->Cuba":              {"role": "unclear",   "episode_start": null,         "basis": "Mar 16, 2026: Trump declined to rule out a military option; implicit, not an explicit threat"},
+    "US->Colombia":          {"role": "unclear",   "episode_start": null,         "basis": "Jan 4, 2026 threat; no continuous episode to Nov 8 established"},
+    "US->Mexico":            {"role": "unclear",   "episode_start": null,         "basis": "Nov 17, 2025 talk of strikes on cartels; no continuous US-Mexico episode established"},
+    "India->Pakistan":       {"role": "unclear",   "episode_start": "2026-09-15", "basis": "warship collision in the Arabian Sea; each side blames the other"},
+    "Yemen->Israel":         {"role": "initiator", "episode_start": "2023-10-10", "basis": "Houthi threats Oct 10, 2023, launches from Oct 19; no 6-month gap"},
+    "Pakistan->Yemen":       {"role": "unclear",   "episode_start": null,         "basis": "Oct 5, 2026 deployment to Saudi Arabia to deter the Houthis: a third-country deployment, not a move against Yemen"},
+    "Israel->Iraq":          {"role": "target",    "episode_start": "2026-01-25", "basis": "Kataib Hezbollah threatened to fight Israel and the US before Israeli strikes"},
+    "Ethiopia->Eritrea":     {"role": "initiator", "episode_start": "2025-03-01", "basis": "Ethiopian forces positioned within striking distance of Assab (early Mar 2025); Eritrea then mobilized"},
+    "Iran->ArabStates":      {"role": "unclear",   "episode_start": null,         "basis": "group of states"}
   }
 }
