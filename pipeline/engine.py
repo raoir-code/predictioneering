@@ -656,9 +656,22 @@ def _call_claude_json(prompt, expected_fields, max_tokens, retries=3,
         part = t.split("```")[1].lstrip("json").strip()
         return re.sub(r'": \+(\d)', r'": \1', part)
 
+    def _norm(c):   # Nov 8: JSON forbids a leading "+" ("NuclearDeterrence": +0.5); also ".25" -> "0.25"
+        return re.sub(r'(":\s*)(-?)\.(\d)', r'\1\g<2>0.\3', re.sub(r'(":\s*)\+(?=[\d.])', r'\1', c))
+
     def _brace_extract(t):
-        lo, hi = t.find("{"), t.rfind("}")
-        return t[lo:hi+1] if lo != -1 and hi != -1 else ""
+        # Nov 9: the LAST complete JSON object that holds an expected field. When the model writes reasoning first despite
+        # the prompt (Iran-ArabStates, Nov 8: 77 articles, a relevance analysis, then the JSON), the object is at the end and
+        # the preamble may itself contain braces; first-{ to last-} then fails.
+        t = _norm(t); dec = json.JSONDecoder()
+        for i in [m.start() for m in re.finditer(r"\{", t)][::-1]:
+            try:
+                obj, _ = dec.raw_decode(t[i:])
+            except Exception:
+                continue
+            if isinstance(obj, dict) and sum(k in obj for k in expected_fields) >= max(1, len(expected_fields) // 2):
+                return json.dumps(obj)
+        return ""   # no first-{-to-last-} fallback: it would accept a fragment quoted in a preamble
 
     for label, candidate in [
         ("direct",        text),
@@ -667,7 +680,7 @@ def _call_claude_json(prompt, expected_fields, max_tokens, retries=3,
     ]:
         # Nov 8: JSON forbids a leading "+" ("NuclearDeterrence": +0.5). The strip lived only in the fence tier, so unfenced
         # replies with any positive score failed every tier and returned zeros (Russia-EU, NATO-Russia, Nov 6-7).
-        candidate = re.sub(r'(":\s*)(-?)\.(\d)', r'\1\g<2>0.\3', re.sub(r'(":\s*)\+(?=[\d.])', r'\1', candidate))   # also ".25" -> "0.25"
+        candidate = _norm(candidate)
         try:
             parsed = json.loads(candidate)
             return {n: float(parsed.get(n, 0.0)) for n in expected_fields}
@@ -675,12 +688,12 @@ def _call_claude_json(prompt, expected_fields, max_tokens, retries=3,
             continue
     print(f"    [warn] \u26a0\ufe0f\u26a0\ufe0f  Node scoring parse error (all 3 tiers) -- "
           f"returning zeros. THIS RUN IS DEGRADED.")
-    print(f"    [warn] raw response (first 300 chars): {text[:300]!r}")
+    print(f"    [warn] raw response (first 300 chars, stop_reason={resp.get('stop_reason')}): {text[:300]!r}")
     if persist_failures:
         _log_node_scoring_failure(
             dyad,
             as_of_date,
-            "parse_error_all_3_tiers",
+            f"parse_error_all_3_tiers:stop_reason={resp.get('stop_reason')}",
             raw_excerpt=text[:300],
         )
     return {n: 0.0 for n in expected_fields}
@@ -730,7 +743,7 @@ Return ONLY valid JSON with no preamble, explanation, or markdown. Example: {{"W
     return _call_claude_json(
         prompt,
         expected,
-        max_tokens=700,
+        max_tokens=2000,   # Nov 9: was 700; a reply with a preamble was cut off before the JSON
         dyad=dyad,
         as_of_date=as_of_date,
         persist_failures=persist_failures,
@@ -827,7 +840,7 @@ Return ONLY valid JSON with no preamble, explanation, or markdown. Example: {{"L
     return _call_claude_json(
         prompt,
         expected,
-        max_tokens=600,
+        max_tokens=2000,   # Nov 9: was 600; a reply with a preamble was cut off before the JSON
         dyad=dyad,
         as_of_date=as_of_date,
         persist_failures=persist_failures,
