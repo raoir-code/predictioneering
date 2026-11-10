@@ -56,6 +56,9 @@ print(f"== {len(live)} live markets published in the latest run, by component: {
 ex = collections.defaultdict(float)
 for m in live: ex[m.get("pricing_component", "engine")] += (m["conditional_p"] - m["market_price"]) ** 2
 print("   expected excess Brier vs a calibrated market:", {k: round(v, 2) for k, v in sorted(ex.items(), key=lambda kv: -kv[1])}, "total", round(sum(ex.values()), 2))
+_bad = [r for r in plog if r["timestamp"] == _last and r.get("bet_direction") in ("YES", "NO") and r.get("conditional_p") is not None
+        and r.get("market_p") is not None and (r["bet_direction"] == "YES") != (r["conditional_p"] > r["market_p"])]
+print(f"== bets against the published price: {len(_bad)}" + ("  FAILED: should be 0 (Nov 10)" if _bad else ""))
 print("== biggest disagreements (|ours - market| > 0.35):")
 for m in sorted(live, key=lambda m: -abs(m["conditional_p"] - m["market_price"]))[:12]:
     if abs(m["conditional_p"] - m["market_price"]) > 0.35:

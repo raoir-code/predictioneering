@@ -2420,6 +2420,9 @@ def run_translator():
                   + (f"; WARNING unlabeled pairs, no tilt: {', '.join(_unl)}" if _unl else ""))
         except Exception as ex: print(f"[role tilt] apply FAILED ({ex!r}); model P(B|A) kept")
     _apply_during_war_pricing(feed)
+    try:                                   # Nov 10: bet and blend on the price we publish (after every pricing pass)
+        print(f"[bettor] re-sized on the published price: {_rebet_on_published(feed)}")
+    except Exception as ex: print(f"[bettor] re-size FAILED ({ex!r}); bet fields describe the translator-time price")
     CLASSIFIED_FEED.write_text(json.dumps(feed, indent=2))
 
     print(f"\n{'='*60}")
@@ -2429,6 +2432,48 @@ def run_translator():
 
     if not SCHOLAR_ONLY:
         _append_log(feed)
+
+
+def _rebet_on_published(feed: list) -> dict:
+    """Nov 10: size the bet and the market blend on the price we PUBLISH. bettor() runs inside translation, before strike|no war,
+    the role tilt and the unified / during-war passes overwrite conditional_p, so its fields described a price we never published
+    (Nov 10 audit: 337 of 540 logged bets on unified contracts pointed against the published price). Contract properties
+    (observability, resolution risk) keep their multipliers; the Clergyman confidence and clamp multipliers apply only when the
+    engine set the price. The blend weight keeps the engine's fidelity term only for engine prices; otherwise liquidity alone
+    (capped), until the blend is tested as a forecast. Logs only: no published price changes."""
+    n = {"re-sized": 0, "direction changed": 0}
+    for m in feed:
+        if not isinstance(m, dict) or m.get("resolved") or m.get("bucket") != "CORE": continue
+        p, mk = m.get("conditional_p"), m.get("market_price")
+        if p is None or mk is None: continue
+        p, mk = float(p), float(mk)
+        comp = m.get("pricing_component") or "engine"
+        engine_priced = comp == "engine"
+        old_dir = m.get("bet_direction")
+        liq = _liquidity_weight(float(m.get("volume") or 0))
+        pba = m.get("p_b_given_a")
+        w = round(min(BLEND_WEIGHT_CAP, ((1.0 - float(pba)) if engine_priced and pba is not None else 1.0) * liq), 4)
+        obs_mult = {"high": 1.0, "medium": 0.5, "low": 0.0}.get(m.get("outcome_observability"), 0.5)
+        risk_mult = {"low": 1.0, "medium": 0.7, "high": 0.3}.get(m.get("resolution_risk"), 0.7)
+        if engine_priced:
+            conf_mult = {"high": 1.0, "medium": 0.6, "low": 0.25}.get(m.get("clergy_confidence") or "medium", 0.5)
+            clamp_mult = 0.75 if m.get("was_clamped") else 1.0
+        else:
+            conf_mult, clamp_mult = 1.0, 1.0
+        kf, d, edge = 0.0, "PASS", p - mk
+        if abs(edge) > 0.02 and 0 < mk < 1:
+            if edge > 0:
+                b = 1.0 / mk - 1.0; raw = (p * b - (1 - p)) / b
+            else:
+                b = 1.0 / (1 - mk) - 1.0; raw = ((1 - p) * b - p) / b
+            kf = round(KELLY_FRACTION * max(0.0, raw) * obs_mult * risk_mult * conf_mult * clamp_mult, 4)
+            if kf > 0: d = "YES" if edge > 0 else "NO"
+        m.update({"blended_p": round(p * (1 - w) + mk * w, 4), "blend_weight": w, "kelly_fraction": kf,
+                  "kelly_dollars": round(kf * BANKROLL, 2), "bet_direction": d, "kelly_clergy_confidence_mult": conf_mult,
+                  "bet_basis": f"published:{comp}"})
+        n["re-sized"] += 1
+        if old_dir in ("YES", "NO") and d != old_dir: n["direction changed"] += 1
+    return n
 
 
 def _append_log(feed: list):
@@ -2538,6 +2583,7 @@ def _append_log(feed: list):
                 "kelly_dollars":            market.get("kelly_dollars"),
                 "bet_direction":            market.get("bet_direction"),
                 "kelly_clergy_confidence_mult": market.get("kelly_clergy_confidence_mult"),
+                "bet_basis":                market.get("bet_basis"),            # Nov 10: "published:<component>"
                 "win_condition_summary":    market.get("win_condition_summary"),
                 "legalese_flags":           market.get("legalese_flags"),
             }
