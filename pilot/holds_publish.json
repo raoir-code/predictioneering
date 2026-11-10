@@ -6,20 +6,20 @@
   ],
   "results": {
     "iran->israel+israel->iran": {
-      "n": 25,
-      "yes": 25,
+      "n": 26,
+      "yes": 26,
       "no": 0,
-      "brier_unified": 0.0239,
-      "brier_market": 0.039,
+      "brier_unified": 0.0232,
+      "brier_market": 0.0383,
       "no_market_price": 0,
       "passes_prereg_rule": true
     },
     "unitedstates->iran": {
-      "n": 34,
-      "yes": 19,
+      "n": 35,
+      "yes": 20,
       "no": 15,
-      "brier_unified": 0.1669,
-      "brier_market": 0.1866,
+      "brier_unified": 0.1659,
+      "brier_market": 0.1816,
       "no_market_price": 0,
       "passes_prereg_rule": true
     },
@@ -36,10 +36,10 @@
   "skipped": {
     "unpriced at first run: no evidence of its own, none in the reverse direction": 12,
     "past its date at first run": 3,
-    "open or void": 14,
+    "open or void": 12,
     "resolved before first run": 4
   },
-  "computed_at": "2026-11-09T22:15:48.194877+00:00",
+  "computed_at": "2026-11-10T22:10:29.471117+00:00",
   "two_direction_model": "v1",
   "two_direction_replay": {
     "n": 16,
