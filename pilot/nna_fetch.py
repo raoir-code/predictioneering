@@ -97,7 +97,7 @@ def _tests():
            '<lastmod>2026-11-07</lastmod></url><url><loc> https://nna-leb.gov.lb/en/news/226222/x </loc></url>'
            '<url><loc>https://nna-leb.gov.lb/en/sitemap/n/3?date=2026-11-07</loc></url></urlset>')
     assert parse_day(xml) == ["https://nna-leb.gov.lb/en/news/226217/four-artillery-shells-land-in-beit-yahoun-2",
-                              "https://nna-leb.gov.lb/en/news/226222/x"\], parse_day(xml)
+                              "https://nna-leb.gov.lb/en/news/226222/x"], parse_day(xml)
     page = ('<meta property="og:title" content="Four artillery shells land in Beit Yahoun"/>'
             '<meta property="og:description" content="NNA - Nabatieh &amp;ndash; Four artillery shells, fired from Israeli positions, '
             'landed this afternoon.\n\n======"/><meta property="article:published_time" content="2026-11-07T22:42:12.000Z"/>')
