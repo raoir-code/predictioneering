@@ -64,3 +64,18 @@ If the rule fails, NNA stays a sighting source at most, and silence stays worthl
 ## Deadline
 
 Key 1 is gone after Nov 23: fetch, label, hand-check and score by Nov 19.
+
+## Amendments (recorded before any scoring)
+
+1. **Nov 11: the hand-check coder.** Adi delegated the 30-item check to ChatGPT, labeling **blind** (no labels shown; links
+   to the full articles supplied). A different model family is an independent coder; the 27-of-30 rule is unchanged.
+2. **Nov 11: labels v2.** `nna-v1` agreed with the blind coder on 26 of 30 (items 7, 8, 17, 24), below the bar, so per the rule
+   above the prompt was revised as `nna-v2`, every article is relabeled, and a fresh sample is drawn (seed 1111). v2 adds four
+   edge-case rules, given verbatim to both the labeler and the blind coder:
+   - "bombing operation", "explosion", "detonation" or "blowing up" by Israeli forces = demolition (OTHER_ACTION) unless
+     warplanes, an air raid or a drone strike are named (item 24);
+   - a self-detonating drone (explosive-laden, kamikaze, FPV, loitering) = OTHER_ACTION (item 7; the contract excludes these);
+   - "strike", "raid" or "airstrike" with no weapon named = QUALIFYING unless the only weapon named for that hit is artillery or
+     a tank (item 8; NNA's "raid" and "strike" usually render the Arabic for an air raid);
+   - a device or munition found or dismantled, with no new attack = OTHER_ACTION (item 17).
+   If v2 also falls below 27 of 30, NNA is not scored on these labels and the test is reported as failed validation.

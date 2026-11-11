@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CACHE = ROOT / "cache" / "nna"
 LABELS = CACHE / "labels.jsonl"
 MODEL = "claude-sonnet-4-6"
-PROMPT_VERSION = "nna-v1"
+PROMPT_VERSION = "nna-v2"   # Nov 11: v1 failed the hand check (26/30); four edge-case rules added (amendment 2)
 BATCH = 25
 CLASSES = ("QUALIFYING", "BORDERLINE", "OTHER_ACTION", "NONE")
 RANK = {c: i for i, c in enumerate(reversed(CLASSES))}          # NONE 0 < OTHER_ACTION 1 < BORDERLINE 2 < QUALIFYING 3
@@ -33,6 +33,14 @@ overflights, warplanes or drones circling, sound barrier breaks, flares, anti-ta
 loitering munitions, munitions intercepted before impact.
 NONE: anything else, including Israeli strikes outside Lebanon, threats or statements, actions by Hezbollah or others,
 casualty tolls or funerals that report no new action, and unrelated news.
+
+Edge cases (apply these exactly):
+- "Bombing operation", "explosion", "detonation" or "blowing up" carried out by Israeli forces or the army = a demolition by ground
+  troops: OTHER_ACTION, unless the item also names warplanes, an air raid or a drone strike.
+- A drone that explodes itself (explosive-laden, kamikaze, suicide, FPV or loitering drone) = OTHER_ACTION.
+- "Strike", "raid" or "airstrike" on Lebanese land with no weapon named = QUALIFYING, unless the only weapon the item names for
+  that hit is artillery or a tank.
+- An Israeli device or munition found, defused or dismantled (no new attack reported) = OTHER_ACTION.
 
 Rules: "the enemy" in NNA means Israel. Only Lebanese land counts (not the sea, not the airspace). If an item reports several
 actions, give the highest class (QUALIFYING > BORDERLINE > OTHER_ACTION > NONE).
@@ -150,7 +158,7 @@ def preview(d0, d1):
               + ("  (borderline only)" if not h and day_hits(d0, d1, True).get(d) else ""))
 
 
-def sample(seed=1110):
+def sample(seed=1111):     # v2: a fresh draw (amendment 2)
     lab = load_labels(); A = {a["id"]: a for a in articles()}
     rng = random.Random(seed); by = {c: [i for i, x in lab.items() if x["cls"] == c and i in A] for c in CLASSES}
     isr = [i for i in by["NONE"] if re.search(r"israel|enemy|drone|strike|raid|shell", (A[i]["title"] + A[i]["description"]).lower())]
