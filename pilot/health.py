@@ -6,6 +6,10 @@ biggest disagreements with the market, and expected excess Brier vs a calibrated
 import json, re, glob, collections, datetime as dt
 from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
+import builtins as _bi
+_OUT = []
+def print(*a, **k):                        # Nov 11: keep every printed line, so the verdict at the end can list each FAILED / ACTION: line
+    _OUT.append(" ".join(str(x) for x in a)); _bi.print(*a, **k)
 log = sorted(glob.glob(str(ROOT / "logs" / "pipeline_*.log")))[-1]; txt = Path(log).read_text(errors="replace")
 print(f"== run: {Path(log).name} | last written {dt.datetime.fromtimestamp(Path(log).stat().st_mtime):%m-%d %H:%M}")
 start = dt.datetime.strptime(Path(log).stem.split("_", 1)[1], "%Y%m%d_%H%M%S")
@@ -78,7 +82,8 @@ def pba_swings(rows, thresh=0.10):
     for r in rows:
         p = prev.get(r["market_id"])
         if r["timestamp"] != runs[-1] or not p or r.get("conditional_p") is None or p.get("conditional_p") is None: continue
-        a, b = p.get("p_b_given_a"), r.get("p_b_given_a")
+        k = "p_b_given_a_pre_role" if p.get("p_b_given_a_pre_role") is not None and r.get("p_b_given_a_pre_role") is not None else "p_b_given_a"
+        a, b = p.get(k), r.get(k)              # Nov 11: both runs logged the pre-tilt value -> compare the LLM's own number, not the role tilt
         if isinstance(a, (int, float)) and isinstance(b, (int, float)) and abs(b - a) > thresh:
             out.append((r["market_label"], a, b, p["conditional_p"], r["conditional_p"]))
     return sorted(out, key=lambda x: -abs(x[2] - x[1]))
@@ -90,6 +95,11 @@ def _swing_tests():
             {"timestamp": "t1", "market_id": "2", "market_label": "B", "p_b_given_a": 0.50, "conditional_p": 0.10},
             {"timestamp": "t2", "market_id": "2", "market_label": "B", "p_b_given_a": 0.55, "conditional_p": 0.11}]
     assert pba_swings(rows) == [("A", 0.41, 0.24, 0.39, 0.21)]
+    rows = [{"timestamp": "t1", "market_id": "3", "market_label": "C", "p_b_given_a": 0.30, "p_b_given_a_pre_role": 0.50, "conditional_p": 0.2},
+            {"timestamp": "t2", "market_id": "3", "market_label": "C", "p_b_given_a": 0.30, "p_b_given_a_pre_role": 0.70, "conditional_p": 0.2},
+            {"timestamp": "t1", "market_id": "4", "market_label": "D", "p_b_given_a": 0.50, "conditional_p": 0.2},
+            {"timestamp": "t2", "market_id": "4", "market_label": "D", "p_b_given_a": 0.30, "p_b_given_a_pre_role": 0.50, "conditional_p": 0.2}]
+    assert sorted(x[0] for x in pba_swings(rows)) == ["C", "D"]      # C: the LLM moved under an unchanged tilt; D: old row unlogged -> tilted vs tilted
 
 
 _swing_tests()
@@ -114,3 +124,65 @@ try:                                                       # Nov 4: the honest s
     [print(l) for l in _FR.report()]
 except Exception as ex:
     print(f"== fair record FAILED: {ex!r}")
+
+
+# Nov 11: autopilot checks. The machine should run for weeks on a weekly glance at this screen, so silent failures must print here.
+import sys
+print("== autopilot checks:")
+_today = dt.date.today()
+def _age(d):
+    try: return (_today - dt.date.fromisoformat(str(d)[:10])).days
+    except Exception: return None
+# 1. Policy and state files: a missing or unreadable one silently switches a component off or back to its default.
+_REQ = {"pipeline/episode_roles.json": "role-tilt labels", "pilot/unified_publish.json": "unified publishing policy",
+        "pilot/holds_publish.json": "holds publishing", "pilot/c_policy.json": "agreement model choice",
+        "pilot/during_war_config.json": "during-war pairs", "pipeline/theater_state.json": "theater state",
+        "pipeline/node_memory_state.json": "node memory", "logs/node_scores_last_good.json": "node-score fallback cache"}
+_files = {}
+for _f in _REQ:
+    try: _files[_f] = json.loads((ROOT / _f).read_text())
+    except Exception as _ex: _files[_f] = None; print(f"   FAILED: {_f} ({_REQ[_f]}) unreadable: {type(_ex).__name__}")
+print(f"   policy/state files readable: {sum(v is not None for v in _files.values())}/{len(_REQ)}")
+if _files.get("pilot/unified_publish.json") is not None and not _files["pilot/unified_publish.json"].get("enabled"):
+    print("   FAILED: pilot/unified_publish.json has enabled = false (the unified model publishes nothing)")
+_lg = _files.get("logs/node_scores_last_good.json") or {}
+_lg_age = min((a for a in (_age(v.get("as_of")) for v in _lg.values() if isinstance(v, dict)) if a is not None), default=None)
+print(f"   node-score fallback cache: {len(_lg)} entries, newest {_lg_age} days old"
+      + ("  ACTION: cache stale or empty, a failed node-scoring call would publish zeros" if _lg_age is None or _lg_age > 2 else ""))
+# 2. Role-tilt labels (pipeline/episode_roles.json): valid, consistent, fresh, complete; and the tilt applied exactly once.
+_R = _files.get("pipeline/episode_roles.json")
+if _R is not None:
+    _P = _R.get("pairs", {})
+    _inval = sorted(k for k, v in _P.items() if (v or {}).get("role") not in ("initiator", "target", "unclear") or k.count("->") != 1)
+    _contra = sorted({" / ".join(sorted((k, "->".join(k.split("->")[::-1])))) for k, v in _P.items() if k.count("->") == 1
+                      and (v or {}).get("role") in ("initiator", "target")
+                      and (_P.get("->".join(k.split("->")[::-1])) or {}).get("role") == v["role"]})
+    _unl = re.findall(r"WARNING unlabeled pairs, no tilt: ([^\n]*)", txt)
+    print(f"   role labels: {len(_P)} pairs as of {_R.get('as_of')}"
+          + (f"  FAILED: invalid entries {_inval}" if _inval else "") + (f"  FAILED: both sides share a role: {_contra}" if _contra else "")
+          + ("  ACTION: re-check the labels (monthly)" if (_age(_R.get("as_of")) or 0) > 35 else "")
+          + (f"  ACTION: label these pairs: {_unl[-1]}" if _unl else ""))
+try:
+    sys.path.insert(0, str(ROOT / "pilot")); import directional_pba as _DP
+    _tr = [r for r in plog if r["timestamp"] == _last and r.get("p_b_given_a_role") and r.get("p_b_given_a_pre_role") is not None]
+    _off = [r["market_label"] for r in _tr if abs(round(_DP.tilt(r["p_b_given_a_pre_role"], r["p_b_given_a_role"].split(":")[-1]), 4) - r["p_b_given_a"]) > 1e-4]
+    print(f"   role tilt applied once: {len(_tr) - len(_off)}/{len(_tr)} tilted contracts check out" if _tr else
+          "   role tilt applied once: not logged yet (fields added Nov 11)")
+    for _x in _off[:5]: print(f"   FAILED: tilt is not one step from the pre-tilt P(B|A) (compounding?): {_x[:90]}")
+except Exception as _ex:
+    print(f"   FAILED: role tilt check could not run ({_ex!r})")
+# 3. Family tags: a ceasefire / agreement / withdrawal contract that lost its tag is priced by the onset engine (wrong model).
+_untag = [r["market_label"] for r in plog if r["timestamp"] == _last and (r.get("pricing_component") or "engine") == "engine"
+          and re.search(r"ceasefire|peace deal|agreement|truce|withdraw", r.get("market_label") or "", re.I)]
+print(f"   family tags: {len(_untag)} ceasefire-like contracts priced by the onset engine" + ("  FAILED (tag missing)" if _untag else ""))
+for _x in _untag[:5]: print(f"      {_x[:100]}")
+# 4. Resolutions: contracts past their end date that the resolver hasn't closed (information; Polymarket can be slow).
+_due = [m for m in feed if not m.get("resolved") and str(m.get("end_date") or "9999")[:10] < (_today - dt.timedelta(days=3)).isoformat()
+        and str(m.get("market_id")) in {str(r["market_id"]) for r in plog}]
+print(f"   unresolved > 3 days past their end date (published at least once): {len(_due)}")
+# Verdict: every FAILED / ACTION: line printed above, in one place.
+_flags = [l.strip() for l in _OUT if "FAILED" in l or "ACTION:" in l]
+_ndeg = sum(len(v) for v in deg.values())
+print("== VERDICT: " + ("all clear" if not _flags and not _ndeg else
+                        f"{len(_flags)} line(s) to read" + (f", {_ndeg} degraded fallback(s) (see above)" if _ndeg else "")))
+for _x in _flags[:15]: print("   " + _x[:160])

@@ -2511,6 +2511,8 @@ def _append_log(feed: list):
                 "translator_verdict":       market.get("translator_verdict"),
                 "p_b_given_a":              market.get("p_b_given_a"),
                 "p_b_given_a_source":       market.get("p_b_given_a_source"),
+                "p_b_given_a_pre_role":     market.get("p_b_given_a_pre_role"),     # Nov 11: P(B|A) before the role tilt (pilot/directional_pba.py)
+                "p_b_given_a_role":         market.get("p_b_given_a_role"),         # "role-tilt-v0:<initiator|target>"; null if not tilted
                 "p_b_given_a_pre_empirical": market.get("p_b_given_a_pre_empirical"),
                 "p_b_given_not_a_source":   market.get("p_b_given_not_a_source"),       # Oct 26: strike|no war
                 "p_b_given_not_a_pre_empirical": market.get("p_b_given_not_a_pre_empirical"),
