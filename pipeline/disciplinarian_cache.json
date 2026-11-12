@@ -32,6 +32,12 @@
 "reason": "This is about domestic Israeli election politics and government formation, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"002c7281c4518a219dfd": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a municipal election outcome, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "0035323b43eab5ebf044": {
 "bucket": "NOISE",
 "dyad": null,
@@ -349,6 +355,12 @@
 "reason": "This question is about domestic Taiwanese local elections and party outcomes, not about interstate conflict onset between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"022a1e8c743ab34509c2": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a municipal election outcome, not interstate conflict between state actors.",
+"relevant_nodes": []
 },
 "0231a8f475b77c323c90": {
 "bucket": "NOISE",
@@ -877,6 +889,12 @@
 "reason": "This question is about AI company rankings, not interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"05dd87d41cf3ee6d6ec1": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
 },
 "05e2547809f547f066e3": {
 "bucket": "NOISE",
@@ -1458,6 +1476,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"09cbf5d396ace001a843": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a domestic economic indicator (inflation) and has nothing to do with interstate conflict onset.",
+"relevant_nodes": []
+},
 "09cd4c29eacd44a872dd": {
 "bucket": "NOISE",
 "dyad": null,
@@ -1983,6 +2007,12 @@
 "reason": "This question is about domestic leadership change within Iran, not about interstate conflict onset between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"0da3e91b5dc6514600c0": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about China's domestic inflation data, not interstate conflict between state actors.",
+"relevant_nodes": []
 },
 "0da48ef19371e77e08a8": {
 "bucket": "ADJACENT",
@@ -2571,6 +2601,16 @@
 ],
 "seeded": true
 },
+"11d4d9f67bb88a0b5d9c": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between two states at war, related to conflict resolution but not directly about conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "11d66591df6d119a8f9a": {
 "bucket": "ADJACENT",
 "dyad": "US-Iran",
@@ -2885,6 +2925,16 @@
 "reason": "This is about a domestic election outcome in Israel, not about interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"13fdf55db124de6d7e2f": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns the diplomatic process between Russia and Ukraine, which relates to conflict resolution but asks about the venue of a meeting rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "1401816e8a9958231c13": {
 "bucket": "NOISE",
@@ -3913,6 +3963,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"1b48b9a5ef9abbace716": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "1b520614abc44b946ed6": {
 "bucket": "NOISE",
 "dyad": null,
@@ -4812,6 +4868,16 @@
 ],
 "seeded": true
 },
+"2089e4bee3588a8debf0": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This question concerns the diplomatic process between Russia and Ukraine, which is related to the ongoing interstate conflict but asks about meeting location rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "208e7400294de11728d6": {
 "bucket": "NOISE",
 "dyad": null,
@@ -5484,6 +5550,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"2564b7ffbbb54da4d08b": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between two states at war, which relates to conflict resolution but is about the venue of a diplomatic meeting rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "258aa043685d0a3f5c9c": {
 "bucket": "ADJACENT",
 "dyad": "Russia-Ukraine",
@@ -5679,6 +5755,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"26c263bd727e61f43edd": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a domestic election scheduling question, not interstate conflict between two state actors.",
+"relevant_nodes": []
+},
 "26ce32576c7cd9b88c22": {
 "bucket": "ADJACENT",
 "dyad": "US-Iran",
@@ -5738,6 +5820,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not about interstate conflict between a specific dyad.",
+"relevant_nodes": []
+},
+"27328d952aa131638300": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about China's domestic consumer price index, an economic/market indicator with no connection to interstate conflict onset.",
 "relevant_nodes": []
 },
 "274178aab7ee1a361ff6": {
@@ -6070,6 +6158,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"29979f778b4745a0382f": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between two states at war, which relates to conflict resolution but is about the venue of a meeting rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "29f59a1b82878070fee3": {
 "bucket": "NOISE",
 "dyad": null,
@@ -6308,6 +6406,16 @@
 "reason": "This question is about AI company rankings, not interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"2ba407213d4cba3d5ff4": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between two states at war, which relates to conflict resolution but is about meeting location rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "2ba9a9f0f499d0745e75": {
 "bucket": "NOISE",
@@ -6736,6 +6844,16 @@
 "dyad": null,
 "reason": "This question is about the duration of a diplomatic handshake, not about interstate conflict onset or escalation.",
 "relevant_nodes": []
+},
+"2ecae1204345c765036d": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between two states at war, which is related to conflict resolution but asks about the venue of a meeting rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "2eda7c4223fe42760cef": {
 "bucket": "NOISE",
@@ -7673,6 +7791,12 @@
 "HardlineClaims",
 "Patience"
 ]
+},
+"3658b2c3fa03f6bc2e03": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about China's domestic economic inflation data, not interstate conflict between state actors.",
+"relevant_nodes": []
 },
 "365ede92567fa11da67b": {
 "bucket": "NOISE",
@@ -9352,6 +9476,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"427c609fc7b417f4a2fc": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns the diplomatic negotiation process between Russia and Ukraine, which is related to but not directly about conflict onset or escalation \u2014 it asks about the venue of peace talks.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "42860e222f670d18af3e": {
 "bucket": "NOISE",
 "dyad": null,
@@ -9493,6 +9627,16 @@
 "dyad": null,
 "reason": "This question is about domestic Israeli politics and government formation after an election, not about interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"435f94ab26587b4bae5a": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between two states at war, related to conflict resolution but not directly about conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "437253850f8b50f0bafa": {
 "bucket": "NOISE",
@@ -9823,6 +9967,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about an Israeli legislative election outcome and vote share margins, not about interstate conflict between two state actors.",
+"relevant_nodes": []
+},
+"45a3c21738ff9823b1ee": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
 "relevant_nodes": []
 },
 "45add3e2e9d1cecc597d": {
@@ -10861,6 +11011,12 @@
 "reason": "This question is about a domestic referendum/political event, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"4caf42f87347adbba768": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
 },
 "4cba699a849551cd3dbb": {
 "bucket": "NOISE",
@@ -12132,6 +12288,12 @@
 "reason": "This question is about a UN leadership selection, not about interstate conflict onset between any dyad.",
 "relevant_nodes": []
 },
+"55f9228c86db29afbd25": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a municipal election outcome and margin of victory, not about interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "560b48ce23fe32ccc1a1": {
 "bucket": "NOISE",
 "dyad": null,
@@ -12209,6 +12371,16 @@
 "DemocraticPeace"
 ],
 "seeded": true
+},
+"565d528ee64b61453883": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "A prisoner exchange is a diplomatic/military event between two state actors in an active interstate conflict, but it concerns negotiation dynamics rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"Patience",
+"CommitmentProblem"
+]
 },
 "565f594573cfb281ca6e": {
 "bucket": "NOISE",
@@ -12466,6 +12638,16 @@
 ],
 "seeded": true
 },
+"57983b2c62e4c88f95ec": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between two states at war, related to potential ceasefire/peace processes, but is about the venue of diplomacy rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "57a31631c015616a4065": {
 "bucket": "NOISE",
 "dyad": null,
@@ -12650,6 +12832,12 @@
 "reason": "This question is about an Israeli domestic election and government formation process, not about interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"598edcbdc6c1ce7b465b": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about an internal Israeli political appointment, not interstate conflict between a specific dyad.",
+"relevant_nodes": []
 },
 "599fd44c82d59341ff6e": {
 "bucket": "NOISE",
@@ -13285,6 +13473,16 @@
 "reason": "This question is about AI company rankings, not interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"5d84a1d913821e22f1e6": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns the diplomatic process between Russia and Ukraine, which is related to but not directly about conflict onset or escalation \u2014 it asks about the venue of peace negotiations.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "5d88d828bea453669cd4": {
 "bucket": "NOISE",
@@ -14032,6 +14230,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"6262ed8a432f2d99df7e": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "A prisoner exchange is a diplomatic/military event between two state actors in an active interstate conflict, but it concerns conflict resolution mechanisms rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"CommitmentProblem",
+"Patience"
+]
+},
 "62635a238cb19984b78d": {
 "bucket": "NOISE",
 "dyad": null,
@@ -14592,6 +14800,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"66670c8aca0ceedfa962": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This question concerns the diplomatic process between two states at war, specifically whether negotiations will occur, which relates to conflict resolution but is not directly about conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "6681be89c87c35f2beb7": {
 "bucket": "NOISE",
 "dyad": null,
@@ -14744,6 +14963,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"67c32ff4e562306e2e78": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a municipal election outcome and margin of victory, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "67eba54887e706e87a59": {
 "bucket": "NOISE",
 "dyad": null,
@@ -14826,6 +15051,16 @@
 "dyad": null,
 "reason": "This question is about the count of North Korean missile tests, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": []
+},
+"688c0e41a2be28f215f5": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between two state actors in an active interstate conflict, but it asks about the venue/logistics of a meeting rather than conflict onset or escalation directly.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "68965717ded10cc33374": {
 "bucket": "NOISE",
@@ -15214,6 +15449,12 @@
 ],
 "seeded": true
 },
+"6b5a849fa47ffe2a16b4": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "6b666cfe5229f51bd13f": {
 "bucket": "NOISE",
 "dyad": null,
@@ -15271,6 +15512,16 @@
 "reason": "This is about a domestic election outcome in Taiwan, not about interstate conflict onset between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"6bc78f9e99ce528f36d2": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns the diplomatic process and venue for Russia-Ukraine negotiations, which is related to but not directly about conflict onset or escalation between the dyad.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"CommitmentProblem",
+"HardlineClaims"
+]
 },
 "6bce21eabb3cf77af07d": {
 "bucket": "NOISE",
@@ -15416,6 +15667,12 @@
 "reason": "This is a local election question in Taiwan with no direct connection to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"6d2e366ccc8efe3fdba4": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about China's domestic inflation/CPI data, which is a macroeconomic indicator unrelated to interstate conflict onset.",
+"relevant_nodes": []
 },
 "6d3f6d3c9158e55e80fe": {
 "bucket": "NOISE",
@@ -15803,6 +16060,16 @@
 "dyad": null,
 "reason": "This question is about a domestic referendum/political event, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": []
+},
+"6feea2f7665bed0b3c38": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns the diplomatic process and venue for peace negotiations between Russia and Ukraine, which is geopolitics-related but not directly about conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "70099fa3eb119c42069f": {
 "bucket": "ADJACENT",
@@ -16321,6 +16588,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"736726f7c04417b5f4d7": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic Taiwanese municipal elections, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "736bbf0425c20c0e7fb7": {
 "bucket": "CORE",
 "dyad": "US-LatinAmerica",
@@ -16469,6 +16742,12 @@
 "reason": "This is about an Israeli domestic political appointment, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"747edf419114a44a50a1": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a municipal election outcome and margin of victory, not interstate conflict between state actors.",
+"relevant_nodes": []
 },
 "74948cca1422f2c58e91": {
 "bucket": "NOISE",
@@ -16648,6 +16927,16 @@
 "reason": "This question is about the ranking of Chinese AI companies, not about interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"75a2d5636d834db992f7": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between two states at war, which relates to conflict resolution but is about the venue of a meeting rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "75b1ccc92b03674f28b4": {
 "bucket": "NOISE",
@@ -17224,6 +17513,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"7a8ea26a3ec26ec7d33e": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic electoral outcomes in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "7a95b12f8cb6400db04e": {
 "bucket": "NOISE",
 "dyad": null,
@@ -17710,6 +18005,12 @@
 ],
 "seeded": true
 },
+"7e854609da9a59cb5e81": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "7e9e0f9d0d22eeae46db": {
 "bucket": "NOISE",
 "dyad": null,
@@ -17980,6 +18281,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"80703db90b954a8f7f41": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "807bc3e1752be5c23d65": {
 "bucket": "NOISE",
 "dyad": null,
@@ -18004,6 +18311,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "Somali piracy involves non-state actors, not interstate conflict between two named state actors.",
+"relevant_nodes": []
+},
+"80dc369785064972ffed": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a municipal election outcome and margin of victory, not interstate conflict between state actors.",
 "relevant_nodes": []
 },
 "80dcaae288756e9f7c82": {
@@ -18065,6 +18378,16 @@
 "reason": "This question is about leadership/political survival of an individual leader in Iran, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"817797568ab6a84fccee": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns the diplomatic negotiation venue between two state actors in an active interstate conflict, but it is about diplomatic logistics rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "817d7005302779d2194a": {
 "bucket": "NOISE",
@@ -18440,6 +18763,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"83c56bb99c18dae9aac1": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about an internal Israeli political appointment, not interstate conflict between two state actors.",
+"relevant_nodes": []
+},
 "83c67a56a19bac66d3c7": {
 "bucket": "ADJACENT",
 "dyad": "Saudi Arabia-Yemen",
@@ -18761,6 +19090,16 @@
 "reason": "This is a local subnational election question with no interstate conflict dimension.",
 "relevant_nodes": [],
 "seeded": true
+},
+"86af98b568ebd4977f9f": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns the diplomatic process between two states at war, specifically the venue of peace negotiations, which is related to but not directly about conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "86b33971c0b28339a3a2": {
 "bucket": "ADJACENT",
@@ -20675,6 +21014,12 @@
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"94729f0afae5923cf95f": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "947a4f5eccb73a8e5746": {
 "bucket": "ADJACENT",
 "dyad": "US-Iran",
@@ -20902,6 +21247,12 @@
 "WarCosts"
 ],
 "seeded": true
+},
+"962cc82ac8e72054eead": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic Taiwanese elections, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
 },
 "963ad2e2ea5a53d906ff": {
 "bucket": "NOISE",
@@ -21827,6 +22178,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"9d12809d16fdf7890b35": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about China's domestic economic inflation data, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "9d15c1bdf66866f3f3e4": {
 "bucket": "NOISE",
 "dyad": null,
@@ -22693,6 +23050,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"a32f11a0ec55534c2685": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a municipal election outcome and margin of victory, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "a375d28d40fbfdf5a9a9": {
 "bucket": "CORE",
 "dyad": "Israel-Iran",
@@ -22805,6 +23168,17 @@
 "reason": "This question is about AI company rankings and technology competition, not interstate conflict.",
 "relevant_nodes": [],
 "seeded": true
+},
+"a40cbe86f5a3cb36121e": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This question concerns diplomatic negotiations between two state actors in an active interstate conflict, but asks about meeting timing rather than conflict onset or escalation directly.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"Patience",
+"CommitmentProblem"
+]
 },
 "a416ad05b9a1b66782a8": {
 "bucket": "NOISE",
@@ -23348,6 +23722,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"a856a2c2cb0dbe851010": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between two states at war, which is related to conflict resolution but asks about meeting venue/logistics rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "a8620ceb0c3c95cf2971": {
 "bucket": "NOISE",
 "dyad": null,
@@ -23499,6 +23883,16 @@
 "reason": "This is a municipal election question with no interstate conflict dimension.",
 "relevant_nodes": [],
 "seeded": true
+},
+"a9036a0dd3520e3e4f53": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between two states at war, related to conflict resolution but not directly about conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "a91a3e0a93024111d603": {
 "bucket": "ADJACENT",
@@ -24076,6 +24470,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"ac4e1bfd2e11d97d4e74": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "ac57f2b68b05c3734737": {
 "bucket": "NOISE",
 "dyad": null,
@@ -24314,6 +24714,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about domestic Taiwanese local elections, not interstate conflict between two state actors.",
+"relevant_nodes": []
+},
+"ae33a2ddbd14be85c25c": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about an Israeli election outcome and leadership succession, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": []
 },
 "ae3dd550209b7b6ed640": {
@@ -26083,6 +26489,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"ba81b2650f381bc009ea": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "bae37ca8119aee63f782": {
 "bucket": "NOISE",
 "dyad": null,
@@ -26198,6 +26610,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"bb2e8996461b32282587": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a municipal election outcome and margin of victory, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "bb30bb2bcf29cbddab20": {
 "bucket": "NOISE",
 "dyad": null,
@@ -26217,6 +26635,16 @@
 "reason": "This question is about leadership/political survival of an individual in Iran, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"bb41affa55b995dee197": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns the diplomatic process and venue selection for Russia-Ukraine negotiations, which is geopolitics-related but not directly about conflict onset or escalation between the dyad.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "bb427ff65481948335ed": {
 "bucket": "NOISE",
@@ -27073,6 +27501,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"c0544aa3f7976aa485f8": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "c05722aef4ffebebb656": {
 "bucket": "ADJACENT",
 "dyad": "US-Iran",
@@ -27196,6 +27630,12 @@
 "CommitmentProblem",
 "Patience"
 ]
+},
+"c0da135fd846341a8a5d": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
 },
 "c10c7f7e348ec02b2f07": {
 "bucket": "NOISE",
@@ -27571,6 +28011,12 @@
 ],
 "seeded": true
 },
+"c3e7e720479e41a4c682": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic Taiwanese elections, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "c3ee43533810f8ff6a05": {
 "bucket": "ADJACENT",
 "dyad": "US-Turkey",
@@ -27742,6 +28188,12 @@
 "reason": "This is a municipal election question, not about interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"c49a39bc885a545cb04a": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a domestic economic indicator (inflation) and has nothing to do with interstate conflict onset.",
+"relevant_nodes": []
 },
 "c49b4bbb97fc1ad9708e": {
 "bucket": "NOISE",
@@ -28270,6 +28722,12 @@
 ],
 "seeded": true
 },
+"c84191a9fbd8da197a66": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "c8506200b03e908aacc2": {
 "bucket": "NOISE",
 "dyad": null,
@@ -28320,6 +28778,16 @@
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between state actors.",
 "relevant_nodes": []
 },
+"c8d09686f29ebf31e150": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between two states at war, related to conflict resolution but not directly about conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "c8daf8f9041ccbd96ec5": {
 "bucket": "NOISE",
 "dyad": null,
@@ -28357,6 +28825,15 @@
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not about interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"c8fae4966e621d4ddf0f": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns the diplomatic process and venue for Russia-Ukraine negotiations, which is geopolitics-related but not directly about conflict onset or escalation between the dyad.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"CommitmentProblem"
+]
 },
 "c905cebff8f81a894a2b": {
 "bucket": "NOISE",
@@ -28646,6 +29123,12 @@
 "PreferenceAlignment",
 "Patience"
 ]
+},
+"cbb288c56ce150c79a10": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a domestic election schedule, not interstate conflict between two state actors.",
+"relevant_nodes": []
 },
 "cbb329da3ac683d472d6": {
 "bucket": "NOISE",
@@ -29281,6 +29764,16 @@
 "reason": "This is about a domestic political appointment in Brazil, not about interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"d0130d89b143be1c3ce2": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns the diplomatic process between Russia and Ukraine, which is related to but not directly about conflict onset or escalation; it asks about meeting location/timing rather than whether conflict will occur.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
+},
 "d020aa36841d685447aa": {
 "bucket": "NOISE",
 "dyad": null,
@@ -29505,6 +29998,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"d2255248889202a0fb0d": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the venue of diplomatic meetings, not about interstate conflict onset or escalation between state actors.",
+"relevant_nodes": []
+},
 "d22c41a2fac9e6d1fbce": {
 "bucket": "NOISE",
 "dyad": null,
@@ -29616,6 +30115,12 @@
 "relevant_nodes": [
 "WinProbability"
 ]
+},
+"d2d4e58ea5dce74ce88e": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about China's domestic consumer price inflation, not interstate conflict between state actors.",
+"relevant_nodes": []
 },
 "d2e1b4b25648fe1fbd28": {
 "bucket": "NOISE",
@@ -29821,6 +30326,12 @@
 "reason": "This question is about a domestic legislative election outcome, not interstate conflict onset between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"d44cf74e9776a0c6dd7d": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about China's domestic consumer price inflation, an economic indicator unrelated to interstate conflict onset.",
+"relevant_nodes": []
 },
 "d45089a14f0d3cb4bb8b": {
 "bucket": "NOISE",
@@ -30597,6 +31108,12 @@
 "reason": "This is about a domestic political appointment in Brazil, not about interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"d928b5b825aeb74b9ccf": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "d93fabfc4bc158e766c1": {
 "bucket": "NOISE",
 "dyad": null,
@@ -30676,6 +31193,16 @@
 "reason": "This is a local municipal election question with no connection to interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"d9ddbe05b952da4a52fb": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This is about diplomatic negotiations between two states at war, not directly about conflict onset or escalation, but relates to the Russia-Ukraine conflict dyad and peace process.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "d9f086f8d32a4f0aeff7": {
 "bucket": "NOISE",
@@ -30776,6 +31303,16 @@
 "reason": "This question is about a domestic legislative election outcome, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"da7664b8e484d7d4641e": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between two states at war, which relates to conflict resolution but is about meeting logistics/venue rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "da7948e980b8f1a8ca83": {
 "bucket": "NOISE",
@@ -31700,6 +32237,12 @@
 "reason": "This is about an internal legislative leadership selection in Israel, not about interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"e0daa53ecc7ecb83c6cd": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
 },
 "e0db2086879718af2226": {
 "bucket": "NOISE",
@@ -32661,6 +33204,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"e7b4f661a026f5fb15c7": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This question concerns diplomatic engagement between two states currently in interstate conflict, but asks about meeting timing rather than conflict onset or escalation directly; the model has partial traction through PreferenceAlignment, Patience, and CommitmentProblem nodes.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"Patience",
+"CommitmentProblem",
+"HardlineClaims"
+]
+},
 "e7c92b04c58b86579f60": {
 "bucket": "NOISE",
 "dyad": null,
@@ -33178,6 +33732,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"eb334e52a8f0f71a71fb": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "eb3576cc8084a5a7bab6": {
 "bucket": "NOISE",
 "dyad": null,
@@ -33363,6 +33923,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"ec1a146455b32f4f2751": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "ec2185b5875adfd1e3f6": {
 "bucket": "NOISE",
 "dyad": null,
@@ -33523,6 +34089,16 @@
 "reason": "This is about an internal Israeli political appointment, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"ed8f96c83eb39eeacf9a": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns the diplomatic process and venue for Russia-Ukraine negotiations, which is related to but not directly about conflict onset or escalation between the dyad.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"CommitmentProblem",
+"HardlineClaims"
+]
 },
 "edd1684d61440d5c6002": {
 "bucket": "NOISE",
@@ -33849,6 +34425,12 @@
 "reason": "This is about a domestic presidential election, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"efe2a5124438be0ba79f": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic Taiwanese elections, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
 "efe4c29eafe61307e7e4": {
 "bucket": "NOISE",
 "dyad": null,
@@ -33940,6 +34522,12 @@
 "reason": "This is a local municipal election question with no direct connection to interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"f09121c7f6beeaa475c9": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
+"relevant_nodes": []
 },
 "f0ab2961ecfe59231622": {
 "bucket": "NOISE",
@@ -34530,6 +35118,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"f59c090b43bcaeb743d8": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns the diplomatic process and venue for peace negotiations between Russia and Ukraine, which is geopolitics-related but not directly about conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"CommitmentProblem",
+"Patience"
+]
+},
 "f59dded2f75c62d7b655": {
 "bucket": "NOISE",
 "dyad": null,
@@ -34717,6 +35315,12 @@
 "CommitmentProblem",
 "Patience"
 ]
+},
+"f70bbab377dac86deb13": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about domestic municipal elections in Taiwan, not about interstate conflict onset between two state actors.",
+"relevant_nodes": []
 },
 "f71868218a4332ce39eb": {
 "bucket": "NOISE",
@@ -35820,6 +36424,12 @@
 "reason": "This is a local election question in Taiwan with no interstate conflict dimension.",
 "relevant_nodes": [],
 "seeded": true
+},
+"ff359a8892f98ac268af": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about China's domestic consumer price inflation, not interstate conflict between state actors.",
+"relevant_nodes": []
 },
 "ff35a4cc653d15432401": {
 "bucket": "NOISE",

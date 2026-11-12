@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-11-11T22:30:17.973572+00:00",
-  "n_resolved": 275,
-  "brier_conditional_mean": 0.290316,
-  "brier_engine_mean": 0.428052,
-  "brier_market_mean": 0.129294,
-  "edge_vs_market": -0.161022,
+  "last_updated": "2026-11-12T22:31:30.560921+00:00",
+  "n_resolved": 279,
+  "brier_conditional_mean": 0.286274,
+  "brier_engine_mean": 0.437109,
+  "brier_market_mean": 0.128495,
+  "edge_vs_market": -0.157779,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -3030,6 +3030,50 @@
       "brier_conditional": 0.006529,
       "brier_market": 0.0784,
       "resolved_at": "2026-11-11T22:30:10.515476+00:00"
+    },
+    {
+      "market_id": "6713445",
+      "market_label": "Israel military action against Lebanon on November 9?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.9149,
+      "market_p": 0.72,
+      "brier_conditional": 0.007242,
+      "brier_market": 0.0784,
+      "resolved_at": "2026-11-12T22:31:16.213648+00:00"
+    },
+    {
+      "market_id": "6713453",
+      "market_label": "Israel military action against Lebanon on November 11?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.9064,
+      "market_p": 0.815,
+      "brier_conditional": 0.008761,
+      "brier_market": 0.034225,
+      "resolved_at": "2026-11-12T22:31:19.153695+00:00"
+    },
+    {
+      "market_id": "6713457",
+      "market_label": "Israel military action against Lebanon on November 12?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.9023,
+      "market_p": 0.84,
+      "brier_conditional": 0.009545,
+      "brier_market": 0.0256,
+      "resolved_at": "2026-11-12T22:31:21.753258+00:00"
+    },
+    {
+      "market_id": "6713450",
+      "market_label": "Israel military action against Lebanon on November 10?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.9106,
+      "market_p": 0.605,
+      "brier_conditional": 0.007992,
+      "brier_market": 0.156025,
+      "resolved_at": "2026-11-12T22:31:26.047846+00:00"
     }
   ]
 }
