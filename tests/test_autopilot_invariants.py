@@ -114,3 +114,37 @@ def test_policy_files_shape():
     h = J("pilot/holds_publish.json"); assert isinstance(h["allowed"], list) and h["allowed"]
     assert J("pilot/c_policy.json")["model"]
     w = J("pilot/during_war_config.json"); assert isinstance(w["pairs"], dict) and w["pairs"]
+
+
+def test_bettor_portfolio():
+    """Nov 13: the run's stakes fit the bankroll and the family / pair / volume caps; sides and prices never change; re-running
+    the re-size + portfolio (as each daily run does on the persisted feed) gives the same stakes, not compounding shrinkage."""
+    import importlib
+    os.environ.setdefault("ANTHROPIC_API_KEY", "x"); os.environ.setdefault("GNEWS_API_KEY", "x")
+    sys.path.insert(0, str(ROOT)); T = importlib.import_module("pipeline.translator")
+    def mk(q, dyad, p, m, vol):
+        return {"bucket": "CORE", "question": q, "dyad": dyad, "conditional_p": p, "market_price": m, "volume": vol,
+                "pricing_component": "unified-v1", "outcome_observability": "high", "resolution_risk": "low"}
+    feed = [mk(f"Israel military action against Lebanon on November {d}?", "Israel-Lebanon", 0.95, 0.60, 50000) for d in range(1, 13)]
+    feed += [mk(f"Russia x Ukraine ceasefire agreement by {x}?", "Russia-Ukraine", 0.05, 0.40, 90000) for x in ("November 30", "December 31, 2026")]
+    feed += [mk(f"Will Iran target {c} by November 30, 2026?", "Iran-" + c, 0.70, 0.30, 20000) for c in ("Oman", "Qatar", "Kuwait", "Jordan", "Bahrain", "Egypt")]
+    feed += [mk("Thin market?", "A-B", 0.90, 0.20, 60), mk("No volume?", "C-D", 0.90, 0.20, 0)]
+    before = [(m["conditional_p"], m["market_price"]) for m in feed]
+    def run():
+        T._rebet_on_published(feed); T._portfolio_budget(feed)
+        return [(m.get("bet_direction"), m.get("kelly_dollars")) for m in feed]
+    first = run(); second = run()
+    assert first == second                                             # idempotent across runs
+    assert [(m["conditional_p"], m["market_price"]) for m in feed] == before
+    bets = [m for m in feed if m.get("bet_direction") in ("YES", "NO")]
+    B = T.BANKROLL
+    assert sum(m["kelly_dollars"] for m in bets) <= B + 1e-9
+    for key, cap in (("portfolio_family", T.PORTFOLIO_FAMILY_CAP), ("portfolio_pair", T.PORTFOLIO_PAIR_CAP)):
+        g = {}
+        for m in bets: g[m[key]] = g.get(m[key], 0) + m["kelly_dollars"]
+        assert max(g.values()) <= cap * B + 1e-9, key
+    assert all(m["kelly_dollars"] <= T.VOLUME_CAP * m["volume"] + 1e-9 for m in bets)
+    assert len({m["portfolio_family"] for m in feed if "Lebanon on" in m["question"]}) == 1      # dailies are one family
+    for m in bets: assert (m["bet_direction"] == "YES") == (m["conditional_p"] > m["market_price"])
+    assert feed[-1]["bet_direction"] == "PASS" and feed[-1]["kelly_dollars"] == 0                # no volume, no stake
+

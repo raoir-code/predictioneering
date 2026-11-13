@@ -180,6 +180,29 @@ for _x in _untag[:5]: print(f"      {_x[:100]}")
 _due = [m for m in feed if not m.get("resolved") and str(m.get("end_date") or "9999")[:10] < (_today - dt.timedelta(days=3)).isoformat()
         and str(m.get("market_id")) in {str(r["market_id"]) for r in plog}]
 print(f"   unresolved > 3 days past their end date (published at least once): {len(_due)}")
+# 5. Bettor portfolio (Nov 13): the run's stakes fit the bankroll and the family / pair / volume caps (limits read from the translator).
+try:
+    _src = (ROOT / "pipeline" / "translator.py").read_text()
+    _c = {k: float(re.search(rf"^{k}\s*=\s*([\d.]+)", _src, re.M).group(1)) for k in ("BANKROLL", "PORTFOLIO_FAMILY_CAP", "PORTFOLIO_PAIR_CAP", "VOLUME_CAP")}
+    _bt = [r for r in plog if r["timestamp"] == _last and r.get("bet_direction") in ("YES", "NO") and (r.get("kelly_dollars") or 0) > 0]
+    if _bt and all(r.get("kelly_dollars_standalone") is not None for r in _bt):
+        def _sum(key):
+            g = collections.defaultdict(float)
+            for r in _bt: g[r[key]] += r["kelly_dollars"]
+            return max(g.values())
+        _tot = sum(r["kelly_dollars"] for r in _bt); _fam, _pair = _sum("portfolio_family"), _sum("portfolio_pair")
+        _vol = [r["market_label"] for r in _bt if r["kelly_dollars"] > _c["VOLUME_CAP"] * float(r.get("volume_usd") or 0) + 0.01]
+        _B = _c["BANKROLL"]
+        print(f"   bettor portfolio: {len(_bt)} bets, ${_tot:,.0f} of ${_B:,.0f} (stand-alone ${sum(r['kelly_dollars_standalone'] for r in _bt):,.0f});"
+              f" largest family ${_fam:,.0f}, largest pair ${_pair:,.0f}"
+              + ("  FAILED: over the bankroll" if _tot > _B + 0.01 else "")
+              + ("  FAILED: a family over its cap" if _fam > _c["PORTFOLIO_FAMILY_CAP"] * _B + 0.01 else "")
+              + ("  FAILED: a pair over its cap" if _pair > _c["PORTFOLIO_PAIR_CAP"] * _B + 0.01 else "")
+              + (f"  FAILED: {len(_vol)} stake(s) over the volume cap" if _vol else ""))
+    elif _bt: print("   bettor portfolio: FAILED (bets logged without portfolio fields: did the portfolio pass run?)" if any(r.get("kelly_dollars_standalone") is not None for r in plog) else
+                    "   bettor portfolio: not logged yet (fields added Nov 13)")
+except Exception as _ex:
+    print(f"   FAILED: bettor portfolio check could not run ({_ex!r})")
 # Verdict: every FAILED / ACTION: line printed above, in one place.
 _flags = [l.strip() for l in _OUT if "FAILED" in l or "ACTION:" in l]
 _ndeg = sum(len(v) for v in deg.values())

@@ -11,6 +11,8 @@ Usage:
 """
 
 import json
+import re                        # Nov 13: portfolio families
+from collections import defaultdict
 import math
 import os
 import sys
@@ -84,6 +86,11 @@ SCHOLAR_ONLY      = "--scholar-only" in sys.argv
 BLEND_WEIGHT_CAP  = 0.50
 BANKROLL          = 500.0
 KELLY_FRACTION    = 0.25
+# Nov 13: portfolio limits (ChatGPT bettor audit). Each contract is sized alone above; _portfolio_budget then fits the whole run.
+PORTFOLIO_FAMILY_CAP = 0.10   # share of the bankroll on one question family (a ladder or a run of dailies is one bet on many dates)
+PORTFOLIO_PAIR_CAP   = 0.20   # share of the bankroll on one country pair, all families together
+VOLUME_CAP           = 0.05   # a stake is at most this share of the market's total traded volume
+_PORTFOLIO_FIELDS    = ("kelly_dollars_standalone", "portfolio_family", "portfolio_pair", "portfolio_scale")
 
 # Live action-selector bridge is production-active by default.
 # Emergency rollback:
@@ -2420,9 +2427,14 @@ def run_translator():
                   + (f"; WARNING unlabeled pairs, no tilt: {', '.join(_unl)}" if _unl else ""))
         except Exception as ex: print(f"[role tilt] apply FAILED ({ex!r}); model P(B|A) kept")
     _apply_during_war_pricing(feed)
+    for _m in feed:                        # Nov 13: portfolio fields describe this run only (cleared even if the bettor fails)
+        if isinstance(_m, dict):
+            for _k in _PORTFOLIO_FIELDS: _m.pop(_k, None)
     try:                                   # Nov 10: bet and blend on the price we publish (after every pricing pass)
         print(f"[bettor] re-sized on the published price: {_rebet_on_published(feed)}")
-    except Exception as ex: print(f"[bettor] re-size FAILED ({ex!r}); bet fields describe the translator-time price")
+        # Nov 13: then fit the run to one portfolio. Only after a successful re-size: it reads this run's stand-alone stakes.
+        print(f"[bettor] portfolio: {_portfolio_budget(feed)}")
+    except Exception as ex: print(f"[bettor] re-size / portfolio FAILED ({ex!r}); bet fields may describe the translator-time price or exceed the bankroll")
     CLASSIFIED_FEED.write_text(json.dumps(feed, indent=2))
 
     print(f"\n{'='*60}")
@@ -2473,6 +2485,58 @@ def _rebet_on_published(feed: list) -> dict:
                   "bet_basis": f"published:{comp}"})
         n["re-sized"] += 1
         if old_dir in ("YES", "NO") and d != old_dir: n["direction changed"] += 1
+    return n
+
+
+_MONTHS = r"(?:January|February|March|April|May|June|July|August|September|October|November|December)"
+
+def _question_family(q: str) -> str:
+    """The question with its dates removed: a ladder or a run of dailies shares one family ("... Lebanon on ?")."""
+    s = re.sub(_MONTHS + r"\s*\d{0,2}(?:,?\s*\d{4})?|\b\d{4}\b", "", q or "")
+    return re.sub(r"\s+", " ", s).strip()
+
+def _portfolio_budget(feed: list) -> dict:
+    """Nov 13 (ChatGPT bettor audit, confirmed): each contract was sized alone on the whole bankroll, so a run's stakes summed to
+    $1,110-1,197 on a $500 bankroll (Nov 10-12), and a contract priced every day read as a new bet every day.
+    Now kelly_dollars is the TARGET HOLDING at today's price (a replay trades the change, not the whole amount again), and the run
+    fits one portfolio:
+      1. each stake <= VOLUME_CAP x the market's traded volume (a bigger order would move a thin market);
+      2. one question family <= PORTFOLIO_FAMILY_CAP x bankroll (ladders and dailies move together: Kelly sized each as independent);
+      3. one country pair <= PORTFOLIO_PAIR_CAP x bankroll;
+      4. the whole run <= bankroll.
+    Each step scales stakes proportionally inside the group; amounts are rounded down, so no cap is exceeded by rounding.
+    Correlation across pairs (e.g. the Israel-Iran ceasefire behind several pairs' prices) is not modeled: caps stand in for a joint
+    model we don't have. The stand-alone quarter-Kelly amount stays in kelly_dollars_standalone. Logs only: no published price moves."""
+    import math
+    fl = lambda x: math.floor(x * 100 + 1e-9) / 100
+    for m in feed:                         # clear last run's values (the feed persists between runs)
+        if isinstance(m, dict):
+            for k in _PORTFOLIO_FIELDS: m.pop(k, None)
+    bets = [m for m in feed if isinstance(m, dict) and not m.get("resolved") and m.get("bucket") == "CORE"
+            and m.get("conditional_p") is not None and m.get("market_price") is not None
+            and m.get("bet_direction") in ("YES", "NO") and float(m.get("kelly_dollars") or 0) > 0]
+    stake = {}
+    for m in bets:
+        fam = f"{m.get('dyad') or '-'} | {_question_family(m.get('question'))}"
+        m.update({"kelly_dollars_standalone": float(m["kelly_dollars"]), "portfolio_family": fam, "portfolio_pair": m.get("dyad") or fam})
+        stake[id(m)] = min(float(m["kelly_dollars"]), VOLUME_CAP * float(m.get("volume") or 0))
+    n = {"bets": len(bets), "stand-alone $": round(sum(m["kelly_dollars_standalone"] for m in bets), 2),
+         "volume-capped": sum(stake[id(m)] < m["kelly_dollars_standalone"] for m in bets)}
+    for key, cap, lab in (("portfolio_family", PORTFOLIO_FAMILY_CAP * BANKROLL, "families capped"),
+                          ("portfolio_pair", PORTFOLIO_PAIR_CAP * BANKROLL, "pairs capped")):
+        tot = defaultdict(float)
+        for m in bets: tot[m[key]] += stake[id(m)]
+        for m in bets:
+            if tot[m[key]] > cap: stake[id(m)] *= cap / tot[m[key]]
+        n[lab] = sum(v > cap for v in tot.values())
+    total = sum(stake.values()); k = min(1.0, BANKROLL / total) if total > 0 else 1.0
+    n["budget scale"] = round(k, 4)
+    for m in bets:
+        d = fl(stake[id(m)] * k)
+        m.update({"kelly_dollars": d, "kelly_fraction": round(d / BANKROLL, 6),
+                  "portfolio_scale": round(d / m["kelly_dollars_standalone"], 4)})
+        if d <= 0: m["bet_direction"] = "PASS"
+    n["final $"] = round(sum(m["kelly_dollars"] for m in bets), 2)
     return n
 
 
@@ -2586,6 +2650,10 @@ def _append_log(feed: list):
                 "bet_direction":            market.get("bet_direction"),
                 "kelly_clergy_confidence_mult": market.get("kelly_clergy_confidence_mult"),
                 "bet_basis":                market.get("bet_basis"),            # Nov 10: "published:<component>"
+                "kelly_dollars_standalone": market.get("kelly_dollars_standalone"),   # Nov 13: before the portfolio caps
+                "portfolio_family":         market.get("portfolio_family"),
+                "portfolio_pair":           market.get("portfolio_pair"),
+                "portfolio_scale":          market.get("portfolio_scale"),
                 "win_condition_summary":    market.get("win_condition_summary"),
                 "legalese_flags":           market.get("legalese_flags"),
             }
