@@ -199,9 +199,11 @@ def interstate(r):
     c = r.get("country")
     return any(h != c for h in homes) or len(set(homes)) >= 2
 
-def pull_full(start="2015-01", end=None, types=("Explosions/Remote violence", "Battles")):
+def pull_full(start="2015-01", end=None, types=("Explosions/Remote violence", "Battles"), refresh_from=None):
     """Worldwide, month by month, filtered by interstate(); one file per (month, type). Resumable: finished months are skipped,
-    except the current month, which is always re-pulled. Prints a per-month row count."""
+    except the current month, which is always re-pulled. Prints a per-month row count.
+    refresh_from ("YYYY-MM"): also re-pull every month from then on, even if finished. Needed for a final pull: the month that was
+    current at the previous pull is in the manifest but only partly covered (and recent weeks get recoded)."""
     FULL.mkdir(parents=True, exist_ok=True); man_p = FULL / "MANIFEST.json"
     man = json.loads(man_p.read_text()) if man_p.exists() else {"files": {}}
     today = dt.date.today(); m = dt.date(int(start[:4]), int(start[5:7]), 1)
@@ -211,7 +213,7 @@ def pull_full(start="2015-01", end=None, types=("Explosions/Remote violence", "B
         last = min(today, dt.date(m.year + (m.month == 12), m.month % 12 + 1, 1) - dt.timedelta(1))
         for ty in types:
             fn = f"{m:%Y-%m}_{'battles' if ty == 'Battles' else 'explosions'}.jsonl"
-            if fn in man["files"] and m < dt.date(today.year, today.month, 1): continue
+            if fn in man["files"] and m < dt.date(today.year, today.month, 1) and not (refresh_from and f"{m:%Y-%m}" >= refresh_from): continue
             kept, seen, page = [], 0, 1
             while True:
                 for attempt in range(5):
@@ -238,6 +240,9 @@ if __name__ == "__main__":
     elif "--pull" in sys.argv: pull()
     elif "--actors" in sys.argv: actors()
     elif "--world" in sys.argv: pull_world()
-    elif "--full" in sys.argv: pull_full()
+    elif "--full" in sys.argv:
+        rf = sys.argv[sys.argv.index("--refresh-from") + 1] if "--refresh-from" in sys.argv else None
+        if rf and not re.fullmatch(r"\d{4}-\d{2}", rf): raise SystemExit("--refresh-from takes YYYY-MM")
+        pull_full(refresh_from=rf)
     elif "--live" in sys.argv: pull_live()
     else: print("use --test | --pull | --actors")
