@@ -829,6 +829,12 @@
 ],
 "seeded": true
 },
+"055c215a7804afec53ea": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about attribution of a technical/cyber incident to a state actor, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "0579f18b751a073259ca": {
 "bucket": "NOISE",
 "dyad": null,
@@ -3196,6 +3202,16 @@
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not about interstate conflict between a specific dyad.",
 "relevant_nodes": []
+},
+"15feb1abb8dbc4bc79ab": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "A prisoner exchange is a diplomatic/military event between two state actors in an active interstate conflict, but it concerns negotiation outcomes rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"CommitmentProblem",
+"Patience"
+]
 },
 "15ffdef959baef278212": {
 "bucket": "NOISE",
@@ -6781,6 +6797,17 @@
 "reason": "This is about a domestic political appointment in Brazil, not about interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"2e0a733ac844412b7361": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between state actors in the Russia-Ukraine conflict context, but asks about a diplomatic meeting event rather than conflict onset or escalation directly.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "2e0cfea9d3147aea753e": {
 "bucket": "NOISE",
 "dyad": null,
@@ -8619,6 +8646,12 @@
 "reason": "This is about domestic Israeli politics and government formation after an election, not about interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"3c6a85047ea3cb5f060d": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about FAA air traffic management, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "3c6ff919e8ed03cdeaea": {
 "bucket": "CORE",
 "dyad": "Saudi Arabia-Yemen",
@@ -10305,6 +10338,12 @@
 "DemocraticPeace"
 ]
 },
+"4802c555fa41b7ee4631": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about FAA operational decisions regarding air traffic, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "480dc7a099be23c8eeda": {
 "bucket": "ADJACENT",
 "dyad": null,
@@ -10856,6 +10895,12 @@
 "reason": "This is a local election question in Taiwan with no direct connection to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"4be890773f3d4723d44f": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about attribution of a technical infrastructure outage, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "4bfbacaf582797e7f07c": {
 "bucket": "NOISE",
@@ -12101,6 +12146,12 @@
 "HardlineClaims"
 ],
 "seeded": true
+},
+"54aa0ae43f8395abec16": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about FAA air traffic management, not interstate conflict between state actors.",
+"relevant_nodes": []
 },
 "54c4a6f3b8e731848d7f": {
 "bucket": "NOISE",
@@ -18525,6 +18576,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"82a5cf3d2e0195c4e68e": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about FAA air traffic management, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "82a63915411b9991aa8f": {
 "bucket": "CORE",
 "dyad": "Russia-Ukraine",
@@ -19482,6 +19539,17 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"8967c605c42079524c77": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns diplomatic negotiations between state actors related to the Russia-Ukraine conflict, but asks about a meeting occurrence rather than conflict onset or escalation directly.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"CommitmentProblem",
+"Patience"
+]
+},
 "89738162c2992ea89293": {
 "bucket": "NOISE",
 "dyad": null,
@@ -20143,6 +20211,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not about interstate conflict between two state actors.",
+"relevant_nodes": []
+},
+"8e1862251c0a4a73f2fc": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about FAA aviation operations, not interstate conflict between state actors.",
 "relevant_nodes": []
 },
 "8e1a7bed8b860d5c90b6": {
@@ -21380,6 +21454,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"9707768be81c61a83509": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about FAA air traffic management, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "9720d5bf04533fced8a1": {
 "bucket": "NOISE",
 "dyad": null,
@@ -22201,6 +22281,16 @@
 "dyad": null,
 "reason": "This is about a domestic presidential election, not interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"9d23fef5e48c1546b10b": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "A prisoner exchange is a diplomatic/military event between two state actors at war, but it concerns a specific negotiated outcome rather than conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"CommitmentProblem",
+"Patience"
+]
 },
 "9d2fc78500b4ba7e26dc": {
 "bucket": "NOISE",

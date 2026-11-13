@@ -3,13 +3,14 @@
   "rule": "A group is priced by the unified engine if in scope, UNLESS the walk-forward replay shows harm: >= 3 replayed contracts and unified Brier worse than production by > 0.05. Groups with < 3 replayed contracts are published (no evidence of harm). Lebanon / Saudi->Yemen dailies are priced by unified since Oct 20. Exclusions are computed, never hand-picked.",
   "excluded": {
     "israel->syria|5f02deea84": "replay n=7: unified 0.467 vs production 0.330",
-    "iran->kuwait|355fdb8e76": "replay n=3: unified 0.123 vs production 0.000"
+    "iran->kuwait|355fdb8e76": "replay n=3: unified 0.123 vs production 0.000",
+    "iran->bahrain|355fdb8e76": "replay n=3: unified 0.305 vs production 0.187"
   },
-  "computed_at": "2026-11-12T22:34:03.783245+00:00",
+  "computed_at": "2026-11-13T22:28:50.779737+00:00",
   "replayed_groups": {
     "israel->yemen|361cd79bd1": 3,
     "saudiarabia->yemen|78a3e35204": 4,
-    "iran->arabcountry|355fdb8e76": 10,
+    "iran->arabcountry|355fdb8e76": 12,
     "israel->syria|5f02deea84": 7,
     "iran->saudiarabia|355fdb8e76": 1,
     "iran->unitedarabemirates|355fdb8e76": 2,
@@ -17,10 +18,10 @@
     "iran->jordan|355fdb8e76": 4,
     "iran->syria|355fdb8e76": 1,
     "iran->kuwait|355fdb8e76": 3,
-    "iran->bahrain|355fdb8e76": 2,
-    "iran->oman|355fdb8e76": 1,
+    "iran->bahrain|355fdb8e76": 3,
+    "iran->oman|355fdb8e76": 3,
     "iran->qatar|355fdb8e76": 1,
-    "israel->lebanon|5f02deea84": 58,
+    "israel->lebanon|5f02deea84": 60,
     "saudiarabia->yemen|52a1259b99": 33
   }
 }
