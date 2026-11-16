@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-11-13T22:26:18.414069+00:00",
-  "n_resolved": 287,
-  "brier_conditional_mean": 0.288765,
-  "brier_engine_mean": 0.442332,
-  "brier_market_mean": 0.132886,
-  "edge_vs_market": -0.155879,
+  "last_updated": "2026-11-16T22:26:23.502427+00:00",
+  "n_resolved": 300,
+  "brier_conditional_mean": 0.283586,
+  "brier_engine_mean": 0.448482,
+  "brier_market_mean": 0.132514,
+  "edge_vs_market": -0.151072,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -3162,6 +3162,149 @@
       "brier_conditional": 0.021934,
       "brier_market": 0.64,
       "resolved_at": "2026-11-13T22:26:16.347389+00:00"
+    },
+    {
+      "market_id": "5401164",
+      "market_label": "Pakistan military action against Afghanistan by October 31, 2026?",
+      "dyad": "Pakistan-Afghanistan",
+      "outcome": 0,
+      "conditional_p": 0.372,
+      "market_p": 0.42,
+      "brier_conditional": 0.138384,
+      "brier_market": 0.1764,
+      "resolved_at": "2026-11-16T22:25:35.252140+00:00"
+    },
+    {
+      "market_id": "6044505",
+      "market_label": "NATO x Russia military clash by November 15, 2026?",
+      "dyad": "NATO-Russia",
+      "outcome": 0,
+      "conditional_p": 0.053,
+      "market_p": 0.0465,
+      "brier_conditional": 0.002809,
+      "brier_market": 0.002162,
+      "resolved_at": "2026-11-16T22:25:42.826101+00:00"
+    },
+    {
+      "market_id": "6424253",
+      "market_label": "Will Iran target the United Arab Emirates by November 15, 2026?",
+      "dyad": "Iran-UAE",
+      "outcome": 0,
+      "conditional_p": 0.1971,
+      "market_p": 0.395,
+      "brier_conditional": 0.038848,
+      "brier_market": 0.156025,
+      "resolved_at": "2026-11-16T22:25:47.580880+00:00"
+    },
+    {
+      "market_id": "6713468",
+      "market_label": "Israel military action against Lebanon on November 15?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.8903,
+      "market_p": 0.83,
+      "brier_conditional": 0.012034,
+      "brier_market": 0.0289,
+      "resolved_at": "2026-11-16T22:26:00.321344+00:00"
+    },
+    {
+      "market_id": "6713463",
+      "market_label": "Israel military action against Lebanon on November 14?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.8942,
+      "market_p": 0.83,
+      "brier_conditional": 0.011194,
+      "brier_market": 0.0289,
+      "resolved_at": "2026-11-16T22:26:02.471155+00:00"
+    },
+    {
+      "market_id": "6713474",
+      "market_label": "Israel military action against Lebanon on November 16?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.8864,
+      "market_p": 0.76,
+      "brier_conditional": 0.012905,
+      "brier_market": 0.0576,
+      "resolved_at": "2026-11-16T22:26:04.762321+00:00"
+    },
+    {
+      "market_id": "6908164",
+      "market_label": "Israel x Iran ceasefire continues through November 13?",
+      "dyad": "Israel-Iran",
+      "outcome": 1,
+      "conditional_p": 0.9805,
+      "market_p": 0.9635,
+      "brier_conditional": 0.00038,
+      "brier_market": 0.001332,
+      "resolved_at": "2026-11-16T22:26:08.776688+00:00"
+    },
+    {
+      "market_id": "6947935",
+      "market_label": "Russia x Ukraine energy ceasefire agreement by November 15, 2026?",
+      "dyad": "Russia-Ukraine",
+      "outcome": 0,
+      "conditional_p": 0.0094,
+      "market_p": 0.038,
+      "brier_conditional": 8.8e-05,
+      "brier_market": 0.001444,
+      "resolved_at": "2026-11-16T22:26:11.076319+00:00"
+    },
+    {
+      "market_id": "6949439",
+      "market_label": "Will Iran target Iraq by November 15, 2026?",
+      "dyad": "Iran-Iraq",
+      "outcome": 0,
+      "conditional_p": 0.7915,
+      "market_p": 0.27,
+      "brier_conditional": 0.626472,
+      "brier_market": 0.0729,
+      "resolved_at": "2026-11-16T22:26:13.725747+00:00"
+    },
+    {
+      "market_id": "7029176",
+      "market_label": "Will Iran target an Arab country by November 30, 2026?",
+      "dyad": "Iran-ArabStates",
+      "outcome": 1,
+      "conditional_p": 0.9614,
+      "market_p": 0.675,
+      "brier_conditional": 0.00149,
+      "brier_market": 0.105625,
+      "resolved_at": "2026-11-16T22:26:15.665957+00:00"
+    },
+    {
+      "market_id": "7029175",
+      "market_label": "Will Iran target an Arab country by November 22, 2026?",
+      "dyad": "Iran-Saudi Arabia",
+      "outcome": 1,
+      "conditional_p": 0.9521,
+      "market_p": 0.415,
+      "brier_conditional": 0.002294,
+      "brier_market": 0.342225,
+      "resolved_at": "2026-11-16T22:26:17.632028+00:00"
+    },
+    {
+      "market_id": "7029669",
+      "market_label": "Will Iran target Bahrain by November 30, 2026?",
+      "dyad": "Iran-Bahrain",
+      "outcome": 1,
+      "conditional_p": 0.2178,
+      "market_p": 0.48,
+      "brier_conditional": 0.611837,
+      "brier_market": 0.2704,
+      "resolved_at": "2026-11-16T22:26:19.571621+00:00"
+    },
+    {
+      "market_id": "7029668",
+      "market_label": "Will Iran target Bahrain by November 22, 2026?",
+      "dyad": "Iran-Bahrain",
+      "outcome": 1,
+      "conditional_p": 0.1389,
+      "market_p": 0.39,
+      "brier_conditional": 0.741493,
+      "brier_market": 0.3721,
+      "resolved_at": "2026-11-16T22:26:21.596711+00:00"
     }
   ]
 }

@@ -24,9 +24,9 @@
    "brier_market": 0.2425
   },
   "C": {
-   "n": 130,
-   "brier_model": 0.1985,
-   "brier_market": 0.1386
+   "n": 131,
+   "brier_model": 0.197,
+   "brier_market": 0.1376
   },
   "C:hamas|israel:BREAKDOWN": {
    "n": 11,
@@ -125,10 +125,10 @@
    "brier_market": 0.0672
   },
   "C:russia|ukraine:CEASEFIRE": {
-   "n": 12,
+   "n": 13,
    "yes": 1,
-   "brier_model": 0.0816,
-   "brier_market": 0.0942
+   "brier_model": 0.0753,
+   "brier_market": 0.087
   },
   "C:russia|ukraine:DEAL": {
    "n": 1,
@@ -1527,6 +1527,15 @@
   },
   {
    "fam": "C",
+   "series": "russia|ukraine:CEASEFIRE",
+   "y": 0,
+   "u": 0.0075,
+   "m": 0.034,
+   "q": "Russia x Ukraine energy ceasefire agreement by November 15, 2026?",
+   "date": "2026-11-15"
+  },
+  {
+   "fam": "C",
    "series": "russia:CEASEFIRE",
    "y": 0,
    "u": 0.0103,
@@ -1580,5 +1589,5 @@
    "date": "2026-06-30"
   }
  ],
- "computed_at": "2026-11-13T22:12:56.183742+00:00"
+ "computed_at": "2026-11-16T22:11:17.437629+00:00"
 }

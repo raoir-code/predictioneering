@@ -6907,5 +6907,245 @@
     },
     "route": "scoped_bilateral",
     "version": 1
+  },
+  "7029176": {
+    "market_id": "7029176",
+    "dyad": "Iran-ArabStates",
+    "question": "Will Iran target an Arab country by November 30, 2026?",
+    "end_date": "2026-12-01",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "ArabStates",
+    "source_signature": "25db044c702d77b1789d3baccd50fe5c2cb670206fe2d8dba8791555ac115ce5",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "enumerable_union",
+        "canonical_actor": null,
+        "entity_type": "state",
+        "members": [
+          "Algeria",
+          "Bahrain",
+          "Comoros",
+          "Djibouti",
+          "Egypt",
+          "Iraq",
+          "Jordan",
+          "Kuwait",
+          "Lebanon",
+          "Libya",
+          "Mauritania",
+          "Morocco",
+          "Oman",
+          "Qatar",
+          "Saudi Arabia",
+          "Somalia",
+          "Sudan",
+          "Syria",
+          "Tunisia",
+          "United Arab Emirates",
+          "Yemen"
+        ],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "multiple",
+        "places": [
+          "Algeria",
+          "Bahrain",
+          "Comoros",
+          "Djibouti",
+          "Egypt",
+          "Iraq",
+          "Jordan",
+          "Kuwait",
+          "Lebanon",
+          "Libya",
+          "Mauritania",
+          "Morocco",
+          "Oman",
+          "Qatar",
+          "Saudi Arabia",
+          "Somalia",
+          "Sudan",
+          "Syria",
+          "Tunisia",
+          "United Arab Emirates",
+          "Yemen"
+        ],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "Iran is the single initiator; the target is an explicitly enumerated list of 21 Arab states, any one of which satisfies the contract. The geographic scope is defined by the same enumerated list and exists solely to specify which countries count as qualifying targets for this particular action type, making it resolution_only rather than a structurally distinct operational theater.",
+      "scope_fingerprint": "e706bb580e9d3921",
+      "action_prior_fingerprint": "39ece0df040128c4"
+    },
+    "route": "agglomeration_required",
+    "version": 1
+  },
+  "7029175": {
+    "market_id": "7029175",
+    "dyad": "Iran-Saudi Arabia",
+    "question": "Will Iran target an Arab country by November 22, 2026?",
+    "end_date": "2026-11-23",
+    "action_type": "missile_strike",
+    "initiator": "Iran",
+    "target": "Saudi Arabia",
+    "source_signature": "a11c72b7cfcafed90f6df9744d6f4d6a9f2dddae25e8b880408f2dcee13af6d0",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "enumerable_union",
+        "canonical_actor": null,
+        "entity_type": "state",
+        "members": [
+          "Algeria",
+          "Bahrain",
+          "Comoros",
+          "Djibouti",
+          "Egypt",
+          "Iraq",
+          "Jordan",
+          "Kuwait",
+          "Lebanon",
+          "Libya",
+          "Mauritania",
+          "Morocco",
+          "Oman",
+          "Qatar",
+          "Saudi Arabia",
+          "Somalia",
+          "Sudan",
+          "Syria",
+          "Tunisia",
+          "United Arab Emirates",
+          "Yemen"
+        ],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "multiple",
+        "places": [
+          "Algeria",
+          "Bahrain",
+          "Comoros",
+          "Djibouti",
+          "Egypt",
+          "Iraq",
+          "Jordan",
+          "Kuwait",
+          "Lebanon",
+          "Libya",
+          "Mauritania",
+          "Morocco",
+          "Oman",
+          "Qatar",
+          "Saudi Arabia",
+          "Somalia",
+          "Sudan",
+          "Syria",
+          "Tunisia",
+          "United Arab Emirates",
+          "Yemen"
+        ],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The assigned initiator is Iran (single state actor). The assigned target is Saudi Arabia, but the contract's resolution criteria expand the target to an enumerable union of 21 explicitly listed Arab countries, any one of which satisfies resolution. The geographic scope is defined by the terrestrial territory of those same enumerated countries, which is intrinsic to the resolution definition rather than a structurally distinct operational theater, so prior_relevance is resolution_only. The direction is compatible because Saudi Arabia is among the enumerated qualifying targets.",
+      "scope_fingerprint": "e706bb580e9d3921",
+      "action_prior_fingerprint": "39ece0df040128c4"
+    },
+    "route": "agglomeration_required",
+    "version": 1
+  },
+  "7029669": {
+    "market_id": "7029669",
+    "dyad": "Iran-Bahrain",
+    "question": "Will Iran target Bahrain by November 30, 2026?",
+    "end_date": "2026-12-01",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Bahrain",
+    "source_signature": "6afa771652dc2f292b5b05e044ba06bec5f0caeb59b08b27b420858b1c7859de",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Bahrain",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Iran, acting as the Islamic Republic with explicit claim or confirmed origin from Iranian territory, excluding proxies) targeting a single state (Bahrain). The geographic restriction to Bahrain's terrestrial territory including internal waters is intrinsic to the definition of the qualifying action being 'directed at Bahrain' and does not define a structurally distinct operational theater beyond the target itself, so it is resolution_only.",
+      "scope_fingerprint": "a408a4963eb4a314",
+      "action_prior_fingerprint": "b315653e9eabefa4"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "7029668": {
+    "market_id": "7029668",
+    "dyad": "Iran-Bahrain",
+    "question": "Will Iran target Bahrain by November 22, 2026?",
+    "end_date": "2026-11-23",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Bahrain",
+    "source_signature": "76675f430ef57632fdb23e38d0ecab416ac25ced2e7cc085a06ba7026a57ceea",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Bahrain",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Iran, acting through its own forces with explicit claim or confirmed origin from Iranian territory) targeting a single state (Bahrain). The geographic restriction to Bahrain's terrestrial territory including internal waters is intrinsic to the definition of the qualifying action being 'directed at Bahrain' and does not constitute a structurally distinct operational theater — it is resolution_only. Proxy forces are explicitly excluded, confirming Iran as the sole qualifying initiator.",
+      "scope_fingerprint": "a408a4963eb4a314",
+      "action_prior_fingerprint": "b315653e9eabefa4"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
   }
 }
