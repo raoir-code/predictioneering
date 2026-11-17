@@ -437,6 +437,12 @@
 "reason": "This is about domestic Israeli politics and parliamentary coalition formation, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"02b10fc1580b785bccef": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about predicting specific words a leader will say during a meeting, not about interstate conflict onset or escalation between a dyad.",
+"relevant_nodes": []
+},
 "02c8568f63ae23b309e9": {
 "bucket": "NOISE",
 "dyad": null,
@@ -6265,6 +6271,12 @@
 "CommitmentProblem"
 ]
 },
+"29a4501ced4b77d432b2": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about predicting specific words a leader will say in a meeting, not about interstate conflict onset or escalation.",
+"relevant_nodes": []
+},
 "29f59a1b82878070fee3": {
 "bucket": "NOISE",
 "dyad": null,
@@ -7622,6 +7634,12 @@
 "reason": "This is a local county magistrate election in Taiwan, not related to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"338e82dc5fbfd36e0792": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the specific words Trump will use in a speech at APEC, not about interstate conflict onset or escalation.",
+"relevant_nodes": []
 },
 "3394ac120e19ddc536fb": {
 "bucket": "NOISE",
@@ -9909,6 +9927,12 @@
 "reason": "This question is about Trump's travel schedule, not about interstate conflict onset or escalation between state actors.",
 "relevant_nodes": []
 },
+"442156a6da6ccbd46101": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about specific words a leader will say during a meeting, not about interstate conflict onset or escalation.",
+"relevant_nodes": []
+},
 "442adf64fb268f4cf178": {
 "bucket": "CORE",
 "dyad": "Israel-Lebanon",
@@ -11374,6 +11398,12 @@
 ],
 "seeded": true
 },
+"4db9e6a418f20354de4b": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the content of a political speech at a summit, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "4dc9a44c6b032c3769c1": {
 "bucket": "NOISE",
 "dyad": null,
@@ -12680,6 +12710,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
+"relevant_nodes": []
+},
+"567a28f37ce6f924f500": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the specific words a leader will say during a meeting, not about interstate conflict onset or escalation between a dyad.",
 "relevant_nodes": []
 },
 "567a910bdc08fc5f0555": {
@@ -15369,6 +15405,12 @@
 "reason": "This is about a domestic political appointment in Brazil, not about interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"686984a84c7755f49efc": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the specific words a leader will say during a diplomatic meeting, not about interstate conflict onset or escalation.",
+"relevant_nodes": []
+},
 "686f819f55202d79576c": {
 "bucket": "NOISE",
 "dyad": null,
@@ -16109,6 +16151,12 @@
 "PreferenceAlignment"
 ],
 "seeded": true
+},
+"6da393facb0802878391": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about predicting specific words in a speech, not about interstate conflict onset or escalation.",
+"relevant_nodes": []
 },
 "6da465ddfb2e64eb4b54": {
 "bucket": "NOISE",
@@ -16951,6 +16999,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"733ac0603b59c734b3a3": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the count of UKMTO maritime safety notices, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "733ff28e4d721f68ac53": {
 "bucket": "NOISE",
 "dyad": null,
@@ -17449,6 +17503,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This question is about US domestic immigration policy, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
+"76dca0ad1a2e439138cb": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the content of a political speech at a summit, not about interstate conflict onset between any dyad.",
 "relevant_nodes": []
 },
 "76e89a829f6852423ac7": {
@@ -19836,6 +19896,12 @@
 "PreferenceAlignment"
 ]
 },
+"88c53c8491f8165115c9": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the content of a leader's speech during a diplomatic meeting, not about interstate conflict onset or escalation between a specific dyad.",
+"relevant_nodes": []
+},
 "88c65135f60b00d20686": {
 "bucket": "NOISE",
 "dyad": null,
@@ -20015,6 +20081,12 @@
 "HardlineClaims"
 ],
 "seeded": true
+},
+"89c7ddcb2c1a7f142e17": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the content of a political speech at a multilateral summit, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "89ceb87d1ff9158b2d85": {
 "bucket": "NOISE",
@@ -20864,6 +20936,12 @@
 "reason": "This is about an Israeli election outcome and leadership succession, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"9037a084bd6e2bb51184": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the specific words a leader will say during a meeting, not about interstate conflict onset or escalation.",
+"relevant_nodes": []
 },
 "903a5df458ffb6057d26": {
 "bucket": "NOISE",
@@ -21900,6 +21978,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"96f75de9c93f51c81926": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the specific words a leader will say during a diplomatic meeting, not about interstate conflict onset or escalation between a dyad.",
+"relevant_nodes": []
+},
 "97052d9afce0701968b8": {
 "bucket": "NOISE",
 "dyad": null,
@@ -22510,6 +22594,12 @@
 "HardlineClaims"
 ]
 },
+"9bab0f7814231f181d75": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the content of a speech at a diplomatic summit, not about interstate conflict onset between state actors.",
+"relevant_nodes": []
+},
 "9bb3ffd1ec8e0239e27d": {
 "bucket": "NOISE",
 "dyad": null,
@@ -22797,6 +22887,12 @@
 "reason": "This question is about a corporate regulatory/trade compliance matter involving Nvidia and the Bureau of Industry and Security, not about interstate conflict onset between state actors.",
 "relevant_nodes": []
 },
+"9d56d8ea5c66823b6c94": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the specific words a leader will say during a meeting, not about interstate conflict onset or escalation between a dyad.",
+"relevant_nodes": []
+},
 "9d721768b9c914b48515": {
 "bucket": "ADJACENT",
 "dyad": "Russia-Ukraine",
@@ -22889,6 +22985,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
+"relevant_nodes": []
+},
+"9e24d2fbdde5c9124425": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the count of UKMTO maritime security notices, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": []
 },
 "9e2eabde4f1f3bc6034e": {
@@ -23936,6 +24038,12 @@
 "Patience"
 ],
 "seeded": true
+},
+"a52ce8d46d61db7bbd73": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the count of UKMTO maritime security notices, not about interstate conflict onset between a specific state dyad.",
+"relevant_nodes": []
 },
 "a53b49136f688ca06574": {
 "bucket": "NOISE",
@@ -26458,6 +26566,12 @@
 "reason": "This is about a local county election in Kinmen, not about interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"b5d4ac2abc269cc2cc8b": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the count of UKMTO maritime safety notices, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "b5d870346ed8a9ce9698": {
 "bucket": "NOISE",
@@ -29243,6 +29357,12 @@
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"c71640108d18731dc290": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the content of a diplomatic meeting's speech, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "c71d435bd148ea0d2137": {
 "bucket": "NOISE",
 "dyad": null,
@@ -31312,6 +31432,12 @@
 "reason": "This is about a US domestic political/personnel question, not about interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"d5f5b594440cd55d0c00": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about predicting specific words in a speech, not about interstate conflict onset or escalation.",
+"relevant_nodes": []
+},
 "d5f8fbe70013d5ae1e32": {
 "bucket": "NOISE",
 "dyad": null,
@@ -32679,6 +32805,12 @@
 "reason": "This is a municipal election question with no interstate conflict component.",
 "relevant_nodes": [],
 "seeded": true
+},
+"df0efacb733beb7e5603": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the specific words a leader will say during a diplomatic meeting, not about interstate conflict onset between a dyad.",
+"relevant_nodes": []
 },
 "df134a10378ade57e068": {
 "bucket": "NOISE",
@@ -36398,6 +36530,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"f907ab192249549d0055": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about predicting specific words in a speech, not about interstate conflict onset.",
+"relevant_nodes": []
+},
 "f90a468c5268f3b86686": {
 "bucket": "NOISE",
 "dyad": null,
@@ -36495,6 +36633,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"f9a1f67537be1882f040": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the count of UKMTO (UK Maritime Trade Operations) notices, which tracks maritime security incidents largely involving non-state actors (e.g., Houthi attacks), not interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "f9ad173978bf4dd8af25": {
 "bucket": "NOISE",
 "dyad": null,
@@ -36571,6 +36715,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This question is about the ranking of Chinese AI companies, not about interstate conflict between state actors.",
+"relevant_nodes": []
+},
+"f9f169241396a6219fa7": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the content of a speech at a diplomatic summit, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": []
 },
 "fa14e10cd98654356b84": {
@@ -36875,12 +37025,24 @@
 "reason": "This question is about leadership tenure/political survival of a specific leader, not about interstate conflict onset between a dyad.",
 "relevant_nodes": []
 },
+"fc7e0b174f3df26a749c": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the specific words a leader will say during a meeting, not about interstate conflict onset or escalation between a dyad.",
+"relevant_nodes": []
+},
 "fc82179f1313d1b7b26c": {
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about leadership tenure/political survival in Iran, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"fc84dd95c4bec8baf36b": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the content of a political speech at a diplomatic summit, not about interstate conflict onset.",
+"relevant_nodes": []
 },
 "fc857128b92600d60170": {
 "bucket": "NOISE",

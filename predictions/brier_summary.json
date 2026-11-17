@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-11-16T22:26:23.502427+00:00",
-  "n_resolved": 300,
-  "brier_conditional_mean": 0.283586,
-  "brier_engine_mean": 0.448482,
-  "brier_market_mean": 0.132514,
-  "edge_vs_market": -0.151072,
+  "last_updated": "2026-11-17T22:23:43.521449+00:00",
+  "n_resolved": 302,
+  "brier_conditional_mean": 0.281796,
+  "brier_engine_mean": 0.451687,
+  "brier_market_mean": 0.132376,
+  "edge_vs_market": -0.14942,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -3305,6 +3305,28 @@
       "brier_conditional": 0.741493,
       "brier_market": 0.3721,
       "resolved_at": "2026-11-16T22:26:21.596711+00:00"
+    },
+    {
+      "market_id": "6713476",
+      "market_label": "Israel military action against Lebanon on November 17?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.8826,
+      "market_p": 0.7,
+      "brier_conditional": 0.013783,
+      "brier_market": 0.09,
+      "resolved_at": "2026-11-17T22:23:36.456855+00:00"
+    },
+    {
+      "market_id": "6949440",
+      "market_label": "Will Iran target Iraq by November 30, 2026?",
+      "dyad": "Iran-Iraq",
+      "outcome": 1,
+      "conditional_p": 0.886,
+      "market_p": 0.635,
+      "brier_conditional": 0.012996,
+      "brier_market": 0.133225,
+      "resolved_at": "2026-11-17T22:23:41.630127+00:00"
     }
   ]
 }

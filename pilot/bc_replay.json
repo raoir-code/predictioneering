@@ -144,6 +144,8 @@
   }
  },
  "skipped": {
+  "gap: past date": 1,
+  "gap: {'unpriced': 'unitedstates->iraniscompleted: no un": 1,
   "agreement: resolved before first run": 4,
   "agreement: past date": 3
  },
@@ -1589,5 +1591,5 @@
    "date": "2026-06-30"
   }
  ],
- "computed_at": "2026-11-16T22:11:17.437629+00:00"
+ "computed_at": "2026-11-17T22:12:16.433235+00:00"
 }
