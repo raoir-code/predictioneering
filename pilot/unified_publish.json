@@ -4,9 +4,9 @@
   "excluded": {
     "israel->syria|5f02deea84": "replay n=7: unified 0.467 vs production 0.330",
     "iran->unitedarabemirates|355fdb8e76": "replay n=3: unified 0.114 vs production 0.015",
-    "iran->kuwait|355fdb8e76": "replay n=3: unified 0.123 vs production 0.000"
+    "iran->kuwait|355fdb8e76": "replay n=4: unified 0.244 vs production 0.152"
   },
-  "computed_at": "2026-11-17T22:26:35.512977+00:00",
+  "computed_at": "2026-11-18T22:25:26.985752+00:00",
   "replayed_groups": {
     "israel->yemen|361cd79bd1": 3,
     "saudiarabia->yemen|78a3e35204": 4,
@@ -17,11 +17,11 @@
     "iran->iraq|355fdb8e76": 12,
     "iran->jordan|355fdb8e76": 4,
     "iran->syria|355fdb8e76": 1,
-    "iran->kuwait|355fdb8e76": 3,
+    "iran->kuwait|355fdb8e76": 4,
     "iran->bahrain|355fdb8e76": 5,
     "iran->oman|355fdb8e76": 3,
     "iran->qatar|355fdb8e76": 1,
-    "israel->lebanon|5f02deea84": 64,
+    "israel->lebanon|5f02deea84": 65,
     "saudiarabia->yemen|52a1259b99": 33
   }
 }
