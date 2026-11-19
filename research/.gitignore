@@ -1,0 +1,9 @@
+# Research records and potentially sensitive work logs must stay local.
+inbox/raw/
+inbox/records/
+projects/
+datasets/raw/
+datasets/private/
+.env
+__pycache__/
+*.pyc

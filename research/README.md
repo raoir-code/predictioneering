@@ -1,0 +1,56 @@
+# Predictioneering Research Factory — Phase 1 (Puzzle Finder)
+
+**Isolated addition:** The `research/` package does not import or modify the forecasting
+engine, forecasting configuration, DAG parameters, or existing pipelines. There is
+no automation that writes to Predictioneering model files.
+
+The current Phase 1 ingests a work log or diagnostic text file, asks Claude to
+identify 0–3 possible research puzzles, and saves local puzzle cards for a
+researcher's approval or rejection. These cards are **ideas, not established
+findings**; claimed novelty is explicitly unverified. No papers or predictions
+are generated in this phase.
+
+## Before you run it
+
+From your existing repository root, set API credentials **in your shell**, not
+in tracked files. A Claude chat subscription does not automatically include
+Anthropic API credits.
+
+```bash
+export ANTHROPIC_API_KEY='YOUR_ANTHROPIC_API_KEY'
+export CLAUDE_MODEL='YOUR_AVAILABLE_MODEL_ID'
+```
+
+This first version uses only the Python standard library (no new dependencies).
+
+## Run
+
+```bash
+python -m research.factory ingest /path/to/worklog.md --kind worklog
+python -m research.factory ingest /path/to/diagnostic.txt --kind diagnostic
+python -m research.factory list
+python -m research.factory show PUZZLE_ID
+python -m research.factory approve PUZZLE_ID
+python -m research.factory reject PUZZLE_ID
+python -m unittest discover -s research/tests -v
+```
+
+**Human checkpoint:** The Puzzle Finder proposes cards, but will not start a
+research project without explicit approval. A literature-review module can be
+added later without changing the intake interface.
+
+## Privacy and reliability
+
+- Private work logs, processing records, and project cards stay local under
+  ignored `research/inbox/` and `research/projects/` directories; never commit
+  work logs or API keys to this **public** GitHub repository.
+- Complete logs are fingerprinted so rerunning a successful log creates no
+  duplicate call or charge. Incomplete/failed processing may be retried.
+- Source snapshots and state files are written atomically. Card identifiers are
+  deterministic, preventing duplicates after partial failures.
+- Source quotations are checked against the original text. Missing/mismatched
+  quotations are flagged as unverified rather than presented as evidence.
+- Failed Claude API calls preserve a local error status for debugging.
+- Automated tests mock Claude; a real API call has **not** been verified yet.
+- This tool processes a *supplied* Markdown/plain-text log. Automatic discovery
+  of logs and diagnostics is intentionally deferred to the next phase.
