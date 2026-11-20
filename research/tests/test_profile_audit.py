@@ -12,7 +12,7 @@ from research.factory.pdf_text import SCHEMA as TEXT
 from research.factory.paper_profiles import SCHEMA as PROFILES, VERSION
 from research.factory.profile_audit import (
     assessment, context_for, load_profile, main, mark, model_packet,
-    open_audit_db, report, pick_queue
+    open_audit_db, report
 )
 
 
@@ -209,7 +209,7 @@ class ProfileAuditTests(unittest.TestCase):
 
     def test_quote_reappearance_on_wrong_page_does_not_count(self):
         mismatched = dict(self.evidence[0], page=6)
-        info = assessment(mismatched, self.text if False else "")
+        info = assessment(mismatched, None)
         self.assertFalse(info["quote_found_on_original_indexed_page"])
         self.assertEqual(info["priority"], 100)
 
