@@ -3,13 +3,20 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import patch
-from urllib.error import HTTPError
+from unittest.mock import patch, Mock
+import requests
 
 from research.factory.holiday_acled import (
     classify_direction, credentials, file_for, fetch_one, fetch_page,
     get_token, pilot, validate_window,
 )
+
+
+def http_error(status):
+    response = requests.Response()
+    response.status_code = status
+    response.url = "https://acleddata.com/oauth/token"
+    return requests.exceptions.HTTPError(response=response)
 
 
 def event(event_id="LBN1", event_type="Battles", day="2024-10-11", prec=1):
@@ -120,8 +127,7 @@ class HolidayAcledTests(unittest.TestCase):
 
     def test_reauth_after_expired_access_token(self):
         state = ["old"]
-        expired = HTTPError(url="https://acleddata.com/api/acled/read", code=401,
-                            msg="Unauthorized", hdrs=None, fp=None)
+        expired = http_error(401)
         with patch("research.factory.holiday_acled.request_json",
                    side_effect=[expired, {"data": [], "status": 200}]) as request:
             with patch("research.factory.holiday_acled.get_token",
@@ -133,27 +139,50 @@ class HolidayAcledTests(unittest.TestCase):
         self.assertEqual(request.call_count, 2)
         auth.assert_called_once_with("u", "p")
 
-    def test_auth_token_uses_current_myacled_authenticated_scope(self):
+    def test_auth_token_matches_successful_production_form(self):
         with patch("research.factory.holiday_acled.request_json",
                    return_value={"access_token": "TOKEN"}) as request:
             tok = get_token("user@example.org", "SECRET_PASSWORD")
         self.assertEqual(tok, "TOKEN")
         body = request.call_args.kwargs["body"]
-        self.assertEqual(body["scope"], "authenticated")
+        self.assertNotIn("scope", body)
         self.assertEqual(body["grant_type"], "password")
         self.assertEqual(body["client_id"], "acled")
 
+    def test_http_client_matches_production_requests_calls(self):
+        auth_response = Mock()
+        auth_response.json.return_value = {"access_token": "token"}
+        event_response = Mock()
+        event_response.json.return_value = {"status": 200, "data": []}
+        with patch("research.factory.holiday_acled.requests.post",
+                   return_value=auth_response) as post:
+            from research.factory.holiday_acled import request_json
+            got = request_json("POST", "https://acleddata.com/oauth/token",
+                               body={"username": "u", "password": "p",
+                                     "grant_type": "password", "client_id": "acled"})
+            self.assertEqual(got["access_token"], "token")
+            self.assertEqual(post.call_args.kwargs["timeout"], 60)
+            self.assertEqual(post.call_args.kwargs["data"]["client_id"], "acled")
+            self.assertNotIn("scope", post.call_args.kwargs["data"])
+        with patch("research.factory.holiday_acled.requests.get",
+                   return_value=event_response) as get:
+            got = request_json("GET", "https://acleddata.com/api/acled/read",
+                               params={"cursor": "abc"}, bearer="token")
+            self.assertEqual(got["status"], 200)
+            self.assertEqual(get.call_args.kwargs["params"]["cursor"], "abc")
+            self.assertEqual(get.call_args.kwargs["headers"]["Authorization"],
+                             "Bearer token")
+            self.assertEqual(get.call_args.kwargs["timeout"], 180)
+
     def test_forbidden_auth_explains_account_permissions_without_secret(self):
-        denied = HTTPError(url="https://acleddata.com/oauth/token", code=403,
-                           msg="Forbidden", hdrs=None, fp=None)
+        denied = http_error(403)
         with patch("research.factory.holiday_acled.request_json", side_effect=denied):
             with self.assertRaisesRegex(RuntimeError, "consent") as caught:
                 get_token("user@example.org", "SECRET_PASSWORD")
         self.assertNotIn("SECRET_PASSWORD", str(caught.exception))
 
     def test_no_token_leak_on_bad_login(self):
-        expired = HTTPError(url="https://acleddata.com/oauth/token", code=400,
-                            msg="Invalid credentials", hdrs=None, fp=None)
+        expired = http_error(400)
         with patch("research.factory.holiday_acled.request_json", side_effect=expired):
             with self.assertRaisesRegex(RuntimeError, "HTTP 400") as err:
                 get_token("user@example.org", "SECRET_PASSWORD")
