@@ -1,0 +1,34 @@
+{
+  "id": "replace-with-study-id",
+  "title": "Replace with paper title",
+  "research_question": "What causal or descriptive question is being tested?",
+  "mechanism": "An explicitly proposed theoretical mechanism; not a finding or proof",
+  "hypotheses": [
+    {
+      "id": "H1",
+      "prediction": "Treatment is positively associated with the outcome, conditional on controls",
+      "sign": "positive"
+    }
+  ],
+  "data": {
+    "csv_path": "PATH_TO_PRIVATE_DATA.csv",
+    "redistribution_allowed": false,
+    "synthetic": false
+  },
+  "design": {
+    "method": "association",
+    "family": "binomial",
+    "outcome": "outcome_column",
+    "treatment": "treatment_column",
+    "time": "date_column",
+    "unit": "unit_column",
+    "controls": [],
+    "fixed_effects": [],
+    "cluster": null,
+    "holdout_fraction": 0.25
+  },
+  "literature": [],
+  "novelty_review": {
+    "status": "pending"
+  }
+}
