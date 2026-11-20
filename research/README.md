@@ -71,3 +71,8 @@ The integrated **local, approval-gated** runner is documented at [FACTORY_PIPELI
 ## Weekly factory operation (offline v0.3)
 
 See [WEEKLY_FACTORY.md](WEEKLY_FACTORY.md) for the safe `python -m research.factory.weekly` command. The weekly runner inventories an explicitly supplied local inbox, registers researcher-written JSON puzzle briefs as **pending approval**, advances existing approved cards through the integrated local pipeline, writes private checkpoint reports, and can generate an **uninstalled** Mac launchd schedule file. It does not invoke Claude or ingest forecasting logs on its own; novelty, data/design and publication gates remain mandatory.
+
+
+## Actual Predictioneering forecasting misses to candidate research puzzles (v0.4)
+
+See [FORECAST_MISSES.md](FORECAST_MISSES.md) and the offline-only research.factory.forecast_misses entrypoint. It reads existing resolved Brier JSONL (no live API, no production writes), ranks repeated miss patterns by topic, dyad, contract type and translator relation, flags possible sibling markets, recomputes forecast losses, and can explicitly register PENDING research-puzzle cards for the existing pipeline's human intake gate. The weekly runner can opt in using --brier-log and --register-miss-candidates. No scientific mechanism, novelty, causal claim, or fair pre-event comparison is inferred automatically.
