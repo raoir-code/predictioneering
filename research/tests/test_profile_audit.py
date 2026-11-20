@@ -114,6 +114,40 @@ class ProfileAuditTests(unittest.TestCase):
         self.assertIn("numeric_detail_not_shown_in_local_quote_context",
                       data["p7-table"]["warnings"])
 
+    def test_simulation_result_is_not_presented_as_observed_finding(self):
+        passage = "Across 60 simulations rivalry can end after concentrated fighting."
+        example = dict(self.evidence[1],
+                       claim="Across 60 simulations conflict ends rivalry more often.",
+                       quote=passage)
+        result = assessment(example, passage)
+        self.assertEqual(result["source_type_hint"],
+                         "simulation_result_candidate")
+        self.assertIn("simulation_result_not_observational_finding",
+                      result["warnings"])
+        self.assertFalse(result["source_type_hint_is_human_verified"])
+
+    def test_prior_work_result_is_not_attributed_to_author(self):
+        passage = "An earlier study finds three crises are sufficient."
+        example = dict(self.evidence[1],
+                       claim="Prior work claimed a three-crisis threshold.",
+                       quote=passage)
+        result = assessment(example, passage)
+        self.assertEqual(result["source_type_hint"],
+                         "prior_literature_result_candidate")
+        self.assertIn("reported_prior_result_not_original_empirical_test",
+                      result["warnings"])
+
+    def test_not_every_empirical_or_simulation_context_is_assigned_to_simulation(self):
+        passage = "In a simulation this coefficient changed. In field data war declined."
+        example = dict(self.evidence[1],
+                       claim="Observed war rates declined in the sample.",
+                       quote="In field data war declined.")
+        result = assessment(example, passage)
+        self.assertEqual(result["source_type_hint"],
+                         "finding_origin_unresolved")
+        self.assertNotIn("simulation_result_not_observational_finding",
+                         result["warnings"])
+
     def test_quotes_must_match_claimed_pdf_page(self):
         data = assessment(dict(self.evidence[0], quote="A fabricated citation " * 3),
                           self.text)
