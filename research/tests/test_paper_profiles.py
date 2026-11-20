@@ -20,6 +20,8 @@ class PaperProfilesTests(unittest.TestCase):
         self.addCleanup(temp.cleanup)
         self.folder = Path(temp.name) / "Conflict"
         self.folder.mkdir()
+        # macOS /var is often a symlink to /private/var. Match production canonical roots.
+        self.folder = self.folder.resolve(strict=True)
         self.db = Path(temp.name) / "library.sqlite3"
         self.sample = ("War occurs when credible commitments cannot be made. "
                        "Leaders must consider audience costs and alternative bargains.")
@@ -108,7 +110,7 @@ class PaperProfilesTests(unittest.TestCase):
     def test_failure_keeps_completed_chunk_and_resumes(self):
         with closing(sqlite3.connect(self.db)) as conn:
             conn.execute("UPDATE pdf_text_pages SET text=? WHERE page_num=1",
-                         self.sample * 170)
+                         (self.sample * 170,))
             conn.commit()
         calls = 0
         def flaky(payload, model, key):
