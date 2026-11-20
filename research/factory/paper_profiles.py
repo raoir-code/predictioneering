@@ -345,6 +345,51 @@ def show(database: Path, filename: str):
             raise ValueError("No current profile matches. Run profile extraction first.")
         return [json.loads(row[0]) for row in rows]
 
+
+def search_profiles(database: Path, query: str, limit: int = 10):
+    """Search cached, source-linked model profiles without Claude or web access."""
+    if not 1 <= limit <= 50:
+        raise ValueError("--limit must be 1-50")
+    terms = list(dict.fromkeys(re.findall(r"[a-z0-9]{3,}", query.lower())))[:8]
+    if not terms:
+        raise ValueError("Provide a substantive search query")
+    with closing(prepare(database)) as db:
+        rows = db.execute(
+            """SELECT p.profile_json FROM paper_profiles p
+               JOIN pdf_text_documents d ON d.root=p.root AND d.relpath=p.relpath
+               WHERE d.status='ok' AND d.sha256=p.pdf_sha256
+               AND p.version=?""", (VERSION,)
+        ).fetchall()
+    found = []
+    for row in rows:
+        profile = json.loads(row[0])
+        citations = []
+        for item in profile["evidence"]:
+            score = 4 * sum(t in item["claim"].lower() for t in terms) + \
+                    sum(t in item["quote"].lower() for t in terms)
+            if score:
+                citations.append((score, {
+                    "pdf_page": item["page"], "kind": item["kind"],
+                    "claim_unreviewed": item["claim"], "verified_quote": item["quote"],
+                    "evidence_id": item["evidence_id"],
+                }))
+        title_hits = sum(t in profile["title"].lower() for t in terms)
+        if title_hits or citations:
+            citations.sort(key=lambda pair: -pair[0])
+            found.append((
+                10 * title_hits + sum(x[0] for x in citations[:5]),
+                {
+                    "title": profile["title"], "file": profile["file"],
+                    "root": profile["root"],
+                    "status": profile["status"],
+                    "evidence": [x[1] for x in citations[:5]],
+                },
+            ))
+    found.sort(key=lambda pair: (-pair[0], pair[1]["file"]))
+    return {"query": query, "profiles_matched": len(found),
+            "results": [x[1] for x in found[:limit]],
+            "caution": "Verbatim quotes checked against indexed PDF text; model interpretations unreviewed."}
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Evidence-linked Claude research paper profiles")
     parser.add_argument("--db", type=Path, default=DEFAULT_DB)
@@ -360,10 +405,15 @@ def main(argv=None):
     pilot.add_argument("--send-to-claude", action="store_true")
     lookup = sub.add_parser("show")
     lookup.add_argument("filename")
+    searchcmd = sub.add_parser("search", help="Search cached evidence cards locally")
+    searchcmd.add_argument("query")
+    searchcmd.add_argument("--limit", type=int, default=10)
     args = parser.parse_args(argv)
     try:
         if args.command == "show":
             output = show(args.db, args.filename)
+        elif args.command == "search":
+            output = search_profiles(args.db, args.query, args.limit)
         else:
             if not args.model:
                 raise ValueError("Set CLAUDE_MODEL or pass --model")
