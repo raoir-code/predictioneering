@@ -55,3 +55,53 @@ The local Zotero metadata screen surfaces **War as a Commitment Problem**, **Bar
 4. If the interaction is not preempted and data are viable, formulate and solve the repeated-bargaining model, then pre-register the observational and OOS predictive comparisons.
 
 **Research Factory output:** a falsifiable, source-anchored paper candidate with clearly specified unknowns—not an automated novelty claim, solved mathematical model or completed paper.
+
+
+## November 20 novelty gate: HOLD — substantial prior-art overlap
+
+**Verdict:** Do not proceed to formalization or manuscript drafting on the present
+hypothesis. This is *not* proof the precise interaction has been published, but
+the obvious components are already known and the incremental contribution is unclear.
+
+- **Morey (2011)** directly models the conditions under which concentrated
+  wartime costs can terminate interstate rivalry. His study also includes
+  historical rivalry observations; do not confuse CAR simulations with the
+  empirical portion of the article.
+- **Owsiak & Rider (2013), "Clearing the Hurdle: Border Settlement and
+  Rivalry Termination"** (Journal of Politics 75(3), DOI
+  10.1017/S0022381613000595), explicitly connect border settlement,
+  commitment problems, and rivalry termination.
+- **Rider & Owsiak (2021), On Dangerous Ground: A Theory of Bargaining,
+  Border Settlement, and Rivalry** (Cambridge University Press) develops
+  the border-endowment/commitment argument and its rivalry termination
+  predictions in greater depth.
+- **Colaresi & Thompson (2005)** concern escalation to *war*, not the
+  post-war risk of *renewed conflict*: these outcomes should not be conflated.
+
+The local-only hazard search returned **12 rows, not 12 independent relevant
+studies**. It mixed: 5 rivalry-termination covariates from Morey (2) and
+Owsiak & Rider (3); 3 Slantchev (2004) measures of *war termination*;
+3 Besley & Reynal-Querol (2012) *intrastate* estimates; and 1 Colaresi
+& Thompson (2005) *interstate war onset* row. Neither a World War dummy
+coefficient nor a Cold War termination period dummy identifies the causal
+effect of concentrated war costs.
+
+**Data-quality alert:** the local hazard row for Owsiak & Rider's "Civil War"
+reports coefficient -0.5259, SE 0.2623 and p<0.01. Its naive |coefficient/SE|
+is ~2.0, implying an approximate two-sided Wald p≈0.045 rather than <0.01
+under a normal approximation. Besley/Reynal-Querol's 0.12/0.05 and p<0.001
+similarly warrant checking. These are potential mismatches, NOT corrected
+source estimates: original table, model, rounding, test type and p-value
+coding must be checked before interpreting or reusing them.
+
+**Decision rule for resurrection:** (a) confirm a distinct dynamic prediction
+not already covered by Morey/Owsiak/Rider; (b) verify appropriate prospective
+MID/crisis recurrence outcomes and war cost concentration measures; (c)
+demonstrate predictive value conditional on territorial settlement and prior
+rivalry. Otherwise archive this as a documented *negative novelty screen*,
+and generate the next puzzle from an actual Predictioneering forecasting miss.
+
+Public source pointers:
+- https://www.journals.uchicago.edu/doi/10.1017/S0022381613000595
+- https://www.cambridge.org/core/books/abs/on-dangerous-ground/theory-of-borders-and-rivalry-termination/56013EAF5895A52BD85D215529D05465
+- https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1540-5907.2010.00488.x
