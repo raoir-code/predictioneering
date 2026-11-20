@@ -26,8 +26,7 @@ CATEGORIES = (
     "hypothesis", "research_design", "empirical_finding", "limitation"
 )
 MAX_CHUNK_CHARS = 14000
-MAX_PROMPT_TOKENS_APPROX = 5500
-MAX_OUTPUT_TOKENS = 1400
+MAX_OUTPUT_TOKENS = 2200
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS paper_profile_chunks (
  root TEXT NOT NULL, relpath TEXT NOT NULL, pdf_sha256 TEXT NOT NULL,
@@ -70,13 +69,13 @@ def prepare(database: Path):
     db.executescript(SCHEMA)
     return db
 
-def indexed(db, folder: Path | None):
+def indexed(db, folder: Path | None, file_contains: str | None = None):
     where, params = "", []
     if folder is not None:
         root = Path(folder).expanduser().resolve(strict=True)
         where = " AND d.root=?"
         params.append(str(root))
-    return db.execute(
+    rows = db.execute(
         """SELECT d.root,d.relpath,d.sha256,d.pages_total,d.pages_with_text,
            i.zotero_uid,i.zotero_title,i.match_confidence
            FROM pdf_text_documents d
@@ -84,6 +83,9 @@ def indexed(db, folder: Path | None):
            WHERE d.status='ok' AND d.sha256=i.sha256""" + where
            + " ORDER BY d.root,d.relpath", params
     ).fetchall()
+    if file_contains:
+        rows = [row for row in rows if file_contains.lower() in row["relpath"].lower()]
+    return rows
 
 def sections(db, row):
     pages = db.execute(
@@ -176,8 +178,8 @@ def claude_extract(payload: str, model: str, key: str):
         item.get("text", "") for item in data.get("content", [])
         if item.get("type") == "text"
     ).strip()
-    if content.startswith("&#96;&#96;&#96;"):
-        content = content.split("\n", 1)[-1].rsplit("&#96;&#96;&#96;", 1)[0].strip()
+    if content.startswith(chr(96) * 3):
+        content = content.partition("\n")[2].rsplit(chr(96) * 3, 1)[0].strip()
     try:
         body = json.loads(content)
     except ValueError as error:
@@ -230,11 +232,12 @@ def chunks_cached(db, row, model, splits):
             cached[i] = json.loads(saved["evidence_json"])
     return cached
 
-def plan(database: Path, folder: Path | None, limit: int, model: str):
+def plan(database: Path, folder: Path | None, limit: int, model: str,
+         file_contains: str | None = None):
     if limit < 1:
         raise ValueError("--limit must be >= 1")
     with closing(prepare(database)) as db:
-        records = indexed(db, folder)[:limit]
+        records = indexed(db, folder, file_contains)[:limit]
         items = []
         for row in records:
             splits = chunks_for(sections(db, row))
@@ -253,13 +256,14 @@ def plan(database: Path, folder: Path | None, limit: int, model: str):
         }
 
 def run(database: Path, folder: Path | None, limit: int,
-        max_calls: int, model: str, key: str, extractor=claude_extract):
+        max_calls: int, model: str, key: str, extractor=claude_extract,
+        file_contains: str | None = None):
     if limit < 1 or max_calls < 1:
         raise ValueError("--limit and --max-calls must both be >= 1")
     results, api_calls = [], 0
     token_usage = {"input_tokens": 0, "output_tokens": 0}
     with closing(prepare(database)) as db:
-        records = indexed(db, folder)[:limit]
+        records = indexed(db, folder, file_contains)[:limit]
         if not records:
             raise ValueError("No searchable PDFs. Run pdf_text extract first.")
         for row in records:
@@ -349,6 +353,7 @@ def main(argv=None):
     pilot = sub.add_parser("run", help="Only sends data to Claude with --send-to-claude")
     for command in (preview, pilot):
         command.add_argument("--folder", type=Path)
+        command.add_argument("--file", help="Case-insensitive substring of PDF filename")
         command.add_argument("--limit", type=int, default=1)
         command.add_argument("--model", default=os.environ.get("CLAUDE_MODEL", ""))
     pilot.add_argument("--max-calls", type=int, default=10)
@@ -363,7 +368,7 @@ def main(argv=None):
             if not args.model:
                 raise ValueError("Set CLAUDE_MODEL or pass --model")
             if args.command == "plan":
-                output = plan(args.db, args.folder, args.limit, args.model)
+                output = plan(args.db, args.folder, args.limit, args.model, args.file)
             else:
                 if not args.send_to_claude:
                     raise ValueError("Explicit --send-to-claude required: PDF passages will be uploaded to Anthropic and billed")
@@ -371,7 +376,7 @@ def main(argv=None):
                 if not key:
                     raise ValueError("Set ANTHROPIC_API_KEY in the shell")
                 output = run(args.db, args.folder, args.limit, args.max_calls,
-                             args.model, key)
+                             args.model, key, file_contains=args.file)
         print(json.dumps(output, indent=2, ensure_ascii=False))
         return 0
     except (OSError, ValueError, sqlite3.Error) as exc:
