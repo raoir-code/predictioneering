@@ -61,3 +61,8 @@ added later without changing the intake interface.
 For the **Holy Days and Hard Bargains** multiyear ACLED own-holiday H1 screen, see [HOLIDAY_FAST_START.md](HOLIDAY_FAST_START.md). It automates a cached 2022–2025 local ACLED extraction, calendar construction, a zero-inclusive daily panel, and an exploratory Poisson estimate in one command. Requires the Python packages in research/requirements.txt. This study is explicitly **non-causal and not a validated dyadic opponent-holiday estimate**.
 
 For its theoretical benchmark and necessary bargaining frictions, see [holy_days_repeated_bargaining_model_v0.md](examples/holy_days_repeated_bargaining_model_v0.md). Neither this extension nor the existing research factory modifies production forecasting code.
+
+
+## Integrated research factory v0.2
+
+The integrated **local, approval-gated** runner is documented at [FACTORY_PIPELINE.md](FACTORY_PIPELINE.md). Run `python -m research.factory.pipeline demo` to test intake-to-paper wiring on explicitly synthetic data. Use `python -m research.factory.pipeline register /path/to/puzzle.json` to import a researcher-authored puzzle without a model call, or `python -m research.factory.pipeline run 16_HEX_INTAKE_CARD_ID` to advance an already intake-approved card. The runner queries only the **local** Zotero/hazard index and stops for a human original-paper novelty check and a researcher-supplied empirical design; repeating `run` resumes the analysis and draft generation after those gates. `python -m research.factory.pipeline batch` advances approved cards to their next gate. No paid API or public upload is performed.
