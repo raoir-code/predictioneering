@@ -26,7 +26,41 @@ CATEGORIES = (
     "hypothesis", "research_design", "empirical_finding", "limitation"
 )
 MAX_CHUNK_CHARS = 14000
-MAX_OUTPUT_TOKENS = 2200
+MAX_OUTPUT_TOKENS = 4096
+# A constrained JSON schema avoids free-form, occasionally malformed LLM output.
+# Still validate every source quotation independently after decoding.
+EVIDENCE_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "evidence": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "page": {"type": "integer"},
+                    "kind": {"type": "string", "enum": list(CATEGORIES)},
+                    "claim": {"type": "string"},
+                    "quote": {"type": "string"},
+                },
+                "required": ["page", "kind", "claim", "quote"],
+                "additionalProperties": False,
+            },
+        },
+    },
+    "required": ["evidence"],
+    "additionalProperties": False,
+}
+
+
+class ClaudeResponseError(ValueError):
+    """Model returned an unusable response; retain usage and stop diagnostics."""
+
+    def __init__(self, message, *, input_tokens=0, output_tokens=0, stop_reason=None):
+        super().__init__(message)
+        self.input_tokens = input_tokens
+        self.output_tokens = output_tokens
+        self.stop_reason = stop_reason
+
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS paper_profile_chunks (
  root TEXT NOT NULL, relpath TEXT NOT NULL, pdf_sha256 TEXT NOT NULL,
@@ -160,6 +194,9 @@ def claude_extract(payload: str, model: str, key: str):
         "https://api.anthropic.com/v1/messages",
         data=json.dumps({
             "model": model, "max_tokens": MAX_OUTPUT_TOKENS, "system": SYSTEM,
+            "output_config": {
+                "format": {"type": "json_schema", "schema": EVIDENCE_SCHEMA}
+            },
             "messages": [{"role": "user", "content": "Extract evidence from this PDF segment:\n"
                           + payload}],
         }).encode("utf-8"),
@@ -174,6 +211,20 @@ def claude_extract(payload: str, model: str, key: str):
             data = json.load(response)
     except urllib.error.HTTPError as error:
         raise RuntimeError("Claude API error HTTP " + str(error.code)) from error
+    usage = data.get("usage") or {}
+    inputs = int(usage.get("input_tokens", 0))
+    outputs = int(usage.get("output_tokens", 0))
+    stop = data.get("stop_reason")
+    if stop == "max_tokens":
+        raise ClaudeResponseError(
+            "Claude response hit max_tokens; incomplete JSON was rejected",
+            input_tokens=inputs, output_tokens=outputs, stop_reason=stop,
+        )
+    if stop not in ("end_turn", "stop_sequence"):
+        raise ClaudeResponseError(
+            f"Claude response stopped unexpectedly: {stop or 'unknown'}",
+            input_tokens=inputs, output_tokens=outputs, stop_reason=stop,
+        )
     content = "\n".join(
         item.get("text", "") for item in data.get("content", [])
         if item.get("type") == "text"
@@ -183,9 +234,12 @@ def claude_extract(payload: str, model: str, key: str):
     try:
         body = json.loads(content)
     except ValueError as error:
-        raise ValueError("Claude returned invalid JSON; no generated evidence was stored") from error
-    usage = data.get("usage") or {}
-    return body, int(usage.get("input_tokens", 0)), int(usage.get("output_tokens", 0))
+        raise ClaudeResponseError(
+            "Claude returned invalid JSON despite structured-output request; "
+            "evidence rejected (no fabricated repair attempted)",
+            input_tokens=inputs, output_tokens=outputs, stop_reason=stop,
+        ) from error
+    return body, inputs, outputs
 
 def profile_object(db, row, groups, model):
     seen = set()
@@ -284,7 +338,13 @@ def run(database: Path, folder: Path | None, limit: int,
                         continue
                     payload = serialize_chunk(chunk)
                     api_calls += 1
-                    body, inputs, outputs = extractor(payload, model, key)
+                    try:
+                        body, inputs, outputs = extractor(payload, model, key)
+                    except ClaudeResponseError as error:
+                        # Even invalid or truncated model replies consume billed tokens.
+                        token_usage["input_tokens"] += error.input_tokens
+                        token_usage["output_tokens"] += error.output_tokens
+                        raise
                     token_usage["input_tokens"] += inputs
                     token_usage["output_tokens"] += outputs
                     accepted, rejected = validated(body, chunk)
@@ -321,8 +381,14 @@ def run(database: Path, folder: Path | None, limit: int,
                     "chunks": len(splits), "previously_cached_chunks": len(cached),
                 })
             except (RuntimeError, ValueError, OSError, sqlite3.Error) as exc:
-                results.append({"file": row["relpath"], "status": "failed_retryable",
-                                "error": str(exc)})
+                results.append({
+                    "file": row["relpath"],
+                    "status": "failed_retryable",
+                    "error": str(exc),
+                    "chunks_cached_before_attempt": len(cached),
+                    "chunks_saved_this_attempt": max(0, len(evidence_groups) - len(cached)),
+                    "next_step": "Run plan to verify cached chunks, then retry the same model.",
+                })
                 break
     return {
         "results": results, "actual_api_calls": api_calls,
