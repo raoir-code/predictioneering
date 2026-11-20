@@ -80,3 +80,22 @@ Sample at least two additional papers, preferably with distinct methods,
 to assess misclassified theory findings, overclaiming, and equation loss.
 Only then consider a broader paid extraction. Neither this planner nor the
 catalog invokes Claude, modifies PDFs, or changes production forecasts.
+
+
+## Pilot portfolio quality dashboard
+
+~~~bash
+python3 -m research.factory.portfolio_quality
+~~~
+
+This is offline and audits every current paper profile against its current
+indexed PDF text: profile totals, source quote matches, flagged categories,
+and human review status by paper. No Claude calls or uploads.
+
+The audit now reports a tentative source_type_hint field for evidence marked
+empirical_finding: simulation_result_candidate if the claim or quote mentions
+simulations; prior_literature_result_candidate if the claim references earlier
+work; and finding_origin_unresolved otherwise. The cross-paper theory catalog
+also returns these hints. They never silently recode an original profile.
+The unresolved class is not proof of observational evidence. All cues are
+heuristic and original-source interpretation still needs human inspection.
