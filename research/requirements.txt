@@ -1,2 +1,7 @@
 # Research Factory ACLED holiday API pilot; isolated from production requirements.
 requests>=2.31,<3
+pyluach>=2.2,<3
+numpy>=1.26,<3
+pandas>=2,<4
+scipy>=1.11,<2
+statsmodels>=0.14,<1
