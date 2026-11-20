@@ -201,12 +201,12 @@ def validate_annotations(sample, rows):
 def direction_protocol(manifest=OUT / "MANIFEST.json", *,
                        make_review=False, per_stratum=20,
                        review_file=None, evaluate=False):
-    reports, rows = load_verified(manifest)
     manifest = Path(manifest)
     review_file = Path(review_file) if review_file else manifest.parent / SAMPLE_NAME
-    # Require private output alongside the verified local manifest; no external paths.
+    # Reject an external review destination before reading any licensed source data.
     if review_file.resolve().parent != manifest.resolve().parent:
         raise ValueError("Review CSV must remain beside private ACLED manifest")
+    reports, rows = load_verified(manifest)
     strata = population_strata(rows)
     counts = [
         {"subevent": key[0], "actor2_stratum": key[1], "eligible_events": len(group)}
