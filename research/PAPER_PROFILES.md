@@ -75,3 +75,43 @@ and profiles stay in the ignored, private local SQLite database:
 research/datasets/private/research_library.sqlite3. Original PDFs are never
 modified, and live forecasting code and main branch are untouched.
 Before bulk processing, evaluate one real paper profile and its API usage.
+
+
+## Recovery from incomplete JSON in the first pilot
+
+The initial Bas and Coe run made seven Anthropic calls and stopped on an invalid
+JSON reply before saving the complete profile. Successful earlier chunks should
+remain cached in the private database. Do **not** delete that database or
+change the model ID. The updated adapter now requests schema-constrained JSON,
+uses a larger output ceiling, flags max-token truncation, and reports usage even
+when the API returns invalid or truncated text.
+
+~~~bash
+cd ~/predictioneering-research-test
+git pull --ff-only
+python3 -m unittest discover -s research/tests -v
+
+# Free: verify the exact model's surviving cached chunks first.
+python3 -m research.factory.paper_profiles plan \
+  --folder "$HOME/Desktop/Grad School/Predictioneering/Conflict" \
+  --file "Bas and Coe" --model "$CLAUDE_MODEL"
+~~~
+
+Expected with unchanged model and PDF: **6 cached of 8**, requiring **2 new
+calls**. If the preview instead shows zero cached, do not run the paid command:
+check that CLAUDE_MODEL is identical to the previous run, and that the database
+and PDF inventory were not replaced or re-imported.
+
+If you explicitly approve those remaining API calls:
+
+~~~bash
+python3 -m research.factory.paper_profiles run \
+  --folder "$HOME/Desktop/Grad School/Predictioneering/Conflict" \
+  --file "Bas and Coe" --limit 1 --max-calls 3 --send-to-claude
+
+python3 -m research.factory.paper_profiles show "Bas and Coe"
+~~~
+
+This is a paid operation that transmits the outstanding PDF passages to
+Anthropic. With matching cache keys the already saved six chunks are not
+sent again. Verify all claims against the original PDF afterward.
