@@ -17,9 +17,7 @@ import re
 import sys
 import tempfile
 import time
-from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen
+import requests
 
 from .__main__ import HOME
 
@@ -57,36 +55,35 @@ def credentials(env_file=None):
 
 
 def request_json(method, url, *, params=None, body=None, bearer=None):
-    if params:
-        url += "?" + urlencode(params)
+    """Match the working production ACLED HTTP client; no credentials in errors."""
     headers = {"Accept": "application/json"}
     if bearer:
         headers["Authorization"] = "Bearer " + bearer
-    data = None
-    if body is not None:
+    if method == "POST":
         headers["Content-Type"] = "application/x-www-form-urlencoded"
-        data = urlencode(body).encode("utf-8")
-    req = Request(url, data=data, headers=headers, method=method)
-    with urlopen(req, timeout=180 if method == "GET" else 60) as response:
-        parsed = json.load(response)
+        response = requests.post(url, data=body, headers=headers, timeout=60)
+    elif method == "GET":
+        response = requests.get(url, params=params, headers=headers, timeout=180)
+    else:
+        raise ValueError("Only GET/POST supported")
+    response.raise_for_status()
+    parsed = response.json()
     if not isinstance(parsed, dict):
         raise ValueError("ACLED response is not a JSON object")
     return parsed
-
 
 def get_token(username, password):
     try:
         token = request_json("POST", TOKEN_URL, body={
             "username": username, "password": password,
             "grant_type": "password", "client_id": "acled",
-            "scope": "authenticated",
         }).get("access_token")
-    except HTTPError as exc:
+    except requests.exceptions.HTTPError as exc:
         raise RuntimeError(
-            "ACLED authentication failed: HTTP " + str(exc.code) +
+            "ACLED authentication failed: HTTP " + str((exc.response.status_code if exc.response is not None else 'unknown')) +
             (". Check myACLED consent, mandatory profile fields, and API "
              "access permissions; do not share credentials or tokens."
-             if exc.code == 403 else
+             if (exc.response.status_code if exc.response is not None else 'unknown') == 403 else
              ". Verify username/password are current in myACLED.")
         ) from None
     if not isinstance(token, str) or not token:
@@ -104,15 +101,15 @@ def fetch_page(params, state, username, password, sleep=time.sleep):
             if payload.get("status") not in (None, 200, "200", "success"):
                 raise ValueError("ACLED response reported non-success status")
             return payload
-        except HTTPError as exc:
-            if exc.code == 401 and attempt < 4:
+        except requests.exceptions.HTTPError as exc:
+            if (exc.response.status_code if exc.response is not None else 'unknown') == 401 and attempt < 4:
                 state[0] = get_token(username, password)
                 continue
-            if exc.code not in RETRY_CODES or attempt == 4:
-                raise RuntimeError("ACLED events request failed: HTTP " + str(exc.code)) from None
-        except (TimeoutError, URLError):
+            if (exc.response.status_code if exc.response is not None else 'unknown') not in RETRY_CODES or attempt == 4:
+                raise RuntimeError("ACLED events request failed: HTTP " + str((exc.response.status_code if exc.response is not None else 'unknown'))) from None
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError):
             if attempt == 4:
-                raise RuntimeError("ACLED events request timed out after retries") from None
+                raise RuntimeError("ACLED events request failed after connection retries") from None
         sleep(min(10 * 2 ** attempt, 80))
     raise RuntimeError("ACLED request retries exhausted")
 
