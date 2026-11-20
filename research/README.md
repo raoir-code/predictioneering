@@ -66,3 +66,8 @@ For its theoretical benchmark and necessary bargaining frictions, see [holy_days
 ## Integrated research factory v0.2
 
 The integrated **local, approval-gated** runner is documented at [FACTORY_PIPELINE.md](FACTORY_PIPELINE.md). Run `python -m research.factory.pipeline demo` to test intake-to-paper wiring on explicitly synthetic data. Use `python -m research.factory.pipeline register /path/to/puzzle.json` to import a researcher-authored puzzle without a model call, or `python -m research.factory.pipeline run 16_HEX_INTAKE_CARD_ID` to advance an already intake-approved card. The runner queries only the **local** Zotero/hazard index and stops for a human original-paper novelty check and a researcher-supplied empirical design; repeating `run` resumes the analysis and draft generation after those gates. `python -m research.factory.pipeline batch` advances approved cards to their next gate. No paid API or public upload is performed.
+
+
+## Weekly factory operation (offline v0.3)
+
+See [WEEKLY_FACTORY.md](WEEKLY_FACTORY.md) for the safe `python -m research.factory.weekly` command. The weekly runner inventories an explicitly supplied local inbox, registers researcher-written JSON puzzle briefs as **pending approval**, advances existing approved cards through the integrated local pipeline, writes private checkpoint reports, and can generate an **uninstalled** Mac launchd schedule file. It does not invoke Claude or ingest forecasting logs on its own; novelty, data/design and publication gates remain mandatory.
