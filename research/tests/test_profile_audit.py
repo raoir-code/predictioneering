@@ -7,6 +7,7 @@ import unittest
 from contextlib import closing, redirect_stdout
 from pathlib import Path
 
+from research.factory.portfolio_quality import summary as portfolio_summary
 from research.factory.pdf_inventory import SCHEMA as INVENTORY
 from research.factory.pdf_text import SCHEMA as TEXT
 from research.factory.paper_profiles import SCHEMA as PROFILES, VERSION
@@ -147,6 +148,27 @@ class ProfileAuditTests(unittest.TestCase):
                          "finding_origin_unresolved")
         self.assertNotIn("simulation_result_not_observational_finding",
                          result["warnings"])
+
+    def test_portfolio_dashboard_count_and_warning_integrity(self):
+        dashboard = portfolio_summary(self.db)
+        self.assertEqual(dashboard["indexed_pdf_count"], 1)
+        self.assertEqual(dashboard["current_profiles"], 1)
+        self.assertEqual(dashboard["extracted_evidence_total"], 3)
+        self.assertEqual(dashboard["matched_quote_total"], 3)
+        self.assertEqual(dashboard["quote_mismatches"], 0)
+        self.assertEqual(dashboard["human_reviews"]["not_reviewed"], 3)
+        self.assertEqual(len(dashboard["papers"]), 1)
+        self.assertEqual(dashboard["scientific_verdict"], "not_verified")
+
+    def test_portfolio_dashboard_excludes_stale_profile(self):
+        with closing(sqlite3.connect(self.db)) as db:
+            db.execute("UPDATE pdf_files SET sha256='new-source-hash'")
+            db.commit()
+        dashboard = portfolio_summary(self.db, include_papers=False)
+        self.assertEqual(dashboard["indexed_pdf_count"], 1)
+        self.assertEqual(dashboard["current_profiles"], 0)
+        self.assertEqual(dashboard["extracted_evidence_total"], 0)
+        self.assertEqual(dashboard["papers"], [])
 
     def test_quotes_must_match_claimed_pdf_page(self):
         data = assessment(dict(self.evidence[0], quote="A fabricated citation " * 3),
