@@ -133,6 +133,24 @@ class HolidayAcledTests(unittest.TestCase):
         self.assertEqual(request.call_count, 2)
         auth.assert_called_once_with("u", "p")
 
+    def test_auth_token_uses_current_myacled_authenticated_scope(self):
+        with patch("research.factory.holiday_acled.request_json",
+                   return_value={"access_token": "TOKEN"}) as request:
+            tok = get_token("user@example.org", "SECRET_PASSWORD")
+        self.assertEqual(tok, "TOKEN")
+        body = request.call_args.kwargs["body"]
+        self.assertEqual(body["scope"], "authenticated")
+        self.assertEqual(body["grant_type"], "password")
+        self.assertEqual(body["client_id"], "acled")
+
+    def test_forbidden_auth_explains_account_permissions_without_secret(self):
+        denied = HTTPError(url="https://acleddata.com/oauth/token", code=403,
+                           msg="Forbidden", hdrs=None, fp=None)
+        with patch("research.factory.holiday_acled.request_json", side_effect=denied):
+            with self.assertRaisesRegex(RuntimeError, "consent") as caught:
+                get_token("user@example.org", "SECRET_PASSWORD")
+        self.assertNotIn("SECRET_PASSWORD", str(caught.exception))
+
     def test_no_token_leak_on_bad_login(self):
         expired = HTTPError(url="https://acleddata.com/oauth/token", code=400,
                             msg="Invalid credentials", hdrs=None, fp=None)
