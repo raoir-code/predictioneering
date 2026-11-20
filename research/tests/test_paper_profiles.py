@@ -1,4 +1,5 @@
 """Offline evidence-profiling tests. Mock Claude; never upload scholarly PDFs."""
+import io
 import json
 import sqlite3
 import tempfile
@@ -10,7 +11,8 @@ from unittest.mock import patch
 from research.factory.pdf_inventory import SCHEMA as INVENTORY
 from research.factory.pdf_text import SCHEMA as TEXT_SCHEMA
 from research.factory.paper_profiles import (
-    chunks_for, main, plan, run, show, validated, prepare, search_profiles
+    chunks_for, main, plan, run, show, validated, prepare, search_profiles,
+    claude_extract, ClaudeResponseError, MAX_OUTPUT_TOKENS
 )
 
 
@@ -169,6 +171,78 @@ class PaperProfilesTests(unittest.TestCase):
         missing = plan(self.db, self.folder, 1, "test-model", "no-such-paper")
         self.assertEqual(selected["selected_papers"], 1)
         self.assertEqual(missing["selected_papers"], 0)
+
+
+    def test_real_adapter_requests_structured_json(self):
+        response = {
+            "stop_reason": "end_turn",
+            "content": [{"type": "text", "text": json.dumps({
+                "evidence": [{
+                    "page": 1, "kind": "theory",
+                    "claim": "Credible commitment affects war.",
+                    "quote": "War occurs when credible commitments cannot be made.",
+                }]
+            })}],
+            "usage": {"input_tokens": 51, "output_tokens": 22},
+        }
+        stream = io.BytesIO(json.dumps(response).encode("utf-8"))
+        with patch("research.factory.paper_profiles.urllib.request.urlopen",
+                   return_value=stream) as transport:
+            body, inputs, outputs = claude_extract("sample passage", "test-model", "key")
+        sent = json.loads(transport.call_args.args[0].data.decode("utf-8"))
+        self.assertEqual(sent["output_config"]["format"]["type"], "json_schema")
+        self.assertEqual(sent["output_config"]["format"]["schema"]["required"], ["evidence"])
+        self.assertEqual(sent["max_tokens"], MAX_OUTPUT_TOKENS)
+        self.assertEqual((inputs, outputs), (51, 22))
+        self.assertEqual(body["evidence"][0]["page"], 1)
+
+    def test_invalid_json_diagnostic_retains_billed_tokens(self):
+        response = {
+            "stop_reason": "end_turn",
+            "content": [{"type": "text", "text": '{"evidence": ['}],
+            "usage": {"input_tokens": 203, "output_tokens": 94},
+        }
+        with patch("research.factory.paper_profiles.urllib.request.urlopen",
+                   return_value=io.BytesIO(json.dumps(response).encode())):
+            with self.assertRaises(ClaudeResponseError) as caught:
+                claude_extract("source text", "test-model", "key")
+        self.assertEqual(caught.exception.input_tokens, 203)
+        self.assertEqual(caught.exception.output_tokens, 94)
+        self.assertIn("invalid JSON", str(caught.exception))
+
+    def test_truncated_reply_never_accepted(self):
+        response = {
+            "stop_reason": "max_tokens",
+            "content": [{"type": "text", "text": '{"evidence": []}'}],
+            "usage": {"input_tokens": 456, "output_tokens": 4096},
+        }
+        with patch("research.factory.paper_profiles.urllib.request.urlopen",
+                   return_value=io.BytesIO(json.dumps(response).encode())):
+            with self.assertRaises(ClaudeResponseError) as caught:
+                claude_extract("source text", "test-model", "key")
+        self.assertEqual(caught.exception.stop_reason, "max_tokens")
+        self.assertEqual(caught.exception.output_tokens, 4096)
+
+    def test_failed_reply_usage_counted_and_cached_chunks_preserved(self):
+        with closing(sqlite3.connect(self.db)) as conn:
+            conn.execute("UPDATE pdf_text_pages SET text=? WHERE page_num=1",
+                         (self.sample * 170,))
+            conn.commit()
+        attempts = 0
+        def flaky(payload, model, key):
+            nonlocal attempts
+            attempts += 1
+            if attempts == 2:
+                raise ClaudeResponseError("truncated response", input_tokens=1200,
+                                          output_tokens=4096, stop_reason="max_tokens")
+            return {"evidence": []}, 500, 100
+        report = run(self.db, self.folder, 1, 3, "test-model", "key", extractor=flaky)
+        self.assertEqual(report["actual_api_calls"], 2)
+        self.assertEqual(report["usage_this_run"]["input_tokens"], 1700)
+        self.assertEqual(report["usage_this_run"]["output_tokens"], 4196)
+        self.assertEqual(report["results"][0]["status"], "failed_retryable")
+        self.assertEqual(plan(self.db, self.folder, 1, "test-model")["papers"][0]["chunks_cached"], 1)
+        self.assertEqual(plan(self.db, self.folder, 1, "test-model")["papers"][0]["api_calls_needed"], 1)
 
 if __name__ == "__main__":
     unittest.main()
