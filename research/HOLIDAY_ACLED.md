@@ -7,6 +7,23 @@ deprecated page pagination. This pilot changes no production forecasting code.
 
 ## Run in the research checkout
 
+## Local Python dependency
+
+The holiday ACLED pilot imports `requests`, matching the working production
+fetcher. A bare Homebrew Python in the separate research checkout may not have
+that package. Use an isolated virtual environment **outside the repository**:
+
+~~~bash
+python3 -m venv "$HOME/.venvs/predictioneering-research"
+"$HOME/.venvs/predictioneering-research/bin/python" -m pip install -r research/requirements.txt
+"$HOME/.venvs/predictioneering-research/bin/python" -m unittest discover -s research/tests -q
+"$HOME/.venvs/predictioneering-research/bin/python" -m research.factory.holiday_acled --fetch --env-file "$HOME/predictioneering/.env"
+~~~
+
+If the import fails with `ModuleNotFoundError: No module named 'requests'`, the
+API was **not** contacted; it is an installation issue, not a 403 or credential
+failure. All other research modules remain standard-library based.
+
 ~~~bash
 # Preview only, no network or credentials:
 python3 -m research.factory.holiday_acled
