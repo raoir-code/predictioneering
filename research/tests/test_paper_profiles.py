@@ -10,7 +10,7 @@ from unittest.mock import patch
 from research.factory.pdf_inventory import SCHEMA as INVENTORY
 from research.factory.pdf_text import SCHEMA as TEXT_SCHEMA
 from research.factory.paper_profiles import (
-    chunks_for, main, plan, run, show, validated, prepare
+    chunks_for, main, plan, run, show, validated, prepare, search_profiles
 )
 
 
@@ -150,6 +150,23 @@ class PaperProfilesTests(unittest.TestCase):
         details = show(self.db, "theory")[0]
         self.assertEqual(details["evidence"], [])
         self.assertEqual(details["categories"]["empirical_finding"], [])
+
+
+    def test_profile_search_returns_page_referenced_quotes(self):
+        run(self.db, self.folder, 1, 2, "test-model", "fake-key",
+            extractor=self.fake_model)
+        result = search_profiles(self.db, "credible commitments")
+        self.assertEqual(result["profiles_matched"], 1)
+        evidence = result["results"][0]["evidence"][0]
+        self.assertEqual(evidence["pdf_page"], 1)
+        self.assertIn("War occurs", evidence["verified_quote"])
+        self.assertEqual(search_profiles(self.db, "completely unrelated")["profiles_matched"], 0)
+
+    def test_select_paper_by_filename_without_charges(self):
+        selected = plan(self.db, self.folder, 1, "test-model", "THEORY")
+        missing = plan(self.db, self.folder, 1, "test-model", "no-such-paper")
+        self.assertEqual(selected["selected_papers"], 1)
+        self.assertEqual(missing["selected_papers"], 0)
 
 if __name__ == "__main__":
     unittest.main()
