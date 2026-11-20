@@ -130,3 +130,58 @@ different coding, additional sources, or a different feasible design.
 The next *scientific* step, once direction can be measured, is to
 expand beyond October 2024 to multiple holiday dates and years, and
 fix a religious calendar/actor crosswalk before estimating effects.
+
+
+## Second measurement gate: provisional one-sided remote-weapon direction
+
+ACLED officially warns that Actor1/Actor2 order does **not** guarantee
+aggression, action initiation or victim/target status. But the remote
+violence event type involves a one-sided use of long-range weapons.
+Following the working forecasting project's pragmatic approximation,
+the research protocol tentatively interprets **Actor1 as weapons user**
+for precise-date **Air/drone strike** and **Shelling/artillery/missile
+attack** events, and **Actor2 as a target candidate only when present**.
+Unlike the production engine, the research protocol never silently
+accepts this approximation as truth; it requires a validation audit.
+
+~~~bash
+# Local counts of proxy-eligible events, WITHOUT changing the data
+"$HOME/.venvs/predictioneering-research/bin/python" -m research.factory.holiday_direction
+
+# One-time creation of a deterministic, private, stratified note-review CSV
+"$HOME/.venvs/predictioneering-research/bin/python" -m research.factory.holiday_direction --make-review
+
+# After editing the local CSV's review_* columns, check the labels
+"$HOME/.venvs/predictioneering-research/bin/python" -m research.factory.holiday_direction --evaluate
+~~~
+
+The private review worksheet is saved at:
+research/inbox/acled/holy_days/DIRECTION_VALIDATION_PRIVATE.csv
+and will **not** overwrite an existing file. It is **separate** from the
+older 50-record DIRECTION_REVIEW_PRIVATE.csv.
+
+Sampling: up to **20 observations per observed combination of remote
+subevent and Actor2 present/missing**, sorted by a seeded SHA256 hash
+to yield reproducible pseudorandom draws. In October 2024 Lebanon,
+air/drone strikes and shelling make up at most four eligible strata,
+thus at most 80 reviews. Eight mine/IED events and all battles remain
+undirected. The study will need a larger, additional-theater validation
+sample before interpreting the proxy globally.
+
+For each sampled observation, read the private Notes and Source locally.
+Fill review_actor1_weapon_user = yes/no/unclear depending on whether
+the notes establish Actor1 actually used the weapon. For observations
+with Actor2, separately fill review_actor2_target = yes/no/unclear,
+otherwise not_applicable. Uncertain source notes must be marked
+"unclear", never guessed. Record any disagreement/uncertainty in
+reviewer_reason, and confidence where helpful.
+
+The evaluator reports **per-stratum** proportion verified among
+decisive human reviews and Wilson 95% intervals. It does **not**
+report an unweighted pooled error rate from disproportional strata,
+infer that notes are infallible, or claim ready-to-publish
+identification from one reviewer. Review results remain research
+quality-control evidence, *not* causal evidence for holiday effects.
+
+Source: https://acleddata.com/methodology/acled-codebook
+Source: https://acleddata.com/faq/can-it-be-assumed-actor-1-aggressor
