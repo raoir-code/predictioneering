@@ -168,14 +168,14 @@ class ProfileAuditTests(unittest.TestCase):
                 load_profile(db, "sample")
 
     def test_old_profile_and_approval_not_carried_to_new_pdf_hash(self):
-        mark(self.db, "sample", "p7-formal", "approved", confirmed=True)
+        mark(self.db, "sample", "p7-formal", "approved", "Checked source in typeset PDF", confirmed=True)
         with closing(sqlite3.connect(self.db)) as db:
             db.execute("UPDATE pdf_files SET sha256='new-source-hash'")
             db.commit()
         with self.assertRaisesRegex(ValueError, "No current profile"):
             report(self.db, "sample")
         with self.assertRaisesRegex(ValueError, "No current profile"):
-            mark(self.db, "sample", "p7-formal", "approved", confirmed=True)
+            mark(self.db, "sample", "p7-formal", "approved", "Checked source in typeset PDF", confirmed=True)
 
     def test_model_packet_never_invents_equations(self):
         packet = model_packet(self.db, "sample")
@@ -195,7 +195,7 @@ class ProfileAuditTests(unittest.TestCase):
 
     def test_bad_evidence_id_cannot_be_approved(self):
         with self.assertRaisesRegex(ValueError, "does not uniquely match"):
-            mark(self.db, "sample", "made-up", "approved", confirmed=True)
+            mark(self.db, "sample", "made-up", "approved", "Test nonexistent ID", confirmed=True)
 
 
 
