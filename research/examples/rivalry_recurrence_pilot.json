@@ -56,7 +56,39 @@
       ]
     }
   ],
-  "candidate_status": "conceptual_puzzle_not_yet_confirmed_by_full_literature",
+  "candidate_status": "hold_substantial_prior_art_overlap_not_ready_for_model_or_paper",
   "novelty_verified": false,
-  "source_verification_note": "Page examples refer to locally indexed PDF editions. Statements are research leads grounded in unapproved extracted cards; inspect original typeset papers and alternative explanations."
+  "source_verification_note": "Page examples refer to locally indexed PDF editions. Statements are research leads grounded in unapproved extracted cards; inspect original typeset papers and alternative explanations.",
+  "novelty_screen": {
+    "verdict": "hold",
+    "reason": "Morey (2011) already studies concentrated war costs and rivalry termination. Owsiak and Rider (2013), extended in their 2021 book, link territorial commitment problems and rivalry termination. Conditional incremental contribution still unverified.",
+    "closest_known_prior_art": [
+      {
+        "authors": "Morey",
+        "year": 2011,
+        "title": "When War Brings Peace: A Dynamic Model of the Rivalry Process"
+      },
+      {
+        "authors": "Owsiak and Rider",
+        "year": 2013,
+        "title": "Clearing the Hurdle: Border Settlement and Rivalry Termination",
+        "doi": "10.1017/S0022381613000595"
+      },
+      {
+        "authors": "Rider and Owsiak",
+        "year": 2021,
+        "title": "On Dangerous Ground: A Theory of Bargaining, Border Settlement, and Rivalry"
+      }
+    ],
+    "next_action": "Do not draft model/manuscript; pivot to original forecasting miss unless distinctive mechanism and outcome supported by original literature."
+  },
+  "hazard_screen": {
+    "candidate_rows": 12,
+    "direct_rivalry_termination_covariate_rows": 5,
+    "war_termination_rows": 3,
+    "intrastate_rows": 3,
+    "interstate_onset_rows": 1,
+    "number_of_independent_studies": 5,
+    "caveat": "Mixed outcomes and potential p-value transcription or test-type anomalies; do not pool raw coefficients. Counts supplied by user's local-only hazard sample."
+  }
 }
