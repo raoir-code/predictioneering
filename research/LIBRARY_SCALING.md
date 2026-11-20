@@ -99,3 +99,34 @@ work; and finding_origin_unresolved otherwise. The cross-paper theory catalog
 also returns these hints. They never silently recode an original profile.
 The unresolved class is not proof of observational evidence. All cues are
 heuristic and original-source interpretation still needs human inspection.
+
+
+## From a Puzzle Finder candidate to a literature evidence packet
+
+This is the first **offline operational bridge** to the Puzzle Finder.
+It retrieves current source-quote-checked cards across the locally profiled
+PDFs and selects citations **round-robin by paper** (default at most 3 per
+paper), rather than allowing one prolific paper to dominate all results.
+
+~~~bash
+# Explore freely without a puzzle card:
+python3 -m research.factory.puzzle_evidence --query "war escalation rivalry" --max-per-paper 2
+
+# Or connect an existing Puzzle Finder candidate:
+python3 -m research.factory list
+python3 -m research.factory.puzzle_evidence --puzzle PUZZLE_ID --save
+
+# Or use an existing literature review spec with search_queries:
+python3 -m research.factory.puzzle_evidence --spec research/examples/YOUR_SPEC.json --save
+~~~
+
+--save creates a **private, ignored local JSON** in research/inbox/records; it
+never commits the paper passages. No Anthropic call, payment, OpenAlex request,
+or production forecasting changes. By default, returned claims are **unreviewed**
+unless already individually approved with the profile review gate; use
+--approved-only for those that have explicit source-review attestations.
+
+This packet is a citation-bearing **candidate** bibliography, not a completed
+novelty review, empirical identification argument, formal proof or manuscript.
+It searches the **currently profiled papers only**; the other indexed PDFs
+must still be separately screened, and external literature is not covered.
