@@ -199,6 +199,13 @@ def interstate(r):
     c = r.get("country")
     return any(h != c for h in homes) or len(set(homes)) >= 2
 
+def _next_cursor(j):
+    """(field present?, value). ACLED returns next_cursor in the JSON body; checked at the top level, then under meta/pagination."""
+    for src in (j, j.get("meta"), j.get("pagination")):
+        if isinstance(src, dict) and "next_cursor" in src:
+            return True, src["next_cursor"]
+    return False, None
+
 def pull_full(start="2015-01", end=None, types=("Explosions/Remote violence", "Battles"), refresh_from=None):
     """Worldwide, month by month, filtered by interstate(); one file per (month, type). Resumable: finished months are skipped,
     except the current month, which is always re-pulled. Prints a per-month row count.
@@ -214,18 +221,25 @@ def pull_full(start="2015-01", end=None, types=("Explosions/Remote violence", "B
         for ty in types:
             fn = f"{m:%Y-%m}_{'battles' if ty == 'Battles' else 'explosions'}.jsonl"
             if fn in man["files"] and m < dt.date(today.year, today.month, 1) and not (refresh_from and f"{m:%Y-%m}" >= refresh_from): continue
-            kept, seen, page = [], 0, 1
+            kept, seen, cursor, used = [], 0, None, set()
             while True:
+                q = dict(event_date=f"{m}|{last}", event_date_where="BETWEEN", event_type=ty, limit=PAGE)
+                if cursor: q["cursor"] = cursor          # ACLED API (Nov 2026): cursor pagination; page= is rejected (400)
                 for attempt in range(5):
                     try:
-                        j = read(tok, event_date=f"{m}|{last}", event_date_where="BETWEEN", event_type=ty, limit=PAGE, page=page); break
+                        j = read(tok, **q); break
                     except Exception as ex:
                         if attempt == 4: raise
                         print(f"    retry {attempt + 1} ({ex!r})", flush=True); time.sleep(10 * (attempt + 1)); tok = token()
+                if "data" not in j: raise SystemExit(f"no 'data' field in response; keys: {sorted(j)}")
                 d = j.get("data") or []; seen += len(d)
                 kept += [{k: x.get(k) for k in FULL_KEEP} for x in d if interstate(x)]
-                if len(d) < PAGE: break
-                page += 1; time.sleep(0.5)
+                has, cursor = _next_cursor(j)
+                if not has and len(d) >= PAGE:
+                    raise SystemExit(f"full page but no next_cursor field; response keys: {sorted(j)}")
+                if not d or not cursor: break
+                if cursor in used: raise SystemExit(f"cursor repeated: {cursor!r}")
+                used.add(cursor); time.sleep(0.5)
             f = FULL / fn; f.write_text("".join(json.dumps(r) + "\n" for r in kept))
             man["files"][fn] = {"query": {"from": str(m), "to": str(last), "event_type": ty, "filter": "interstate"}, "rows_seen": seen,
                                 "rows_kept": len(kept), "pulled_at": dt.datetime.now(dt.timezone.utc).isoformat(),
