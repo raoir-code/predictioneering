@@ -17,6 +17,10 @@ python3 -m unittest discover -s research/tests -q
 # Prioritized audit of the current Bas and Coe profile:
 python3 -m research.factory.profile_audit audit --file "Bas and Coe" --limit 12
 
+# A representative, reproducible sample across claim categories:
+python3 -m research.factory.profile_audit audit \
+  --file "Bas and Coe" --limit 12 --stratified
+
 # Focus on theoretical assumptions, formal propositions, and context:
 python3 -m research.factory.profile_audit model-packet \
   --file "Bas and Coe" --limit 12
