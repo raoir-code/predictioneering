@@ -152,7 +152,27 @@ def audits(db, row, profile):
             a["reviewed_at"] = saved["reviewed_at"]
     return output
 
-def report(database, file, limit=15, only_unreviewed=True):
+def pick_queue(queue, limit, stratified=False):
+    if not stratified:
+        return queue[:limit]
+    # Reproducible round-robin review sample spanning types of claims.
+    categories = (
+        "formal_model", "assumption", "empirical_finding", "mechanism",
+        "research_design", "theory", "hypothesis", "limitation", "research_question",
+    )
+    grouped = {kind: [item for item in queue if item["kind"] == kind] for kind in categories}
+    result = []
+    while len(result) < limit:
+        progressed = False
+        for kind in categories:
+            if grouped[kind] and len(result) < limit:
+                result.append(grouped[kind].pop(0))
+                progressed = True
+        if not progressed:
+            break
+    return result
+
+def report(database, file, limit=15, only_unreviewed=True, stratified=False):
     if not 1 <= limit <= 200:
         raise ValueError("--limit must be from 1 to 200")
     with closing(open_audit_db(database)) as db:
@@ -169,7 +189,7 @@ def report(database, file, limit=15, only_unreviewed=True):
         "human_reviews": dict(count), "warning_counts": dict(risks),
         "source_quote_mismatches": sum(not a["quote_found_on_original_indexed_page"]
                                        for a in cards),
-        "queue_total": len(queue), "queue": queue[:limit],
+        "queue_total": len(queue), "queue": pick_queue(queue, limit, stratified),
         "scientific_verdict": "not_verified",
         "note": ("Page-level quotation matching checks presence, NOT inference or "
                  "entailment. Flags and risk ordering are heuristics. "
@@ -251,6 +271,8 @@ def main(argv=None):
     audit.add_argument("--file", required=True)
     audit.add_argument("--limit", type=int, default=15)
     audit.add_argument("--include-reviewed", action="store_true")
+    audit.add_argument("--stratified", action="store_true",
+                       help="Deterministic sample across claim types instead of only high risk")
     model = sub.add_parser("model-packet", help="Source-page packet for math review")
     model.add_argument("--file", required=True)
     model.add_argument("--limit", type=int, default=18)
@@ -264,7 +286,7 @@ def main(argv=None):
     try:
         if args.command == "audit":
             result = report(args.db, args.file, args.limit,
-                            not args.include_reviewed)
+                            not args.include_reviewed, args.stratified)
         elif args.command == "model-packet":
             result = model_packet(args.db, args.file, args.limit)
         else:
