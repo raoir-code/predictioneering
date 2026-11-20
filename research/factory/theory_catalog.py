@@ -17,8 +17,9 @@ from .paper_profiles import VERSION, prepare, cleaned
 from .profile_audit import SCHEMA as REVIEW_SCHEMA
 from .pdf_text import DEFAULT_DB
 
-STOP = {"the", "that", "with", "from", "which", "this", "those", "their",
-        "about", "when", "would", "could", "there", "have", "were", "been"}
+STOP = {"the", "and", "for", "that", "with", "from", "which", "this",
+        "those", "their", "about", "when", "would", "could", "there",
+        "have", "were", "been"}
 
 
 def terms(query):
