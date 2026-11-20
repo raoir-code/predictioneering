@@ -15,6 +15,8 @@ class PDFTextTests(unittest.TestCase):
         self.addCleanup(tmp.cleanup)
         self.root = Path(tmp.name) / "Conflict"
         self.root.mkdir()
+        # macOS /var is often a symlink to /private/var. Match production canonical roots.
+        self.root = self.root.resolve(strict=True)
         self.db = Path(tmp.name) / "library.sqlite3"
         with closing(sqlite3.connect(self.db)) as db:
             db.executescript(INVENTORY_SCHEMA)
