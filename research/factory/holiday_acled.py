@@ -79,9 +79,16 @@ def get_token(username, password):
         token = request_json("POST", TOKEN_URL, body={
             "username": username, "password": password,
             "grant_type": "password", "client_id": "acled",
+            "scope": "authenticated",
         }).get("access_token")
     except HTTPError as exc:
-        raise RuntimeError("ACLED authentication failed: HTTP " + str(exc.code)) from None
+        raise RuntimeError(
+            "ACLED authentication failed: HTTP " + str(exc.code) +
+            (". Check myACLED consent, mandatory profile fields, and API "
+             "access permissions; do not share credentials or tokens."
+             if exc.code == 403 else
+             ". Verify username/password are current in myACLED.")
+        ) from None
     if not isinstance(token, str) or not token:
         raise ValueError("ACLED login returned no access token")
     return token
