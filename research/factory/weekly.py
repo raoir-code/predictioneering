@@ -97,10 +97,18 @@ def summarize(rows):
     return dict(sorted(counts.items()))
 
 
-def preview(home,inbox,limit=100):
+def preview(home,inbox,limit=100,forecast_log=None):
     items=incoming(inbox,limit)
     current=inventory(home)
-    return {"status":"dry_run_no_mutations","inbox":str(Path(inbox).expanduser().resolve()),
+    forecast_preview = None
+    if forecast_log is not None:
+        from .forecast_misses import analyze
+        screened = analyze(forecast_log)
+        forecast_preview = {"source_sha256":screened["source_sha256"],
+                            "resolved_contracts":screened["selected_resolved_contracts"],
+                            "candidate_slices":screened["candidate_screen_count"],
+                            "note":"Read-only dry run; no puzzle cards registered"}
+    return {"forecast_misses":forecast_preview,"status":"dry_run_no_mutations","inbox":str(Path(inbox).expanduser().resolve()),
             "new_intake_candidates":sum(i["status"]=="registerable_brief" for i in items),
             "inbox_inventory":items,
             "projects":current,
@@ -109,7 +117,7 @@ def preview(home,inbox,limit=100):
             "warning":"Unstructured worklogs cannot be converted into puzzles without a separate, explicitly authorized intake process."}
 
 
-def execute(home,inbox,limit=100,db=None):
+def execute(home,inbox,limit=100,db=None,forecast_log=None,register_misses=False):
     """Register valid user-authored briefs, run local literature/analysis batch."""
     home=Path(home).expanduser().resolve()
     inbox=Path(inbox).expanduser().resolve()
@@ -126,6 +134,13 @@ def execute(home,inbox,limit=100,db=None):
         except (ValueError,OSError,KeyError,TypeError) as exc:
             registration.append({"name":item["name"],"status":"registration_failed_safe",
                                  "reason":type(exc).__name__})
+    # Only an explicitly supplied log is inspected; never mutate production logs.
+    forecast_result = None
+    if forecast_log is not None:
+        from .forecast_misses import execute as scan_misses
+        forecast_result = scan_misses(forecast_log, home=home,
+            out=home / "inbox" / "forecast_misses",
+            register=register_misses)
     batch_result=pipeline.batch(home,db=db,limit=limit)
     current=inventory(home)
     stamp=timestamp()
@@ -133,6 +148,7 @@ def execute(home,inbox,limit=100,db=None):
             "version":VERSION,"generated_utc":stamp.isoformat(timespec="seconds"),
             "week":stamp.strftime("%G-W%V"),
             "inbox_file_count":len(scan),"registration":registration,
+            "forecast_misses":forecast_result,
             "approved_projects_processed":batch_result["processed"],
             "project_advances":batch_result["projects"],
             "workflow_counts":summarize(current),
@@ -188,8 +204,13 @@ def main(argv=None):
             sp.add_argument("--limit",type=int,default=100)
         if name in ("run","make-launchd"):
             sp.add_argument("--db",type=Path)
+        if name in ("plan","run"):
+            sp.add_argument("--brier-log",type=Path,
+                            help="Optional read-only resolved Brier JSONL")
         if name=="run":
             sp.add_argument("--execute",action="store_true")
+            sp.add_argument("--register-miss-candidates",action="store_true",
+                            help="Create PENDING screening cards only")
         if name=="make-launchd":
             sp.add_argument("--python",type=Path)
             sp.add_argument("--weekday",type=int,default=1)
@@ -203,9 +224,12 @@ def main(argv=None):
             result={"status":"local_factory_status","projects":cards,
                     "workflow_counts":summarize(cards),"network_or_paid_api_calls":0}
         elif args.command=="plan" or (args.command=="run" and not args.execute):
-            result=preview(args.home,args.inbox,args.limit)
+            result=preview(args.home,args.inbox,args.limit,args.brier_log)
         elif args.command=="run":
-            result=execute(args.home,args.inbox,args.limit,args.db)
+            if args.register_miss_candidates and not args.brier_log:
+                raise ValueError("--register-miss-candidates requires --brier-log")
+            result=execute(args.home,args.inbox,args.limit,args.db,
+                           args.brier_log,args.register_miss_candidates)
         else:
             result=make_launchd(args.home,args.inbox,python=args.python,
                                 weekday=args.weekday,hour=args.hour,minute=args.minute,db=args.db)
