@@ -12,7 +12,7 @@ from research.factory.pdf_text import SCHEMA as TEXT
 from research.factory.paper_profiles import SCHEMA as PROFILES, VERSION
 from research.factory.profile_audit import (
     assessment, context_for, load_profile, main, mark, model_packet,
-    open_audit_db, report
+    open_audit_db, report, pick_queue
 )
 
 
@@ -195,6 +195,23 @@ class ProfileAuditTests(unittest.TestCase):
     def test_bad_evidence_id_cannot_be_approved(self):
         with self.assertRaisesRegex(ValueError, "does not uniquely match"):
             mark(self.db, "sample", "made-up", "approved", confirmed=True)
+
+
+
+    def test_stratified_sample_covers_different_claim_types(self):
+        data = report(self.db, "sample", limit=3, stratified=True)
+        self.assertEqual(len(data["queue"]), 3)
+        self.assertEqual(
+            {item["kind"] for item in data["queue"]},
+            {"formal_model", "empirical_finding"},
+        )
+        self.assertEqual(data["scientific_verdict"], "not_verified")
+
+    def test_quote_reappearance_on_wrong_page_does_not_count(self):
+        mismatched = dict(self.evidence[0], page=6)
+        info = assessment(mismatched, self.text if False else "")
+        self.assertFalse(info["quote_found_on_original_indexed_page"])
+        self.assertEqual(info["priority"], 100)
 
 
 if __name__ == "__main__":
