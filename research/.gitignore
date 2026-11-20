@@ -7,3 +7,6 @@ datasets/private/
 .env
 __pycache__/
 *.pyc
+
+# Licensed ACLED event records and local research manifests must never be published.
+inbox/acled/
