@@ -38,6 +38,30 @@ THEORY_LANGUAGE = re.compile(
 VISUAL = re.compile(r"\b(?:table|figure|fig\.)\s*\d+", re.I)
 FORMAL = {"formal_model", "assumption"}
 CATEGORIES = ("formal_model", "assumption", "mechanism", "empirical_finding")
+SIMULATION_CUE = re.compile(
+    r"\b(?:simulations?|simulated|simulate[ds]?|computational experiments?)\b",
+    re.I
+)
+PRIOR_WORK_CUE = re.compile(
+    r"\b(?:prior|previous|earlier|existing)\s+(?:work|research|studies|findings|literature)\b"
+    r"|\b(?:citing|cites|reexamines|revisits)\s+\w+",
+    re.I
+)
+
+def evidence_source_type_hint(kind, claim, quote):
+    """Conservative *candidate* origin, not a correction or scientific validation.
+
+    Prefer positive cues in the original claim or quote over speculative
+    classification from nearby unrelated paragraphs.
+    """
+    if kind != "empirical_finding":
+        return "not_applicable"
+    if SIMULATION_CUE.search(claim) or SIMULATION_CUE.search(quote):
+        return "simulation_result_candidate"
+    if PRIOR_WORK_CUE.search(claim):
+        return "prior_literature_result_candidate"
+    return "finding_origin_unresolved"
+
 
 def open_audit_db(path):
     db = prepare(path)
@@ -92,7 +116,12 @@ def assessment(item, page_text):
     quote = item.get("quote") or ""
     kind = item.get("kind") or ""
     context = context_for(page_text or "", quote)
+    source_type_hint = evidence_source_type_hint(kind, claim, quote)
     warnings = []
+    if source_type_hint == "simulation_result_candidate":
+        warnings.append("simulation_result_not_observational_finding")
+    elif source_type_hint == "prior_literature_result_candidate":
+        warnings.append("reported_prior_result_not_original_empirical_test")
     if context is None:
         warnings.append("quote_not_found_on_claimed_pdf_page")
     if len(cleaned(quote)) < 65:
@@ -118,6 +147,8 @@ def assessment(item, page_text):
         priority = (
             25 * int(kind == "formal_model")
             + 18 * int("possible_theory_or_simulation_mislabeled_empirical" in warnings)
+            + 18 * int("simulation_result_not_observational_finding" in warnings)
+            + 12 * int("reported_prior_result_not_original_empirical_test" in warnings)
             + 15 * int("table_or_figure_requires_original_pdf_inspection" in warnings)
             + 12 * int("numeric_detail_not_shown_in_local_quote_context" in warnings)
             + 8 * int("formal_assumption_requires_symbol_definition_check" in warnings)
@@ -129,6 +160,8 @@ def assessment(item, page_text):
         "claim": claim, "verified_quote": quote,
         "quote_found_on_original_indexed_page": context is not None,
         "source_context": context, "warnings": warnings, "priority": priority,
+        "source_type_hint": source_type_hint,
+        "source_type_hint_is_human_verified": False,
     }
 
 def audits(db, row, profile):
