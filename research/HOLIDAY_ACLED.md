@@ -94,3 +94,39 @@ git pull --ff-only
 python3 -m unittest discover -s research/tests -q
 python3 -m research.factory.holiday_acled --fetch --env-file "$HOME/predictioneering/.env"
 ~~~
+
+
+## First empirical data-quality gate: direction audit
+
+The October 2024 Lebanon pilot retrieved 2,982 remote-violence and 64
+battle records; 3,038 of 3,046 had precise event dates (99.7%). The
+separate Violence against civilians query returned zero, which does
+NOT mean no civilian injuries or deaths: ACLED counts remote attacks
+harming civilians under Explosions/Remote violence in many cases.
+
+Run this *offline* after downloading the pilot:
+
+~~~bash
+python3 -m research.factory.holiday_audit --review
+~~~
+
+The command checks raw file hashes, prints counts of usable exact dates,
+source-note coverage, Actor2 coverage, subevents and most frequent
+actor pairs, and writes a **private** direction-coding sample at
+research/inbox/acled/holy_days/DIRECTION_REVIEW_PRIVATE.csv.
+This worksheet contains licensed source notes and must **not** be
+uploaded to chat, Anthropic, or GitHub unless ACLED rights allow it.
+The worksheet's coding columns are deliberately blank; review notes
+and record the *actual attacker and target* from source details.
+Do not interpret actor1 as aggressor, or count remote-violence
+observations as individual projectiles/strikes.
+
+Only paste the command's aggregate JSON summary here. Do not paste
+the CSV. The audit refuses to overwrite reviewed annotations unless
+--overwrite-review is explicitly supplied. Zero evidence of direction
+validity is not evidence against the paper: it tells us whether we need
+different coding, additional sources, or a different feasible design.
+
+The next *scientific* step, once direction can be measured, is to
+expand beyond October 2024 to multiple holiday dates and years, and
+fix a religious calendar/actor crosswalk before estimating effects.
