@@ -54,3 +54,10 @@ added later without changing the intake interface.
 - Automated tests mock Claude; a real API call has **not** been verified yet.
 - This tool processes a *supplied* Markdown/plain-text log. Automatic discovery
   of logs and diagnostics is intentionally deferred to the next phase.
+
+
+## First end-to-end empirical paper candidate
+
+For the **Holy Days and Hard Bargains** multiyear ACLED own-holiday H1 screen, see [HOLIDAY_FAST_START.md](HOLIDAY_FAST_START.md). It automates a cached 2022–2025 local ACLED extraction, calendar construction, a zero-inclusive daily panel, and an exploratory Poisson estimate in one command. Requires the Python packages in research/requirements.txt. This study is explicitly **non-causal and not a validated dyadic opponent-holiday estimate**.
+
+For its theoretical benchmark and necessary bargaining frictions, see [holy_days_repeated_bargaining_model_v0.md](examples/holy_days_repeated_bargaining_model_v0.md). Neither this extension nor the existing research factory modifies production forecasting code.
