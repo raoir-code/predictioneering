@@ -1,7 +1,7 @@
 {
   "Iran|US": {
     "hazard": 1.7,
-    "as_of": "2026-11-18"
+    "as_of": "2026-11-20"
   },
   "Denmark|US": {
     "hazard": 0.2,
@@ -13,11 +13,11 @@
   },
   "Cuba|US": {
     "hazard": 0.2,
-    "as_of": "2026-11-18"
+    "as_of": "2026-11-20"
   },
   "Mexico|US": {
-    "hazard": 0.7257293509250919,
-    "as_of": "2026-11-18"
+    "hazard": 0.7,
+    "as_of": "2026-11-20"
   },
   "Venezuela|US": {
     "hazard": 0.2,
@@ -34,5 +34,9 @@
   "LatinAmerica|US": {
     "hazard": 0.39174775348325586,
     "as_of": "2026-11-17"
+  },
+  "Panama|US": {
+    "hazard": 0.2,
+    "as_of": "2026-11-20"
   }
 }

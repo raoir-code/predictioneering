@@ -1,15 +1,15 @@
 {
  "results": {
   "B": {
-   "n": 21,
-   "brier_model": 0.0475,
-   "brier_market": 0.1633
+   "n": 22,
+   "brier_model": 0.0454,
+   "brier_market": 0.1589
   },
   "B:houthi->saudiarabia+saudiarabia->yemen": {
-   "n": 4,
+   "n": 5,
    "yes": 0,
-   "brier_model": 0.0036,
-   "brier_market": 0.1195
+   "brier_model": 0.003,
+   "brier_market": 0.1091
   },
   "B:israel->lebanon": {
    "n": 7,
@@ -338,6 +338,15 @@
    "m": 0.265,
    "q": "Houthi x Saudi Arabia effective ceasefire by October 15?",
    "date": "2026-10-15"
+  },
+  {
+   "fam": "B",
+   "series": "houthi->saudiarabia+saudiarabia->yemen",
+   "y": 0,
+   "u": 0.0274,
+   "m": 0.26,
+   "q": "Houthi x Saudi Arabia effective ceasefire by November 15?",
+   "date": "2026-11-15"
   },
   {
    "fam": "C",
@@ -1591,5 +1600,5 @@
    "date": "2026-06-30"
   }
  ],
- "computed_at": "2026-11-18T22:11:09.676701+00:00"
+ "computed_at": "2026-11-20T22:14:31.870070+00:00"
 }

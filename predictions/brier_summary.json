@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-11-18T22:22:29.842555+00:00",
-  "n_resolved": 305,
-  "brier_conditional_mean": 0.281149,
-  "brier_engine_mean": 0.454792,
-  "brier_market_mean": 0.13369,
-  "edge_vs_market": -0.147459,
+  "last_updated": "2026-11-20T22:30:24.580015+00:00",
+  "n_resolved": 309,
+  "brier_conditional_mean": 0.277618,
+  "brier_engine_mean": 0.457905,
+  "brier_market_mean": 0.133852,
+  "edge_vs_market": -0.143766,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -3360,6 +3360,50 @@
       "brier_conditional": 0.014665,
       "brier_market": 0.25,
       "resolved_at": "2026-11-18T22:22:27.548990+00:00"
+    },
+    {
+      "market_id": "5999259",
+      "market_label": "Houthi x Saudi Arabia effective ceasefire by November 15?",
+      "dyad": "Saudi Arabia-Yemen",
+      "outcome": 0,
+      "conditional_p": 0.0138,
+      "market_p": 0.2,
+      "brier_conditional": 0.00019,
+      "brier_market": 0.04,
+      "resolved_at": "2026-11-20T22:30:02.459698+00:00"
+    },
+    {
+      "market_id": "6713488",
+      "market_label": "Israel military action against Lebanon on November 20?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.8717,
+      "market_p": 0.46,
+      "brier_conditional": 0.016461,
+      "brier_market": 0.2916,
+      "resolved_at": "2026-11-20T22:30:15.263274+00:00"
+    },
+    {
+      "market_id": "6713484",
+      "market_label": "Israel military action against Lebanon on November 19?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.8753,
+      "market_p": 0.505,
+      "brier_conditional": 0.01555,
+      "brier_market": 0.245025,
+      "resolved_at": "2026-11-20T22:30:18.419495+00:00"
+    },
+    {
+      "market_id": "6908162",
+      "market_label": "Israel x Iran ceasefire continues through November 18?",
+      "dyad": "Israel-Iran",
+      "outcome": 1,
+      "conditional_p": 0.964,
+      "market_p": 0.91,
+      "brier_conditional": 0.001296,
+      "brier_market": 0.0081,
+      "resolved_at": "2026-11-20T22:30:21.041742+00:00"
     }
   ]
 }
