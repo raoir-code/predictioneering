@@ -80,10 +80,12 @@ def search(database, query, limit=12, approved_only=False,
                 q = quote.casefold()
                 t = title.casefold()
                 k = kind.casefold()
-                score = sum(5*(w in c)+3*(w in q)+(w in t)+(w in k)
-                            for w in words)
-                if score == 0:
+                # A paper title match alone does not support an individual
+                # evidence card; require claim, verbatim quote or kind match.
+                if not any(w in c or w in q or w in k for w in words):
                     continue
+                score = sum(5*(w in c)+3*(w in q)+(w in k)+(w in t)
+                            for w in words)
                 hits.append((score, {
                     "source_id": profile.get("zotero_uid"),
                     "title": title, "file": row["relpath"],
