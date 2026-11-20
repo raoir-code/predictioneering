@@ -14,7 +14,7 @@ import sqlite3
 import sys
 
 from .paper_profiles import VERSION, prepare, cleaned
-from .profile_audit import SCHEMA as REVIEW_SCHEMA
+from .profile_audit import SCHEMA as REVIEW_SCHEMA, evidence_source_type_hint
 from .pdf_text import DEFAULT_DB
 
 STOP = {"the", "and", "for", "that", "with", "from", "which", "this",
@@ -92,6 +92,8 @@ def search(database, query, limit=12, approved_only=False,
                     "title": title, "file": row["relpath"],
                     "pdf_sha256": row["pdf_sha256"],
                     "pdf_page": e["page"], "kind": kind,
+                    "source_type_hint": evidence_source_type_hint(kind, claim, quote),
+                    "source_type_hint_is_human_verified": False,
                     "claim_unreviewed_or_annotated": claim,
                     "verified_quote": quote,
                     "evidence_id": e["evidence_id"],
