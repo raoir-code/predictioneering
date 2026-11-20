@@ -75,6 +75,10 @@ class TheoryCatalogTests(unittest.TestCase):
         self.assertFalse(evidence["interpretation_independently_checked"])
         self.assertEqual(evidence["verified_quote"], self.quote)
 
+    def test_title_match_alone_does_not_create_false_evidence(self):
+        # Title contains Bargaining but neither the quote nor individual claim does.
+        self.assertEqual(search(self.db, "bargaining")["evidence_hits"], 0)
+
     def test_approved_only_needs_human_gate(self):
         self.assertEqual(search(self.db, "preventive war", approved_only=True)
                          ["evidence_hits"], 0)
