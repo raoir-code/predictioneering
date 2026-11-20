@@ -1,5 +1,7 @@
 # Predictioneering Research Factory — Phase 1 (Puzzle Finder)
 
+**Master build plan (updated November 20, 2026):** [MASTER_BUILD_CHECKLIST.md](MASTER_BUILD_CHECKLIST.md). This distinguishes the operational deterministic miss scanner from the still-unbuilt point-in-time reconstruction and Claude diagnostic investigation. It is the canonical phase/priorities checklist; nothing here changes production.
+
 **Isolated addition:** The `research/` package does not import or modify the forecasting
 engine, forecasting configuration, DAG parameters, or existing pipelines. There is
 no automation that writes to Predictioneering model files.
