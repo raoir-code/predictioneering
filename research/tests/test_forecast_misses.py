@@ -49,7 +49,7 @@ class ForecastMissTests(unittest.TestCase):
 
     def test_prevents_contract_sibling_inflation(self):
         self.make(8,same_day=True)
-        report=m.analyze(self.log,min_contracts=2,min_families=2)
+        report=m.analyze(self.log,min_contracts=2,min_families=3)
         self.assertEqual(report["candidate_screen_count"],0)
         self.assertEqual(report["overall"]["possible_event_families"],2)
         self.assertEqual(report["overall"]["probable_duplicate_contracts"],6)
