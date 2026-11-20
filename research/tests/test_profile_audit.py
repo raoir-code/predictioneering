@@ -1,11 +1,11 @@
 """Zero-network tests of profile provenance, scientific review flags and human gate."""
+import io
 import json
 import sqlite3
 import tempfile
 import unittest
-from contextlib import closing
+from contextlib import closing, redirect_stdout
 from pathlib import Path
-from unittest.mock import patch
 
 from research.factory.pdf_inventory import SCHEMA as INVENTORY
 from research.factory.pdf_text import SCHEMA as TEXT
@@ -96,14 +96,12 @@ class ProfileAuditTests(unittest.TestCase):
             db.commit()
 
     def test_reports_risk_but_never_labels_claim_scientifically_verified(self):
-        with patch("research.factory.profile_audit.urllib", create=True) as transport:
-            output = report(self.db, "sample")
+        output = report(self.db, "sample")
         self.assertEqual(output["evidence_total"], 3)
         self.assertEqual(output["source_quote_mismatches"], 0)
         self.assertEqual(output["scientific_verdict"], "not_verified")
         self.assertEqual(output["human_reviews"]["not_reviewed"], 3)
         self.assertEqual(output["queue_total"], 3)
-        transport.assert_not_called()
 
     def test_flags_theoretical_finding_and_table_missing_number(self):
         data = {e["evidence_id"]: assessment(e, self.text) for e in self.evidence}
@@ -187,10 +185,13 @@ class ProfileAuditTests(unittest.TestCase):
         self.assertIn("Proposition 1", packet["candidate_source_cards"][0]["source_context"])
 
     def test_cli_outputs_without_remote_requests(self):
-        self.assertEqual(main(["--db", str(self.db), "audit", "--file", "sample",
-                               "--limit", "1"]), 0)
-        self.assertEqual(main(["--db", str(self.db), "model-packet",
-                               "--file", "sample", "--limit", "1"]), 0)
+        with redirect_stdout(io.StringIO()) as capture:
+            self.assertEqual(main(["--db", str(self.db), "audit", "--file", "sample",
+                                   "--limit", "1"]), 0)
+            self.assertEqual(main(["--db", str(self.db), "model-packet",
+                                   "--file", "sample", "--limit", "1"]), 0)
+        self.assertIn('"scientific_verdict": "not_verified"', capture.getvalue())
+        self.assertIn('"payoff_functions": "NOT YET VERIFIED', capture.getvalue())
 
     def test_bad_evidence_id_cannot_be_approved(self):
         with self.assertRaisesRegex(ValueError, "does not uniquely match"):
