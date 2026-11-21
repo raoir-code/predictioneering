@@ -5989,6 +5989,12 @@
 "reason": "This is about domestic Taiwanese local elections, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"26cf2aacddf6b95354d6": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about US domestic crude oil reserve levels, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "26dec00f23f97f59ab38": {
 "bucket": "ADJACENT",
 "dyad": "US-Russia",
@@ -7892,6 +7898,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not about interstate conflict between two state actors.",
+"relevant_nodes": []
+},
+"34a31e0a4c32d633fe23": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about US domestic crude oil reserve levels, an economic/commodity metric unrelated to interstate conflict onset between a specific dyad.",
 "relevant_nodes": []
 },
 "34aeeffd8498e06770f1": {
@@ -17086,6 +17098,12 @@
 "relevant_nodes": [
 "WinProbability"
 ]
+},
+"7225c60d1158bc6ff9d1": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about US domestic oil reserves/inventory levels, not interstate conflict between state actors.",
+"relevant_nodes": []
 },
 "722d5743904b1a0faa82": {
 "bucket": "NOISE",
@@ -28519,6 +28537,12 @@
 "reason": "This is about domestic Israeli coalition politics and government formation, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"bf63ff7a77eb83dedc21": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about US domestic oil reserves/inventory levels, not interstate conflict between state actors.",
+"relevant_nodes": []
 },
 "bf891641da6442a5c4f1": {
 "bucket": "NOISE",

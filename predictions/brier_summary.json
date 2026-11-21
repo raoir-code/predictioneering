@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-11-20T22:30:24.580015+00:00",
-  "n_resolved": 309,
-  "brier_conditional_mean": 0.277618,
-  "brier_engine_mean": 0.457905,
-  "brier_market_mean": 0.133852,
-  "edge_vs_market": -0.143766,
+  "last_updated": "2026-11-21T22:26:03.424331+00:00",
+  "n_resolved": 314,
+  "brier_conditional_mean": 0.27339,
+  "brier_engine_mean": 0.459223,
+  "brier_market_mean": 0.133544,
+  "edge_vs_market": -0.139846,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -3404,6 +3404,61 @@
       "brier_conditional": 0.001296,
       "brier_market": 0.0081,
       "resolved_at": "2026-11-20T22:30:21.041742+00:00"
+    },
+    {
+      "market_id": "6713492",
+      "market_label": "Israel military action against Lebanon on November 21?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.8681,
+      "market_p": 0.47,
+      "brier_conditional": 0.017398,
+      "brier_market": 0.2809,
+      "resolved_at": "2026-11-21T22:25:50.222530+00:00"
+    },
+    {
+      "market_id": "7182979",
+      "market_label": "Will Iran target an Arab country by November 30, 2026?",
+      "dyad": "Iran-ArabStates",
+      "outcome": 1,
+      "conditional_p": 0.9486,
+      "market_p": 0.765,
+      "brier_conditional": 0.002642,
+      "brier_market": 0.055225,
+      "resolved_at": "2026-11-21T22:25:54.623779+00:00"
+    },
+    {
+      "market_id": "7183032",
+      "market_label": "Will Iran target Bahrain by November 30, 2026?",
+      "dyad": "Iran-Bahrain",
+      "outcome": 1,
+      "conditional_p": 0.8274,
+      "market_p": 0.58,
+      "brier_conditional": 0.029791,
+      "brier_market": 0.1764,
+      "resolved_at": "2026-11-21T22:25:56.758890+00:00"
+    },
+    {
+      "market_id": "7183033",
+      "market_label": "Will Iran target Bahrain by December 31, 2026?",
+      "dyad": "Iran-Bahrain",
+      "outcome": 1,
+      "conditional_p": 0.9024,
+      "market_p": 0.765,
+      "brier_conditional": 0.009526,
+      "brier_market": 0.055225,
+      "resolved_at": "2026-11-21T22:25:59.032694+00:00"
+    },
+    {
+      "market_id": "7182980",
+      "market_label": "Will Iran target an Arab country by December 31, 2026?",
+      "dyad": "Iran-Saudi Arabia",
+      "outcome": 1,
+      "conditional_p": 0.965,
+      "market_p": 0.93,
+      "brier_conditional": 0.001225,
+      "brier_market": 0.0049,
+      "resolved_at": "2026-11-21T22:26:01.080332+00:00"
     }
   ]
 }
