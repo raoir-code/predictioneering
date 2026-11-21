@@ -39,6 +39,28 @@ class StarterTests(unittest.TestCase):
                 starter.run_puzzle(home,"holy-days",holy_days=True)
             self.assertEqual(g.overview(home,"holy-days")["ready_stages"],["puzzle"])
 
+    def test_holy_days_revision_preserves_prior_snapshot_and_stays_unapproved(self):
+        from research.factory import review_workflow as g, stage_starter as starter
+        g.init(self.home, "holy-days", "Holy Days and War")
+        first=starter.run_puzzle(self.home,"holy-days",holy_days=True)
+        snapshot=g.location(self.home,"holy-days")/"snapshots"/"puzzle"/"rev0001"/"PUZZLE_REVIEW.md"
+        old=snapshot.read_text()
+        self.assertIn("Competing strategic intuitions",old)
+        self.assertNotIn("## H1",old)
+        g.revise(self.home,"holy-days","puzzle",
+                 "Keep only the strategic opportunity-versus-anticipation tension")
+        revised=starter.revise_holy_days_puzzle(self.home,"holy-days")
+        self.assertEqual(revised["revision"],2)
+        self.assertEqual(revised["status"],"awaiting_human_approval")
+        self.assertTrue(snapshot.is_file())
+        self.assertEqual(snapshot.read_text(),old)
+        self.assertEqual(g.load(self.home,"holy-days")["stages"]["diagnosis"]["status"],"not_started")
+        new=g.location(self.home,"holy-days")/"snapshots"/"puzzle"/"rev0002"/"PUZZLE_REVIEW.md"
+        self.assertTrue(new.is_file())
+        self.assertIn("anticipate",new.read_text().lower())
+        with self.assertRaisesRegex(ValueError,"Human must request"):
+            starter.revise_holy_days_puzzle(self.home,"holy-days")
+
     def test_diagnosis_requires_approved_puzzle_and_keeps_decision_pending(self):
         from research.factory import review_workflow as g, stage_starter as starter
         with tempfile.TemporaryDirectory() as td:
