@@ -679,7 +679,7 @@ def revision_brief(home, project, stage):
     if rec["status"] != "needs_revision":
         raise ValueError("This stage has no current human revision request")
     summary = rec.get("human_revision_notes")
-    ensure_text(summary, "Human revision request", 20, 16000)
+    ensure_text(summary, "Human revision request", 5, 16000)
     base = location(home, project)
     previous = []
     for item in rec.get("artifacts", []):
