@@ -1,4 +1,4 @@
-"""Mandatory per-stage human review gates for the isolated Research Factory.
+"""Human-controlled per-stage review gates for the isolated Research Factory.
 
 All actions are local, offline, and confined to research/projects/factory_runs.
 Artifacts are copied into immutable-by-convention versioned snapshots; approval
@@ -244,8 +244,8 @@ def approved_token(home, state, stage):
     approval = record.get("approval")
     if not isinstance(approval, dict) or not approval.get("token"):
         raise ValueError(f"Approval record missing for {stage}")
-    if not critique_valid(home, state["project"], record):
-        raise ValueError(f"Independently reviewed evidence for {stage} changed or is missing")
+    if record.get("critique") is not None and not critique_valid(home, state["project"], record):
+        raise ValueError(f"Optional critique for {stage} changed or is missing")
     decision = (location(home, state["project"]) / "decisions" / stage /
                 f"rev{record['revision']:04d}_approval.json")
     if decision.is_symlink() or not decision.is_file():
@@ -359,14 +359,15 @@ def submit(home, project, stage, files, summary):
                           "sha256": sha, "bytes": size,
                           "original_source": str(p.resolve())})
     changed = invalidate(state, stage) if record.get("revision", 0) > 0 else []
-    state["stages"][stage] = {"status": "awaiting_critique", "revision": rev,
+    state["stages"][stage] = {"status": "awaiting_human_approval", "revision": rev,
                                "submitted_utc": time_now(), "summary": summary,
-                               "artifacts": snapshots, "upstream_approval_tokens": upstream}
+                               "artifacts": snapshots, "upstream_approval_tokens": upstream,
+                               "previous_revision_request": record.get("human_revision_notes")}
     event(state, "submitted", stage, {"revision": rev, "sha256": [e["sha256"] for e in snapshots],
                                       "invalidated": changed})
     persist(home, project, state)
     write_packet(home, project, stage, state)
-    return {"status": "awaiting_critique", "project": project, "stage": stage,
+    return {"status": "awaiting_human_approval", "project": project, "stage": stage,
             "revision": rev, "review_packet": str(packet_path(home, project, stage)),
             "invalidated_downstream": changed, "network_or_paid_api_calls": 0}
 
@@ -403,8 +404,10 @@ def critique(home, project, stage, report_path):
     state = load(home, safe_project(project))
     validate_events(state)
     rec = state["stages"][stage]
-    if rec["status"] != "awaiting_critique":
-        raise ValueError("Stage must be submitted and awaiting critique")
+    if rec["status"] not in ("awaiting_critique", "awaiting_human_approval"):
+        raise ValueError("Stage must be submitted and awaiting human review")
+    if rec.get("critique") is not None:
+        raise ValueError("An optional critique is already attached to this revision")
     if not artifacts_valid(home, project, rec):
         raise ValueError("Submitted artifact has changed or disappeared")
     p, _ = ensure_regular_small(report_path)
@@ -454,40 +457,40 @@ def critique_valid(home, project, rec):
 def approve(home, project, stage, reviewer, notes, *, override=False):
     stage = safe_stage(stage)
     reviewer = ensure_text(reviewer, "Human signatory", 2, 200)
-    notes = ensure_text(notes, "Human decision notes", 20, 16000)
+    notes = ensure_text(notes, "Human decision notes", 2, 16000)
     state = load(home, safe_project(project))
     validate_events(state)
     rec = state["stages"][stage]
-    if rec["status"] != "awaiting_human_approval":
-        raise ValueError("Stage has no independently critiqued work awaiting human approval")
-    if not artifacts_valid(home, project, rec) or not critique_valid(home, project, rec):
-        raise ValueError("Submitted evidence or independent review changed")
-    c = rec["critique"]
-    if reviewer.casefold() == c["reviewer"].casefold():
-        raise ValueError("Human approval must be independent of critique authorship")
-    blocked = (c["recommendation"] != "approve" or
-               any(x["severity"] in ("blocker", "major") for x in c["issues"]))
-    if blocked and not override:
-        raise ValueError("Critic recommends revision/rejection or flags major concerns. Use revise, or explicit --override-critic with reason.")
-    if blocked and (not override or len(notes) < 60):
-        raise ValueError("Overriding scientific concerns requires 60+ characters explaining why")
+    # v0.7 projects may still have the legacy awaiting_critique status.
+    # No migration or extra review is required: both are human-decision states.
+    if rec["status"] not in ("awaiting_critique", "awaiting_human_approval"):
+        raise ValueError("Stage has no submitted work awaiting human approval")
+    if not artifacts_valid(home, project, rec):
+        raise ValueError("Submitted evidence changed or is missing")
+    c = rec.get("critique")
+    if c is not None and not critique_valid(home, project, rec):
+        raise ValueError("Optional critique changed or is missing")
+    # A supplementary reviewer is advisory. The human can accept or reject
+    # its recommendations without a separate override ceremony.
+    warning = (c is not None and (c["recommendation"] != "approve" or
+               any(x["severity"] in ("blocker", "major") for x in c["issues"])))
     deps = {key: approved_token(home, state, key) for key in DEPS[stage]}
     if deps != rec.get("upstream_approval_tokens"):
         raise ValueError("Upstream scientific decisions changed since submission")
     hashes = [a["sha256"] for a in rec["artifacts"]]
     data = {"project": project, "stage": stage, "revision": rec["revision"],
             "artifact_sha256": hashes, "dependency_tokens": deps,
-            "critic_sha256": c["snapshot_sha256"], "reviewer": reviewer,
+            "critic_sha256": c["snapshot_sha256"] if c else None, "reviewer": reviewer,
             "notes": notes, "override": bool(override), "approved_utc": time_now()}
     token = sha_bytes(canonical(data).encode("utf-8"))
     rec["approval"] = {"token": token, "reviewer": reviewer, "notes": notes,
                        "approved_utc": data["approved_utc"],
-                       "dependencies": deps, "critic_sha256": c["snapshot_sha256"],
+                       "dependencies": deps, "critic_sha256": c["snapshot_sha256"] if c else None,
                        "override": bool(override), "artifact_sha256": hashes}
     rec["status"] = "approved"
     event(state, "human_approved", stage,
           {"revision": rec["revision"], "approval_token": token, "reviewer": reviewer,
-           "critic_override": bool(override)})
+           "critic_advice_not_followed": bool(warning)})
     decision_dir = location(home, project) / "decisions" / stage
     decision_dir.mkdir(parents=True, exist_ok=True)
     destination = decision_dir / f"rev{rec['revision']:04d}_approval.json"
@@ -499,13 +502,13 @@ def approve(home, project, stage, reviewer, notes, *, override=False):
     write_packet(home, project, stage, state)
     return {"status": "approved", "stage": stage, "revision": rec["revision"],
             "approval_token": token, "ready_stages": ready_stages(home, project, state),
-            "network_or_paid_api_calls": 0}
+            "optional_critic_disagreed": bool(warning), "network_or_paid_api_calls": 0}
 
 
 @serialized
 def revise(home, project, stage, notes, *, reject=False):
     stage = safe_stage(stage)
-    notes = ensure_text(notes, "Human revision/rejection reason", 20, 16000)
+    notes = ensure_text(notes, "Human revision/rejection reason", 5, 16000)
     state = load(home, safe_project(project))
     validate_events(state)
     rec = state["stages"][stage]
@@ -557,62 +560,154 @@ def overview(home, project):
         steps.append(details)
     return {"project": project, "title": state["title"],
             "ready_stages": ready_stages(home, project, state),
-            "awaiting_human": [s["stage"] for s in steps if s["status"]=="awaiting_human_approval"],
-            "awaiting_critique": [s["stage"] for s in steps if s["status"]=="awaiting_critique"],
+            "awaiting_human": [s["stage"] for s in steps if s["status"] in ("awaiting_human_approval", "awaiting_critique")],
+            "awaiting_critique": [],
             "stages": steps, "events": len(state["events"]),
             "network_or_paid_api_calls": 0}
+
+
+def review(home, project, stage):
+    """Regenerate the readable packet for either current or legacy saved state."""
+    stage = safe_stage(stage)
+    state = load(home, safe_project(project))
+    validate_events(state)
+    write_packet(home, project, stage, state)
+    dashboard(home, project, state)
+    return {"project":project, "stage":stage,
+            "status":state["stages"][stage]["status"],
+            "review_packet":str(packet_path(home,project,stage)),
+            "human_decision_required":state["stages"][stage]["status"] in
+                ("awaiting_human_approval","awaiting_critique"),
+            "network_or_paid_api_calls":0}
 
 
 def packet_path(home, project, stage):
     return location(home, project) / "review_packets" / (stage + ".md")
 
 
+def human_preview(home, project, rec, budget=12000):
+    """Show a small, safe local text preview; never inline datasets or JSON payloads.
+
+    The authoritative submitted artifacts remain the hashed snapshots.
+    """
+    base = location(home, project).resolve()
+    previews = []
+    for item in rec.get("artifacts", []):
+        name = item.get("name", "")
+        if not name.lower().endswith((".md", ".txt")):
+            continue
+        if len(previews) >= 3 or budget <= 0:
+            break
+        p = base / item["snapshot"]
+        if (p.is_symlink() or not p.is_file() or
+                not p.resolve().is_relative_to(base) or
+                file_sha(p) != item["sha256"]):
+            previews.append(f"### {name}\n\nSnapshot unavailable or hash-invalid")
+            continue
+        text = p.read_text(encoding="utf-8", errors="replace")
+        taken = text[:budget]
+        budget -= len(taken)
+        if len(text) > len(taken):
+            taken += "\n\n[Preview truncated. Open the full immutable snapshot.]"
+        previews.append(f"### {name}\n\n" + taken)
+    return "\n\n".join(previews)
+
+
 def write_packet(home, project, stage, state):
     rec = state["stages"][stage]
-    c = rec.get("critique") or {}
-    lines = [f"# Human review: {stage}", "",
-             f"Project: **{state['title']}** (`{project}`)",
-             f"Stage status: **{rec['status']}**, revision **{rec['revision']}**", "",
-             "## Scientific decision checklist", "", CHECKS[stage], "",
-             "## Submitted work", "", rec.get("summary", "No submitted artifacts yet"), ""]
+    c = rec.get("critique")
+    lines = [f"# Research decision: {stage}", "",
+             f"**Project:** {state['title']} (`{project}`)",
+             f"**Status:** {rec['status']} — revision {rec['revision']}", "",
+             "## What you are deciding", "", CHECKS[stage], "",
+             "## What the factory produced", "", rec.get("summary", "No submitted artifacts yet"), ""]
     for a in rec.get("artifacts", []):
-        lines.append(f"- `{a['name']}` — SHA256 `{a['sha256']}` ({a['bytes']} bytes)")
-    lines += ["", "## Independent critic", "",
-              c.get("summary", "**PENDING.** Independent critique required before human approval."),
-              f"Recommendation: **{c.get('recommendation', 'not supplied')}**", ""]
-    for issue in c.get("issues", []):
-        lines.append(f"- **{issue['severity']}**: {issue['description']} → {issue['suggested_fix']}")
-    if rec.get("human_revision_notes"):
-        lines += ["", "## Requested changes", "", rec["human_revision_notes"]]
+        absolute = (location(home, project) / a["snapshot"]).resolve()
+        lines.append(f"- [{a['name']}]({absolute.as_uri()}) — SHA256 `{a['sha256'][:16]}…`")
+    preview = human_preview(home, project, rec)
+    if preview:
+        lines += ["", "## Research report (preview)", "", preview]
+    if c:
+        lines += ["", "## Optional second opinion (advisory)", "", c["summary"],
+                  "Recommendation: **" + c["recommendation"].upper() + "**", ""]
+        for issue in c.get("issues", []):
+            lines.append(f"- **{issue['severity']}**: {issue['description']} — {issue['suggested_fix']}")
+    else:
+        lines += ["", "## Optional second opinion", "", "Not requested. **You can approve or revise immediately.**"]
+    if rec.get("human_revision_notes") or rec.get("previous_revision_request"):
+        lines += ["", "## Your revision instructions", "",
+                  rec.get("human_revision_notes") or rec["previous_revision_request"]]
     if rec.get("approval"):
-        lines += ["", "## Human sign-off", "",
-                  f"Approved by {rec['approval']['reviewer']} on {rec['approval']['approved_utc']}.",
-                  "Approval bound to this revision and its upstream SHA256 tokens."]
-    lines += ["", "## Decision", "",
-              "**APPROVE:** Only after independent review and satisfactory evidence.",
-              "**REVISE:** Explain required changes, repair this stage, then resubmit.",
-              "**REJECT:** Stop the branch; retain evidence and decision history.",
-              "No downstream stage is released without this stage's valid human approval.", ""]
+        lines += ["", "## Your signed approval", "",
+                  f"Approved by {rec['approval']['reviewer']} on {rec['approval']['approved_utc']}."]
+    lines += ["", "## Your decision", "",
+              "**APPROVE** — sign off on this exact revision; then the next stage unlocks.",
+              "**REVISE** — give concrete change instructions; only affected work becomes stale.",
+              "**REJECT** — stop this project branch; retain the audit trail.", "",
+              "Nothing advances without your explicit approval. See HUMAN_APPROVAL_GATES.md for commands.", ""]
     atomic_text(packet_path(home, project, stage), "\n".join(lines))
 
 
 def dashboard(home, project, state):
     folder = location(home, project)
-    lines = [f"# Research Factory approval dashboard — {state['title']}", "",
-             "Human sign-off is mandatory after every stage; nothing below authorizes auto-advancement.", "",
+    lines = [f"# Research Factory dashboard — {state['title']}", "",
+             "Every completed stage waits for **your approval or revision**. Optional AI criticism is advisory.", "",
              "| Stage | Status | Revision | Depends on |", "|---|---|---:|---|"]
-    for s in STAGES:
-        r = state["stages"][s]
-        lines.append(f"| {s} | {r['status']} | {r['revision']} | {', '.join(DEPS[s]) or '—'} |")
-    lines += ["", "## Current actions", ""]
-    awaiting = [s for s in STAGES if state["stages"][s]["status"] == "awaiting_human_approval"]
-    if awaiting:
-        lines.append("Awaiting your explicit approval, revision, or rejection: " + ", ".join(awaiting))
-    for s in STAGES:
-        if state["stages"][s]["status"] == "awaiting_critique":
-            lines.append(f"- {s}: independent critic must submit a review report before your sign-off")
-    lines.append("\nUse `python -m research.factory.review_workflow --help` to inspect and act.\n")
+    for stage in STAGES:
+        r = state["stages"][stage]
+        status = "awaiting your decision" if r["status"] in ("awaiting_critique", "awaiting_human_approval") else r["status"]
+        lines.append(f"| {stage} | {status} | {r['revision']} | {', '.join(DEPS[stage]) or '—'} |")
+    lines += ["", "## Your next actions", ""]
+    for stage in STAGES:
+        if state["stages"][stage]["status"] in ("awaiting_critique", "awaiting_human_approval"):
+            lines.append(f"- Review [{stage}](review_packets/{stage}.md) and APPROVE or REVISE.")
+    for stage in ready_stages(home, project, state):
+        lines.append(f"- Ready to produce: **{stage}**")
+    lines += ["", "Use `python -m research.factory.review_workflow --help` for commands.", ""]
     atomic_text(folder / "PROJECT_DASHBOARD.md", "\n".join(lines))
+
+
+def revision_brief(home, project, stage):
+    """Create a bounded, local prompt/work order; no model call or auto-approval.
+
+    The next worker must *actually address* these instructions. Retaining a
+    revision request in a prompt is not proof that the science was repaired.
+    """
+    stage = safe_stage(stage)
+    state = require_ready(home, project, stage)
+    rec = state["stages"][stage]
+    if rec["status"] != "needs_revision":
+        raise ValueError("This stage has no current human revision request")
+    summary = rec.get("human_revision_notes")
+    ensure_text(summary, "Human revision request", 20, 16000)
+    base = location(home, project)
+    previous = []
+    for item in rec.get("artifacts", []):
+        file = base / item["snapshot"]
+        if not file.is_file() or file_sha(file) != item["sha256"]:
+            raise ValueError("Prior stage artifact has changed; cannot prepare revision")
+        previous.append({"name": item["name"], "sha256": item["sha256"],
+                         "snapshot_path": str(file), "source_is_private": True})
+    brief = {"project": project, "stage": stage,
+             "last_revision": rec["revision"],
+             "human_instructions": summary,
+             "previous_artifacts": previous,
+             "stage_checks": CHECKS[stage],
+             "approved_upstream": {p: approved_token(home, state, p) for p in DEPS[stage]},
+             "worker_rules": [
+                 "Use only supplied evidence or explicitly sourced new evidence; cite originals.",
+                 "Implement the requested changes, listing each resolved or unresolved issue.",
+                 "Never invent data, sources, game equilibria, or causal identification.",
+                 "Create new stage artifact(s), then submit; DO NOT autoapprove.",
+             ],
+             "status": "revision_request_NOT_revised_science",
+             "no_network_or_paid_api_calls": True}
+    destination = (Path(home).expanduser().resolve() / "inbox" / "raw" /
+                   "revision_jobs" / project / f"{stage}_rev{rec['revision']:04d}.json")
+    atomic(destination, brief)
+    return {"status": "revision_brief_ready", "path": str(destination),
+            "stage": stage, "human_instructions": summary, "next_action":
+            "Use an authorized worker or researcher to revise the actual stage artifacts, then submit and review again"}
 
 
 def approved_sha_matches(home, project, stage, source):
@@ -645,7 +740,7 @@ def data_hash_from_approved_manifest(home, project):
 
 
 def produce(home, project, stage, *, spec_file=None, model_file=None):
-    """Guarded analysis or manuscript worker: run, then STOP at critique gate.
+    """Guarded analysis or manuscript worker: run, then STOP for human sign-off.
 
     Existing standalone CLIs remain accessible by design; use this guarded
     orchestrator for projects where human approval at each step is mandatory.
@@ -673,7 +768,7 @@ def produce(home, project, stage, *, spec_file=None, model_file=None):
         files = [out / name for name in ("results.json", "QC_REPORT.json",
                                                 "replication_manifest.json", "state.json")]
         submission = submit(home, project, stage, files,
-                            "Python estimation and temporal validation results (exploratory); independent QC still required")
+                            "Python estimation and temporal validation results (exploratory); human approval still required")
         return {**submission, "worker_status": result["status"], "output_directory": str(out)}
     if model_file is None:
         raise ValueError("--formal-model is required for manuscript generation")
@@ -694,7 +789,7 @@ def produce(home, project, stage, *, spec_file=None, model_file=None):
         raise ValueError("Paper packaging failed or did not produce an unreviewed draft")
     submission = submit(home, project, stage,
                         [Path(result["archive"]), Path(result["package_dir"]) / "PAPER_QC.json"],
-                        "Overleaf draft, figures, bibliography and QA checklist; requires independent scientific and human review")
+                        "Overleaf draft, figures, bibliography and QA checklist; requires human review")
     return {**submission, "worker_status": result["status"], "archive": result["archive"]}
 
 
@@ -704,27 +799,32 @@ def main(argv=None):
     sub = parser.add_subparsers(dest="command", required=True)
     i = sub.add_parser("init"); i.add_argument("project"); i.add_argument("--title", required=True)
     s = sub.add_parser("status"); s.add_argument("project")
+    v = sub.add_parser("review", help="Refresh readable report without changing approval state")
+    v.add_argument("project"); v.add_argument("stage", choices=STAGES)
     r = sub.add_parser("submit"); r.add_argument("project"); r.add_argument("stage", choices=STAGES)
     r.add_argument("--artifact", action="append", type=Path, required=True)
     r.add_argument("--summary", required=True)
     c = sub.add_parser("critique"); c.add_argument("project"); c.add_argument("stage", choices=STAGES)
     c.add_argument("--report", type=Path, required=True)
     a = sub.add_parser("approve"); a.add_argument("project"); a.add_argument("stage", choices=STAGES)
-    a.add_argument("--reviewer", required=True); a.add_argument("--notes", required=True)
-    a.add_argument("--override-critic", action="store_true")
+    a.add_argument("--reviewer", required=True); a.add_argument("--notes", default="Approved after reading the stage report")
+    a.add_argument("--override-critic", action="store_true", help="Deprecated, optional AI advice cannot block you")
     for op in ("revise", "reject"):
         sp = sub.add_parser(op); sp.add_argument("project"); sp.add_argument("stage", choices=STAGES)
         sp.add_argument("--reason", required=True)
-    pr = sub.add_parser("produce", help="Run guarded analysis/manuscript adapter, then stop at critique")
+    pr = sub.add_parser("produce", help="Run guarded analysis/manuscript adapter, then stop for human review")
     pr.add_argument("project"); pr.add_argument("stage", choices=("analysis", "manuscript"))
     pr.add_argument("--spec", type=Path, required=True)
     pr.add_argument("--formal-model", type=Path)
+    rb = sub.add_parser("revision-brief", help="Export approved-input work order from your revision instructions")
+    rb.add_argument("project"); rb.add_argument("stage", choices=STAGES)
     g = sub.add_parser("check"); g.add_argument("project"); g.add_argument("stage", choices=STAGES)
     g.add_argument("--approved", action="store_true", help="Validate completed approval instead of readiness")
     args = parser.parse_args(argv)
     try:
         if args.command == "init": output = init(args.home, args.project, args.title)
         elif args.command == "status": output = overview(args.home, args.project)
+        elif args.command == "review": output = review(args.home, args.project, args.stage)
         elif args.command == "submit": output = submit(args.home, args.project, args.stage, args.artifact, args.summary)
         elif args.command == "critique": output = critique(args.home, args.project, args.stage, args.report)
         elif args.command == "approve": output = approve(args.home, args.project, args.stage,args.reviewer,args.notes,override=args.override_critic)
@@ -732,6 +832,7 @@ def main(argv=None):
         elif args.command == "reject": output = revise(args.home, args.project, args.stage,args.reason,reject=True)
         elif args.command == "produce": output = produce(args.home,args.project,args.stage,
                                                            spec_file=args.spec,model_file=args.formal_model)
+        elif args.command == "revision-brief": output = revision_brief(args.home,args.project,args.stage)
         elif args.command == "check":
             val = require_approved(args.home,args.project,args.stage) if args.approved else require_ready(args.home,args.project,args.stage)
             output = {"status":"approved" if args.approved else "ready", "stage":args.stage,
