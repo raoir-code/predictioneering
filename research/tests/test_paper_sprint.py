@@ -180,11 +180,11 @@ class BibliographyIntegrationTests(unittest.TestCase):
             sp=ps.prototype.read_json(source)
             mod={
                 'title':'Two-player toy decision problem',
-                'players':['P','R'],
+                'players':['Proposer','Responder'],
                 'information':'Both know u',
                 'timing':'P moves before R',
                 'strategies':['P offers','R accepts'],
-                'payoffs':{'P':'residual','R':'offer or outside option'},
+                'payoffs':{'Proposer':'residual','Responder':'offer or outside option'},
                 'solution_concept':'Asserted toy subgame perfect equilibrium',
                 'equilibrium_argument':'Synthetic game notation for a formatting check only',
                 'parameters':{'u':'positive'},'equilibrium':{'choice':'x','expression':'u'},
