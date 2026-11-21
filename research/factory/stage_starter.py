@@ -128,7 +128,7 @@ def puzzle_report(info):
 
 The complete-information static bargain in the local theory note permits peace under positive fighting costs. An actual directional holiday-war claim requires an explicit, validated bargaining friction. The existing H1 screen is observational and does not establish a causal or directed-dyad effect. This packet is **not** an independent literature review, solved repeated game, or research finding.
 
-**Next step:** Obtain independent criticism; the mandatory human gate must then approve, revise or reject the *puzzle framing*. Approval does not imply approval of the theory, data, or result.
+**Next step:** Read this proposal and choose **APPROVE** (for the next diagnostic stage), **REVISE** (with precise instructions), or **REJECT**. An AI second opinion is optional. Puzzle approval does not certify theory, data, novelty, or results.
 """
 
 
@@ -160,11 +160,85 @@ def run_puzzle(home,project,*,holy_days=False):
     atomically_save(metadata,json.dumps(info,indent=2,ensure_ascii=False)+"\n")
     result=workflow.submit(home,project,"puzzle",[proposal,metadata],
            "Source-grounded Holy Days puzzle framing with explicit theory and measurement weaknesses, not an approved finding")
-    instructions=dest/"INDEPENDENT_CRITIC_REQUEST.json"
-    write_critic_request(instructions,"puzzle")
-    return {**result,"source_provenance":str(metadata),"critic_request":str(instructions),
-            "next_action":"Obtain actual independent critique; record with review_workflow critique; human approve/revise/reject",
+    return {**result,"source_provenance":str(metadata),
+            "next_action":"Human reads review packet and chooses approve, revise, or reject; optional critique available",
             "paid_api_calls":0,"external_network_calls":0}
+
+
+def run_diagnosis(home, project):
+    """Cautious first diagnostic report from HUMAN-APPROVED puzzle evidence.
+
+    Not a historical forecast reconstruction, full literature review or test
+    of a theory. Missing data explicitly stays missing.
+    """
+    from . import review_workflow as workflow
+    workflow.require_ready(home, project, "diagnosis")
+    state=workflow.load(home,project)
+    approved=workflow.require_approved(home,project,"puzzle")
+    entries={a["name"]:a for a in state["stages"]["puzzle"]["artifacts"]}
+    if "PUZZLE_REVIEW.md" not in entries or "LOCAL_SOURCE_PROVENANCE.json" not in entries:
+        raise ValueError("Diagnosis worker requires the vetted Holy Days puzzle artifact and provenance; do not guess")
+    root=workflow.location(home,project)
+    original=root/entries["PUZZLE_REVIEW.md"]["snapshot"]
+    metadata=root/entries["LOCAL_SOURCE_PROVENANCE.json"]["snapshot"]
+    info=json.loads(metadata.read_text(encoding="utf-8"))
+    if info.get("kind")!="holy_days_puzzle" or not info.get("traceable_excerpts"):
+        raise ValueError("Approved puzzle provenance lacks Holy Days traceable evidence")
+    # Verify source note bytes still equal the approved registry; no silent source revision.
+    for item in info["source_registry"]:
+        rel=item["path"]
+        if rel.startswith("external_local_source:"):
+            raise ValueError("External source not safely resolvable")
+        p=Path(home).resolve()/rel
+        if not p.is_file() or sha_file(p)!=item["sha256"]:
+            raise ValueError("Source note differs from approved puzzle provenance")
+    dest=project_draft(home,project,"diagnosis")
+    report=dest/"DIAGNOSIS_REPORT.md"
+    evidence=dest/"DIAGNOSIS_EVIDENCE.json"
+    text=f"""# Holy Days and War — diagnostic decision
+
+**Status:** theoretical/measurement diagnostic only; empirical and novelty claims unverified.
+
+## Approved puzzle
+
+{info['question']}
+
+Approved puzzle decision token: `{approved}`. Prior puzzle report SHA256: `{sha_file(original)}`.
+
+## What the prior notes actually establish
+
+A complete-information, divisible-prize static bargaining benchmark permits a peaceful bargain when fighting is costly. Holiday shifts in relative power change outside options but do not, by themselves, establish increased war onset. This is a conditional theoretical observation in the approved local note, not a new verified equilibrium of a repeated game.
+
+## Mechanisms to distinguish
+
+- **Own-holiday costs/readiness:** might discourage attacks; could be overwhelmed by countervailing incentives.
+- **Opponent-holiday vulnerability:** might invite opportunistic attacks, but preparation and anticipation could eliminate the advantage.
+- **Failed bargaining:** a directional war-on-holiday prediction requires commitment, information, deadlines or another explicit friction.
+- **Formal ceasefire:** zero ACLED events is not proof of negotiated truce; independently dated agreements would be necessary.
+
+## Empirical obstacles
+
+- The pilot's Actor1-in-Lebanon outcome is not a verified Israel–Hezbollah target dyad.
+- Contemporaneous event classification, holiday timing, conflict phase and anticipation confound causal interpretation.
+- We do not yet have a page-verified original-literature explanation, proven repeated-game equilibrium, credible cross-theater evidence, or a comprehensive matched dataset.
+
+## What you must decide
+
+**Suggested action: APPROVE as a narrow diagnostic agenda** if you agree that these rival mechanisms merit the upcoming literature/novelty review; **REVISE** to narrow the substantive question or address a missing rival. This is not approval of any empirical holiday effect.
+
+**Next only after your approval:** source-backed original-paper literature review, followed by a separate novelty gate.
+"""
+    atomically_save(report,text)
+    proof={"project":project,"stage":"diagnosis","puzzle_approval_token":approved,
+           "puzzle_artifact_sha256":sha_file(original),
+           "provenance_sha256":sha_file(metadata),"source_notes":info["source_registry"],
+           "empirical_effect_proven":False,"repeated_game_equilibrium_proven":False,
+           "new_primary_sources_reviewed":0,"novelty_verified":False,
+           "status":"diagnostic_agenda_not_empirical_finding"}
+    atomically_save(evidence,json.dumps(proof,indent=2,ensure_ascii=False)+"\n")
+    submitted=workflow.submit(home,project,"diagnosis",[report,evidence],
+             "Guarded Holy Days theory and measurement diagnosis with unresolved rival mechanisms")
+    return {**submitted,"report":str(report),"next_action":"Human approve, revise or reject the diagnosis; no automatic literature-stage work"}
 
 
 def read_puzzle_spec(path):
@@ -191,7 +265,7 @@ def literature_report(result,source):
         lines.append(f"- {hit['title']} — source `{hit['source_id']}`, PDF page {hit['pdf_page']}, evidence `{hit['evidence_id']}` (review status {hit['human_review_status']}); SHA256 `{hit['pdf_sha256']}`")
     lines += ["","## Mandatory human investigation","- Read the full original arguments, equilibria and contrary studies, not just matching passages.",
               "- Document alternative mechanisms and scope conditions; verify source titles/pages and bibliographic metadata.",
-              "- An independent critic must assess omission and novelty risk before a human literature-stage approval.",
+              "- You must assess omissions and novelty risk before approving; a second opinion is optional.",
               "- **Never infer novelty solely from these search results.**"]
     return "\n".join(lines)+"\n"
 
@@ -222,10 +296,8 @@ def run_literature(home,project,spec,db):
     atomically_save(report,literature_report(evidence,src))
     result=workflow.submit(home,project,"literature",[metadata,report],
           "Offline PDF page-verified candidate literature screen, pending full-text scientific evaluation")
-    critic=dest/"INDEPENDENT_CRITIC_REQUEST.json"
-    write_critic_request(critic,"literature")
-    return {**result,"critic_request":str(critic),"source_count":len(evidence['selected_evidence']),
-            "next_action":"Read originals, perform independent critical literature review and obtain human sign-off; no novelty claim",
+    return {**result,"source_count":len(evidence['selected_evidence']),
+            "next_action":"Read originals and decide whether to approve or revise the literature screen; no novelty claim",
             "paid_api_calls":0,"external_network_calls":0}
 
 
@@ -236,6 +308,8 @@ def main(argv=None):
     a=sub.add_parser("puzzle",help="Produce guarded Holy Days puzzle review package")
     a.add_argument("project")
     a.add_argument("--holy-days",action="store_true",required=True)
+    d=sub.add_parser("diagnosis",help="Diagnose the human-approved Holy Days puzzle using local sources")
+    d.add_argument("project")
     b=sub.add_parser("literature",help="Search page-indexed local PDF library after prior approvals")
     b.add_argument("project")
     b.add_argument("--spec",type=Path,required=True)
@@ -243,6 +317,7 @@ def main(argv=None):
     args=parser.parse_args(argv)
     try:
         if args.cmd=="puzzle":out=run_puzzle(args.home,args.project,holy_days=args.holy_days)
+        elif args.cmd=="diagnosis":out=run_diagnosis(args.home,args.project)
         else:out=run_literature(args.home,args.project,args.spec,args.db)
         print(json.dumps(out,indent=2,ensure_ascii=False));return 0
     except (OSError,ValueError,TypeError,KeyError,RuntimeError) as exc:
