@@ -78,3 +78,8 @@ See [WEEKLY_FACTORY.md](WEEKLY_FACTORY.md) for the safe `python -m research.fact
 ## Actual Predictioneering forecasting misses to candidate research puzzles (v0.4)
 
 See [FORECAST_MISSES.md](FORECAST_MISSES.md) and the offline-only research.factory.forecast_misses entrypoint. It reads existing resolved Brier JSONL (no live API, no production writes), ranks repeated miss patterns by topic, dyad, contract type and translator relation, flags possible sibling markets, recomputes forecast losses, and can explicitly register PENDING research-puzzle cards for the existing pipeline's human intake gate. The weekly runner can opt in using --brier-log and --register-miss-candidates. No scientific mechanism, novelty, causal claim, or fair pre-event comparison is inferred automatically.
+
+
+## Forecast context reconstruction + opt-in Claude diagnostic (v0.5)
+
+See [CASE_FORENSICS.md](CASE_FORENSICS.md). `python -m research.factory.case_dossiers` builds private, timestamp-bounded forensic packets from resolved contracts, available individual forecasts, node traces, and optional dated news/model manifests. Missing historical sources are surfaced, not fabricated. `python -m research.factory.diagnostic_critic DOSSIERS.json` previews a source-scoped prompt **offline**. Anthropic calls require explicit `--send-to-claude --confirm-share-evidence`, model credentials, caller-verified price rates and a cost cap. The agent cannot access news independently, claim novelty, or approve a puzzle. No forecasting files are changed.
