@@ -93,3 +93,6 @@ See [PAPER_SPRINT.md](PAPER_SPRINT.md). `python -m research.factory.paper_sprint
 ## Guarded scientific-stage starters (v0.8)
 
 [SCIENTIFIC_STAGE_STARTER.md](SCIENTIFIC_STAGE_STARTER.md) documents `python -m research.factory.stage_starter puzzle holy-days --holy-days`, which source-hashes the **existing** Holy Days model and H1 pilot note, submits a reviewable puzzle packet to the **mandatory human gate**, and stops for an actual independent critique. A second guarded worker can search local page-verified PDF profiles once **puzzle and diagnosis have been approved**, failing closed without sources. There are no paid/API calls, novelty claims, fabricated critiques, or production changes; the separate diagnosis/review agents still need completion.
+
+
+**Human-first approval workflow (v0.9):** [HUMAN_APPROVAL_GATES.md](HUMAN_APPROVAL_GATES.md). After every guarded research stage, the researcher alone approves or requests revisions; an AI critique is optional. Current Holy Days puzzle states saved as `awaiting_critique` remain directly approvable. Use `review_workflow review holy-days puzzle` to refresh the report. [Remaining scientific workers](HUMAN_FIRST_SPRINT.md).
