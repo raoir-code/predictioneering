@@ -76,6 +76,35 @@ After the actual `literature` stage becomes ready, edit `research/examples/HOLY_
 
 This invokes the existing `puzzle_evidence.assemble` against the **local indexed, page-checked PDF evidence**. It records the precise PDF file hash, page, evidence ID and review status; deduplicates passages and includes multiple paper candidates. It **does not** search the web, retrieve missing PDFs, summarize the complete papers, or verify novelty. If the local index is absent or returns no passage, the worker writes a **private blocked report** and does not submit/approve the literature stage. Otherwise it submits the candidate evidence for a separate critical full-text review, with human approval still mandatory. Only source documents actually indexed in the Mac PDF library are covered.
 
+## Revise a rejected literature screen (Holy Days)
+
+If the previous keyword search returned unrelated papers, request revision with
+`review_workflow revise` first. Do not repeat the unchanged `literature` command.
+After a human has requested revision, use:
+
+```bash
+cd ~/predictioneering-research-test
+git pull --ff-only
+P="$HOME/.venvs/predictioneering-research/bin/python"
+"$P" -m unittest discover -s research/tests -q
+"$P" -m research.factory.stage_starter revise-literature holy-days
+open research/projects/factory_runs/holy-days/human_gates/review_packets/literature.md
+```
+
+The new worker draws on `research/examples/HOLY_DAYS_LITERATURE_LEADS.json`,
+which explicitly separates directly relevant studies of holiday-associated
+violence, adjacent calendar-design work, original theory, and holiday-ceasefire
+measurement. Entries were checked against original publisher/institutional
+abstracts or hosted pages on November 21, 2026; **this is not a systematic
+search, a full-original-PDF review, an independently proven effect or a novelty
+assessment.** It does not automatically read every paper. Optional
+`--external-notes /path/to/private/research_report.md` adds the SHA256 of the
+researcher's separately saved report as *unverified context*, without treating
+its bibliography as verified citations. Revision 1 remains available under
+`snapshots/literature/rev0001/`; revision 2 requires a new explicit human
+decision. To approve as a *scoped candidate screen* is distinct from approval
+of a complete scholarly synthesis; further source reading remains necessary.
+
 ## Scientific limitations
 
 The Holy Days local note itself says the static bargaining benchmark predicts **peace**, that a distinct repeated-game friction is required for attack timing, and that H1 is a **country/event-level exploratory** measure, not a directed-belligerent causal estimate. We must decide whether the paper is about own-holiday restraint, opponent-holiday opportunism, or actual negotiated truces; each requires different outcomes and possibly different data. This worker intentionally preserves those unresolved choices.
