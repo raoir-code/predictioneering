@@ -25,6 +25,36 @@ class StarterTests(unittest.TestCase):
 
     def tearDown(self):self.t.cleanup()
 
+    def test_diagnosis_requires_approved_puzzle_and_keeps_decision_pending(self):
+        from research.factory import review_workflow as g, stage_starter as starter
+        with tempfile.TemporaryDirectory() as td:
+            home=Path(td)/"research"; home.mkdir()
+            g.init(home,"holy-days","Holy Days and War")
+            with self.assertRaisesRegex(ValueError,"not currently approved"):
+                starter.run_diagnosis(home,"holy-days")
+            source=home/"examples"/"holy_days_repeated_bargaining_model_v0.md"
+            source.parent.mkdir(parents=True)
+            source.write_text("An approved local theoretical research note.")
+            registry=[{"id":"LOCAL-1","path":"examples/holy_days_repeated_bargaining_model_v0.md",
+                       "sha256":starter.sha_file(source)}]
+            info={"kind":"holy_days_puzzle","question":"Why do holidays matter for conflict?",
+                  "source_registry":registry,"traceable_excerpts":[{"issue":"friction"}]}
+            inputs=home/"inbox"/"raw"/"seed";inputs.mkdir(parents=True)
+            proposal=inputs/"PUZZLE_REVIEW.md"; proposal.write_text("# Provisional puzzle")
+            provenance=inputs/"LOCAL_SOURCE_PROVENANCE.json"; provenance.write_text(json.dumps(info))
+            g.submit(home,"holy-days","puzzle",[proposal,provenance],
+                     "A locally justified draft puzzle requiring formal diagnosis")
+            g.approve(home,"holy-days","puzzle","Researcher",
+                      "I approve this provisional framing for diagnostic inquiry, not novelty")
+            result=starter.run_diagnosis(home,"holy-days")
+            self.assertEqual(result["status"],"awaiting_human_approval")
+            text=Path(result["report"]).read_text()
+            self.assertIn("not a verified Israel",text)
+            self.assertIn("APPROVE",text)
+            with self.assertRaises(ValueError):
+                starter.run_diagnosis(home,"holy-days")
+            self.assertEqual(g.overview(home,"holy-days")["awaiting_human"],["diagnosis"])
+
     def test_puzzle_anchors_retain_real_markdown(self):
         doc=stage.prepare_holy_days(self.home)
         self.assertEqual(len(doc['traceable_excerpts']),5)
@@ -47,12 +77,12 @@ class StarterTests(unittest.TestCase):
     def test_puzzle_submits_only_ready_unapproved(self):
         fake=types.ModuleType('research.factory.review_workflow')
         fake.require_ready=mock.Mock(return_value={'ready':True})
-        fake.submit=mock.Mock(return_value={'status':'awaiting_critique','stage':'puzzle'})
+        fake.submit=mock.Mock(return_value={'status':'awaiting_human_approval','stage':'puzzle'})
         with mock.patch.dict(sys.modules,{'research.factory.review_workflow':fake}), mock.patch.object(factory,'review_workflow',fake,create=True):
             output=stage.run_puzzle(self.home,'holy-days',holy_days=True)
-        self.assertEqual(output['status'],'awaiting_critique')
+        self.assertEqual(output['status'],'awaiting_human_approval')
         self.assertEqual(output['paid_api_calls'],0)
-        self.assertTrue(Path(output['critic_request']).is_file())
+        self.assertNotIn('critic_request',output)
         fake.require_ready.assert_called_once_with(self.home,'holy-days','puzzle')
         fake.submit.assert_called_once()
         self.assertEqual(fake.submit.call_args.args[2],'puzzle')
@@ -99,17 +129,17 @@ class StarterTests(unittest.TestCase):
         p=self.home/'queries.json';p.write_text(json.dumps({'search_queries':['religious holiday conflict']}))
         db=self.home/'index.db';db.write_bytes(b'not an actual database; assembler mocked')
         fake=types.ModuleType('research.factory.review_workflow');fake.require_ready=mock.Mock(return_value=True)
-        fake.submit=mock.Mock(return_value={'status':'awaiting_critique','stage':'literature'})
+        fake.submit=mock.Mock(return_value={'status':'awaiting_human_approval','stage':'literature'})
         literature=types.ModuleType('research.factory.puzzle_evidence')
         literature.assemble=mock.Mock(return_value={'selected_evidence':[
             {'title':'Paper A','source_id':'zot1','pdf_page':12,'evidence_id':'e1','human_review_status':'not_reviewed','pdf_sha256':'a'*64}],
             'queries':[{'query':'religious holiday conflict','retrieved_candidate_matches':1}]})
         with mock.patch.dict(sys.modules,{'research.factory.review_workflow':fake,'research.factory.puzzle_evidence':literature}), mock.patch.object(factory,'review_workflow',fake,create=True), mock.patch.object(factory,'puzzle_evidence',literature,create=True):
             output=stage.run_literature(self.home,'holy-days',p,db)
-        self.assertEqual(output['status'],'awaiting_critique')
+        self.assertEqual(output['status'],'awaiting_human_approval')
         self.assertEqual(output['source_count'],1)
         fake.submit.assert_called_once()
-        self.assertTrue(Path(output['critic_request']).exists())
+        self.assertNotIn('critic_request',output)
         self.assertFalse('approved' in output['status'])
 
 
@@ -120,9 +150,9 @@ class StarterTests(unittest.TestCase):
             self.skipTest('Review workflow module not available in standalone fixture tree')
         actual.init(self.home,'holy-days','Holy Days and War')
         result=stage.run_puzzle(self.home,'holy-days',holy_days=True)
-        self.assertEqual(result['status'],'awaiting_critique')
+        self.assertEqual(result['status'],'awaiting_human_approval')
         state=actual.load(self.home,'holy-days')
-        self.assertEqual(state['stages']['puzzle']['status'],'awaiting_critique')
+        self.assertEqual(state['stages']['puzzle']['status'],'awaiting_human_approval')
         with self.assertRaisesRegex(ValueError,'Required stage puzzle'):
             actual.require_ready(self.home,'holy-days','diagnosis')
         self.assertEqual(state['stages']['diagnosis']['status'],'not_started')
