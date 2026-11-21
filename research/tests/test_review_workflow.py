@@ -37,7 +37,7 @@ class ReviewWorkflowTests(unittest.TestCase):
     def submit(self, stage="puzzle", name=None):
         p=self.source(name or f"{stage}.json")
         return g.submit(self.home,self.project,stage,[p],
-                        "Substantive scientific artifact ready for independent review")
+                        "Substantive scientific artifact ready for researcher review")
 
     def approve(self, stage="puzzle", *, skip_critic=False):
         if not skip_critic:
@@ -61,11 +61,10 @@ class ReviewWorkflowTests(unittest.TestCase):
 
     def test_submit_creates_packet_and_does_not_auto_approve(self):
         result=self.submit()
-        self.assertEqual(result["status"],"awaiting_critique")
-        self.assertIn("Scientific decision checklist",Path(result["review_packet"]).read_text())
-        self.assertEqual(g.overview(self.home,self.project)["awaiting_critique"],["puzzle"])
-        with self.assertRaisesRegex(ValueError,"no independently critiqued"):
-            g.approve(self.home,self.project,"puzzle","Researcher","I checked this decision carefully")
+        self.assertEqual(result["status"],"awaiting_human_approval")
+        self.assertIn("What you are deciding",Path(result["review_packet"]).read_text())
+        self.assertEqual(g.overview(self.home,self.project)["awaiting_human"],["puzzle"])
+        self.assertIn("approve or revise immediately",Path(result["review_packet"]).read_text())
 
     def test_critique_then_human_approval_unlocks_next_stage(self):
         self.submit()
@@ -76,29 +75,69 @@ class ReviewWorkflowTests(unittest.TestCase):
         self.assertEqual(len(g.require_approved(self.home,self.project,"puzzle")),64)
         self.assertIn("Approved by",g.packet_path(self.home,self.project,"puzzle").read_text())
 
-    def test_critiqued_revision_blocks_approval(self):
+    def test_optional_critic_recommends_revision_but_human_can_approve(self):
         self.submit()
-        issue=[{"severity":"major","description":"No credible comparative theory found yet", 
+        issue=[{"severity":"major","description":"No credible comparative theory found yet",
                 "suggested_fix":"Read original bargaining scholarship first"}]
-        g.critique(self.home,self.project,"puzzle",self.critic_file(recommendation="revise", issues=issue))
-        with self.assertRaisesRegex(ValueError,"Critic recommends"):
-            g.approve(self.home,self.project,"puzzle","Researcher","I have reviewed the findings carefully")
+        g.critique(self.home,self.project,"puzzle",self.critic_file(recommendation="revise",issues=issue))
+        result=g.approve(self.home,self.project,"puzzle","Researcher",
+                         "I approve the limited puzzle framing despite the stated open theoretical questions")
+        self.assertEqual(result["status"],"approved")
+        self.assertTrue(result["optional_critic_disagreed"])
 
-    def test_critical_override_requires_explicit_reason(self):
+    def test_revision_work_order_includes_exact_instructions(self):
         self.submit()
-        g.critique(self.home,self.project,"puzzle",self.critic_file(recommendation="reject"))
-        with self.assertRaisesRegex(ValueError,"60"):
-            g.approve(self.home,self.project,"puzzle","Researcher","Waive",override=True)
-        r=g.approve(self.home,self.project,"puzzle","Researcher",
-                    "Despite the independent critique, I reviewed the substantive source evidence and explicitly accept the risk.",override=True)
-        self.assertEqual(r["status"],"approved")
-        self.assertTrue(g.load(self.home,self.project)["stages"]["puzzle"]["approval"]["override"])
+        with self.assertRaisesRegex(ValueError,"not ready to produce work"):
+            g.revision_brief(self.home,self.project,"puzzle")
+        g.revise(self.home,self.project,"puzzle",
+                 "Rewrite the question to distinguish own holidays from an adversary's holidays")
+        job=g.revision_brief(self.home,self.project,"puzzle")
+        record=json.loads(Path(job["path"]).read_text())
+        self.assertIn("adversary's holidays",record["human_instructions"])
+        self.assertEqual(record["last_revision"],1)
+        self.assertEqual(record["status"],"revision_request_NOT_revised_science")
+        self.assertEqual(len(record["previous_artifacts"]),1)
+        self.assertEqual(g.overview(self.home,self.project)["ready_stages"],["puzzle"])
 
-    def test_same_reviewer_cannot_approve(self):
+    def test_packet_shows_actual_research_report_and_links(self):
+        p=self.source("RESEARCH.md","# Substantive finding\n\nThe complete information game permits peace.")
+        r=g.submit(self.home,self.project,"puzzle",[p],"Review the bargaining benchmark and open mechanism")
+        text=Path(r["review_packet"]).read_text()
+        self.assertIn("complete information game permits peace",text)
+        self.assertIn("file://",text)
+        self.assertIn("You can approve or revise immediately",text)
+
+    def test_direct_human_approval_no_critic(self):
+        self.submit()
+        result=self.approve(skip_critic=True)
+        self.assertEqual(result["ready_stages"],["diagnosis"])
+        self.assertIsNone(g.load(self.home,self.project)["stages"]["puzzle"]["approval"]["critic_sha256"])
+        self.assertEqual(g.require_approved(self.home,self.project,"puzzle"),result["approval_token"])
+
+    def test_legacy_v07_pending_critic_is_directly_approvable(self):
+        self.submit()
+        state=g.load(self.home,self.project)
+        state["stages"]["puzzle"]["status"]="awaiting_critique"
+        g.atomic(g.state_path(self.home,self.project),state)
+        self.assertEqual(g.overview(self.home,self.project)["awaiting_human"],["puzzle"])
+        self.assertEqual(self.approve(skip_critic=True)["status"],"approved")
+
+    def test_review_refresh_migrates_legacy_packet_without_modifying_status(self):
+        self.submit()
+        state=g.load(self.home,self.project)
+        state["stages"]["puzzle"]["status"]="awaiting_critique"
+        g.atomic(g.state_path(self.home,self.project),state)
+        output=g.review(self.home,self.project,"puzzle")
+        self.assertTrue(output["human_decision_required"])
+        self.assertIn("You can approve or revise immediately",
+                      Path(output["review_packet"]).read_text())
+        self.assertEqual(g.load(self.home,self.project)["stages"]["puzzle"]["status"],
+                         "awaiting_critique")
+
+    def test_optional_critic_same_name_does_not_block_human(self):
         self.submit()
         g.critique(self.home,self.project,"puzzle",self.critic_file(reviewer="Researcher"))
-        with self.assertRaisesRegex(ValueError,"independent"):
-            g.approve(self.home,self.project,"puzzle","Researcher","I approve after independent critique")
+        self.assertEqual(self.approve(skip_critic=True)["status"],"approved")
 
     def test_stale_after_earlier_revision_invalidates_only_descendants(self):
         self.advance("puzzle")
@@ -123,6 +162,7 @@ class ReviewWorkflowTests(unittest.TestCase):
         self.source("puzzle.json",'{"question":"New research puzzle and contrasting theory"}')
         r=self.submit()
         self.assertEqual(r["revision"],2)
+        self.assertIn("Mechanism changed",g.packet_path(self.home,self.project,"puzzle").read_text())
         self.assertTrue(old.exists())
         self.assertIn("holy days",old.read_text().lower())
 
@@ -255,16 +295,16 @@ class ReviewWorkflowTests(unittest.TestCase):
                  "Approved dataset, association design and forward holdout split")
         self.approve("design")
         result=g.produce(self.home,self.project,"analysis",spec_file=study)
-        self.assertEqual(result["status"],"awaiting_critique")
+        self.assertEqual(result["status"],"awaiting_human_approval")
         self.assertTrue(Path(result["output_directory"],"results.json").is_file())
         with self.assertRaises(ValueError):
             g.produce(self.home,self.project,"manuscript",spec_file=study,model_file=model)
         self.approve("analysis")
         self.advance("validation")
         paper=g.produce(self.home,self.project,"manuscript",spec_file=study,model_file=model)
-        self.assertEqual(paper["status"],"awaiting_critique")
+        self.assertEqual(paper["status"],"awaiting_human_approval")
         self.assertTrue(Path(paper["archive"]).exists())
-        self.assertEqual(g.overview(self.home,self.project)["awaiting_critique"],["manuscript"])
+        self.assertEqual(g.overview(self.home,self.project)["awaiting_human"],["manuscript"])
 
     def test_approved_data_hash_required_for_guarded_run(self):
         self.advance("puzzle")
