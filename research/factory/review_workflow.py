@@ -47,7 +47,7 @@ DEPS = {
     "qc": ("manuscript",),
 }
 CHECKS = {
-    "puzzle": "What is genuinely surprising? Are repeated cases independent? Could this be a coding or measurement error?",
+    "puzzle": "Is there a clear open question with competing plausible intuitions, and is it worth investigating? Do not require hypotheses, methods, data, novelty, or a solved mechanism at this stage.",
     "diagnosis": "Are forecast-time sources actually historical? Were news and model assumptions knowable then? Have ordinary bugs been eliminated?",
     "literature": "Were original papers read and page-cited? Are competing explanations and contrary findings fairly represented?",
     "novelty": "Does the contribution survive an adversarial existing-theory comparison? Is the claimed gap specific and defensible?",
