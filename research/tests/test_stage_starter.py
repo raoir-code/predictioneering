@@ -66,6 +66,13 @@ class StarterTests(unittest.TestCase):
         self.assertIn("anticipate",new.read_text().lower())
         with self.assertRaisesRegex(ValueError,"not ready to produce work"):
             starter.revise_holy_days_puzzle(self.home,"holy-days")
+        g.approve(self.home,"holy-days","puzzle","Researcher",
+                  "I approve the conceptual puzzle for diagnosis only")
+        diagnosis=starter.run_diagnosis(self.home,"holy-days")
+        diagnosis_text=Path(diagnosis["report"]).read_text()
+        self.assertIn("Competing strategic intuitions",diagnosis_text)
+        self.assertIn("The potentially vulnerable side",diagnosis_text)
+        self.assertNotIn("How, and under which bargaining frictions",diagnosis_text)
 
     def test_diagnosis_requires_approved_puzzle_and_keeps_decision_pending(self):
         from research.factory import review_workflow as g, stage_starter as starter
