@@ -1,0 +1,27 @@
+{
+  "note": "SYNTHETIC TOY MODEL TEMPLATE. Not an original IR finding or independently proven game-theoretic contribution.",
+  "title": "Complete-information ultimatum with outside option",
+  "players": ["Proposer", "Responder"],
+  "information": "Both players know V and u. Assume 0 <= u < V.",
+  "timing": "Proposer offers x in [0,V]; responder chooses accept or reject.",
+  "strategies": ["Proposer chooses x", "Responder accepts iff x >= u"],
+  "payoffs": {
+    "Proposer": "V-x if accepted, 0 otherwise",
+    "Responder": "x if accepted, u otherwise"
+  },
+  "solution_concept": "Subgame-perfect equilibrium, acceptance at indifference",
+  "equilibrium_argument": "Responder accepts iff x>=u. If u<V, proposer makes the smallest accepted offer, x*=u. Independently verify the argument and boundary conditions for real work.",
+  "parameters": {"u": "nonnegative", "V": "positive"},
+  "equilibrium": {"choice": "x", "expression": "u"},
+  "comparative_statics": [
+    {
+      "id": "CS1",
+      "parameter": "u",
+      "sign": "positive",
+      "hypothesis_id": "H1",
+      "hypothesis_text": "Increasing the outside option raises the offered concession.",
+      "interpretation": "A higher outside option raises the smallest accepted offer one-for-one.",
+      "empirical_mapping": {"predictor": "outside_option", "outcome": "offer"}
+    }
+  ]
+}
