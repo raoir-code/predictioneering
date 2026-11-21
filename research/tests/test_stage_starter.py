@@ -208,7 +208,7 @@ class StarterTests(unittest.TestCase):
         g.submit(self.home,"holy-days","literature",[old_report,old_evidence],
                  "Unreviewed, unrelated literature candidates requiring scientific attention")
         rejected_snapshot=g.location(self.home,"holy-days")/"snapshots"/"literature"/"rev0001"/"LITERATURE_SCREEN.md"
-        with self.assertRaisesRegex(ValueError,"human revision decision"):
+        with self.assertRaisesRegex(ValueError,"not ready to produce work"):
             stage.revise_holy_days_literature(self.home,"holy-days")
         g.revise(self.home,"holy-days","literature",
                  "Find holiday studies, distinguish outcome classes, and do not shoehorn unrelated papers")
