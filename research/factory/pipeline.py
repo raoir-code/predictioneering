@@ -66,21 +66,33 @@ def register(home,source_path):
         raise ValueError("Puzzle study brief must be a JSON object")
     title=value.get("title") or value.get("research_question")
     question=value.get("research_question") or value.get("why_puzzling")
+    competing=value.get("competing_intuitions")
     mechanism=(value.get("candidate_mechanism") or value.get("proposed_mechanism")
                or value.get("mechanism"))
     hypotheses=value.get("hypotheses")
     first=(hypotheses[0].get("prediction") if isinstance(hypotheses,list)
            and hypotheses and isinstance(hypotheses[0],dict) else None)
     prediction=value.get("testable_prediction") or first
+    # Conceptual puzzles can be registered before a mechanism/H1/data exist.
+    # Older researcher-authored study briefs remain valid for compatibility.
     if not all(isinstance(x,str) and 3<=len(x.strip())<=5000
-               for x in (title,question,mechanism,prediction)):
-        raise ValueError("Supply title, research_question, mechanism and a testable prediction/H1")
+               for x in (title,question)):
+        raise ValueError("Supply a title and research_question")
+    if not (isinstance(competing,str) and len(competing.strip())>=10
+            or (isinstance(mechanism,str) and len(mechanism.strip())>=3
+                and isinstance(prediction,str) and len(prediction.strip())>=3)):
+        raise ValueError("Supply competing_intuitions for a conceptual puzzle, or a legacy mechanism and testable prediction")
     ident=hashlib.sha256(raw).hexdigest()[:16]
     card={"id":ident,"title":title.strip(),"phenomenon":str(value.get("phenomenon") or question).strip(),
-          "expected_theory":str(value.get("expected_theory") or "Not provided by researcher"),
-          "why_puzzling":question.strip(),"candidate_mechanism":mechanism.strip(),
-          "testable_prediction":prediction.strip(),"potential_data":str(value.get("potential_data") or "Not yet sourced"),
-          "forecasting_benefit":str(value.get("forecasting_benefit") or "To be evaluated"),
+          "expected_theory":str(value.get("expected_theory") or ""),
+          "why_puzzling":question.strip(),
+          "competing_intuitions":str(competing or "").strip() or (
+              "Prior proposed mechanism: "+str(mechanism)),
+          "why_worth_investigating":str(value.get("why_worth_investigating") or "For subsequent diagnosis"),
+          "candidate_mechanism":str(mechanism or "").strip(),
+          "testable_prediction":str(prediction or "").strip(),
+          "potential_data":str(value.get("potential_data") or ""),
+          "forecasting_benefit":str(value.get("forecasting_benefit") or ""),
           "source_excerpt":"","source_quote_verified":False,
           "status":"pending_human_review","novelty":"not_yet_checked",
           "evidence":"candidate_not_finding","source_kind":"researcher_supplied_study_brief",
@@ -107,7 +119,7 @@ def approved_card(home, card_id):
     if card.get("id")!=card_id or card.get("status")!="approved_for_literature_review":
         raise ValueError("Puzzle must first pass existing human intake approval")
     if not all(isinstance(card.get(k),str) and card[k].strip() for k in
-               ("title","phenomenon","candidate_mechanism","testable_prediction")):
+               ("title","phenomenon","why_puzzling")):
         raise ValueError("Approved puzzle is missing required original fields")
     return card,digest(path)
 
@@ -140,9 +152,9 @@ def initial_spec(card, card_id):
         "id":"p"+card_id,
         "title":project_title(card),
         "research_question":research_question(card),
-        "mechanism":card["candidate_mechanism"],
-        "hypotheses":[{"id":"H1","prediction":card["testable_prediction"],
-                       "sign":"unspecified"}],
+        "mechanism":card.get("candidate_mechanism") or "",
+        "hypotheses":([{"id":"H1","prediction":card.get("testable_prediction") or "Not yet formulated",
+                       "sign":"unspecified"}] if card.get("testable_prediction") else []),
         "data":{"csv_path":"SET_PRIVATE_DATA_CSV_PATH.csv",
                 "redistribution_allowed":False,"synthetic":False},
         "design":{"method":None,"family":None,"outcome":None,
@@ -159,8 +171,8 @@ def theory_design_worksheet(card):
         "No empirical sign, causal design, or equilibrium has been established.","",
         "## Research puzzle", research_question(card),"",
         "## What existing theory led us to expect",card.get("expected_theory") or "Unspecified", "",
-        "## Proposed mechanism",card["candidate_mechanism"],"",
-        "## Falsifiable hypothesis (sign deliberately unspecified)",card["testable_prediction"],"",
+        "## Proposed mechanism",card.get("candidate_mechanism") or "Not yet formulated","",
+        "## Hypotheses (not required at Puzzle stage)",card.get("testable_prediction") or "Not yet formulated","",
         "## Formalization obligations","",
         "- Define players, action sets, timing, observable state, and information sets.",
         "- Write coherent payoffs/outside options; solve or state why solution is not yet obtained.",
@@ -180,7 +192,7 @@ def theory_design_worksheet(card):
 
 def literature_spec(card, card_id):
     return {"id":"p"+card_id,"research_question":research_question(card),
-            "proposed_mechanism":card["candidate_mechanism"],
+            "proposed_mechanism":card.get("candidate_mechanism") or "",
             "search_queries":query_suggestions(card)}
 
 
