@@ -2,6 +2,8 @@
 
 **Master build plan (updated November 20, 2026):** [MASTER_BUILD_CHECKLIST.md](MASTER_BUILD_CHECKLIST.md). This distinguishes the operational deterministic miss scanner from the still-unbuilt point-in-time reconstruction and Claude diagnostic investigation. It is the canonical phase/priorities checklist; nothing here changes production.
 
+**Mandatory human sign-offs v0.7:** [HUMAN_APPROVAL_GATES.md](HUMAN_APPROVAL_GATES.md). New guarded `research.factory.review_workflow` requires independently critiqued, human-approved snapshots after EACH research stage before downstream guarded work; revision invalidates descendants and preserves approved upstream artifacts. Existing standalone CLIs still run outside the guard. No automatic paid API calls or approval impersonation.
+
 **Isolated addition:** The `research/` package does not import or modify the forecasting
 engine, forecasting configuration, DAG parameters, or existing pipelines. There is
 no automation that writes to Predictioneering model files.
