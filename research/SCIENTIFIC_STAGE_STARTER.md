@@ -24,6 +24,46 @@ research/projects/factory_runs/holy-days/human_gates/review_packets/puzzle.md
 
 After puzzle approval, the new `stage_starter diagnosis holy-days` produces a source-constrained diagnostic report and stops for your review again. Re-running an unchanged templated puzzle or diagnosis after you request revisions is deliberately blocked; export `review_workflow revision-brief`, have an authorized researcher or agent repair the scientific document, and resubmit. Original source data, proof and novelty remain unverified.
 
+## Conceptual Puzzle gate (all projects)
+
+A **Puzzle** identifies a genuine unresolved question and competing plausible intuitions.
+It does not need a demonstrated empirical anomaly. It does **not** choose a
+country, dataset, causal estimator, H1/H2/H3, mechanism, or model result.
+Those belong to Diagnosis, Literature, Formal Model, Hypotheses, Data and Design.
+Approval means only that the question merits investigation. Independent critique
+is optional; the researcher's decision remains mandatory.
+
+The legacy intake accepts existing cards, while newly generated puzzle cards use
+`competing_intuitions` and `why_worth_investigating` instead of requiring
+predictions or data. The standalone older integrated pipeline remains a prototype;
+the guarded 12-stage review workflow is the authoritative scientific path.
+
+## Update an existing Holy Days revision-1 packet
+
+The local Holy Days review snapshots are intentionally **gitignored** and cannot
+be updated by a GitHub commit. After pulling the new version, explicitly request
+revision of the existing `holy-days` Puzzle stage, then resubmit the actual
+conceptual draft into a new, preserved snapshot:
+
+```bash
+cd ~/predictioneering-research-test
+git pull --ff-only
+P="$HOME/.venvs/predictioneering-research/bin/python"
+"$P" -m unittest discover -s research/tests -q
+"$P" -m research.factory.review_workflow revise holy-days puzzle --reason "Replace hypotheses and empirical specifications with the strategic opportunity-versus-anticipation puzzle"
+"$P" -m research.factory.stage_starter revise-puzzle holy-days --holy-days
+"$P" -m research.factory.review_workflow review holy-days puzzle
+open research/projects/factory_runs/holy-days/human_gates/review_packets/puzzle.md
+```
+
+Use `revise` only once: if the project is already `needs_revision`, run
+`revise-puzzle` directly. The command preserves the previous version, source
+provenance, and human decision history; it does not approve the revision.
+The new packet asks why predictable vulnerability might or might not affect
+conflict timing when adversaries can prepare for one another's strategies.
+It deliberately defers any claimed holiday effect, Israeli case, ACLED screen,
+bargaining friction, hypothesis, novelty, and causal design.
+
 ## Literature worker, only **after** puzzle AND diagnosis approvals
 
 After the actual `literature` stage becomes ready, edit `research/examples/HOLY_DAYS_LITERATURE_QUERIES.json` as needed and run:
