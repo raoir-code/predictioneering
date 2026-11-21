@@ -410,7 +410,13 @@ _Develop theory and empirical feasibility together._
 
 **My role:** Approve puzzles, contributions, research designs, major scientific decisions, manuscripts, and changes to the production forecasting engine.
 
-**Claude's role:** Analyze explicitly supplied, provenance-checked evidence; investigate contemporaneous news and original theoretical sources when permitted; challenge technical vs substantive explanations; assist with formal modeling and empirical work; prepare source-linked, reproducible research artifacts. Claude must be allowed to say **no puzzle**.
+**Research Factory ownership:** The researcher and ChatGPT develop, review, and maintain the complete scientific-paper factory together, confined to the research branch. The researcher has final approval over science and publication. Do not redirect factory implementation to a separate Claude conversation.
+
+**Predictioneering boundary:** The researcher and Claude separately develop the forecasting engine. The factory may consume strictly read-only, provenance-checked outputs from it, but must not modify engine code or settings.
+
+**Optional model APIs inside the factory:** Explicitly authorized, bounded model calls may help with scientific diagnostics, original-source reading, criticism, and drafting, without any model being allowed to approve science or claim novelty by itself.
+
+**Puzzle-stage rule:** A puzzle is an open question with competing plausible intuitions, including purely theoretical tensions. No H1/H2/H3, operationalization, datasets, estimators, settled mechanism, novelty, or formal equilibrium is required or approved at the Puzzle checkpoint. Those are independent downstream tasks. Preserve source provenance without smuggling later work into puzzle approval.
 
 **Knowledge rule:** Our permanent library is reusable scientific memory, not an authority. Important claims must remain traceable to original sources. Historical explanations must distinguish what was knowable when a forecast was made from later outcomes or reporting.
 
