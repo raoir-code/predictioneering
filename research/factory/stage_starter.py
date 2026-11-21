@@ -230,6 +230,11 @@ def run_diagnosis(home, project):
     root=workflow.location(home,project)
     original=root/entries["PUZZLE_REVIEW.md"]["snapshot"]
     metadata=root/entries["LOCAL_SOURCE_PROVENANCE.json"]["snapshot"]
+    if not original.is_file() or sha_file(original)!=entries["PUZZLE_REVIEW.md"]["sha256"]:
+        raise ValueError("Approved puzzle snapshot missing or hash-invalid")
+    approved_puzzle_text=original.read_text(encoding="utf-8")
+    if not approved_puzzle_text.strip() or len(approved_puzzle_text)>12000:
+        raise ValueError("Approved puzzle must be substantive and at most 12,000 characters")
     info=json.loads(metadata.read_text(encoding="utf-8"))
     if info.get("kind")!="holy_days_puzzle" or not info.get("traceable_excerpts"):
         raise ValueError("Approved puzzle provenance lacks Holy Days traceable evidence")
@@ -248,9 +253,9 @@ def run_diagnosis(home, project):
 
 **Status:** theoretical/measurement diagnostic only; empirical and novelty claims unverified.
 
-## Approved puzzle
+## Approved puzzle (verbatim from the human-approved, SHA256-bound snapshot)
 
-{info['question']}
+{approved_puzzle_text}
 
 Approved puzzle decision token: `{approved}`. Prior puzzle report SHA256: `{sha_file(original)}`.
 
