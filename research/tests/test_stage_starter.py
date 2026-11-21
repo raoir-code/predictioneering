@@ -25,6 +25,20 @@ class StarterTests(unittest.TestCase):
 
     def tearDown(self):self.t.cleanup()
 
+    def test_unchanged_puzzle_template_cannot_override_human_revision_request(self):
+        from research.factory import review_workflow as g, stage_starter as starter
+        with tempfile.TemporaryDirectory() as td:
+            home=Path(td)/"research";home.mkdir()
+            (home/"examples").mkdir()
+            (home/"examples"/"holy_days_repeated_bargaining_model_v0.md").write_text(MODEL)
+            (home/"HOLIDAY_FAST_START.md").write_text("Exploratory H1 only")
+            g.init(home,"holy-days","Holy Days and War")
+            starter.run_puzzle(home,"holy-days",holy_days=True)
+            g.revise(home,"holy-days","puzzle","Separate adversary and own holidays in the problem framing")
+            with self.assertRaisesRegex(ValueError,"unchanged puzzle template"):
+                starter.run_puzzle(home,"holy-days",holy_days=True)
+            self.assertEqual(g.overview(home,"holy-days")["ready_stages"],["puzzle"])
+
     def test_diagnosis_requires_approved_puzzle_and_keeps_decision_pending(self):
         from research.factory import review_workflow as g, stage_starter as starter
         with tempfile.TemporaryDirectory() as td:
@@ -76,7 +90,7 @@ class StarterTests(unittest.TestCase):
 
     def test_puzzle_submits_only_ready_unapproved(self):
         fake=types.ModuleType('research.factory.review_workflow')
-        fake.require_ready=mock.Mock(return_value={'ready':True})
+        fake.require_ready=mock.Mock(return_value={'stages':{'puzzle':{'status':'not_started'}}})
         fake.submit=mock.Mock(return_value={'status':'awaiting_human_approval','stage':'puzzle'})
         with mock.patch.dict(sys.modules,{'research.factory.review_workflow':fake}), mock.patch.object(factory,'review_workflow',fake,create=True):
             output=stage.run_puzzle(self.home,'holy-days',holy_days=True)
