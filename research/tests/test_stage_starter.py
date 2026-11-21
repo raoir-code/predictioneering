@@ -192,6 +192,59 @@ class StarterTests(unittest.TestCase):
         self.assertFalse('approved' in output['status'])
 
 
+    def test_targeted_literature_revision_preserves_history_and_requires_fresh_approval(self):
+        from research.factory import review_workflow as g
+        g.init(self.home,"holy-days","Holy Days and War")
+        stage.run_puzzle(self.home,"holy-days",holy_days=True)
+        g.approve(self.home,"holy-days","puzzle","Researcher","Scientific puzzle is worth studying")
+        stage.run_diagnosis(self.home,"holy-days")
+        g.approve(self.home,"holy-days","diagnosis","Researcher","Diagnostic agenda only")
+        old_dir=self.home/"inbox"/"raw"/"scientific_stages"/"holy-days"/"literature"
+        old_dir.mkdir(parents=True,exist_ok=True)
+        old_report=old_dir/"LITERATURE_SCREEN.md"
+        old_report.write_text("# Irrelevant nuclear proliferation literature\n")
+        old_evidence=old_dir/"LITERATURE_EVIDENCE.json"
+        old_evidence.write_text(json.dumps({"status":"not_reviewed","source_count":1}))
+        g.submit(self.home,"holy-days","literature",[old_report,old_evidence],
+                 "Unreviewed, unrelated literature candidates requiring scientific attention")
+        rejected_snapshot=g.location(self.home,"holy-days")/"snapshots"/"literature"/"rev0001"/"LITERATURE_SCREEN.md"
+        with self.assertRaisesRegex(ValueError,"human revision decision"):
+            stage.revise_holy_days_literature(self.home,"holy-days")
+        g.revise(self.home,"holy-days","literature",
+                 "Find holiday studies, distinguish outcome classes, and do not shoehorn unrelated papers")
+        revised=stage.revise_holy_days_literature(self.home,"holy-days")
+        self.assertEqual(revised["status"],"awaiting_human_approval")
+        self.assertEqual(revised["revision"],2)
+        self.assertGreaterEqual(revised["source_count"],4)
+        self.assertEqual(revised["original_papers_page_audited"],0)
+        self.assertIn("nuclear proliferation",rejected_snapshot.read_text())
+        new_report=Path(revised["report"]).read_text()
+        self.assertIn("Reese",new_report)
+        self.assertIn("Chinda",new_report)
+        self.assertIn("not a single estimand",new_report.lower())
+        self.assertIn("full original-paper review remains outstanding",new_report)
+        self.assertNotIn("A Dynamic Theory of Nuclear Proliferation and Preventive War",new_report)
+        self.assertEqual(g.overview(self.home,"holy-days")["awaiting_human"],["literature"])
+        with self.assertRaisesRegex(ValueError,"not ready to produce work"):
+            stage.revise_holy_days_literature(self.home,"holy-days")
+
+    def test_literature_revision_fails_closed_on_bad_source_manifest(self):
+        from research.factory import review_workflow as g
+        g.init(self.home,"holy-days","Holy Days and War")
+        stage.run_puzzle(self.home,"holy-days",holy_days=True)
+        g.approve(self.home,"holy-days","puzzle","Researcher","Approved puzzle")
+        stage.run_diagnosis(self.home,"holy-days")
+        g.approve(self.home,"holy-days","diagnosis","Researcher","Approved diagnosis")
+        draft=self.home/"scratch";draft.mkdir()
+        old=draft/"LITERATURE_SCREEN.md";old.write_text("Old screened scientific literature")
+        proof=draft/"LITERATURE_EVIDENCE.json";proof.write_text("{}")
+        g.submit(self.home,"holy-days","literature",[old,proof],"Provisional literature shortlist")
+        g.revise(self.home,"holy-days","literature","Irrelevant matches")
+        missing=draft/"bad.json";missing.write_text(json.dumps({"schema_version":"holiday_literature_leads_v1","sources":[]}))
+        with self.assertRaisesRegex(ValueError,"at least four"):
+            stage.revise_holy_days_literature(self.home,"holy-days",leads_path=missing)
+        self.assertEqual(g.load(self.home,"holy-days")["stages"]["literature"]["status"],"needs_revision")
+
     def test_real_gating_engine_puzzle_integration_when_installed(self):
         try:
             from research.factory import review_workflow as actual
