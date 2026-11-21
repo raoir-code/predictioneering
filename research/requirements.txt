@@ -5,3 +5,6 @@ numpy>=1.26,<3
 pandas>=2,<4
 scipy>=1.11,<2
 statsmodels>=0.14,<1
+# Formal theory derivatives and PDF figures for isolated paper sprint.
+sympy>=1.12,<2
+matplotlib>=3.8,<4
