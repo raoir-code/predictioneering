@@ -188,6 +188,22 @@ class ResearchPipelineTests(unittest.TestCase):
         self.assertEqual(result["status"],"blocked_human_novelty_review")
 
 
+    def test_register_conceptual_puzzle_without_hypothesis(self):
+        brief=self.home/"conceptual_puzzle.json"
+        pipeline.save(brief,{
+            "title":"Can predictable holidays alter military conflict?",
+            "research_question":"Why would public holidays alter attacks when both sides anticipate the vulnerability?",
+            "competing_intuitions":"Attackers might exploit reduced readiness, but defenders can prepare beforehand."
+        })
+        card_id=pipeline.register(self.home,brief)["card_id"]
+        from research.factory.__main__ import main as intake
+        self.assertEqual(intake(["--home",str(self.home),"approve",card_id]),0)
+        path,_,card=pipeline.initialize(self.home,card_id)
+        spec=pipeline.read(path/"analysis_spec.json")
+        self.assertEqual(spec["mechanism"],"")
+        self.assertEqual(spec["hypotheses"],[])
+        self.assertIn("defenders",card["competing_intuitions"])
+
     def test_register_external_study_brief_requires_intake_review(self):
         brief=self.home/"researcher_puzzle.json"
         pipeline.save(brief,{"title":"A new bargaining puzzle",
