@@ -102,7 +102,7 @@ def prepare_holy_days(root=ROOT):
 
 
 def puzzle_report(info):
-    references="\\n".join(f"- {x['id']}: `{x['path']}`; SHA256 `{x['sha256']}`" for x in info['source_registry'])
+    references="\n".join(f"- {x['id']}: `{x['path']}`; SHA256 `{x['sha256']}`" for x in info['source_registry'])
     return f"""# Puzzle: Religious Holidays and Strategic Conflict
 
 ## Central question
@@ -204,7 +204,7 @@ def revise_holy_days_puzzle(home, project):
     if hashlib.sha256(new_report.encode("utf-8")).hexdigest()==sha_file(old):
         raise ValueError("Generated puzzle is unchanged; a substantive revision is required")
     atomically_save(proposal,new_report)
-    atomically_save(metadata,json.dumps(info,indent=2,ensure_ascii=False)+"\\n")
+    atomically_save(metadata,json.dumps(info,indent=2,ensure_ascii=False)+"\n")
     submitted=workflow.submit(home,project,"puzzle",[proposal,metadata],
         "Revised conceptual Holy Days puzzle: competing opportunity and anticipation intuitions; no premature hypotheses or dataset")
     return {**submitted,"source_provenance":str(metadata),
