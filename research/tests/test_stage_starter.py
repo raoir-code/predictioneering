@@ -42,11 +42,17 @@ class StarterTests(unittest.TestCase):
     def test_holy_days_revision_preserves_prior_snapshot_and_stays_unapproved(self):
         from research.factory import review_workflow as g, stage_starter as starter
         g.init(self.home, "holy-days", "Holy Days and War")
-        first=starter.run_puzzle(self.home,"holy-days",holy_days=True)
+        original_dir=self.home/"inbox"/"raw"/"scientific_stages"/"holy-days"/"puzzle"
+        original_dir.mkdir(parents=True)
+        proposal=original_dir/"PUZZLE_REVIEW.md"
+        proposal.write_text("# Old puzzle review\\n\\nPremature H1 and ACLED details.\\n")
+        provenance=original_dir/"LOCAL_SOURCE_PROVENANCE.json"
+        provenance.write_text(json.dumps(starter.prepare_holy_days(self.home)))
+        g.submit(self.home,"holy-days","puzzle",[proposal,provenance],
+                 "Legacy Holy Days puzzle needing a strictly conceptual revision")
         snapshot=g.location(self.home,"holy-days")/"snapshots"/"puzzle"/"rev0001"/"PUZZLE_REVIEW.md"
         old=snapshot.read_text()
-        self.assertIn("Competing strategic intuitions",old)
-        self.assertNotIn("## H1",old)
+        self.assertIn("Premature H1",old)
         g.revise(self.home,"holy-days","puzzle",
                  "Keep only the strategic opportunity-versus-anticipation tension")
         revised=starter.revise_holy_days_puzzle(self.home,"holy-days")
