@@ -92,43 +92,56 @@ def prepare_holy_days(root=ROOT):
     if len(anchors)<4:
         raise ValueError("Holy Days theory source changed: expected measurement/model caveats are missing; manually re-audit")
     return {"kind":"holy_days_puzzle","title":"Holy Days and War",
-            "question":"How, and under which bargaining frictions, do religious holidays alter the timing of attacks or restraint?",
+            "framing_version":"conceptual_puzzle_v2",
+            "question":"Why, and under what conditions, would predictable religious holidays affect the timing or risk of military conflict when adversaries anticipate and respond to each other?",
             "source_registry":registry,"traceable_excerpts":anchors,
-            "hypothesis_status":"unverified_not_a_derived_equilibrium_result",
-            "observation_status":"empirical_holiday_effect_not_established_by_these_documents",
+            "hypothesis_status":"not_formulated_at_puzzle_stage",
+            "observation_status":"holiday_conflict_effect_not_established",
             "novelty_status":"unassessed_original_papers_not_yet_screened",
-            "required_diagnosis":"Distinguish empirical pattern, theory prediction, actor measurement and endogeneity before novelty review"}
+            "required_diagnosis":"Examine rival strategic intuitions, whether the apparent puzzle survives existing theory, and alternative non-strategic explanations"}
 
 
 def puzzle_report(info):
-    references="\n".join(f"- {x['id']}: `{x['path']}`; SHA256 `{x['sha256']}`" for x in info['source_registry'])
-    cautions="\n".join(f"- {a['issue']}: {a['text']} ({a['source_id']} line {a['line']})" for a in info['traceable_excerpts'])
-    return f"""# Puzzle review packet: {info['title']}
+    references="\\n".join(f"- {x['id']}: `{x['path']}`; SHA256 `{x['sha256']}`" for x in info['source_registry'])
+    return f"""# Puzzle: Religious Holidays and Strategic Conflict
 
-## Proposed question, NOT an established discovery
+## Central question
 
 {info['question']}
 
-## Grounding: existing local research notes
+## Competing strategic intuitions
+
+**Opportunity.** A holiday might temporarily change routines, staffing, vigilance, or readiness. An opponent could anticipate a window of vulnerability and consider attacking then.
+
+**Anticipation.** Yet holiday dates are generally public and predictable. The potentially vulnerable side can anticipate the same incentive, change readiness, or take other precautions.
+
+**Strategic response.** Once the attacker anticipates those precautions, the apparent advantage may weaken, disappear, or even reverse. Both sides' choices depend on expectations about the other's choices.
+
+## Why this is puzzling
+
+The naive intuition that holidays make attacks more attractive clashes with the equally plausible intuition that predictable vulnerability encourages preparation. Neither intuition alone tells us whether conflict becomes more likely, less likely, or simply moves in time.
+
+The interesting question is **whether predictable, shared knowledge of a possible vulnerability can produce a distinctive conflict-timing pattern once both sides respond strategically.** This is an open theoretical question, not a claim that any holiday effect exists.
+
+## Boundary of this stage
+
+This proposal does **not** assert an observed holiday effect, settle a bargaining model, identify the relevant friction, establish novelty, specify hypotheses, choose countries or datasets, or infer causality. Own-holiday readiness, opponent-holiday opportunities, and negotiated truces are distinct possibilities for later evaluation, not findings or preselected outcomes.
+
+## Local background provenance (for later stages)
 
 {references}
 
-## Critical caveats from the source notes
+These local notes document earlier thinking and measurement limitations. Their empirical screens, H1/H2/H3 labels, equilibrium conjectures, and source-specific qualifications belong in **Diagnosis, Literature, Formal Model, Hypotheses, Data, and Design**, rather than serving as the Puzzle-stage result. The source registry preserves where that work came from without asking the researcher to endorse it now.
 
-{cautions}
+## Human decision
 
-## What must be decided at this first human gate
+**APPROVE:** This unresolved strategic tension is worth investigating, even if subsequent diagnosis or empirical work finds no effect.
 
-- Is the question worth pursuing even if the initial empirical pattern is null?
-- Is the target phenomenon **holiday restraint**, **opportunistic attacks**, or **actual negotiated truces**? These are different outcomes.
-- Does any available pilot dataset measure actual belligerent identities and attacks rather than country-level event location?
-- Do we accept this as a provisional puzzle needing literature/diagnosis, without asserting novelty or an equilibrium result?
+**REVISE:** The central tension itself needs sharpening, a competing intuition is missing, or the scope is too broad.
 
-## Suggested decision: REVISE / INVESTIGATE before making novelty claims
+**REJECT:** The conceptual question is not worth pursuing.
 
-The complete-information static bargain in the local theory note permits peace under positive fighting costs. An actual directional holiday-war claim requires an explicit, validated bargaining friction. The existing H1 screen is observational and does not establish a causal or directed-dyad effect. This packet is **not** an independent literature review, solved repeated game, or research finding.
-
-**Next step:** Read this proposal and choose **APPROVE** (for the next diagnostic stage), **REVISE** (with precise instructions), or **REJECT**. An AI second opinion is optional. Puzzle approval does not certify theory, data, novelty, or results.
+Approval only authorizes the next **Diagnosis** stage. It does not approve novelty, mechanisms, hypotheses, data, estimates, or publication. Optional independent critique is advisory, not mandatory.
 """
 
 
@@ -165,6 +178,39 @@ def run_puzzle(home,project,*,holy_days=False):
     return {**result,"source_provenance":str(metadata),
             "next_action":"Human reads review packet and chooses approve, revise, or reject; optional critique available",
             "paid_api_calls":0,"external_network_calls":0}
+
+
+def revise_holy_days_puzzle(home, project):
+    """Resubmit a genuinely revised conceptual puzzle without rewriting prior snapshots.
+
+    Requires the researcher's explicit revision decision first. Does not approve.
+    """
+    from . import review_workflow as workflow
+    state=workflow.require_ready(home,project,"puzzle")
+    previous=state["stages"]["puzzle"]
+    if previous["status"] != "needs_revision" or not previous.get("human_revision_notes"):
+        raise ValueError("Human must request a puzzle revision first: review_workflow revise PROJECT puzzle --reason ...")
+    entries={a["name"]:a for a in previous.get("artifacts",[])}
+    if "PUZZLE_REVIEW.md" not in entries:
+        raise ValueError("Previous puzzle source snapshot missing; refusing to manufacture revision history")
+    old=workflow.location(home,project)/entries["PUZZLE_REVIEW.md"]["snapshot"]
+    if not old.is_file() or sha_file(old)!=entries["PUZZLE_REVIEW.md"]["sha256"]:
+        raise ValueError("Previous puzzle snapshot missing or changed")
+    info=prepare_holy_days(home)
+    dest=project_draft(home,project,"puzzle")
+    proposal=dest/"PUZZLE_REVIEW.md"
+    metadata=dest/"LOCAL_SOURCE_PROVENANCE.json"
+    new_report=puzzle_report(info)
+    if hashlib.sha256(new_report.encode("utf-8")).hexdigest()==sha_file(old):
+        raise ValueError("Generated puzzle is unchanged; a substantive revision is required")
+    atomically_save(proposal,new_report)
+    atomically_save(metadata,json.dumps(info,indent=2,ensure_ascii=False)+"\\n")
+    submitted=workflow.submit(home,project,"puzzle",[proposal,metadata],
+        "Revised conceptual Holy Days puzzle: competing opportunity and anticipation intuitions; no premature hypotheses or dataset")
+    return {**submitted,"source_provenance":str(metadata),
+            "previous_revision_preserved":True,"next_action":"Human review revised puzzle; do not advance before approval",
+            "paid_api_calls":0,"external_network_calls":0}
+
 
 
 def run_diagnosis(home, project):
@@ -311,6 +357,9 @@ def main(argv=None):
     a=sub.add_parser("puzzle",help="Produce guarded Holy Days puzzle review package")
     a.add_argument("project")
     a.add_argument("--holy-days",action="store_true",required=True)
+    v=sub.add_parser("revise-puzzle",help="Resubmit a human-requested conceptual Holy Days revision without losing prior history")
+    v.add_argument("project")
+    v.add_argument("--holy-days",action="store_true",required=True)
     d=sub.add_parser("diagnosis",help="Diagnose the human-approved Holy Days puzzle using local sources")
     d.add_argument("project")
     b=sub.add_parser("literature",help="Search page-indexed local PDF library after prior approvals")
@@ -320,6 +369,7 @@ def main(argv=None):
     args=parser.parse_args(argv)
     try:
         if args.cmd=="puzzle":out=run_puzzle(args.home,args.project,holy_days=args.holy_days)
+        elif args.cmd=="revise-puzzle":out=revise_holy_days_puzzle(args.home,args.project)
         elif args.cmd=="diagnosis":out=run_diagnosis(args.home,args.project)
         else:out=run_literature(args.home,args.project,args.spec,args.db)
         print(json.dumps(out,indent=2,ensure_ascii=False));return 0
