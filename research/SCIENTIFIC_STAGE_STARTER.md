@@ -12,7 +12,7 @@ P="$HOME/.venvs/predictioneering-research/bin/python"
 "$P" -m research.factory.stage_starter puzzle holy-days --holy-days
 ```
 
-The worker first checks `review_workflow.require_ready('puzzle')`. It reads the **actual versioned local research notes** `research/examples/holy_days_repeated_bargaining_model_v0.md` and `research/HOLIDAY_FAST_START.md`. If their key cautionary text disappears or the source files are missing, it stops rather than inventing a new scientific finding. It saves a puzzle proposal and hash/line-linked provenance to `research/inbox/raw/scientific_stages/holy-days/puzzle/` (ignored by Git). Then `review_workflow.submit` makes an independently checkable snapshot and changes the puzzle stage to `awaiting_critique`.
+The worker first checks `review_workflow.require_ready('puzzle')`. It reads the **actual versioned local research notes** `research/examples/holy_days_repeated_bargaining_model_v0.md` and `research/HOLIDAY_FAST_START.md`. If their key cautionary text disappears or the source files are missing, it stops rather than inventing a new scientific finding. It saves a puzzle proposal and hash/line-linked provenance to `research/inbox/raw/scientific_stages/holy-days/puzzle/` (ignored by Git). Then `review_workflow.submit` makes an independently checkable snapshot and changes the puzzle stage to `awaiting_human_approval`.
 
 Inspect the generated human review packet:
 
@@ -20,17 +20,9 @@ Inspect the generated human review packet:
 research/projects/factory_runs/holy-days/human_gates/review_packets/puzzle.md
 ```
 
-The private file `INDEPENDENT_CRITIC_REQUEST.json` is **instructions for obtaining** an independent review. It is **not** a critique and **cannot** be passed as a review to approve the stage. A different human or an explicitly authorized independent AI critic must read the actual sources and write a substantive JSON review in the structure of `research/examples/INDEPENDENT_CRITIQUE_TEMPLATE.json`.
+**Your approval is now the only required gate.** No independent AI reviewer is needed to approve the puzzle. Run `review_workflow review holy-days puzzle` to view the full report preview and then `approve` or `revise` with your own instructions. Optional independent criticism can be supplied via `critique --report` if useful. The worker does not make a paid model call.
 
-Record that real critique and then decide:
-
-```bash
-"$P" -m research.factory.review_workflow critique holy-days puzzle --report /path/to/actual_critic_review.json
-"$P" -m research.factory.review_workflow status holy-days
-# You, not an agent, must decide whether to approve, revise or reject.
-```
-
-If the critique identifies gaps, **revise** rather than approve. A human approval of puzzle *framing* is not approval of the model, literature, data, causal inference, or manuscript. After puzzle approval, `diagnosis` becomes ready; it still requires its **own** source-grounded artifact, independent critique and human signoff.
+After puzzle approval, the new `stage_starter diagnosis holy-days` produces a source-constrained diagnostic report and stops for your review again. Re-running an unchanged templated puzzle or diagnosis after you request revisions is deliberately blocked; export `review_workflow revision-brief`, have an authorized researcher or agent repair the scientific document, and resubmit. Original source data, proof and novelty remain unverified.
 
 ## Literature worker, only **after** puzzle AND diagnosis approvals
 
@@ -48,7 +40,7 @@ This invokes the existing `puzzle_evidence.assemble` against the **local indexed
 
 The Holy Days local note itself says the static bargaining benchmark predicts **peace**, that a distinct repeated-game friction is required for attack timing, and that H1 is a **country/event-level exploratory** measure, not a directed-belligerent causal estimate. We must decide whether the paper is about own-holiday restraint, opponent-holiday opportunism, or actual negotiated truces; each requires different outcomes and possibly different data. This worker intentionally preserves those unresolved choices.
 
-No independent AI critique is fabricated or automatically paid. These two stage adapters **only** perform puzzle framing and page-verified preliminary literature retrieval. The actual `diagnosis`, comprehensive external literature acquisition, adversarial scholarly synthesis, formal model solution, and data discovery remain to be connected behind the existing 12 approval gates. After the user approves each stage, new work begins at the next stage; older accepted science remains frozen.
+No independent AI critique is fabricated or automatically paid. These three stage adapters cover **puzzle framing, constrained diagnosis, and preliminary local-PDF literature retrieval**. Comprehensive external literature acquisition, full-text synthesis, formal equilibrium solving, automatic scientific revisions, and data discovery remain to be connected behind the existing 12 approval gates. After the user approves each stage, new work begins at the next stage; older accepted science remains frozen.
 
 ## Verification
 
