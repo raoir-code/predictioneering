@@ -64,7 +64,7 @@ class StarterTests(unittest.TestCase):
         new=g.location(self.home,"holy-days")/"snapshots"/"puzzle"/"rev0002"/"PUZZLE_REVIEW.md"
         self.assertTrue(new.is_file())
         self.assertIn("anticipate",new.read_text().lower())
-        with self.assertRaisesRegex(ValueError,"Human must request"):
+        with self.assertRaisesRegex(ValueError,"not ready to produce work"):
             starter.revise_holy_days_puzzle(self.home,"holy-days")
 
     def test_diagnosis_requires_approved_puzzle_and_keeps_decision_pending(self):
