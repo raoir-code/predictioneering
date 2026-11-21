@@ -45,6 +45,21 @@ class ResearchIntakeTests(unittest.TestCase):
             self.assertEqual(json.loads(files[0].read_text())['status'],
                              'approved_for_literature_review')
 
+    def test_conceptual_puzzle_needs_no_hypothesis_or_dataset(self):
+        candidate={"puzzles":[{
+            "title":"Can predictable holidays change attack incentives?",
+            "phenomenon":"Predictable public holidays may affect military readiness.",
+            "competing_intuitions":"Attacker sees an opportunity; defender anticipates it and prepares.",
+            "why_puzzling":"If both anticipate each other, why should attack timing change?",
+            "why_worth_investigating":"Strategic predictability may neutralize short-term opportunities.",
+            "source_excerpt":"holidays"
+        }]}
+        result=validate(candidate,"Working notes about holidays and anticipation")
+        self.assertEqual(result[0]["testable_prediction"],"")
+        self.assertEqual(result[0]["candidate_mechanism"],"")
+        self.assertTrue(result[0]["source_quote_verified"])
+        self.assertEqual(result[0]["status"],"pending_human_review")
+
     def test_fabricated_quote_is_not_accepted(self):
         puzzle = sample()
         puzzle['puzzles'][0]['source_excerpt'] = 'not in the input'
