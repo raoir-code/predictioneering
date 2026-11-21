@@ -355,6 +355,159 @@ def run_literature(home,project,spec,db):
             "paid_api_calls":0,"external_network_calls":0}
 
 
+
+def revise_holy_days_literature(home, project, *, leads_path=None, external_notes=None):
+    """Resubmit a genuinely different, relevance-screened holiday bibliography.
+
+    Publisher abstracts are leads, not page-audited full-text evidence. No
+    unreviewed result is promoted to a proven finding. No network or paid calls.
+    """
+    from . import review_workflow as workflow
+    state=workflow.require_ready(home, project, "literature")
+    prior=state["stages"]["literature"]
+    if prior["status"] != "needs_revision" or not prior.get("human_revision_notes"):
+        raise ValueError("A human revision decision is required before redoing literature")
+    old_artifacts={a["name"]:a for a in prior.get("artifacts",[])}
+    old_ref=old_artifacts.get("LITERATURE_SCREEN.md")
+    if not old_ref:
+        raise ValueError("Missing prior literature snapshot; cannot preserve revision history")
+    previous=workflow.location(home,project)/old_ref["snapshot"]
+    if not previous.is_file() or sha_file(previous)!=old_ref["sha256"]:
+        raise ValueError("Prior literature snapshot missing or altered")
+    workflow.require_approved(home,project,"puzzle")
+    workflow.require_approved(home,project,"diagnosis")
+
+    leads_path=Path(leads_path) if leads_path else ROOT/"examples"/"HOLY_DAYS_LITERATURE_LEADS.json"
+    leads_document=read_document(leads_path)
+    data=json.loads(leads_document["text"])
+    sources=data.get("sources")
+    if data.get("schema_version")!="holiday_literature_leads_v1" or not isinstance(sources,list) or len(sources)<4:
+        raise ValueError("Expected at least four scoped holiday literature leads")
+    classes={"core_direct","adjacent_design","theory","data_resource"}
+    fields=("id","title","authors","year","url","classification","outcome",
+            "holiday_exposure","scope_limited_finding","relevance","verification")
+    seen=set()
+    direct=0
+    for item in sources:
+        if not isinstance(item,dict) or any(not isinstance(item.get(key),str) or not item[key].strip()
+                                            for key in fields if key!="year"):
+            raise ValueError("Every source requires complete source, outcome, relevance and verification fields")
+        if not isinstance(item.get("year"),int) or item["classification"] not in classes:
+            raise ValueError("Invalid paper year or conceptual role")
+        if not item["url"].startswith("https://"):
+            raise ValueError("Sources must use verified HTTPS original/institutional URLs")
+        key=(item["id"],item["url"])
+        if item["id"] in seen or item["url"] in seen:
+            raise ValueError("Duplicated literature identifier or URL")
+        seen.update(key)
+        direct+=(item["classification"]=="core_direct")
+    if direct<3:
+        raise ValueError("Insufficient direct holiday-violence evidence for meaningful revision")
+
+    notes_record=None
+    if external_notes is not None:
+        note=read_document(external_notes)
+        notes_record={"sha256":note["sha256"],"file_name":Path(note["path"]).name,
+                      "status":"researcher_supplied_unverified_context_not_a_citation"}
+    sections=[
+        "# Holy Days and War — targeted literature screening (revision)",
+        "",
+        "**Scientific status: ABSTRACT/ENTRY SCREEN ONLY; full original-paper review remains outstanding.**",
+        "These sources were deliberately selected for conceptual relevance, not keyword overlap.",
+        "The factory does not claim page-verified full-text readings, a proven effect, or novelty.",
+        "",
+        "## Synthesis for scientific triage",
+        "",
+        "**Holiday effects are not a single estimand.** Terrorist attacks, communal riots,",
+        "civil ceasefire agreements, and interstate onset are distinct outcomes.",
+        "Reese et al. and Chinda et al. both study holiday-associated violence but report",
+        "different holiday-type patterns in different populations. This is a question",
+        "for comparison, not a contradiction that can be pooled into a universal sign.",
+        "The audience-support and ritual-friction channels may be distinct from",
+        "strategic surprise or negotiated holiday restraint.",
+        "",
+        "## Core: directly measure holiday-associated violence",
+    ]
+    labels={"core_direct":"Core: directly measure holiday-associated violence",
+            "adjacent_design":"Adjacent: calendar identification or mechanism",
+            "data_resource":"Separate outcome: negotiated holiday ceasefires",
+            "theory":"Theory-only: strategic anticipation and surprise"}
+    for cls in ("core_direct","adjacent_design","data_resource","theory"):
+        if cls!="core_direct":
+            sections.extend(["", "## "+labels[cls]])
+        for item in sources:
+            if item["classification"]!=cls:
+                continue
+            sections += [
+                "",
+                "### "+item["authors"]+" ("+str(item["year"])+"): "+item["title"],
+                "- **Original/institutional source:** "+item["url"],
+                "- **Outcome:** "+item["outcome"],
+                "- **Holiday definition:** "+item["holiday_exposure"],
+                "- **Reported claim (limited to checked source):** "+item["scope_limited_finding"],
+                "- **Why it actually counts / limits:** "+item["relevance"],
+                "- **Verification:** "+item["verification"],
+            ]
+    sections += [
+        "",
+        "## Exclusions from revision 1",
+        "The original keyword matches on nuclear proliferation, diversionary war,",
+        "generic arms buildups, and rivalry dynamics are excluded from the main",
+        "holiday review: none establishes a holiday mechanism or measures a holiday effect.",
+        "They can be reconsidered later ONLY for a specific theoretical argument with",
+        "actual supporting passages, not to inflate coverage.",
+        "",
+        "## Outstanding original-paper work before approving a complete review",
+        "1. Read originals and confirm sample, variables, identification and actual tables",
+        "   for each direct-effect study; record source PDF SHA256 and page numbers.",
+        "2. Search systematically for contradictory or missing direct studies, especially",
+        "   military interstate conflict onset rather than terrorist/communal events.",
+        "3. Distinguish attacker-constituency holidays, defender holidays, shared holidays,",
+        "   and formally declared ceasefires; do not assume one mechanism fits all.",
+        "4. Treat the external research summary as leads, never as primary citation evidence.",
+        "5. Novelty is NOT assessed and the model/hypothesis is NOT chosen here.",
+        "",
+        "## Provenance",
+        "- Literature-lead manifest SHA256: "+leads_document["sha256"],
+        "- Prior rejected screening SHA256: "+sha_file(previous),
+        "- Researcher revision request: "+prior["human_revision_notes"],
+    ]
+    if notes_record is not None:
+        sections.append("- Optional external notes SHA256: "+notes_record["sha256"]+
+                        " (unverified leads, not source evidence)")
+    sections += ["","## Researcher decision",
+                 "APPROVE only if treating this strictly as a *scoped candidate screen*;",
+                 "REVISE if a full original-paper literature review is required before advancing.",
+                 "No source here is asserted page-audited by this revised worker.",""]
+    report_text="\n".join(sections)
+    if hashlib.sha256(report_text.encode("utf-8")).hexdigest()==sha_file(previous):
+        raise ValueError("Literature revision made no substantive change")
+    dest=project_draft(home,project,"literature")
+    report=dest/"LITERATURE_SCREEN.md"
+    evidence=dest/"LITERATURE_EVIDENCE.json"
+    proof={
+        "status":"scoped_external_source_screen_full_text_pending",
+        "project":project,"stage":"literature",
+        "literature_leads_sha256":leads_document["sha256"],
+        "previous_rejected_screen_sha256":sha_file(previous),
+        "original_full_text_page_verified_by_this_worker":False,
+        "novelty_verified":False,
+        "sources":sources,
+        "optional_external_notes":notes_record,
+        "human_revision_reason":prior["human_revision_notes"],
+        "external_network_calls":0,
+        "paid_api_calls":0,
+    }
+    atomically_save(report,report_text)
+    atomically_save(evidence,json.dumps(proof,indent=2,ensure_ascii=False)+"\n")
+    result=workflow.submit(home,project,"literature",[report,evidence],
+        "Targeted holiday literature screen; checked publisher/institutional leads, full-text verification pending")
+    return {**result,"report":str(report),"source_count":len(sources),
+            "original_papers_page_audited":0,
+            "next_action":"Human assess scoped source relevance; full-text/source-page audit required before claiming comprehensive review",
+            "external_network_calls":0,"paid_api_calls":0}
+
+
 def main(argv=None):
     parser=argparse.ArgumentParser(description="Source-grounded stage workers behind mandatory approvals; zero paid calls")
     parser.add_argument("--home",type=Path,default=ROOT)
@@ -371,11 +524,17 @@ def main(argv=None):
     b.add_argument("project")
     b.add_argument("--spec",type=Path,required=True)
     b.add_argument("--db",type=Path,required=True)
+    lr=sub.add_parser("revise-literature",help="Resubmit scoped, separately checked holiday paper leads after a human revision request")
+    lr.add_argument("project")
+    lr.add_argument("--leads",type=Path,default=ROOT/"examples"/"HOLY_DAYS_LITERATURE_LEADS.json")
+    lr.add_argument("--external-notes",type=Path)
     args=parser.parse_args(argv)
     try:
         if args.cmd=="puzzle":out=run_puzzle(args.home,args.project,holy_days=args.holy_days)
         elif args.cmd=="revise-puzzle":out=revise_holy_days_puzzle(args.home,args.project)
         elif args.cmd=="diagnosis":out=run_diagnosis(args.home,args.project)
+        elif args.cmd=="revise-literature":out=revise_holy_days_literature(args.home,args.project,
+                                                        leads_path=args.leads,external_notes=args.external_notes)
         else:out=run_literature(args.home,args.project,args.spec,args.db)
         print(json.dumps(out,indent=2,ensure_ascii=False));return 0
     except (OSError,ValueError,TypeError,KeyError,RuntimeError) as exc:
