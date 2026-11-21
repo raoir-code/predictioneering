@@ -151,7 +151,9 @@ def run_puzzle(home,project,*,holy_days=False):
     from . import review_workflow as workflow
     if not holy_days:
         raise ValueError("This first worker only supports --holy-days; other puzzle briefs need the existing manual submit")
-    workflow.require_ready(home,project,"puzzle")
+    state=workflow.require_ready(home,project,"puzzle")
+    if state["stages"]["puzzle"]["status"] == "needs_revision":
+        raise ValueError("Do not reuse the unchanged puzzle template after a revision request; run review_workflow revision-brief and submit an actually revised document")
     info=prepare_holy_days(home)
     dest=project_draft(home,project,"puzzle")
     proposal=dest/"PUZZLE_REVIEW.md"
@@ -172,8 +174,9 @@ def run_diagnosis(home, project):
     of a theory. Missing data explicitly stays missing.
     """
     from . import review_workflow as workflow
-    workflow.require_ready(home, project, "diagnosis")
-    state=workflow.load(home,project)
+    state=workflow.require_ready(home, project, "diagnosis")
+    if state["stages"]["diagnosis"]["status"] == "needs_revision":
+        raise ValueError("Do not rerun an unchanged diagnosis template; use the human revision brief and submit a substantive revision")
     approved=workflow.require_approved(home,project,"puzzle")
     entries={a["name"]:a for a in state["stages"]["puzzle"]["artifacts"]}
     if "PUZZLE_REVIEW.md" not in entries or "LOCAL_SOURCE_PROVENANCE.json" not in entries:
