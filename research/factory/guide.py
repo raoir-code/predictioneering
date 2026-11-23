@@ -95,14 +95,51 @@ def guide(home, project):
                     0, "A failed newer Claude response is unresolved; never approve the older model by accident."
                 )
         else:
-            result["next_action"] = "Solve and independently verify the repeated-game equilibrium before submitting formal_model."
-            result["command"] = (
-                PY + " -m research.factory.science_mvp produce " +
-                project + " formal_model --model /path/to/verified_model.json"
-            )
+            # A signed architecture is only permission to BEGIN mathematics,
+            # not a theorem. This explicit numeric adapter cannot bypass proof.
+            formal = dest.parent / "formal_workbench"
+            work_order = formal / "MODEL_CONTRACT.json"
+            if not work_order.is_file():
+                result["next_action"] = (
+                    "Prepare the formal game's explicit equations, assumptions, "
+                    "and numerical-check work order."
+                )
+                result["command"] = (
+                    PY + " -m research.factory.formal_workbench prepare " + project
+                )
+            else:
+                try:
+                    contract = json.loads(work_order.read_text(encoding="utf-8"))
+                    signed_sha = json.loads(
+                        approval.read_text(encoding="utf-8")
+                    )["blueprint_sha256"]
+                except (OSError, ValueError, KeyError):
+                    raise ValueError("Cannot read formal work order or signature; recheck local scientific state")
+                if contract.get("approved_blueprint_sha256") != signed_sha:
+                    raise ValueError("Formal work order is for a different blueprint version; "
+                                     "archive it before preparing the new game")
+                report = formal / "DEMO_SYNTHETIC_NUMERIC_DIAGNOSTIC.json"
+                if not report.is_file():
+                    result["next_action"] = (
+                        "Run a synthetic numerical equilibrium smoke test "
+                        "before deriving a general proof."
+                    )
+                    result["command"] = (
+                        PY + " -m research.factory.formal_workbench demo " + project
+                    )
+                else:
+                    result["next_action"] = (
+                        "Derive and independently verify the repeated-game "
+                        "equilibrium beyond the numerical examples."
+                    )
+                    result["command"] = (
+                        PY + " -m research.factory.science_mvp produce " +
+                        project + " formal_model --model /path/to/verified_model.json"
+                    )
             result["notes"] = [
-                "The model must reference the approved blueprint SHA, and provide all equations and proof checks.",
-                "Do not substitute the earlier conditional 2x2 inspection-game candidate.",
+                "The formal workbench checks selected numerical pure Markov cases, "
+                "NOT all theorems or non-Markov SPE.",
+                "Do not advance to empirical hypotheses before a researcher-approved full model proof.",
             ]
         return result
 
