@@ -1,0 +1,64 @@
+{
+  "id": "holy-days-interstate-pilot",
+  "title": "Predictable Defender Holidays and Interstate Attack Attempts: A Conditional Theory Test",
+  "research_question": "Are attacker-identified interstate military attack attempts more frequent on predictable holidays of the defending country, conditional on conflict risk set and observable seasonality?",
+  "mechanism": "Candidate inspection game: if defender readiness has a larger holiday-specific cost, mixed-equilibrium attack frequency rises; this is conditional, not a general holiday effect and not a proven causal design.",
+  "hypotheses": [
+    {
+      "id": "H1",
+      "prediction": "When holidays raise defenders' readiness costs while other incentives remain fixed, attack attempts become more likely.",
+      "sign": "positive"
+    }
+  ],
+  "data": {
+    "csv_path": "../datasets/private/holy_days_directed_dyad_day.csv",
+    "redistribution_allowed": false,
+    "synthetic": false
+  },
+  "design": {
+    "method": "association",
+    "family": "binomial",
+    "outcome": "attack_attempt",
+    "treatment": "defender_holiday",
+    "time": "event_date",
+    "unit": "directed_dyad",
+    "controls": [],
+    "fixed_effects": [],
+    "cluster": "directed_dyad",
+    "holdout_fraction": 0.25
+  },
+  "literature": [
+    {
+      "title": "Days of Action or Restraint? How the Islamic Calendar Impacts Violence",
+      "authors": "Reese, Michael J. and Ruby, Keven G. and Pape, Robert A.",
+      "year": 2017,
+      "url": "https://www.cambridge.org/core/journals/american-political-science-review/article/abs/days-of-action-or-restraint-how-the-islamic-calendar-impacts-violence/E20A17A254F769D44E0887D0FD1F507B",
+      "review_status": "abstract_verified_only"
+    },
+    {
+      "title": "Religion and terrorism: Evidence from Ramadan fasting",
+      "authors": "Hodler, Roland and Raschky, Paul A. and Strittmatter, Anthony",
+      "year": 2024,
+      "url": "https://academic.oup.com/jpr/article/61/3/351/8364821",
+      "review_status": "abstract_verified_only"
+    },
+    {
+      "title": "The Impact of Public Holidays on Insurgent Attacks: The Case of Thailand",
+      "authors": "Chinda, Chris and Unal, Cigdem and Marchment, Zoe and Gill, Paul",
+      "year": 2024,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11382784/",
+      "review_status": "open_access_candidate_not_fully_audited"
+    },
+    {
+      "title": "The Rational Timing of Surprise",
+      "authors": "Axelrod, Robert",
+      "year": 1979,
+      "url": "https://www.cambridge.org/core/journals/world-politics/article/abs/rational-timing-of-surprise/B4EE2AC4163A33546DC6530E6EB5EC19",
+      "review_status": "abstract_verified_only"
+    }
+  ],
+  "novelty_review": {
+    "status": "pending"
+  },
+  "study_limitations": "DRAFT. No directed interstate dyad-day panel has yet been assembled or validated. Defender holiday is NOT a direct observation of readiness cost. Attack attempts require independently verified attacker/defender direction and no-event risk days. Association only; no causality or novelty established. Not a DiD or RDD. Original articles require full-text reading."
+}
