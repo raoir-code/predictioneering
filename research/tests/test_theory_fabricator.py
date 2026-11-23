@@ -80,6 +80,9 @@ class TheoryFabricatorTests(unittest.TestCase):
         self.assertEqual(validated["source_status_label"],
                          "draft_pending_human_review")
         self.assertEqual(raw["status"], "draft_pending_human_review")
+        for harmless in ("unverified", "not_solved", "not_approved"):
+            raw["status"] = harmless
+            self.assertEqual(th.validate(raw)["status"], "proposal_NOT_proven")
         raw["status"] = "solved"
         with self.assertRaisesRegex(ValueError, "proof or approval"):
             th.validate(raw)
