@@ -151,6 +151,79 @@ class FormalReasonerTests(unittest.TestCase):
         self.assertFalse(gates.load(self.home, self.project)["stages"]
                          ["formal_model"]["status"] == "approved")
 
+    def test_recovery_of_complete_saved_max_tokens_json_is_offline_and_unverified(self):
+        self.signed_work_order()
+        root = fr.directory(self.home, self.project)
+        attempts = root / "attempts"
+        attempts.mkdir(parents=True, exist_ok=True)
+        file = attempts / "CLAUDE_FORMAL_PARTIAL_20261123T194402862287Z.txt"
+        file.write_text(json.dumps(self.candidate()) + "\nExtra non-JSON commentary")
+        signature = json.loads((th.folder(self.home, self.project) /
+                                "BLUEPRINT_APPROVAL.json").read_text())
+        th.write(file.with_suffix(".diagnostic.json"), {
+            "status": "REJECTED_UNREVIEWED",
+            "error": "Cut off at output-token cap",
+            "model": "claude-opus-5-5",
+            "usage": {"input_tokens": 300, "output_tokens": 12000},
+            "approved_blueprint_sha256": signature["blueprint_sha256"],
+            "previous_proof_sha256": None,
+            "feedback": None,
+        })
+        result = fr.recover(self.home, self.project)
+        self.assertEqual(result["status"], "RECOVERED_UNVERIFIED_FORMAL_DRAFT")
+        self.assertEqual(result["network_or_paid_api_calls"], 0)
+        self.assertEqual(result["original_response"], str(file))
+        saved = json.loads(Path(result["path"]).read_text())
+        self.assertEqual(saved["generation"]["model"], "claude-opus-5-5")
+        self.assertEqual(saved["generation"]["origin"],
+                         "recovered_saved_claude_response")
+        self.assertFalse(saved["general_equilibrium_proven"])
+        self.assertEqual(gates.load(self.home, self.project)["stages"]
+                         ["formal_model"]["status"], "not_started")
+
+    def test_incomplete_saved_response_stops_without_editing_draft(self):
+        self.signed_work_order()
+        attempts = fr.directory(self.home, self.project) / "attempts"
+        attempts.mkdir(parents=True, exist_ok=True)
+        file = attempts / "CLAUDE_FORMAL_PARTIAL_20261123T194402862288Z.txt"
+        file.write_text('{"schema":"formal_derivation_draft_v1","setup":')
+        signature = json.loads((th.folder(self.home, self.project) /
+                                "BLUEPRINT_APPROVAL.json").read_text())
+        th.write(file.with_suffix(".diagnostic.json"), {
+            "status": "REJECTED_UNREVIEWED",
+            "model": "mock", "usage": {},
+            "approved_blueprint_sha256": signature["blueprint_sha256"],
+            "previous_proof_sha256": None, "feedback": None,
+        })
+        with self.assertRaisesRegex(ValueError, "incomplete JSON"):
+            fr.recover(self.home, self.project)
+        self.assertFalse((fr.directory(self.home, self.project) /
+                          "PROOF_DRAFT.json").exists())
+        self.assertEqual(file.read_text(),
+                         '{"schema":"formal_derivation_draft_v1","setup":')
+
+    def test_stale_attempt_cannot_overwrite_new_formal_draft(self):
+        self.signed_work_order()
+        root = fr.directory(self.home, self.project)
+        attempts = root / "attempts"
+        attempts.mkdir(parents=True, exist_ok=True)
+        file = attempts / "CLAUDE_FORMAL_PARTIAL_20261123T194402862289Z.txt"
+        file.write_text(json.dumps(self.candidate()))
+        signature = json.loads((th.folder(self.home, self.project) /
+                                "BLUEPRINT_APPROVAL.json").read_text())
+        th.write(file.with_suffix(".diagnostic.json"), {
+            "status": "REJECTED_UNREVIEWED", "model": "mock", "usage": {},
+            "approved_blueprint_sha256": signature["blueprint_sha256"],
+            "previous_proof_sha256": None, "feedback": None,
+        })
+        offline = self.work / "offline.json"
+        offline.write_text(json.dumps(self.candidate()))
+        fr.draft(self.home, self.project, candidate_file=offline)
+        original = gates.file_sha(root / "PROOF_DRAFT.json")
+        with self.assertRaisesRegex(ValueError, "formal draft now exists"):
+            fr.recover(self.home, self.project)
+        self.assertEqual(original, gates.file_sha(root / "PROOF_DRAFT.json"))
+
     def test_interactive_approve_refuses_to_certify_proof(self):
         self.signed_work_order()
         first = self.work / "first.json"
