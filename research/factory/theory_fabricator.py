@@ -33,7 +33,10 @@ minimal change is needed, a null case, countervailing mechanism, assumptions,
 and a precise proof plan. For repeated ultimatum games specify proposer protocol,
 rejection transition, discounting, perfect/imperfect information, observable
 calendar process and equilibrium concept. No hypotheses before solution.
-Return only the JSON blueprint contract given in the prompt."""
+Return only the JSON blueprint contract given in the prompt. Be concise:
+each narrative field should normally be 1-3 sentences; aim for fewer than
+4000 output tokens total, but provide all required details and proof checks.
+Do not repeat source caveats in every field."""
 SOURCE_LIMIT = 9000
 
 
@@ -404,6 +407,9 @@ def propose(home, project, *, baseline, candidate=None, send=False, share=False,
         "origin": origin, "model": model_used or model if send else None,
         "estimated_charge_usd": round(charge, 6)}
     if prior_sha is not None:
+        if gates.file_sha(dest / "THEORY_BLUEPRINT.json") != prior_sha:
+            raise ValueError("Blueprint changed while Claude generated a revision; "
+                             "do not overwrite concurrent edits. Review saved attempt.")
         blueprint["generation"]["revision_of_sha256"] = prior_sha
         blueprint["generation"]["researcher_feedback"] = feedback
         blueprint["generation"]["revision_number"] = (
@@ -474,6 +480,33 @@ def propose(home, project, *, baseline, candidate=None, send=False, share=False,
             "change": blueprint["innovation"]["one_sentence_change"],
             "estimated_charge_usd": round(charge, 6),
             "network_or_paid_api_calls": int(bool(send)), "human_approval_required": True}
+
+
+def history(home, project):
+    """List every accepted architecture draft, with immutable SHA lineage."""
+    dest = folder(home, project)
+    current = dest / "THEORY_BLUEPRINT.json"
+    entries = []
+    archives = dest / "history"
+    paths = sorted(archives.glob("*/THEORY_BLUEPRINT.json")) if archives.is_dir() else []
+    if current.is_file():
+        paths.append(current)
+    for path in paths:
+        candidate = json.loads(path.read_text(encoding="utf-8"))
+        info = candidate.get("generation", {})
+        entries.append({
+            "revision_number": info.get("revision_number"),
+            "sha256": gates.file_sha(path),
+            "parent_sha256": info.get("revision_of_sha256"),
+            "origin": info.get("origin", "unknown"),
+            "researcher_feedback": info.get("researcher_feedback"),
+            "path": str(path),
+            "current": path == current,
+        })
+    entries.sort(key=lambda e: (e["revision_number"] is None,
+                                e["revision_number"] or 0,
+                                not e["current"], e["sha256"]))
+    return {"project": project, "draft_count": len(entries), "drafts": entries}
 
 
 def revise(home, project, *, feedback, share, model, key, input_rate,
@@ -563,6 +596,8 @@ def main(argv=None):
     v.add_argument("--output-rate", type=float)
     v.add_argument("--max-usd", type=float)
     v.add_argument("--max-tokens", type=int, default=12000)
+    h = sub.add_parser("history", help="Show all saved blueprint revisions")
+    h.add_argument("project")
     a = sub.add_parser("approve")
     a.add_argument("project"); a.add_argument("--reviewer", required=True)
     a.add_argument("--notes", required=True)
@@ -580,6 +615,8 @@ def main(argv=None):
                              key=os.getenv("ANTHROPIC_API_KEY"),
                              input_rate=args.input_rate, output_rate=args.output_rate,
                              max_usd=args.max_usd, max_tokens=args.max_tokens)
+        elif args.command == "history":
+            result = history(args.home, args.project)
         elif args.command == "revise":
             result = revise(args.home, args.project,
                             feedback=args.feedback_file.read_text(encoding="utf-8"),
