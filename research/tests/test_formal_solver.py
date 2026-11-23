@@ -30,6 +30,29 @@ class FormalSolverTests(unittest.TestCase):
         r = solver.audit_case(x, self.sha)
         self.assertEqual(r["pure_mpe_masks"], [0, 6])
         self.assertFalse(r["contradictions"])
+        self.assertEqual(r["equilibrium_selection_bounds"][
+                         "first_phase_possible_war_lags"], [1, "never"])
+
+    def test_selection_is_set_valued_without_selection_assumption(self):
+        cycle = list(wb.STATES)
+        s = solver.selection_bounds(cycle, [0, 6])
+        self.assertEqual(s["classification_from_first_phase"],
+                         "PEACE_OR_WAR_DEPENDS_ON_EQUILIBRIUM_SELECTION")
+        self.assertEqual(s["first_phase_possible_war_lags"], [1, "never"])
+        self.assertFalse(s["first_phase_invariant"])
+        self.assertEqual(s["per_start_phase"][1]["possible_first_war_lags"],
+                         [0, "never"])
+        all_peace = solver.selection_bounds(cycle, [0])
+        self.assertEqual(all_peace["first_phase_possible_war_lags"], ["never"])
+        self.assertTrue(all_peace["first_phase_invariant"])
+        all_war = solver.selection_bounds(cycle, [7])
+        self.assertEqual(all_war["first_phase_possible_war_lags"], [0])
+        self.assertTrue(all_war["first_phase_invariant"])
+        self.assertEqual(all_war["per_start_phase"][3]["possible_first_war_lags"],
+                         [1])
+        self.assertEqual(solver.selection_bounds(cycle, [])[
+                         "classification_from_first_phase"],
+                         "NO_PURE_EQUILIBRIUM_FOUND")
 
     def test_constant_power_repeated_ordinary_states(self):
         for n in (1, 2, 3, 6):
