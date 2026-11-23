@@ -5,6 +5,8 @@ import tempfile
 import unittest
 
 from research.factory import formal_reasoner as fr
+from research.factory import finite_war_set_handoff as handoff
+from research.factory import science_mvp as mvp
 from research.factory import formal_workbench as fw
 from research.factory import formal_solver as solver
 from research.factory import formal_proof_brief as proof_brief
@@ -120,6 +122,60 @@ class FormalReasonerTests(unittest.TestCase):
         proof.write_text(json.dumps(data), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "changed"):
             proof_brief.prepare(self.home, self.project)
+
+    def test_set_valued_formal_model_handoff_preserves_source_pins_and_gates(self):
+        self.signed_work_order()
+        candidate = self.work / "proof_candidate_for_handoff.json"
+        candidate.write_text(json.dumps(self.candidate()))
+        fr.draft(self.home, self.project, candidate_file=candidate)
+        solver.audit(self.home, self.project, cases=3, max_phases=4)
+        setup = handoff.prepare(self.home, self.project)
+        self.assertEqual(setup["network_or_paid_api_calls"], 0)
+        self.assertFalse(setup["formal_model_submitted"])
+        model_file = Path(setup["candidate"])
+        model = json.loads(model_file.read_text())
+        self.assertEqual(model["equilibrium_form"], handoff.FORM)
+        self.assertFalse(model["general_pure_existence_proven"])
+        with self.assertRaisesRegex(ValueError, "at least one defensible"):
+            mvp.model_checks(model)
+        model["hypotheses"] = [{
+            "id": "H1",
+            "prediction": "Conditional on a particular equilibrium, an upcoming holiday changes onset risk.",
+            "sign": "positive",
+            "scope": "conditional_on_equilibrium",
+            "conditions": "Requires selection of the war-onset equilibrium and valid actor attribution.",
+            "formal_basis": "This is a deliberately synthetic conditional hypothesis for testing the new handoff.",
+            "empirical_mapping": {"predictor": "holiday_shift", "outcome": "war_onset"},
+        }]
+        check = mvp.model_checks(model)
+        self.assertTrue(check["formal_check_passed"])
+        self.assertIsNone(check["all_derivative_signs_verified"])
+        self.assertEqual(check["derivatives"], [])
+        self.assertFalse(check["general_pure_existence_proven"])
+        self.assertEqual(check["selection_conditional_hypotheses"], 1)
+        self.assertEqual(mvp.derived_hypotheses(model)[0]["sign"], "positive")
+        invalid = dict(model, unique_equilibrium_assumed=True)
+        with self.assertRaisesRegex(ValueError, "unconditional uniqueness"):
+            mvp.model_checks(invalid)
+        handoff.source_check(self.home, self.project, model)
+        gates.activate_mvp(self.home, self.project)
+        model_file.write_text(json.dumps(model))
+        pending = mvp.produce(self.home, self.project, "formal_model",
+                              model_path=model_file)
+        self.assertEqual(pending["status"], "awaiting_human_approval")
+        report = (mvp.draft(self.home, self.project, "formal_model") /
+                  "FORMAL_CHECKS.md").read_text()
+        self.assertIn("No derivative has been calculated", report)
+        self.assertEqual(gates.load(self.home, self.project)["stages"]
+                         ["formal_model"]["status"], "awaiting_human_approval")
+        self.assertFalse((theory.folder(self.home, self.project) /
+                          "FORMAL_MODEL_APPROVAL.json").exists())
+        proof = fr.directory(self.home, self.project) / "PROOF_DRAFT.json"
+        data = json.loads(proof.read_text())
+        data["candidate_equilibrium"] += " An unreviewed edit to test source pinning."
+        proof.write_text(json.dumps(data))
+        with self.assertRaisesRegex(ValueError, "stale"):
+            handoff.source_check(self.home, self.project, model)
 
     def test_billable_generation_requires_consent_and_budget(self):
         self.signed_work_order()
