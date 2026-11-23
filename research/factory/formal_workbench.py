@@ -332,7 +332,7 @@ def policy_candidate(values, cycle, probabilities, war_mask, *, tol=1e-9):
             bellman_b = abs(vb[i] - max(w_b[i], delta*vb[following]))
         max_gap = max(max_gap, deviation_gain, bellman_a, bellman_b)
         rows.append({
-            "state": h, "policy": "WAR" if war[i] else "PEACE",
+            "phase_index": i, "state": h, "policy": "WAR" if war[i] else "PEACE",
             "war_probability_B": probabilities[h],
             "war_value_A": w_a[i], "war_value_B": w_b[i],
             "value_A": va[i], "value_B": vb[i],
@@ -423,7 +423,7 @@ def check(home, project, case_path, *, label="case"):
             format(cand["max_best_response_or_Bellman_residual"], ".4g"),
         ]
         for row in cand["calendar_policy"]:
-            lines.append("- " + row["state"] + ": " + row["policy"] +
+            lines.append("- phase " + str(row["phase_index"]) + " (" + row["state"] + "): " + row["policy"] +
                          ("; B offer " + format(row["offer_if_peace"], ".5f")
                           if row["offer_if_peace"] is not None else "") +
                          "; B war win p=" + format(row["war_probability_B"], ".3f"))
