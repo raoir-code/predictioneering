@@ -55,7 +55,7 @@ class TheoryFabricatorTests(unittest.TestCase):
             th.validate(altered)
         altered = copy.deepcopy(c)
         altered["innovation"]["added_state_variables"] = ["holiday_state", "extra_state"]
-        with self.assertRaisesRegex(ValueError, "Exactly one"):
+        with self.assertRaisesRegex(ValueError, "At most one"):
             th.validate(altered)
 
     def test_human_blueprint_approval_provenance_and_change_guard(self):
