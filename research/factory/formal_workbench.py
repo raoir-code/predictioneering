@@ -317,7 +317,7 @@ def check(home, project, case_path, *, label="case"):
     result = analyze(case, signature["blueprint_sha256"])
     dest = outdir(home, project)
     dest.mkdir(parents=True, exist_ok=True)
-    safe_label = gates.safe_project(label)
+    safe_label = gates.safe_project(str(label).lower())
     output = dest / (safe_label.upper() + "_NUMERIC_DIAGNOSTIC.json")
     theory.write(output, result)
     review = dest / (safe_label.upper() + "_REVIEW.md")
