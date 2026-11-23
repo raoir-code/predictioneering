@@ -198,7 +198,7 @@ class FormalReasonerTests(unittest.TestCase):
         self.assertIn("No unconditional signed marginal effect",
                       report["scientific_blockers"][0])
         text = Path(result["review"]).read_text()
-        self.assertIn("not an unconditional sign", text)
+        self.assertIn("unconditional sign for the average", text)
         self.assertIn("## Unresolved empirical requirements", text)
         model = json.loads((fw.outdir(self.home, self.project) /
                             "FORMAL_MODEL_HANDOFF_CANDIDATE.json").read_text())
