@@ -177,8 +177,9 @@ def validate_case(case, required_sha):
     delta, p0, d_a, d_b, c_a, c_b = (values[key] for key in keys)
     if not (0 < delta < 1):
         raise ValueError("delta must lie strictly between 0 and 1")
-    if not (d_a > 0 and d_b > 0 and c_a > 0 and c_b > 0):
-        raise ValueError("d_A, d_B, c_A, c_B must be positive")
+    if not (d_a >= 0 and d_b >= 0 and c_a > 0 and c_b > 0):
+        raise ValueError("d_A and d_B must be nonnegative (zero recovers the "
+                         "benchmark); c_A and c_B must be strictly positive")
     p = {
         "ordinary": p0,
         "A_holiday": p0 + d_b,
