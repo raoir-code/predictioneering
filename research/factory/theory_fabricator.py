@@ -116,16 +116,20 @@ def validate(candidate):
               "rejection_transition", "discounting", "information",
               "baseline_source_status"):
         reasonable("baseline." + k, base.get(k))
-    for k in ("one_sentence_change", "state_variable", "payoff_or_transition_affected"):
+    for k in ("one_sentence_change", "payoff_or_transition_affected"):
         reasonable("innovation." + k, innovation.get(k), minimum=3)
-    if innovation.get("added_state_variables") != [innovation["state_variable"]]:
-        raise ValueError("Exactly one added calendar/state variable is required")
+    name = innovation.get("state_variable")
+    added = innovation.get("added_state_variables")
+    if name is not None:
+        reasonable("innovation.state_variable", name, minimum=3)
+    if added != ([name] if name is not None else []):
+        raise ValueError("At most one new state variable; it must match the declared innovation")
     if innovation.get("added_players") != [] or innovation.get("added_actions") != []:
         raise ValueError("Do not add players or actions to the baseline game")
     states = innovation.get("state_values")
-    if not isinstance(states, list) or not 2 <= len(states) <= 8 or any(
+    if not isinstance(states, list) or (name is not None and not 2 <= len(states) <= 8) or (name is None and states != []) or any(
             not isinstance(x, str) or not x for x in states) or len(set(states)) != len(states):
-        raise ValueError("Supply a clear finite list of holiday/calendar states")
+        raise ValueError("State values must be finite and distinct (empty if no new state)")
     for k in ("candidate_literature_gap", "mechanism", "null_case", "rival_explanation"):
         reasonable("mechanism." + k, mechanism.get(k))
     for k in ("solution_concept", "equilibrium_conditions",
