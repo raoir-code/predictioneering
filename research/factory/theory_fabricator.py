@@ -172,6 +172,11 @@ def anthropic_transport(bundle, model, key, max_tokens):
 def propose(home, project, *, baseline, candidate=None, send=False, share=False,
             model=None, key=None, input_rate=None, output_rate=None,
             max_usd=None, max_tokens=2200, transport=anthropic_transport):
+    # A signed formal model cannot silently lose or replace its approved
+    # architecture; revise the model stage first to invalidate descendants.
+    project_state = gates.load(home, project)
+    if project_state["stages"]["formal_model"]["status"] == "approved":
+        raise ValueError("Revise approved formal_model before proposing a different theory blueprint")
     bundle, dest = brief(home, project, baseline=baseline)
     if candidate and send:
         raise ValueError("Choose supplied candidate OR paid generation, not both")
