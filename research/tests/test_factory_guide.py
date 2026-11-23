@@ -84,8 +84,8 @@ class FactoryGuideTests(unittest.TestCase):
         self.assertIn("formal_workbench demo", middle["command"])
         fw.demo(self.home, self.project)
         after = guide.guide(self.home, self.project)
-        self.assertIn("formal_model --model", after["command"])
-        self.assertIn("independently verify", after["next_action"])
+        self.assertIn("formal_reasoner draft", after["command"])
+        self.assertIn("auditable equilibrium", after["next_action"])
         self.assertFalse((th.folder(self.home, self.project) /
                           "FORMAL_MODEL_APPROVAL.json").exists())
 
