@@ -35,7 +35,7 @@ def theorem_predicate(values, cycle, p, mask, *, tol=TOL):
     """
     n = len(cycle)
     d = values["delta"]
-    costs = values["c_A"] + values["c_B"]
+    cost = values["c_A"] + values["c_B"]
     w = [p[h] / (1.0 - d) - values["c_B"] for h in cycle]
     war = [bool(mask & (1 << i)) for i in range(n)]
     vb = []
