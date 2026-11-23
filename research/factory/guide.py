@@ -207,18 +207,51 @@ def guide(home, project):
                             revised_feedback = (proof_record.get("generation", {})
                                                 .get("researcher_feedback") or "")
                             if "MATHEMATICAL PROOF AUDIT" in revised_feedback:
-                                result["next_action"] = (
-                                    "Inspect the revised mathematics and create an "
-                                    "INCOMPLETE, unsigned discrete-equilibrium model handoff."
-                                )
-                                result["command"] = (
-                                    PY + " -m research.factory.finite_war_set_handoff " +
-                                    project
-                                )
+                                handoff = formal / "FORMAL_MODEL_HANDOFF_CANDIDATE.json"
+                                hypothesis_review = formal / "HYPOTHESIS_REVIEW.json"
+                                if not handoff.is_file():
+                                    result["next_action"] = (
+                                        "Create an INCOMPLETE unsigned, set-valued "
+                                        "formal-model handoff from the revised mathematics."
+                                    )
+                                    result["command"] = (
+                                        PY + " -m research.factory.finite_war_set_handoff " +
+                                        project
+                                    )
+                                else:
+                                    pins = json.loads(handoff.read_text(encoding="utf-8")).get(
+                                        "source_pins", {})
+                                    if pins.get("proof_draft_sha256") != proof_sha or (
+                                            pins.get("numeric_audit_sha256") !=
+                                            gates.file_sha(audit_file)):
+                                        raise ValueError(
+                                            "Existing formal handoff is stale; archive "
+                                            "the local handoff and regenerate after review")
+                                    metadata = (json.loads(hypothesis_review.read_text(encoding="utf-8"))
+                                                if hypothesis_review.is_file() else {})
+                                    if (metadata.get("formal_model_candidate_sha256") !=
+                                            gates.file_sha(handoff)):
+                                        result["next_action"] = (
+                                            "Translate the new war-set mathematics into "
+                                            "auditable logical restrictions without "
+                                            "fabricating an empirical effect sign."
+                                        )
+                                        result["command"] = (
+                                            PY + " -m research.factory.formal_hypothesis_review " +
+                                            project
+                                        )
+                                    else:
+                                        result["next_action"] = (
+                                            "Review candidate structural restrictions and "
+                                            "specify a defensible observed-data estimand "
+                                            "before populating formal-model hypotheses."
+                                        )
+                                        result["command"] = (
+                                            "cat " + str(formal / "HYPOTHESIS_REVIEW.md")
+                                        )
                                 result["notes"].append(
-                                    "This only creates a private template, not hypotheses, "
-                                    "a complete proof or an approved formal_model. "
-                                    "Do not invent derivatives or equilibrium selection."
+                                    "No formal-model approval or empirical hypotheses "
+                                    "are automatic; preserve multiplicity and selection scope."
                                 )
                             elif not current_meta:
                                 result["next_action"] = (
