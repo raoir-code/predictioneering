@@ -40,11 +40,19 @@ characterization of the finite deterministic holiday cycle where possible.
 If unable, state the missing mathematical step and propose a counterexample
 or finite-state numerical falsification test. Show off-path incentives.
 Do not claim novelty, general theorems or publication readiness without proof.
-Be concise and return exactly ONE JSON object, no Markdown fences or remarks.
+Produce a COMPACT first-pass mathematical draft, not a comprehensive treatise.
+Target <= 3500 output tokens total, hard ceiling 4500; this is an OUTPUT
+COMPLETENESS constraint. Keep each of the eight string sections to at most
+180 words; use 3-5 proof steps, each at most 100 words; list 2-6 gaps.
+Derive the critical Bellman conditions and at least one falsifiable
+conditional result. State unsolved regions as UNSOLVED rather than enumerating
+all 16 policy cases in prose. Longer details belong in later focused revisions.
+Return exactly ONE COMPLETE JSON object, no Markdown fences or remarks, no
+preface or appendix. Finish the object with a closing brace.
 Fields: schema=formal_derivation_draft_v1; setup, bellman_equations,
 candidate_equilibrium, parameter_domains, offpath_deviation_checks,
 constant_power_recovery, holiday_power_results, falsification_checks
-are strings; proof_steps is a list of {claim,argument,domain} objects;
+are concise strings; proof_steps is a list of {claim,argument,domain} objects;
 unresolved_gaps is a nonempty list of strings. Never invent citations."""
 
 
@@ -136,7 +144,11 @@ def source_bundle(home, project, *, feedback=None):
 
 
 def anthropic_transport(bundle, model, key, max_tokens):
-    prompt = ("Produce the complete formal derivation JSON DRAFT as specified. "
+    prompt = ("Produce a concise and complete 8-section JSON DRAFT as specified. "
+              "Aim for 2500–3500 output tokens TOTAL; you are not expected to "
+              "solve every holiday-game parameter region in one call. "
+              "Give mathematically checkable derivations and label unproved "
+              "results unresolved, not established. "
               "Use the approved game; do not modify its timing or mechanism. "
               "Only mathematically establish results you can derive and check; "
               "otherwise label them conjectures. "
@@ -306,6 +318,86 @@ def draft(home, project, *, candidate_file=None, feedback=None,
     }
 
 
+def recover(home, project, *, source=None):
+    """Safely replay a COMPLETE JSON draft from saved cut-off API response.
+
+    Rejects incomplete/ambiguous outputs without a paid call or changing
+    an earlier draft. Maintains exact signed-blueprint and parent-draft pins.
+    """
+    bundle = source_bundle(home, project)
+    base = directory(home, project)
+    attempts = base / "attempts"
+    if source is None:
+        paths = sorted(attempts.glob("CLAUDE_FORMAL_PARTIAL_*.txt"))
+        if not paths:
+            raise ValueError("No saved partial Claude formal response exists")
+        path = paths[-1]
+    else:
+        path = Path(source).expanduser().resolve()
+        if (path.parent != attempts.resolve() or not
+                path.name.startswith("CLAUDE_FORMAL_PARTIAL_") or
+                path.suffix != ".txt"):
+            raise ValueError("Recovery source must be CLAUDE_FORMAL_PARTIAL_*.txt "
+                             "inside this project's saved attempts directory")
+    if not path.is_file() or path.stat().st_size > 400_000:
+        raise ValueError("Saved formal response is missing or too large")
+    diagnostic = path.with_suffix(".diagnostic.json")
+    if not diagnostic.is_file():
+        raise ValueError("Cannot recover an attempt with no saved diagnostic")
+    meta = json.loads(diagnostic.read_text(encoding="utf-8"))
+    if meta.get("status") != "REJECTED_UNREVIEWED":
+        raise ValueError("This saved attempt is not an unreviewed rejected response")
+    if meta.get("approved_blueprint_sha256") != bundle["blueprint_sha256"]:
+        raise ValueError("Claude attempt was generated for a different approved blueprint")
+    existing = base / "PROOF_DRAFT.json"
+    parent = meta.get("previous_proof_sha256")
+    if parent is None and existing.exists():
+        raise ValueError("A formal draft now exists; cannot overwrite with an older "
+                         "first-draft response. Archive/review history first.")
+    if parent is not None and (not existing.exists() or
+                                gates.file_sha(existing) != parent):
+        raise ValueError("Formal derivation parent SHA differs from the failed revision")
+    raw = path.read_text(encoding="utf-8").strip()
+    parsed = raw
+    if parsed.startswith("```"):
+        parsed = parsed.partition("\n")[2]
+    try:
+        payload, end = json.JSONDecoder().raw_decode(parsed.lstrip())
+    except json.JSONDecodeError as exc:
+        raise ValueError("Saved partial is incomplete JSON (" + exc.msg +
+                         "); cannot safely recover. Use a new concise draft; "
+                         "this check made zero paid calls.") from exc
+    extra = parsed.lstrip()[end:].strip()
+    if extra.startswith("```"):
+        extra = extra[3:].strip()
+    if extra.startswith(("{", "[")):
+        raise ValueError("Saved partial contains multiple JSON structures, "
+                         "so recovery cannot select one automatically")
+    checked = validate(payload)
+    saved_candidate = path.with_name("RECOVERED_" + path.stem + ".json")
+    if not saved_candidate.exists():
+        theory.write(saved_candidate, checked)
+    result = draft(
+        home, project, candidate_file=saved_candidate,
+        feedback=meta.get("feedback"))
+    current = base / "PROOF_DRAFT.json"
+    normalized = json.loads(current.read_text(encoding="utf-8"))
+    normalized["generation"].update({
+        "origin": "recovered_saved_claude_response",
+        "model": meta.get("model"),
+        "original_response": str(path),
+        "original_usage": meta.get("usage"),
+        "discarded_trailing_text": extra[:8000],
+        "warning": "The original truncated API call may have incurred a charge; "
+                   "offline recovery incurred zero additional API charges.",
+    })
+    theory.write(current, normalized)
+    result["status"] = "RECOVERED_UNVERIFIED_FORMAL_DRAFT"
+    result["network_or_paid_api_calls"] = 0
+    result["original_response"] = str(path)
+    return result
+
+
 def review(home, project, *, share, model, key, input_rate, output_rate,
            max_usd, max_tokens=12000, ask=input, output=print,
            transport=anthropic_transport):
@@ -362,8 +454,15 @@ def main(argv=None):
             d.add_argument("--candidate", type=Path)
         if command == "revise":
             d.add_argument("--feedback-file", type=Path, required=True)
+    recovery = sub.add_parser("recover", help="Try offline replay of a complete saved cut-off Claude draft")
+    recovery.add_argument("project")
+    recovery.add_argument("--from-file", type=Path)
     args = p.parse_args(argv)
     try:
+        if args.command == "recover":
+            print(json.dumps(recover(args.home, args.project,
+                                     source=args.from_file), indent=2))
+            return 0
         opts = {
             "share": args.confirm_share_evidence, "model": args.model,
             "key": os.getenv("ANTHROPIC_API_KEY"),
