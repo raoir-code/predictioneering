@@ -275,8 +275,15 @@ def manuscript(spec,model,mathcheck,results,refs,figs,claims):
               r'\paragraph{Payoffs.} '+tex('; '.join(p+': '+model['payoffs'][p] for p in model['players'])),
               r'\paragraph{Solution concept.} '+tex(model['solution_concept']),
               r'\paragraph{Proposed equilibrium argument.} '+tex(model['equilibrium_argument']),
-              r'\[ '+tex(mathcheck['choice'])+'^{*} = '+mathcheck['equilibrium_latex']+r' \] ',
-              r'\section{Comparative statics and falsifiable hypotheses}']
+              r'\[ '+tex(mathcheck['choice'])+'^{*} = '+mathcheck['equilibrium_latex']+r' \] ']
+    if model.get('normal_form_2x2') and mathcheck.get('normal_form_2x2_audit'):
+        audit = mathcheck['normal_form_2x2_audit']
+        lines += [r'\paragraph{Payoff-matrix indifference audit.} ',
+                  tex('The following exact mixing identities follow from the supplied two-by-two payoff matrix, conditional on both probabilities lying strictly between zero and one. This is not a complete equilibrium-domain proof.'),
+                  r'\[ p^{*} = '+audit['row_player_first_action_probability_latex']+r',\qquad q^{*} = '+audit['column_player_first_action_probability_latex']+r' \]']
+    if model.get('note'):
+        lines += [r'\paragraph{Research scope caveat.} '+tex(model['note'])]
+    lines += [r'\section{Comparative statics and falsifiable hypotheses}']
     for d in mathcheck['derivatives']:
         h=next(x for x in spec['hypotheses'] if x['id']==d['hypothesis_id'])
         lines += [r'\paragraph{'+tex(d['id'])+' / '+tex(h['id'])+'} '+tex(d['interpretation']),
@@ -305,8 +312,10 @@ def manuscript(spec,model,mathcheck,results,refs,figs,claims):
         lines += [r'\begin{figure}[ht]',r'\centering',r'\includegraphics[width=0.80\textwidth]{figures/'+name+'.pdf}',
                   r'\caption{'+caption+'}',r'\end{figure}']
     lines += [r'\section{Robustness, scope and limitations}',
-              tex('Independent equilibrium proof, novelty search, source-to-claim citations, empirical identification, alternate specifications, multiple-testing control, independent replication, and human review have not been automatically passed.'),
-              r'\section{Conclusion}',
+              tex('Independent equilibrium proof, novelty search, source-to-claim citations, empirical identification, alternate specifications, multiple-testing control, independent replication, and human review have not been automatically passed.')]
+    if spec.get('study_limitations'):
+        lines.append(tex(spec['study_limitations']))
+    lines += [r'\section{Conclusion}',
               tex('This is a machine-assembled working-paper shell, not a scientific finding. Conclusions remain open pending independent review.'),
               r'\section*{Research integrity and replication}',
               tex('See REVIEW_REQUIRED.md and replication_manifest.json. No protected source data were copied into the manuscript package.')]
@@ -320,6 +329,9 @@ def run(spec_path,model_path,*,out=None,analysis_dir=None):
     spec=prototype.validate_spec(prototype.read_json(spec_path))
     model=load(model_path)
     mathcheck=check_model(model,spec)
+    if model.get('normal_form_2x2') is not None:
+        from . import two_by_two_game
+        mathcheck['normal_form_2x2_audit'] = two_by_two_game.verify(model)
     out=Path(out).expanduser().resolve() if out else ROOT/'projects'/'factory_runs'/spec['id']/'paper_sprint'
     if out in (spec_path,model_path) or any(x in out.parents for x in [spec_path,model_path]):
         raise ValueError('Invalid output directory')
@@ -371,6 +383,8 @@ def run(spec_path,model_path,*,out=None,analysis_dir=None):
         'review_status':'UNREVIEWED_DRAFT'})
     original_qc=load(source_dir/'QC_REPORT.json')
     gates={'symbolic_derivative_signs_verified':mathcheck['all_derivative_signs_verified'],
+           'mixed_indifference_from_payoff_matrix_verified':bool(
+               mathcheck.get('normal_form_2x2_audit',{}).get('algebraic_indifference_identically_zero')),
            'equilibrium_proof_independently_verified':False,
            'empirical_mapping_independently_verified':False,
            'human_novelty_review':spec['novelty_review']['status']=='approved',
