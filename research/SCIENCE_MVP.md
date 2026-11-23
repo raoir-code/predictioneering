@@ -39,31 +39,60 @@ We also committed `research/examples/HOLY_DAYS_2X2_MODEL_CANDIDATE.json` and
 points only**. The latter requires an authorized private, direction-validated
 interstate dyad-day risk panel and is not presently data-complete.
 
-## 2. Continue a real project
+## 2. Formal model MUST start with an approved theory blueprint
 
-Write an original `formal_model.json` with actual players, actions, timing, payoffs, equilibrium argument and comparative statics. Use `research/examples/FORMAL_MODEL_TEMPLATE.json` for **format only** (its game is synthetic). The formal model's equilibrium still requires independent proof.
+The formal-model stage now has two internal steps: **architecture proposal** (the source-grounded baseline + exactly one change) and **mathematical solution**. Human review of the architecture is required **before** model equations in the 10-stage MVP profile. The old 12-stage pilot remains available for backward compatibility.
+
+The previous Holy Days one-shot inspection game is NOT the researcher's desired repeated ultimatum model. Its pending revision must be rejected for revision locally; no old signed puzzle/literature decisions are touched:
 
 ```bash
-"$P" -m research.factory.science_mvp produce holy-days formal_model --model /path/to/formal_model.json
+"$P" -m research.factory.review_workflow revise holy-days formal_model \
+  --reason "Replace one-shot inspection game with a conventional infinitely repeated ultimatum/bargaining game plus ONE predictable four-state holiday calendar innovation."
+"$P" -m research.factory.theory_fabricator brief holy-days \
+  --baseline "Conventional infinitely repeated ultimatum game; holiday state affects one existing payoff or continuation primitive"
+"$P" -m research.factory.theory_fabricator propose holy-days \
+  --baseline "Conventional infinitely repeated ultimatum game; holiday state affects one existing payoff or continuation primitive" \
+  --candidate research/examples/HOLY_DAYS_THEORY_BLUEPRINT_CANDIDATE.json
+open research/inbox/raw/scientific_stages/holy-days/theory_blueprint/THEORY_BLUEPRINT.json
 ```
 
-Read `research/projects/factory_runs/holy-days/human_gates/review_packets/formal_model.md`.
-To sign off: `"$P" -m research.factory.review_workflow approve holy-days formal_model --reviewer Researcher --notes "Checked the model and conditions."`
+The proposal is a **model plan**, not a proof. Its starting proposer protocol (e.g., alternating or fixed proposer), discounting, rejection continuation, calendar process, and candidate cost change all need human judgment. Review the blueprint; revise the file and re-propose if anything is wrong. To sign off **only the architecture**:
 
-Subsequent steps run only after the previous stage has been explicitly approved:
+```bash
+"$P" -m research.factory.theory_fabricator approve holy-days \
+  --reviewer Researcher --notes "Approved conventional repeated bargaining benchmark and one holiday-state innovation; mathematical solution still required."
+```
+
+A subsequent formal_model.json must match the SHA256 of the approved blueprint and explicitly name the same baseline game and one change. The formal-model worker will reject an unrelated model. The genuine infinite-horizon equilibrium is **not yet solved** and cannot be replaced with the old inspection game.
+
+**Optional automation:** the fabricator can generate an unreviewed blueprint via an explicitly authorized Claude API call (`propose --send-to-claude --confirm-share-evidence` with model, current token rates, and per-call dollar cap); offline is the default. API generation does not count as human approval or source verification.
+
+### Continue after the separately reviewed formal solution
+
+Use `research/examples/FORMAL_MODEL_TEMPLATE.json` for **file format only**.
+The formal model must state players, actions, timing, payoffs, solution concept,
+equilibrium argument and the actual comparative-static derivations.
+Any proposed repeated-game equilibrium must satisfy Bellman recursion,
+best responses, off-path incentives, all holiday states and baseline recovery.
+
+```bash
+"$P" -m research.factory.science_mvp produce holy-days formal_model \
+  --model /path/to/fully_derived_repeated_bargaining_model.json
+```
+
+Each subsequent stage also requires a human approval checkpoint:
 
 | Ready stage | Command |
 |---|---|
-| `hypotheses` | `"$P" -m research.factory.science_mvp produce holy-days hypotheses` |
-| `design` | `"$P" -m research.factory.science_mvp produce holy-days design --spec /path/to/study.json` |
-| `data` | `"$P" -m research.factory.science_mvp produce holy-days data` |
-| `analysis` | `"$P" -m research.factory.science_mvp produce holy-days analysis` |
-| `validation` | `"$P" -m research.factory.science_mvp produce holy-days validation` |
-| `manuscript` | `"$P" -m research.factory.science_mvp produce holy-days manuscript` |
-| `qc` | `"$P" -m research.factory.science_mvp produce holy-days qc` |
+| hypotheses | `"$P" -m research.factory.science_mvp produce holy-days hypotheses` |
+| design | `"$P" -m research.factory.science_mvp produce holy-days design --spec /path/to/study.json` |
+| data | `"$P" -m research.factory.science_mvp produce holy-days data` |
+| analysis | `"$P" -m research.factory.science_mvp produce holy-days analysis` |
+| validation | `"$P" -m research.factory.science_mvp produce holy-days validation` |
+| manuscript | `"$P" -m research.factory.science_mvp produce holy-days manuscript` |
+| qc | `"$P" -m research.factory.science_mvp produce holy-days qc` |
 
-The `study.json` must contain prespecified variables/estimation, and an authorized local CSV;
-see `research/examples/factory_spec_template.json`. In MVP mode the **design is approved before data procurement**; the worker checks missing data at the data stage. Each stage produces a review packet and **stops without approval**. Commands use the exact hashed and human-approved artifacts from upstream stages.
+A private, approved study CSV is still required for genuine empirical analysis. No source data or papers are copied to GitHub.
 
 ## 3. Fast mechanical acceptance test
 
