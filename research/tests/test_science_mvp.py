@@ -140,6 +140,30 @@ class ScientificMVPTests(unittest.TestCase):
         self.assertEqual(state["stages"]["diagnosis"]["status"], "approved")
         self.assertIn("literature", g.overview(self.home, self.project)["ready_stages"])
 
+    def test_directed_dyad_panel_guards_reject_ambiguous_and_missing_days(self):
+        import pandas as pd
+        spec = {"design": {"unit": "dyad", "time": "date", "outcome": "attack"},
+                "research_integrity_checks": {
+                    "unique_unit_date": True, "complete_unit_daily_panel": True,
+                    "require_directed_attack_attribution": True,
+                    "direction_verified_column": "direction_verified"}}
+        data = pd.DataFrame({
+            "dyad": ["A-B", "A-B", "A-B"],
+            "date": pd.to_datetime(["2024-01-01", "2024-01-02", "2024-01-03"]),
+            "attack": [0, 1, 0], "direction_verified": [0, 1, 0]})
+        checked = mvp.check_panel_integrity(spec, data)
+        self.assertEqual(len(checked["checks"]), 3)
+        self.assertFalse(checked["independent_direction_audit"])
+        invalid = data.copy()
+        invalid.loc[1, "direction_verified"] = 0
+        with self.assertRaisesRegex(ValueError, "Unverified"):
+            mvp.check_panel_integrity(spec, invalid)
+        with self.assertRaisesRegex(ValueError, "Missing unit-day"):
+            mvp.check_panel_integrity(spec, data.drop(index=1).assign(attack=[0, 1]))
+        with self.assertRaisesRegex(ValueError, "Duplicate unit-date"):
+            mvp.check_panel_integrity(spec, pd.concat([data, data.iloc[[0]]],
+                                                        ignore_index=True))
+
     def test_no_autoapproval_and_missing_assessment_fails_closed(self):
         self.seed()
         with self.assertRaisesRegex(ValueError, "assessment"):
