@@ -311,8 +311,17 @@ def propose(home, project, *, baseline, candidate=None, send=False, share=False,
         if prior.get("schema") != SCHEMA:
             raise ValueError("Existing blueprint has an incompatible schema")
         prior_sha = gates.file_sha(existing_path)
+        # Bound revision prompt size across indefinitely many rounds:
+        # provide the current scientific architecture, not accumulating
+        # generated metadata, prior feedback, signatures, or historical text.
+        architecture = {
+            key: prior[key]
+            for key in ("schema", "status", "baseline", "innovation",
+                        "mechanism", "proof_plan", "source_caveats")
+            if key in prior
+        }
         bundle["revision_request"] = {
-            "feedback": feedback, "prior_blueprint": prior,
+            "feedback": feedback, "prior_blueprint": architecture,
             "prior_blueprint_sha256": prior_sha}
     if candidate and send:
         raise ValueError("Choose supplied candidate OR paid generation, not both")
