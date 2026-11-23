@@ -1,0 +1,78 @@
+{
+  "note": "MECHANISM CANDIDATE ONLY. Simple two-player simultaneous inspection game; not a claim about observed interstate holiday attacks. Interior mixed strategy valid only if 0 < c0 + d*h < L, h is 0 or 1, and v, ell > 0. Requires original-paper scrutiny, full domain proof and credible data.",
+  "title": "Holiday readiness costs and attack timing: a two-by-two inspection-game candidate",
+  "players": [
+    "Attacker",
+    "Defender"
+  ],
+  "information": "The upcoming holiday h in {0,1} and parameters c0,d,L,v,ell are common knowledge. Defender readiness and attack decisions are simultaneous/private; neither observes the other's current action.",
+  "timing": "Nature announces h. Attacker chooses Attack or Wait, Defender chooses Ready or Rest simultaneously. If attacked while resting, Defender suffers loss L; readiness prevents damage but costs c0+d*h; an attack against readiness incurs attacker loss ell.",
+  "strategies": [
+    "Attacker chooses Attack or Wait",
+    "Defender chooses Ready or Rest"
+  ],
+  "payoffs": {
+    "Attacker": "Attack yields -ell when Defender is Ready, v when Defender Rests; waiting yields 0.",
+    "Defender": "Ready always costs c0+d*h and prevents damage; Rest incurs loss L only if attacked, otherwise 0."
+  },
+  "solution_concept": "Interior mixed-strategy Nash equilibrium conditional on strict admissibility 0<c0+d*h<L, v>0 and ell>0; uniqueness and corner cases require independent checking.",
+  "equilibrium_argument": "Attacker indifference requires defender readiness mixing q=v/(v+ell). Defender indifference requires attacker attack mixing p=(c0+d*h)/L. These are algebraic necessary conditions, and with both mixing probabilities in (0,1) imply mutual best responses. Full equilibrium coverage and appropriateness for interstate warfare are not independently established.",
+  "parameters": {
+    "c0": "positive",
+    "d": "positive",
+    "h": "nonnegative",
+    "L": "positive",
+    "v": "positive",
+    "ell": "positive"
+  },
+  "equilibrium": {
+    "choice": "p",
+    "expression": "(c0+d*h)/L"
+  },
+  "normal_form_2x2": {
+    "row_actions": [
+      "Attack",
+      "Wait"
+    ],
+    "column_actions": [
+      "Ready",
+      "Rest"
+    ],
+    "row_payoffs": [
+      [
+        "-ell",
+        "v"
+      ],
+      [
+        "0",
+        "0"
+      ]
+    ],
+    "column_payoffs": [
+      [
+        "-(c0+d*h)",
+        "-L"
+      ],
+      [
+        "-(c0+d*h)",
+        "0"
+      ]
+    ],
+    "column_mix_probability": "v/(v+ell)",
+    "stated_interior_domain": "h in {0,1}; 0<c0+d*h<L; v>0; ell>0"
+  },
+  "comparative_statics": [
+    {
+      "id": "CS1",
+      "parameter": "h",
+      "sign": "positive",
+      "hypothesis_id": "H1",
+      "hypothesis_text": "When holidays raise defenders' readiness costs while other incentives remain fixed, attack attempts become more likely.",
+      "interpretation": "Under the stated interior mixed equilibrium, dp/dh=d/L>0, conditional on d>0, L>c0+d and invariant opponent incentives. This does NOT imply all holidays increase interstate war.",
+      "empirical_mapping": {
+        "predictor": "defender_holiday",
+        "outcome": "attack_attempt"
+      }
+    }
+  ]
+}
