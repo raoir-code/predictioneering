@@ -248,7 +248,8 @@ def produce(home, project, stage, *, model_path=None, spec_path=None,
         spec["novelty_review"] = {
             "status": "approved", "reviewer": approval["reviewer"],
             "notes": "Human-signed " + upstream + " screening: " +
-                     approval["token"][:24] + "; candidate contribution ONLY, not independently confirmed."}
+                     approval["token"][:24] + "; candidate contribution ONLY, not independently confirmed.",
+            "scope": "preliminary_screen_only"}
         # A frozen study.json lives in an immutable snapshot directory, so
         # relative CSV paths would silently resolve against the wrong folder.
         # Record a local, private absolute source path; never upload the spec
