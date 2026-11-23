@@ -499,6 +499,16 @@ def approve(home, project, stage, reviewer, notes, *, override=False):
     deps = {key: approved_token(home, state, key) for key in stage_dependencies(state, stage)}
     if deps != rec.get("upstream_approval_tokens"):
         raise ValueError("Upstream scientific decisions changed since submission")
+    # The MVP formal theory checkpoint cannot be approved by bypassing the
+    # architecture-first fabricator with an unrelated handwritten JSON.
+    if stage == "formal_model" and state.get("gate_profile") == "mvp10":
+        from . import theory_fabricator
+        model_files = [a for a in rec["artifacts"] if a["name"] == "formal_model.json"]
+        if len(model_files) != 1:
+            raise ValueError("Formal model approval requires one auditable formal_model.json")
+        frozen = location(home, project) / model_files[0]["snapshot"]
+        theory_fabricator.require_blueprint(
+            home, project, json.loads(frozen.read_text(encoding="utf-8")))
     hashes = [a["sha256"] for a in rec["artifacts"]]
     data = {"project": project, "stage": stage, "revision": rec["revision"],
             "artifact_sha256": hashes, "dependency_tokens": deps,
