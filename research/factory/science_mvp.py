@@ -162,6 +162,9 @@ def produce(home, project, stage, *, model_path=None, spec_path=None,
         if model_path is None:
             raise ValueError("Supply --model with a proposed, explicitly argued game model JSON")
         model = paper_sprint.load(model_path)
+        if profile == "mvp10":
+            from . import theory_fabricator
+            theory_fabricator.require_blueprint(home, project, model)
         checks = model_checks(model)
         files = [write(dest / "formal_model.json", model),
                  write(dest / "FORMAL_CHECKS.md",
@@ -180,7 +183,12 @@ def produce(home, project, stage, *, model_path=None, spec_path=None,
                          "Defender mixing q = " +
                          checks["normal_form_2x2_audit"]["column_player_first_action_probability"] + "\n")
                         if "normal_form_2x2_audit" in checks else ""))]
-        summary = "Researcher-supplied formal game and conditional algebra checks; equilibrium UNPROVEN"
+        if profile == "mvp10":
+            from . import theory_fabricator
+            agreed = theory_fabricator.folder(home, project) / "THEORY_BLUEPRINT.json"
+            files.append(write(dest / "THEORY_BLUEPRINT.json",
+                               json.loads(agreed.read_text(encoding="utf-8"))))
+        summary = "Approved architecture -> researcher-supplied game and conditional checks; equilibrium UNPROVEN"
     elif stage == "hypotheses":
         model = approved_model(home, project)
         checks = model_checks(model)
