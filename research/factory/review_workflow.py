@@ -32,6 +32,15 @@ STAGES = (
     "puzzle", "diagnosis", "literature", "novelty", "formal_model",
     "hypotheses", "data", "design", "analysis", "validation", "manuscript", "qc",
 )
+# 10-stage opt-in profile. Legacy signatures and decision files are preserved.
+MVP_STAGES = ("puzzle", "literature", "formal_model", "hypotheses",
+              "design", "data", "analysis", "validation", "manuscript", "qc")
+MVP_DEPS = {"puzzle": (), "literature": ("puzzle",),
+            "formal_model": ("literature",), "hypotheses": ("formal_model",),
+            "design": ("hypotheses",), "data": ("design",),
+            "analysis": ("design", "data"), "validation": ("analysis",),
+            "manuscript": ("validation", "literature", "formal_model"),
+            "qc": ("manuscript",)}
 DEPS = {
     "puzzle": (),
     "diagnosis": ("puzzle",),
@@ -129,6 +138,18 @@ def safe_stage(value):
     if value not in DEPS:
         raise ValueError("Unknown research stage: " + str(value))
     return value
+
+
+def active_stages(state):
+    return MVP_STAGES if state.get("gate_profile") == "mvp10" else STAGES
+
+
+def stage_dependencies(state, stage):
+    if state.get("gate_profile") == "mvp10":
+        if stage not in MVP_DEPS:
+            raise ValueError("Stage " + stage + " is folded into the MVP pipeline")
+        return MVP_DEPS[stage]
+    return DEPS[stage]
 
 
 def location(home, project):
@@ -272,7 +293,7 @@ def require_ready(home, project, stage):
     entry = state["stages"][stage]
     if entry["status"] not in ("not_started", "needs_revision", "stale"):
         raise ValueError(f"Stage {stage} is {entry['status']}, not ready to produce work")
-    for upstream in DEPS[stage]:
+    for upstream in stage_dependencies(state, stage):
         approved_token(home, state, upstream)
     return state
 
@@ -284,13 +305,14 @@ def require_approved(home, project, stage):
     return approved_token(home, state, safe_stage(stage))
 
 
-def downstream(stage):
+def downstream(stage, profile="legacy"):
     todo = [stage]
     found = set()
     while todo:
         cur = todo.pop()
         for name, parents in DEPS.items():
-            if cur in parents and name not in found:
+            new_parents = MVP_DEPS.get(name, ()) if profile == "mvp10" else ()
+            if (cur in parents or cur in new_parents) and name not in found:
                 found.add(name)
                 todo.append(name)
     return [s for s in STAGES if s in found]
@@ -298,7 +320,7 @@ def downstream(stage):
 
 def invalidate(state, changed):
     invalidated = []
-    for stage in downstream(changed):
+    for stage in downstream(changed, state.get("gate_profile", "legacy")):
         record = state["stages"][stage]
         if record["status"] == "not_started":
             continue
@@ -345,7 +367,7 @@ def submit(home, project, stage, files, summary):
     target = stage_root / "snapshots" / stage / f"rev{rev:04d}"
     if target.exists():
         raise ValueError("Revision snapshot already exists; refusing to overwrite")
-    upstream = {key: approved_token(home, state, key) for key in DEPS[stage]}
+    upstream = {key: approved_token(home, state, key) for key in stage_dependencies(state, stage)}
     target.mkdir(parents=True)
     snapshots = []
     for p, size, sha in prepared:
@@ -474,7 +496,7 @@ def approve(home, project, stage, reviewer, notes, *, override=False):
     # its recommendations without a separate override ceremony.
     warning = (c is not None and (c["recommendation"] != "approve" or
                any(x["severity"] in ("blocker", "major") for x in c["issues"])))
-    deps = {key: approved_token(home, state, key) for key in DEPS[stage]}
+    deps = {key: approved_token(home, state, key) for key in stage_dependencies(state, stage)}
     if deps != rec.get("upstream_approval_tokens"):
         raise ValueError("Upstream scientific decisions changed since submission")
     hashes = [a["sha256"] for a in rec["artifacts"]]
@@ -531,11 +553,11 @@ def revise(home, project, stage, notes, *, reject=False):
 def ready_stages(home, project, state=None):
     state = state or load(home, project)
     ready = []
-    for stage in STAGES:
+    for stage in active_stages(state):
         if state["stages"][stage]["status"] not in ("not_started", "needs_revision", "stale"):
             continue
         try:
-            for parent in DEPS[stage]:
+            for parent in stage_dependencies(state, stage):
                 approved_token(home, state, parent)
         except ValueError:
             continue
@@ -547,10 +569,10 @@ def overview(home, project):
     state = load(home, safe_project(project))
     validate_events(state)
     steps = []
-    for stage in STAGES:
+    for stage in active_stages(state):
         rec = state["stages"][stage]
         details = {"stage": stage, "status": rec["status"], "revision": rec["revision"],
-                   "dependencies": DEPS[stage]}
+                   "dependencies": stage_dependencies(state, stage)}
         if rec["status"] == "approved":
             try:
                 approved_token(home, state, stage)
@@ -559,6 +581,7 @@ def overview(home, project):
                 details["snapshot_integrity"] = "INVALID: " + str(exc)
         steps.append(details)
     return {"project": project, "title": state["title"],
+            "gate_profile": state.get("gate_profile", "legacy"),
             "ready_stages": ready_stages(home, project, state),
             "awaiting_human": [s["stage"] for s in steps if s["status"] in ("awaiting_human_approval", "awaiting_critique")],
             "awaiting_critique": [],
@@ -653,12 +676,12 @@ def dashboard(home, project, state):
     lines = [f"# Research Factory dashboard — {state['title']}", "",
              "Every completed stage waits for **your approval or revision**. Optional AI criticism is advisory.", "",
              "| Stage | Status | Revision | Depends on |", "|---|---|---:|---|"]
-    for stage in STAGES:
+    for stage in active_stages(state):
         r = state["stages"][stage]
         status = "awaiting your decision" if r["status"] in ("awaiting_critique", "awaiting_human_approval") else r["status"]
-        lines.append(f"| {stage} | {status} | {r['revision']} | {', '.join(DEPS[stage]) or '—'} |")
+        lines.append(f"| {stage} | {status} | {r['revision']} | {', '.join(stage_dependencies(state, stage)) or '—'} |")
     lines += ["", "## Your next actions", ""]
-    for stage in STAGES:
+    for stage in active_stages(state):
         if state["stages"][stage]["status"] in ("awaiting_critique", "awaiting_human_approval"):
             lines.append(f"- Review [{stage}](review_packets/{stage}.md) and APPROVE or REVISE.")
     for stage in ready_stages(home, project, state):
@@ -693,7 +716,8 @@ def revision_brief(home, project, stage):
              "human_instructions": summary,
              "previous_artifacts": previous,
              "stage_checks": CHECKS[stage],
-             "approved_upstream": {p: approved_token(home, state, p) for p in DEPS[stage]},
+             "approved_upstream": {p: approved_token(home, state, p)
+                                   for p in stage_dependencies(state, stage)},
              "worker_rules": [
                  "Use only supplied evidence or explicitly sourced new evidence; cite originals.",
                  "Implement the requested changes, listing each resolved or unresolved issue.",
@@ -793,12 +817,36 @@ def produce(home, project, stage, *, spec_file=None, model_file=None):
     return {**submission, "worker_status": result["status"], "archive": result["archive"]}
 
 
+@serialized
+def activate_mvp(home, project):
+    """One-way profile switch; never modify past approval tokens or snapshots."""
+    state = load(home, safe_project(project))
+    validate_events(state)
+    if state.get("gate_profile") == "mvp10":
+        return {"status": "already_mvp", "ready_stages": ready_stages(home, project, state)}
+    for stage in ("diagnosis", "novelty"):
+        if state["stages"][stage]["status"] in (
+                "awaiting_critique", "awaiting_human_approval", "needs_revision"):
+            raise ValueError("Resolve pending legacy " + stage + " before migration")
+    for stage in STAGES:
+        if state["stages"][stage]["status"] == "approved":
+            approved_token(home, state, stage)
+    state["gate_profile"] = "mvp10"
+    event(state, "gate_profile_activated", "workflow",
+          {"old_signed_approvals_preserved": True, "optional_stages": ["diagnosis", "novelty"]})
+    persist(home, project, state)
+    return {"status": "mvp_activated", "ready_stages": ready_stages(home, project, state),
+            "old_signed_approvals_preserved": True, "network_or_paid_api_calls": 0}
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Research Factory immutable scientific review gates")
     parser.add_argument("--home", type=Path, default=ROOT)
     sub = parser.add_subparsers(dest="command", required=True)
     i = sub.add_parser("init"); i.add_argument("project"); i.add_argument("--title", required=True)
     s = sub.add_parser("status"); s.add_argument("project")
+    m = sub.add_parser("activate-mvp", help="Switch to 10 stages without rewriting previous approvals")
+    m.add_argument("project")
     v = sub.add_parser("review", help="Refresh readable report without changing approval state")
     v.add_argument("project"); v.add_argument("stage", choices=STAGES)
     r = sub.add_parser("submit"); r.add_argument("project"); r.add_argument("stage", choices=STAGES)
@@ -823,6 +871,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     try:
         if args.command == "init": output = init(args.home, args.project, args.title)
+        elif args.command == "activate-mvp": output = activate_mvp(args.home, args.project)
         elif args.command == "status": output = overview(args.home, args.project)
         elif args.command == "review": output = review(args.home, args.project, args.stage)
         elif args.command == "submit": output = submit(args.home, args.project, args.stage, args.artifact, args.summary)
