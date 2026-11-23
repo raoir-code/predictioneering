@@ -123,6 +123,19 @@ class FactoryGuideTests(unittest.TestCase):
         self.assertIn("formal_reasoner review", need_revision["command"])
         self.assertIn("@", " ".join(need_revision["notes"]))
         self.assertEqual(need_revision["network_or_paid_api_calls"], 0)
+
+        fr.draft(
+            self.home, self.project, candidate_file=local,
+            feedback="Focused MATHEMATICAL PROOF AUDIT: clarify multiplicity and "
+                     "do not assume unique pure-phase Markov equilibria."
+        )
+        # The saved numerical audit is stale until repeated for the new proof.
+        self.assertIn("formal_solver audit", guide.guide(self.home, self.project)["command"])
+        solver.audit(self.home, self.project, cases=2, max_phases=4)
+        next_task = guide.guide(self.home, self.project)
+        self.assertIn("finite_war_set_handoff", next_task["command"])
+        self.assertIn("INCOMPLETE", " ".join([next_task["next_action"],
+                                              *next_task["notes"]]))
         self.assertEqual(gates.load(self.home, self.project)["stages"]
                          ["formal_model"]["status"], "not_started")
 
