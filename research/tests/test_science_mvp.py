@@ -90,6 +90,56 @@ class ScientificMVPTests(unittest.TestCase):
         self.assertFalse(qc["independent_replication"])
         self.assertEqual(g.overview(self.home, self.project)["awaiting_human"], ["qc"])
 
+    def test_mvp_profile_skips_redundant_gates_and_reorders_design_data(self):
+        self.seed()
+        old_literature_token = g.require_approved(self.home, self.project, "literature")
+        profile = g.activate_mvp(self.home, self.project)
+        self.assertEqual(profile["status"], "mvp_activated")
+        self.assertEqual(profile["ready_stages"], ["formal_model"])
+        self.assertEqual(g.require_approved(self.home, self.project, "literature"), old_literature_token)
+        self.assertEqual(len(g.overview(self.home, self.project)["stages"]), 10)
+        self.assertEqual(g.load(self.home, self.project)["stages"]["diagnosis"]["status"],
+                         "approved")
+        self.assertEqual(g.load(self.home, self.project)["stages"]["novelty"]["status"],
+                         "not_started")
+        model, spec = self.toy_input()
+        mvp.produce(self.home, self.project, "formal_model", model_path=model)
+        self.approved("formal_model")
+        mvp.produce(self.home, self.project, "hypotheses")
+        self.approved("hypotheses")
+        self.assertEqual(g.overview(self.home, self.project)["ready_stages"], ["design"])
+        design = mvp.produce(self.home, self.project, "design", spec_path=spec)
+        self.assertEqual(design["status"], "awaiting_human_approval")
+        approved_plan = mvp.draft(self.home, self.project, "design") / "study.json"
+        self.assertTrue(Path(json.loads(approved_plan.read_text())["data"]["csv_path"]).is_absolute())
+        self.approved("design")
+        self.assertEqual(g.overview(self.home, self.project)["ready_stages"], ["data"])
+        mvp.produce(self.home, self.project, "data")
+        self.approved("data")
+        mvp.produce(self.home, self.project, "analysis")
+        self.approved("analysis")
+        mvp.produce(self.home, self.project, "validation")
+        self.approved("validation")
+        paper = mvp.produce(self.home, self.project, "manuscript")
+        self.assertTrue(Path(paper["archive"]).exists())
+        self.approved("manuscript")
+        qc = mvp.produce(self.home, self.project, "qc")
+        self.assertEqual(qc["status"], "awaiting_human_approval")
+        self.assertEqual(g.overview(self.home, self.project)["awaiting_human"], ["qc"])
+
+    def test_mvp_profile_preserves_snapshot_dependencies_when_literature_revised(self):
+        self.seed()
+        g.activate_mvp(self.home, self.project)
+        model, _ = self.toy_input()
+        mvp.produce(self.home, self.project, "formal_model", model_path=model)
+        self.approved("formal_model")
+        g.revise(self.home, self.project, "literature",
+                 "New directly relevant original paper alters the synthesis")
+        state = g.load(self.home, self.project)
+        self.assertEqual(state["stages"]["formal_model"]["status"], "stale")
+        self.assertEqual(state["stages"]["diagnosis"]["status"], "approved")
+        self.assertIn("literature", g.overview(self.home, self.project)["ready_stages"])
+
     def test_no_autoapproval_and_missing_assessment_fails_closed(self):
         self.seed()
         with self.assertRaisesRegex(ValueError, "assessment"):
