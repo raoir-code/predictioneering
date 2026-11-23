@@ -225,7 +225,9 @@ def anthropic_transport(bundle, model, key, max_tokens):
                        " mechanism: candidate_literature_gap,"
                        "mechanism,null_case,rival_explanation. proof_plan: "
                        "solution_concept,equilibrium_conditions,off_path_requirements,"
-                       "benchmark_recovery.")
+                       "benchmark_recovery. source_caveats MUST be a"
+                       " nonempty list of explicit unresolved source/novelty gaps."
+                       " Return exactly ONE JSON object; no commentary afterward.")
     revision = bundle.get("revision_request")
     if revision:
         # The researcher's feedback is an INSTRUCTION; the earlier blueprint
@@ -630,8 +632,14 @@ def review(home, project, *, share=False, model=None, key=None,
         output("War/rejection: " + short(candidate["baseline"]["rejection_transition"]))
         output("Holiday innovation: " + short(candidate["innovation"]["one_sentence_change"]))
         output("Full review: " + str(dest / "BLUEPRINT_REVIEW.md"))
-        output("What should I change? Type your feedback, SHOW for the full report, "
-               "or APPROVE if the architecture is good to go.")
+        unresolved = unresolved_claude_attempts(home, project)
+        if unresolved:
+            output("WARNING: A newer Claude revision FAILED; you are viewing the OLDER "
+                   "draft. Type your feedback to revise, or APPROVE CURRENT to "
+                   "explicitly accept this older version.")
+        else:
+            output("What should I change? Type your feedback, SHOW for the full "
+                   "report, or APPROVE if this architecture is good to go.")
         try:
             answer = ask("> ").strip()
         except EOFError:
@@ -642,9 +650,19 @@ def review(home, project, *, share=False, model=None, key=None,
             output((dest / "BLUEPRINT_REVIEW.md").read_text(encoding="utf-8"))
             continue
         if answer.upper() == "APPROVE":
+            if unresolved:
+                output("NOT APPROVED: the latest Claude revision failed. "
+                       "Type APPROVE CURRENT only if you intentionally want to "
+                       "accept this older model, or give me your corrections.")
+                continue
             return approve(home, project, reviewer="Researcher",
                            notes="Researcher explicitly accepted architecture using "
                                  "interactive review; no equilibrium proved.")
+        if answer.upper() == "APPROVE CURRENT":
+            return approve(home, project, reviewer="Researcher",
+                           notes="Researcher explicitly accepted older architecture "
+                                 "despite a failed newer Claude revision; no proof.",
+                           accept_pending=True)
         if answer.startswith("@"):
             feedback_file = Path(answer[1:]).expanduser()
             answer = feedback_file.read_text(encoding="utf-8")
@@ -678,7 +696,60 @@ def revise(home, project, *, feedback, share, model, key, input_rate,
                    revision_feedback=feedback)
 
 
-def approve(home, project, *, reviewer, notes):
+def unresolved_claude_attempts(home, project):
+    """Failed Claude revisions against the CURRENT draft, not older archives."""
+    dest = folder(home, project)
+    current = dest / "THEORY_BLUEPRINT.json"
+    if not current.is_file():
+        return []
+    parent_sha = gates.file_sha(current)
+    pending = []
+    for diagnostic_file in sorted((dest / "attempts").glob("*.diagnostic.json")):
+        try:
+            diagnostic = json.loads(diagnostic_file.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        if (diagnostic.get("prior_blueprint_sha256") == parent_sha and
+                diagnostic.get("status") in {
+                    "TRUNCATED_OR_INVALID_MODEL_OUTPUT",
+                    "CLAUDE_OUTPUT_REJECTED_UNREVIEWED",
+                }):
+            pending.append(str(diagnostic_file))
+    return pending
+
+
+def reopen(home, project, *, reason):
+    """Withdraw an architecture approval, preserving its signature as evidence."""
+    reason = reasonable("reopening reason", reason, minimum=10, maximum=2000)
+    dest = folder(home, project)
+    signed = dest / "BLUEPRINT_APPROVAL.json"
+    if not signed.is_file():
+        raise ValueError("No architecture approval exists to reopen")
+    state = gates.load(home, project)
+    if state["stages"]["formal_model"]["status"] == "approved":
+        raise ValueError("The formal model is already approved; revise the "
+                         "formal_model workflow stage and invalidate descendants first")
+    original = json.loads(signed.read_text(encoding="utf-8"))
+    blueprint = dest / "THEORY_BLUEPRINT.json"
+    if original.get("blueprint_sha256") != gates.file_sha(blueprint):
+        raise ValueError("Signed blueprint SHA does not match current model")
+    original["withdrawn_utc"] = datetime.now(timezone.utc).isoformat()
+    original["withdrawal_reason"] = reason
+    archive = dest / "approval_history" / (
+        datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ") +
+        "_" + original["blueprint_sha256"][:16] + ".json")
+    write(archive, original)
+    signed.unlink()
+    return {
+        "status": "ARCHITECTURE_REOPENED_UNREVIEWED",
+        "withdrawn_approval_archived": str(archive),
+        "blueprint_sha256": original["blueprint_sha256"],
+        "network_or_paid_api_calls": 0,
+        "next_action": "Run revise or recover; review corrected blueprint before approval",
+    }
+
+
+def approve(home, project, *, reviewer, notes, accept_pending=False):
     reviewer = reasonable("reviewer", reviewer, minimum=2, maximum=200)
     notes = reasonable("approval notes", notes, minimum=8, maximum=2000)
     dest = folder(home, project)
@@ -689,10 +760,19 @@ def approve(home, project, *, reviewer, notes):
     signed = dest / "BLUEPRINT_APPROVAL.json"
     if signed.exists():
         raise ValueError("This blueprint already has an approval")
+    unresolved = unresolved_claude_attempts(home, project)
+    if unresolved and not accept_pending:
+        raise ValueError(
+            "A newer Claude revision FAILED and remains unresolved. "
+            "This is the OLDER blueprint. Use recover/revise, or explicitly "
+            "use APPROVE CURRENT in interactive review to approve the old version."
+        )
     record = {"blueprint_sha256": gates.file_sha(file),
               "upstream": proposed["upstream"], "reviewer": reviewer, "notes": notes,
               "approved_utc": datetime.now(timezone.utc).isoformat(),
-              "architecture_only": True, "equilibrium_proven": False}
+              "architecture_only": True, "equilibrium_proven": False,
+              "explicitly_accepted_unresolved_attempts":
+                  unresolved if accept_pending else []}
     write(signed, record)
     return {"status": "ARCHITECTURE_APPROVED_NOT_SOLVED",
             "blueprint_sha256": record["blueprint_sha256"],
@@ -757,11 +837,16 @@ def main(argv=None):
     w.add_argument("--output-rate", type=float)
     w.add_argument("--max-usd", type=float)
     w.add_argument("--max-tokens", type=int, default=12000)
+    r = sub.add_parser("reopen", help="Withdraw an architecture approval and resume revisions")
+    r.add_argument("project")
+    r.add_argument("--reason", required=True)
     h = sub.add_parser("history", help="Show all saved blueprint revisions")
     h.add_argument("project")
     a = sub.add_parser("approve")
     a.add_argument("project"); a.add_argument("--reviewer", required=True)
     a.add_argument("--notes", required=True)
+    a.add_argument("--accept-pending", action="store_true",
+                   help="Explicitly sign older model even if later failed revision exists")
     args = p.parse_args(argv)
     try:
         if args.command == "brief":
@@ -784,6 +869,8 @@ def main(argv=None):
                             model=args.model, key=os.getenv("ANTHROPIC_API_KEY"),
                             input_rate=args.input_rate, output_rate=args.output_rate,
                             max_usd=args.max_usd, max_tokens=args.max_tokens)
+        elif args.command == "reopen":
+            result = reopen(args.home, args.project, reason=args.reason)
         elif args.command == "history":
             result = history(args.home, args.project)
         elif args.command == "revise":
@@ -795,7 +882,8 @@ def main(argv=None):
                             max_usd=args.max_usd, max_tokens=args.max_tokens)
         else:
             result = approve(args.home, args.project,
-                             reviewer=args.reviewer, notes=args.notes)
+                             reviewer=args.reviewer, notes=args.notes,
+                             accept_pending=args.accept_pending)
         print(json.dumps(result, indent=2, ensure_ascii=False))
         return 0
     except (ValueError, KeyError, TypeError, OSError, RuntimeError, json.JSONDecodeError) as exc:
