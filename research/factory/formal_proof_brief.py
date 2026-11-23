@@ -12,6 +12,7 @@ import sys
 
 from . import formal_workbench as wb
 from . import formal_solver as solver
+from . import formal_reasoner as reasoner
 from . import review_workflow as gates
 from . import theory_fabricator as theory
 
@@ -28,6 +29,7 @@ def prepare(home, project):
         raise ValueError("Need both the saved unverified Claude draft and the "
                          "completed offline solver audit first")
     proof = json.loads(proof_path.read_text(encoding="utf-8"))
+    reasoner.validate(proof)  # Structural validation only; never mathematical proof.
     audit = json.loads(audit_path.read_text(encoding="utf-8"))
     proof_sha = gates.file_sha(proof_path)
     if (proof.get("approved_blueprint_sha256") != sha or
