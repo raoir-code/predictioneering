@@ -122,6 +122,8 @@ class ScientificMVPTests(unittest.TestCase):
         self.approved("validation")
         paper = mvp.produce(self.home, self.project, "manuscript")
         self.assertTrue(Path(paper["archive"]).exists())
+        qc = json.loads((Path(paper["archive"]).parent / "overleaf" / "PAPER_QC.json").read_text())
+        self.assertFalse(qc["gates"]["human_novelty_review"])
         self.approved("manuscript")
         qc = mvp.produce(self.home, self.project, "qc")
         self.assertEqual(qc["status"], "awaiting_human_approval")
