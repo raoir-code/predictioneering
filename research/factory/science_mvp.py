@@ -13,7 +13,7 @@ import re
 import sys
 import zipfile
 
-from . import paper_sprint, prototype, review_workflow as gates
+from . import paper_sprint, prototype, review_workflow as gates, finite_war_set_handoff as war_set
 
 ROOT = Path(__file__).resolve().parents[1]
 STAGES = ("puzzle", "diagnosis", "literature", "novelty", "formal_model",
@@ -60,6 +60,9 @@ def approved_model(home, project):
 
 
 def derived_hypotheses(model):
+    if model.get("schema") == war_set.SCHEMA:
+        return [{key: row[key] for key in ("id", "prediction", "sign")}
+                for row in war_set.hypotheses(model)]
     h = paper_sprint.hypotheses_from_model(model)["hypotheses"]
     return [{"id": row["id"], "prediction": row["prediction"], "sign": row["sign"]}
             for row in h]
@@ -75,6 +78,20 @@ def match_hypotheses(home, project, spec):
 
 
 def model_checks(model, spec=None):
+    # A discrete war-set is not a differentiable equilibrium expression.
+    # Do not fabricate an equilibrium expression to satisfy a symbolic API.
+    if model.get("schema") == war_set.SCHEMA:
+        checks = war_set.checks(model)
+        if spec is not None:
+            expected = derived_hypotheses(model)
+            if spec.get("hypotheses") != expected:
+                raise ValueError("Empirical hypotheses differ from the signed set-valued model")
+            predictors = {(h["empirical_mapping"]["predictor"],
+                           h["empirical_mapping"]["outcome"])
+                          for h in model["hypotheses"]}
+            if predictors != {(spec["design"]["treatment"], spec["design"]["outcome"])}:
+                raise ValueError("Empirical design does not match the discrete game's variable mapping")
+        return checks
     # The existing paper sprint checks derivatives conditional on an ASSERTED
     # equilibrium; a valid derivative is not a best-response proof.
     if spec is None:
@@ -89,6 +106,8 @@ def model_checks(model, spec=None):
     if model.get("normal_form_2x2") is not None:
         from . import two_by_two_game
         checks["normal_form_2x2_audit"] = two_by_two_game.verify(model)
+    checks["formal_check_passed"] = True
+    checks["check_type"] = "conditional_symbolic_derivative"
     return checks
 
 
@@ -165,24 +184,44 @@ def produce(home, project, stage, *, model_path=None, spec_path=None,
         if profile == "mvp10":
             from . import theory_fabricator
             theory_fabricator.require_blueprint(home, project, model)
+        if model.get("schema") == war_set.SCHEMA:
+            war_set.source_check(home, project, model)
         checks = model_checks(model)
+        if model.get("schema") == war_set.SCHEMA:
+            screening = (
+                "# Finite war-set model — structural screening, NOT theorem verification\n\n"
+                "**No derivative has been calculated or invented.**\n\n"
+                "The human-supplied predictions are explicitly scoped as "
+                "selection-invariant or conditional on equilibrium selection.\n"
+                "Conditional claims: " +
+                str(checks["selection_conditional_hypotheses"]) + "\n\n"
+                "**NOT VERIFIED:** general pure-MPE existence, mathematical "
+                "necessity/sufficiency beyond the numerical audit, equilibrium "
+                "selection, empirical identification, literature novelty or signed "
+                "hypothesis interpretation.\n\n"
+                "Human review is REQUIRED before proceeding.\n"
+            )
+        else:
+            screening = (
+                "# Formal model screening\n\n" +
+                "Symbolic derivative signs (conditional on asserted equilibrium): " +
+                str(checks["all_derivative_signs_verified"]) + "\n\n" +
+                "\n".join("- " + x["id"] + ": d/d" + x["parameter"] +
+                          " = " + x["derivative_sympy"] + " (" +
+                          x["expected_sign"] + ")"
+                          for x in checks["derivatives"]) +
+                "\n\n**NOT VERIFIED:** complete equilibrium classification, parameter admissibility, "
+                "empirical mapping, and novelty. Researcher must check all.\n" +
+                (("2x2 payoff-matrix indifference: " +
+                  checks["normal_form_2x2_audit"]["status"] + "\n" +
+                  "Attacker mixing p = " +
+                  checks["normal_form_2x2_audit"]["row_player_first_action_probability"] + "\n" +
+                  "Defender mixing q = " +
+                  checks["normal_form_2x2_audit"]["column_player_first_action_probability"] + "\n")
+                 if "normal_form_2x2_audit" in checks else "")
+            )
         files = [write(dest / "formal_model.json", model),
-                 write(dest / "FORMAL_CHECKS.md",
-                       "# Formal model screening\n\n" +
-                       "Symbolic derivative signs (conditional on asserted equilibrium): " +
-                       str(checks["all_derivative_signs_verified"]) + "\n\n" +
-                       "\n".join("- " + x["id"] + ": d/d" + x["parameter"] +
-                       " = " + x["derivative_sympy"] + " (" + x["expected_sign"] + ")"
-                                 for x in checks["derivatives"]) +
-                       "\n\n**NOT VERIFIED:** complete equilibrium classification, parameter admissibility, " +
-                       "empirical mapping, and novelty. Researcher must check all.\n" +
-                       (("2x2 payoff-matrix indifference: " +
-                         checks["normal_form_2x2_audit"]["status"] + "\n" +
-                         "Attacker mixing p = " +
-                         checks["normal_form_2x2_audit"]["row_player_first_action_probability"] + "\n" +
-                         "Defender mixing q = " +
-                         checks["normal_form_2x2_audit"]["column_player_first_action_probability"] + "\n")
-                        if "normal_form_2x2_audit" in checks else ""))]
+                 write(dest / "FORMAL_CHECKS.md", screening)]
         if profile == "mvp10":
             from . import theory_fabricator
             agreed = theory_fabricator.folder(home, project) / "THEORY_BLUEPRINT.json"
@@ -199,7 +238,10 @@ def produce(home, project, stage, *, model_path=None, spec_path=None,
         files = [write(dest / "hypotheses.json", {"hypotheses": h,
             "formal_model_sha256": gates.file_sha(approved_artifact(
                 home, project, "formal_model", "formal_model.json")),
+            "formal_check_type": checks["check_type"],
             "conditional_derivative_signs_verified": checks["all_derivative_signs_verified"],
+            "selection_conditional_predictions": (
+                checks.get("selection_conditional_hypotheses", 0)),
             "mechanism_and_empirical_mapping_independently_verified": False})]
         summary = "Hypotheses derived from approved game comparative statics, pending substantive human review"
     elif stage == "data":
@@ -248,8 +290,15 @@ def produce(home, project, stage, *, model_path=None, spec_path=None,
                 raise ValueError("Dataset changed since human data approval")
         model = approved_model(home, project)
         checks = model_checks(model, spec)
-        if not checks["all_derivative_signs_verified"]:
-            raise ValueError("Formal model derivative check failed")
+        if not checks["formal_check_passed"]:
+            raise ValueError("Formal model mechanical check failed")
+        if checks["check_type"] == war_set.FORM and checks["selection_conditional_hypotheses"]:
+            condition = spec["design"].get("equilibrium_scope_conditions")
+            if not isinstance(condition, str) or len(condition.strip()) < 50:
+                raise ValueError(
+                    "Design with selection-conditional war-set predictions requires "
+                    "an explicit, substantive equilibrium_scope_conditions field; "
+                    "do not assume unconditional war probabilities")
         # Automatically reference the signed novelty approval; do not ask the
         # researcher to certify the same decision twice in study.json.
         upstream = "literature" if profile == "mvp10" else "novelty"
