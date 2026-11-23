@@ -180,6 +180,11 @@ def produce(home, project, stage, *, model_path=None, spec_path=None,
             "status": "approved", "reviewer": approval["reviewer"],
             "notes": "Human-signed preliminary contribution assessment: " +
                      approval["token"][:24] + "; does not certify novelty as fact."}
+        # A frozen study.json lives in an immutable snapshot directory, so
+        # relative CSV paths would silently resolve against the wrong folder.
+        # Record a local, private absolute source path; never upload the spec
+        # or source CSV to the public repository.
+        spec["data"]["csv_path"] = str(source.resolve())
         files = [write(dest / "study.json", spec),
                  write(dest / "DESIGN_REVIEW.md",
                     "# Prespecified research design\n\n" +
