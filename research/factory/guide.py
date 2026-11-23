@@ -210,11 +210,11 @@ def guide(home, project):
                                 "To revise mathematics, use formal_reasoner review. "
                                 "Only a human-reviewed, fully derived model may be submitted."
                             )
-            result["notes"] = [
+            result["notes"].extend([
                 "The formal workbench checks selected numerical pure Markov cases, "
                 "NOT all theorems or non-Markov SPE.",
                 "Do not advance to empirical hypotheses before a researcher-approved full model proof.",
-            ]
+            ])
         return result
 
     if stage in ("puzzle", "literature"):
