@@ -80,6 +80,57 @@ def theorem_predicate(values, cycle, p, mask, *, tol=TOL):
     }
 
 
+def selection_bounds(cycle, equilibrium_masks):
+    """Set-valued onset timing across *all enumerated pure* MPEs.
+
+    No equilibrium selection, probabilities or empirical forecast is inferred.
+    A mask encodes WAR in that phase; war is absorbing, so only the first
+    phase encountered on a path is an observable onset.
+    """
+    n = len(cycle)
+    if n == 0:
+        raise ValueError("Selection analysis requires a nonempty calendar")
+    if not equilibrium_masks:
+        return {
+            "classification_from_first_phase": "NO_PURE_EQUILIBRIUM_FOUND",
+            "first_phase_possible_war_lags": [],
+            "first_phase_invariant": False,
+            "per_start_phase": [],
+        }
+    by_phase = []
+    for k, h in enumerate(cycle):
+        lags = set()
+        for mask in equilibrium_masks:
+            onset = next((lag for lag in range(n)
+                          if mask & (1 << ((k + lag) % n))), None)
+            lags.add(onset)
+        ordered = sorted(lag for lag in lags if lag is not None)
+        if None in lags:
+            ordered.append("never")
+        if lags == {None}:
+            classification = "PEACE_IN_ALL_PURE_EQUILIBRIA"
+        elif len(lags) == 1:
+            classification = "SAME_WAR_TIMING_IN_ALL_PURE_EQUILIBRIA"
+        elif None in lags:
+            classification = "PEACE_OR_WAR_DEPENDS_ON_EQUILIBRIUM_SELECTION"
+        else:
+            classification = "WAR_OCCURS_BUT_TIMING_DEPENDS_ON_EQUILIBRIUM_SELECTION"
+        by_phase.append({
+            "phase_index": k,
+            "state": h,
+            "possible_first_war_lags": ordered,
+            "classification": classification,
+            "selection_invariant": len(lags) == 1,
+        })
+    first = by_phase[0]
+    return {
+        "classification_from_first_phase": first["classification"],
+        "first_phase_possible_war_lags": first["possible_first_war_lags"],
+        "first_phase_invariant": first["selection_invariant"],
+        "per_start_phase": by_phase,
+    }
+
+
 def audit_case(case, sha, *, tol=TOL):
     values, cycle, probs = wb.validate_case(case, sha)
     n = len(cycle)
@@ -159,6 +210,7 @@ def audit_case(case, sha, *, tol=TOL):
         "masks_checked": masks_checked,
         "pure_mpe_masks": valid_masks,
         "pure_mpe_count": len(valid_masks),
+        "equilibrium_selection_bounds": selection_bounds(cycle, valid_masks),
         "A_peace_tie_boundary_checks": boundaries,
         "proposition_3_bound_holds": sufficient,
         "contradictions": issues[:20],
@@ -226,6 +278,7 @@ def audit(home, project, *, cases=400, seed=20261123, max_phases=8,
     pure = []
     proposition_3 = 0
     ties = 0
+    first_phase_selection_ambiguous = 0
     for idx, case in enumerate(inputs):
         result = audit_case(case, sha)
         total_masks += result["masks_checked"]
@@ -234,6 +287,8 @@ def audit(home, project, *, cases=400, seed=20261123, max_phases=8,
         if result["contradictions"]:
             contradictions.append({"case_index": idx, **result})
         count = result["pure_mpe_count"]
+        if count and not result["equilibrium_selection_bounds"]["first_phase_invariant"]:
+            first_phase_selection_ambiguous += 1
         if count == 0:
             no_pure.append({"case_index": idx, "case": case})
         elif count == 1:
@@ -252,7 +307,9 @@ def audit(home, project, *, cases=400, seed=20261123, max_phases=8,
         "total_policy_masks_enumerated": total_masks,
         "unique_pure_mpe_cases": len(pure),
         "multiple_pure_mpe_cases": len(multiple),
+        "first_phase_outcome_or_timing_ambiguous_cases": first_phase_selection_ambiguous,
         "no_pure_mpe_cases": len(no_pure),
+        "first_phase_outcome_or_timing_ambiguous_cases": first_phase_selection_ambiguous,
         "proposition_3_bound_cases": proposition_3,
         "near_tie_policy_checks": ties,
         "contradiction_cases": len(contradictions),
@@ -295,6 +352,7 @@ def audit(home, project, *, cases=400, seed=20261123, max_phases=8,
         "**Pure policy masks independently compared:** " + str(total_masks),
         "**Cases with exactly one pure MPE:** " + str(len(pure)),
         "**Cases with multiple pure MPE:** " + str(len(multiple)),
+        "**Cases whose onset timing depends on pure-equilibrium selection (starting at phase 0):** " + str(first_phase_selection_ambiguous),
         "**Cases with no pure MPE:** " + str(len(no_pure)),
         "**Theorem contradictions detected:** " + str(len(contradictions)),
         "**Near-tie phase checks (conservative):** " + str(ties),
