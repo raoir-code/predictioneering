@@ -21,6 +21,24 @@ The opt-in **10-stage profile** is:
 Existing Diagnosis/Novelty approval files and their hashes remain unchanged and readable.
 It does **not** automatically claim that the current preliminary literature screen establishes novelty.
 
+### Fastest visible demonstration (Holy Days, synthetic)
+
+```bash
+"$P" -m research.factory.paper_sprint holy-days-demo
+```
+
+Creates a real empirical calculation, two PDF figures, and an Overleaf ZIP under
+`research/projects/factory_runs/holy_days_synthetic_demo/package/`, but all
+**event dates and outcomes are fabricated**. The game is a conditional
+inspection-game **candidate** and the holiday indicator is not a real holiday calendar.
+It verifies indifference algebra from the actual 2x2 payoff matrix, not the
+full equilibrium parameter domain or historical evidence.
+
+We also committed `research/examples/HOLY_DAYS_2X2_MODEL_CANDIDATE.json` and
+`research/examples/HOLY_DAYS_STUDY_CANDIDATE.json` as **reviewable starting
+points only**. The latter requires an authorized private, direction-validated
+interstate dyad-day risk panel and is not presently data-complete.
+
 ## 2. Continue a real project
 
 Write an original `formal_model.json` with actual players, actions, timing, payoffs, equilibrium argument and comparative statics. Use `research/examples/FORMAL_MODEL_TEMPLATE.json` for **format only** (its game is synthetic). The formal model's equilibrium still requires independent proof.
