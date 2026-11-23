@@ -203,7 +203,24 @@ def guide(home, project):
                                 meta.get("unverified_proof_draft_sha256") == proof_sha and
                                 meta.get("numeric_audit_sha256") == gates.file_sha(audit_file)
                             )
-                            if not current_meta:
+                            proof_record = json.loads(proof.read_text(encoding="utf-8"))
+                            revised_feedback = (proof_record.get("generation", {})
+                                                .get("researcher_feedback") or "")
+                            if "MATHEMATICAL PROOF AUDIT" in revised_feedback:
+                                result["next_action"] = (
+                                    "Inspect the revised mathematics and create an "
+                                    "INCOMPLETE, unsigned discrete-equilibrium model handoff."
+                                )
+                                result["command"] = (
+                                    PY + " -m research.factory.finite_war_set_handoff " +
+                                    project
+                                )
+                                result["notes"].append(
+                                    "This only creates a private template, not hypotheses, "
+                                    "a complete proof or an approved formal_model. "
+                                    "Do not invent derivatives or equilibrium selection."
+                                )
+                            elif not current_meta:
                                 result["next_action"] = (
                                     "Prepare targeted mathematical proof feedback from "
                                     "the successful numerical equilibrium-selection audit."
