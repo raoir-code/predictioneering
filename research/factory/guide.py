@@ -130,20 +130,40 @@ def guide(home, project):
                 else:
                     proof = formal / "derivations" / "PROOF_DRAFT.json"
                     if not proof.is_file():
-                        result["next_action"] = (
-                            "Ask Claude to draft an auditable equilibrium derivation "
-                            "from the signed blueprint and benchmark."
+                        partials = sorted(
+                            (formal / "derivations" / "attempts").glob(
+                                "CLAUDE_FORMAL_PARTIAL_*.txt")
                         )
-                        result["command"] = (
-                            PY + " -m research.factory.formal_reasoner draft " +
-                            project + " --confirm-share-evidence "
-                            "--model claude-opus-5-5 --input-rate 4 "
-                            "--output-rate 20 --max-usd 1.00 --max-tokens 12000"
-                        )
-                        result["notes"].append(
-                            "This optional Claude step is billable and produces an "
-                            "UNVERIFIED candidate, never a proved theorem."
-                        )
+                        if partials:
+                            result["next_action"] = (
+                                "Claude's previous derivation was cut off. "
+                                "Try zero-cost recovery before a new paid call."
+                            )
+                            result["command"] = (
+                                PY + " -m research.factory.formal_reasoner recover " +
+                                project
+                            )
+                            result["notes"].append(
+                                "If recovery reports incomplete JSON, run "
+                                "formal_reasoner draft again with current pricing "
+                                "and --max-tokens 12000. The prompt is now compact; "
+                                "the retry is billable."
+                            )
+                        else:
+                            result["next_action"] = (
+                                "Ask Claude to draft an auditable equilibrium "
+                                "derivation from the signed blueprint."
+                            )
+                            result["command"] = (
+                                PY + " -m research.factory.formal_reasoner draft " +
+                                project + " --confirm-share-evidence "
+                                "--model claude-opus-5-5 --input-rate 4 "
+                                "--output-rate 20 --max-usd 1.00 --max-tokens 12000"
+                            )
+                            result["notes"].append(
+                                "This optional Claude step is billable and produces "
+                                "an UNVERIFIED candidate, never a proved theorem."
+                            )
                     else:
                         result["next_action"] = (
                             "Inspect/revise the Claude mathematical derivation, then "
