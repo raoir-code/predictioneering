@@ -60,5 +60,11 @@
   "novelty_review": {
     "status": "pending"
   },
-  "study_limitations": "DRAFT. No directed interstate dyad-day panel has yet been assembled or validated. Defender holiday is NOT a direct observation of readiness cost. Attack attempts require independently verified attacker/defender direction and no-event risk days. Association only; no causality or novelty established. Not a DiD or RDD. Original articles require full-text reading."
+  "study_limitations": "DRAFT. No directed interstate dyad-day panel has yet been assembled or validated. Defender holiday is NOT a direct observation of readiness cost. Attack attempts require independently verified attacker/defender direction and no-event risk days. Association only; no causality or novelty established. Not a DiD or RDD. Original articles require full-text reading. The proposed private panel MUST contain all at-risk unit-days (including zero-attack days), exactly one row per unit-date, and a researcher-reviewed direction_verified=1 flag for attack days. This flag is not independent validation; manual annotation audit remains necessary.",
+  "research_integrity_checks": {
+    "unique_unit_date": true,
+    "complete_unit_daily_panel": true,
+    "require_directed_attack_attribution": true,
+    "direction_verified_column": "direction_verified"
+  }
 }
