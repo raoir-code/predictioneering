@@ -98,18 +98,75 @@ See `research/SCIENCE_MVP.md` for the complete initial setup.
 | Need to change an already approved upstream scholarly input | Use `review_workflow revise PROJECT STAGE --reason "..."`; downstream gates must be invalidated and reviewed again. |
 | Git conflicts or local state mismatch | Stop and investigate; don't force-push or overwrite private signed research artifacts. |
 
-## After architecture approval
+## After architecture approval — formal mathematics
 
 The next task is to **derive and independently verify** a formal equilibrium,
-not to generate hypotheses. The accepted model must be faithful to the signed
-baseline and one calendar innovation; check Bellman equations, unilateral
-deviations, off-path play, all calendar states, and benchmark recovery.
-Only once a fully argued model JSON exists, submit it:
+not to generate hypotheses. The one-command `guide` walks through three
+distinct steps, all bound to the signed blueprint SHA:
+
+**1. Prepare a formal-game contract and verify the constant-power benchmark:**
+
+```bash
+"$P" -m research.factory.formal_workbench prepare holy-days
+```
+
+Creates `FORMAL_WORK_ORDER.md`, an explicit one-period bargaining/war
+contract, an **exact symbolic benchmark identity** showing existence of a
+peaceful *stationary Markov equilibrium when holiday power does not change*,
+and an unfilled parameter template. No paid API call, no false formal-model
+submission.
+
+**2. Run a finite-state numerical smoke test:**
+
+```bash
+"$P" -m research.factory.formal_workbench demo holy-days
+```
+
+Enumerates 16 pure stationary war/peace policies in one **arbitrary synthetic
+four-state cycle**, checks conditional Bellman and best-response residuals,
+and writes a human-readable diagnostic. This is **not** a global theorem,
+equilibrium uniqueness proof, mixed-strategy analysis or empirical result.
+Researcher-chosen cases can be checked via `formal_workbench check holy-days
+--case /path/to/numeric_case.json`. The real calendar order and admissible
+parameter ranges must be scientifically justified.
+
+**3. Ask Claude to propose, not certify, an analytical derivation:**
+
+```bash
+"$P" -m research.factory.formal_reasoner draft holy-days \
+  --confirm-share-evidence --model claude-opus-5-5 \
+  --input-rate 4 --output-rate 20 --max-usd 1.00 --max-tokens 12000
+```
+
+Claude receives the approved architecture and restricted benchmark, not the
+entire revision history. It produces `formal_workbench/derivations/
+PROOF_REVIEW.md` and an unverified structured draft. Iterate with:
+
+```bash
+"$P" -m research.factory.formal_reasoner review holy-days \
+  --confirm-share-evidence --model claude-opus-5-5 \
+  --input-rate 4 --output-rate 20 --max-usd 1.00 --max-tokens 12000
+```
+
+Type natural-language corrections, `SHOW`, or `QUIT`. Typing `APPROVE`
+does **not** sign a mathematical result; the proof worker refuses to certify
+one. Every successful revision is archived with its source SHA, parent SHA
+and researcher feedback. Failed or truncated API responses are saved without
+overwriting the prior draft. Claude calls are billable; review and numerical
+checks are not.
+
+**Only after a researcher independently audits** all Bellman equations,
+unilateral deviations, off-path play, admissible parameter regions, calendar
+states and benchmark recovery may a fully argued model JSON be submitted:
 
 ```bash
 "$P" -m research.factory.science_mvp produce holy-days formal_model \
   --model /path/to/fully_derived_and_checked_game.json
 ```
+
+The separate `review_workflow` human approval gate still applies.
+The symbolic derivative checker in `science_mvp` is conditional on an
+asserted equilibrium and **does not certify game-theoretic optimality**.
 
 The command checks structure and symbolic conditions, **not** all equilibrium
 claims or novelty. Read the new review packet and use the human
