@@ -248,6 +248,21 @@ the approved research design must state substantive
 `design.equilibrium_scope_conditions`; an unconditional probability cannot
 be reverse-engineered from multiple pure war sets.
 
+**7. Screen the theory-to-empirics restrictions without forcing a sign:**
+
+```bash
+"$P" -m research.factory.formal_hypothesis_review holy-days
+```
+
+This writes private `HYPOTHESIS_REVIEW.md` and `.json` beside the handoff,
+pinned to the current candidate, proof SHA and numerical audit. It lists the
+constant-power peace case, sufficient unique-peace region, necessary conditions
+for A-driven and B-driven war, and a multiple-equilibrium example. These are
+**researcher-reviewable structural implications, not estimated coefficients
+or signed empirical hypotheses**. It also records measurement and identification
+obstacles, especially the lack of a universal positive holiday-onset effect.
+No source data is fetched, no claim is signed, and no model is approved.
+
 Only after the human-reviewed candidate has those fields populated may the
 researcher submit it to the **existing** formal-model approval gate:
 
