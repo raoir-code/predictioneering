@@ -1,5 +1,18 @@
 # Research Factory — fast MVP workflow
 
+**Start here instead of memorizing commands:** [FACTORY_RUNBOOK.md](FACTORY_RUNBOOK.md).
+To see exactly what to run next:
+
+```bash
+cd ~/predictioneering-research-test
+git pull --ff-only
+"$HOME/.venvs/predictioneering-research/bin/python" -m research.factory.guide holy-days
+```
+
+The guide reads signed workflow state, costs nothing, and never modifies a
+research artifact or approves it. Follow its next-action instruction; run it
+again after each human-gated step.
+
 **Status:** runnable orchestration, **not** an autonomous scientist or a validated paper.
 Data and paper drafts stay in private, gitignored local folders; no paid API calls.
 
