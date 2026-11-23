@@ -171,6 +171,15 @@ now targets a short, checkable initial derivation rather than an exhaustively
 long solution in one response. The retry is billable. The `guide` command
 points to recovery when it sees an earlier truncated draft.
 
+**If a revision instead ends with `The read operation timed out`:** This is
+a *network read timeout*, not a model proof or JSON validation result.
+The original worker allowed only 120 seconds; the worker now allows
+900 seconds for long responses. Timeout may occur without any response
+body being returned locally, so `recover` cannot recover that call.
+The existing proof draft remains untouched, and a retry may incur a
+second API charge. Relaunch `formal_reasoner review PROJECT` and
+resubmit the feedback if another revision is warranted.
+
 **Only after a researcher independently audits** all Bellman equations,
 unilateral deviations, off-path play, admissible parameter regions, calendar
 states and benchmark recovery may a fully argued model JSON be submitted:
