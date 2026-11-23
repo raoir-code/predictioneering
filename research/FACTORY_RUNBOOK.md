@@ -228,6 +228,42 @@ audit: it will be considered stale until reconfirmed against the new
 `PROOF_DRAFT.json` SHA. If pure MPEs disagree on onset or war occurrence,
 keep those as **set-valued predictions**, not invented numerical probabilities.
 
+**6. Create an unsigned set-valued formal-model handoff (no more fake derivatives):**
+
+```bash
+"$P" -m research.factory.finite_war_set_handoff holy-days
+```
+
+This **only** writes a private, incomplete `FORMAL_MODEL_HANDOFF_CANDIDATE.json`
+pinned to the signed blueprint, current unverified proof and latest passed
+offline audit. It preserves war-set multiplicity, refuses to assert general
+pure-MPE existence or a selected equilibrium, and leaves `hypotheses: []`
+intentionally blank. This is NOT model approval and does not contact Claude.
+
+The next scientific task is to examine the proof critically, specify at
+least one **substantively defensible** hypothesis explicitly labeled
+`selection_invariant` or `conditional_on_equilibrium`, and justify its
+empirical sign, assumptions and construct mapping. For conditional predictions,
+the approved research design must state substantive
+`design.equilibrium_scope_conditions`; an unconditional probability cannot
+be reverse-engineered from multiple pure war sets.
+
+Only after the human-reviewed candidate has those fields populated may the
+researcher submit it to the **existing** formal-model approval gate:
+
+```bash
+"$P" -m research.factory.science_mvp produce holy-days formal_model \
+  --model research/inbox/raw/scientific_stages/holy-days/formal_workbench/FORMAL_MODEL_HANDOFF_CANDIDATE.json
+```
+
+The adapter checks the *consistency and provenance* of the draft, not the
+correctness of its equilibrium proof or its prediction sign. The analyst must
+review the generated `FORMAL_CHECKS.md` before approving. Then the project
+continues through hypotheses, prespecified design, private observed data,
+analysis, validation, manuscript and scientific QC. **The later manuscript
+renderer still needs a discrete-war-set-aware adaptation; do not claim the
+new handoff alone makes the complete Overleaf package work.**
+
 **Only after a researcher independently audits** all Bellman equations,
 unilateral deviations, off-path play, admissible parameter regions, calendar
 states and benchmark recovery may a fully argued model JSON be submitted:
