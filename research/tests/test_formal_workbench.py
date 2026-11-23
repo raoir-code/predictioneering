@@ -120,7 +120,18 @@ class FormalWorkbenchTests(unittest.TestCase):
         sha = self.signed()
         case = self.scenario(sha)
         case["calendar_cycle"] = ["ordinary", "A_holiday", "ordinary", "B_holiday"]
-        with self.assertRaisesRegex(ValueError, "each holiday state exactly once"):
+        duplicate_cycle = fw.analyze(case, sha)
+        self.assertEqual(duplicate_cycle["checked_pure_stationary_policies"], 16)
+        case["calendar_cycle"] = ["ordinary"]
+        self.assertEqual(fw.analyze(case, sha)["checked_pure_stationary_policies"], 2)
+        case["calendar_cycle"] = []
+        with self.assertRaisesRegex(ValueError, "nonempty ordered"):
+            fw.analyze(case, sha)
+        case["calendar_cycle"] = ["ordinary"] * (fw.MAX_EXHAUSTIVE_PHASES + 1)
+        with self.assertRaisesRegex(ValueError, "larger calendars"):
+            fw.analyze(case, sha)
+        case["calendar_cycle"] = ["ordinary", "alien_holiday"]
+        with self.assertRaisesRegex(ValueError, "recognized holiday"):
             fw.analyze(case, sha)
         case = self.scenario(sha)
         case["blueprint_sha256"] = "not-approved"
@@ -134,6 +145,27 @@ class FormalWorkbenchTests(unittest.TestCase):
         case["d_B"] = 0.8
         with self.assertRaisesRegex(ValueError, "war probabilities"):
             fw.analyze(case, sha)
+
+    def test_generalized_workbench_repeats_and_matches_constant_power(self):
+        sha = self.signed()
+        case = self.scenario(sha)
+        case["calendar_cycle"] = ["ordinary"] * 6
+        result = fw.analyze(case, sha)
+        self.assertEqual(result["checked_pure_stationary_policies"], 64)
+        self.assertEqual([c["war_mask"] for c in result["candidates"]], [0])
+        case["calendar_cycle"] = ["ordinary", "A_holiday", "ordinary",
+                                  "B_holiday", "ordinary", "ordinary"]
+        result = fw.analyze(case, sha)
+        self.assertEqual(result["checked_pure_stationary_policies"], 64)
+        self.assertGreaterEqual(result["valid_numeric_pure_markov_candidates"], 1)
+
+    def test_multiple_equilibria_can_coexist_at_one_parameter_point(self):
+        sha = self.signed()
+        case = self.scenario(sha)
+        case.update({"delta": 0.7, "p0": 0.4, "d_A": 0.2,
+                     "d_B": 0.1, "c_A": 0.1, "c_B": 0.3})
+        result = fw.analyze(case, sha)
+        self.assertEqual([c["war_mask"] for c in result["candidates"]], [0, 6])
 
     def test_demo_is_synthetic_and_cannot_approve_model(self):
         sha = self.signed()
