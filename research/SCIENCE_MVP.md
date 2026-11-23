@@ -133,6 +133,29 @@ loads a longer existing feedback file. Each successful revision is archived.
 `APPROVE` requires explicit typing; no model response self-approves.
 The command doesn't call the API just to view the existing design.
 
+### Recovering from an accidentally approved older blueprint
+
+If Claude's later revision fails and the old blueprint was accidentally
+approved, **do not begin the formal model**. Reopen explicitly:
+
+```bash
+"$P" -m research.factory.theory_fabricator reopen holy-days \
+  --reason "Newer requested model changes were not yet incorporated"
+```
+
+This withdraws only the local theory-architecture approval and archives its
+original signed record under `approval_history/`; the current blueprint and
+approved scholarly source snapshots remain intact. Reopening is refused if the
+formal-model stage has already been approved, to avoid untracked downstream
+dependencies. Then run `revise` with the saved feedback or retry `recover`.
+A failed Claude draft is **never** an approved revision.
+
+The interactive `review` now warns if a newer Claude revision failed
+against the current draft. Typing `APPROVE` in that case does **not** sign the
+older draft. Only `APPROVE CURRENT` deliberately accepts that older design,
+and the waiver is recorded in its signature. Otherwise successful revisions
+remain subject to explicit human approval.
+
 ### Continue after the separately reviewed formal solution
 
 Use `research/examples/FORMAL_MODEL_TEMPLATE.json` for **file format only**.
