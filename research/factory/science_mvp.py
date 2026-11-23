@@ -188,6 +188,9 @@ def produce(home, project, stage, *, model_path=None, spec_path=None,
             agreed = theory_fabricator.folder(home, project) / "THEORY_BLUEPRINT.json"
             files.append(write(dest / "THEORY_BLUEPRINT.json",
                                json.loads(agreed.read_text(encoding="utf-8"))))
+            signature = theory_fabricator.folder(home, project) / "BLUEPRINT_APPROVAL.json"
+            files.append(write(dest / "THEORY_BLUEPRINT_APPROVAL.json",
+                               json.loads(signature.read_text(encoding="utf-8"))))
         summary = "Approved architecture -> researcher-supplied game and conditional checks; equilibrium UNPROVEN"
     elif stage == "hypotheses":
         model = approved_model(home, project)
