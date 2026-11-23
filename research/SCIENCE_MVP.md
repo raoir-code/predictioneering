@@ -101,6 +101,38 @@ response is **not** a valid revision. The output default is 12,000 tokens
 not guaranteed billed cost. The full prior revision history is never sent to
 Claude, so repeated rounds do not accumulate prompt size.
 
+### Simplified interactive review and recovery
+
+For a saved Claude response rejected with `invalid JSON (Extra data)`,
+first recover the complete first JSON object **without another API call**:
+
+```bash
+P="$HOME/.venvs/predictioneering-research/bin/python"
+"$P" -m research.factory.theory_fabricator recover holy-days
+```
+
+This selects the latest `CLAUDE_PARTIAL_*.txt` from this project's private
+`attempts/` directory, verifies the original signed source inputs and parent
+blueprint SHA, and extracts one complete valid blueprint object. It preserves
+all trailing text and the original response, and refuses ambiguous multiple-JSON
+responses or incomplete objects. The recovered architecture remains **unreviewed**.
+
+For a much simpler human-in-the-loop interface, run:
+
+```bash
+"$P" -m research.factory.theory_fabricator review holy-days \
+  --confirm-share-evidence --model claude-opus-5-5 \
+  --input-rate 4 --output-rate 20 --max-usd 1.00 --max-tokens 12000
+```
+
+The terminal summarizes the current design and asks: **What should I change?**
+Type a short correction to make another (billable) Claude API revision, type
+`SHOW` to display the full review, or type `APPROVE` to approve the
+**architecture only**, not its proof. A `@/path/to/feedback.md` answer
+loads a longer existing feedback file. Each successful revision is archived.
+`APPROVE` requires explicit typing; no model response self-approves.
+The command doesn't call the API just to view the existing design.
+
 ### Continue after the separately reviewed formal solution
 
 Use `research/examples/FORMAL_MODEL_TEMPLATE.json` for **file format only**.
