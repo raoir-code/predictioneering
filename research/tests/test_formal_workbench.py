@@ -83,6 +83,21 @@ class FormalWorkbenchTests(unittest.TestCase):
         self.assertEqual(gates.load(self.home, self.project)["stages"]
                          ["formal_model"]["status"], "not_started")
 
+    def test_symbolic_constant_power_benchmark_existence_is_scope_limited(self):
+        sha = self.signed()
+        result = fw.constant_power_benchmark_proof()
+        self.assertEqual(result["B_incentive_gap_if_binding"], "0")
+        self.assertEqual(result["A_peace_minus_war_if_binding"], "c_A + c_B")
+        self.assertFalse(result["holiday_equilibrium_proven"])
+        self.assertFalse(result["other_SPE_classified"])
+        prepared = fw.prepare(self.home, self.project)
+        self.assertTrue(Path(prepared["constant_power_benchmark"]).exists())
+        self.assertIn("NOT the solution", Path(prepared["constant_power_benchmark"]).read_text())
+        self.assertEqual(
+            json.loads((fw.outdir(self.home, self.project) /
+                        "CONSTANT_POWER_BENCHMARK.json").read_text())["status"],
+            "CONSTANT_POWER_STATIONARY_MPE_EXISTENCE_BENCHMARK_ONLY")
+
     def test_exact_stationary_baseline_offer_and_no_war(self):
         sha = self.signed()
         case = self.scenario(sha)
