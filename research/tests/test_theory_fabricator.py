@@ -376,6 +376,110 @@ class TheoryFabricatorTests(unittest.TestCase):
         self.assertEqual(diagnostic["stop_reason"], "max_tokens")
         self.assertIn("both players may fight", diagnostic["revision_feedback"])
 
+    def test_offline_recovery_of_extra_data_retains_revision_lineage(self):
+        import hashlib
+        th.propose(self.home, self.project,
+                   baseline="Repeated bargaining and costly war",
+                   candidate=CANDIDATE)
+        parent_sha = gates.file_sha(self.stage() / "THEORY_BLUEPRINT.json")
+        attempts = self.stage() / "attempts"
+        attempts.mkdir(exist_ok=True)
+        source = attempts / "CLAUDE_PARTIAL_20261123T182948258460Z.txt"
+        raw = self.candidate()
+        raw["innovation"]["one_sentence_change"] = (
+            "Holidays shift war win chances but no other game primitive changes."
+        )
+        source.write_text(json.dumps(raw) + "\nSome trailing commentary about proof.")
+        th.write(source.with_suffix(".diagnostic.json"), {
+            "status": "TRUNCATED_OR_INVALID_MODEL_OUTPUT",
+            "stop_reason": "end_turn", "reason": "Extra data",
+            "model": "mock", "estimated_charge_usd": .12,
+            "prior_blueprint_sha256": parent_sha,
+            "revision_feedback": "Allow rejection to continue peace; both may attack.",
+            "upstream": th.source_pins(th.source_inputs(self.home, self.project)),
+        })
+        result = th.recover(self.home, self.project)
+        self.assertEqual(result["status"], "BLUEPRINT_PROPOSED_UNREVIEWED")
+        self.assertEqual(result["network_or_paid_api_calls"], 0)
+        self.assertEqual(result["origin"], "recovered_claude_api")
+        self.assertGreater(result["ignored_trailing_characters"], 1)
+        draft = json.loads((self.stage() / "THEORY_BLUEPRINT.json").read_text())
+        self.assertEqual(draft["generation"]["revision_number"], 1)
+        self.assertEqual(draft["generation"]["revision_of_sha256"], parent_sha)
+        self.assertIn("Some trailing commentary",
+                      draft["generation"]["ignored_trailing_text"])
+        self.assertEqual(source.read_text(),
+                         json.dumps(raw) + "\nSome trailing commentary about proof.")
+        self.assertIn("Recovery note:",
+            (self.stage() / "BLUEPRINT_REVIEW.md").read_text())
+        self.assertEqual(th.history(self.home, self.project)["draft_count"], 2)
+
+    def test_recovery_rejects_second_json_and_stale_parent(self):
+        th.propose(self.home, self.project,
+                   baseline="Repeated bargaining and costly war",
+                   candidate=CANDIDATE)
+        attempts = self.stage() / "attempts"
+        attempts.mkdir(exist_ok=True)
+        source = attempts / "CLAUDE_PARTIAL_20261123T182948258461Z.txt"
+        source.write_text(json.dumps(self.candidate()) + "\n" +
+                          json.dumps(self.candidate()))
+        sha = gates.file_sha(self.stage() / "THEORY_BLUEPRINT.json")
+        diag = {
+            "status": "TRUNCATED_OR_INVALID_MODEL_OUTPUT",
+            "prior_blueprint_sha256": sha,
+            "revision_feedback": "Allow both countries to initiate a costly war.",
+            "upstream": th.source_pins(th.source_inputs(self.home, self.project))}
+        th.write(source.with_suffix(".diagnostic.json"), diag)
+        with self.assertRaisesRegex(ValueError, "more than one JSON"):
+            th.recover(self.home, self.project, source=source)
+        self.assertEqual(gates.file_sha(self.stage() / "THEORY_BLUEPRINT.json"), sha)
+        diag["prior_blueprint_sha256"] = "badsha"
+        th.write(source.with_suffix(".diagnostic.json"), diag)
+        with self.assertRaisesRegex(ValueError, "differs from"):
+            th.recover(self.home, self.project, source=source)
+
+    def test_interactive_review_can_revise_then_approve(self):
+        th.propose(self.home, self.project,
+                   baseline="Repeated bargaining and costly war",
+                   candidate=CANDIDATE)
+        received = []
+        user_responses = iter([
+            "SHOW",
+            "Make it clear both countries may attack, and peace can persist.",
+            "APPROVE",
+        ])
+        displayed = []
+        def fake_claude(bundle, model, key, max_tokens):
+            received.append(bundle["revision_request"]["feedback"])
+            return self.candidate(), {"input_tokens": 100,
+                                      "output_tokens": 200}, model
+        result = th.review(
+            self.home, self.project, share=True, model="mock", key="TEST",
+            input_rate=1, output_rate=1, max_usd=1,
+            ask=lambda prompt: next(user_responses), output=displayed.append,
+            transport=fake_claude)
+        self.assertEqual(result["status"], "ARCHITECTURE_APPROVED_NOT_SOLVED")
+        self.assertEqual(received,
+                         ["Make it clear both countries may attack, and peace can persist."])
+        self.assertTrue((self.stage() / "BLUEPRINT_APPROVAL.json").exists())
+        self.assertTrue(any("What should I change?" in x for x in displayed))
+        self.assertTrue(any("One innovation" in x for x in displayed))
+        self.assertTrue(any("Claude revised" in x for x in displayed))
+        self.assertEqual(th.history(self.home, self.project)["draft_count"], 2)
+
+    def test_interactive_review_does_not_send_without_consent(self):
+        th.propose(self.home, self.project,
+                   baseline="Repeated bargaining and costly war",
+                   candidate=CANDIDATE)
+        with self.assertRaisesRegex(ValueError, "confirm-share"):
+            th.review(
+                self.home, self.project, share=False, model="mock", key="TEST",
+                input_rate=1, output_rate=1, max_usd=1,
+                ask=lambda prompt: "Make an attack option available to both sides.",
+                output=lambda line: None,
+                transport=lambda *a: self.fail("No API allowed"))
+        self.assertFalse((self.stage() / "BLUEPRINT_APPROVAL.json").exists())
+
     def test_revision_requires_previous_draft_and_explicit_consent(self):
         feedback = "Make a separate attack option available to both countries."
         opts = dict(feedback=feedback, share=True, model="mock",
