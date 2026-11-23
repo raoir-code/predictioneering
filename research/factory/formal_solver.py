@@ -185,14 +185,23 @@ def audit_case(case, sha, *, tol=TOL):
                             "type": "A_driven_necessary_condition_fails",
                             "war_mask": mask, "phase": k,
                         })
-    # Draft Proposition 3: sufficient small-amplitude uniqueness.
+    # Revised Claude Proposition 3: a stronger sufficient (NOT necessary)
+    # small-amplitude uniqueness condition. The original version omitted
+    # the /delta in its first bound; it is still valid but more restrictive.
+    # Evaluate at full precision, without tolerance relaxing the strict bound.
     amplitude = max(p_by_phase) - min(p_by_phase)
-    sufficient = amplitude < min(
+    revised_unique_peace_limit = min(
+        (1-d)**2 * values["c_A"] / d,
+        (1-d) * (1-max(p_by_phase)) / d)
+    earlier_unique_peace_limit = min(
         (1-d)**2 * values["c_A"],
         (1-d) * (1-max(p_by_phase)) / d)
+    sufficient = amplitude < revised_unique_peace_limit
     if sufficient and valid_masks != [0]:
-        issues.append({"type": "small_amplitude_unique_peace_claim_fails",
-                       "valid_masks": valid_masks})
+        issues.append({"type": "revised_proposition_3_unique_peace_claim_fails",
+                       "valid_masks": valid_masks,
+                       "amplitude": amplitude,
+                       "revised_bound": revised_unique_peace_limit})
     # Test the separate all-peace C1/C2 characterization, without
     # constructing validity from the same workbench predicate.
     w = [x/(1-d)-values["c_B"] for x in p_by_phase]
@@ -213,6 +222,10 @@ def audit_case(case, sha, *, tol=TOL):
         "equilibrium_selection_bounds": selection_bounds(cycle, valid_masks),
         "A_peace_tie_boundary_checks": boundaries,
         "proposition_3_bound_holds": sufficient,
+        "proposition_3_revised_bound": revised_unique_peace_limit,
+        "proposition_3_old_bound": earlier_unique_peace_limit,
+        "proposition_3_improvement_eligible": (
+            sufficient and amplitude >= earlier_unique_peace_limit),
         "contradictions": issues[:20],
         "contradiction_count": len(issues),
     }
@@ -277,6 +290,7 @@ def audit(home, project, *, cases=400, seed=20261123, max_phases=8,
     multiple = []
     pure = []
     proposition_3 = 0
+    proposition_3_improvement = 0
     ties = 0
     first_phase_selection_ambiguous = 0
     for idx, case in enumerate(inputs):
@@ -284,6 +298,7 @@ def audit(home, project, *, cases=400, seed=20261123, max_phases=8,
         total_masks += result["masks_checked"]
         ties += result["A_peace_tie_boundary_checks"]
         proposition_3 += int(result["proposition_3_bound_holds"])
+        proposition_3_improvement += int(result["proposition_3_improvement_eligible"])
         if result["contradictions"]:
             contradictions.append({"case_index": idx, **result})
         count = result["pure_mpe_count"]
@@ -310,6 +325,7 @@ def audit(home, project, *, cases=400, seed=20261123, max_phases=8,
         "first_phase_outcome_or_timing_ambiguous_cases": first_phase_selection_ambiguous,
         "no_pure_mpe_cases": len(no_pure),
         "proposition_3_bound_cases": proposition_3,
+        "proposition_3_new_not_old_bound_cases": proposition_3_improvement,
         "near_tie_policy_checks": ties,
         "contradiction_cases": len(contradictions),
         "contradiction_examples": contradictions[:3],
@@ -354,6 +370,7 @@ def audit(home, project, *, cases=400, seed=20261123, max_phases=8,
         "**Cases whose onset timing depends on pure-equilibrium selection (starting at phase 0):** " + str(first_phase_selection_ambiguous),
         "**Cases with no pure MPE:** " + str(len(no_pure)),
         "**Theorem contradictions detected:** " + str(len(contradictions)),
+        "**Cases satisfying revised Proposition 3 only (not earlier bound):** " + str(proposition_3_improvement),
         "**Near-tie phase checks (conservative):** " + str(ties),
         "",
         "## Worked example from Claude",
