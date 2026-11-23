@@ -184,6 +184,24 @@ class FormalWorkbenchTests(unittest.TestCase):
         self.assertEqual(gates.load(self.home, self.project)["stages"]
                          ["formal_model"]["status"], "not_started")
 
+    def test_generalized_audit_writes_private_report_without_signoff(self):
+        from research.factory import formal_solver as solver
+        sha = self.signed()
+        result = solver.audit(self.home, self.project, cases=5,
+                              seed=20261123, max_phases=5)
+        self.assertEqual(result["network_or_paid_api_calls"], 0)
+        self.assertFalse(result["formal_model_submitted"])
+        self.assertTrue(Path(result["review"]).is_file())
+        self.assertTrue(Path(result["report"]).is_file())
+        full = json.loads(Path(result["report"]).read_text(encoding="utf-8"))
+        self.assertEqual(full["approved_blueprint_sha256"], sha)
+        self.assertIsNone(full["unverified_proof_draft_sha256"])
+        self.assertEqual(full["total_synthetic_cases"], 8)
+        self.assertEqual(full["known_hand_example"]["result"]["pure_mpe_masks"], [7])
+        self.assertEqual(full["known_multiple_example"]["result"]["pure_mpe_masks"], [0, 6])
+        self.assertEqual(gates.load(self.home, self.project)["stages"]
+                         ["formal_model"]["status"], "not_started")
+
     def test_revising_architecture_makes_old_numerical_case_stale(self):
         sha = self.signed()
         case = self.scenario(sha)
