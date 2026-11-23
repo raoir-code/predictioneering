@@ -259,6 +259,67 @@ class TheoryFabricatorTests(unittest.TestCase):
         self.assertEqual(before, (self.stage() / "history" / original_sha /
                                   "THEORY_BLUEPRINT.json").read_bytes())
 
+    def test_human_feedback_revises_via_claude_and_archives_old_draft(self):
+        import hashlib
+        th.propose(self.home, self.project,
+                   baseline="Repeated bargaining, bilateral war outside option",
+                   candidate=CANDIDATE)
+        existing = (self.stage() / "THEORY_BLUEPRINT.json").read_bytes()
+        previous_sha = hashlib.sha256(existing).hexdigest()
+        observed = []
+        def fake_claude(bundle, model, key, max_tokens):
+            observed.append(bundle["revision_request"])
+            revision = self.candidate()
+            revision["baseline"]["rejection_transition"] = (
+                "Either country may separately initiate war or continue "
+                "discounted bargaining, and rejection alone does not start war."
+            )
+            return revision, {"input_tokens": 120, "output_tokens": 300}, model
+        feedback = (
+            "Both players must have a separate option to initiate war. "
+            "A rejected offer should allow another bargaining round. "
+            "Public holidays only change relative battlefield effectiveness."
+        )
+        result = th.revise(
+            self.home, self.project, feedback=feedback, share=True,
+            model="mock", key="TEST", input_rate=1, output_rate=1,
+            max_usd=1, transport=fake_claude)
+        self.assertEqual(result["status"], "BLUEPRINT_PROPOSED_UNREVIEWED")
+        self.assertEqual(result["network_or_paid_api_calls"], 1)
+        self.assertEqual(len(observed), 1)
+        self.assertEqual(observed[0]["feedback"], feedback)
+        self.assertEqual(observed[0]["prior_blueprint_sha256"], previous_sha)
+        self.assertEqual(observed[0]["prior_blueprint"]["schema"],
+                         "theory_blueprint_v1")
+        revision = json.loads((self.stage() / "THEORY_BLUEPRINT.json").read_text())
+        self.assertEqual(revision["generation"]["revision_of_sha256"], previous_sha)
+        self.assertEqual(revision["generation"]["researcher_feedback"], feedback)
+        self.assertIn(feedback, (self.stage() / "BLUEPRINT_REVIEW.md").read_text())
+        self.assertEqual(existing, (self.stage() / "history" / previous_sha[:16] /
+                                    "THEORY_BLUEPRINT.json").read_bytes())
+        self.assertFalse((self.stage() / "BLUEPRINT_APPROVAL.json").exists())
+
+    def test_revision_requires_previous_draft_and_explicit_consent(self):
+        feedback = "Make a separate attack option available to both countries."
+        opts = dict(feedback=feedback, share=True, model="mock",
+                    key="TEST", input_rate=1, output_rate=1, max_usd=1,
+                    transport=lambda *a: self.fail("Unexpected API call"))
+        with self.assertRaisesRegex(ValueError, "First generate"):
+            th.revise(self.home, self.project, **opts)
+        th.propose(self.home, self.project,
+                   baseline="Repeated bargaining, bilateral war outside option",
+                   candidate=CANDIDATE)
+        old = (self.stage() / "THEORY_BLUEPRINT.json").read_bytes()
+        opts["share"] = False
+        with self.assertRaisesRegex(ValueError, "confirm-share"):
+            th.revise(self.home, self.project, **opts)
+        self.assertEqual(old, (self.stage() / "THEORY_BLUEPRINT.json").read_bytes())
+        th.approve(self.home, self.project,
+                   reviewer="Scientist", notes="Sign test draft")
+        opts["share"] = True
+        with self.assertRaisesRegex(ValueError, "reopen"):
+            th.revise(self.home, self.project, **opts)
+
     def test_paid_generation_refuses_without_explicit_permission(self):
         called = []
         def transport(*args):
