@@ -59,9 +59,35 @@ class FactoryGuideTests(unittest.TestCase):
                    notes="Architecture approved only; mathematical solution pending")
         report = guide.guide(self.home, self.project)
         self.assertEqual(report["stage"], "formal_model")
-        self.assertIn("Solve", report["next_action"])
-        self.assertIn("formal_model --model", report["command"])
+        self.assertIn("Prepare", report["next_action"])
+        self.assertIn("formal_workbench prepare", report["command"])
         self.assertEqual(report["network_or_paid_api_calls"], 0)
+
+    def test_guide_scaffolds_then_runs_numerical_diagnostics(self):
+        from research.factory import formal_workbench as fw
+        candidate = json.loads(CANDIDATE.read_text())
+        candidate["baseline"]["canonical_rules"] = (
+            "A chooses Attack or an offer; B chooses Accept or Attack; "
+            "there is no Reject action. Accept is a one-period agreement."
+        )
+        source = self.work / "approved_game.json"
+        source.write_text(json.dumps(candidate))
+        th.propose(self.home, self.project,
+                   baseline="Repeated bargaining with bilateral war",
+                   candidate=source)
+        th.approve(self.home, self.project, reviewer="Scientist",
+                   notes="Accepted numerical adapter fixture")
+        before = guide.guide(self.home, self.project)
+        self.assertIn("formal_workbench prepare", before["command"])
+        fw.prepare(self.home, self.project)
+        middle = guide.guide(self.home, self.project)
+        self.assertIn("formal_workbench demo", middle["command"])
+        fw.demo(self.home, self.project)
+        after = guide.guide(self.home, self.project)
+        self.assertIn("formal_model --model", after["command"])
+        self.assertIn("independently verify", after["next_action"])
+        self.assertFalse((th.folder(self.home, self.project) /
+                          "FORMAL_MODEL_APPROVAL.json").exists())
 
     def test_guide_warns_about_unresolved_newer_claude_attempt(self):
         th.propose(self.home, self.project,
