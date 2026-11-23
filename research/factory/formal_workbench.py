@@ -60,6 +60,49 @@ def approved_blueprint(home, project):
     return current, signature_data
 
 
+def constant_power_benchmark_proof():
+    """Symbolically verify a stationary peaceful equilibrium for constant p.
+
+    This is a theorem about one particular stationary equilibrium in the
+    single-state benchmark, NOT proof of unique/all equilibria or holiday game.
+    """
+    import sympy as sp
+    p, d, ca, cb = sp.symbols("p delta c_A c_B", positive=True)
+    x_binding = p-(1-d)*cb
+    war_b = p/(1-d)-cb
+    war_a = (1-p)/(1-d)-ca
+    b_gap = sp.simplify(x_binding/(1-d)-war_b)
+    a_gap_binding = sp.simplify((1-x_binding)/(1-d)-war_a)
+    a_gap_zero = sp.simplify(1/(1-d)-war_a)
+    expected_a_gap_binding = ca+cb
+    expected_a_gap_zero = p/(1-d)+ca
+    if (b_gap != 0 or
+            sp.simplify(a_gap_binding-expected_a_gap_binding) != 0 or
+            sp.simplify(a_gap_zero-expected_a_gap_zero) != 0):
+        raise ValueError("Symbolic baseline incentive identities failed")
+    return {
+        "status": "CONSTANT_POWER_STATIONARY_MPE_EXISTENCE_BENCHMARK_ONLY",
+        "domain": "0<p<1, 0<delta<1, c_A>0, c_B>0; p constant",
+        "candidate_offer": "x*=max(0,p-(1-delta)*c_B)",
+        "offpath_B_response": "Accept iff x+delta*x*/(1-delta) >= p/(1-delta)-c_B",
+        "A_offer": "A proposes x*, the smallest nonnegative share accepted by B",
+        "B_incentive_gap_if_binding": str(b_gap),
+        "A_peace_minus_war_if_binding": str(a_gap_binding),
+        "A_peace_minus_war_if_zero_offer": str(a_gap_zero),
+        "reasoning": [
+            "For x*>0, B's stationary continuation x*/(1-delta) "
+            "equals war payoff; B accepts at equality.",
+            "For x*=0, p/(1-delta)-c_B <= 0 and B accepts a zero offer.",
+            "On either branch A strictly prefers the smallest feasible "
+            "accepted offer to attacking; B's off-path attack is sequentially rational.",
+            "The stationary policy therefore forms a peaceful Markov-perfect "
+            "equilibrium for constant power and stated tie-breaking.",
+        ],
+        "holiday_equilibrium_proven": False,
+        "other_SPE_classified": False,
+    }
+
+
 def numerical_case_template(blueprint_sha):
     return {
         "schema": CASE_SCHEMA,
@@ -152,10 +195,31 @@ def prepare(home, project):
         "Alternatively `demo` uses stated synthetic values for a smoke test.\n"
     )
     theory.write(dest / "FORMAL_WORK_ORDER.md", review)
+    baseline = constant_power_benchmark_proof()
+    theory.write(dest / "CONSTANT_POWER_BENCHMARK.json", baseline)
+    theory.write(dest / "CONSTANT_POWER_BENCHMARK.md",
+                 "# Stationary constant-power benchmark\n\n"
+                 "This is a **restricted benchmark theorem**, NOT the solution "
+                 "to the holiday game.\n\n"
+                 "Assume " + baseline["domain"] + ". The stationary minimal "
+                 "acceptable offer is `" + baseline["candidate_offer"] + "`.\n\n"
+                 "B's acceptance incentive gap when the constraint binds: "
+                 "`" + baseline["B_incentive_gap_if_binding"] + "`. "
+                 "A's peace-minus-war gap is `" +
+                 baseline["A_peace_minus_war_if_binding"] +
+                 "` when B's war constraint binds, or `" +
+                 baseline["A_peace_minus_war_if_zero_offer"] +
+                 "` when the optimal share is zero. "
+                 "Both A gaps are positive under the declared domain.\n\n"
+                 "This proves the existence of a peaceful **stationary "
+                 "Markov** equilibrium in the constant-power benchmark, "
+                 "assuming the stated tie-breaking. It does NOT prove global "
+                 "uniqueness, all SPE, or results with shifting holiday power.\n")
     return {
         "status": "FORMAL_WORK_ORDER_PREPARED_NOT_SOLVED",
         "contract": str(dest / "MODEL_CONTRACT.json"),
         "review": str(dest / "FORMAL_WORK_ORDER.md"),
+        "constant_power_benchmark": str(dest / "CONSTANT_POWER_BENCHMARK.md"),
         "parameter_template": str(template),
         "blueprint_sha256": sha,
         "network_or_paid_api_calls": 0,
