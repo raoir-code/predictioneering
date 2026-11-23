@@ -53,7 +53,7 @@ The previous Holy Days one-shot inspection game is NOT the researcher's desired 
 "$P" -m research.factory.theory_fabricator propose holy-days \
   --baseline "Conventional infinitely repeated ultimatum game; holiday state affects one existing payoff or continuation primitive" \
   --candidate research/examples/HOLY_DAYS_THEORY_BLUEPRINT_CANDIDATE.json
-open research/inbox/raw/scientific_stages/holy-days/theory_blueprint/THEORY_BLUEPRINT.json
+open research/inbox/raw/scientific_stages/holy-days/theory_blueprint/BLUEPRINT_REVIEW.md
 ```
 
 The proposal is a **model plan**, not a proof. Its starting proposer protocol (e.g., alternating or fixed proposer), discounting, rejection continuation, calendar process, and candidate cost change all need human judgment. Review the blueprint; revise the file and re-propose if anything is wrong. To sign off **only the architecture**:
