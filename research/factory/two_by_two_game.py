@@ -76,6 +76,8 @@ def verify(model):
         "status": "symbolic_indifference_verified_INTERIOR_ADMISSIBILITY_PENDING",
         "row_player_first_action_probability": str(p_star),
         "column_player_first_action_probability": str(q_star),
+        "row_player_first_action_probability_latex": sp.latex(p_star),
+        "column_player_first_action_probability_latex": sp.latex(q_star),
         "row_indifference_expression": str(row_difference),
         "column_indifference_expression": str(col_difference),
         "algebraic_indifference_identically_zero": True,
