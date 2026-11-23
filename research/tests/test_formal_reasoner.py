@@ -6,6 +6,7 @@ import unittest
 
 from research.factory import formal_reasoner as fr
 from research.factory import finite_war_set_handoff as handoff
+from research.factory import formal_hypothesis_review as hypothesis_review
 from research.factory import science_mvp as mvp
 from research.factory import formal_workbench as fw
 from research.factory import formal_solver as solver
@@ -176,6 +177,43 @@ class FormalReasonerTests(unittest.TestCase):
         proof.write_text(json.dumps(data))
         with self.assertRaisesRegex(ValueError, "stale"):
             handoff.source_check(self.home, self.project, model)
+
+    def test_hypothesis_review_records_restrictions_but_no_signed_effects(self):
+        self.signed_work_order()
+        fixture = self.work / "source_proof_for_hypothesis_review.json"
+        fixture.write_text(json.dumps(self.candidate()))
+        fr.draft(self.home, self.project, candidate_file=fixture)
+        solver.audit(self.home, self.project, cases=2, max_phases=4)
+        handoff.prepare(self.home, self.project)
+        result = hypothesis_review.prepare(self.home, self.project)
+        self.assertEqual(result["network_or_paid_api_calls"], 0)
+        self.assertEqual(result["logical_restrictions"], 5)
+        self.assertEqual(result["signed_empirical_hypotheses"], 0)
+        self.assertFalse(result["formal_model_submitted"])
+        report = json.loads(Path(result["json"]).read_text())
+        self.assertEqual(report["numeric_contradictions"], 0)
+        self.assertEqual(report["illustrative_onset_lags_from_phase_zero"],
+                         [1, "never"])
+        self.assertIsNone(report["signed_average_holiday_war_effect"])
+        self.assertIn("No unconditional signed marginal effect",
+                      report["scientific_blockers"][0])
+        text = Path(result["review"]).read_text()
+        self.assertIn("not an unconditional sign", text)
+        self.assertIn("## Unresolved empirical requirements", text)
+        model = json.loads((fw.outdir(self.home, self.project) /
+                            "FORMAL_MODEL_HANDOFF_CANDIDATE.json").read_text())
+        self.assertEqual(model["hypotheses"], [])
+        self.assertEqual(gates.load(self.home, self.project)["stages"]
+                         ["formal_model"]["status"], "not_started")
+
+        # Source changes must invalidate derived evidence and never be
+        # silently grandfathered into a hypothesis review.
+        candidate_path = fw.outdir(self.home, self.project) / "FORMAL_MODEL_HANDOFF_CANDIDATE.json"
+        changed = json.loads(candidate_path.read_text())
+        changed["source_pins"]["proof_draft_sha256"] = "0" * 64
+        candidate_path.write_text(json.dumps(changed))
+        with self.assertRaisesRegex(ValueError, "stale"):
+            hypothesis_review.prepare(self.home, self.project)
 
     def test_billable_generation_requires_consent_and_budget(self):
         self.signed_work_order()
