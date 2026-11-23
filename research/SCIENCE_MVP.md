@@ -67,6 +67,40 @@ A subsequent formal_model.json must match the SHA256 of the approved blueprint a
 
 **Optional automation:** the fabricator can generate an unreviewed blueprint via an explicitly authorized Claude API call (`propose --send-to-claude --confirm-share-evidence` with model, current token rates, and per-call dollar cap); offline is the default. API generation does not count as human approval or source verification.
 
+### Revisions upon revisions — permanent Model Fabricator workflow
+
+The architecture remains **unreviewed** until an explicit human `approve`.
+After each proposed blueprint, create/update a private text file with **only the
+latest round's feedback**, then run `revise`. Repeat as often as needed:
+
+```bash
+D="research/inbox/raw/scientific_stages/holy-days/theory_blueprint"
+P="$HOME/.venvs/predictioneering-research/bin/python"
+# Edit $D/REVISION_FEEDBACK.md with the next round's requested corrections.
+"$P" -m research.factory.theory_fabricator revise holy-days \
+  --feedback-file "$D/REVISION_FEEDBACK.md" \
+  --confirm-share-evidence --model claude-opus-5-5 \
+  --input-rate 4 --output-rate 20 --max-usd 1.00 --max-tokens 12000
+open "$D/BLUEPRINT_REVIEW.md"
+"$P" -m research.factory.theory_fabricator history holy-days
+```
+
+Each successful revision is saved as `THEORY_BLUEPRINT.json`, with the old
+blueprint/review archived in `history/<sha>/`. The revision number, exact
+researcher feedback, parent SHA, and generation provenance are retained in the
+new blueprint. The source snapshots remain signed and unchanged. The `history`
+command lists versions and their linkage. Sending an approved blueprint back
+to Claude is blocked until the researcher reopens the approval.
+
+Claude generation may fail even with adequate budget, and **failed calls can be
+billable**. Invalid complete JSON is saved under `attempts/` for local replay.
+Truncated or malformed responses are saved as `CLAUDE_PARTIAL_*.txt` with
+diagnostics, while the previous blueprint remains untouched. A truncated
+response is **not** a valid revision. The output default is 12,000 tokens
+(allowed 512–20,000); the dollar setting is a conservative pre-call estimate,
+not guaranteed billed cost. The full prior revision history is never sent to
+Claude, so repeated rounds do not accumulate prompt size.
+
 ### Continue after the separately reviewed formal solution
 
 Use `research/examples/FORMAL_MODEL_TEMPLATE.json` for **file format only**.
