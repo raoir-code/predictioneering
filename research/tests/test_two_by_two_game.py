@@ -44,7 +44,7 @@ class HolidayInspectionGameTests(unittest.TestCase):
             two_by_two_game.verify(changed)
 
     def test_no_claim_of_general_holiday_effect(self):
-        self.assertIn("condition", self.model["note"].lower())
+        self.assertIn("only if", self.model["note"].lower())
         self.assertIn("conditional", self.model["comparative_statics"][0]["interpretation"].lower())
         self.assertIn("readiness costs", self.model["comparative_statics"][0]["hypothesis_text"].lower())
 
