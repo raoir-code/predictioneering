@@ -92,6 +92,51 @@ def model_checks(model, spec=None):
     return checks
 
 
+def check_panel_integrity(spec, frame):
+    """Conservative optional guardrails for directed dyad-day datasets.
+
+    A self-declared direction flag is NOT independent coding validation.
+    """
+    cfg = spec.get("research_integrity_checks", {})
+    if not isinstance(cfg, dict):
+        raise ValueError("research_integrity_checks must be an object")
+    if not cfg:
+        return {"status": "not_specified", "independent_direction_audit": False}
+    d = spec["design"]
+    unit, when, outcome = d.get("unit"), d["time"], d["outcome"]
+    result = {"status": "researcher_declared_panel_checks_passed",
+              "independent_direction_audit": False,
+              "checks": []}
+    if cfg.get("unique_unit_date", False):
+        if not unit or unit not in frame.columns:
+            raise ValueError("Unit ID required for dyad-day uniqueness")
+        if bool(frame.duplicated([unit, when]).any()):
+            raise ValueError("Duplicate unit-date rows; event counts must be aggregated into one at-risk day")
+        result["checks"].append("one_row_per_unit_date")
+    if cfg.get("complete_unit_daily_panel", False):
+        if not unit or unit not in frame.columns:
+            raise ValueError("Unit ID required to verify daily risk-set completeness")
+        for _, sample in frame.groupby(unit):
+            distinct = sample[when].nunique()
+            expected = (sample[when].max() - sample[when].min()).days + 1
+            if distinct != expected:
+                raise ValueError("Missing unit-day observations; unobserved days cannot silently become zeros")
+        result["checks"].append("continuous_dates_within_each_observed_unit_span")
+    if cfg.get("require_directed_attack_attribution", False):
+        direction = cfg.get("direction_verified_column")
+        if not isinstance(direction, str) or direction not in frame.columns:
+            raise ValueError("Missing researcher-audited direction verification column")
+        positive = frame.loc[frame[outcome] > 0]
+        if positive.empty:
+            raise ValueError("Cannot validate directed event attribution: no attack days observed")
+        if not positive[direction].eq(1).all():
+            raise ValueError("Unverified or ambiguous attacking actor; directed interstate panel blocked")
+        result["checks"].append("positive_attack_days_researcher_flagged_direction_verified")
+    if not result["checks"]:
+        raise ValueError("research_integrity_checks present but no scientific guard enabled")
+    return result
+
+
 def produce(home, project, stage, *, model_path=None, spec_path=None,
             assessment_path=None):
     home = Path(home).expanduser().resolve()
@@ -162,7 +207,9 @@ def produce(home, project, stage, *, model_path=None, spec_path=None,
             raise ValueError("Private study CSV missing or symlinked; cannot approve data")
         # Check actual columns, date validity, outcome family and distinct observations.
         frame, diagnostics = prototype.read_data(spec, source)
+        integrity = check_panel_integrity(spec, frame)
         manifest = {"data_sha256": gates.file_sha(source),
+                    "research_panel_integrity": integrity,
                     "data_file_name": source.name, "rows": len(frame),
                     "diagnostics": diagnostics,
                     "redistribution_allowed": spec["data"]["redistribution_allowed"],
