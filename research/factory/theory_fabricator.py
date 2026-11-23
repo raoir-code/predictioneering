@@ -208,10 +208,40 @@ def propose(home, project, *, baseline, candidate=None, send=False, share=False,
     blueprint["upstream"] = bundle["upstream"]
     blueprint["baseline_preference"] = bundle["baseline_preference"]
     write(dest / "THEORY_BLUEPRINT.json", blueprint)
+    b, v, mech, proof = (blueprint["baseline"], blueprint["innovation"],
+                         blueprint["mechanism"], blueprint["proof_plan"])
+    review = ("# Model Fabricator — architecture decision\n\n" +
+              "**Unreviewed proposal, not a solved theorem.**\n\n" +
+              "## Conventional baseline\n\n" +
+              "**Game:** " + b["family"] + "\n\n" +
+              "**Rules:** " + b["canonical_rules"] + "\n\n" +
+              "**Proposer protocol:** " + b["proposer_protocol"] + "\n\n" +
+              "**Rejection:** " + b["rejection_transition"] + "\n\n" +
+              "**Discounting:** " + b["discounting"] + "\n\n" +
+              "**Reference status:** " + b["baseline_source_status"] + "\n\n" +
+              "## One innovation\n\n" + v["one_sentence_change"] +
+              "\n\nStates: " + ", ".join(v["state_values"]) +
+              "\n\nPayoff/transition primitive: " +
+              v["payoff_or_transition_affected"] +
+              "\n\n## Candidate contribution and mechanisms\n\n" +
+              mech["candidate_literature_gap"] + "\n\n" + mech["mechanism"] +
+              "\n\n**Could also be no effect:** " + mech["null_case"] +
+              "\n\n**Rival mechanism:** " + mech["rival_explanation"] +
+              "\n\n## Proof requirements\n\n" +
+              proof["solution_concept"] + "\n\n" +
+              proof["equilibrium_conditions"] + "\n\n" +
+              proof["off_path_requirements"] + "\n\n" +
+              proof["benchmark_recovery"] +
+              "\n\n**Source caveats:** " +
+              " | ".join(blueprint["source_caveats"]) +
+              "\n\n**Your decision:** approve the architecture only, or revise its rules and mechanism. " +
+              "No hypotheses, equilibrium or novelty are approved here.\n")
+    write(dest / "BLUEPRINT_REVIEW.md", review)
     approval = dest / "BLUEPRINT_APPROVAL.json"
     if approval.exists():
         approval.unlink()  # never carry a previous signature across changed content
     return {"status": "BLUEPRINT_PROPOSED_UNREVIEWED", "path": str(dest / "THEORY_BLUEPRINT.json"),
+            "review_packet": str(dest / "BLUEPRINT_REVIEW.md"),
             "baseline": blueprint["baseline"]["family"],
             "change": blueprint["innovation"]["one_sentence_change"],
             "estimated_charge_usd": round(charge, 6),
