@@ -286,7 +286,12 @@ For the subsequent stages, refer to `research/SCIENCE_MVP.md`. Each stage
 requires its own inputs, audit, and separate human signoff; the guide can
 identify the next eligible stage but does not fabricate missing data or theory.
 
-**Where we stopped November 23, 2026:** the Holy Days Claude architecture
-revision was successfully generated, remains unreviewed, and requires reading
-its entire `BLUEPRINT_REVIEW.md` before human approval. It has **not**
-produced a proved repeated-bargaining equilibrium.
+**Current Holy Days milestone, November 23, 2026:** the research architecture
+is signed and Claude has produced a revised, **UNVERIFIED** mathematical
+derivation. The offline solver enumerated 26,032 pure policy masks over 403
+synthetic cases: no numerical contradictions, seven instances of multiple
+pure MPE, and no cases without a pure MPE. This is not a general existence
+proof, a unique equilibrium, or empirical evidence. The set-valued model
+handoff can now prepare a private **incomplete** model candidate; explicit
+hypotheses, scientific review, source-validated real data, estimation,
+validation and final Overleaf manuscript work remain outstanding.
