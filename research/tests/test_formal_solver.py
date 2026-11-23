@@ -33,6 +33,27 @@ class FormalSolverTests(unittest.TestCase):
         self.assertEqual(r["equilibrium_selection_bounds"][
                          "first_phase_possible_war_lags"], [1, "never"])
 
+    def test_revised_proposition_3_expands_unique_peace_guarantee(self):
+        # delta=0.7; D=0.022 exceeds the earlier 0.018 bound but
+        # falls below the new 0.018/0.7 bound from Claude's revision.
+        case = self.scenario(delta=0.7, p0=0.5, d_A=0.0,
+                             d_B=0.022, c_A=0.2, c_B=0.3)
+        result = solver.audit_case(case, self.sha)
+        self.assertEqual(result["pure_mpe_masks"], [0])
+        self.assertFalse(result["contradictions"])
+        self.assertTrue(result["proposition_3_bound_holds"])
+        self.assertTrue(result["proposition_3_improvement_eligible"])
+        self.assertLess(result["proposition_3_old_bound"], 0.022)
+        self.assertGreater(result["proposition_3_revised_bound"], 0.022)
+
+    def test_just_outside_revised_bound_is_not_certified(self):
+        case = self.scenario(delta=0.7, p0=0.5, d_A=0.0,
+                             d_B=0.03, c_A=0.2, c_B=0.3)
+        result = solver.audit_case(case, self.sha)
+        self.assertFalse(result["proposition_3_bound_holds"])
+        # Outside a sufficient condition means unclassified, NOT war.
+        self.assertFalse(result["contradictions"])
+
     def test_selection_is_set_valued_without_selection_assumption(self):
         cycle = list(wb.STATES)
         s = solver.selection_bounds(cycle, [0, 6])
