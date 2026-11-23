@@ -128,14 +128,37 @@ def guide(home, project):
                         PY + " -m research.factory.formal_workbench demo " + project
                     )
                 else:
-                    result["next_action"] = (
-                        "Derive and independently verify the repeated-game "
-                        "equilibrium beyond the numerical examples."
-                    )
-                    result["command"] = (
-                        PY + " -m research.factory.science_mvp produce " +
-                        project + " formal_model --model /path/to/verified_model.json"
-                    )
+                    proof = formal / "derivations" / "PROOF_DRAFT.json"
+                    if not proof.is_file():
+                        result["next_action"] = (
+                            "Ask Claude to draft an auditable equilibrium derivation "
+                            "from the signed blueprint and benchmark."
+                        )
+                        result["command"] = (
+                            PY + " -m research.factory.formal_reasoner draft " +
+                            project + " --confirm-share-evidence "
+                            "--model claude-opus-5-5 --input-rate 4 "
+                            "--output-rate 20 --max-usd 1.00 --max-tokens 12000"
+                        )
+                        result["notes"].append(
+                            "This optional Claude step is billable and produces an "
+                            "UNVERIFIED candidate, never a proved theorem."
+                        )
+                    else:
+                        result["next_action"] = (
+                            "Inspect/revise the Claude mathematical derivation, then "
+                            "independently verify its proof and all deviations."
+                        )
+                        result["command"] = (
+                            PY + " -m research.factory.formal_reasoner review " +
+                            project + " --confirm-share-evidence "
+                            "--model claude-opus-5-5 --input-rate 4 "
+                            "--output-rate 20 --max-usd 1.00 --max-tokens 12000"
+                        )
+                        result["notes"].append(
+                            "A full verified game JSON still must be supplied to "
+                            "science_mvp produce PROJECT formal_model; no automatic approval."
+                        )
             result["notes"] = [
                 "The formal workbench checks selected numerical pure Markov cases, "
                 "NOT all theorems or non-Markov SPE.",
