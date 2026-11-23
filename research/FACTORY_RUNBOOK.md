@@ -204,6 +204,30 @@ equilibrium selection. If any contradiction appears, inspect the saved
 examples and revise mathematics; do NOT approve the formal model. Revisions
 to `PROOF_DRAFT.json` invalidate the guide's saved-audit checkpoint.
 
+**5. Prepare a focused mathematical proof and equilibrium-selection review** from
+the last solver audit, without another API call:
+
+```bash
+"$P" -m research.factory.formal_proof_brief holy-days
+```
+
+This validates that the signed blueprint, current unverified Claude proof SHA
+and last numerical audit agree, then writes private
+`formal_workbench/FORMAL_PROOF_FEEDBACK.txt`. It includes the precise proof
+obligations: verify the finite-cycle war-set fixed point and boundaries;
+establish or refute general pure-MPE existence; check the unique-peace
+sufficient bound; and distinguish predictions that hold in **every** pure
+equilibrium from those requiring an explicit equilibrium selection rule.
+
+To **request a new, billable Claude revision**, run the existing interactive
+`formal_reasoner review` command above. At `>`, paste the path prefixed
+by `@`, e.g. `@research/inbox/raw/scientific_stages/holy-days/formal_workbench/FORMAL_PROOF_FEEDBACK.txt`.
+The read-only `formal_proof_brief` command itself neither contacts Claude
+nor certifies anything. After Claude revises, rerun the offline numerical
+audit: it will be considered stale until reconfirmed against the new
+`PROOF_DRAFT.json` SHA. If pure MPEs disagree on onset or war occurrence,
+keep those as **set-valued predictions**, not invented numerical probabilities.
+
 **Only after a researcher independently audits** all Bellman equations,
 unilateral deviations, off-path play, admissible parameter regions, calendar
 states and benchmark recovery may a fully argued model JSON be submitted:
