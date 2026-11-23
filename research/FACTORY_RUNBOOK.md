@@ -155,6 +155,22 @@ and researcher feedback. Failed or truncated API responses are saved without
 overwriting the prior draft. Claude calls are billable; review and numerical
 checks are not.
 
+**If Claude hits the output-token limit:** Its partial text and diagnostic
+remain in `formal_workbench/derivations/attempts/`, and earlier drafts are
+untouched. Before paying to rerun, try:
+
+```bash
+"$P" -m research.factory.formal_reasoner recover holy-days
+```
+
+This performs **zero API calls**, verifies the signed blueprint and any
+parent draft, and only accepts a COMPLETE valid JSON object within the saved
+text. If the text really stops mid-JSON, recovery will explicitly refuse.
+Then repeat the `formal_reasoner draft` command above; its revised prompt
+now targets a short, checkable initial derivation rather than an exhaustively
+long solution in one response. The retry is billable. The `guide` command
+points to recovery when it sees an earlier truncated draft.
+
 **Only after a researcher independently audits** all Bellman equations,
 unilateral deviations, off-path play, admissible parameter regions, calendar
 states and benchmark recovery may a fully argued model JSON be submitted:
