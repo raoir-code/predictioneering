@@ -155,6 +155,8 @@ class ScientificMVPTests(unittest.TestCase):
             mvp.produce(self.home, self.project, "formal_model", model_path=model)
         self.approved_architecture(model)
         mvp.produce(self.home, self.project, "formal_model", model_path=model)
+        self.assertTrue((mvp.draft(self.home, self.project, "formal_model") /
+                         "THEORY_BLUEPRINT_APPROVAL.json").is_file())
         self.approved("formal_model")
         mvp.produce(self.home, self.project, "hypotheses")
         self.approved("hypotheses")
