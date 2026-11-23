@@ -55,8 +55,55 @@ class TheoryFabricatorTests(unittest.TestCase):
             th.validate(altered)
         altered = copy.deepcopy(c)
         altered["innovation"]["added_state_variables"] = ["holiday_state", "extra_state"]
-        with self.assertRaisesRegex(ValueError, "At most one"):
+        with self.assertRaisesRegex(ValueError, "Conflicting calendar state declarations"):
             th.validate(altered)
+
+    def test_public_calendar_metadata_can_be_declared_exogenous(self):
+        raw = self.candidate()
+        raw["innovation"]["added_state_variables"] = []
+        checked = th.validate(raw)
+        self.assertEqual(
+            checked["innovation"]["added_state_variables"], ["holiday_state"])
+        self.assertEqual(raw["innovation"]["added_state_variables"], [])
+        # No silent invention of separate 'country A holiday' and
+        # 'country B holiday' variables is permitted.
+        invalid = self.candidate()
+        invalid["innovation"]["added_state_variables"] = ["A_holiday", "B_holiday"]
+        with self.assertRaisesRegex(ValueError, "Conflicting calendar state"):
+            th.validate(invalid)
+
+    def test_rejected_paid_result_preserved_and_replayable_without_api(self):
+        import re
+        broken = self.candidate()
+        broken["innovation"]["added_state_variables"] = [
+            "A_holiday", "B_holiday"]
+        calls = []
+        def transport(bundle, model, key, max_tokens):
+            calls.append(True)
+            return broken, {"input_tokens": 40, "output_tokens": 120}, model
+        with self.assertRaisesRegex(ValueError, "Raw response preserved"):
+            th.propose(self.home, self.project,
+                       baseline="Repeated ultimatum with one holiday calendar",
+                       send=True, share=True, model="mock", key="TEST",
+                       input_rate=1, output_rate=1, max_usd=1,
+                       transport=transport)
+        self.assertEqual(len(calls), 1)
+        saved = list((self.stage() / "attempts").glob("CLAUDE_BLUEPRINT_*.json"))
+        saved = [p for p in saved if not p.name.endswith(".diagnostic.json")]
+        self.assertEqual(len(saved), 1)
+        self.assertEqual(json.loads(saved[0].read_text()), broken)
+        self.assertTrue(saved[0].with_suffix(".diagnostic.json").is_file())
+        self.assertFalse((self.stage() / "THEORY_BLUEPRINT.json").exists())
+        # A scientist reviews/corrects a copy of the raw response and replays
+        # locally: this must not re-trigger Claude.
+        corrected = self.work / "REVIEWED_CLAUDE_BLUEPRINT.json"
+        broken["innovation"]["added_state_variables"] = ["holiday_state"]
+        corrected.write_text(json.dumps(broken))
+        result = th.propose(self.home, self.project,
+                            baseline="Repeated ultimatum with one holiday calendar",
+                            candidate=corrected)
+        self.assertEqual(result["network_or_paid_api_calls"], 0)
+        self.assertEqual(len(calls), 1)
 
     def test_human_blueprint_approval_provenance_and_change_guard(self):
         result = th.propose(self.home, self.project,
