@@ -86,6 +86,9 @@ def model_checks(model, spec=None):
     checks = paper_sprint.check_model(model, spec)
     if not checks["all_derivative_signs_verified"]:
         raise ValueError("At least one asserted comparative-static sign is not symbolically verified")
+    if model.get("normal_form_2x2") is not None:
+        from . import two_by_two_game
+        checks["normal_form_2x2_audit"] = two_by_two_game.verify(model)
     return checks
 
 
@@ -123,8 +126,15 @@ def produce(home, project, stage, *, model_path=None, spec_path=None,
                        "\n".join("- " + x["id"] + ": d/d" + x["parameter"] +
                        " = " + x["derivative_sympy"] + " (" + x["expected_sign"] + ")"
                                  for x in checks["derivatives"]) +
-                       "\n\n**NOT VERIFIED:** equilibrium existence, best responses, " +
-                       "selection, empirical mapping, and novelty. Researcher must check all.\n")]
+                       "\n\n**NOT VERIFIED:** complete equilibrium classification, parameter admissibility, " +
+                       "empirical mapping, and novelty. Researcher must check all.\n" +
+                       (("2x2 payoff-matrix indifference: " +
+                         checks["normal_form_2x2_audit"]["status"] + "\n" +
+                         "Attacker mixing p = " +
+                         checks["normal_form_2x2_audit"]["row_player_first_action_probability"] + "\n" +
+                         "Defender mixing q = " +
+                         checks["normal_form_2x2_audit"]["column_player_first_action_probability"] + "\n")
+                        if "normal_form_2x2_audit" in checks else ""))]
         summary = "Researcher-supplied formal game and conditional algebra checks; equilibrium UNPROVEN"
     elif stage == "hypotheses":
         model = approved_model(home, project)
