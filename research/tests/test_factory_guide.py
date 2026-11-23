@@ -89,6 +89,43 @@ class FactoryGuideTests(unittest.TestCase):
         self.assertFalse((th.folder(self.home, self.project) /
                           "FORMAL_MODEL_APPROVAL.json").exists())
 
+        from research.factory import formal_reasoner as fr
+        from research.factory import formal_solver as solver
+        from research.factory import formal_proof_brief as brief
+        first_pass = {key: (
+            "A provisional mathematical equation and equilibrium claim "
+            "for independent algebraic and strategic verification."
+        ) for key in fr.FIELDS}
+        first_pass.update({
+            "schema": fr.SCHEMA,
+            "proof_steps": [
+                {"claim": "B acceptance threshold",
+                 "argument": "Compare the immediate attack payoff to expected continuation.",
+                 "domain": "Finite deterministic cycle"},
+                {"claim": "A choice",
+                 "argument": "Compare peace obtained by offering the threshold to attacking.",
+                 "domain": "Fixed bilateral-war game"},
+            ],
+            "unresolved_gaps": [
+                "Independently verify existence, uniqueness and equilibrium selection."
+            ]
+        })
+        local = self.work / "draft.json"
+        local.write_text(json.dumps(first_pass))
+        fr.draft(self.home, self.project, candidate_file=local)
+        need_audit = guide.guide(self.home, self.project)
+        self.assertIn("formal_solver audit", need_audit["command"])
+        solver.audit(self.home, self.project, cases=2, max_phases=4)
+        need_brief = guide.guide(self.home, self.project)
+        self.assertIn("formal_proof_brief", need_brief["command"])
+        brief.prepare(self.home, self.project)
+        need_revision = guide.guide(self.home, self.project)
+        self.assertIn("formal_reasoner review", need_revision["command"])
+        self.assertIn("@", " ".join(need_revision["notes"]))
+        self.assertEqual(need_revision["network_or_paid_api_calls"], 0)
+        self.assertEqual(gates.load(self.home, self.project)["stages"]
+                         ["formal_model"]["status"], "not_started")
+
     def test_guide_prioritizes_recovery_of_cutoff_formal_draft(self):
         from research.factory import formal_workbench as fw
         candidate = json.loads(CANDIDATE.read_text())
