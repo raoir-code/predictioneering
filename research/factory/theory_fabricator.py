@@ -535,6 +535,130 @@ def history(home, project):
     return {"project": project, "draft_count": len(entries), "drafts": entries}
 
 
+def recover(home, project, *, source=None):
+    """Safely promote the first complete JSON object from saved Claude text."""
+    dest = folder(home, project)
+    attempts = dest / "attempts"
+    if source is None:
+        matches = sorted(attempts.glob("CLAUDE_PARTIAL_*.txt"))
+        if not matches:
+            raise ValueError("No saved partial Claude response found")
+        path = matches[-1]
+    else:
+        path = Path(source).expanduser().resolve()
+        if path.parent != attempts.resolve() or not path.name.startswith("CLAUDE_PARTIAL_"):
+            raise ValueError("Recovery source must be a saved CLAUDE_PARTIAL_*.txt in this project's attempts folder")
+    if not path.is_file() or path.stat().st_size > 400_000:
+        raise ValueError("Recovery text file missing or too large")
+    diagnostic_path = path.with_suffix(".diagnostic.json")
+    if not diagnostic_path.is_file():
+        raise ValueError("Saved response has no matching provenance diagnostic")
+    diagnostic = json.loads(diagnostic_path.read_text(encoding="utf-8"))
+    if diagnostic.get("status") != "TRUNCATED_OR_INVALID_MODEL_OUTPUT":
+        raise ValueError("Recovery diagnostic is not a recognized Claude failure")
+    previous = dest / "THEORY_BLUEPRINT.json"
+    if not previous.is_file():
+        raise ValueError("No current blueprint to revise")
+    prior_sha = gates.file_sha(previous)
+    if diagnostic.get("prior_blueprint_sha256") != prior_sha:
+        raise ValueError("Current blueprint differs from the failed revision's parent; "
+                         "review history before applying an outdated response")
+    if diagnostic.get("upstream") != source_pins(source_inputs(home, project)):
+        raise ValueError("Approved upstream sources changed since failed generation")
+    feedback = diagnostic.get("revision_feedback")
+    if not isinstance(feedback, str) or len(feedback.strip()) < 20:
+        raise ValueError("Cannot recover without the original revision feedback")
+    raw = path.read_text(encoding="utf-8").strip()
+    if raw.startswith("```"):
+        raw = raw.partition("\n")[2]
+    try:
+        first, end = json.JSONDecoder().raw_decode(raw.lstrip())
+    except json.JSONDecodeError as exc:
+        raise ValueError("Saved partial does not contain a complete JSON blueprint: " +
+                         exc.msg + "; review the partial text or rerun Claude") from exc
+    if not isinstance(first, dict) or first.get("schema") != SCHEMA:
+        raise ValueError("Saved first JSON object is not a theory blueprint")
+    trailing = raw.lstrip()[end:].strip()
+    if trailing.startswith(("```",)):
+        trailing = trailing[3:].strip()
+    if trailing.startswith(("{", "[")):
+        raise ValueError("Claude returned more than one JSON structure; cannot "
+                         "choose silently. Inspect saved response and select a candidate.")
+    # Do not overwrite the original saved response, which is evidence.
+    recovered_path = path.with_name("CLAUDE_RECOVERED_" + path.stem + ".json")
+    write(recovered_path, first)
+    parent = json.loads(previous.read_text(encoding="utf-8"))
+    baseline = parent.get("baseline_preference")
+    if not baseline:
+        raise ValueError("Current blueprint has no saved baseline preference")
+    result = propose(
+        home, project, baseline=baseline, candidate=recovered_path,
+        revision_feedback=feedback,
+        recovery_context={
+            "partial_path": str(path),
+            "model": diagnostic.get("model"),
+            "estimated_charge_usd": diagnostic.get("estimated_charge_usd", 0.0),
+            "trailing_text": trailing[:10000],
+        })
+    result["recovery"] = "COMPLETE_JSON_RECOVERED_UNREVIEWED"
+    result["ignored_trailing_characters"] = len(trailing)
+    result["network_or_paid_api_calls"] = 0
+    return result
+
+
+def review(home, project, *, share=False, model=None, key=None,
+           input_rate=None, output_rate=None, max_usd=None,
+           max_tokens=12000, ask=input, output=print,
+           transport=anthropic_transport):
+    """One conversational terminal interface for repeated blueprint revisions."""
+    dest = folder(home, project)
+    current = dest / "THEORY_BLUEPRINT.json"
+    if not current.is_file():
+        raise ValueError("No blueprint exists yet; run propose first")
+    for _ in range(50):
+        candidate = json.loads(current.read_text(encoding="utf-8"))
+        gen = candidate.get("generation", {})
+        if (dest / "BLUEPRINT_APPROVAL.json").exists():
+            output("Architecture already approved. Mathematical proof is still pending.")
+            return {"status": "ARCHITECTURE_ALREADY_APPROVED"}
+        def short(value, width=275):
+            value = " ".join(str(value).split())
+            return value if len(value) <= width else value[:width - 3] + "..."
+        output("\nHere's the current proposal (revision " +
+               str(gen.get("revision_number", 0)) + "):")
+        output("Game: " + short(candidate["baseline"]["canonical_rules"]))
+        output("War/rejection: " + short(candidate["baseline"]["rejection_transition"]))
+        output("Holiday innovation: " + short(candidate["innovation"]["one_sentence_change"]))
+        output("Full review: " + str(dest / "BLUEPRINT_REVIEW.md"))
+        output("What should I change? Type your feedback, SHOW for the full report, "
+               "or APPROVE if the architecture is good to go.")
+        try:
+            answer = ask("> ").strip()
+        except EOFError:
+            return {"status": "AWAITING_HUMAN_REVIEW", "path": str(current)}
+        if not answer or answer.upper() in {"QUIT", "EXIT"}:
+            return {"status": "AWAITING_HUMAN_REVIEW", "path": str(current)}
+        if answer.upper() == "SHOW":
+            output((dest / "BLUEPRINT_REVIEW.md").read_text(encoding="utf-8"))
+            continue
+        if answer.upper() == "APPROVE":
+            return approve(home, project, reviewer="Researcher",
+                           notes="Researcher explicitly accepted architecture using "
+                                 "interactive review; no equilibrium proved.")
+        if answer.startswith("@"):
+            feedback_file = Path(answer[1:]).expanduser()
+            answer = feedback_file.read_text(encoding="utf-8")
+        if not share:
+            raise ValueError("Sending feedback to Claude requires --confirm-share-evidence")
+        result = revise(
+            home, project, feedback=answer, share=share, model=model, key=key,
+            input_rate=input_rate, output_rate=output_rate, max_usd=max_usd,
+            max_tokens=max_tokens, transport=transport)
+        output("Claude revised the model. Estimated API cost: $" +
+               str(result["estimated_charge_usd"]))
+    return {"status": "REVIEW_ROUND_LIMIT", "rounds_this_session": 50}
+
+
 def revise(home, project, *, feedback, share, model, key, input_rate,
            output_rate, max_usd, max_tokens=12000,
            transport=anthropic_transport):
@@ -622,6 +746,17 @@ def main(argv=None):
     v.add_argument("--output-rate", type=float)
     v.add_argument("--max-usd", type=float)
     v.add_argument("--max-tokens", type=int, default=12000)
+    z = sub.add_parser("recover", help="Recover a complete JSON blueprint from Claude's failed saved response")
+    z.add_argument("project")
+    z.add_argument("--from-file", type=Path)
+    w = sub.add_parser("review", help="Interactive: review, ask Claude for changes, or approve")
+    w.add_argument("project")
+    w.add_argument("--confirm-share-evidence", action="store_true")
+    w.add_argument("--model", default=os.getenv("CLAUDE_MODEL"))
+    w.add_argument("--input-rate", type=float)
+    w.add_argument("--output-rate", type=float)
+    w.add_argument("--max-usd", type=float)
+    w.add_argument("--max-tokens", type=int, default=12000)
     h = sub.add_parser("history", help="Show all saved blueprint revisions")
     h.add_argument("project")
     a = sub.add_parser("approve")
@@ -641,6 +776,14 @@ def main(argv=None):
                              key=os.getenv("ANTHROPIC_API_KEY"),
                              input_rate=args.input_rate, output_rate=args.output_rate,
                              max_usd=args.max_usd, max_tokens=args.max_tokens)
+        elif args.command == "recover":
+            result = recover(args.home, args.project, source=args.from_file)
+        elif args.command == "review":
+            result = review(args.home, args.project,
+                            share=args.confirm_share_evidence,
+                            model=args.model, key=os.getenv("ANTHROPIC_API_KEY"),
+                            input_rate=args.input_rate, output_rate=args.output_rate,
+                            max_usd=args.max_usd, max_tokens=args.max_tokens)
         elif args.command == "history":
             result = history(args.home, args.project)
         elif args.command == "revise":
