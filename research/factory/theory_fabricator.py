@@ -12,6 +12,7 @@ import hashlib
 import json
 import math
 import os
+import re
 from pathlib import Path
 import shutil
 import sys
@@ -168,9 +169,14 @@ def validate(candidate):
                 len(raw_status) > 160):
             raise ValueError("Blueprint requires a nonempty proposal status label; "
                              "raw Claude output is saved for offline inspection")
-        if any(word in raw_status.lower() for word in
-               ("solved", "proved", "verified", "validated", "approved",
-                "accepted", "submission_ready", "published", "complete")):
+        tokens = re.findall(r"[a-z]+", raw_status.lower())
+        claims = {"solved", "proved", "verified", "validated",
+                  "approved", "accepted", "published", "complete"}
+        # "not_solved", "unverified", etc. are not positive proof claims.
+        if ("submission_ready" in raw_status.lower() or
+            any(tok in claims and not (
+                idx > 0 and tokens[idx - 1] in {"not", "never", "non"}
+            ) for idx, tok in enumerate(tokens))):
             raise ValueError(
                 "Claude used a status that might claim an achieved proof or approval: " +
                 repr(raw_status) + ". Review the saved JSON; no auto-approval permitted."
