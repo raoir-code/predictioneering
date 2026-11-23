@@ -89,6 +89,33 @@ class FactoryGuideTests(unittest.TestCase):
         self.assertFalse((th.folder(self.home, self.project) /
                           "FORMAL_MODEL_APPROVAL.json").exists())
 
+    def test_guide_prioritizes_recovery_of_cutoff_formal_draft(self):
+        from research.factory import formal_workbench as fw
+        candidate = json.loads(CANDIDATE.read_text())
+        candidate["baseline"]["canonical_rules"] = (
+            "A chooses Attack or a new offer; B chooses Accept or Attack; "
+            "there is no Reject action; acceptance is a one-period agreement."
+        )
+        source = self.work / "approved_game_for_recovery.json"
+        source.write_text(json.dumps(candidate))
+        th.propose(self.home, self.project,
+                   baseline="Repeated bargaining with bilateral war",
+                   candidate=source)
+        th.approve(self.home, self.project, reviewer="Scientist",
+                   notes="Accepted numerical adapter fixture")
+        fw.prepare(self.home, self.project)
+        fw.demo(self.home, self.project)
+        before = guide.guide(self.home, self.project)
+        self.assertIn("formal_reasoner draft", before["command"])
+        attempts = fw.outdir(self.home, self.project) / "derivations" / "attempts"
+        attempts.mkdir(parents=True, exist_ok=True)
+        (attempts / "CLAUDE_FORMAL_PARTIAL_test.txt").write_text(
+            '{"schema":"formal_derivation_draft_v1",')
+        after = guide.guide(self.home, self.project)
+        self.assertIn("formal_reasoner recover", after["command"])
+        self.assertIn("zero-cost recovery", after["next_action"])
+        self.assertEqual(after["network_or_paid_api_calls"], 0)
+
     def test_guide_warns_about_unresolved_newer_claude_attempt(self):
         th.propose(self.home, self.project,
                    baseline="Repeated bargaining with costly war",
