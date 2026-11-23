@@ -166,16 +166,32 @@ def anthropic_transport(bundle, model, key, max_tokens):
             answer = json.load(response)
     except urllib.error.HTTPError as exc:
         raise RuntimeError("Anthropic returned HTTP " + str(exc.code)) from exc
+    # Anthropic returns stop_reason=max_tokens when output is truncated. A
+    # partially emitted JSON object must never replace the previous blueprint.
+    if answer.get("stop_reason") == "max_tokens":
+        raise ValueError(
+            "Claude's blueprint was truncated at max_tokens=" + str(max_tokens) +
+            "; no new blueprint was saved. Rerun with --max-tokens 6000 "
+            "(this is another billable API call)."
+        )
     text = "\n".join(b.get("text", "") for b in answer.get("content", [])
                      if b.get("type") == "text").strip()
     if text.startswith(chr(96) * 3):
         text = text.partition("\n")[2].rsplit(chr(96) * 3, 1)[0].strip()
-    return json.loads(text), answer.get("usage", {}), answer.get("model")
+    try:
+        parsed = json.loads(text)
+    except json.JSONDecodeError as exc:
+        raise ValueError(
+            "Claude returned invalid JSON (" + exc.msg +
+            "); no blueprint was saved. Inspect output budget and retry with "
+            "--max-tokens 6000; retrying is billable."
+        ) from exc
+    return parsed, answer.get("usage", {}), answer.get("model")
 
 
 def propose(home, project, *, baseline, candidate=None, send=False, share=False,
             model=None, key=None, input_rate=None, output_rate=None,
-            max_usd=None, max_tokens=2200, transport=anthropic_transport):
+            max_usd=None, max_tokens=6000, transport=anthropic_transport):
     # A signed formal model cannot silently lose or replace its approved
     # architecture; revise the model stage first to invalidate descendants.
     project_state = gates.load(home, project)
@@ -199,8 +215,8 @@ def propose(home, project, *, baseline, candidate=None, send=False, share=False,
         if any(not isinstance(x, (int, float)) or not math.isfinite(x) or x <= 0
                for x in (input_rate, output_rate, max_usd)):
             raise ValueError("Provide current pricing and positive --max-usd")
-        if not 512 <= max_tokens <= 4000:
-            raise ValueError("max_tokens out of range")
+        if not 512 <= max_tokens <= 8000:
+            raise ValueError("max_tokens must be between 512 and 8000")
         upper_input_tokens = 2 * len(json.dumps(bundle, ensure_ascii=False).encode("utf-8"))
         cap = (upper_input_tokens * input_rate + max_tokens * output_rate) / 1_000_000
         if cap > max_usd:
@@ -309,6 +325,8 @@ def main(argv=None):
     g.add_argument("--input-rate", type=float)
     g.add_argument("--output-rate", type=float)
     g.add_argument("--max-usd", type=float)
+    g.add_argument("--max-tokens", type=int, default=6000,
+                   help="Claude output token cap; use 6000 for blueprint JSON")
     a = sub.add_parser("approve")
     a.add_argument("project"); a.add_argument("--reviewer", required=True)
     a.add_argument("--notes", required=True)
@@ -325,7 +343,7 @@ def main(argv=None):
                              share=args.confirm_share_evidence, model=args.model,
                              key=os.getenv("ANTHROPIC_API_KEY"),
                              input_rate=args.input_rate, output_rate=args.output_rate,
-                             max_usd=args.max_usd)
+                             max_usd=args.max_usd, max_tokens=args.max_tokens)
         else:
             result = approve(args.home, args.project,
                              reviewer=args.reviewer, notes=args.notes)
