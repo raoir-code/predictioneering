@@ -168,7 +168,7 @@ class FormalReasonerTests(unittest.TestCase):
         self.assertIn("No derivative has been calculated", report)
         self.assertEqual(gates.load(self.home, self.project)["stages"]
                          ["formal_model"]["status"], "awaiting_human_approval")
-        self.assertFalse((theory.folder(self.home, self.project) /
+        self.assertFalse((th.folder(self.home, self.project) /
                           "FORMAL_MODEL_APPROVAL.json").exists())
         proof = fr.directory(self.home, self.project) / "PROOF_DRAFT.json"
         data = json.loads(proof.read_text())
