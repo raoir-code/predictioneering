@@ -219,9 +219,12 @@ def anthropic_transport(bundle, model, key, max_tokens):
         prompt = (
             "REVISE the existing unsolved model blueprint according to the "
             "researcher's instructions below. Treat the prior blueprint as "
-            "unapproved working material. Preserve the conventional game, "
-            "modify one holiday-dependent military primitive only, do not "
-            "invent an equilibrium, and return a COMPLETE revised JSON.\n"
+            "unapproved working material. Correct the baseline game, including "
+            "war timing, who can fight, and whether bargaining can continue, "
+            "when instructed. Treat those as conventional BASELINE choices, "
+            "not new holiday mechanisms. The ONE holiday-specific innovation "
+            "must remain a calendar-dependent military-success probability. "
+            "Do not invent an equilibrium; return a COMPLETE revised JSON.\n"
             "RESEARCHER FEEDBACK (instructions):\n" +
             revision["feedback"] +
             "\nPRIOR BLUEPRINT (candidate to revise):\n" +
