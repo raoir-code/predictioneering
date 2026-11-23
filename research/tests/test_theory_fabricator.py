@@ -147,6 +147,11 @@ class TheoryFabricatorTests(unittest.TestCase):
             observed.append(max_tokens)
             return self.candidate(), {"input_tokens": 30,
                                       "output_tokens": 90}, model
+        earlier = th.propose(self.home, self.project,
+            baseline="Infinitely repeated ultimatum bargaining",
+            candidate=CANDIDATE)
+        before = (self.stage() / "THEORY_BLUEPRINT.json").read_bytes()
+        original_sha = __import__("hashlib").sha256(before).hexdigest()[:16]
         result = th.propose(self.home, self.project,
             baseline="Infinitely repeated ultimatum bargaining",
             send=True, share=True, model="mock", key="TEST",
@@ -155,6 +160,10 @@ class TheoryFabricatorTests(unittest.TestCase):
         self.assertEqual(observed, [6000])
         self.assertEqual(result["status"], "BLUEPRINT_PROPOSED_UNREVIEWED")
         self.assertEqual(result["network_or_paid_api_calls"], 1)
+        self.assertEqual(result["origin"], "claude_api")
+        self.assertIn("Claude API (mock)", (self.stage() / "BLUEPRINT_REVIEW.md").read_text())
+        self.assertEqual(before, (self.stage() / "history" / original_sha /
+                                  "THEORY_BLUEPRINT.json").read_bytes())
 
     def test_paid_generation_refuses_without_explicit_permission(self):
         called = []
