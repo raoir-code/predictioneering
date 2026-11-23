@@ -152,6 +152,69 @@ class TheoryFabricatorTests(unittest.TestCase):
         self.assertEqual(result["network_or_paid_api_calls"], 0)
         self.assertEqual(len(calls), 1)
 
+    def test_reopen_archives_approval_without_rewriting_blueprint(self):
+        th.propose(self.home, self.project,
+                   baseline="Repeated bargaining with war", candidate=CANDIDATE)
+        before = gates.file_sha(self.stage() / "THEORY_BLUEPRINT.json")
+        th.approve(self.home, self.project, reviewer="Scientist",
+                   notes="Premature architecture approval for regression test.")
+        result = th.reopen(self.home, self.project,
+                           reason="Latest draft did not incorporate requested revision.")
+        self.assertEqual(result["status"], "ARCHITECTURE_REOPENED_UNREVIEWED")
+        self.assertEqual(before, gates.file_sha(self.stage() / "THEORY_BLUEPRINT.json"))
+        self.assertFalse((self.stage() / "BLUEPRINT_APPROVAL.json").exists())
+        saved = list((self.stage() / "approval_history").glob("*.json"))
+        self.assertEqual(len(saved), 1)
+        withdrawn = json.loads(saved[0].read_text())
+        self.assertEqual(withdrawn["blueprint_sha256"], before)
+        self.assertIn("Latest draft", withdrawn["withdrawal_reason"])
+        with self.assertRaisesRegex(ValueError, "signed THEORY BLUEPRINT"):
+            th.require_blueprint(self.home, self.project, {
+                "theory_blueprint_sha256": before})
+
+    def test_approval_guard_requires_explicit_stale_blueprint_acknowledgement(self):
+        th.propose(self.home, self.project,
+                   baseline="Repeated bargaining with war", candidate=CANDIDATE)
+        old_sha = gates.file_sha(self.stage() / "THEORY_BLUEPRINT.json")
+        attempts = self.stage() / "attempts"
+        attempts.mkdir(parents=True, exist_ok=True)
+        th.write(attempts / "CLAUDE_PARTIAL_trial.diagnostic.json", {
+            "status": "TRUNCATED_OR_INVALID_MODEL_OUTPUT",
+            "prior_blueprint_sha256": old_sha,
+        })
+        with self.assertRaisesRegex(ValueError, "newer Claude revision FAILED"):
+            th.approve(self.home, self.project, reviewer="Scientist",
+                       notes="Attempt to approve an outdated draft")
+        self.assertFalse((self.stage() / "BLUEPRINT_APPROVAL.json").exists())
+        answers = iter(["APPROVE", "QUIT"])
+        outputs = []
+        result = th.review(
+            self.home, self.project,
+            ask=lambda _: next(answers), output=outputs.append)
+        self.assertEqual(result["status"], "AWAITING_HUMAN_REVIEW")
+        self.assertTrue(any("NOT APPROVED" in output for output in outputs))
+        self.assertFalse((self.stage() / "BLUEPRINT_APPROVAL.json").exists())
+        explicit = th.review(
+            self.home, self.project,
+            ask=lambda _: "APPROVE CURRENT", output=lambda _: None)
+        self.assertEqual(explicit["status"], "ARCHITECTURE_APPROVED_NOT_SOLVED")
+        approval = json.loads((self.stage() / "BLUEPRINT_APPROVAL.json").read_text())
+        self.assertEqual(len(approval["explicitly_accepted_unresolved_attempts"]), 1)
+
+    def test_reopen_blocks_if_formal_model_stage_is_approved(self):
+        th.propose(self.home, self.project,
+                   baseline="Repeated bargaining with war", candidate=CANDIDATE)
+        th.approve(self.home, self.project, reviewer="Scientist",
+                   notes="Architecture accepted for this test.")
+        # A downstream formal-model signature must never silently remain live.
+        project_state = gates.load(self.home, self.project)
+        project_state["stages"]["formal_model"]["status"] = "approved"
+        gates.persist(self.home, self.project, project_state)
+        with self.assertRaisesRegex(ValueError, "formal model is already approved"):
+            th.reopen(self.home, self.project,
+                      reason="Force re-examination of accepted architecture.")
+        self.assertTrue((self.stage() / "BLUEPRINT_APPROVAL.json").exists())
+
     def test_human_blueprint_approval_provenance_and_change_guard(self):
         result = th.propose(self.home, self.project,
             baseline="Infinite repeated ultimatum bargaining",
