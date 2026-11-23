@@ -87,7 +87,7 @@ def guide(home, project):
             result["notes"] = [
                 "Review the COMPLETE " + str(dest / "BLUEPRINT_REVIEW.md") +
                 " before approving.",
-                "APPROVE signs the architecture only; no mathematical equilibrium is established.",
+                "Explicit human APPROVE signs the architecture only; no mathematical equilibrium is established.",
                 "Revisions incur API charges; verify current model and token pricing.",
             ]
             if theory.unresolved_claude_attempts(home, project):
