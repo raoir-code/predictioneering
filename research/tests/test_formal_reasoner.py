@@ -224,6 +224,39 @@ class FormalReasonerTests(unittest.TestCase):
             fr.recover(self.home, self.project)
         self.assertEqual(original, gates.file_sha(root / "PROOF_DRAFT.json"))
 
+    def test_long_formal_transport_uses_extended_read_timeout(self):
+        import io
+        from unittest.mock import patch
+        calls = []
+        reply = json.dumps({
+            "content": [{"type": "text", "text": json.dumps(self.candidate())}],
+            "usage": {"input_tokens": 40, "output_tokens": 100},
+            "model": "mock", "stop_reason": "end_turn",
+        }).encode("utf-8")
+        def fake_open(req, timeout):
+            calls.append(timeout)
+            return io.BytesIO(reply)
+        with patch.object(fr.urllib.request, "urlopen", side_effect=fake_open):
+            candidate, usage, model, extra = fr.anthropic_transport(
+                {"blueprint_sha256": "test"}, "mock", "private-test", 20000)
+        self.assertEqual(calls, [fr.CLAUDE_READ_TIMEOUT_SECONDS])
+        self.assertGreaterEqual(calls[0], 600)
+        self.assertEqual(candidate["schema"], fr.SCHEMA)
+        self.assertEqual(model, "mock")
+        self.assertFalse(extra)
+
+    def test_transport_timeout_is_explicit_and_does_not_write_draft(self):
+        from unittest.mock import patch
+        self.signed_work_order()
+        with patch.object(fr.urllib.request, "urlopen",
+                          side_effect=TimeoutError("read operation timed out")):
+            with self.assertRaisesRegex(RuntimeError, "may still have incurred a charge"):
+                fr.draft(self.home, self.project, share=True, model="mock",
+                         key="TEST", input_rate=1, output_rate=1,
+                         max_usd=1, max_tokens=20000)
+        self.assertFalse((fr.directory(self.home, self.project) /
+                          "PROOF_DRAFT.json").exists())
+
     def test_interactive_approve_refuses_to_certify_proof(self):
         self.signed_work_order()
         first = self.work / "first.json"
