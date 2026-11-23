@@ -217,7 +217,7 @@ class TheoryFabricatorTests(unittest.TestCase):
         for response, expected in [
             ({"stop_reason": "max_tokens", "content": [{"type": "text",
                "text": '{"schema":"theory_blueprint_v1","baseline":"cut'}]},
-             "truncated"),
+             "exhausted"),
             ({"stop_reason": "end_turn", "content": [{"type": "text",
                "text": '{"schema":"theory_blueprint_v1","baseline":"cut'}]},
              "invalid JSON"),
@@ -234,6 +234,9 @@ class TheoryFabricatorTests(unittest.TestCase):
                 self.assertEqual(existing,
                                  (self.stage() / "THEORY_BLUEPRINT.json").read_bytes())
                 self.assertFalse((self.stage() / "BLUEPRINT_APPROVAL.json").exists())
+                partials = list((self.stage() / "attempts").glob("CLAUDE_PARTIAL_*.txt"))
+                self.assertGreaterEqual(len(partials), 1)
+                self.assertTrue(partials[-1].with_suffix(".diagnostic.json").exists())
 
     def test_configurable_output_cap_transmitted_to_model(self):
         observed = []
@@ -294,10 +297,84 @@ class TheoryFabricatorTests(unittest.TestCase):
         revision = json.loads((self.stage() / "THEORY_BLUEPRINT.json").read_text())
         self.assertEqual(revision["generation"]["revision_of_sha256"], previous_sha)
         self.assertEqual(revision["generation"]["researcher_feedback"], feedback)
+        self.assertEqual(revision["generation"]["revision_number"], 1)
         self.assertIn(feedback, (self.stage() / "BLUEPRINT_REVIEW.md").read_text())
         self.assertEqual(existing, (self.stage() / "history" / previous_sha[:16] /
                                     "THEORY_BLUEPRINT.json").read_bytes())
         self.assertFalse((self.stage() / "BLUEPRINT_APPROVAL.json").exists())
+
+    def test_revisions_can_repeat_indefinitely_and_history_keeps_feedback(self):
+        import hashlib
+        th.propose(self.home, self.project,
+                   baseline="Repeated bargaining and costly war",
+                   candidate=CANDIDATE)
+        prior_sha = gates.file_sha(self.stage() / "THEORY_BLUEPRINT.json")
+        feedbacks = [
+            "Give both states a unilateral military option alongside bargains.",
+            "Let either player reject and wait for a favorable holiday.",
+            "Make readiness advantages symmetric when only one player has a holiday."
+        ]
+        observed = []
+        def fake_claude(bundle, model, key, max_tokens):
+            observed.append(bundle["revision_request"])
+            candidate = self.candidate()
+            candidate["baseline"]["rejection_transition"] = (
+                "War and waiting are both options, subject to sequential "
+                "rationality and explicit player moves. Revision " +
+                str(len(observed))
+            )
+            return candidate, {"input_tokens": 200, "output_tokens": 300}, model
+        for n, feedback in enumerate(feedbacks, 1):
+            result = th.revise(
+                self.home, self.project, feedback=feedback, share=True,
+                model="mock", key="TEST", input_rate=1, output_rate=1,
+                max_usd=1, max_tokens=12000, transport=fake_claude)
+            self.assertEqual(result["network_or_paid_api_calls"], 1)
+            self.assertEqual(observed[-1]["prior_blueprint_sha256"], prior_sha)
+            current = json.loads((self.stage() / "THEORY_BLUEPRINT.json").read_text())
+            self.assertEqual(current["generation"]["revision_number"], n)
+            self.assertEqual(current["generation"]["researcher_feedback"], feedback)
+            self.assertEqual(current["generation"]["revision_of_sha256"], prior_sha)
+            prior_sha = gates.file_sha(self.stage() / "THEORY_BLUEPRINT.json")
+        ledger = th.history(self.home, self.project)
+        self.assertEqual(ledger["draft_count"], 4)
+        self.assertEqual([x["revision_number"] for x in ledger["drafts"]],
+                         [0, 1, 2, 3])
+        self.assertEqual([x["researcher_feedback"] for x in ledger["drafts"][1:]],
+                         feedbacks)
+        self.assertTrue(ledger["drafts"][-1]["current"])
+        self.assertEqual(ledger["drafts"][-1]["sha256"], prior_sha)
+        for i in range(1, 4):
+            self.assertEqual(ledger["drafts"][i]["parent_sha256"],
+                             ledger["drafts"][i-1]["sha256"])
+
+    def test_truncation_does_not_mutate_current_revision_or_history(self):
+        th.propose(self.home, self.project,
+                   baseline="Repeated bargaining and costly war",
+                   candidate=CANDIDATE)
+        before = gates.file_sha(self.stage() / "THEORY_BLUEPRINT.json")
+        import io
+        from unittest.mock import patch
+        simulated = {
+            "stop_reason": "max_tokens", "model": "mock",
+            "usage": {"input_tokens": 900, "output_tokens": 6000},
+            "content": [{"type": "text", "text": '{"schema":"theory_blueprint_v1"'}],
+        }
+        with patch("urllib.request.urlopen",
+                   return_value=io.BytesIO(json.dumps(simulated).encode())):
+            with self.assertRaisesRegex(ValueError, "Partial response preserved"):
+                th.revise(self.home, self.project,
+                    feedback="The rejected offer allows waiting and both players may fight.",
+                    share=True, model="mock", key="TEST",
+                    input_rate=1, output_rate=1, max_usd=1, max_tokens=12000)
+        self.assertEqual(before, gates.file_sha(self.stage() / "THEORY_BLUEPRINT.json"))
+        self.assertEqual(th.history(self.home, self.project)["draft_count"], 1)
+        saved = list((self.stage() / "attempts").glob("CLAUDE_PARTIAL_*.txt"))
+        self.assertEqual(len(saved), 1)
+        diagnostic = json.loads(saved[0].with_suffix(".diagnostic.json").read_text())
+        self.assertEqual(diagnostic["prior_blueprint_sha256"], before)
+        self.assertEqual(diagnostic["stop_reason"], "max_tokens")
+        self.assertIn("both players may fight", diagnostic["revision_feedback"])
 
     def test_revision_requires_previous_draft_and_explicit_consent(self):
         feedback = "Make a separate attack option available to both countries."
