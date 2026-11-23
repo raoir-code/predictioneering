@@ -495,7 +495,7 @@ def history(home, project):
         candidate = json.loads(path.read_text(encoding="utf-8"))
         info = candidate.get("generation", {})
         entries.append({
-            "revision_number": info.get("revision_number"),
+            "revision_number": int(info.get("revision_number", 0)),
             "sha256": gates.file_sha(path),
             "parent_sha256": info.get("revision_of_sha256"),
             "origin": info.get("origin", "unknown"),
