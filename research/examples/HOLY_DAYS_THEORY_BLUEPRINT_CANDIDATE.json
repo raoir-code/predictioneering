@@ -1,0 +1,46 @@
+{
+  "schema": "theory_blueprint_v1",
+  "status": "proposal_NOT_proven",
+  "baseline": {
+    "family": "infinite_horizon_repeated_ultimatum_bargaining",
+    "canonical_rules": "Two countries repeatedly bargain over a divisible allocation. Each round one proposer offers terms; the responder accepts immediately or rejects and the game continues, with discounted continuation payoffs.",
+    "proposer_protocol": "Candidate benchmark: alternating offers A,B,A,B in successive rounds. Whether fixed or alternating proposer best matches the substantive puzzle requires human approval; do not silently substitute a different game.",
+    "rejection_transition": "Rejecting an offer advances to the next round without an automatic attack or war, preserving the conventional bargaining benchmark. War/outside options would require a separately justified change.",
+    "discounting": "A and B discount next-round values with fixed factors delta_A and delta_B strictly between zero and one; state dependence enters only through the selected holiday primitive.",
+    "information": "Complete information about preferences, discount factors, calendar and past offers; the four-state calendar is announced and perfectly anticipated.",
+    "baseline_source_status": "Conventional infinite-horizon bargaining benchmark: exact original scholarly reference and equilibrium assumptions still require full-text verification."
+  },
+  "innovation": {
+    "one_sentence_change": "Allow one conventional bargaining payoff or rejection-cost primitive to depend on a publicly known four-state holiday calendar, leaving the rest of the repeated ultimatum game unchanged.",
+    "state_variable": "holiday_state",
+    "added_state_variables": [
+      "holiday_state"
+    ],
+    "state_values": [
+      "ordinary",
+      "A_holiday",
+      "B_holiday",
+      "both_holiday"
+    ],
+    "payoff_or_transition_affected": "Candidate single change: holiday_state shifts a player's cost of rejecting and continuing to the next bargaining round. The sign, symmetry and interpretation are not yet identified.",
+    "added_players": [],
+    "added_actions": []
+  },
+  "mechanism": {
+    "candidate_literature_gap": "The preliminary screened literature examines holiday-associated violence in terrorism, insurgency, communal riots and ceasefires; how strategic anticipation affects interstate bargaining timing remains a candidate, not established, research gap.",
+    "mechanism": "Players anticipate calendar-dependent continuation costs, possibly changing acceptance thresholds, offers, or the timing of rejected bargains. Whether any military attack behavior follows requires an additional, explicitly justified outcome link.",
+    "null_case": "If holiday shifts are symmetric, offset by offers, or do not change continuation incentives, observable conflict timing may be unchanged despite a calendar state.",
+    "rival_explanation": "Operational readiness, religious norms, media reporting, and event-coding seasonality could explain apparent holiday timing without bargaining effects."
+  },
+  "proof_plan": {
+    "solution_concept": "Find and characterize appropriate subgame-perfect equilibrium or a clearly restricted stationary or calendar-periodic Markov-perfect equilibrium; justify any equilibrium selection.",
+    "equilibrium_conditions": "Derive Bellman/continuation-value equations for each holiday state, best responses, participation and acceptance thresholds; identify discount and cost domains with valid equilibria.",
+    "off_path_requirements": "Verify rejected-offer continuation, deviations at each calendar state, optimality of offers and acceptance thresholds, and any threatened war/outside-option actions if later introduced.",
+    "benchmark_recovery": "Set holiday-dependent cost variation to zero and recover the published benchmark bargaining equilibrium and its interpretation before deriving any new effects."
+  },
+  "source_caveats": [
+    "Current Holy Days literature stage was approved only as a preliminary abstract/entry screening, not a full-text novelty review.",
+    "The baseline repeated bargaining game needs a verified canonical scholarly reference and a precise choice between fixed versus alternating proposer.",
+    "This is a blueprint, not an equilibrium proof or an established interstate holiday effect."
+  ]
+}
