@@ -165,20 +165,51 @@ def guide(home, project):
                                 "an UNVERIFIED candidate, never a proved theorem."
                             )
                     else:
-                        result["next_action"] = (
-                            "Inspect/revise the Claude mathematical derivation, then "
-                            "independently verify its proof and all deviations."
-                        )
-                        result["command"] = (
-                            PY + " -m research.factory.formal_reasoner review " +
-                            project + " --confirm-share-evidence "
-                            "--model claude-opus-5-5 --input-rate 4 "
-                            "--output-rate 20 --max-usd 1.00 --max-tokens 12000"
-                        )
-                        result["notes"].append(
-                            "A full verified game JSON still must be supplied to "
-                            "science_mvp produce PROJECT formal_model; no automatic approval."
-                        )
+                        audit_file = formal / "FORMAL_SOLVER_AUDIT.json"
+                        proof_sha = gates.file_sha(proof)
+                        audit_payload = None
+                        if audit_file.is_file():
+                            audit_payload = json.loads(audit_file.read_text(encoding="utf-8"))
+                        if (audit_payload is None or
+                                audit_payload.get("unverified_proof_draft_sha256") != proof_sha):
+                            result["next_action"] = (
+                                "Numerically falsify the latest unverified Claude "
+                                "equilibrium derivation before proof signoff."
+                            )
+                            result["command"] = (
+                                PY + " -m research.factory.formal_solver audit " +
+                                project + " --cases 400 --seed 20261123 --max-phases 8"
+                            )
+                            result["notes"].append(
+                                "Offline exhaustive pure-Markov checks on short random calendars; "
+                                "cannot prove equilibrium or approve formal_model."
+                            )
+                        elif audit_payload.get("contradiction_cases", 0):
+                            result["next_action"] = (
+                                "Numerical audit found possible contradictions; inspect "
+                                "FORMAL_SOLVER_AUDIT.md and request a targeted proof revision."
+                            )
+                            result["command"] = (
+                                PY + " -m research.factory.formal_reasoner review " +
+                                project + " --confirm-share-evidence "
+                                "--model claude-opus-5-5 --input-rate 4 "
+                                "--output-rate 20 --max-usd 1.00 --max-tokens 12000"
+                            )
+                        else:
+                            result["next_action"] = (
+                                "Read the numerical audit and independently verify "
+                                "the derivation, off-path play and equilibrium-selection "
+                                "limits before submitting any formal-model artifact."
+                            )
+                            result["command"] = (
+                                PY + " -m research.factory.formal_solver audit " +
+                                project + " --cases 400 --seed 20261123 --max-phases 8"
+                            )
+                            result["notes"].append(
+                                "Re-running this offline audit is optional. "
+                                "To revise mathematics, use formal_reasoner review. "
+                                "Only a human-reviewed, fully derived model may be submitted."
+                            )
             result["notes"] = [
                 "The formal workbench checks selected numerical pure Markov cases, "
                 "NOT all theorems or non-Markov SPE.",
