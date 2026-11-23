@@ -113,6 +113,49 @@ class TheoryFabricatorTests(unittest.TestCase):
         self.assertEqual(gates.load(self.home, self.project)["stages"]["formal_model"]["status"],
                          "awaiting_human_approval")
 
+    def test_truncated_or_bad_claude_json_preserves_existing_blueprint(self):
+        import io
+        from unittest.mock import patch
+        th.propose(self.home, self.project,
+                   baseline="Infinite repeated ultimatum bargaining",
+                   candidate=CANDIDATE)
+        existing = (self.stage() / "THEORY_BLUEPRINT.json").read_bytes()
+        for response, expected in [
+            ({"stop_reason": "max_tokens", "content": [{"type": "text",
+               "text": '{"schema":"theory_blueprint_v1","baseline":"cut'}]},
+             "truncated"),
+            ({"stop_reason": "end_turn", "content": [{"type": "text",
+               "text": '{"schema":"theory_blueprint_v1","baseline":"cut'}]},
+             "invalid JSON"),
+        ]:
+            with self.subTest(expected=expected):
+                with patch("urllib.request.urlopen",
+                           return_value=io.BytesIO(json.dumps(response).encode())):
+                    with self.assertRaisesRegex(ValueError, expected):
+                        th.propose(self.home, self.project,
+                                   baseline="Infinite repeated ultimatum bargaining",
+                                   send=True, share=True, model="test-model",
+                                   key="TEST_KEY_NOT_A_REAL_SECRET", input_rate=1,
+                                   output_rate=1, max_usd=1, max_tokens=6000)
+                self.assertEqual(existing,
+                                 (self.stage() / "THEORY_BLUEPRINT.json").read_bytes())
+                self.assertFalse((self.stage() / "BLUEPRINT_APPROVAL.json").exists())
+
+    def test_configurable_output_cap_transmitted_to_model(self):
+        observed = []
+        def transport(bundle, model, key, max_tokens):
+            observed.append(max_tokens)
+            return self.candidate(), {"input_tokens": 30,
+                                      "output_tokens": 90}, model
+        result = th.propose(self.home, self.project,
+            baseline="Infinitely repeated ultimatum bargaining",
+            send=True, share=True, model="mock", key="TEST",
+            input_rate=1, output_rate=1, max_usd=1,
+            max_tokens=6000, transport=transport)
+        self.assertEqual(observed, [6000])
+        self.assertEqual(result["status"], "BLUEPRINT_PROPOSED_UNREVIEWED")
+        self.assertEqual(result["network_or_paid_api_calls"], 1)
+
     def test_paid_generation_refuses_without_explicit_permission(self):
         called = []
         def transport(*args):
