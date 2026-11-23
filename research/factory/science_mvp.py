@@ -95,6 +95,7 @@ def produce(home, project, stage, *, model_path=None, spec_path=None,
     if stage not in SUPPORTED:
         raise ValueError("Unsupported stage; use existing puzzle/literature starter")
     gates.require_ready(home, project, stage)
+    profile = gates.load(home, project).get("gate_profile", "legacy")
     dest = draft(home, project, stage)
     if stage == "novelty":
         if assessment_path is None:
@@ -136,9 +137,14 @@ def produce(home, project, stage, *, model_path=None, spec_path=None,
             "mechanism_and_empirical_mapping_independently_verified": False})]
         summary = "Hypotheses derived from approved game comparative statics, pending substantive human review"
     elif stage == "data":
-        if spec_path is None:
-            raise ValueError("Supply --spec referring to the proposed study and accessible local CSV")
-        path = Path(spec_path).expanduser().resolve()
+        if profile == "mvp10":
+            if spec_path is not None:
+                raise ValueError("MVP data uses the approved design study.json; omit --spec")
+            path = approved_artifact(home, project, "design", "study.json")
+        else:
+            if spec_path is None:
+                raise ValueError("Supply --spec referring to the proposed study and accessible local CSV")
+            path = Path(spec_path).expanduser().resolve()
         spec = prototype.validate_spec(prototype.read_json(path))
         match_hypotheses(home, project, spec)
         source = prototype.data_file(spec, path)
@@ -163,23 +169,29 @@ def produce(home, project, stage, *, model_path=None, spec_path=None,
         path = Path(spec_path).expanduser().resolve()
         spec = prototype.validate_spec(prototype.read_json(path))
         match_hypotheses(home, project, spec)
-        expected = gates.data_hash_from_approved_manifest(home, project)
         source = prototype.data_file(spec, path)
-        if not source.is_file() or gates.file_sha(source) != expected:
-            raise ValueError("Dataset changed since human data approval")
+        if profile == "mvp10":
+            # Research design is prespecified before procurement. Any currently
+            # present CSV may inform feasibility but is not yet human-approved.
+            expected = "PENDING_DATA_APPROVAL"
+        else:
+            expected = gates.data_hash_from_approved_manifest(home, project)
+            if not source.is_file() or gates.file_sha(source) != expected:
+                raise ValueError("Dataset changed since human data approval")
         model = approved_model(home, project)
         checks = model_checks(model, spec)
         if not checks["all_derivative_signs_verified"]:
             raise ValueError("Formal model derivative check failed")
         # Automatically reference the signed novelty approval; do not ask the
         # researcher to certify the same decision twice in study.json.
-        approval = gates.load(home, project)["stages"]["novelty"].get("approval")
+        upstream = "literature" if profile == "mvp10" else "novelty"
+        approval = gates.load(home, project)["stages"][upstream].get("approval")
         if not approval:
-            raise ValueError("No signed contribution assessment")
+            raise ValueError("No human-signed literature/contribution assessment")
         spec["novelty_review"] = {
             "status": "approved", "reviewer": approval["reviewer"],
-            "notes": "Human-signed preliminary contribution assessment: " +
-                     approval["token"][:24] + "; does not certify novelty as fact."}
+            "notes": "Human-signed " + upstream + " screening: " +
+                     approval["token"][:24] + "; candidate contribution ONLY, not independently confirmed."}
         # A frozen study.json lives in an immutable snapshot directory, so
         # relative CSV paths would silently resolve against the wrong folder.
         # Record a local, private absolute source path; never upload the spec
@@ -195,7 +207,9 @@ def produce(home, project, stage, *, model_path=None, spec_path=None,
                     "Data SHA256: " + expected + "\n\n" +
                     "**Identification not established by code.** Human must assess " +
                     "confounding, treatment timing, parallel trends or continuity " +
-                    "where applicable, clustering, alternative designs and falsifiers.\n")]
+                    "where applicable, clustering, alternative designs and falsifiers.\n" +
+                    ("**Data not yet approved.** Procurement and hash verification follow design signoff.\n"
+                     if profile == "mvp10" else ""))]
         summary = "Prespecified empirical study matched to human-approved theory and data; causal assumptions unverified"
     elif stage == "analysis":
         if spec_path is not None:
