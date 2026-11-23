@@ -166,10 +166,16 @@ def validate(candidate):
     raw_status = candidate.get("status")
     if raw_status != "proposal_NOT_proven":
         if (not isinstance(raw_status, str) or not raw_status.strip() or
-                len(raw_status) > 160):
-            raise ValueError("Blueprint requires a nonempty proposal status label; "
-                             "raw Claude output is saved for offline inspection")
-        tokens = re.findall(r"[a-z]+", raw_status.lower())
+                len(raw_status) > 2048):
+            raise ValueError("Blueprint requires a nonempty status note of at most "
+                             "2048 characters; raw Claude output is preserved")
+        # The status is MODEL-WRITTEN commentary, NOT a source of approval.
+        # A note may accurately say an upstream puzzle or literature screen
+        # was approved; that does NOT claim the new formal model was approved.
+        approval_context = re.sub(
+            r"\b(?:(?:upstream|prior)\s+)?(?:puzzle|literature(?:\s+(?:screen|review))?|diagnosis)\s+(?:(?:has\s+been|was|is)\s+)?approved\b",
+            "upstream_stage_reviewed", raw_status, flags=re.IGNORECASE)
+        tokens = re.findall(r"[a-z]+", approval_context.lower())
         claims = {"solved", "proved", "verified", "validated",
                   "approved", "accepted", "published", "complete"}
         # "not_solved", "unverified", etc. are not positive proof claims.
@@ -343,6 +349,9 @@ def propose(home, project, *, baseline, candidate=None, send=False, share=False,
               ("Claude API (" + str(model_used or model) + ")" if send else
                "replayed saved Claude API proposal (no new API call)" if replayed_saved_claude else
                "researcher-supplied candidate (no API call)") + "\n\n" +
+              ("**Generator's original status note (unverified):** " +
+               blueprint["source_status_label"] + "\n\n"
+               if "source_status_label" in blueprint else "") +
               "## Conventional baseline\n\n" +
               "**Game:** " + b["family"] + "\n\n" +
               "**Rules:** " + b["canonical_rules"] + "\n\n" +
