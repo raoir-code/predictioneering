@@ -8,7 +8,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from research.factory import paper_sprint, review_workflow as g, science_mvp as mvp
+from research.factory import paper_sprint, review_workflow as g, science_mvp as mvp, theory_fabricator
 
 
 class ScientificMVPTests(unittest.TestCase):
@@ -43,6 +43,54 @@ class ScientificMVPTests(unittest.TestCase):
             paper_sprint.ROOT = old
         folder = Path(outputs["demo_dir"]) / "inputs"
         return folder / "formal_model.json", folder / "study.json"
+
+    def approved_architecture(self, model_path):
+        """Synthetic model architecture signoff is strictly local to this fixture."""
+        candidate = {
+            "schema": "theory_blueprint_v1", "status": "proposal_NOT_proven",
+            "baseline": {
+                "family": "complete_information_ultimatum",
+                "canonical_rules": "One proposer offers a share to one responder with a stated outside option.",
+                "proposer_protocol": "The same proposer moves first and makes the only proposed offer.",
+                "rejection_transition": "Responder rejects and each player receives their stated outside option.",
+                "discounting": "There is only one round, so intertemporal discounting is not used.",
+                "information": "Both agents know the total surplus and responder outside option.",
+                "baseline_source_status": "Synthetic textbook benchmark; not scientific novelty evidence."
+            },
+            "innovation": {
+                "one_sentence_change": "Let the one observed responder outside option vary as a declared state, without new actors.",
+                "state_variable": "outside_option_state",
+                "added_state_variables": ["outside_option_state"],
+                "state_values": ["low", "high"],
+                "payoff_or_transition_affected": "The responder's reject payoff varies with the known outside option.",
+                "added_players": [], "added_actions": []
+            },
+            "mechanism": {
+                "candidate_literature_gap": "This is a synthetic toy example and has no original scholarly contribution.",
+                "mechanism": "The responder's alternative opportunity determines their minimum acceptable offer.",
+                "null_case": "If the outside option does not change, the equilibrium offer does not change.",
+                "rival_explanation": "Any apparent relation could simply reflect how synthetic offers were generated."
+            },
+            "proof_plan": {
+                "solution_concept": "Backward-induction subgame-perfect equilibrium in the single-stage bargaining game.",
+                "equilibrium_conditions": "Verify proposer incentive and responder reservation utility with boundary conditions.",
+                "off_path_requirements": "Responder actions at all offers and proposer deviations require independent scrutiny.",
+                "benchmark_recovery": "Holding the state fixed reduces the game to the simple familiar ultimatum baseline."
+            },
+            "source_caveats": ["Synthetic fixture only; not a verified novel scientific mechanism."]
+        }
+        candidate_path = self.scratch / "blueprint_candidate.json"
+        candidate_path.write_text(json.dumps(candidate))
+        theory_fabricator.propose(self.home, self.project,
+            baseline="Simple textbook ultimatum benchmark", candidate=candidate_path)
+        theory_fabricator.approve(self.home, self.project,
+            reviewer="Integration Test", notes="Approve synthetic game architecture only.")
+        source = theory_fabricator.folder(self.home, self.project) / "THEORY_BLUEPRINT.json"
+        obj = json.loads(model_path.read_text())
+        obj.update({"theory_blueprint_sha256": g.file_sha(source),
+                    "baseline_game_family": candidate["baseline"]["family"],
+                    "one_change_summary": candidate["innovation"]["one_sentence_change"]})
+        model_path.write_text(json.dumps(obj))
 
     def test_entire_human_gated_scientific_pipeline_produces_unreviewed_overleaf(self):
         self.seed()
@@ -103,6 +151,9 @@ class ScientificMVPTests(unittest.TestCase):
         self.assertEqual(g.load(self.home, self.project)["stages"]["novelty"]["status"],
                          "not_started")
         model, spec = self.toy_input()
+        with self.assertRaisesRegex(ValueError, "THEORY BLUEPRINT"):
+            mvp.produce(self.home, self.project, "formal_model", model_path=model)
+        self.approved_architecture(model)
         mvp.produce(self.home, self.project, "formal_model", model_path=model)
         self.approved("formal_model")
         mvp.produce(self.home, self.project, "hypotheses")
@@ -133,6 +184,7 @@ class ScientificMVPTests(unittest.TestCase):
         self.seed()
         g.activate_mvp(self.home, self.project)
         model, _ = self.toy_input()
+        self.approved_architecture(model)
         mvp.produce(self.home, self.project, "formal_model", model_path=model)
         self.approved("formal_model")
         g.revise(self.home, self.project, "literature",
