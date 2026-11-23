@@ -166,6 +166,37 @@ class PaperSprintTests(unittest.TestCase):
 if __name__=='__main__':unittest.main()
 
 # Separate integration check: source-linked text and bibliography compile together.
+class HolidayPaperSyntheticDemoTests(unittest.TestCase):
+    def test_holiday_game_to_overleaf_synthetic_with_real_figures(self):
+        original=ps.ROOT
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)/'research'
+            examples=root/'examples'
+            examples.mkdir(parents=True)
+            for name in ('HOLY_DAYS_2X2_MODEL_CANDIDATE.json',
+                         'HOLY_DAYS_STUDY_CANDIDATE.json'):
+                shutil.copyfile(original/'examples'/name, examples/name)
+            try:
+                ps.ROOT=root
+                result=ps.holiday_demo()
+            finally:
+                ps.ROOT=original
+            self.assertTrue(result['synthetic_only'])
+            self.assertFalse(result['research_paper_claim'])
+            self.assertEqual(len(result['figures']),2)
+            tex=(Path(result['package_dir'])/'main.tex').read_text()
+            self.assertIn('Payoff-matrix indifference audit',tex)
+            self.assertIn('artificial repeating pattern',tex)
+            qc=json.loads((Path(result['package_dir'])/'PAPER_QC.json').read_text())
+            self.assertTrue(qc['gates']['mixed_indifference_from_payoff_matrix_verified'])
+            self.assertFalse(qc['gates']['equilibrium_proof_independently_verified'])
+            self.assertFalse(qc['gates']['non_synthetic_data'])
+            with zipfile.ZipFile(result['archive']) as z:
+                self.assertIn('figures/estimate.pdf',z.namelist())
+                self.assertIn('figures/holdout.pdf',z.namelist())
+                self.assertFalse(any(x.endswith('.csv') for x in z.namelist()))
+
+
 class BibliographyIntegrationTests(unittest.TestCase):
     @unittest.skipUnless(shutil.which('pdflatex') and shutil.which('bibtex'),
                          'LaTeX/BibTeX tools not installed')
