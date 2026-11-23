@@ -37,6 +37,17 @@ Return only the JSON blueprint contract given in the prompt."""
 SOURCE_LIMIT = 9000
 
 
+class ClaudeOutputError(ValueError):
+    """A paid model response failed; preserve its content for diagnosis."""
+
+    def __init__(self, message, *, raw_text, usage, model, stop_reason):
+        super().__init__(message)
+        self.raw_text = raw_text
+        self.usage = usage
+        self.model = model
+        self.stop_reason = stop_reason
+
+
 def reasonable(name, value, minimum=10, maximum=2200):
     if not isinstance(value, str) or not minimum <= len(value.strip()) <= maximum:
         raise ValueError("Invalid or incomplete " + name)
@@ -249,32 +260,32 @@ def anthropic_transport(bundle, model, key, max_tokens):
             answer = json.load(response)
     except urllib.error.HTTPError as exc:
         raise RuntimeError("Anthropic returned HTTP " + str(exc.code)) from exc
-    # Anthropic returns stop_reason=max_tokens when output is truncated. A
-    # partially emitted JSON object must never replace the previous blueprint.
-    if answer.get("stop_reason") == "max_tokens":
-        raise ValueError(
-            "Claude's blueprint was truncated at max_tokens=" + str(max_tokens) +
-            "; no new blueprint was saved. Rerun with --max-tokens 6000 "
-            "(this is another billable API call)."
-        )
+    # Save every billable partial response, including a truncated JSON string.
     text = "\n".join(b.get("text", "") for b in answer.get("content", [])
                      if b.get("type") == "text").strip()
+    stop_reason = answer.get("stop_reason")
+    if stop_reason == "max_tokens":
+        raise ClaudeOutputError(
+            "Claude exhausted its " + str(max_tokens) + "-token output limit",
+            raw_text=text, usage=answer.get("usage", {}),
+            model=answer.get("model"), stop_reason=stop_reason
+        )
     if text.startswith(chr(96) * 3):
         text = text.partition("\n")[2].rsplit(chr(96) * 3, 1)[0].strip()
     try:
         parsed = json.loads(text)
     except json.JSONDecodeError as exc:
-        raise ValueError(
-            "Claude returned invalid JSON (" + exc.msg +
-            "); no blueprint was saved. Inspect output budget and retry with "
-            "--max-tokens 6000; retrying is billable."
+        raise ClaudeOutputError(
+            "Claude returned invalid JSON (" + exc.msg + ")",
+            raw_text=text, usage=answer.get("usage", {}),
+            model=answer.get("model"), stop_reason=stop_reason
         ) from exc
     return parsed, answer.get("usage", {}), answer.get("model")
 
 
 def propose(home, project, *, baseline, candidate=None, send=False, share=False,
             model=None, key=None, input_rate=None, output_rate=None,
-            max_usd=None, max_tokens=6000, transport=anthropic_transport,
+            max_usd=None, max_tokens=12000, transport=anthropic_transport,
             revision_feedback=None):
     # A signed formal model cannot silently lose or replace its approved
     # architecture; revise the model stage first to invalidate descendants.
@@ -318,13 +329,35 @@ def propose(home, project, *, baseline, candidate=None, send=False, share=False,
         if any(not isinstance(x, (int, float)) or not math.isfinite(x) or x <= 0
                for x in (input_rate, output_rate, max_usd)):
             raise ValueError("Provide current pricing and positive --max-usd")
-        if not 512 <= max_tokens <= 8000:
-            raise ValueError("max_tokens must be between 512 and 8000")
+        if not 512 <= max_tokens <= 20000:
+            raise ValueError("max_tokens must be between 512 and 20000")
         upper_input_tokens = 2 * len(json.dumps(bundle, ensure_ascii=False).encode("utf-8"))
         cap = (upper_input_tokens * input_rate + max_tokens * output_rate) / 1_000_000
         if cap > max_usd:
             raise ValueError("Budget guard: conservative estimate exceeds --max-usd")
-        proposed, usage, model_used = transport(bundle, model, key, max_tokens)
+        try:
+            proposed, usage, model_used = transport(bundle, model, key, max_tokens)
+        except ClaudeOutputError as exc:
+            charge = (int(exc.usage.get("input_tokens", 0)) * input_rate +
+                      int(exc.usage.get("output_tokens", 0)) * output_rate) / 1_000_000
+            stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+            raw_path = dest / "attempts" / ("CLAUDE_PARTIAL_" + stamp + ".txt")
+            write(raw_path, exc.raw_text)
+            diagnostic = raw_path.with_suffix(".diagnostic.json")
+            write(diagnostic, {
+                "status": "TRUNCATED_OR_INVALID_MODEL_OUTPUT",
+                "stop_reason": exc.stop_reason, "reason": str(exc),
+                "raw_partial_text": str(raw_path),
+                "model": exc.model or model,
+                "estimated_charge_usd": round(charge, 6),
+                "prior_blueprint_sha256": prior_sha,
+                "revision_feedback": feedback if prior_sha is not None else None,
+                "upstream": bundle["upstream"]
+            })
+            raise ValueError(str(exc) + ". Partial response preserved at " +
+                             str(raw_path) + ". Current blueprint is unchanged. "
+                             "Retry with --max-tokens 12000 or higher, or inspect "
+                             "the partial response. A retry is billable.") from exc
         charge = (int(usage.get("input_tokens", 0)) * input_rate +
                   int(usage.get("output_tokens", 0)) * output_rate) / 1_000_000
     # Preserve the ORIGINAL complete JSON response BEFORE schema validation.
@@ -373,6 +406,11 @@ def propose(home, project, *, baseline, candidate=None, send=False, share=False,
     if prior_sha is not None:
         blueprint["generation"]["revision_of_sha256"] = prior_sha
         blueprint["generation"]["researcher_feedback"] = feedback
+        blueprint["generation"]["revision_number"] = (
+            int(prior.get("generation", {}).get("revision_number", 0)) + 1
+        )
+    else:
+        blueprint["generation"]["revision_number"] = 0
     # Archive only AFTER successful parsing and schema validation. A failed
     # billable model call must not touch the current review/approval artifacts.
     previous = dest / "THEORY_BLUEPRINT.json"
@@ -439,7 +477,7 @@ def propose(home, project, *, baseline, candidate=None, send=False, share=False,
 
 
 def revise(home, project, *, feedback, share, model, key, input_rate,
-           output_rate, max_usd, max_tokens=6000,
+           output_rate, max_usd, max_tokens=12000,
            transport=anthropic_transport):
     """Human feedback -> paid Claude revision; preserve prior approved sources."""
     dest = folder(home, project)
@@ -514,8 +552,8 @@ def main(argv=None):
     g.add_argument("--input-rate", type=float)
     g.add_argument("--output-rate", type=float)
     g.add_argument("--max-usd", type=float)
-    g.add_argument("--max-tokens", type=int, default=6000,
-                   help="Claude output token cap; use 6000 for blueprint JSON")
+    g.add_argument("--max-tokens", type=int, default=12000,
+                   help="Claude output token cap (default 12000)")
     v = sub.add_parser("revise", help="Ask Claude to revise a draft using researcher feedback")
     v.add_argument("project")
     v.add_argument("--feedback-file", type=Path, required=True)
@@ -524,7 +562,7 @@ def main(argv=None):
     v.add_argument("--input-rate", type=float)
     v.add_argument("--output-rate", type=float)
     v.add_argument("--max-usd", type=float)
-    v.add_argument("--max-tokens", type=int, default=6000)
+    v.add_argument("--max-tokens", type=int, default=12000)
     a = sub.add_parser("approve")
     a.add_argument("project"); a.add_argument("--reviewer", required=True)
     a.add_argument("--notes", required=True)
