@@ -110,6 +110,8 @@ def brief(home, project, *, baseline):
 def validate(candidate):
     if not isinstance(candidate, dict) or candidate.get("schema") != SCHEMA:
         raise ValueError("Expected a theory_blueprint_v1 JSON object")
+    # Operate on a copy: retain the raw response for provenance and replay.
+    candidate = dict(candidate)
     base, innovation = candidate.get("baseline"), candidate.get("innovation")
     mechanism, proof = candidate.get("mechanism"), candidate.get("proof_plan")
     if not all(isinstance(x, dict) for x in (base, innovation, mechanism, proof)):
@@ -118,14 +120,33 @@ def validate(candidate):
               "rejection_transition", "discounting", "information",
               "baseline_source_status"):
         reasonable("baseline." + k, base.get(k))
+    innovation = dict(innovation)
+    candidate["innovation"] = innovation
     for k in ("one_sentence_change", "payoff_or_transition_affected"):
         reasonable("innovation." + k, innovation.get(k), minimum=3)
     name = innovation.get("state_variable")
     added = innovation.get("added_state_variables")
+    # The named public calendar may be described as an *exogenous* state,
+    # hence a model can legitimately call added_state_variables=[].
+    # Canonicalize redundant bookkeeping ONLY; never invent a second state.
+    if name is None and isinstance(added, list) and len(added) == 1:
+        name = added[0]
+        innovation["state_variable"] = name
     if name is not None:
         reasonable("innovation.state_variable", name, minimum=3)
+        if added is None or added == []:
+            added = [name]
+            innovation["added_state_variables"] = added
+    elif added is None:
+        added = []
+        innovation["added_state_variables"] = added
     if added != ([name] if name is not None else []):
-        raise ValueError("At most one new state variable; it must match the declared innovation")
+        raise ValueError(
+            "Conflicting calendar state declarations: state_variable=" +
+            repr(name) + ", added_state_variables=" + repr(added) +
+            ". Describe ONE public calendar variable and list its values; "
+            "do not introduce independent country-day state variables."
+        )
     if innovation.get("added_players") != [] or innovation.get("added_actions") != []:
         raise ValueError("Do not add players or actions to the baseline game")
     states = innovation.get("state_values")
@@ -227,7 +248,35 @@ def propose(home, project, *, baseline, candidate=None, send=False, share=False,
         proposed, usage, model_used = transport(bundle, model, key, max_tokens)
         charge = (int(usage.get("input_tokens", 0)) * input_rate +
                   int(usage.get("output_tokens", 0)) * output_rate) / 1_000_000
-    blueprint = dict(validate(proposed))
+    # Preserve the ORIGINAL complete JSON response BEFORE schema validation.
+    # A user can fix/replay this exact file with --candidate, without another
+    # billable Anthropic call. It lives under the local, private research inbox.
+    raw_attempt = None
+    if send:
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+        digest = hashlib.sha256(json.dumps(proposed, sort_keys=True,
+                                          ensure_ascii=False).encode("utf-8")).hexdigest()[:12]
+        raw_attempt = dest / "attempts" / ("CLAUDE_BLUEPRINT_" + stamp + "_" + digest + ".json")
+        write(raw_attempt, proposed)
+    try:
+        blueprint = dict(validate(proposed))
+    except ValueError as exc:
+        if raw_attempt is not None:
+            write(raw_attempt.with_suffix(".diagnostic.json"), {
+                "status": "CLAUDE_OUTPUT_REJECTED_UNREVIEWED",
+                "reason": str(exc), "raw_candidate": str(raw_attempt),
+                "model": model_used or model,
+                "estimated_charge_usd": round(charge, 6),
+                "upstream": bundle["upstream"],
+                "instructions": "Inspect or edit a COPY of the raw blueprint, then "
+                                "replay locally with propose --candidate PATH. "
+                                "No new API call is necessary."})
+            raise ValueError(
+                "Claude completed the API call, but the blueprint failed validation: " +
+                str(exc) + ". Raw response preserved at " + str(raw_attempt) +
+                ". Edit/review and replay with --candidate PATH (free)."
+            ) from exc
+        raise
     blueprint["upstream"] = bundle["upstream"]
     blueprint["baseline_preference"] = bundle["baseline_preference"]
     origin = "claude_api" if send else "supplied_candidate"
@@ -286,6 +335,7 @@ def propose(home, project, *, baseline, candidate=None, send=False, share=False,
     return {"status": "BLUEPRINT_PROPOSED_UNREVIEWED", "path": str(dest / "THEORY_BLUEPRINT.json"),
             "review_packet": str(dest / "BLUEPRINT_REVIEW.md"),
             "origin": origin, "model": model_used or model if send else None,
+            "raw_claude_candidate": str(raw_attempt) if raw_attempt else None,
             "baseline": blueprint["baseline"]["family"],
             "change": blueprint["innovation"]["one_sentence_change"],
             "estimated_charge_usd": round(charge, 6),
