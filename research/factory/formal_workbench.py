@@ -23,6 +23,7 @@ STATES = ("ordinary", "A_holiday", "B_holiday", "both_holiday")
 CONTRACT_SCHEMA = "holy_days_formal_contract_v1"
 CASE_SCHEMA = "holiday_bargaining_numeric_case_v1"
 STATUS = "NUMERICAL_PURE_MARKOV_CANDIDATES_ONLY_NO_GENERAL_PROOF"
+MAX_EXHAUSTIVE_PHASES = 12  # More phases need a non-exhaustive or specialized algorithm.
 
 
 def outdir(home, project):
@@ -153,8 +154,8 @@ def prepare(home, project):
         "source": "Researcher-approved architecture; this contract is a conditional numerical adapter.",
         "equilibrium_proven": False,
         "novelty_verified": False,
-        "supported_case": "Finite deterministic cycle, all four states exactly once, "
-                          "homogeneous discount, war no initiator advantage",
+        "supported_case": "Finite deterministic cycle with 1–12 phases and repeatable "
+                          "holiday states; homogeneous discount, war no initiator advantage",
         "not_supported": [
             "general symbolic parameter regions",
             "non-Markov SPE and punishment paths",
@@ -253,10 +254,13 @@ def validate_case(case, required_sha):
     if not all(0 < val < 1 for val in p.values()):
         raise ValueError("All state-dependent war probabilities must lie in (0,1)")
     cycle = case.get("calendar_cycle")
-    if not isinstance(cycle, list) or len(cycle) != len(STATES) or set(cycle) != set(STATES):
-        raise ValueError("Specify each holiday state exactly once in the ordered deterministic cycle")
-    if not all(isinstance(item, str) for item in cycle):
-        raise ValueError("Calendar states must be strings")
+    if not isinstance(cycle, list) or not 1 <= len(cycle) <= MAX_EXHAUSTIVE_PHASES:
+        raise ValueError("Supply a nonempty ordered deterministic cycle with at most " +
+                         str(MAX_EXHAUSTIVE_PHASES) + " phases for exhaustive enumeration; "
+                         "larger calendars need a separate scalable solver")
+    if any(type(item) is not str or item not in STATES for item in cycle):
+        raise ValueError("Calendar phases must be recognized holiday state strings; "
+                         "repeated states are allowed")
     return values, cycle, p
 
 
@@ -303,6 +307,7 @@ def policy_candidate(values, cycle, probabilities, war_mask, *, tol=1e-9):
             va.append(value / (1-delta**n))
     rows = []
     max_gap = 0.0
+    a_tie_break_respected = True
     for i, h in enumerate(cycle):
         following = (i+1) % n
         peaceful_payoff = (
@@ -310,6 +315,11 @@ def policy_candidate(values, cycle, probabilities, war_mask, *, tol=1e-9):
             if minima[i] <= 1+tol else None
         )
         if war[i]:
+            # The agreed tie-break is A choosing peace when feasible.
+            # A zero numerical deviation gap is NOT sufficient for a war
+            # candidate at an exact tie; near ties are conservatively flagged.
+            if peaceful_payoff is not None and peaceful_payoff >= w_a[i]-tol:
+                a_tie_break_respected = False
             deviation_gain = (
                 max(0.0, peaceful_payoff-w_a[i])
                 if peaceful_payoff is not None else 0.0
@@ -336,7 +346,9 @@ def policy_candidate(values, cycle, probabilities, war_mask, *, tol=1e-9):
         "war_mask": war_mask,
         "calendar_policy": rows,
         "max_best_response_or_Bellman_residual": max_gap,
-        "passes_numeric_sequential_rationality": max_gap <= tol,
+        "A_peace_on_ties_respected": a_tie_break_respected,
+        "passes_numeric_sequential_rationality": (
+            max_gap <= tol and a_tie_break_respected),
     }
 
 
@@ -361,10 +373,12 @@ def analyze(case, sha):
         "candidates": verified,
         "all_policy_residuals": [
             {"war_mask": x["war_mask"],
-             "max_best_response_or_Bellman_residual": x["max_best_response_or_Bellman_residual"]}
+             "max_best_response_or_Bellman_residual": x["max_best_response_or_Bellman_residual"],
+             "A_peace_on_ties_respected": x["A_peace_on_ties_respected"]}
             for x in candidates
         ],
         "scientific_limits": [
+            "This calculation exhausts at most 12 phases; real annual calendars are not yet supported",
             "This calculation is at one parameter point and exogenous finite calendar cycle",
             "Does not check non-Markov or mixed-strategy equilibria",
             "Does not establish analytic parameter ranges or infer war onset from holiday data",
