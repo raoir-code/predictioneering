@@ -102,7 +102,7 @@ class FactoryGuideTests(unittest.TestCase):
                 {"claim": "B acceptance threshold",
                  "argument": "Compare the immediate attack payoff to expected continuation.",
                  "domain": "Finite deterministic cycle"},
-                {"claim": "A choice",
+                {"claim": "A optimal offer or direct attack",
                  "argument": "Compare peace obtained by offering the threshold to attacking.",
                  "domain": "Fixed bilateral-war game"},
             ],
