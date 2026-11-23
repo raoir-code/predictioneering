@@ -24,6 +24,7 @@ from . import review_workflow as gates
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = "formal_derivation_draft_v1"
+CLAUDE_READ_TIMEOUT_SECONDS = 900  # A 20k-token mathematical response can exceed two minutes.
 FIELDS = (
     "setup", "bellman_equations", "candidate_equilibrium",
     "parameter_domains", "offpath_deviation_checks",
@@ -164,10 +165,24 @@ def anthropic_transport(bundle, model, key, max_tokens):
         headers={"x-api-key": key, "anthropic-version": "2023-06-01",
                  "content-type": "application/json"})
     try:
-        with urllib.request.urlopen(req, timeout=120) as response:
+        with urllib.request.urlopen(req, timeout=CLAUDE_READ_TIMEOUT_SECONDS) as response:
             answer = json.load(response)
     except urllib.error.HTTPError as exc:
         raise RuntimeError("Anthropic returned HTTP " + str(exc.code)) from exc
+    except TimeoutError as exc:
+        raise RuntimeError(
+            "Claude response timed out on the network after the extended read "
+            "timeout; the API request may still have incurred a charge. "
+            "No complete response was received, and the previous draft is unchanged."
+        ) from exc
+    except urllib.error.URLError as exc:
+        if isinstance(exc.reason, TimeoutError):
+            raise RuntimeError(
+                "Claude network connection timed out; the API request may "
+                "still have incurred a charge. Previous draft unchanged."
+            ) from exc
+        raise RuntimeError("Anthropic network request failed: " +
+                           str(type(exc.reason).__name__)) from exc
     raw = "\n".join(item.get("text", "") for item in answer.get("content", [])
                     if item.get("type") == "text").strip()
     if answer.get("stop_reason") == "max_tokens":
@@ -217,6 +232,8 @@ def draft(home, project, *, candidate_file=None, feedback=None,
                              "lower max tokens or change explicitly approved budget")
     root.mkdir(parents=True, exist_ok=True)
     if candidate_file is None:
+        print("Claude formal derivation request submitted. Waiting for the API "
+              "response; no further input is needed.", file=sys.stderr, flush=True)
         try:
             payload, usage, actual_model, trailing = transport(
                 bundle, model, key, max_tokens)
