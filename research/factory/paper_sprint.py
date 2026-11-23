@@ -484,10 +484,56 @@ def demo():
     return result
 
 
+def holiday_demo():
+    """Actual Holy Days factory wiring using FAKE data and conditional game."""
+    import csv
+    folder=ROOT/'projects'/'factory_runs'/'holy_days_synthetic_demo'
+    inputs=folder/'inputs'
+    inputs.mkdir(parents=True,exist_ok=True)
+    source_model=ROOT/'examples'/'HOLY_DAYS_2X2_MODEL_CANDIDATE.json'
+    source_spec=ROOT/'examples'/'HOLY_DAYS_STUDY_CANDIDATE.json'
+    model=load(source_model)
+    spec=load(source_spec)
+    # Dates below are intentionally NOT religious or national calendars.
+    # This tests software only; no historical data or identified treatment.
+    rng=random.Random(20261123)
+    data=inputs/'SYNTHETIC_holiday_dyad_days.csv'
+    with data.open('w',newline='',encoding='utf-8') as handle:
+        writer=csv.writer(handle)
+        writer.writerow(['event_date','directed_dyad','defender_holiday',
+                         'attack_attempt','direction_verified'])
+        base=date(2024,1,1)
+        for day in range(150):
+            h=int(day%19 in (0,1))
+            for unit in range(12):
+                p_attack=(0.12+0.12*h)/0.8
+                attack=int(rng.random()<p_attack)
+                writer.writerow([(base+timedelta(days=day)).isoformat(),
+                                 f'actor{unit:02d}-opponent',h,attack,attack])
+    spec['id']='holy-days-synthetic-demo'
+    spec['title']='SYNTHETIC — holiday inspection-game software demonstration'
+    spec['research_question']='Can the software estimate an artificial attack signal generated from a stipulated mixed-strategy game?'
+    spec['data']['csv_path']=data.name
+    spec['data']['synthetic']=True
+    spec['novelty_review']={'status':'demo_only'}
+    spec['study_limitations']=(
+        'Every observation is simulated; the holiday indicator is an artificial repeating pattern, not a genuine religious calendar. '
+        'The model and its assumed game structure have not been validated for real conflict. '
+        'No causal identification, scholarly novelty, or empirical interstate result is established.')
+    spec_path=inputs/'study.json'
+    prototype.write_json(spec_path,spec)
+    output=run(spec_path,source_model,out=folder/'package')
+    output.update({'synthetic_only':True,'data_source':'GENERATED_FAKE_DYAD_DAYS',
+                   'research_paper_claim':False,
+                   'demo_dir':str(folder)})
+    return output
+
+
 def main(argv=None):
     p=argparse.ArgumentParser(description='Formal-model hypothesis -> Python -> figures -> Overleaf unreviewed draft')
     subs=p.add_subparsers(dest='command',required=True)
     subs.add_parser('demo',help='Safe synthetic end-to-end demo; no paid APIs or real scientific claims')
+    subs.add_parser('holy-days-demo',help='Synthetic holiday 2x2 inspection game -> estimation -> Overleaf (NOT a real paper)')
     h=subs.add_parser('hypotheses',help='Extract prespecified empirical hypotheses from formal comparative statics')
     h.add_argument('formal_model',type=Path)
     r=subs.add_parser('run',help='Prepare Overleaf draft from supplied theory and a reviewed empirical specification')
@@ -496,6 +542,7 @@ def main(argv=None):
     a=p.parse_args(argv)
     try:
         output=(demo() if a.command=='demo' else
+                holiday_demo() if a.command=='holy-days-demo' else
                 hypotheses_from_model(load(a.formal_model)) if a.command=='hypotheses' else
                 run(a.spec,a.formal_model,out=a.out,analysis_dir=a.analysis_dir))
         print(json.dumps(output,indent=2));return 0
