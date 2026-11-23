@@ -83,6 +83,18 @@ class TheoryFabricatorTests(unittest.TestCase):
         for harmless in ("unverified", "not_solved", "not_approved"):
             raw["status"] = harmless
             self.assertEqual(th.validate(raw)["status"], "proposal_NOT_proven")
+        raw["status"] = (
+            "blueprint_only_unsolved: no equilibrium derived, no hypotheses stated, "
+            "novelty not assessed. Upstream puzzle approved only for Diagnosis. "
+            "The literature screen is abstract-level only."
+        )
+        validated = th.validate(raw)
+        self.assertEqual(validated["status"], "proposal_NOT_proven")
+        self.assertEqual(validated["source_status_label"], raw["status"])
+        self.assertEqual(raw["status"].count("approved"), 1)
+        raw["status"] = "model_approved: equilibrium solved and proof verified"
+        with self.assertRaisesRegex(ValueError, "proof or approval"):
+            th.validate(raw)
         raw["status"] = "solved"
         with self.assertRaisesRegex(ValueError, "proof or approval"):
             th.validate(raw)
@@ -104,6 +116,8 @@ class TheoryFabricatorTests(unittest.TestCase):
         saved = json.loads((self.stage() / "THEORY_BLUEPRINT.json").read_text())
         self.assertEqual(saved["source_status_label"], "unreviewed_candidate")
         self.assertEqual(saved["status"], "proposal_NOT_proven")
+        self.assertIn("Generator's original status note (unverified):",
+                      (self.stage() / "BLUEPRINT_REVIEW.md").read_text())
 
     def test_rejected_paid_result_preserved_and_replayable_without_api(self):
         import re
