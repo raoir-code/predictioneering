@@ -387,7 +387,8 @@ def run(spec_path,model_path,*,out=None,analysis_dir=None):
                mathcheck.get('normal_form_2x2_audit',{}).get('algebraic_indifference_identically_zero')),
            'equilibrium_proof_independently_verified':False,
            'empirical_mapping_independently_verified':False,
-           'human_novelty_review':spec['novelty_review']['status']=='approved',
+           'human_novelty_review':(spec['novelty_review']['status']=='approved' and
+                                    spec['novelty_review'].get('scope')!='preliminary_screen_only'),
            'non_synthetic_data':not spec['data']['synthetic'],
            'statistical_estimation_completed':results.get('model',{}).get('status')=='estimated_association_not_causal',
            'temporal_oos_completed':results.get('predictive_validation',{}).get('status')=='holdout_scored',
