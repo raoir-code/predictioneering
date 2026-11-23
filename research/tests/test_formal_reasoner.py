@@ -6,6 +6,8 @@ import unittest
 
 from research.factory import formal_reasoner as fr
 from research.factory import formal_workbench as fw
+from research.factory import formal_solver as solver
+from research.factory import formal_proof_brief as proof_brief
 from research.factory import theory_fabricator as th
 from research.factory import review_workflow as gates
 
@@ -89,6 +91,35 @@ class FormalReasonerTests(unittest.TestCase):
         self.assertIn("UNVERIFIED", Path(result["review"]).read_text())
         self.assertEqual(gates.load(self.home, self.project)["stages"]
                          ["formal_model"]["status"], "not_started")
+
+    def test_mathematical_proof_brief_is_pinned_and_never_certifies(self):
+        self.signed_work_order()
+        with self.assertRaisesRegex(ValueError, "Need both"):
+            proof_brief.prepare(self.home, self.project)
+        file = self.work / "proof.json"
+        file.write_text(json.dumps(self.candidate()), encoding="utf-8")
+        draft = fr.draft(self.home, self.project, candidate_file=file)
+        audit = solver.audit(self.home, self.project, cases=3,
+                             seed=20261123, max_phases=4)
+        self.assertEqual(audit["contradiction_cases"], 0)
+        brief = proof_brief.prepare(self.home, self.project)
+        self.assertEqual(brief["network_or_paid_api_calls"], 0)
+        self.assertFalse(brief["formal_model_submitted"])
+        self.assertIn("@" + brief["feedback"], brief["next_step"])
+        text = Path(brief["feedback"]).read_text(encoding="utf-8")
+        self.assertIn("pure phase-Markov MPE existence", text)
+        self.assertIn("without inventing a selection rule", text)
+        self.assertIn("0 numerical contradictions", text)
+        self.assertLess(len(text), 5000)
+        self.assertEqual(gates.load(self.home, self.project)["stages"]
+                         ["formal_model"]["status"], "not_started")
+        # A newer draft invalidates the previous numerical-audit checkpoint.
+        proof = Path(draft["path"])
+        data = json.loads(proof.read_text(encoding="utf-8"))
+        data["candidate_equilibrium"] += " Unreviewed alteration."
+        proof.write_text(json.dumps(data), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "changed"):
+            proof_brief.prepare(self.home, self.project)
 
     def test_billable_generation_requires_consent_and_budget(self):
         self.signed_work_order()
