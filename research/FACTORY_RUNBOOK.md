@@ -180,6 +180,30 @@ The existing proof draft remains untouched, and a retry may incur a
 second API charge. Relaunch `formal_reasoner review PROJECT` and
 resubmit the feedback if another revision is warranted.
 
+**4. Run the generalized finite-cycle falsification solver (no API charges):**
+
+```bash
+"$P" -m research.factory.formal_solver audit holy-days \
+  --cases 400 --seed 20261123 --max-phases 8
+```
+
+This compares the unverified Claude war-set equations against an independently
+implemented direct Bellman/incentive evaluator across the worked example, a
+known **multiple-equilibrium** example, a constant-power benchmark and 400
+reproducible synthetic cases. Results are saved privately to
+`formal_workbench/FORMAL_SOLVER_AUDIT.md` and `.json`. It enumerates
+all `2^N` pure phase-Markov policies for each calendar, supports repeated
+ordinary/holiday phases and up to **12** phases in one exhaustive case;
+a long real calendar (e.g. 365 days) still requires a scalable algorithm.
+
+`--case /path/to/user_case.json` adds a researcher-specified case using the
+signed `PARAMETER_CASE_TEMPLATE.json` schema. No datasets or source papers
+are sent to an API. A numerical pass does **not** establish uniqueness,
+mixed-strategy existence, non-Markov SPE, a general parameter theorem or
+equilibrium selection. If any contradiction appears, inspect the saved
+examples and revise mathematics; do NOT approve the formal model. Revisions
+to `PROOF_DRAFT.json` invalidate the guide's saved-audit checkpoint.
+
 **Only after a researcher independently audits** all Bellman equations,
 unilateral deviations, off-path play, admissible parameter regions, calendar
 states and benchmark recovery may a fully argued model JSON be submitted:
