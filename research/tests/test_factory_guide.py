@@ -136,6 +136,16 @@ class FactoryGuideTests(unittest.TestCase):
         self.assertIn("finite_war_set_handoff", next_task["command"])
         self.assertIn("INCOMPLETE", " ".join([next_task["next_action"],
                                               *next_task["notes"]]))
+
+        from research.factory import finite_war_set_handoff as handoff
+        from research.factory import formal_hypothesis_review as hypothesis_review
+        handoff.prepare(self.home, self.project)
+        screened = guide.guide(self.home, self.project)
+        self.assertIn("formal_hypothesis_review", screened["command"])
+        hypothesis_review.prepare(self.home, self.project)
+        reviewed = guide.guide(self.home, self.project)
+        self.assertIn("HYPOTHESIS_REVIEW.md", reviewed["command"])
+        self.assertIn("estimand", reviewed["next_action"])
         self.assertEqual(gates.load(self.home, self.project)["stages"]
                          ["formal_model"]["status"], "not_started")
 
