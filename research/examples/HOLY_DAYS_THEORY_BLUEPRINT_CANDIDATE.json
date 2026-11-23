@@ -3,15 +3,15 @@
   "status": "proposal_NOT_proven",
   "baseline": {
     "family": "infinite_horizon_repeated_ultimatum_bargaining",
-    "canonical_rules": "Two countries repeatedly bargain over a divisible allocation. Each round one proposer offers terms; the responder accepts immediately or rejects and the game continues, with discounted continuation payoffs.",
-    "proposer_protocol": "Candidate benchmark: alternating offers A,B,A,B in successive rounds. Whether fixed or alternating proposer best matches the substantive puzzle requires human approval; do not silently substitute a different game.",
-    "rejection_transition": "Rejecting an offer advances to the next round without an automatic attack or war, preserving the conventional bargaining benchmark. War/outside options would require a separately justified change.",
-    "discounting": "A and B discount next-round values with fixed factors delta_A and delta_B strictly between zero and one; state dependence enters only through the selected holiday primitive.",
-    "information": "Complete information about preferences, discount factors, calendar and past offers; the four-state calendar is announced and perfectly anticipated.",
-    "baseline_source_status": "Conventional infinite-horizon bargaining benchmark: exact original scholarly reference and equilibrium assumptions still require full-text verification."
+    "canonical_rules": "Two countries bargain indefinitely over a divisible good. A designated proposer offers a split, the responder accepts or rejects, and rejection permits another discounted round or the already-existing option of costly military conflict. The military option is part of the benchmark, not a new holiday-specific action.",
+    "proposer_protocol": "Alternate proposers A,B,A,B across periods in the baseline. The timing and availability of an existing war option after failed bargaining must be stated before the mathematical solution.",
+    "rejection_transition": "Rejecting permits continuation to the next bargaining round at the regular discount rate, or costly war through a preexisting conflict/outside-option choice. Conflict ends bargaining with a military payoff. Which player may initiate war, and at what move, must be specified consistently for every state.",
+    "discounting": "Use fixed discount factors delta_A and delta_B in (0,1). Holidays do not change discount factors or peacetime payoffs.",
+    "information": "Complete information about preferences, discount factors, military parameters, current and future four-state calendar, and prior bargaining. Holidays are anticipated, not surprise shocks.",
+    "baseline_source_status": "Conventional repeated alternating-offers bargaining extended by a preexisting costly-war option; identify and audit the actual scholarly benchmark before treating this as a canonical published game. It is not identical to a bare Rubinstein alternating-offers model."
   },
   "innovation": {
-    "one_sentence_change": "Allow one conventional bargaining payoff or rejection-cost primitive to depend on a publicly known four-state holiday calendar, leaving the rest of the repeated ultimatum game unchanged.",
+    "one_sentence_change": "Make only the existing war-outside-option payoff depend on a publicly observed holiday calendar, by changing relative military effectiveness when one country observes its own holiday.",
     "state_variable": "holiday_state",
     "added_state_variables": [
       "holiday_state"
@@ -22,25 +22,27 @@
       "B_holiday",
       "both_holiday"
     ],
-    "payoff_or_transition_affected": "Candidate single change: holiday_state shifts a player's cost of rejecting and continuing to the next bargaining round. The sign, symmetry and interpretation are not yet identified.",
+    "payoff_or_transition_affected": "One state-dependent war-payoff primitive: p_A(h)=p0+theta*[I(B holiday)-I(A holiday)], with 0<theta<min(p0,1-p0). If B's holiday alone, A's chance of military success rises; if A's holiday alone, A becomes vulnerable and B's chance rises; if neither or both, the symmetric benchmark stays p0. War payoffs are W_A(h)=p_A(h)*V-c_A and W_B(h)=[1-p_A(h)]*V-c_B. No direct audience/reputation, peacetime-payoff, or discount-factor channel. This is a deliberately symmetric first benchmark, not an empirical fact about readiness.",
     "added_players": [],
     "added_actions": []
   },
   "mechanism": {
-    "candidate_literature_gap": "The preliminary screened literature examines holiday-associated violence in terrorism, insurgency, communal riots and ceasefires; how strategic anticipation affects interstate bargaining timing remains a candidate, not established, research gap.",
-    "mechanism": "Players anticipate calendar-dependent continuation costs, possibly changing acceptance thresholds, offers, or the timing of rejected bargains. Whether any military attack behavior follows requires an additional, explicitly justified outcome link.",
-    "null_case": "If holiday shifts are symmetric, offset by offers, or do not change continuation incentives, observable conflict timing may be unchanged despite a calendar state.",
-    "rival_explanation": "Operational readiness, religious norms, media reporting, and event-coding seasonality could explain apparent holiday timing without bargaining effects."
+    "candidate_literature_gap": "Holiday-related violence research in the preliminary screen largely addresses terrorism, insurgency, riots or ceasefires. An anticipated calendar-dependent military outside option in interstate bargaining is a candidate extension; the exact gap needs full-text verification against interstate bargaining and surprise-attack scholarship.",
+    "mechanism": "A predictable holiday temporarily reduces the defender's relative military readiness, raising the opposing state's potential war payoff. Bargaining offers and credible threats may therefore depend on which country has the holiday, even when both states anticipate the date. Attack timing is an equilibrium question, not something the holiday assumption establishes.",
+    "null_case": "With complete information and feasible bargaining transfers, both states may adjust offers and avoid war on every date; holidays can alter settlement terms without changing observed attack frequency. If both observe a holiday and effects are symmetric, there is no relative military advantage.",
+    "rival_explanation": "Holidays might change the ability to LAUNCH an attack, not only to DEFEND; this opposing effect could offset gains from a distracted defender. Seasonality and reporting artifacts can also generate apparent holiday associations. Audience costs or restraint signaling are deliberately excluded from the baseline."
   },
   "proof_plan": {
-    "solution_concept": "Find and characterize appropriate subgame-perfect equilibrium or a clearly restricted stationary or calendar-periodic Markov-perfect equilibrium; justify any equilibrium selection.",
-    "equilibrium_conditions": "Derive Bellman/continuation-value equations for each holiday state, best responses, participation and acceptance thresholds; identify discount and cost domains with valid equilibria.",
-    "off_path_requirements": "Verify rejected-offer continuation, deviations at each calendar state, optimality of offers and acceptance thresholds, and any threatened war/outside-option actions if later introduced.",
-    "benchmark_recovery": "Set holiday-dependent cost variation to zero and recover the published benchmark bargaining equilibrium and its interpretation before deriving any new effects."
+    "solution_concept": "Find subgame-perfect equilibrium for the specified alternating-offers bargaining game with an existing conflict option and a known calendar process; justify any Markov or calendar-periodic equilibrium restriction.",
+    "equilibrium_conditions": "First recover the non-holiday bargaining-with-war benchmark. Then solve continuation values, offer/acceptance thresholds and the incentive to invoke war for each of ordinary, A_holiday, B_holiday and both_holiday. State restrictions on delta_i, p0, theta and war costs; do not assume attacks increase on holidays.",
+    "off_path_requirements": "Check proposer deviations, responder acceptance and rejection decisions, credibility and timing of the preexisting war option, and whether threats to fight are sequentially rational in all four states.",
+    "benchmark_recovery": "Set theta=0 so p_A(h)=p0 for every holiday state and recover exactly the selected constant-military-payoff repeated bargaining benchmark. Any new result must come only from the holiday variation in military payoffs."
   },
   "source_caveats": [
-    "Current Holy Days literature stage was approved only as a preliminary abstract/entry screening, not a full-text novelty review.",
-    "The baseline repeated bargaining game needs a verified canonical scholarly reference and a precise choice between fixed versus alternating proposer.",
-    "This is a blueprint, not an equilibrium proof or an established interstate holiday effect."
+    "Preliminary literature screening is not enough to certify an interstate-theory gap.",
+    "The specific conventional bargaining-with-war baseline, including who may initiate conflict following rejection, needs source verification and researcher approval before solving.",
+    "Relative military effectiveness is a modeling assumption, not evidence that defenders become less prepared on holidays.",
+    "This blueprint adds no audience-cost or reputational channel. Its complete-information benchmark may predict zero actual attacks even when holiday-sensitive threats and bargaining terms change.",
+    "No equilibrium, comparative static, or empirical holiday effect has been derived or established."
   ]
 }
