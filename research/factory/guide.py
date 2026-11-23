@@ -196,20 +196,42 @@ def guide(home, project):
                                 "--output-rate 20 --max-usd 1.00 --max-tokens 12000"
                             )
                         else:
-                            result["next_action"] = (
-                                "Read the numerical audit and independently verify "
-                                "the derivation, off-path play and equilibrium-selection "
-                                "limits before submitting any formal-model artifact."
+                            feedback_meta = formal / "FORMAL_PROOF_FEEDBACK_META.json"
+                            meta = (json.loads(feedback_meta.read_text(encoding="utf-8"))
+                                    if feedback_meta.is_file() else {})
+                            current_meta = (
+                                meta.get("unverified_proof_draft_sha256") == proof_sha and
+                                meta.get("numeric_audit_sha256") == gates.file_sha(audit_file)
                             )
-                            result["command"] = (
-                                PY + " -m research.factory.formal_solver audit " +
-                                project + " --cases 400 --seed 20261123 --max-phases 8"
-                            )
-                            result["notes"].append(
-                                "Re-running this offline audit is optional. "
-                                "To revise mathematics, use formal_reasoner review. "
-                                "Only a human-reviewed, fully derived model may be submitted."
-                            )
+                            if not current_meta:
+                                result["next_action"] = (
+                                    "Prepare targeted mathematical proof feedback from "
+                                    "the successful numerical equilibrium-selection audit."
+                                )
+                                result["command"] = (
+                                    PY + " -m research.factory.formal_proof_brief " + project
+                                )
+                                result["notes"].append(
+                                    "This offline step pins the current proof/audit, "
+                                    "produces a review request, and makes zero paid API calls."
+                                )
+                            else:
+                                result["next_action"] = (
+                                    "Independently inspect the mathematical proof brief and "
+                                    "ask Claude for a focused, UNVERIFIED proof revision."
+                                )
+                                result["command"] = (
+                                    PY + " -m research.factory.formal_reasoner review " +
+                                    project + " --confirm-share-evidence "
+                                    "--model claude-opus-5-5 --input-rate 4 "
+                                    "--output-rate 20 --max-usd 1.00 --max-tokens 12000"
+                                )
+                                result["notes"].append(
+                                    "At the interactive prompt, enter @" +
+                                    str(formal / "FORMAL_PROOF_FEEDBACK.txt") +
+                                    " to use the generated researcher-review request. "
+                                    "This Claude API revision is billable and unverified."
+                                )
             result["notes"].extend([
                 "The formal workbench checks selected numerical pure Markov cases, "
                 "NOT all theorems or non-Markov SPE.",
