@@ -72,6 +72,36 @@ class TheoryFabricatorTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Conflicting calendar state"):
             th.validate(invalid)
 
+    def test_draft_status_is_normalized_with_original_status_retained(self):
+        raw = self.candidate()
+        raw["status"] = "draft_pending_human_review"
+        validated = th.validate(raw)
+        self.assertEqual(validated["status"], "proposal_NOT_proven")
+        self.assertEqual(validated["source_status_label"],
+                         "draft_pending_human_review")
+        self.assertEqual(raw["status"], "draft_pending_human_review")
+        raw["status"] = "solved"
+        with self.assertRaisesRegex(ValueError, "proof or approval"):
+            th.validate(raw)
+
+    def test_saved_claude_attempt_can_replay_without_network_or_loss_of_origin(self):
+        input_dir = self.stage() / "attempts"
+        input_dir.mkdir(parents=True, exist_ok=True)
+        raw = self.candidate()
+        raw["status"] = "unreviewed_candidate"
+        path = input_dir / "CLAUDE_BLUEPRINT_replay_fixture.json"
+        path.write_text(json.dumps(raw))
+        result = th.propose(self.home, self.project,
+            baseline="Infinitely repeated bargaining with costly war",
+            candidate=path)
+        self.assertEqual(result["network_or_paid_api_calls"], 0)
+        self.assertEqual(result["origin"], "saved_claude_api_replay")
+        self.assertIn("replayed saved Claude API proposal",
+            (self.stage() / "BLUEPRINT_REVIEW.md").read_text())
+        saved = json.loads((self.stage() / "THEORY_BLUEPRINT.json").read_text())
+        self.assertEqual(saved["source_status_label"], "unreviewed_candidate")
+        self.assertEqual(saved["status"], "proposal_NOT_proven")
+
     def test_rejected_paid_result_preserved_and_replayable_without_api(self):
         import re
         broken = self.candidate()
