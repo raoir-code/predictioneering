@@ -63,6 +63,11 @@ class TheoryFabricatorTests(unittest.TestCase):
             baseline="Infinite repeated ultimatum bargaining",
             candidate=CANDIDATE)
         self.assertEqual(result["status"], "BLUEPRINT_PROPOSED_UNREVIEWED")
+        packet = Path(result["review_packet"]).read_text()
+        self.assertIn("Conventional baseline", packet)
+        self.assertIn("Proposer protocol", packet)
+        self.assertIn("One innovation", packet)
+        self.assertIn("Could also be no effect", packet)
         model = {"baseline_game_family": "infinite_horizon_repeated_ultimatum_bargaining",
                  "one_change_summary": self.candidate()["innovation"]["one_sentence_change"],
                  "theory_blueprint_sha256": gates.file_sha(
@@ -95,6 +100,18 @@ class TheoryFabricatorTests(unittest.TestCase):
             th.require_blueprint(self.home, self.project,
                                   {"theory_blueprint_sha256": "fake"})
         self.assertEqual(before, signed.read_bytes())
+
+    def test_manual_stage_approval_cannot_bypass_theory_blueprint(self):
+        gates.activate_mvp(self.home, self.project)
+        file = self.work / "formal_model.json"
+        file.write_text('{"title":"Unrelated, unsupported inspection game"}')
+        gates.submit(self.home, self.project, "formal_model", [file],
+                     "Manually supplied, unsupported model must fail architecture control")
+        with self.assertRaisesRegex(ValueError, "signed THEORY BLUEPRINT"):
+            gates.approve(self.home, self.project, "formal_model",
+                          "Researcher", "Trying to approve without baseline screening")
+        self.assertEqual(gates.load(self.home, self.project)["stages"]["formal_model"]["status"],
+                         "awaiting_human_approval")
 
     def test_paid_generation_refuses_without_explicit_permission(self):
         called = []
