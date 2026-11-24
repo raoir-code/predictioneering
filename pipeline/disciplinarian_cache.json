@@ -2126,6 +2126,15 @@
 "reason": "This is about a domestic presidential election, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"0e5c28ddc1a4f6861990": {
+"bucket": "ADJACENT",
+"dyad": "Russia-EU",
+"reason": "Diplomatic expulsions involve state actors and reflect interstate tensions but are not direct conflict onset events; the model has only partial traction on this diplomatic signaling action.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims"
+]
+},
 "0e7716afaa444ea9844b": {
 "bucket": "NOISE",
 "dyad": null,
@@ -2698,6 +2707,12 @@
 "reason": "The Houthis are a non-state actor (rebel/militia group), not a sovereign state, so this is not an interstate conflict dyad question.",
 "relevant_nodes": [],
 "seeded": true
+},
+"12186976bb9cbc786251": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "The question is about a diplomatic expulsion event, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "123571965021386f7db5": {
 "bucket": "NOISE",
@@ -4441,6 +4456,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"1d1343cd66eeb551603b": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a US naval vessel's port arrival/deployment logistics, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "1d1f912b799202d34d0c": {
 "bucket": "NOISE",
 "dyad": null,
@@ -4519,6 +4540,12 @@
 "reason": "This is a local election question in Taiwan with no direct connection to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"1d7d886a016899ca8260": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a US Navy carrier homeport rotation/logistics event, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "1d9a1350645e53ab5275": {
 "bucket": "NOISE",
@@ -6126,6 +6153,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about a domestic political appointment, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
+"27bdf97e8391cd14e441": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "Diplomatic expulsion is not about interstate conflict onset between a specific dyad; no named opposing state actor is specified.",
 "relevant_nodes": []
 },
 "27ca521941ae7dc5cc55": {
@@ -8447,6 +8480,12 @@
 "Patience",
 "PreferenceAlignment"
 ]
+},
+"390163023d33e2e8e242": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "The question is about a diplomatic expulsion event, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "3909d535b0041ecc8d75": {
 "bucket": "NOISE",
@@ -15908,6 +15947,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"6a20236abd4e13478643": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a US Navy ship deployment/basing logistics question, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "6a28560ebfd1c61f9890": {
 "bucket": "NOISE",
 "dyad": null,
@@ -15966,6 +16011,15 @@
 "reason": "This is a local election question in Taiwan with no direct connection to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"6a93587a2432416c6fa7": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This is a territorial advance/battlefield progress question about whether Russia will capture a specific location in Ukraine, not directly about conflict onset between a new dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims"
+]
 },
 "6aa3612a93f163b91b11": {
 "bucket": "NOISE",
@@ -16280,6 +16334,15 @@
 "reason": "This is about a local mayoral election in Taiwan, not interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"6c638b89bfc4067bab56": {
+"bucket": "ADJACENT",
+"dyad": "Russia-EU",
+"reason": "Diplomatic expulsions involve state actors and reflect geopolitical tensions related to preference alignment and commitment problems, but are not directly about interstate conflict onset between a specific dyad.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"CommitmentProblem"
+]
 },
 "6c657f8172f4911d625d": {
 "bucket": "NOISE",
@@ -19000,6 +19063,12 @@
 "reason": "This is about shipping traffic volume, not interstate conflict onset between specific state actors.",
 "relevant_nodes": []
 },
+"805bf52227919c9ab5f2": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "Diplomatic expulsions are not interstate conflict onset events and the question does not specify a dyad or conflict scenario.",
+"relevant_nodes": []
+},
 "805fc9d8346399742f4e": {
 "bucket": "CORE",
 "dyad": "China-Taiwan",
@@ -19871,6 +19940,12 @@
 "reason": "This is a local subnational election question with no interstate conflict dimension.",
 "relevant_nodes": [],
 "seeded": true
+},
+"8696dd736995a5dfd2ba": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "Expulsion of diplomats is a diplomatic event, not a question about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "86af98b568ebd4977f9f": {
 "bucket": "ADJACENT",
@@ -24531,6 +24606,12 @@
 "reason": "This question is about domestic Israeli coalition politics and government formation, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"a6fd3c162cd8c5a1cc55": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a personal diplomatic gesture, not about interstate conflict onset or escalation between state actors.",
+"relevant_nodes": []
+},
 "a7031d16891ec5363fba": {
 "bucket": "CORE",
 "dyad": "Israel-Iran",
@@ -26564,6 +26645,15 @@
 "reason": "This is about an internal Israeli legislative leadership selection, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"b38944d86cbc116d447c": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This is a territorial advance/battlefield progress question about whether Russia will capture a specific location in Ukraine, not about conflict onset between a new dyad.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims"
+]
 },
 "b38b44cb16ef7b305513": {
 "bucket": "ADJACENT",
@@ -32278,6 +32368,12 @@
 ],
 "seeded": true
 },
+"d899d94af0627a737dcd": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a personal diplomatic gesture between leaders, not about interstate conflict onset or escalation.",
+"relevant_nodes": []
+},
 "d8c3a24214c8e7a84c9a": {
 "bucket": "NOISE",
 "dyad": null,
@@ -35398,6 +35494,15 @@
 ],
 "seeded": true
 },
+"ec94ac26c254dc16d612": {
+"bucket": "ADJACENT",
+"dyad": "Russia-EU",
+"reason": "Diplomatic expulsions involve state actors and reflect interstate tensions but are not direct conflict onset events; the model has partial traction through preference alignment and commitment problems.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"CommitmentProblem"
+]
+},
 "eca7970741dd0d459610": {
 "bucket": "NOISE",
 "dyad": null,
@@ -36254,6 +36359,12 @@
 "reason": "This is about an internal Israeli legislative leadership selection, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"f3988445fcda781b449b": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "The question is about a diplomatic expulsion event, not about interstate conflict onset between a specific dyad of state actors.",
+"relevant_nodes": []
 },
 "f3a1724e2c00948fc2cb": {
 "bucket": "NOISE",

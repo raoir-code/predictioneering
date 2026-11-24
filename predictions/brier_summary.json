@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-11-23T22:20:10.221988+00:00",
-  "n_resolved": 315,
-  "brier_conditional_mean": 0.272583,
-  "brier_engine_mean": 0.460531,
-  "brier_market_mean": 0.134046,
-  "edge_vs_market": -0.138537,
+  "last_updated": "2026-11-24T22:23:19.695397+00:00",
+  "n_resolved": 317,
+  "brier_conditional_mean": 0.270933,
+  "brier_engine_mean": 0.461771,
+  "brier_market_mean": 0.133667,
+  "edge_vs_market": -0.137266,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -3470,6 +3470,28 @@
       "brier_conditional": 0.019265,
       "brier_market": 0.2916,
       "resolved_at": "2026-11-23T22:20:05.968500+00:00"
+    },
+    {
+      "market_id": "6713506",
+      "market_label": "Israel military action against Lebanon on November 24?",
+      "dyad": "Israel-Lebanon",
+      "outcome": 1,
+      "conditional_p": 0.8579,
+      "market_p": 0.63,
+      "brier_conditional": 0.020192,
+      "brier_market": 0.1369,
+      "resolved_at": "2026-11-24T22:23:12.468957+00:00"
+    },
+    {
+      "market_id": "6908163",
+      "market_label": "Israel x Iran ceasefire continues through November 20?",
+      "dyad": "Israel-Iran",
+      "outcome": 1,
+      "conditional_p": 0.9575,
+      "market_p": 0.895,
+      "brier_conditional": 0.001806,
+      "brier_market": 0.011025,
+      "resolved_at": "2026-11-24T22:23:16.385551+00:00"
     }
   ]
 }
