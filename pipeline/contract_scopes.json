@@ -7615,5 +7615,327 @@
     },
     "route": "scoped_bilateral",
     "version": 1
+  },
+  "7337235": {
+    "market_id": "7337235",
+    "dyad": "Iran-ArabStates",
+    "question": "Will Iran target an Arab country by November 30, 2026?",
+    "end_date": "2026-12-01",
+    "action_type": "missile_strike",
+    "initiator": "Iran",
+    "target": "ArabStates",
+    "source_signature": "fbbb49298448db768f83147215a83ae818060c0fc469524407a28ce2bb192de1",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "enumerable_union",
+        "canonical_actor": null,
+        "entity_type": "state",
+        "members": [
+          "Algeria",
+          "Bahrain",
+          "Comoros",
+          "Djibouti",
+          "Egypt",
+          "Iraq",
+          "Jordan",
+          "Kuwait",
+          "Lebanon",
+          "Libya",
+          "Mauritania",
+          "Morocco",
+          "Oman",
+          "Qatar",
+          "Saudi Arabia",
+          "Somalia",
+          "Sudan",
+          "Syria",
+          "Tunisia",
+          "United Arab Emirates",
+          "Yemen"
+        ],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "multiple",
+        "places": [
+          "Algeria",
+          "Bahrain",
+          "Comoros",
+          "Djibouti",
+          "Egypt",
+          "Iraq",
+          "Jordan",
+          "Kuwait",
+          "Lebanon",
+          "Libya",
+          "Mauritania",
+          "Morocco",
+          "Oman",
+          "Qatar",
+          "Saudi Arabia",
+          "Somalia",
+          "Sudan",
+          "Syria",
+          "Tunisia",
+          "United Arab Emirates",
+          "Yemen"
+        ],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "Iran is the single initiator. The target is an explicitly enumerated list of 21 Arab states, making this an enumerable_union. The geographic scope corresponds exactly to the terrestrial territory of those same target states, which is resolution_only because the geography is defined by the identity of the target rather than constituting a distinct operational theater separate from the target itself.",
+      "scope_fingerprint": "e706bb580e9d3921",
+      "action_prior_fingerprint": "39ece0df040128c4"
+    },
+    "route": "agglomeration_required",
+    "version": 1
+  },
+  "7337248": {
+    "market_id": "7337248",
+    "dyad": "Iran-Saudi Arabia",
+    "question": "Will Iran target an Arab country by December 31, 2026?",
+    "end_date": "2027-01-01",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Saudi Arabia",
+    "source_signature": "788c0ee5205f89088ea5515ed59c8632c9f9d150d1a89dc04108d16272ae7fd5",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "enumerable_union",
+        "canonical_actor": null,
+        "entity_type": "state",
+        "members": [
+          "Algeria",
+          "Bahrain",
+          "Comoros",
+          "Djibouti",
+          "Egypt",
+          "Iraq",
+          "Jordan",
+          "Kuwait",
+          "Lebanon",
+          "Libya",
+          "Mauritania",
+          "Morocco",
+          "Oman",
+          "Qatar",
+          "Saudi Arabia",
+          "Somalia",
+          "Sudan",
+          "Syria",
+          "Tunisia",
+          "United Arab Emirates",
+          "Yemen"
+        ],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "multiple",
+        "places": [
+          "Algeria",
+          "Bahrain",
+          "Comoros",
+          "Djibouti",
+          "Egypt",
+          "Iraq",
+          "Jordan",
+          "Kuwait",
+          "Lebanon",
+          "Libya",
+          "Mauritania",
+          "Morocco",
+          "Oman",
+          "Qatar",
+          "Saudi Arabia",
+          "Somalia",
+          "Sudan",
+          "Syria",
+          "Tunisia",
+          "United Arab Emirates",
+          "Yemen"
+        ],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The assigned initiator is Iran (single state actor) and the assigned target is Saudi Arabia, but the contract's resolution criteria expand the target to any member of an explicitly enumerated list of 21 Arab countries. The geography is defined by the terrestrial territory of those enumerated states, which is intrinsic to the contract's definition of the qualifying action target rather than a structurally distinct operational theater, so prior_relevance is resolution_only. The direction is compatible because Saudi Arabia is one of the enumerated qualifying targets.",
+      "scope_fingerprint": "e706bb580e9d3921",
+      "action_prior_fingerprint": "39ece0df040128c4"
+    },
+    "route": "agglomeration_required",
+    "version": 1
+  },
+  "7337253": {
+    "market_id": "7337253",
+    "dyad": "Iran-Bahrain",
+    "question": "Will Iran target Bahrain by December 31, 2026?",
+    "end_date": "2027-01-01",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Bahrain",
+    "source_signature": "29f328f2c186a3b7b77c0955f9e53f491b0255627542eec2b6774401111b56ba",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Bahrain",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Iran, acting through its own forces, not proxies) targeting a single state (Bahrain). The geographic restriction to Bahrain's terrestrial territory and internal waters is intrinsic to the definition of the qualifying action (directed at Bahrain) and does not constitute a structurally distinct operational theater — it is resolution_only. The action must be explicitly claimed by or confirmed to originate from Iranian territory, excluding proxy forces.",
+      "scope_fingerprint": "a408a4963eb4a314",
+      "action_prior_fingerprint": "b315653e9eabefa4"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "7337252": {
+    "market_id": "7337252",
+    "dyad": "Iran-Bahrain",
+    "question": "Will Iran target Bahrain by November 30, 2026?",
+    "end_date": "2026-12-01",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Bahrain",
+    "source_signature": "82899fdce73f064e05a026872e0917cc565cc81d799ff57235188bc4838c6caa",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Bahrain",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract specifies a single initiator (Iran, acting through its own forces, not proxies) conducting qualifying military strikes against a single target state (Bahrain). The geographic restriction to Bahrain's terrestrial territory and internal waters is intrinsic to the definition of the action being directed at Bahrain, making it resolution_only. The target is Bahrain's general recognized territory, so target_wide applies.",
+      "scope_fingerprint": "a408a4963eb4a314",
+      "action_prior_fingerprint": "b315653e9eabefa4"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "7351770": {
+    "market_id": "7351770",
+    "dyad": "China-Taiwan",
+    "question": "Will China blockade Taiwan by June 30, 2027?",
+    "end_date": "2027-07-01",
+    "action_type": "naval_blockade",
+    "initiator": "China",
+    "target": "Taiwan",
+    "source_signature": "67f4a1e1a57b54d3ce37ad4a0f2c44679c84c608ef2d793153f06f997de98f9c",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "China",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Taiwan",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "subterritory",
+        "places": [
+          "Taiwan Island's main airports",
+          "Taiwan Island's main ports",
+          "Taiwan main island (Formosa)"
+        ],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The initiator is unambiguously the PRC as a single state actor. The target is Taiwan. The geographic restriction to the main island of Taiwan (Formosa) and its ports/airports is intrinsic to the definition of a qualifying blockade under this contract—it exists to distinguish a blockade of the main island from islet-only incidents or exercises, not to define a structurally different operational theater. Therefore the geography is resolution_only rather than structural_theater.",
+      "scope_fingerprint": "a756275634d8426f",
+      "action_prior_fingerprint": "89c2652018b045b5"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "7351773": {
+    "market_id": "7351773",
+    "dyad": "China-Taiwan",
+    "question": "Will China blockade Taiwan by December 31, 2027?",
+    "end_date": "2028-01-01",
+    "action_type": "naval_blockade",
+    "initiator": "China",
+    "target": "Taiwan",
+    "source_signature": "a88a2bf36d8928ace4acfc9e108aee40c2f0b19a743c2b7b0bb73c9ebf550180",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "China",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Taiwan",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "subterritory",
+        "places": [
+          "Taiwan Island (Formosa) main island — main ports and airports"
+        ],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract has a single initiator (PRC) acting against a single target (Taiwan/ROC). The geographic restriction to Taiwan's main island ports and airports is intrinsic to the legal definition of the blockade being asked about — it distinguishes the main island from outlying islets and specifies approach lanes/ports/airports only to define what counts as a qualifying blockade. This geographic detail would largely disappear if the same actors were asked about a different action family (e.g., invasion, missile strike), so it is resolution_only rather than structural_theater.",
+      "scope_fingerprint": "f09394cb1cbe3ca2",
+      "action_prior_fingerprint": "89c2652018b045b5"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
   }
 }

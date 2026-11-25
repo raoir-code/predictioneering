@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-11-24T22:23:19.695397+00:00",
-  "n_resolved": 317,
-  "brier_conditional_mean": 0.270933,
-  "brier_engine_mean": 0.461771,
-  "brier_market_mean": 0.133667,
-  "edge_vs_market": -0.137266,
+  "last_updated": "2026-11-25T22:30:08.897187+00:00",
+  "n_resolved": 319,
+  "brier_conditional_mean": 0.269594,
+  "brier_engine_mean": 0.463925,
+  "brier_market_mean": 0.133602,
+  "edge_vs_market": -0.135992,
   "resolved_markets": [
     {
       "market_id": "956590",
@@ -3492,6 +3492,28 @@
       "brier_conditional": 0.001806,
       "brier_market": 0.011025,
       "resolved_at": "2026-11-24T22:23:16.385551+00:00"
+    },
+    {
+      "market_id": "7182986",
+      "market_label": "Will Iran target Iraq by November 30, 2026?",
+      "dyad": "Iran-Iraq",
+      "outcome": 1,
+      "conditional_p": 0.6906,
+      "market_p": 0.555,
+      "brier_conditional": 0.095728,
+      "brier_market": 0.198025,
+      "resolved_at": "2026-11-25T22:30:03.416551+00:00"
+    },
+    {
+      "market_id": "7182987",
+      "market_label": "Will Iran target Iraq by December 31, 2026?",
+      "dyad": "Iran-Iraq",
+      "outcome": 1,
+      "conditional_p": 0.8613,
+      "market_p": 0.78,
+      "brier_conditional": 0.019238,
+      "brier_market": 0.0484,
+      "resolved_at": "2026-11-25T22:30:05.769012+00:00"
     }
   ]
 }

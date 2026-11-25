@@ -406,6 +406,12 @@
 ],
 "seeded": true
 },
+"0279c58e54561e579f16": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a diplomatic/personal communication event involving a political leader and a UK mayor, not about interstate conflict onset.",
+"relevant_nodes": []
+},
 "02a23eb64edde862ddf3": {
 "bucket": "NOISE",
 "dyad": null,
@@ -545,6 +551,12 @@
 "reason": "This is a composite question about US domestic elections, oil prices, and a speculative agreement \u2014 not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"037d8652dce7eeb66095": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume metrics, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "03915254bafd081a6b48": {
 "bucket": "NOISE",
@@ -1136,6 +1148,12 @@
 "reason": "This question is about leadership tenure and political survival, not about interstate conflict between a specific dyad.",
 "relevant_nodes": []
 },
+"073b91895a3709745387": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the specific count of North Korean missile tests, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "074f1b86dee3c7bc8a51": {
 "bucket": "NOISE",
 "dyad": null,
@@ -1185,6 +1203,12 @@
 "reason": "This is a local election question in Taiwan with no direct connection to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"0782d5289e7f8c0ac897": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume metrics, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "078a67ec77ed1a11a751": {
 "bucket": "NOISE",
@@ -1440,6 +1464,12 @@
 ],
 "seeded": true
 },
+"0944cb70d7d6cdd75441": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about personal communications between a political leader and a private individual, not about interstate conflict.",
+"relevant_nodes": []
+},
 "095a5b3455690adeeb8e": {
 "bucket": "NOISE",
 "dyad": null,
@@ -1548,6 +1578,16 @@
 "Patience"
 ]
 },
+"09e8aa8ebbe4f1d29a89": {
+"bucket": "ADJACENT",
+"dyad": "US-China",
+"reason": "This concerns a potential trilateral nuclear arms control agreement between state actors, which relates to commitment problems and preference alignment but is not directly about interstate conflict onset.",
+"relevant_nodes": [
+"CommitmentProblem",
+"PreferenceAlignment",
+"HardlineClaims"
+]
+},
 "09eb7440df69e2bb3b5c": {
 "bucket": "NOISE",
 "dyad": null,
@@ -1616,6 +1656,12 @@
 "CommitmentProblem"
 ],
 "seeded": true
+},
+"0a5bcf4b6f763df9e192": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about diplomatic communication between leaders, not about interstate conflict onset or escalation.",
+"relevant_nodes": []
 },
 "0a5c1471b6e52728c45a": {
 "bucket": "CORE",
@@ -1877,6 +1923,14 @@
 "WinProbability"
 ]
 },
+"0c70a465b3d376dc7c51": {
+"bucket": "ADJACENT",
+"dyad": null,
+"reason": "US carrier presence in CENTCOM reflects military posture and force projection relevant to potential interstate conflicts in the Middle East, but the question is about force deployment levels rather than conflict onset between a specific dyad.",
+"relevant_nodes": [
+"WinProbability"
+]
+},
 "0c827aeebee8c221d4d2": {
 "bucket": "NOISE",
 "dyad": null,
@@ -1952,6 +2006,12 @@
 "reason": "This is about an internal Israeli legislative leadership election, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"0ce2a5b99845f07d9abb": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about diplomatic communication/phone calls, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "0cf012042abdcc0ba670": {
 "bucket": "NOISE",
@@ -2810,12 +2870,30 @@
 "WarCosts"
 ]
 },
+"1298c34086cd775ecaa8": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about diplomatic communications/phone calls, not about interstate conflict onset between state actors.",
+"relevant_nodes": []
+},
 "1298fe869d96bc119529": {
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This question is about domestic Israeli election outcomes and government formation, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"12b235a08dfe40f2cdfd": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a commercial technology/trade event involving a corporation, not about interstate conflict onset between state actors.",
+"relevant_nodes": []
+},
+"12b58e43823317d80e71": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a shipping/trade metric question, not directly about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "12b6793d6cf84d8414ac": {
 "bucket": "NOISE",
@@ -3317,6 +3395,14 @@
 "reason": "This is about an Israeli election outcome and leadership succession, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"160d67b9d5533c89b379": {
+"bucket": "ADJACENT",
+"dyad": null,
+"reason": "US military force posture in CENTCOM reflects capability deployment relevant to potential interstate conflict dyads in the Middle East, but the question is about force positioning rather than conflict onset between a specific dyad.",
+"relevant_nodes": [
+"WinProbability"
+]
 },
 "163f34ac9cdfa3dabe2c": {
 "bucket": "NOISE",
@@ -3992,6 +4078,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"1a258893b7ee268e19ad": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a shipping/maritime traffic metric question, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "1a3aaa64fd0797d88c8e": {
 "bucket": "NOISE",
 "dyad": null,
@@ -4501,6 +4593,12 @@
 "reason": "This is about a domestic legislative election outcome, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"1d48ea2068b05a200f27": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is an intrastate conflict question involving Iraqi government forces and a domestic militia (Kataib Hezbollah), not an interstate dyad.",
+"relevant_nodes": []
 },
 "1d4b0bcf47d3fd37ab58": {
 "bucket": "NOISE",
@@ -5643,6 +5741,12 @@
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between state actors.",
 "relevant_nodes": []
 },
+"242cec56a39b7e02de3d": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about diplomatic communication/phone calls, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "2470e993ff81a653604a": {
 "bucket": "NOISE",
 "dyad": null,
@@ -5691,6 +5795,16 @@
 "dyad": null,
 "reason": "This is about a domestic presidential election, not interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"24d7da70205aa736b0d3": {
+"bucket": "ADJACENT",
+"dyad": "US-China",
+"reason": "Sanctions are a coercive interstate action between two state actors related to geopolitical competition, but sanctions imposition is not conflict onset itself\u2014the model has only partial traction through nodes like PreferenceAlignment and HardlineClaims.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"HardlineClaims",
+"WarCosts"
+]
 },
 "24dd38f378e7799cc906": {
 "bucket": "NOISE",
@@ -7632,6 +7746,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"32120c2eaba7e36db95b": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about diplomatic communications/phone calls, not interstate conflict onset between state actors.",
+"relevant_nodes": []
+},
 "3214b8c3df767fe536b8": {
 "bucket": "NOISE",
 "dyad": null,
@@ -7692,6 +7812,12 @@
 "PreferenceAlignment",
 "Patience"
 ]
+},
+"32cce2635259edcf53c1": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about whether a political leader will have a conversation with another leader, not about interstate conflict onset.",
+"relevant_nodes": []
 },
 "32f3b3bc8f6449cc309d": {
 "bucket": "NOISE",
@@ -8171,6 +8297,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"368f854475070cbc0290": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "3694a031ca89e3c8400f": {
 "bucket": "NOISE",
 "dyad": null,
@@ -8512,6 +8644,16 @@
 "reason": "This is a local county-level election in Taiwan with no direct relevance to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"391d532ec69e0f00bab1": {
+"bucket": "ADJACENT",
+"dyad": "North Korea-US",
+"reason": "North Korean missile tests are provocative military actions related to interstate tension (primarily US/South Korea-North Korea dyads) but this question is about the count of tests rather than conflict onset between specific state actors.",
+"relevant_nodes": [
+"HardlineClaims",
+"CommitmentProblem",
+"WinProbability"
+]
 },
 "392820c5b075218a6d44": {
 "bucket": "NOISE",
@@ -9846,6 +9988,14 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"424822e24cc49ed42656": {
+"bucket": "ADJACENT",
+"dyad": null,
+"reason": "US military force posture in CENTCOM reflects power projection capability relevant to potential interstate conflicts in the Middle East, but the question is about force deployment levels rather than conflict onset between a specific dyad.",
+"relevant_nodes": [
+"WinProbability"
+]
+},
 "425f501c64117cb4df68": {
 "bucket": "NOISE",
 "dyad": null,
@@ -10273,6 +10423,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"44f846894c171dc2a392": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a shipping/trade metric question, not directly about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "44f8b40288e34ad65f66": {
 "bucket": "NOISE",
 "dyad": null,
@@ -10541,6 +10697,12 @@
 "reason": "This is about a domestic presidential election, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"46e7f6323a9164f7b8b9": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a commercial technology company's export decisions, not interstate conflict onset between state actors.",
+"relevant_nodes": []
+},
 "46eabd9d3af77dbf5ff1": {
 "bucket": "NOISE",
 "dyad": null,
@@ -10632,6 +10794,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between state actors.",
+"relevant_nodes": []
+},
+"477ccf9ff16f12af4e2d": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about an individual's travel to a country, not about interstate conflict between state actors.",
 "relevant_nodes": []
 },
 "47862c483dcfbaca7fe9": {
@@ -11901,6 +12069,15 @@
 "reason": "This question is about domestic coalition politics and government formation in Israel, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"50070ad4090ad5070cdf": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns a specific military incident (attack on the Crimean Bridge) within the ongoing Russia-Ukraine interstate conflict, rather than conflict onset itself.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims"
+]
+},
 "500d22efe3a8a126b72e": {
 "bucket": "NOISE",
 "dyad": null,
@@ -12238,6 +12415,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"51ca6a83a0ac90c81723": {
+"bucket": "ADJACENT",
+"dyad": "North Korea-US",
+"reason": "North Korean missile tests are related to interstate tension and signaling (particularly in the US/Japan/South Korea-North Korea dyads) but this question is about the count of tests, not direct conflict onset between a specific dyad.",
+"relevant_nodes": [
+"HardlineClaims",
+"CommitmentProblem",
+"WinProbability"
+]
+},
 "51cbfb5950093533da6c": {
 "bucket": "NOISE",
 "dyad": null,
@@ -12258,6 +12445,15 @@
 "reason": "This question is about a political leader's travel/visit, not about interstate conflict onset or escalation between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"51e701fe03a3b931c97f": {
+"bucket": "ADJACENT",
+"dyad": "US-Yemen",
+"reason": "Bab el-Mandeb ship traffic is indirectly related to Houthi attacks on commercial shipping tied to the US/coalition-Houthi and broader Iran-Israel/US conflicts, but measures shipping volume rather than conflict onset itself.",
+"relevant_nodes": [
+"WarCosts",
+"WinProbability"
+]
 },
 "51e75d482ffcff3dc90c": {
 "bucket": "ADJACENT",
@@ -12348,6 +12544,12 @@
 "reason": "This is about an Israeli domestic election outcome and party vote share, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"5273f491772ca065f813": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about diplomatic communication between leaders, not about interstate conflict onset or escalation.",
+"relevant_nodes": []
 },
 "527fd5de9a9c5bb22cbd": {
 "bucket": "NOISE",
@@ -12534,6 +12736,15 @@
 "Patience"
 ]
 },
+"53b59b38513b41ede1d4": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns a specific military incident (attack on Crimean Bridge) in the Russia-Ukraine conflict, not full conflict onset but a battlefield event within an ongoing war.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims"
+]
+},
 "53cc89f46fcd31bd79ac": {
 "bucket": "NOISE",
 "dyad": null,
@@ -12604,6 +12815,20 @@
 "reason": "This is a local municipal election question with no direct relevance to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"5479c90b28000c2f776b": {
+"bucket": "CORE",
+"dyad": "China-Taiwan",
+"reason": "This question directly asks about a potential interstate conflict escalation (naval blockade) between China and Taiwan, which is a classic coercive act of war fitting the Fearon bargaining framework.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"PreferenceAlignment",
+"Patience",
+"DemocraticPeace"
+]
 },
 "5489edb78da3494d0281": {
 "bucket": "NOISE",
@@ -12704,6 +12929,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
+"relevant_nodes": []
+},
+"55169d111738807148cd": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about the specific count of North Korean missile tests, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": []
 },
 "5527c58b0a70d8500ee0": {
@@ -13490,6 +13721,12 @@
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between state actors.",
 "relevant_nodes": []
 },
+"59fe896efc8dfb51e0fb": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "5a07b67ac8178b948d10": {
 "bucket": "NOISE",
 "dyad": null,
@@ -13826,6 +14063,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about shipping traffic volume through a strait, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
+"5c4e2adf1d05e3c084f6": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about an individual's travel/visit to a country, not about interstate conflict between state actors.",
 "relevant_nodes": []
 },
 "5c6e38637dae31e74fee": {
@@ -14448,6 +14691,20 @@
 ],
 "seeded": true
 },
+"600496cf422fe24860ec": {
+"bucket": "ADJACENT",
+"dyad": null,
+"reason": "US military force posture in CENTCOM reflects power projection capability relevant to potential interstate conflicts in the Middle East, but this question is about force deployment levels rather than conflict onset between a specific dyad.",
+"relevant_nodes": [
+"WinProbability"
+]
+},
+"60086c375bc059818cfa": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about diplomatic communication between a leader and a non-state actor (or new head of a transitional government), not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "600ea3db43a69139c73d": {
 "bucket": "NOISE",
 "dyad": null,
@@ -14468,6 +14725,12 @@
 "reason": "This question is about a domestic legislative election outcome, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"6020062cd6f6a4c5613b": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a shipping/maritime traffic metric question, not directly about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "6023813dad121a261c5f": {
 "bucket": "ADJACENT",
@@ -14641,6 +14904,12 @@
 "reason": "This is about a domestic political appointment, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"610ab4a43fd7375b9bd9": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about domestic Israeli government formation, not interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "61118954f673f93b7ad4": {
 "bucket": "NOISE",
 "dyad": null,
@@ -14690,6 +14959,12 @@
 "WinProbability"
 ]
 },
+"616b26689c95d3e8bf0a": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about shipping traffic volume metrics, not interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "61727ef94b839e3dbe56": {
 "bucket": "NOISE",
 "dyad": null,
@@ -14716,6 +14991,16 @@
 "reason": "This is a local municipal election question with no interstate conflict dimension.",
 "relevant_nodes": [],
 "seeded": true
+},
+"618b8106598d0ad828b3": {
+"bucket": "ADJACENT",
+"dyad": "US-China",
+"reason": "This concerns a potential trilateral nuclear arms control agreement between state actors, which relates to commitment problems and preference alignment but is not directly about interstate conflict onset.",
+"relevant_nodes": [
+"CommitmentProblem",
+"PreferenceAlignment",
+"HardlineClaims"
+]
 },
 "618e53d636e2830b2a67": {
 "bucket": "NOISE",
@@ -15053,6 +15338,12 @@
 "reason": "This question is about a personal meeting between a political leader and a private individual, not about interstate conflict between state actors.",
 "relevant_nodes": []
 },
+"63d392f309e30063fd91": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a diplomatic communication event, not about interstate conflict onset or escalation between specific state actors.",
+"relevant_nodes": []
+},
 "63d638529b580d617f24": {
 "bucket": "NOISE",
 "dyad": null,
@@ -15301,6 +15592,12 @@
 "reason": "This is about a domestic legislative election outcome, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"6593f2b1ef75c7779a54": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about whether a phone call or meeting occurs between leaders, not about interstate conflict onset or escalation.",
+"relevant_nodes": []
 },
 "65a7b2290c3826a0ad99": {
 "bucket": "NOISE",
@@ -15738,6 +16035,16 @@
 "reason": "This is about a domestic legislative election outcome, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"68eca0b67c0cf06dc1ee": {
+"bucket": "ADJACENT",
+"dyad": "Russia-Ukraine",
+"reason": "This concerns a specific military incident (attack on Crimean Bridge) in the Russia-Ukraine conflict, not full conflict onset but a battlefield escalation event.",
+"relevant_nodes": [
+"WinProbability",
+"HardlineClaims",
+"CommitmentProblem"
+]
 },
 "68ed5e1ceb65553421c5": {
 "bucket": "NOISE",
@@ -16306,6 +16613,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about domestic regime change/collapse in Cuba, not interstate conflict between two state actors.",
+"relevant_nodes": []
+},
+"6c409bd49f9ef882f4ce": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about diplomatic communication between leaders, not about interstate conflict onset or escalation.",
 "relevant_nodes": []
 },
 "6c4ca7a0acb1718f5a24": {
@@ -17887,6 +18200,12 @@
 "reason": "This is a local county-level election question, not about interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"775b81c083f52f9ae0b0": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a diplomatic communication event involving a non-state actor (exiled figure), not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "77696d7fce69969a06c9": {
 "bucket": "NOISE",
@@ -19867,6 +20186,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"85a695a870aac4b385b1": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume metrics, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "85b84c308d6f80383a78": {
 "bucket": "NOISE",
 "dyad": null,
@@ -20010,6 +20335,15 @@
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"871225f28b06977f71d2": {
+"bucket": "ADJACENT",
+"dyad": "US-Iran",
+"reason": "Bab el-Mandeb ship traffic is indirectly related to Houthi attacks on shipping (a proxy conflict involving Iran-US/coalition dynamics and the Yemen conflict), but this question measures commercial shipping volume rather than direct interstate conflict onset.",
+"relevant_nodes": [
+"WarCosts",
+"WinProbability"
+]
 },
 "87245be821734409bda4": {
 "bucket": "ADJACENT",
@@ -20237,6 +20571,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This question is about a potential criminal sentencing of a political leader, not about interstate conflict onset between two state actors.",
+"relevant_nodes": []
+},
+"88b278b40a93284e05ae": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about diplomatic communications/meetings, not about interstate conflict onset between a specific dyad.",
 "relevant_nodes": []
 },
 "88b9c2b3f4393655de1a": {
@@ -21036,6 +21376,15 @@
 "reason": "This is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
 "relevant_nodes": []
 },
+"8e08fed8b8d3c506d54a": {
+"bucket": "ADJACENT",
+"dyad": null,
+"reason": "Bab el-Mandeb shipping traffic is indirectly related to the Houthi-initiated attacks on commercial shipping (tied to the US-Houthi and broader Iran-Israel/US conflict dynamics), but the question itself measures commercial traffic volume rather than conflict onset or escalation between state dyads.",
+"relevant_nodes": [
+"WarCosts",
+"WinProbability"
+]
+},
 "8e091308a7d5754a0efa": {
 "bucket": "NOISE",
 "dyad": null,
@@ -21176,6 +21525,12 @@
 "reason": "This is a local municipal election question, not related to interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"8ec5d7b633be6fcd949b": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume metrics, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "8ed770dc7a0a7b0688f2": {
 "bucket": "NOISE",
@@ -21904,6 +22259,14 @@
 ],
 "seeded": true
 },
+"93ce70631dd81e82af3b": {
+"bucket": "ADJACENT",
+"dyad": null,
+"reason": "US carrier deployments to CENTCOM reflect military posture related to potential interstate conflicts in the Middle East, but the question is about force positioning rather than conflict onset between a specific dyad.",
+"relevant_nodes": [
+"WinProbability"
+]
+},
 "93e33312255d1d3906f5": {
 "bucket": "NOISE",
 "dyad": null,
@@ -22021,6 +22384,12 @@
 "reason": "This question is about elections in multiple countries, not about interstate conflict between a specific dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"94a9acddd53025c84ae7": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume metrics, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "94b87cc763cae3e722ee": {
 "bucket": "CORE",
@@ -22190,6 +22559,12 @@
 "reason": "This is a local county-level election in Taiwan with no direct relevance to interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"95d1cd7446a81ad018d7": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a commercial/technology trade event involving a private company, not about interstate conflict onset between state actors.",
+"relevant_nodes": []
 },
 "95d27ddd261568cbe3ce": {
 "bucket": "NOISE",
@@ -22362,6 +22737,12 @@
 "reason": "This is about domestic Israeli electoral politics and government formation, not interstate conflict between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"96f4c390e0310e6439aa": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume metrics, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "96f75de9c93f51c81926": {
 "bucket": "NOISE",
@@ -23481,6 +23862,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"9ed9c5d0f51f9a898935": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a shipping/trade volume metric question, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "9edcdcbdc8f959e47472": {
 "bucket": "NOISE",
 "dyad": null,
@@ -23900,6 +24287,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about domestic Israeli parliamentary politics (government formation vote), not interstate conflict between two state actors.",
+"relevant_nodes": []
+},
+"a16e563429523e5ca4ce": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about diplomatic communication/personal interactions, not interstate conflict onset between state actors.",
 "relevant_nodes": []
 },
 "a174ab46dad7439705ff": {
@@ -24527,6 +24920,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"a628f66a686f84a2dc9d": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a diplomatic phone call between Trump and a Venezuelan opposition leader, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "a63d8aa9d6e8f0d1c1b3": {
 "bucket": "NOISE",
 "dyad": null,
@@ -24636,6 +25035,12 @@
 "reason": "This is about domestic local elections in Taiwan, not about interstate conflict onset between two state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"a734edbeb6680d235f64": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a personal communication event between a political leader and a corporate CEO, not about interstate conflict.",
+"relevant_nodes": []
 },
 "a73c89a3a5efdfc18ba4": {
 "bucket": "NOISE",
@@ -25609,6 +26014,12 @@
 "reason": "This is about Israeli domestic politics and parliamentary coalition formation, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"ac654a006c818fc16cde": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume metrics, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "ac754948ca8ebf172bc1": {
 "bucket": "ADJACENT",
 "dyad": "Russia-Ukraine",
@@ -25638,6 +26049,12 @@
 "reason": "Houthis are a non-state actor (rebel/militia group), so this is not interstate conflict between two sovereign states.",
 "relevant_nodes": [],
 "seeded": true
+},
+"aca1fdbd552a7fd746b4": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "acaa6e94fe2945815953": {
 "bucket": "NOISE",
@@ -27030,6 +27447,12 @@
 "WinProbability"
 ]
 },
+"b5c23abdf67382f3c911": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is about a diplomatic communication event, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
+},
 "b5d1f86bff65d88eee91": {
 "bucket": "NOISE",
 "dyad": null,
@@ -27276,6 +27699,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"b7288e764661f7e0a633": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "Kataib Hezbollah is a non-state militia operating within Iraq, making this an intrastate conflict rather than interstate conflict between two state actors.",
+"relevant_nodes": []
+},
 "b72b5ca92f7cc678798e": {
 "bucket": "NOISE",
 "dyad": null,
@@ -27305,6 +27734,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This question is about domestic Israeli politics and government formation, not interstate conflict between two state actors.",
+"relevant_nodes": []
+},
+"b769083453af41f42607": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
 "relevant_nodes": []
 },
 "b76eaec0d0b6a3b8dc3f": {
@@ -27731,6 +28166,12 @@
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
 "relevant_nodes": []
 },
+"ba64ca44c4ad368c1aee": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume metrics, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "ba6659f882a5871aa94e": {
 "bucket": "NOISE",
 "dyad": null,
@@ -28065,6 +28506,15 @@
 "dyad": null,
 "reason": "This question is about presidential travel, not interstate conflict onset between a specific dyad.",
 "relevant_nodes": []
+},
+"bc46fca49843cc424b03": {
+"bucket": "ADJACENT",
+"dyad": "US-Yemen",
+"reason": "Bab el-Mandeb ship traffic is indirectly related to Houthi attacks on shipping (Iran-backed, affecting US/coalition naval operations and Red Sea security), but this is a shipping volume metric rather than a direct interstate conflict onset question.",
+"relevant_nodes": [
+"WarCosts",
+"WinProbability"
+]
 },
 "bc51771529745549c64e": {
 "bucket": "NOISE",
@@ -28905,6 +29355,15 @@
 "reason": "This is about domestic municipal elections in Taiwan, not interstate conflict onset between two state actors.",
 "relevant_nodes": []
 },
+"c0fc53f8cd337eaa723c": {
+"bucket": "ADJACENT",
+"dyad": "US-Yemen",
+"reason": "Bab el-Mandeb ship traffic is indirectly related to Houthi attacks on commercial shipping tied to the US/coalition-Houthi and broader Iran-Israel/US conflicts, but this measures shipping volume rather than conflict onset itself.",
+"relevant_nodes": [
+"WarCosts",
+"WinProbability"
+]
+},
 "c10c7f7e348ec02b2f07": {
 "bucket": "NOISE",
 "dyad": null,
@@ -29023,6 +29482,12 @@
 "reason": "This is a local election question in Taiwan with no direct connection to interstate conflict onset between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"c1d2ac0bb883430629b7": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume metrics, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "c1d3f0c62958d4090994": {
 "bucket": "NOISE",
@@ -29358,6 +29823,12 @@
 "bucket": "NOISE",
 "dyad": null,
 "reason": "This is about a domestic political appointment, not interstate conflict between two state actors.",
+"relevant_nodes": []
+},
+"c43472db8712561bb828": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a diplomatic communication event (whether a phone call or meeting occurs), not about interstate conflict onset or escalation between a specific dyad.",
 "relevant_nodes": []
 },
 "c44365bd7622eb039a97": {
@@ -30246,12 +30717,32 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"c9edd142f811ce229158": {
+"bucket": "CORE",
+"dyad": "China-Taiwan",
+"reason": "A Chinese naval blockade of Taiwan would constitute a direct interstate conflict onset between China and Taiwan, involving military coercion between two state actors.",
+"relevant_nodes": [
+"WinProbability",
+"WarCosts",
+"HardlineClaims",
+"CommitmentProblem",
+"PreferenceAlignment",
+"Patience",
+"DemocraticPeace"
+]
+},
 "c9f2560f52f0fe03cc24": {
 "bucket": "NOISE",
 "dyad": null,
 "reason": "Houthis are a non-state actor (rebel/militia group), not a sovereign state, so this is not an interstate conflict dyad.",
 "relevant_nodes": [],
 "seeded": true
+},
+"ca06ff7be274b49b0b9e": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about diplomatic communication/phone calls, not about interstate conflict onset between any dyad.",
+"relevant_nodes": []
 },
 "ca1de056b7b3359fbe8e": {
 "bucket": "NOISE",
@@ -31121,6 +31612,12 @@
 "HardlineClaims",
 "Patience"
 ]
+},
+"d056c0fa392c47d8f393": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This is a shipping/logistics metric question, not about interstate conflict onset between a specific dyad.",
+"relevant_nodes": []
 },
 "d063908328753fb1f112": {
 "bucket": "NOISE",
@@ -32914,6 +33411,12 @@
 "DemocraticPeace"
 ]
 },
+"dbc99d90dabcd70cdb17": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about diplomatic communication between leaders, not about interstate conflict onset or escalation.",
+"relevant_nodes": []
+},
 "dbd4870a0a0a4425c870": {
 "bucket": "ADJACENT",
 "dyad": "US-Iran",
@@ -34067,6 +34570,12 @@
 "reason": "This is about domestic leadership change in the DRC, not interstate conflict onset between two state actors.",
 "relevant_nodes": []
 },
+"e387f0a65727acf17452": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume through a strait, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "e395b80b6817ce7bbf18": {
 "bucket": "NOISE",
 "dyad": null,
@@ -34189,6 +34698,12 @@
 "reason": "This question is about commercial AI model rankings, not interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"e4c5de912251378d2049": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume metrics, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
 },
 "e4e98ad8b84bc9ac59ca": {
 "bucket": "ADJACENT",
@@ -35461,6 +35976,12 @@
 "reason": "This is about local elections in Taiwan, not interstate conflict between state actors.",
 "relevant_nodes": []
 },
+"ec7429a10d035bfa76fc": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about shipping traffic volume metrics, not about interstate conflict onset between specific state actors.",
+"relevant_nodes": []
+},
 "ec7a8f5df9a0a12de74a": {
 "bucket": "NOISE",
 "dyad": null,
@@ -35573,6 +36094,17 @@
 "reason": "This is about a local county election in Taiwan, not interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"ed5c8ea6294858744ebf": {
+"bucket": "ADJACENT",
+"dyad": "US-China",
+"reason": "A trilateral nuclear arms control deal relates to interstate strategic dynamics and commitment problems but is about diplomacy/treaty formation rather than conflict onset between a specific dyad.",
+"relevant_nodes": [
+"CommitmentProblem",
+"PreferenceAlignment",
+"HardlineClaims",
+"WarCosts"
+]
 },
 "ed70fc7d30ed66dd3153": {
 "bucket": "NOISE",
@@ -35786,6 +36318,15 @@
 "dyad": null,
 "reason": "This question is about domestic Israeli politics and government formation, not interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"ef1a7e1c6de864ac5119": {
+"bucket": "ADJACENT",
+"dyad": "US-Yemen",
+"reason": "Bab el-Mandeb shipping traffic is indirectly related to the Houthi-US/coalition conflict and its impact on maritime security, but this question is about traffic volume metrics rather than conflict onset between state dyads.",
+"relevant_nodes": [
+"WarCosts",
+"WinProbability"
+]
 },
 "ef1edd751a615c68e5dc": {
 "bucket": "NOISE",
@@ -36299,6 +36840,12 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"f2fe369f5ad8c22417b3": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about an individual's travel/visit to a country, not about interstate conflict between state actors.",
+"relevant_nodes": []
+},
 "f30749e3ba58aa6fe2b3": {
 "bucket": "NOISE",
 "dyad": null,
@@ -36660,6 +37207,16 @@
 "relevant_nodes": [],
 "seeded": true
 },
+"f599e5c3dc974a86f8ae": {
+"bucket": "ADJACENT",
+"dyad": "US-Russia",
+"reason": "Trump-Putin communication is geopolitics-related and could affect US-Russia conflict dynamics, but the question is about a diplomatic event (a phone call) rather than directly about interstate conflict onset or escalation.",
+"relevant_nodes": [
+"PreferenceAlignment",
+"CommitmentProblem",
+"Patience"
+]
+},
 "f59c090b43bcaeb743d8": {
 "bucket": "ADJACENT",
 "dyad": "Russia-Ukraine",
@@ -36839,6 +37396,12 @@
 "reason": "This question is about corporate AI rankings, not interstate conflict between state actors.",
 "relevant_nodes": [],
 "seeded": true
+},
+"f701fc8837dcb9774e14": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about diplomatic communication/phone calls, not about interstate conflict onset or escalation between a specific dyad.",
+"relevant_nodes": []
 },
 "f709c96058d6d1a88953": {
 "bucket": "NOISE",
@@ -37883,6 +38446,12 @@
 "reason": "This question is about AI company rankings, not interstate conflict between state actors.",
 "relevant_nodes": []
 },
+"fe00e6206a898b289802": {
+"bucket": "NOISE",
+"dyad": null,
+"reason": "This question is about a diplomatic phone call or communication event, not about interstate conflict onset between two states.",
+"relevant_nodes": []
+},
 "fe2d5a8de9eaa795ac07": {
 "bucket": "ADJACENT",
 "dyad": "US-Iran",
@@ -38128,5 +38697,15 @@
 "dyad": null,
 "reason": "This is about a domestic political appointment in Brazil, not interstate conflict between two state actors.",
 "relevant_nodes": []
+},
+"ffe66f81fe392f2d56c7": {
+"bucket": "ADJACENT",
+"dyad": "North Korea-US",
+"reason": "North Korean missile tests are provocative military actions by a state actor that relate to commitment problems and hardline claims but are not direct interstate conflict onset between a specific dyad.",
+"relevant_nodes": [
+"CommitmentProblem",
+"HardlineClaims",
+"WinProbability"
+]
 }
 }
