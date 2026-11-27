@@ -7937,5 +7937,311 @@
     },
     "route": "scoped_bilateral",
     "version": 1
+  },
+  "7403841": {
+    "market_id": "7403841",
+    "dyad": "Iran-Iraq",
+    "question": "Will Iran target Iraq by December 5, 2026?",
+    "end_date": "2026-12-06",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Iraq",
+    "source_signature": "05a3f0390d693e812b12b2ca4ece001435e5566302d2635bbffcff5c1d5645ad",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iraq",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract is straightforward: Iran (single state actor) must conduct a qualifying military strike (air strike or surface-to-surface missile/drone) directed at Iraq's terrestrial territory. Proxy forces are explicitly excluded, requiring action by Iranian forces claimed by or confirmed to originate from Iran. The geographic restriction to Iraq's terrestrial territory including internal waters is definitional to the action being 'directed at Iraq' and is resolution_only. The target is Iraq's general territory (target_wide), not a subterritory.",
+      "scope_fingerprint": "2426ea60a91fc54d",
+      "action_prior_fingerprint": "7f416c7867136324"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "7403842": {
+    "market_id": "7403842",
+    "dyad": "Iran-Iraq",
+    "question": "Will Iran target Iraq by December 12, 2026?",
+    "end_date": "2026-12-13",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Iraq",
+    "source_signature": "9dbb9e272a81d606336b2474ed6c51f3d9576ad63a5909469b18b029c901c5f6",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iraq",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract is straightforward: Iran (single state actor) must conduct a qualifying military strike against Iraq (single state actor). The geographic restriction to Iraqi terrestrial territory including internal waters is intrinsic to the definition of 'directed at Iraq' and does not constitute a structurally distinct operational theater — it is resolution_only. Proxy forces are explicitly excluded, confirming the initiator must be Iranian state forces. The target is Iraq's general territory, so geography mode is target_wide.",
+      "scope_fingerprint": "2426ea60a91fc54d",
+      "action_prior_fingerprint": "7f416c7867136324"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "7403843": {
+    "market_id": "7403843",
+    "dyad": "Iran-Iraq",
+    "question": "Will Iran target Iraq by December 31, 2026?",
+    "end_date": "2027-01-01",
+    "action_type": "airstrike",
+    "initiator": "Iran",
+    "target": "Iraq",
+    "source_signature": "faceec433e3b8bb0af5b503364afece082536bac7861f306edaf450dfb2d6c90",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iran",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Iraq",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "geography": {
+        "mode": "target_wide",
+        "places": [],
+        "prior_relevance": "resolution_only"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The contract is straightforward: Iran (single state actor) must conduct a qualifying military strike (air or surface-to-surface missile/drone) directed at Iraq's terrestrial territory. Proxy forces are explicitly excluded, requiring action by Iranian forces claimed by or confirmed to originate from Iran. The geographic restriction to Iraq's terrestrial territory including internal waters is definitional to the action being 'directed at Iraq' and is resolution_only. The target is Iraq's general territory (target_wide), not a subterritory.",
+      "scope_fingerprint": "2426ea60a91fc54d",
+      "action_prior_fingerprint": "7f416c7867136324"
+    },
+    "route": "scoped_bilateral",
+    "version": 1
+  },
+  "7403863": {
+    "market_id": "7403863",
+    "dyad": "Russia-EU",
+    "question": "Russian missile or drone impact in an EU country by December 15, 2026?",
+    "end_date": "2026-12-16",
+    "action_type": "missile_strike",
+    "initiator": "Russia",
+    "target": "EU",
+    "source_signature": "30e1d6a8222067b9fabec90ee781bcd9e478e26ceadf69166fe91b868cc03654",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Russia",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "named_group_union",
+        "canonical_actor": null,
+        "entity_type": "state",
+        "members": [
+          "Austria",
+          "Belgium",
+          "Bulgaria",
+          "Croatia",
+          "Cyprus",
+          "Czechia",
+          "Denmark",
+          "Estonia",
+          "Finland",
+          "France",
+          "Germany",
+          "Greece",
+          "Hungary",
+          "Ireland",
+          "Italy",
+          "Latvia",
+          "Lithuania",
+          "Luxembourg",
+          "Malta",
+          "Netherlands",
+          "Poland",
+          "Portugal",
+          "Romania",
+          "Slovakia",
+          "Slovenia",
+          "Spain",
+          "Sweden"
+        ],
+        "group_names": [
+          "European Union member states"
+        ]
+      },
+      "geography": {
+        "mode": "multiple",
+        "places": [
+          "Austria",
+          "Belgium",
+          "Bulgaria",
+          "Croatia",
+          "Cyprus",
+          "Czechia",
+          "Denmark",
+          "Estonia",
+          "Finland",
+          "France",
+          "Germany",
+          "Greece",
+          "Hungary",
+          "Ireland",
+          "Italy",
+          "Latvia",
+          "Lithuania",
+          "Luxembourg",
+          "Malta",
+          "Netherlands",
+          "Poland",
+          "Portugal",
+          "Romania",
+          "Slovakia",
+          "Slovenia",
+          "Spain",
+          "Sweden"
+        ],
+        "prior_relevance": "structural_theater"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "Russia is the single initiator (armed forces of Russia only; PMCs, proxies, Belarus excluded). The target is any one of the 27 explicitly enumerated EU member states, making it a named_group_union with a bounded list provided in the contract. Geography is structural_theater because the specific EU member states constitute a genuinely distinct operational theater from Ukraine or Russia's general neighborhood, and the geographic restriction materially conditions the feasibility of the action family (Russian munitions reaching EU territory vs. Ukraine). The contract further restricts qualifying territory to terrestrial territory and internal waters, excluding maritime territory, airspace, and non-EU-treaty territories such as Greenland—these are resolution_only refinements within the already-structural theater definition.",
+      "scope_fingerprint": "4ead01dcd62eb9de",
+      "action_prior_fingerprint": "b6ad4fdc469fb947"
+    },
+    "route": "agglomeration_required",
+    "version": 1
+  },
+  "7403864": {
+    "market_id": "7403864",
+    "dyad": "Russia-EU",
+    "question": "Russian missile or drone impact in an EU country by December 31, 2026?",
+    "end_date": "2027-01-01",
+    "action_type": "missile_strike",
+    "initiator": "Russia",
+    "target": "EU",
+    "source_signature": "1a6487a8791c92b5d1a47d9fb27553cc57d4378a98d404980e3efc4601edce80",
+    "scope": {
+      "initiator_scope": {
+        "mode": "single_actor",
+        "canonical_actor": "Russia",
+        "entity_type": "state",
+        "members": [],
+        "group_names": []
+      },
+      "target_scope": {
+        "mode": "named_group_union",
+        "canonical_actor": null,
+        "entity_type": "state",
+        "members": [
+          "Austria",
+          "Belgium",
+          "Bulgaria",
+          "Croatia",
+          "Cyprus",
+          "Czechia",
+          "Denmark",
+          "Estonia",
+          "Finland",
+          "France",
+          "Germany",
+          "Greece",
+          "Hungary",
+          "Ireland",
+          "Italy",
+          "Latvia",
+          "Lithuania",
+          "Luxembourg",
+          "Malta",
+          "Netherlands",
+          "Poland",
+          "Portugal",
+          "Romania",
+          "Slovakia",
+          "Slovenia",
+          "Spain",
+          "Sweden"
+        ],
+        "group_names": [
+          "European Union member states"
+        ]
+      },
+      "geography": {
+        "mode": "multiple",
+        "places": [
+          "Austria",
+          "Belgium",
+          "Bulgaria",
+          "Croatia",
+          "Cyprus",
+          "Czechia",
+          "Denmark",
+          "Estonia",
+          "Finland",
+          "France",
+          "Germany",
+          "Greece",
+          "Hungary",
+          "Ireland",
+          "Italy",
+          "Latvia",
+          "Lithuania",
+          "Luxembourg",
+          "Malta",
+          "Netherlands",
+          "Poland",
+          "Portugal",
+          "Romania",
+          "Slovakia",
+          "Slovenia",
+          "Spain",
+          "Sweden"
+        ],
+        "prior_relevance": "structural_theater"
+      },
+      "direction_compatible": true,
+      "confidence": "high",
+      "reasoning": "The initiator is Russia (single state actor, armed forces only). The target is any one of the 27 enumerated EU member states — a named group union with an explicit bounded list provided in the contract. The geography is structurally relevant: impact must occur on the terrestrial territory of an EU member state, which defines a genuinely different operational theater from Ukraine or Russia proper, affecting the feasibility of the action family (missile/drone strike reaching EU soil). The contract explicitly excludes maritime territory, airspace-only violations, overseas territories, and intercepted munitions, but these are resolution-only definitional refinements, not additional geographic theaters.",
+      "scope_fingerprint": "4ead01dcd62eb9de",
+      "action_prior_fingerprint": "b6ad4fdc469fb947"
+    },
+    "route": "agglomeration_required",
+    "version": 1
   }
 }
