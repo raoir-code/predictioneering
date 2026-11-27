@@ -1,0 +1,135 @@
+{
+  "schema": "scientific_source_audit_v1",
+  "paper": {
+    "title": "A Dynamic Theory of Nuclear Proliferation and Preventive War",
+    "authors": [
+      "Muhammet A. Bas",
+      "Andrew J. Coe"
+    ],
+    "publication": "International Organization",
+    "volume": 70,
+    "issue": 4,
+    "year": 2016,
+    "journal_pages": "655-685",
+    "stable_url": "https://www.jstor.org/stable/44651919"
+  },
+  "edition": {
+    "inspected_format": "JSTOR PDF with cover page",
+    "inspected_pdf_page_count": 32,
+    "caveat": "The user's private full-text index uses a different 50-page PDF layout; its PDF page numbers do not crosswalk automatically to this 32-page copy.",
+    "original_file_committed": false,
+    "page_numbering": "One-based JSTOR PDF page number, and separately printed journal page."
+  },
+  "verification": {
+    "status": "partial_source_checked_not_proof_verified",
+    "method": "Visual inspection of actual typeset article PDF pages 5-12, particularly equation on PDF page 9 and game tree on PDF page 8",
+    "no_inference_of_full_scientific_validation": true,
+    "appendix_proofs_examined": false,
+    "appendix_note": "The article explicitly places proofs of its propositions in a separate online appendix, which was not included in the uploaded 32-page article."
+  },
+  "model": {
+    "players": {
+      "A": "Monitoring/preventive-attack state; United States in motivating application",
+      "B": "State pursuing nuclear weapons"
+    },
+    "time": "Infinite discrete periods, common discount factor delta in (0,1)",
+    "contested_stake": "Unit interval; war winner receives stake in current and future periods, both pay costs",
+    "war": "War immediately ends bargaining with costly lottery; A's pre-nuclear victory probability p, post-nuclear p_n<p; costs c_A,c_B>0",
+    "no_deal_definition": "Perfect Bayesian equilibrium in which A does not offer B more than necessary to avoid immediate war",
+    "key_assumptions": [
+      "B's investment is binary and its direct budgetary costs are abstracted away",
+      "Weapons development requires two stochastic prerequisites; the model begins in the early stage",
+      "B's nuclear acquisition becomes common knowledge, shifting A's victory probability from p to p_n<p",
+      "A receives noisy existence/investment signals and accurate or null stage/progress signals",
+      "A's offers can be accepted or rejected, and rejection causes immediate war",
+      "Source model's empirical application sets aside states expecting no gains from weapons"
+    ],
+    "game_tree": {
+      "source": {
+        "jstor_pdf_page": 8,
+        "printed_journal_page": 661,
+        "label": "Figure 1"
+      },
+      "first_period_note": "Initial period begins without new intelligence signals; subsequent periods have signaling phase",
+      "order": [
+        "Nature produces an imperfect signal about B's previous-period investment (tau or tau-prime, depending on previous action)",
+        "Nature produces an accurate stage signal with probability sigma, otherwise a null signal",
+        "A chooses immediate war or makes a take-it-or-leave-it bargaining offer x",
+        "B rejects (war) or accepts the offer",
+        "After accepting, B chooses whether to invest",
+        "Nature determines stochastic program progress and the game repeats if weapons not obtained"
+      ],
+      "stage_transition_probabilities": {
+        "initial_stage_1": {
+          "remain_stage_1": "1 - epsilon",
+          "advance_to_stage_2": "epsilon * (1 - lambda)",
+          "acquire_nuclear_weapons": "epsilon * lambda"
+        },
+        "initial_stage_2": {
+          "remain_stage_2": "1 - lambda",
+          "acquire_nuclear_weapons": "lambda"
+        },
+        "source": {
+          "jstor_pdf_page": 8,
+          "printed_journal_page": 661
+        }
+      },
+      "information": {
+        "investment_signal": "Correct positive signal conditional on investment with probability tau>1/2, and correct negative signal conditional on no investment with tau_prime>1/2; can be mistaken",
+        "stage_signal": "True stage with probability sigma; null otherwise (baseline model)",
+        "source": {
+          "jstor_pdf_page": 8,
+          "printed_journal_page": 661
+        }
+      }
+    },
+    "proposition_1": {
+      "source": {
+        "jstor_pdf_page": 9,
+        "printed_journal_page": 662,
+        "label": "Proposition 1"
+      },
+      "scope": "B is in the second stage, this fact is common knowledge, and the equilibrium is no-deal",
+      "investment": "B always invests whenever given the opportunity",
+      "peace_and_eventual_proliferation_iff_latex": "p-c_A+\\frac{\\delta\\lambda}{1-\\delta}(p-p_n)<1+\\frac{\\delta\\lambda}{1-\\delta}(c_A+c_B)",
+      "otherwise": "Immediate war and no proliferation",
+      "variables": {
+        "p": "A's probability of winning a war before B acquires nuclear weapons",
+        "p_n": "A's probability of winning a war after B acquires nuclear weapons; p_n<p",
+        "c_A": "A's war cost",
+        "c_B": "B's war cost",
+        "delta": "Common per-period discount factor",
+        "lambda": "Chance of stage-2 to nuclear acquisition in one round if B invests"
+      },
+      "status": "typeset_statement_and_inequality_verified; proof_not_checked"
+    },
+    "proposition_2": {
+      "source": {
+        "jstor_pdf_page": 11,
+        "printed_journal_page": 664,
+        "label": "Proposition 2"
+      },
+      "scope": "Second-stage-known no-deal equilibrium is immediate war",
+      "statement": "In every no-deal equilibrium of the full game, B invests whenever given the opportunity.",
+      "status": "article_statement_read; proof_not_checked"
+    },
+    "proposition_3": {
+      "source": {
+        "jstor_pdf_page": 12,
+        "printed_journal_page": 665,
+        "label": "Proposition 3"
+      },
+      "scope": "No-deal equilibrium with no new informative stage intelligence",
+      "statement": "A's conditional probability that B reached the second stage increases with time without new stage intelligence.",
+      "if_epsilon_ge_lambda": "Belief approaches 1",
+      "if_epsilon_lt_lambda": "Belief approaches (epsilon-epsilon*lambda)/(lambda-epsilon*lambda), which is less than 1",
+      "status": "typeset_statement_and_limit_verified; proof_not_checked"
+    },
+    "scope_notes": [
+      "Do not treat page-level quote matching as proof of the associated interpretation.",
+      "The no-deal model's strategic assumptions need not hold in a bargain involving enforceable nonproliferation deals.",
+      "The proposition 1 inequality and figure 1 timing were source checked, not mathematically derived in this audit.",
+      "The source's appendix proofs and computational verification remain to be reviewed before any 'validated model' claim."
+    ]
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "schema_version": "holiday_literature_leads_v1",
+  "verified_at": "2026-11-21",
+  "source_limitations": "Entries were checked against publisher/institutional pages and author-hosted material, not all original full texts. They are candidate arguments, not validated causal estimates or novelty findings.",
+  "sources": [
+    {
+      "id": "reese2017",
+      "title": "Days of Action or Restraint? How the Islamic Calendar Impacts Violence",
+      "authors": "Michael J. Reese; Keven G. Ruby; Robert A. Pape",
+      "year": 2017,
+      "url": "https://www.cambridge.org/core/journals/american-political-science-review/article/abs/days-of-action-or-restraint-how-the-islamic-calendar-impacts-violence/E20A17A254F769D44E0887D0FD1F507B",
+      "classification": "core_direct",
+      "outcome": "political violence in Islamic societies",
+      "holiday_exposure": "important Islamic holidays, including Ramadan",
+      "scope_limited_finding": "Publisher abstract reports decreases on important Islamic holidays and no systematic increase associated with any Islamic holiday, including Ramadan.",
+      "relevance": "Direct evidence on own-constituency holiday restraint; not evidence of interstate war onset.",
+      "verification": "publisher abstract checked; original methods/results pages not independently audited"
+    },
+    {
+      "id": "hodler2024",
+      "title": "Religion and terrorism: Evidence from Ramadan fasting",
+      "authors": "Roland Hodler; Paul A. Raschky; Anthony Strittmatter",
+      "year": 2024,
+      "url": "https://academic.oup.com/jpr/article/61/3/351/8364821",
+      "classification": "core_direct",
+      "outcome": "terrorist attacks and public support for terrorism",
+      "holiday_exposure": "Ramadan fasting intensity from daylight hours",
+      "scope_limited_finding": "Published abstract reports longer fasting daylight hours reduce support for terrorism and are associated with fewer terrorist attacks, particularly operationally difficult attacks.",
+      "relevance": "A possible audience-support and operational-cost mechanism; not a direct test of opponent surprise.",
+      "verification": "publisher abstract checked; full text not independently audited"
+    },
+    {
+      "id": "chinda2024",
+      "title": "The Impact of Public Holidays on Insurgent Attacks: The Case of Thailand",
+      "authors": "Chris Chinda; Cigdem Unal; Zoe Marchment; Paul Gill",
+      "year": 2024,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11382784/",
+      "classification": "core_direct",
+      "outcome": "daily insurgent attacks in southern Thailand",
+      "holiday_exposure": "Islamic, Buddhist, and secular Thai public holidays",
+      "scope_limited_finding": "Authors report increases on Islamic holidays and decreases on Buddhist and public holidays in their southern Thailand sample.",
+      "relevance": "Directly tests heterogeneous effects by holiday type; explicitly challenges any universal own-holiday-restraint rule.",
+      "verification": "open-access article and abstract located; comprehensive methods/results audit pending"
+    },
+    {
+      "id": "allie2024",
+      "title": "Sacred Time and Religious Violence: Evidence from Hindu-Muslim Riots in India",
+      "authors": "Feyaad Allie",
+      "year": 2024,
+      "url": "https://journals.sagepub.com/doi/10.1177/00220027231219985",
+      "classification": "core_direct",
+      "outcome": "Hindu-Muslim riots in India",
+      "holiday_exposure": "religious ritual calendars and incompatible ritual observances",
+      "scope_limited_finding": "Publisher abstract argues ritual incompatibility between groups helps explain increased riot risk at sacred times.",
+      "relevance": "Directly relevant to holiday-triggered communal riots; NOT evidence of interstate military attack timing.",
+      "verification": "publisher abstract checked; full methods/results audit pending"
+    },
+    {
+      "id": "iyer2018",
+      "title": "Religious Riots and Electoral Politics in India",
+      "authors": "Sriya Iyer; Anand Shrivastava",
+      "year": 2018,
+      "url": "https://www.sciencedirect.com/science/article/pii/S0304387817301025",
+      "classification": "adjacent_design",
+      "outcome": "communal riots, with electoral consequences studied using an instrument",
+      "holiday_exposure": "Hindu festival falling on a Muslim holy Friday",
+      "scope_limited_finding": "Authors report higher riot probability when a Hindu festival falls on Friday, using calendar-based variation as an instrument in their electoral-effects design.",
+      "relevance": "Valuable calendar-based design inspiration, but not a study of interstate war onset.",
+      "verification": "article abstract and design description checked; identification validity not independently assessed"
+    },
+    {
+      "id": "cf2023",
+      "title": "Introducing the ETH/PRIO Civil Conflict Ceasefire Dataset",
+      "authors": "ETH/PRIO Ceasefire Dataset authors",
+      "year": 2023,
+      "url": "https://journals.sagepub.com/doi/10.1177/00220027221129183",
+      "classification": "data_resource",
+      "outcome": "reported civil-conflict ceasefire arrangements",
+      "holiday_exposure": "holiday stated as purpose of the ceasefire arrangement",
+      "scope_limited_finding": "The dataset explicitly codes arrangements whose stated purpose is a holiday; its existence does not establish that holidays cause truces or that unannounced violence pauses are formal ceasefires.",
+      "relevance": "Direct measurement resource for negotiated holiday ceasefires, a distinct outcome.",
+      "verification": "journal methods/description and ETH dataset description checked; codebook data extraction pending"
+    },
+    {
+      "id": "axelrod1979",
+      "title": "The Rational Timing of Surprise",
+      "authors": "Robert Axelrod",
+      "year": 1979,
+      "url": "https://www.cambridge.org/core/journals/world-politics/article/abs/rational-timing-of-surprise/B4EE2AC4163A33546DC6530E6EB5EC19",
+      "classification": "theory",
+      "outcome": "strategic timing of the use of surprise",
+      "holiday_exposure": "no holiday variable",
+      "scope_limited_finding": "Analyzes timing incentives concerning surprise; no direct empirical result about holidays should be attributed to this paper.",
+      "relevance": "Potential formal-theory input for opportunity versus defensive anticipation, NOT direct evidence on holiday conflict effects.",
+      "verification": "journal article and author-hosted manuscript identified; full model not independently audited"
+    }
+  ]
+}
